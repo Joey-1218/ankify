@@ -1,6 +1,7 @@
 import { getDb, schema, type DB } from "@ankify/db";
 import { and, eq, sql } from "drizzle-orm";
 import type { AiProvider } from "@ankify/core";
+import { isProviderId, normalizeModelId } from "./ai/providers/registry";
 
 /**
  * Starter AI credits: a small, lifetime allowance of AI actions that new users
@@ -47,9 +48,9 @@ export class StarterCreditsExhaustedError extends Error {
 export function readStarterAiConfig(env: Record<string, string | undefined> = process.env): StarterAiConfig | null {
   const apiKey = env.ANKIFY_STARTER_AI_API_KEY?.trim();
   if (!apiKey) return null;
-  const provider = (env.ANKIFY_STARTER_AI_PROVIDER?.trim() || DEFAULT_PROVIDER) as Exclude<AiProvider, "">;
-  if (!PROVIDERS.includes(provider)) return null;
-  const model = env.ANKIFY_STARTER_AI_MODEL?.trim() || DEFAULT_MODEL;
+  const provider = env.ANKIFY_STARTER_AI_PROVIDER?.trim() || DEFAULT_PROVIDER;
+  if (!isProviderId(provider)) return null;
+  const model = normalizeModelId(provider, env.ANKIFY_STARTER_AI_MODEL?.trim() || DEFAULT_MODEL);
   const parsedCredits = Number.parseInt(env.ANKIFY_STARTER_AI_CREDITS ?? "", 10);
   const credits = Number.isFinite(parsedCredits) && parsedCredits >= 0 ? parsedCredits : DEFAULT_CREDITS;
   return { provider, model, apiKey, credits };
