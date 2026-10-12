@@ -62,7 +62,7 @@ async function main() {
 
   const backupDir = resolve(repoRoot, "backups");
   mkdirSync(backupDir, { recursive: true });
-  const outPath = resolve(backupDir, `ankileet-prod-${timestamp()}.db`);
+  const outPath = resolve(backupDir, `database-ankileet-${timestamp()}.db`);
   if (existsSync(outPath)) {
     throw new Error(`backup target already exists: ${outPath}`);
   }

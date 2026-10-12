@@ -5,27 +5,26 @@ release checklist consistent with this file.
 
 ## Current Production identity
 
-As of 2026-08-12, Production is:
+As of 2026-10-12, Production is:
 
 | Resource | Canonical value |
 | --- | --- |
 | Web/API origin | `https://ankileet.com` |
-| Vercel project | `ankileet` (`apps/web` is the Root Directory) |
+| Vercel project | `ankileet` in team `amor-6509` (`apps/web` is the Root Directory) |
+| Function region | `iad1` (Washington, D.C.), next to the database |
 | Database provider | Turso, provisioned through the Vercel Turso integration |
 | Turso organization | `vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg` |
 | Turso database | `database-ankileet` |
 | Database URL | `libsql://database-ankileet-vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg.aws-us-east-1.turso.io` |
+| Database region | `aws-us-east-1` |
 | Runtime DB variables | `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN` |
 
-The personal Turso database named `ankileet-prod` is a legacy database. It is
-write-blocked and is **not** connected to Vercel Production. Never select a
-database only because the Turso CLI's current organization lists a plausible
-`*-prod` name.
+Ankileet is deployed independently of the upstream Ankify project
+(`ankify-pi.vercel.app`, Turso `database-ankify`, region `hnd1`). Never run a
+migration, backup, or deploy against those resources. Select the database by
+the exact organization and URL above, never by a plausible name.
 
-`ANKILEET_NEW_DB_TURSO_DATABASE_URL` and
-`ANKILEET_NEW_DB_TURSO_AUTH_TOKEN` are not read by the application. If these
-legacy names still exist in Vercel, do not use them for migrations; the runtime
-source of truth is the `TURSO_*` pair.
+The runtime source of truth is the `TURSO_*` pair.
 
 ## Environment ownership
 
@@ -36,8 +35,8 @@ source of truth is the `TURSO_*` pair.
   env file.
 - `.env.production.local` is only for an operator running a controlled backup
   or migration. Use the exact integration database URL and a short-lived token
-  created for `database-ankileet`; do not copy credentials from the legacy
-  personal database.
+  created for `database-ankileet`; do not copy credentials from any other
+  database.
 - `AI_KEY_ENCRYPTION_SECRET` must remain stable for the lifetime of this
   database. Provider API keys are user-owned encrypted settings, not Vercel env
   fallbacks.

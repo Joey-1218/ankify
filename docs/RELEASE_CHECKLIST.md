@@ -9,8 +9,8 @@ runtime variable.
 
 Canonical Production data target: the Vercel Turso integration database
 `database-ankileet` in organization
-`vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg`. The personal `ankileet-prod` database is
-legacy and must not be used for Production migrations. Follow
+`vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg`. No other database may be used for
+Production migrations. Follow
 [`DEPLOYMENT.md`](DEPLOYMENT.md) for the full identity and verification runbook.
 
 ## 1. Prepare Preview
@@ -59,7 +59,7 @@ legacy and must not be used for Production migrations. Follow
 - [ ] Run read-only migration/user/problem counts against `database-ankileet` and
       compare them with the Drizzle journal and authenticated Production UI.
 - [ ] Confirm Vercel Production uses `TURSO_DATABASE_URL` and
-      `TURSO_AUTH_TOKEN`. Do not use legacy `ANKILEET_NEW_DB_TURSO_*` variables.
+      `TURSO_AUTH_TOKEN`, and every `ANKILEET_*` name (no leftover `ANKIFY_*`).
 - [ ] Confirm Production has its own auth secret, Google OAuth credentials, and
       encryption secret.
 - [ ] Keep `AI_KEY_ENCRYPTION_SECRET` backed up and stable for this database.
@@ -88,7 +88,7 @@ legacy and must not be used for Production migrations. Follow
 - [ ] Confirm Vercel runtime logs contain neither provider response bodies nor
       API-key fragments; retain only classified error codes and safe request identifiers.
 - [ ] Confirm the authenticated deployment shows recognizable data from
-      `database-ankileet`, not the legacy personal `ankileet-prod` database.
+      `database-ankileet`.
 - [ ] Open Study Coach and complete one real Agent turn with a valid provider
       key, including a read-only tool call and streaming response.
 - [ ] Confirm the `ankileet-ai-generation` Queue trigger is deployed and one

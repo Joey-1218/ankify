@@ -85,13 +85,13 @@ rotating it without re-encryption orphans every stored AI key.
 
 Use the Vercel Turso integration for production. The current Production database
 is `database-ankileet` in the `vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg`
-organization. The personal `ankileet-prod` database is legacy and is not used by
-Vercel. See [`docs/DEPLOYMENT.md`](DEPLOYMENT.md) before any Production
+organization, in `aws-us-east-1`. See [`docs/DEPLOYMENT.md`](DEPLOYMENT.md) before any Production
 database operation.
 
 1. Provision Turso through the Vercel integration. For the current deployment,
    retain the canonical `database-ankileet` integration database and do not point
-   `TURSO_*` at the legacy personal database.
+   `TURSO_*` at any other database. Put the database in the same area as the
+   function region in `apps/web/vercel.json` (currently `iad1` with `aws-us-east-1`).
 2. Configure **Production** variables in Vercel:
    - `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`
    - `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL=https://ankileet.com`
