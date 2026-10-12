@@ -1,6 +1,6 @@
 /**
- * Every tunable constant of the daily practice feed. See
- * docs/DAILY_FEED_PLAN.md for what each one means and why it has this value.
+ * Every tunable constant of the daily practice feed and the weakness model.
+ * See docs/ARCHITECTURE.md (Weakness model).
  */
 export const FEED_PARAMS = {
   /** Evidence loses half its weight every 21 days and is ignored after 90. */

@@ -7,7 +7,7 @@
 ankileet works next to LeetCode. The Chrome extension records each practice session and its submissions,<br>
 FSRS brings every problem back just before you'd forget it, and your mistake profile shows which causes of failure keep coming back.
 
-[**Open the web app**](https://ankileet.com) · [**Install the extension**](#install-the-extension) · [Self-host](docs/SELF_HOSTING.md)
+[**Open the web app**](https://ankileet.com) · [**Install the extension**](#install-the-extension) · [Develop](docs/DEVELOPMENT.md)
 
 </div>
 
@@ -98,7 +98,7 @@ Then open `chrome://extensions`, turn on **Developer mode**, click **Load unpack
 
 ## Self-hosting and development
 
-Local setup, the QA and demo environments, database profiles, Vercel deployment, and release checks are covered in **[docs/SELF_HOSTING.md](docs/SELF_HOSTING.md)**. For how the system fits together, start with **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
+Local setup, the QA and demo environments, and tests are in **[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)**; how the system fits together is in **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**; Production, releases, and running your own instance are in **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**. **[docs/HANDOFF.md](docs/HANDOFF.md)** has the current state and next steps.
 
 ```bash
 pnpm install

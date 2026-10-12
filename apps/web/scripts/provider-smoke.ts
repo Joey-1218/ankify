@@ -50,7 +50,7 @@ async function quietly<T>(task: () => Promise<T>): Promise<T> {
 async function main() {
   const configured = PROVIDERS.filter(({ provider }) => process.env[keyName(provider)]);
   if (configured.length === 0) {
-    console.log("No SMOKE_<PROVIDER>_API_KEY is set. Put keys in .env.smoke.local (git-ignored); see docs/TEST_GUIDE.md.");
+    console.log("No SMOKE_<PROVIDER>_API_KEY is set. Put keys in .env.smoke.local (git-ignored); see docs/DEVELOPMENT.md.");
     process.exit(1);
   }
 

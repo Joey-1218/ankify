@@ -43,7 +43,7 @@ function countBy<K>(items: readonly FeedHistoryItem[], key: (item: FeedHistoryIt
 
 /**
  * Plans today's practice items. Pure and deterministic: the same input always
- * yields the same plan. See docs/DAILY_FEED_PLAN.md.
+ * yields the same plan. See docs/ARCHITECTURE.md (Weakness model).
  */
 export function planDailyFeed(input: DailyFeedInput): DailyFeedPlan {
   const params = input.params ?? FEED_PARAMS;

@@ -276,7 +276,7 @@ describe("AI job terminal transitions", () => {
     expect((await jobRow(job.id)).status).toBe("failed");
     expect(await starterRemaining()).toBe(1);
 
-    // Same query as docs/PAID_AI_CREDITS.md "Reconciliation".
+    // Same query as the reconciliation query in docs/ARCHITECTURE.md.
     const unrefunded = await getDb().all<{ ref_id: string }>(sql`
       SELECT l.ref_id FROM ai_credit_ledger l
       LEFT JOIN ai_credit_ledger r ON r.reason = 'refund' AND r.ref_type = l.ref_type AND r.ref_id = l.ref_id

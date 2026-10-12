@@ -37,11 +37,12 @@ Turso. Production runtime reads Vercel env vars, never local files.
 
 Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) before non-trivial changes. It
 is the single source of truth for the monorepo layout, data model, auth, FSRS
-scheduling, asynchronous AI jobs (Vercel Queues, leases, retries), Study Coach,
-and hosted AI keys. Paid AI credits (Stripe) are documented in
-[docs/PAID_AI_CREDITS.md](docs/PAID_AI_CREDITS.md); deployment and Production
-data ownership in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) and
-[docs/SELF_HOSTING.md](docs/SELF_HOSTING.md).
+scheduling, asynchronous AI jobs (Vercel Queues, leases, retries), the mistake
+profile, suggestions, and the suspended Study Coach and paid credits. The other
+docs: [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) (local setup, environments,
+tests, manual QA), [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) (Production
+identity, shipping, migrations, extension release), and
+[docs/HANDOFF.md](docs/HANDOFF.md) (current state, history, next steps).
 
 In one paragraph: `apps/web` (Next.js 16 App Router, logic in `src/server/`),
 `apps/extension` (Chrome MV3), `packages/db` (Drizzle + Turso/SQLite),

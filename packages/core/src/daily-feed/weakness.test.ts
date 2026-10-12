@@ -27,7 +27,7 @@ function servedWeak(dimension: FeedHistoryItem["dimension"], daysAgo: number): F
   };
 }
 
-describe("dimension weakness (worked values in docs/DAILY_FEED_PLAN.md)", () => {
+describe("dimension weakness (worked values in docs/ARCHITECTURE.md, Weakness model)", () => {
   it("one confirmed mistake with no other evidence is weak (0.48)", () => {
     const invariant = model([mistake("invariant", dp)]).dimensions.get("invariant")!;
     expect(invariant.weakness).toBeCloseTo(0.48, 3);

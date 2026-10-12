@@ -2,11 +2,9 @@
 
 Canonical description of how ankileet is built. `CLAUDE.md` and `AGENTS.md` link
 here instead of repeating it; update this file when the architecture changes.
-Paid AI credits have their own deep-dive in [PAID_AI_CREDITS.md](PAID_AI_CREDITS.md).
-Deployment and data-ownership rules live in [DEPLOYMENT.md](DEPLOYMENT.md) and
-[SELF_HOSTING.md](SELF_HOSTING.md). Features in progress have their own plans:
-[MISTAKE_PROFILE_PLAN.md](MISTAKE_PROFILE_PLAN.md) and
-[DAILY_FEED_PLAN.md](DAILY_FEED_PLAN.md).
+Local setup and tests: [DEVELOPMENT.md](DEVELOPMENT.md). Production and
+releases: [DEPLOYMENT.md](DEPLOYMENT.md). Current state and open work:
+[HANDOFF.md](HANDOFF.md).
 
 ## Shape of the system
 
@@ -18,7 +16,7 @@ MV3 extension, and a single database. pnpm workspaces:
 | `apps/web` | Next.js 16 App Router: pages, API routes, Vercel Queue consumer, all server logic in `src/server/` |
 | `apps/extension` | Chrome MV3 extension (content script, background worker, popup/side panel) |
 | `packages/db` | Drizzle schema (`src/schema.ts`), migrations (`drizzle/`), `getDb()` client, env profile loading |
-| `packages/core` | Browser-safe domain logic: FSRS wrapper (`fsrs.ts`), shared types, quiz Markdown formatter |
+| `packages/core` | Browser-safe domain logic: FSRS wrapper (`fsrs.ts`), practice-session rules, mistake profile, weakness model, suggestion planner, shared types |
 | `packages/contracts` | Zod request schemas and JSON-safe DTOs shared by web, extension, and DB JSON columns |
 | `packages/api-client` | Isomorphic AI-job client (start, poll, cancel) used by web and extension; caller supplies `fetch` |
 
@@ -38,7 +36,7 @@ and API routes stay thin HTTP adapters.
   Production runtime reads Vercel env vars, not files.
 - **Migrations**: edit `schema.ts`, run `pnpm db:generate`, commit the generated
   SQL + snapshot, apply with `pnpm db:migrate` (local) or the documented release
-  flow (`pnpm db:release`, see DEPLOYMENT.md). Migrations are additive; apply
+  flow (`pnpm db:release`, see [DEPLOYMENT.md](DEPLOYMENT.md#database-operations)). Migrations are additive; apply
   them before deploying code that depends on them.
 - **Isolation**: every business table carries `userId` and every query is scoped
   by it, including raw SQL. `problems.leetcodeSlug`/`leetcodeId` are unique per
@@ -57,7 +55,7 @@ Tables (all in `packages/db/src/schema.ts`):
 | `cards` | Q&A flashcards; `aiStatus` `candidate | failed | ready`; integer `version` for optimistic concurrency |
 | `quiz_sessions` | 5-item quizzes (`active | completed | archived`), answers, score |
 | `review_events` | Append-only history with FSRS snapshots; ratings are undone by stamping `undoneAt`; newer events record session, policy, method, and schedule-revision provenance |
-| `mistake_records` | Causes of failure, confirmed by the user (or AI candidates awaiting confirmation), linked to a submission, quiz answer, rating, or practice session, with structured evidence references; partial unique indexes dedupe per source and category (see MISTAKE_PROFILE_PLAN.md) |
+| `mistake_records` | Causes of failure, confirmed by the user (or AI candidates awaiting confirmation), linked to a submission, quiz answer, rating, or practice session, with structured evidence references; partial unique indexes dedupe per source and category |
 | `practice_improvements` | Retired "Skill handled well" confirmations. Kept for history and export; no longer written or counted (improvement is derived from clean reviews) |
 | `ai_jobs` | Durable async card, quiz, and session-analysis commands (see below) |
 | `session_analyses` | Immutable session-analysis results, cached per evidence version, analyzer version, provider, and model (see Session analysis) |
@@ -65,7 +63,7 @@ Tables (all in `packages/db/src/schema.ts`):
 | `attempt_history`, `attempt_history_coverage` | Attempted problems by slug and source, independent of `problems` rows, and how much of a LeetCode account's history was read (see New-problem suggestions) |
 | `agent_sessions`, `agent_runs`, `agent_messages`, `agent_steps` | Persistent Study Coach conversations |
 | `settings` | Per-user key/value: encrypted AI config, review/generation prefs, onboarding, rate-limit windows, starter-credit counter, Stripe customer ids |
-| `ai_credit_balances`, `ai_credit_ledger`, `credit_purchases` | Hosted AI credits (see PAID_AI_CREDITS.md) |
+| `ai_credit_balances`, `ai_credit_ledger`, `credit_purchases` | Hosted AI credits (see Paid AI credits) |
 
 ## Authentication and authorization
 
@@ -131,9 +129,8 @@ Tables (all in `packages/db/src/schema.ts`):
 
 ## Practice sessions
 
-The extension-first workflow ([plan](EXTENSION_FIRST_REFACTOR_PLAN.md),
-[checkpoints](EXTENSION_FIRST_CHECKPOINTS.md)) tracks each attempt at a problem
-as a practice session. The server owns the lifecycle; the extension reports.
+The extension-first workflow tracks each attempt at a problem as a practice
+session. The server owns the lifecycle; the extension reports.
 Pure rules live in `packages/core/src/practice-session.ts`, services in
 `server/practice-sessions/`.
 
@@ -171,7 +168,25 @@ Pure rules live in `packages/core/src/practice-session.ts`, services in
 
 ### Mistake evidence and profile
 
-Details: [MISTAKE_PROFILE_PLAN.md](MISTAKE_PROFILE_PLAN.md).
+The profile shows *recurring causes* of failure across problems ("I keep
+mishandling DFS base cases"), not topic statistics. Categories are one stable
+set, `SKILL_DIMENSIONS` in `packages/core/src/skills.ts`, mirrored by
+`skillDimensionEnum` in contracts (a test keeps them equal):
+
+| ID | Boundary |
+| --- | --- |
+| `approach` | Picked an unsuitable technique (not: implemented a good one badly) |
+| `invariant` | Wrong DP state, recursion contract, or loop invariant |
+| `edge_case` | Empty input, boundaries, base cases, initial values |
+| `complexity` | TLE/MLE traced to a cost decision |
+| `implementation` | Indexing, return values, scope, pointer/null handling |
+| `conceptual` | Doesn't know what a technique guarantees |
+| `other` | Evidence is thin or nothing fits |
+
+A record has one primary category (so counts never double-count) and up to 8
+free-form tags. A LeetCode status (`Wrong Answer`, `TLE`) never becomes a
+category by itself: it is a symptom. Records the user creates are
+`confirmed`; AI findings are `ai_suggested` until confirmed or dismissed.
 
 - A mistake record belongs to a practice session when made on it, or when its
   submission or rating came from one (derived server-side). Evidence
@@ -189,6 +204,42 @@ Details: [MISTAKE_PROFILE_PLAN.md](MISTAKE_PROFILE_PLAN.md).
   on read: a later completed, accepted session (not rated Again) on a problem
   with a confirmed mistake of that dimension, where the session has no
   record (confirmed or suggested) of it.
+- **Readiness**: personalized targeting needs three completed sessions across
+  two problems; a category needs confirmed evidence from two sessions across
+  two problems.
+- **Topic signals**: per topic, sessions with Accepted, failed, and first-try
+  counts; a session's rating (Again/Hard fail, Good/Easy pass) outranks its
+  observed outcome. Interrupted or abandoned sessions and missing evidence are
+  never failures, and incomplete evidence is labeled rather than counted as
+  success.
+
+### Weakness model
+
+Shared by the profile and the suggestion planner; constants in `FEED_PARAMS`
+(`packages/core/src/daily-feed/params.ts`). Evidence weighs `0.5^(age / 21
+days)` and is ignored after 90 days. A confirmed mistake is fail weight 3
+(x0.25 once resolved); a clean review is pass weight 2. For each dimension `d`
+with summed fail and pass weights `F_d`, `S_d`:
+
+```
+p̄   = clamp((ΣF + 1) / (ΣF + ΣS + 2), 0.15, 0.60)   # the user's overall failure rate
+p_d = (F_d + 3·p̄) / (F_d + S_d + 3)                 # Beta posterior mean, prior strength 3
+c_d = F_d / (F_d + 2)                                # how much failure evidence exists
+w_d = p_d · c_d                                      # weakness
+```
+
+`d` is weak when `w_d ≥ 0.25`, and once served as weak it stays weak until
+`w_d < 0.15` (hysteresis). Worked values used as test fixtures: one fresh
+confirmed mistake and nothing else gives `w = 0.48` (weak); one invariant
+mistake 21 days old followed by two clean passes gives `0.126` (recovered).
+Several weak dimensions share slots in proportion to `w_d` (each clamped to
+[0.15, 0.6] of an 85 % split, 15 % to general practice) through a seeded
+deficit round-robin over 14 days, so allocation converges to the shares
+without one type crowding out the rest.
+
+`planDailyFeed()` in `packages/core/src/daily-feed/` is the original, fully
+tested engine for a mixed daily drill/quiz feed. The app never calls it; its
+weakness, share, and rotation code is what `planSuggestion()` reuses.
 
 ## AI configuration and hosted keys
 
@@ -293,9 +344,8 @@ One model call explains one completed practice session (`server/session-analysis
 
 ## New-problem suggestions
 
-Suggestions target problems the user has never attempted
-([plan](EXTENSION_FIRST_REFACTOR_PLAN.md#recommendations)); no model invents
-or explains them.
+Suggestions target problems the user has never attempted; no model invents or
+explains them.
 
 - **Candidates** need verified metadata: a title, a difficulty, and LeetCode's
   paid flag as read from LeetCode, with the time it was read. Sources:
@@ -303,8 +353,9 @@ or explains them.
     them with the problem, and `upsertLeetcodeProblem()` records them in the
     same transaction.
   - the committed catalog (`server/suggestions/catalog.json`), generated from
-    LeetCode's problem list by `scripts/leetcode-catalog.js`. It is empty until
-    generated.
+    LeetCode's problem list by `scripts/leetcode-catalog.js` (see
+    DEVELOPMENT.md): 177 free Easy and Medium problems across 20 core topics,
+    generated 2026-10-12.
 - **Attempted problems** are never suggested. They are:
   - every problem row, archived ones included;
   - `attempt_history`, which holds LeetCode status reads, the user's own
@@ -314,9 +365,8 @@ or explains them.
   its last page. Nothing infers completeness from a partial list.
 - **Prerequisites** (no scheduled import or background job is involved):
   - A first suggestion needs at least one verified, free, never-attempted
-    candidate. A fresh account has none until it practices (or captures) a
-    problem whose LeetCode page lists similar questions, or until the catalog
-    is generated.
+    candidate. The catalog gives a fresh account general-practice picks from
+    day one; similar questions of practiced problems add targeted ones.
   - Personalized picks also need a personalized profile (3 completed sessions
     across 2 problems) and a weak dimension confirmed in 2+ sessions across
     2+ problems.
@@ -387,17 +437,64 @@ until the legacy code is removed.
   and refund. Stale runs are failed as interrupted on the next turn. Long
   sessions are compacted into summaries (`compaction.ts`).
 
-## Paid AI credits (summary)
+## Paid AI credits (suspended)
 
 New purchases are suspended by default; see the note under Asynchronous AI
-generation. Balances, the ledger, refunds, and the webhook still work.
+generation. Balances, the ledger, refunds, and the webhook still work. Nothing
+was ever sold on ankileet.com. Configuration is in
+[DEPLOYMENT.md](DEPLOYMENT.md#legacy-workflows).
 
-Optional Stripe Checkout credit packs, off unless Stripe keys and the hosted AI
-key are configured. Routes: `POST /api/billing/checkout` (session-only) and
-`POST /api/billing/webhook` (public, signature-verified). Credits are granted
-once per Checkout Session from the authoritative Session state and tracked in an
-append-only ledger. Full design, invariants, and test instructions:
-[PAID_AI_CREDITS.md](PAID_AI_CREDITS.md).
+- **Packs and costs** are server-side only: `CREDIT_PACKS` in
+  `server/billing/config.ts` ($4.99 → 100, $9.99 → 250, $19.99 → 600) and
+  `CREDIT_COST` in `server/ai-credits.ts` (card 1, quiz 2, Coach turn 5; 20
+  free starter credits per account). Checkout sends inline `price_data`, so the
+  client names only a `packId`; Session metadata freezes `userId`, `packId`,
+  and `credits`. Billing is on only when both Stripe variables and the hosted
+  key are set; live keys are refused outside Production, test keys on it.
+- **Data**: `ai_credit_balances` (`CHECK balance >= 0`, cascades with the
+  user); append-only `ai_credit_ledger` (`spend`, `refund`, `purchase`,
+  `stripe_refund`, `forfeit`, `adjustment`, per bucket `starter | paid`,
+  unique per reason, reference, and bucket); `credit_purchases` (unique per
+  Checkout Session). Ledger and purchases have no foreign key to `user`, so
+  they survive account deletion for accounting.
+- **Spending**: `spendHostedCredit()` runs in the transaction that creates the
+  job or Coach run; free credits go first, purchased credits pay the rest, by
+  conditional updates, so a short balance spends nothing
+  (`starter_credits_exhausted`, 403). `refundHostedCredit()` returns each part
+  to its bucket at most once: on `failed`, `superseded`, cancelled-before-start
+  jobs, and failed (not interrupted) Coach runs.
+- **Fulfillment**: both the webhook (`checkout.session.completed`,
+  `async_payment_succeeded`) and the success redirect call
+  `fulfillCheckoutSessionById()`, which re-reads the Session from Stripe,
+  ignores the event payload, grants only paid `mode=payment` Sessions for an
+  existing user, and records an already-refunded charge without credits. A
+  full `charge.refunded` removes up to that purchase's credits; partial
+  refunds and disputes are logged for manual review.
+- **Account deletion** with purchased credits requires
+  `acknowledgeCreditForfeit: true` (else `409`) and writes a `forfeit` row.
+- **Reconciliation** (spends on failed work that were never returned):
+
+  ```sql
+  SELECT l.user_id, l.ref_type, l.ref_id, l.bucket, l.delta
+  FROM ai_credit_ledger l
+  LEFT JOIN ai_credit_ledger r
+    ON r.reason = 'refund' AND r.ref_type = l.ref_type AND r.ref_id = l.ref_id AND r.bucket = l.bucket
+  LEFT JOIN ai_jobs j ON l.ref_type = 'ai_job' AND j.id = l.ref_id
+  LEFT JOIN agent_runs a ON l.ref_type = 'agent_run' AND a.id = l.ref_id
+  WHERE l.reason = 'spend'
+    AND r.id IS NULL
+    AND (
+      j.status IN ('failed', 'superseded')
+      OR (j.status = 'cancelled' AND j.started_at IS NULL)
+      OR (a.status = 'failed' AND a.error_code <> 'agent_interrupted')
+    );
+  ```
+
+Tests: `server/ai-credits*`, `account.test.ts`,
+`ai-generation/jobs.credits.test.ts`, `agent/store.credits.test.ts`, and
+`server/billing` (a real Stripe SDK offline, with signed test webhooks).
+Before selling anything, verify in Stripe test mode end to end, including a
+refund, and update the terms and privacy policy.
 
 ## Rate limits and caps
 
@@ -407,8 +504,7 @@ limit cards and quiz sessions per problem and active AI jobs per user.
 
 ## The extension
 
-The extension is the daily surface ([plan](EXTENSION_FIRST_REFACTOR_PLAN.md)).
-Three contexts, each with one job:
+The extension is the daily surface. Three contexts, each with one job:
 
 - **Content script** (`src/content/`, LeetCode problem pages only): reads
   LeetCode through its own GraphQL endpoint with the page's session
