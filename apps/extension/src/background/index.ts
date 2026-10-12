@@ -1,4 +1,4 @@
-import type { ReviewOverviewDto } from "@ankify/contracts";
+import type { ReviewOverviewDto } from "@ankileet/contracts";
 import { classifySender, parseMessage } from "../shared/protocol";
 import { getSettings } from "../shared/storage";
 import { createAccountState } from "./account";
@@ -21,24 +21,24 @@ import { createSuggestionsClient } from "./suggestions";
 // Extension settings and drafts are private to trusted extension contexts.
 void chrome.storage.local
   .setAccessLevel({ accessLevel: "TRUSTED_CONTEXTS" })
-  .catch((err) => console.error("ankify: failed to restrict local storage", err));
+  .catch((err) => console.error("ankileet: failed to restrict local storage", err));
 void chrome.storage.session
   .setAccessLevel({ accessLevel: "TRUSTED_CONTEXTS" })
-  .catch((err) => console.error("ankify: failed to restrict session storage", err));
+  .catch((err) => console.error("ankileet: failed to restrict session storage", err));
 
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
     void chrome.tabs
-      .create({ url: `${__ANKIFY_DEFAULT_API_ORIGIN__}/welcome?source=extension` })
-      .catch((err) => console.error("ankify: failed to open welcome page", err));
+      .create({ url: `${__ANKILEET_DEFAULT_API_ORIGIN__}/welcome?source=extension` })
+      .catch((err) => console.error("ankileet: failed to open welcome page", err));
   }
 });
 
-const SYNC_ALARM = "ankify-sync";
-const BADGE_ALARM = "ankify-badge";
-const BADGE_COLOR = "#d4a853"; // ankify gold accent
+const SYNC_ALARM = "ankileet-sync";
+const BADGE_ALARM = "ankileet-badge";
+const BADGE_COLOR = "#d4a853"; // ankileet gold accent
 const newId = () => crypto.randomUUID();
-const api = createApiClient({ origin: __ANKIFY_DEFAULT_API_ORIGIN__ });
+const api = createApiClient({ origin: __ANKILEET_DEFAULT_API_ORIGIN__ });
 const account = createAccountState({ api, store: chromeKeyValueStore(chrome.storage.local) });
 const tokens = createTokenRegistry(chrome.storage.session, newId);
 
@@ -139,7 +139,7 @@ async function scheduleSync() {
 }
 
 async function syncNow() {
-  await controller.flush().catch((error) => console.warn("ankify: sync failed", error));
+  await controller.flush().catch((error) => console.warn("ankileet: sync failed", error));
   await scheduleSync();
 }
 
@@ -185,7 +185,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       void scheduleSync();
     })
     .catch((error: unknown) => {
-      console.warn("ankify: message failed", error);
+      console.warn("ankileet: message failed", error);
       sendResponse({ ok: false, error: "unexpected" });
     });
   return true;

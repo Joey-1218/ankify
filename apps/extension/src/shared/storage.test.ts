@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-const PRODUCTION_ORIGIN = "https://ankify-pi.vercel.app";
+const PRODUCTION_ORIGIN = "https://ankileet.com";
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -10,11 +10,11 @@ afterEach(() => {
 
 async function loadStorage(storedSettings: Record<string, unknown> | undefined) {
   const get = vi.fn().mockResolvedValue({
-    "ankify.settings": storedSettings,
+    "ankileet.settings": storedSettings,
   });
   const set = vi.fn().mockResolvedValue(undefined);
 
-  vi.stubGlobal("__ANKIFY_DEFAULT_API_ORIGIN__", PRODUCTION_ORIGIN);
+  vi.stubGlobal("__ANKILEET_DEFAULT_API_ORIGIN__", PRODUCTION_ORIGIN);
   vi.stubGlobal("chrome", {
     storage: {
       local: { get, set },
@@ -39,7 +39,7 @@ describe("extension settings", () => {
       language: "zh",
     });
     expect(set).toHaveBeenCalledWith({
-      "ankify.settings": {
+      "ankileet.settings": {
         language: "zh",
       },
     });
@@ -56,7 +56,7 @@ describe("extension settings", () => {
     });
 
     expect(set).toHaveBeenCalledWith({
-      "ankify.settings": {
+      "ankileet.settings": {
         language: "zh",
       },
     });

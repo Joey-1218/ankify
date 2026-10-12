@@ -23,12 +23,12 @@ pnpm db:release             # backup + migrate Production; follow docs/DEPLOYMEN
 pnpm typecheck              # tsc --noEmit across all packages
 pnpm lint                   # eslint (5 known warnings in pre-existing code)
 pnpm test                   # vitest from the repo root (DB tests use throwaway SQLite files)
-ANKIFY_EXTENSION_API_ORIGIN=https://ankify-pi.vercel.app pnpm build
+ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com pnpm build
                             # production build; a bare Production extension build fails closed
 pnpm release:check          # typecheck + lint + test + build + manifest check + audit
 ```
 
-Root scripts delegate to workspace packages via pnpm filters. `ANKIFY_PROFILE`
+Root scripts delegate to workspace packages via pnpm filters. `ANKILEET_PROFILE`
 selects the env file for CLI tools (`local` default, `qa`, `preview`,
 `production`); only `:prod`/`db:backup`/`db:release` scripts touch Production
 Turso. Production runtime reads Vercel env vars, never local files.
@@ -51,7 +51,7 @@ client). The extension tracks practice sessions on LeetCode and syncs them
 through a durable outbox; FSRS changes only when a completed review session
 is rated. Session analysis runs as durable `ai_jobs` through a Vercel Queue
 on the user's own key. Study Coach, card/quiz generation, and credit sales are
-suspended (`ANKIFY_ENABLED_LEGACY_WORKFLOWS` re-enables one deliberately).
+suspended (`ANKILEET_ENABLED_LEGACY_WORKFLOWS` re-enables one deliberately).
 
 ## Rules that matter when editing
 
@@ -59,8 +59,8 @@ suspended (`ANKIFY_ENABLED_LEGACY_WORKFLOWS` re-enables one deliberately).
   `requirePageUser()`; API routes call `getRequestUser()` or
   `getRequestSessionUser()` (settings, account, billing). `proxy.ts` is not an
   auth check.
-- **Contracts at the edge**: validate requests with `@ankify/contracts` schemas
-  and return DTOs, never raw Drizzle rows. Browser code never imports `@ankify/db`.
+- **Contracts at the edge**: validate requests with `@ankileet/contracts` schemas
+  and return DTOs, never raw Drizzle rows. Browser code never imports `@ankileet/db`.
 - **Schema changes** go through `pnpm db:generate` and a committed migration;
   never edit applied migrations. Apply migrations before deploying code that
   needs them.
@@ -136,7 +136,7 @@ Genuinely custom controls are the exception and stay raw: rating buttons, quiz a
 - **suggestion** = a new problem offered to try (`suggestions`), never one the user attempted.
 - **AI job** = a durable command in `ai_jobs` (session analysis; legacy card/quiz generation), executed by the queue worker.
 - **card**, **quiz session**, **run** = legacy content of the suspended card, quiz, and Study Coach workflows.
-- **hosted key** = the server-owned AI key (`ANKIFY_STARTER_AI_API_KEY`) used when a user has no key of their own.
+- **hosted key** = the server-owned AI key (`ANKILEET_STARTER_AI_API_KEY`) used when a user has no key of their own.
 - **starter credits** = the free lifetime allowance on the hosted key; **purchased credits** = paid balance from Stripe credit packs.
 - **retrievability** = probability the user still remembers (0-1), computed by FSRS.
 - **stability** = how well a memory is consolidated (days until retrievability drops to 90%).

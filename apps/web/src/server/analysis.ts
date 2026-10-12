@@ -1,5 +1,5 @@
-import { getDb, schema } from "@ankify/db";
-import { retrievability, type FsrsCardState } from "@ankify/core";
+import { getDb, schema } from "@ankileet/db";
+import { retrievability, type FsrsCardState } from "@ankileet/core";
 import { and, eq, gt, gte, isNull, sql } from "drizzle-orm";
 import { dueProblemCondition } from "@/server/due-problems";
 import { getReviewSettings } from "@/server/settings";

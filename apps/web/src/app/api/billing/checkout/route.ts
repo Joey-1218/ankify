@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { creditCheckoutRequestSchema } from "@ankify/contracts";
+import { creditCheckoutRequestSchema } from "@ankileet/contracts";
 import { getSiteUrl } from "@/lib/site-url";
 import { getRequestSessionUser, unauthorizedResponse } from "@/server/auth";
 import { isWorkflowEnabled, legacyWorkflowResponse } from "@/server/features";
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       user,
       pack,
       origin: getSiteUrl(),
-      productName: `ankify AI credits (${pack.credits})`,
+      productName: `ankileet AI credits (${pack.credits})`,
     });
     return NextResponse.json({ url });
   } catch (error) {

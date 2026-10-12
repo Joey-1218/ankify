@@ -1,6 +1,6 @@
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
-import type { SuggestionAllocateResponseDto } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { SuggestionAllocateResponseDto } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { POST as postAttemptHistory } from "@/app/api/attempt-history/route";
 import { getRequestUser } from "@/server/auth";
 import { upsertLeetcodeProblem } from "@/server/problem-upsert";
@@ -20,7 +20,7 @@ const testDb = createTestDb();
 const user = { id: "suggest-route-user", email: "suggest-route@example.test", name: "Route" };
 
 function request(path: string, body?: unknown) {
-  return new Request(`https://ankify.test${path}`, {
+  return new Request(`https://ankileet.test${path}`, {
     method: body === undefined ? "GET" : "POST",
     headers: { "content-type": "application/json" },
     ...(body === undefined ? {} : { body: typeof body === "string" ? body : JSON.stringify(body) }),
@@ -59,7 +59,7 @@ describe("suggestion routes", () => {
     const noAccount = await postAttemptHistory(request("/api/attempt-history", { source: "leetcode_status", sourceAccount: null, entries: [] }));
     expect(noAccount.status).toBe(400);
 
-    vi.stubEnv("ANKIFY_DISABLED_WORKFLOWS", "suggestions");
+    vi.stubEnv("ANKILEET_DISABLED_WORKFLOWS", "suggestions");
     expect((await listSuggestions(request("/api/suggestions"))).status).toBe(503);
     expect((await postSuggestion(request("/api/suggestions", { requestId: crypto.randomUUID(), kind: "daily" }))).status).toBe(503);
     expect((await action("x", { action: "skip", requestId: crypto.randomUUID() })).status).toBe(503);

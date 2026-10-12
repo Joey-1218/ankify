@@ -1,5 +1,5 @@
-import type { AiJobCreateRequestInput } from "@ankify/contracts";
-import type { AiJob } from "@ankify/db";
+import type { AiJobCreateRequestInput } from "@ankileet/contracts";
+import type { AiJob } from "@ankileet/db";
 import { isWorkflowEnabled, LEGACY_WORKFLOWS, workflowForAiAction } from "@/server/features";
 import { RATE_LIMITS, checkRateLimit } from "@/server/rate-limit";
 import { createSessionAnalysisJob } from "@/server/session-analysis/jobs";

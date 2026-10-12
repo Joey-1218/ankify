@@ -1,4 +1,4 @@
-import type { SuggestionDto } from "@ankify/contracts";
+import type { SuggestionDto } from "@ankileet/contracts";
 import { describe, expect, it, vi } from "vitest";
 import type { ApiClient } from "./api";
 import { createSuggestionsClient } from "./suggestions";

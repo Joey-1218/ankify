@@ -1,5 +1,5 @@
-import type { QuizAnswer, QuizItem, QuizSessionDto } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { QuizAnswer, QuizItem, QuizSessionDto } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq, sql } from "drizzle-orm";
 import { toQuizSessionDto } from "./public-dto";
 

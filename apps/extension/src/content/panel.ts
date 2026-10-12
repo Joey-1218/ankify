@@ -1,4 +1,4 @@
-import type { MistakeRecordDto, PracticeModeId, PracticeSessionDto, SessionAnalysisFinding, SkillDimensionId } from "@ankify/contracts";
+import type { MistakeRecordDto, PracticeModeId, PracticeSessionDto, SessionAnalysisFinding, SkillDimensionId } from "@ankileet/contracts";
 import { relativeDay, type ExtensionStrings, type Language } from "../shared/i18n";
 import type { AnalysisView, PageNotice, PageSession, PageView } from "./page-session";
 import { PANEL_STYLES } from "./panel-styles";
@@ -84,7 +84,7 @@ export function mountPanel(deps: {
   actions: PanelActions;
 }) {
   const host = document.createElement("div");
-  host.setAttribute("data-ankify-panel", "");
+  host.setAttribute("data-ankileet-panel", "");
   host.setAttribute("data-slug", deps.slug);
   // Open mode: a page script could hook attachShadow before this document_idle
   // script runs anyway; the shadow root is for style isolation.
@@ -162,7 +162,7 @@ export function mountPanel(deps: {
         type: "button",
         class: "pill",
         "data-key": "pill",
-        // The visible "ankify <status>" is the name; aria-expanded is the state.
+        // The visible "ankileet <status>" is the name; aria-expanded is the state.
         "aria-expanded": open ? "true" : "false",
         onClick: () => {
           open = !open;
@@ -215,7 +215,7 @@ export function mountPanel(deps: {
         } }, chevron(false)),
       ),
       h("div", { class: "body" }, ...body(t)),
-      h("footer", {}, h("a", { href: dashboard, target: "_blank", rel: "noopener" }, view.kind === "ready" && view.problem ? t.common.openInAnkify : t.common.openDashboard)),
+      h("footer", {}, h("a", { href: dashboard, target: "_blank", rel: "noopener" }, view.kind === "ready" && view.problem ? t.common.openInAnkileet : t.common.openDashboard)),
     );
   }
 

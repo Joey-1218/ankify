@@ -1,5 +1,5 @@
-import type { SimilarQuestionInput } from "@ankify/contracts";
-import { schema } from "@ankify/db";
+import type { SimilarQuestionInput } from "@ankileet/contracts";
+import { schema } from "@ankileet/db";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import type { DbTransaction } from "../practice-sessions/store";

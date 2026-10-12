@@ -5,7 +5,7 @@ import {
   type LanguageModel,
   type ModelMessage,
 } from "ai";
-import type { AgentStepDto } from "@ankify/contracts";
+import type { AgentStepDto } from "@ankileet/contracts";
 import { compactAgentSessionIfNeeded } from "./compaction";
 import { STUDY_COACH_INSTRUCTIONS } from "./prompt";
 import { createStepTextBuffer } from "./step-text";
@@ -41,7 +41,7 @@ export async function runStudyCoach(args: {
     },
   });
   const agent = new ToolLoopAgent({
-    id: "ankify-study-coach",
+    id: "ankileet-study-coach",
     model: args.model,
     instructions: STUDY_COACH_INSTRUCTIONS,
     tools,

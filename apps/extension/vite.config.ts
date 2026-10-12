@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), crx({ manifest })],
     define: {
-      __ANKIFY_DEFAULT_API_ORIGIN__: JSON.stringify(apiOrigin),
+      __ANKILEET_DEFAULT_API_ORIGIN__: JSON.stringify(apiOrigin),
     },
     build: {
       outDir: "dist",

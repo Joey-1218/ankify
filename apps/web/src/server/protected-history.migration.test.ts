@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { afterAll, expect, it } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { eq } from "drizzle-orm";
 import { createTestDb } from "./test-db";
 import { iterateAccountExport } from "./account-export";

@@ -1,7 +1,7 @@
 import { DuplicateMessageError, send } from "@vercel/queue";
 import { isQaProfile } from "@/server/qa";
 
-const AI_GENERATION_TOPIC = "ankify-ai-generation";
+const AI_GENERATION_TOPIC = "ankileet-ai-generation";
 
 export async function dispatchAiJob(jobId: string) {
   if (isQaProfile()) return;

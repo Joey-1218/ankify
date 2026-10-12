@@ -1,7 +1,7 @@
 import type { Config } from "drizzle-kit";
 import { loadDbEnv } from "./src/client";
 
-// Honour ANKIFY_PROFILE=production to point drizzle-kit at Turso; default
+// Honour ANKILEET_PROFILE=production to point drizzle-kit at Turso; default
 // targets local SQLite via LOCAL_DB_PATH (set by loadDbEnv when missing).
 loadDbEnv();
 

@@ -3,17 +3,17 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { migrate } from "drizzle-orm/libsql/migrator";
-import { getDb } from "@ankify/db";
+import { getDb } from "@ankileet/db";
 
 const migrationsFolder = fileURLToPath(new URL("../../../../packages/db/drizzle", import.meta.url));
 
 /**
- * Points @ankify/db at a throwaway SQLite file. Call at the top of a test file,
+ * Points @ankileet/db at a throwaway SQLite file. Call at the top of a test file,
  * before anything calls getDb(). Env set here wins over .env.local, so tests
  * can never reach a Turso database.
  */
 export function createTestDb() {
-  const dir = mkdtempSync(join(tmpdir(), "ankify-test-"));
+  const dir = mkdtempSync(join(tmpdir(), "ankileet-test-"));
   process.env.TURSO_DATABASE_URL = "";
   process.env.LOCAL_DB_PATH = join(dir, "test.db");
 

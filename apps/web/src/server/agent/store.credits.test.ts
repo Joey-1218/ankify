@@ -1,15 +1,15 @@
 import { randomUUID } from "node:crypto";
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { eq } from "drizzle-orm";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import type { AiRuntimeSettings } from "../settings";
 import { getStarterAiStatus } from "../starter-ai";
 import { createTestDb } from "../test-db";
 import { AgentRequestError, beginAgentTurn, failAgentRun } from "./store";
 
 const testDb = createTestDb();
-process.env.ANKIFY_STARTER_AI_API_KEY = "sk-starter-test";
-process.env.ANKIFY_STARTER_AI_CREDITS = "10";
+process.env.ANKILEET_STARTER_AI_API_KEY = "sk-starter-test";
+process.env.ANKILEET_STARTER_AI_CREDITS = "10";
 
 const USER_ID = "user-coach";
 const context = { page: "today" as const, activePanel: "overview" as const, problemId: null };

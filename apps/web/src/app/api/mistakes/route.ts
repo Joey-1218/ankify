@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { mistakeCreateSchema, mistakeListQuerySchema } from "@ankify/contracts";
+import { mistakeCreateSchema, mistakeListQuerySchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { InvalidMistakesCursorError, createMistake, listMistakes } from "@/server/mistakes";
 import { RATE_LIMITS, checkRateLimit, rateLimitResponse } from "@/server/rate-limit";

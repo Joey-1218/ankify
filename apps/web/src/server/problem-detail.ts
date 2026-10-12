@@ -1,4 +1,4 @@
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { and, desc, eq, isNull, or } from "drizzle-orm";
 import { listProblemMistakes } from "./mistakes";
 import { listPracticeSessions } from "./practice-sessions/queries";

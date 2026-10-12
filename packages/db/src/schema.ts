@@ -10,7 +10,7 @@ import type {
   SessionAnalysisResult,
   SuggestionReasonDto,
   QuizItem,
-} from "@ankify/contracts";
+} from "@ankileet/contracts";
 
 const ts = (name: string) =>
   integer(name, { mode: "timestamp_ms" }).notNull().default(sql`(unixepoch() * 1000)`);

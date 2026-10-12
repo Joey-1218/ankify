@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { userCardManualCreateSchema } from "@ankify/contracts";
+import { userCardManualCreateSchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { createManualCard } from "@/server/card-commands";
 

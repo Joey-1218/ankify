@@ -3,7 +3,7 @@ import type {
   SuggestionAllocateResponseDto,
   SuggestionDto,
   SuggestionListDto,
-} from "@ankify/contracts";
+} from "@ankileet/contracts";
 import type { ApiClient, ApiResult } from "./api";
 
 export type SuggestionsFailure = { ok: false; error: string };

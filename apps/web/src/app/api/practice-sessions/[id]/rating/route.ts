@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { practiceSessionRatingSchema } from "@ankify/contracts";
+import { practiceSessionRatingSchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { isWorkflowEnabled, workflowDisabledResponse } from "@/server/features";
 import { sessionErrorResponse } from "@/server/practice-sessions/http";

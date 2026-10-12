@@ -1,4 +1,4 @@
-import type { MistakeRecordDto, PublicAiJobDto, SessionAnalysisStateDto, SkillDimensionId } from "@ankify/contracts";
+import type { MistakeRecordDto, PublicAiJobDto, SessionAnalysisStateDto, SkillDimensionId } from "@ankileet/contracts";
 import type { ApiClient, ApiResult } from "./api";
 
 export type AnalysisFailure = { ok: false; error: string };

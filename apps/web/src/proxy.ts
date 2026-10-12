@@ -1,10 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 const API_METHODS = "GET,POST,PATCH,DELETE,OPTIONS";
-const API_HEADERS = "Content-Type, X-Ankify-Owner-Token";
+const API_HEADERS = "Content-Type, X-Ankileet-Owner-Token";
 
 function allowedExtensionOrigins() {
-  return (process.env.ANKIFY_EXTENSION_ORIGINS ?? "")
+  return (process.env.ANKILEET_EXTENSION_ORIGINS ?? "")
     .split(",")
     .map((origin) => origin.trim())
     .filter((origin) => origin.startsWith("chrome-extension://"));
@@ -44,7 +44,7 @@ export async function proxy(req: NextRequest) {
     pathname === "/welcome" ||
     pathname === "/privacy" ||
     pathname === "/terms" ||
-    (process.env.ANKIFY_PROFILE === "qa" && pathname === "/api/qa/login") ||
+    (process.env.ANKILEET_PROFILE === "qa" && pathname === "/api/qa/login") ||
     pathname.startsWith("/api/auth/") ||
     pathname.startsWith("/api/queues/") ||
     pathname === "/api/billing/webhook";

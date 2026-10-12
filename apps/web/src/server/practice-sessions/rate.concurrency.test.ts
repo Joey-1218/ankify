@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, expect, it } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { eq } from "drizzle-orm";
 import { createTestDb } from "../test-db";
 import { runSessionCommand, startPracticeSession } from "./commands";

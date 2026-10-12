@@ -6,25 +6,25 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const scratch = mkdtempSync(join(tmpdir(), "ankify-e2e-"));
+const scratch = mkdtempSync(join(tmpdir(), "ankileet-e2e-"));
 const pnpm = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
 // Explicit empty values take precedence over local env files. The disposable
 // profile cannot reach Turso, hosted AI, a personal provider, or Stripe.
 const env = {
   ...process.env,
-  NODE_ENV: "development", ANKIFY_PROFILE: "qa", ANKIFY_E2E: "1", VERCEL: "",
+  NODE_ENV: "development", ANKILEET_PROFILE: "qa", ANKILEET_E2E: "1", VERCEL: "",
   TURSO_DATABASE_URL: "", TURSO_AUTH_TOKEN: "", LOCAL_DB_PATH: join(scratch, "qa.db"),
   BETTER_AUTH_URL: "http://localhost:4317",
-  BETTER_AUTH_SECRET: "ankify-browser-tests-only-secret-32-characters",
+  BETTER_AUTH_SECRET: "ankileet-browser-tests-only-secret-32-characters",
   GOOGLE_CLIENT_ID: "", GOOGLE_CLIENT_SECRET: "",
-  ANKIFY_EXTENSION_API_ORIGIN: "http://localhost:4317", ANKIFY_EXTENSION_ORIGINS: "",
+  ANKILEET_EXTENSION_API_ORIGIN: "http://localhost:4317", ANKILEET_EXTENSION_ORIGINS: "",
   AI_KEY_ENCRYPTION_SECRET: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
-  ANKIFY_STARTER_AI_API_KEY: "", ANKIFY_DISABLE_SIGNUP: "true",
-  ANKIFY_QA_AI_PROVIDER: "", ANKIFY_QA_AI_MODEL: "", ANKIFY_QA_AI_API_KEY: "",
-  ANKIFY_QA_AI_REASONING_MODE: "", STRIPE_SECRET_KEY: "", STRIPE_WEBHOOK_SECRET: "",
+  ANKILEET_STARTER_AI_API_KEY: "", ANKILEET_DISABLE_SIGNUP: "true",
+  ANKILEET_QA_AI_PROVIDER: "", ANKILEET_QA_AI_MODEL: "", ANKILEET_QA_AI_API_KEY: "",
+  ANKILEET_QA_AI_REASONING_MODE: "", STRIPE_SECRET_KEY: "", STRIPE_WEBHOOK_SECRET: "",
   // Session analysis runs against the local fake provider below, and
   // automatic analysis is available so tests can switch it per user.
-  ANKIFY_QA_AI_BASE_URL: "http://127.0.0.1:4318/v1", ANKIFY_AUTOMATIC_ANALYSIS: "enabled",
+  ANKILEET_QA_AI_BASE_URL: "http://127.0.0.1:4318/v1", ANKILEET_AUTOMATIC_ANALYSIS: "enabled",
 };
 
 // A fake OpenAI-compatible provider: every chat completion returns the same
@@ -79,10 +79,10 @@ function run(command, args, cwd = root) {
 
 try {
   await run(pnpm, ["db:migrate:qa"]);
-  await run(pnpm, ["--filter", "@ankify/web", "qa:seed"]);
-  await run(pnpm, ["--filter", "@ankify/extension", "exec", "vite", "build", "--mode", "development", "--outDir", "dist-e2e"]);
+  await run(pnpm, ["--filter", "@ankileet/web", "qa:seed"]);
+  await run(pnpm, ["--filter", "@ankileet/extension", "exec", "vite", "build", "--mode", "development", "--outDir", "dist-e2e"]);
   // The QA worker processes queued AI jobs from the same database.
-  worker = spawn(pnpm, ["--filter", "@ankify/web", "qa:worker"], { cwd: root, env, stdio: "inherit" });
+  worker = spawn(pnpm, ["--filter", "@ankileet/web", "qa:worker"], { cwd: root, env, stdio: "inherit" });
   await run(process.execPath, [resolve(root, "apps/web/node_modules/next/dist/bin/next"), "dev", "--hostname", "127.0.0.1", "--port", "4317"], resolve(root, "apps/web"));
 } catch (error) {
   if (!stopping) {

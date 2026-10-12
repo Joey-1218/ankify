@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
-import type { PracticeSessionStartInput } from "@ankify/contracts";
-import { rateFullSolve } from "@ankify/core";
-import { getDb, schema } from "@ankify/db";
+import type { PracticeSessionStartInput } from "@ankileet/contracts";
+import { rateFullSolve } from "@ankileet/core";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { problemFsrsState, rateProblemReview, undoLatestProblemReview } from "../review-commands";
 import { getReviewQueueStatus } from "../review-queue";

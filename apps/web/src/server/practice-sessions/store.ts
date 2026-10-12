@@ -1,4 +1,4 @@
-import type { PracticeProblemStatusDto, PracticeSessionDto, PracticeSessionErrorCode } from "@ankify/contracts";
+import type { PracticeProblemStatusDto, PracticeSessionDto, PracticeSessionErrorCode } from "@ankileet/contracts";
 import {
   getDb,
   schema,
@@ -6,7 +6,7 @@ import {
   type PracticeSession,
   type PracticeSessionCommand,
   type Problem,
-} from "@ankify/db";
+} from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { loadSessionEvidence, toPracticeSessionDto } from "./dto";

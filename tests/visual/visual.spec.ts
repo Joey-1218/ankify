@@ -22,7 +22,7 @@ async function leetcodeTheme(page: Page, theme: Theme) {
   }, theme);
 }
 
-const panelHost = (page: Page) => page.locator("[data-ankify-panel]");
+const panelHost = (page: Page) => page.locator("[data-ankileet-panel]");
 
 /** Text that changes with the calendar day: absolute dates and chart day labels. */
 const dated = (page: Page) => [
@@ -116,7 +116,7 @@ test.describe("embedded panel", () => {
       const page = await context.newPage();
       await page.setViewportSize({ width: 1280, height: 800 });
 
-      // Collapsed: a problem new to ankify.
+      // Collapsed: a problem new to ankileet.
       await page.goto(problemUrl("valid-parentheses"));
       await leetcodeTheme(page, theme);
       await expect(panelHost(page)).toHaveAttribute("data-theme", theme);

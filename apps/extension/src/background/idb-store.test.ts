@@ -6,7 +6,7 @@ import type { OutboxOperation } from "./outbox";
 const operation = (id: string, createdAt: number): OutboxOperation => ({
   id,
   accountId: "user-1",
-  apiOrigin: "https://ankify.test",
+  apiOrigin: "https://ankileet.test",
   sessionId: "s1",
   kind: "observations",
   path: "/api/practice-sessions/s1/submissions",
@@ -38,7 +38,7 @@ describe("IndexedDB outbox store", () => {
     const store = createIdbOutboxStore(() => openSyncDatabase(factory));
     for (let index = 0; index < 5; index += 1) {
       await store.addRejection(
-        { id: `r${index}`, accountId: "user-1", apiOrigin: "https://ankify.test", sessionId: "s1", kind: "command", status: 409, code: "invalid_transition", at: index },
+        { id: `r${index}`, accountId: "user-1", apiOrigin: "https://ankileet.test", sessionId: "s1", kind: "command", status: 409, code: "invalid_transition", at: index },
         3,
       );
     }

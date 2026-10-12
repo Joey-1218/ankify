@@ -17,7 +17,7 @@ const problem = {
 };
 
 describe("practice session contracts", () => {
-  it("starts from an Ankify problem or LeetCode metadata, and never supersedes a rating implicitly", () => {
+  it("starts from an Ankileet problem or LeetCode metadata, and never supersedes a rating implicitly", () => {
     const fromQueue = practiceSessionStartSchema.parse({ requestId, ownerToken, mode: "due_review", target: { kind: "problem", problemId: "p1" } });
     expect(fromQueue.supersedePendingRating).toBe(false);
     expect(fromQueue.baseline).toBeUndefined();

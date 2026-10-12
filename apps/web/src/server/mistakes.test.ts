@@ -1,8 +1,8 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { eq } from "drizzle-orm";
-import { SKILL_DIMENSIONS, quizScopeToDimension } from "@ankify/core";
-import { skillDimensionEnum, type MistakeCreateRequest, type QuizItem } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import { SKILL_DIMENSIONS, quizScopeToDimension } from "@ankileet/core";
+import { skillDimensionEnum, type MistakeCreateRequest, type QuizItem } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { iterateAccountExport } from "./account-export";
 import {
   InvalidMistakesCursorError,

@@ -1,5 +1,5 @@
-import { schema } from "@ankify/db";
-import type { getDb } from "@ankify/db";
+import { schema } from "@ankileet/db";
+import type { getDb } from "@ankileet/db";
 
 type Tx = Parameters<Parameters<ReturnType<typeof getDb>["transaction"]>[0]>[0];
 

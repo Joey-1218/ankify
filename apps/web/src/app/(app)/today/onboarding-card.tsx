@@ -10,8 +10,8 @@ import {
   Sparkles,
   Trophy,
 } from "lucide-react";
-import type { AiProvider } from "@ankify/core";
-import type { OnboardingProgressDto } from "@ankify/contracts";
+import type { AiProvider } from "@ankileet/core";
+import type { OnboardingProgressDto } from "@ankileet/contracts";
 import { Surface } from "@/components/ui/surface";
 import { Button, buttonClasses } from "@/components/ui/button";
 import { Field, Input, Select } from "@/components/ui/field";
@@ -70,11 +70,11 @@ type Copy = {
 const COPY: Record<"en" | "zh", Copy> = {
   en: {
     eyebrow: "Quick setup",
-    title: "Start practicing with ankify",
+    title: "Start practicing with ankileet",
     description: "Four small steps take you from a new account to your first scheduled review.",
     progress: (done) => `${done} of 4 handled`,
     extensionTitle: "Install and connect the extension",
-    extensionBody: "Install it, then click ankify once so it reuses this web login and tracks your practice on LeetCode.",
+    extensionBody: "Install it, then click ankileet once so it reuses this web login and tracks your practice on LeetCode.",
     extensionDone: "Extension connected",
     install: "Install extension",
     aiTitle: "Connect AI",
@@ -101,7 +101,7 @@ const COPY: Record<"en" | "zh", Copy> = {
     aiSuccess: (model, latencyMs) => `${model} connected in ${latencyMs} ms.`,
     aiMissing: "Choose a provider and model, then add its API key.",
     captureTitle: "Practice your first problem",
-    captureBody: "Open a LeetCode problem and click Start practice in the ankify panel.",
+    captureBody: "Open a LeetCode problem and click Start practice in the ankileet panel.",
     captureDone: "First practice started",
     openSample: "Open Two Sum",
     captureLocked: "Connect the extension first.",
@@ -112,11 +112,11 @@ const COPY: Record<"en" | "zh", Copy> = {
   },
   zh: {
     eyebrow: "快速设置",
-    title: "开始用 ankify 练习",
+    title: "开始用 ankileet 练习",
     description: "四个小步骤，从新账号到第一次安排好的复习。",
     progress: (done) => `已处理 ${done}/4`,
     extensionTitle: "安装并连接扩展",
-    extensionBody: "安装后点击一次 ankify，让扩展复用当前网页登录，并记录你在 LeetCode 上的练习。",
+    extensionBody: "安装后点击一次 ankileet，让扩展复用当前网页登录，并记录你在 LeetCode 上的练习。",
     extensionDone: "扩展已连接",
     install: "安装扩展",
     aiTitle: "连接 AI",
@@ -143,7 +143,7 @@ const COPY: Record<"en" | "zh", Copy> = {
     aiSuccess: (model, latencyMs) => `${model} 连接成功，用时 ${latencyMs} ms。`,
     aiMissing: "请选择供应商和模型，并填写对应的 API Key。",
     captureTitle: "练习第一道题",
-    captureBody: "打开一道 LeetCode 题目，在 ankify 面板中点击开始练习。",
+    captureBody: "打开一道 LeetCode 题目，在 ankileet 面板中点击开始练习。",
     captureDone: "已开始第一次练习",
     openSample: "打开 Two Sum",
     captureLocked: "请先连接扩展。",

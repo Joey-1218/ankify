@@ -1,4 +1,4 @@
-import { schema } from "@ankify/db";
+import { schema } from "@ankileet/db";
 import { and, eq, isNull, lte, or } from "drizzle-orm";
 
 /** Due for review: enrolled (initial learning complete), not archived, and

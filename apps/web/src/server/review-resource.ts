@@ -1,5 +1,5 @@
-import type { CardDto, SubmissionDto } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { CardDto, SubmissionDto } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, desc, eq } from "drizzle-orm";
 import {
   publicCardColumns,

@@ -1,6 +1,6 @@
-import type { ProblemDto, ProblemLookupPayloadDto } from "@ankify/contracts";
-import { preview, type FsrsCardState } from "@ankify/core";
-import { getDb, schema } from "@ankify/db";
+import type { ProblemDto, ProblemLookupPayloadDto } from "@ankileet/contracts";
+import { preview, type FsrsCardState } from "@ankileet/core";
+import { getDb, schema } from "@ankileet/db";
 import { and, desc, eq, isNull, ne } from "drizzle-orm";
 import { getReviewQueueStatus } from "@/server/review-queue";
 import { publicCardColumns } from "./public-dto";

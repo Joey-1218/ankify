@@ -1,6 +1,6 @@
 # Architecture
 
-Canonical description of how ankify is built. `CLAUDE.md` and `AGENTS.md` link
+Canonical description of how ankileet is built. `CLAUDE.md` and `AGENTS.md` link
 here instead of repeating it; update this file when the architecture changes.
 Paid AI credits have their own deep-dive in [PAID_AI_CREDITS.md](PAID_AI_CREDITS.md).
 Deployment and data-ownership rules live in [DEPLOYMENT.md](DEPLOYMENT.md) and
@@ -22,8 +22,8 @@ MV3 extension, and a single database. pnpm workspaces:
 | `packages/contracts` | Zod request schemas and JSON-safe DTOs shared by web, extension, and DB JSON columns |
 | `packages/api-client` | Isomorphic AI-job client (start, poll, cancel) used by web and extension; caller supplies `fetch` |
 
-Boundaries: browser code never imports `@ankify/db`; public APIs return DTOs
-from `@ankify/contracts`, never raw Drizzle rows; `apps/web/src/lib/` is
+Boundaries: browser code never imports `@ankileet/db`; public APIs return DTOs
+from `@ankileet/contracts`, never raw Drizzle rows; `apps/web/src/lib/` is
 browser-safe helpers only; DB/auth/AI/queue code lives in `apps/web/src/server/`
 and API routes stay thin HTTP adapters.
 
@@ -33,7 +33,7 @@ and API routes stay thin HTTP adapters.
   development/QA. `getDb()` picks Turso when `TURSO_DATABASE_URL` is set and
   refuses local SQLite on Vercel. Every Drizzle transaction opens with
   `BEGIN IMMEDIATE` (libSQL's default `write` mode), so writers are serialized.
-- **Profiles**: `ANKIFY_PROFILE` selects `local` (default), `qa`, `preview`, or
+- **Profiles**: `ANKILEET_PROFILE` selects `local` (default), `qa`, `preview`, or
   `production` env files for CLI tools (`loadDbEnv()` in `packages/db/src/client.ts`).
   Production runtime reads Vercel env vars, not files.
 - **Migrations**: edit `schema.ts`, run `pnpm db:generate`, commit the generated
@@ -70,7 +70,7 @@ Tables (all in `packages/db/src/schema.ts`):
 ## Authentication and authorization
 
 - Better Auth with Google OAuth (`/api/auth/[...all]`). Signup is public;
-  `ANKIFY_DISABLE_SIGNUP=true` pauses new accounts only.
+  `ANKILEET_DISABLE_SIGNUP=true` pauses new accounts only.
 - `src/proxy.ts` (Next 16 proxy convention) is only a cookie gate and the
   extension CORS preflight handler. Every server page calls `requirePageUser()`
   and every API route calls `getRequestUser()` (cookie-cached) or
@@ -79,8 +79,8 @@ Tables (all in `packages/db/src/schema.ts`):
   `/api/queues/*` (Vercel Queue callbacks), `/api/billing/webhook` (Stripe
   signature), and `/api/qa/login` in the QA profile only.
 - The extension reuses the web session cookie (`credentials: include`); its API
-  origin is fixed at build time (`ANKIFY_EXTENSION_API_ORIGIN`), and production
-  CORS allows only `ANKIFY_EXTENSION_ORIGINS`.
+  origin is fixed at build time (`ANKILEET_EXTENSION_API_ORIGIN`), and production
+  CORS allows only `ANKILEET_EXTENSION_ORIGINS`.
 - Production fails closed without `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`,
   Google credentials, and `AI_KEY_ENCRYPTION_SECRET`;
   `scripts/check-vercel-env.mjs` validates Vercel env at build time.
@@ -137,7 +137,7 @@ as a practice session. The server owns the lifecycle; the extension reports.
 Pure rules live in `packages/core/src/practice-session.ts`, services in
 `server/practice-sessions/`.
 
-- **Kinds**: `initial_learning` (a problem new to Ankify, created
+- **Kinds**: `initial_learning` (a problem new to Ankileet, created
   `awaiting_initial` and kept out of the queue), `scheduled_review` (due, or
   explicitly started early), `voluntary_practice` (never changes the schedule).
 - **Lifecycle**: `active` → `completed` | `abandoned`. An active session whose
@@ -165,8 +165,8 @@ Pure rules live in `packages/core/src/practice-session.ts`, services in
   clamped into the session window and flagged when adjusted.
 - **API**: `POST/GET /api/practice-sessions`, `GET /api/practice-sessions/current`,
   `GET /api/practice-sessions/:id`, `POST .../:id/commands`,
-  `POST .../:id/submissions`. Tabs send `X-Ankify-Owner-Token` on reads.
-- **Kill switch**: `ANKIFY_DISABLED_WORKFLOWS` (comma-separated workflow ids)
+  `POST .../:id/submissions`. Tabs send `X-Ankileet-Owner-Token` on reads.
+- **Kill switch**: `ANKILEET_DISABLED_WORKFLOWS` (comma-separated workflow ids)
   disables a workflow's routes and removes it from `GET /api/capabilities`.
 
 ### Mistake evidence and profile
@@ -197,7 +197,7 @@ Details: [MISTAKE_PROFILE_PLAN.md](MISTAKE_PROFILE_PLAN.md).
 1. The user's own provider/model/key (AES-256-GCM encrypted with
    `AI_KEY_ENCRYPTION_SECRET`; APIs expose only `hasApiKey`). Always wins and
    never spends credits (`source: "user"`).
-2. Otherwise the server's hosted key when `ANKIFY_STARTER_AI_API_KEY` is set
+2. Otherwise the server's hosted key when `ANKILEET_STARTER_AI_API_KEY` is set
    (`source: "starter"`). Work on this key spends hosted credits (card 1, quiz
    2, Study Coach turn 5): free starter credits if they cover the cost, else
    purchased credits (`server/ai-credits.ts`).
@@ -216,7 +216,7 @@ can be disabled per call; Gemini counts thinking against the output cap, so
 > as deprecations. Card and quiz jobs queued before the suspension fail in the
 > runner before any provider call, which refunds their hosted credit once. The
 > Stripe webhook and credit accounting keep working. An operator can re-enable
-> one explicitly with `ANKIFY_ENABLED_LEGACY_WORKFLOWS`; no rollback does.
+> one explicitly with `ANKILEET_ENABLED_LEGACY_WORKFLOWS`; no rollback does.
 
 Card and quiz generation never run inside the request:
 
@@ -225,7 +225,7 @@ Card and quiz generation never run inside the request:
    model, language, and preconditions (expected card version / quiz session).
    The idempotency key (`requestId`) and an active-resource dedup key are
    unique per user; a hosted credit is spent in the same transaction as the insert.
-2. The job id is published to the Vercel Queue topic `ankify-ai-generation`
+2. The job id is published to the Vercel Queue topic `ankileet-ai-generation`
    (`dispatch.ts`, idempotent by job id). If publishing fails, the job is failed
    and its credit refunded. The QA profile uses `scripts/qa-worker.ts` instead.
 3. `api/queues/ai-generation` → `runner.ts:processAiJob()` claims the job with
@@ -246,7 +246,7 @@ One model call explains one completed practice session (`server/session-analysis
 
 - **Start**: `POST /api/ai-jobs` with `session_analyze` (manual), or planned inside
   the finish transaction when automatic analysis is on for the
-  deployment (default; `ANKIFY_AUTOMATIC_ANALYSIS=disabled` switches it off),
+  deployment (default; `ANKILEET_AUTOMATIC_ANALYSIS=disabled` switches it off),
   for the user (settings `analysis.automatic`, default on), and the session
   has captured code (`hasAnalyzableCode()` in core, the same rule as a manual
   analysis). Every session kind qualifies alike, accepted or not, so a review
@@ -287,7 +287,7 @@ One model call explains one completed practice session (`server/session-analysis
   the web problem page (Sessions tab, loaded when visible) show status and
   confirm/correct/dismiss controls. The Mistakes tab lists open suggestions
   first; manual entry is a secondary link.
-- **Kill switch**: `ANKIFY_DISABLED_WORKFLOWS=session_analysis` refuses new jobs
+- **Kill switch**: `ANKILEET_DISABLED_WORKFLOWS=session_analysis` refuses new jobs
   (`503 workflow_disabled`) and fails queued ones before any provider call.
   Stored analyses, candidates, and confirmed mistakes stay.
 
@@ -354,7 +354,7 @@ or explains them.
     - skip and already attempted store today's replacement in the same
       transaction, and already attempted also records `user_marked` history;
     - start runs the practice-session start in the same transaction
-      (`startSessionInTransaction()`). A problem new to Ankify starts initial
+      (`startSessionInTransaction()`). A problem new to Ankileet starts initial
       learning; one already in the deck is started by id, so its own metadata
       is never overwritten.
   - Any new practice session on a problem with a pending suggestion (from the
@@ -365,7 +365,7 @@ or explains them.
   - `GET /api/suggestions` lists today's suggestions.
   - `POST /api/attempt-history` merges LeetCode status reads, with their
     coverage.
-  - The kill switch is `ANKIFY_DISABLED_WORKFLOWS=suggestions`.
+  - The kill switch is `ANKILEET_DISABLED_WORKFLOWS=suggestions`.
 
 ## Study Coach
 
@@ -446,9 +446,9 @@ Three contexts, each with one job:
     metadata it just read. This completes a problem created from stored
     metadata (description, topics, similar questions).
 
-The API origin is fixed at build time (`ANKIFY_EXTENSION_API_ORIGIN`); the
+The API origin is fixed at build time (`ANKILEET_EXTENSION_API_ORIGIN`); the
 extension reuses the web session cookie, and production CORS allows only
-`ANKIFY_EXTENSION_ORIGINS`. Permissions: `storage`, `tabs`, `alarms`; hosts:
+`ANKILEET_EXTENSION_ORIGINS`. Permissions: `storage`, `tabs`, `alarms`; hosts:
 `leetcode.com` and the API origin.
 
 ## Web pages

@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { afterAll, beforeAll, expect, it, vi } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { getPaidCreditBalance } from "../ai-credits";
 import { createTestDb } from "../test-db";
 import { confirmCheckoutReturn } from "./credits";

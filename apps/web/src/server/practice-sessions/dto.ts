@@ -2,14 +2,14 @@ import type {
   PracticeProblemStatusDto,
   PracticeSessionDto,
   PracticeSessionObservationDto,
-} from "@ankify/contracts";
+} from "@ankileet/contracts";
 import {
   effectiveRatingDisposition,
   effectiveSessionStatus,
   hasLiveLease,
   isSessionStale,
-} from "@ankify/core";
-import { getDb, schema, type PracticeSession, type PracticeSessionSubmission, type Problem } from "@ankify/db";
+} from "@ankileet/core";
+import { getDb, schema, type PracticeSession, type PracticeSessionSubmission, type Problem } from "@ankileet/db";
 import { and, eq, inArray, sql } from "drizzle-orm";
 
 type DbExecutor = ReturnType<typeof getDb> | Parameters<Parameters<ReturnType<typeof getDb>["transaction"]>[0]>[0];

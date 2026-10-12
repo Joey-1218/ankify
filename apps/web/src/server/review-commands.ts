@@ -3,9 +3,9 @@ import type {
   ReviewRatingInput,
   ReviewUndoInput,
   ReviewUndoResponseDto,
-} from "@ankify/contracts";
-import { rate, retrievability, SCHEDULING_POLICIES, type FsrsCardState } from "@ankify/core";
-import { getDb, schema, type Problem, type ReviewEvent } from "@ankify/db";
+} from "@ankileet/contracts";
+import { rate, retrievability, SCHEDULING_POLICIES, type FsrsCardState } from "@ankileet/core";
+import { getDb, schema, type Problem, type ReviewEvent } from "@ankileet/db";
 import { and, asc, desc, eq, gt, inArray, isNull, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { z } from "zod";

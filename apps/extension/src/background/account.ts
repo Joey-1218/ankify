@@ -1,4 +1,4 @@
-import type { AuthUserDto } from "@ankify/contracts";
+import type { AuthUserDto } from "@ankileet/contracts";
 import type { ApiClient } from "./api";
 
 export type AccountState =
@@ -12,11 +12,11 @@ export type KeyValueStore = {
   set(key: string, value: unknown): Promise<void>;
 };
 
-const CACHE_KEY = "ankify.account";
+const CACHE_KEY = "ankileet.account";
 const FRESH_MS = 60_000;
 
 /**
- * The Ankify account the extension acts for. The last confirmed account is
+ * The Ankileet account the extension acts for. The last confirmed account is
  * persisted so work done offline is still scoped to it; it is never assumed
  * to be the account a later sign-in belongs to.
  */

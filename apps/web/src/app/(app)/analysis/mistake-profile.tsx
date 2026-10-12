@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Route } from "next";
-import type { MistakeProfileDto } from "@ankify/contracts";
+import type { MistakeProfileDto } from "@ankileet/contracts";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Pill } from "@/components/ui/pill";
 import { Surface } from "@/components/ui/surface";

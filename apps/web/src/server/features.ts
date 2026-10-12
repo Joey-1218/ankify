@@ -1,4 +1,4 @@
-import type { WorkflowId } from "@ankify/contracts";
+import type { WorkflowId } from "@ankileet/contracts";
 import { NextResponse } from "next/server";
 
 /**
@@ -20,7 +20,7 @@ const IMPLEMENTED_WORKFLOWS: readonly WorkflowId[] = [
 ];
 
 /**
- * Operational kill switch: `ANKIFY_DISABLED_WORKFLOWS=practice_sessions,...`
+ * Operational kill switch: `ANKILEET_DISABLED_WORKFLOWS=practice_sessions,...`
  * turns implemented workflows off without a code change (the plan's rollback
  * lever). Unknown names are ignored.
  */
@@ -37,15 +37,15 @@ function envList(name: string): Set<string> {
  * Legacy AI workflows suspended by the extension-first release: Study Coach,
  * card and quiz generation, and credit sales. Each stays off unless an
  * operator re-enables it explicitly with
- * `ANKIFY_ENABLED_LEGACY_WORKFLOWS=coach,...`; no rollback turns one back on.
+ * `ANKILEET_ENABLED_LEGACY_WORKFLOWS=coach,...`; no rollback turns one back on.
  */
 const SUSPENDED_WORKFLOWS: readonly WorkflowId[] = ["coach", "card_generation", "quiz_generation", "credit_checkout"];
 
 export function isWorkflowEnabled(workflow: WorkflowId) {
   return (
     IMPLEMENTED_WORKFLOWS.includes(workflow) &&
-    !envList("ANKIFY_DISABLED_WORKFLOWS").has(workflow) &&
-    (!SUSPENDED_WORKFLOWS.includes(workflow) || envList("ANKIFY_ENABLED_LEGACY_WORKFLOWS").has(workflow))
+    !envList("ANKILEET_DISABLED_WORKFLOWS").has(workflow) &&
+    (!SUSPENDED_WORKFLOWS.includes(workflow) || envList("ANKILEET_ENABLED_LEGACY_WORKFLOWS").has(workflow))
   );
 }
 
@@ -55,21 +55,21 @@ export function enabledWorkflows(): WorkflowId[] {
 
 /**
  * Automatic session analysis is on unless an operator switches it off with
- * `ANKIFY_AUTOMATIC_ANALYSIS=disabled` (or switches all analysis off). It
+ * `ANKILEET_AUTOMATIC_ANALYSIS=disabled` (or switches all analysis off). It
  * does not depend on the recovery cron: a job is queued and sent after its
  * session commits, and one whose send failed is re-sent on the user's next
  * contact (the popup, a problem page, an analysis read), or by
  * `/api/cron/ai-dispatch` where that is scheduled (see DEPLOYMENT.md).
  */
 export function isAutomaticAnalysisEnabled() {
-  return isWorkflowEnabled("session_analysis") && process.env.ANKIFY_AUTOMATIC_ANALYSIS !== "disabled";
+  return isWorkflowEnabled("session_analysis") && process.env.ANKILEET_AUTOMATIC_ANALYSIS !== "disabled";
 }
 
 /** Retired workflows old clients may still call, and how each is retired. */
 export const LEGACY_WORKFLOWS: Partial<Record<WorkflowId, { code: "upgrade_required" | "workflow_suspended"; message: string }>> = {
   legacy_review: {
     code: "upgrade_required",
-    message: "Update the ankify extension: reviews are now rated after solving the problem on LeetCode.",
+    message: "Update the ankileet extension: reviews are now rated after solving the problem on LeetCode.",
   },
   coach: { code: "workflow_suspended", message: "Study Coach is no longer available." },
   card_generation: { code: "workflow_suspended", message: "Card generation is no longer available." },

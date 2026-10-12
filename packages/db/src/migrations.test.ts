@@ -14,7 +14,7 @@ describe("database invariants", () => {
   let client: Client;
 
   beforeEach(async () => {
-    dir = await mkdtemp(resolve(tmpdir(), "ankify-db-test-"));
+    dir = await mkdtemp(resolve(tmpdir(), "ankileet-db-test-"));
     client = createClient({ url: `file:${resolve(dir, "test.db")}` });
     await migrate(drizzle(client), { migrationsFolder });
     await client.execute({

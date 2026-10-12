@@ -3,26 +3,26 @@ import { NextRequest } from "next/server";
 import { proxy } from "./proxy";
 
 const extensionOrigin = "chrome-extension://abcdefghijklmnopabcdefghijklmnop";
-const originalOrigins = process.env.ANKIFY_EXTENSION_ORIGINS;
-const originalProfile = process.env.ANKIFY_PROFILE;
+const originalOrigins = process.env.ANKILEET_EXTENSION_ORIGINS;
+const originalProfile = process.env.ANKILEET_PROFILE;
 
 afterEach(() => {
   if (originalOrigins === undefined) {
-    delete process.env.ANKIFY_EXTENSION_ORIGINS;
+    delete process.env.ANKILEET_EXTENSION_ORIGINS;
   } else {
-    process.env.ANKIFY_EXTENSION_ORIGINS = originalOrigins;
+    process.env.ANKILEET_EXTENSION_ORIGINS = originalOrigins;
   }
   if (originalProfile === undefined) {
-    delete process.env.ANKIFY_PROFILE;
+    delete process.env.ANKILEET_PROFILE;
   } else {
-    process.env.ANKIFY_PROFILE = originalProfile;
+    process.env.ANKILEET_PROFILE = originalProfile;
   }
 });
 
 describe("extension session CORS", () => {
   it("keeps the product homepage public for Google OAuth verification", async () => {
     const response = await proxy(
-      new NextRequest("https://ankify.example.com/"),
+      new NextRequest("https://ankileet.example.com/"),
     );
 
     expect(response.status).toBe(200);
@@ -31,7 +31,7 @@ describe("extension session CORS", () => {
 
   it("keeps the extension welcome page public before sign-in", async () => {
     const response = await proxy(
-      new NextRequest("https://ankify.example.com/welcome?source=extension"),
+      new NextRequest("https://ankileet.example.com/welcome?source=extension"),
     );
 
     expect(response.status).toBe(200);
@@ -40,7 +40,7 @@ describe("extension session CORS", () => {
 
   it("lets Vercel Queue callbacks reach the queue SDK without a user cookie", async () => {
     const response = await proxy(
-      new NextRequest("https://ankify.example.com/api/queues/ai-generation", {
+      new NextRequest("https://ankileet.example.com/api/queues/ai-generation", {
         method: "POST",
       }),
     );
@@ -50,24 +50,24 @@ describe("extension session CORS", () => {
 
   it("lets Stripe webhooks through without a cookie but keeps checkout private", async () => {
     const webhook = await proxy(
-      new NextRequest("https://ankify.example.com/api/billing/webhook", { method: "POST" }),
+      new NextRequest("https://ankileet.example.com/api/billing/webhook", { method: "POST" }),
     );
     expect(webhook.status).toBe(200);
 
     const checkout = await proxy(
-      new NextRequest("https://ankify.example.com/api/billing/checkout", { method: "POST" }),
+      new NextRequest("https://ankileet.example.com/api/billing/checkout", { method: "POST" }),
     );
     expect(checkout.status).toBe(401);
   });
 
   it("opens the fixed-session login only in the QA profile", async () => {
-    process.env.ANKIFY_PROFILE = "qa";
+    process.env.ANKILEET_PROFILE = "qa";
     const qaResponse = await proxy(
       new NextRequest("http://localhost:3000/api/qa/login"),
     );
     expect(qaResponse.status).toBe(200);
 
-    process.env.ANKIFY_PROFILE = "local";
+    process.env.ANKILEET_PROFILE = "local";
     const localResponse = await proxy(
       new NextRequest("http://localhost:3000/api/qa/login"),
     );
@@ -75,9 +75,9 @@ describe("extension session CORS", () => {
   });
 
   it("allows credentialed preflight only for configured extension origins", async () => {
-    process.env.ANKIFY_EXTENSION_ORIGINS = extensionOrigin;
+    process.env.ANKILEET_EXTENSION_ORIGINS = extensionOrigin;
     const response = await proxy(
-      new NextRequest("https://ankify.example.com/api/capture", {
+      new NextRequest("https://ankileet.example.com/api/capture", {
         method: "OPTIONS",
         headers: { origin: extensionOrigin },
       }),
@@ -86,16 +86,16 @@ describe("extension session CORS", () => {
     expect(response.status).toBe(204);
     expect(response.headers.get("access-control-allow-origin")).toBe(extensionOrigin);
     expect(response.headers.get("access-control-allow-credentials")).toBe("true");
-    expect(response.headers.get("access-control-allow-headers")).toBe("Content-Type, X-Ankify-Owner-Token");
+    expect(response.headers.get("access-control-allow-headers")).toBe("Content-Type, X-Ankileet-Owner-Token");
   });
 
-  it("does not let retired x-ankify-token headers bypass session auth", async () => {
-    process.env.ANKIFY_EXTENSION_ORIGINS = extensionOrigin;
+  it("does not let retired x-ankileet-token headers bypass session auth", async () => {
+    process.env.ANKILEET_EXTENSION_ORIGINS = extensionOrigin;
     const response = await proxy(
-      new NextRequest("https://ankify.example.com/api/me", {
+      new NextRequest("https://ankileet.example.com/api/me", {
         headers: {
           origin: extensionOrigin,
-          "x-ankify-token": "retired-token",
+          "x-ankileet-token": "retired-token",
         },
       }),
     );
@@ -106,9 +106,9 @@ describe("extension session CORS", () => {
   });
 
   it("does not grant CORS to an untrusted extension", async () => {
-    process.env.ANKIFY_EXTENSION_ORIGINS = extensionOrigin;
+    process.env.ANKILEET_EXTENSION_ORIGINS = extensionOrigin;
     const response = await proxy(
-      new NextRequest("https://ankify.example.com/api/me", {
+      new NextRequest("https://ankileet.example.com/api/me", {
         headers: {
           origin: "chrome-extension://pppppppppppppppppppppppppppppppp",
         },

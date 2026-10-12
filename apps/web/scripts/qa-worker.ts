@@ -1,5 +1,5 @@
-import { getDb, schema } from "@ankify/db";
-import { loadDbEnv } from "@ankify/db/client";
+import { getDb, schema } from "@ankileet/db";
+import { loadDbEnv } from "@ankileet/db/client";
 import { and, asc, eq, lte } from "drizzle-orm";
 import { processAiJob } from "../src/server/ai-generation/runner";
 import { isQaProfile } from "../src/server/qa";
@@ -7,7 +7,7 @@ import { isQaProfile } from "../src/server/qa";
 loadDbEnv();
 
 if (!isQaProfile()) {
-  throw new Error("qa:worker requires ANKIFY_PROFILE=qa");
+  throw new Error("qa:worker requires ANKILEET_PROFILE=qa");
 }
 
 let stopping = false;

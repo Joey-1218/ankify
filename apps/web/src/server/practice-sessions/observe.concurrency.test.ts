@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, expect, it } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { createTestDb } from "../test-db";
 import { ingestSessionObservations, startPracticeSession } from "./commands";
 import { expectOnlyBusy, RACE_T0, raceStartInput } from "./race-fixtures";

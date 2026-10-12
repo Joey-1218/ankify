@@ -1,5 +1,5 @@
-import type { AttemptHistoryCoverageDto, AttemptHistoryMergeInput, AttemptStatus } from "@ankify/contracts";
-import { getDb, schema, type AttemptHistoryCoverage } from "@ankify/db";
+import type { AttemptHistoryCoverageDto, AttemptHistoryMergeInput, AttemptStatus } from "@ankileet/contracts";
+import { getDb, schema, type AttemptHistoryCoverage } from "@ankileet/db";
 import { and, eq, gte, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import type { DbTransaction } from "../practice-sessions/store";

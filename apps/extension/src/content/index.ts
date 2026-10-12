@@ -1,4 +1,4 @@
-import type { CaptureSubmissionInput, CaptureResultDto } from "@ankify/contracts";
+import type { CaptureSubmissionInput, CaptureResultDto } from "@ankileet/contracts";
 import { strings, type Language } from "../shared/i18n";
 import type { ContentMessage } from "../shared/protocol";
 import { createLeetcodeClient } from "./leetcode-client";
@@ -43,7 +43,7 @@ function slugFromLocation() {
 /** Reads the latest page of submissions with details and imports them. */
 async function importHistory(slug: string) {
   const [problem, listing] = await Promise.all([client.readProblem(slug), client.listSubmissions(slug, { maxPages: 1 })]);
-  // LeetCode could not be read: say so, rather than blaming the connection to ankify.
+  // LeetCode could not be read: say so, rather than blaming the connection to ankileet.
   const leetcodeError = (availability: string) => (availability === "signed_out" ? "leetcode_signed_out" : "leetcode_unavailable");
   if (!problem.value) return { ok: false as const, error: leetcodeError(problem.availability) };
   if (!listing.value) return { ok: false as const, error: leetcodeError(listing.availability) };
@@ -88,7 +88,7 @@ function mount() {
     page,
     strings: () => strings(language),
     language: () => language,
-    apiOrigin: __ANKIFY_DEFAULT_API_ORIGIN__,
+    apiOrigin: __ANKILEET_DEFAULT_API_ORIGIN__,
     actions: { importHistory: () => importHistory(slug) },
   });
   current = { slug, page, panel };

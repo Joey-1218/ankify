@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import type { SubmissionDto } from "@ankify/contracts";
+import type { SubmissionDto } from "@ankileet/contracts";
 import { Pill } from "@/components/ui/pill";
 import { HighlightedCode } from "@/components/ui/highlighted-code";
 import { Button } from "@/components/ui/button";

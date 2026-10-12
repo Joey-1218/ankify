@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq, inArray } from "drizzle-orm";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 

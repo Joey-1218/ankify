@@ -5,7 +5,7 @@ import type { OutboxOperation, OutboxRejection, OutboxStore } from "./outbox";
  * (the background worker) open it; content scripts run in the page's origin,
  * whose storage LeetCode's scripts could read, and never touch it.
  */
-const DB_NAME = "ankify-sync";
+const DB_NAME = "ankileet-sync";
 const DB_VERSION = 1;
 const OPERATIONS = "operations";
 const REJECTIONS = "rejections";

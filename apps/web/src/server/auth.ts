@@ -4,8 +4,8 @@ import { cache } from "react";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { getDb, schema } from "@ankify/db";
-import type { AuthUserDto } from "@ankify/contracts";
+import { getDb, schema } from "@ankileet/db";
+import type { AuthUserDto } from "@ankileet/contracts";
 
 function requiredEnv(name: string) {
   const value = process.env[name];
@@ -20,7 +20,7 @@ function configuredBaseUrl() {
 }
 
 function configuredExtensionOrigins() {
-  const configured = (process.env.ANKIFY_EXTENSION_ORIGINS ?? "")
+  const configured = (process.env.ANKILEET_EXTENSION_ORIGINS ?? "")
     .split(",")
     .map((origin) => origin.trim())
     .filter((origin) => origin.startsWith("chrome-extension://"));
@@ -35,7 +35,7 @@ function configuredExtensionOrigins() {
  * where new account creation must be paused without locking out existing users.
  */
 export function isSignupEnabled() {
-  const flag = (process.env.ANKIFY_DISABLE_SIGNUP ?? "").trim().toLowerCase();
+  const flag = (process.env.ANKILEET_DISABLE_SIGNUP ?? "").trim().toLowerCase();
   return !(flag === "true" || flag === "1" || flag === "yes");
 }
 

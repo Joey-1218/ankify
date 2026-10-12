@@ -1,10 +1,10 @@
-import { ownerTokenSchema } from "@ankify/contracts";
+import { ownerTokenSchema } from "@ankileet/contracts";
 import { NextResponse } from "next/server";
 import type { SessionFailure } from "./store";
 
 /** Tabs identify themselves on reads with this header, so the response can say
  *  whether the session is controlled by the caller or another tab. */
-export const OWNER_TOKEN_HEADER = "x-ankify-owner-token";
+export const OWNER_TOKEN_HEADER = "x-ankileet-owner-token";
 
 export function requestOwnerToken(req: Request): string | null {
   const parsed = ownerTokenSchema.safeParse(req.headers.get(OWNER_TOKEN_HEADER));

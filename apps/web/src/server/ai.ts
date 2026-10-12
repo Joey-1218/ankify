@@ -111,7 +111,7 @@ export function buildModel(settings: BuildModelSettings, opts: BuildModelOptions
     const client = createOpenAICompatible({
       name: preset.name,
       // QA and browser tests point this preset at a local fake provider.
-      baseURL: (isQaProfile() && process.env.ANKIFY_QA_AI_BASE_URL) || preset.baseURL,
+      baseURL: (isQaProfile() && process.env.ANKILEET_QA_AI_BASE_URL) || preset.baseURL,
       apiKey: settings.apiKey,
       ...(disableThinking ? { fetch: deepseekNonThinkingFetch } : {}),
     });

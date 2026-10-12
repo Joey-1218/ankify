@@ -1,5 +1,5 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { eq } from "drizzle-orm";
 import { createTestDb } from "@/server/test-db";
 import { QA_SECOND_SESSION_ID, QA_SECOND_USER_ID, QA_SESSION_ID, QA_SESSION_TOKEN, QA_USER_ID } from "@/server/qa";
@@ -12,12 +12,12 @@ const sessionRow = async (id: string) => (await getDb().select().from(schema.ses
 beforeAll(() => testDb.migrate());
 afterAll(() => testDb.cleanup());
 beforeEach(async () => {
-  vi.stubEnv("ANKIFY_PROFILE", "qa");
+  vi.stubEnv("ANKILEET_PROFILE", "qa");
   vi.stubEnv("BETTER_AUTH_SECRET", "qa-login-test-secret-qa-login-test-secret");
   await getDb().delete(schema.user);
   await getDb().insert(schema.user).values([
-    { id: QA_USER_ID, name: "QA", email: "qa@ankify.local" },
-    { id: QA_SECOND_USER_ID, name: "QA 2", email: "qa2@ankify.local" },
+    { id: QA_USER_ID, name: "QA", email: "qa@ankileet.local" },
+    { id: QA_SECOND_USER_ID, name: "QA 2", email: "qa2@ankileet.local" },
   ]);
 });
 afterEach(() => vi.unstubAllEnvs());
@@ -47,7 +47,7 @@ describe("QA sign-in", () => {
   it("explains a missing QA account, and does not exist outside the QA profile", async () => {
     await getDb().delete(schema.user).where(eq(schema.user.id, QA_USER_ID));
     expect((await login()).status).toBe(409);
-    vi.stubEnv("ANKIFY_PROFILE", "local");
+    vi.stubEnv("ANKILEET_PROFILE", "local");
     expect((await login()).status).toBe(404);
   });
 });

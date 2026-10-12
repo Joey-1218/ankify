@@ -8,7 +8,7 @@ import type {
   PracticeSessionSubmissionsResponseDto,
   SessionBaselineInput,
   SessionObservationOutcome,
-} from "@ankify/contracts";
+} from "@ankileet/contracts";
 import {
   classifyObservation,
   effectiveRatingDisposition,
@@ -20,8 +20,8 @@ import {
   ratingDispositionOnCompletion,
   SESSION_LEASE_MS,
   sessionKindFor,
-} from "@ankify/core";
-import { getDb, schema, type PracticeSession, type PracticeSessionSubmission, type Problem } from "@ankify/db";
+} from "@ankileet/core";
+import { getDb, schema, type PracticeSession, type PracticeSessionSubmission, type Problem } from "@ankileet/db";
 import { and, asc, eq, inArray, ne, or } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { markFirstCapture } from "@/server/onboarding";

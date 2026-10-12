@@ -1,4 +1,4 @@
-import type { MistakeProfileDto } from "@ankify/contracts";
+import type { MistakeProfileDto } from "@ankileet/contracts";
 import {
   computeMistakeProfile,
   FEED_PARAMS,
@@ -6,8 +6,8 @@ import {
   type FsrsRating,
   type ProfileMistakeInput,
   type ProfileSessionInput,
-} from "@ankify/core";
-import { getDb, schema } from "@ankify/db";
+} from "@ankileet/core";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq, gte, isNotNull, isNull, ne, or } from "drizzle-orm";
 
 const TREND_DAYS = 30;
@@ -31,7 +31,7 @@ export function legacySourceKey(row: {
 /**
  * The mistake profile from the user's own records, sessions, and ratings in
  * the last 90 days. Every query is scoped by user; aggregation happens in
- * `computeMistakeProfile()` (see `@ankify/core`), so nothing derived is stored
+ * `computeMistakeProfile()` (see `@ankileet/core`), so nothing derived is stored
  * that Undo, dismissal, or deletion could leave stale.
  */
 export async function loadMistakeProfile(userId: string, now = new Date()): Promise<MistakeProfileDto> {

@@ -6,7 +6,7 @@ function client(response: Response | Error) {
     if (response instanceof Error) throw response;
     return response;
   });
-  return { api: createApiClient({ origin: "https://ankify.test/", fetch }), fetch };
+  return { api: createApiClient({ origin: "https://ankileet.test/", fetch }), fetch };
 }
 
 const json = (status: number, body: unknown, headers: Record<string, string> = {}) =>
@@ -16,7 +16,7 @@ describe("extension API client", () => {
   it("sends JSON with the session cookie and the tab's owner token", async () => {
     const { api, fetch } = client(json(200, { ok: true }));
     expect(await api.request("/api/x", { body: { a: 1 }, ownerToken: "tab-token" })).toEqual({ ok: true, status: 200, data: { ok: true } });
-    expect(fetch).toHaveBeenCalledWith("https://ankify.test/api/x", expect.objectContaining({
+    expect(fetch).toHaveBeenCalledWith("https://ankileet.test/api/x", expect.objectContaining({
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ a: 1 }),

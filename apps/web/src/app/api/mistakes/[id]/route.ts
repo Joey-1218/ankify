@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { mistakePatchSchema } from "@ankify/contracts";
+import { mistakePatchSchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { deleteMistake, updateMistake } from "@/server/mistakes";
 import { RATE_LIMITS, checkRateLimit, rateLimitResponse } from "@/server/rate-limit";

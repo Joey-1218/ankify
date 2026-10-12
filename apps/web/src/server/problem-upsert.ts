@@ -1,6 +1,6 @@
-import type { CaptureProblemInput } from "@ankify/contracts";
-import { emptyCardState } from "@ankify/core";
-import { getDb, schema, type Problem } from "@ankify/db";
+import type { CaptureProblemInput } from "@ankileet/contracts";
+import { emptyCardState } from "@ankileet/core";
+import { getDb, schema, type Problem } from "@ankileet/db";
 import { and, eq, isNull, or, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { MAX_PROBLEMS_PER_USER } from "@/server/resource-limits";

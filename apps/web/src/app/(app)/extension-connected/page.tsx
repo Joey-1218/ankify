@@ -9,13 +9,13 @@ export const dynamic = "force-dynamic";
 const copy = {
   en: {
     title: "Extension connected",
-    body: "Your Google session is ready in the ankify extension. You can close this tab and return to LeetCode.",
-    continue: "Open ankify",
+    body: "Your Google session is ready in the ankileet extension. You can close this tab and return to LeetCode.",
+    continue: "Open ankileet",
   },
   zh: {
     title: "扩展已连接",
-    body: "Google 登录会话已同步到 ankify 扩展。你可以关闭此页面并返回 LeetCode。",
-    continue: "打开 ankify",
+    body: "Google 登录会话已同步到 ankileet 扩展。你可以关闭此页面并返回 LeetCode。",
+    continue: "打开 ankileet",
   },
 } as const;
 

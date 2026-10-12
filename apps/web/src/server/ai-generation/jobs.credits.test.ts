@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { and, eq, sql } from "drizzle-orm";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { setAiSettings } from "../settings";
 import { getStarterAiStatus } from "../starter-ai";
 import { createTestDb } from "../test-db";
@@ -25,8 +25,8 @@ vi.mock("./card", () => ({ generateAiCardDraft: vi.fn() }));
 
 const testDb = createTestDb();
 process.env.AI_KEY_ENCRYPTION_SECRET = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
-process.env.ANKIFY_STARTER_AI_API_KEY = "sk-starter-test";
-process.env.ANKIFY_STARTER_AI_CREDITS = "2";
+process.env.ANKILEET_STARTER_AI_API_KEY = "sk-starter-test";
+process.env.ANKILEET_STARTER_AI_CREDITS = "2";
 
 const USER_ID = "user-jobs";
 const PROBLEM_ID = "problem-jobs";
@@ -74,7 +74,7 @@ beforeEach(async () => {
   await testDb.exec("DROP TRIGGER IF EXISTS fail_refund_insert");
   // Card generation is suspended by default (Phase 6B); these tests cover its
   // still-present accounting, so they re-enable it as an operator would.
-  vi.stubEnv("ANKIFY_ENABLED_LEGACY_WORKFLOWS", "card_generation,quiz_generation");
+  vi.stubEnv("ANKILEET_ENABLED_LEGACY_WORKFLOWS", "card_generation,quiz_generation");
 });
 afterEach(() => vi.unstubAllEnvs());
 
@@ -129,14 +129,14 @@ describe("AI job creation", () => {
   });
 
   it("creates no job when credits are exhausted", async () => {
-    process.env.ANKIFY_STARTER_AI_CREDITS = "0";
+    process.env.ANKILEET_STARTER_AI_CREDITS = "0";
     try {
       const error = await createAiJob(USER_ID, cardJobInput()).catch((e: unknown) => e);
       expect(error).toBeInstanceOf(AiJobRequestError);
       expect(error).toMatchObject({ code: "starter_credits_exhausted", status: 403 });
       expect(await getDb().select().from(schema.aiJobs)).toHaveLength(0);
     } finally {
-      process.env.ANKIFY_STARTER_AI_CREDITS = "2";
+      process.env.ANKILEET_STARTER_AI_CREDITS = "2";
     }
   });
 

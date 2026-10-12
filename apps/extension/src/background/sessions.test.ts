@@ -4,7 +4,7 @@ import type { ApiClient, ApiRequest, ApiResult } from "./api";
 import { createMemoryOutboxStore, createOutbox, type DeliveryOutcome, type OutboxOperation } from "./outbox";
 import { createSessionController } from "./sessions";
 
-const ORIGIN = "https://ankify.test";
+const ORIGIN = "https://ankileet.test";
 type Call = { path: string; init: ApiRequest };
 type Responder = (call: Call) => ApiResult<unknown>;
 
@@ -106,7 +106,7 @@ describe("session controller", () => {
     expect(await controller.pageState(7, "two-sum")).toMatchObject({ ok: true, response: { localSync: { pendingObservations: 1 } } });
   });
 
-  it("sends saved work as soon as ankify answers again, without waiting out the backoff", async () => {
+  it("sends saved work as soon as ankileet answers again, without waiting out the backoff", async () => {
     let delivered = 0;
     const { controller, setOnline, store } = harness(
       (call) => ok(call.path.startsWith("/api/practice-sessions/current") ? { problem: null, session: null, pendingRating: null } : { ok: true, session: { id: "s1" } }),

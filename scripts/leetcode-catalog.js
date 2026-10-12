@@ -40,7 +40,7 @@
       credentials: "include",
       headers: { "content-type": "application/json", ...(csrf ? { "x-csrftoken": decodeURIComponent(csrf) } : {}) },
       body: JSON.stringify({
-        query: `query ankifyCatalog($skip: Int!, $limit: Int!, $filters: QuestionListFilterInput) {
+        query: `query ankileetCatalog($skip: Int!, $limit: Int!, $filters: QuestionListFilterInput) {
           questionList(categorySlug: "", limit: $limit, skip: $skip, filters: $filters) {
             totalNum
             data { titleSlug title difficulty isPaidOnly topicTags { name } }

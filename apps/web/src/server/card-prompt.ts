@@ -1,5 +1,5 @@
-import type { Problem, Submission } from "@ankify/db";
-import type { CardDraft } from "@ankify/contracts";
+import type { Problem, Submission } from "@ankileet/db";
+import type { CardDraft } from "@ankileet/contracts";
 import type { Language } from "@/lib/i18n";
 
 const RAW_TEXT_MAX = 6000;

@@ -11,14 +11,14 @@ const COPY = {
   en: {
     eyebrow: "Spaced repetition for LeetCode",
     title: "Remember the reasoning behind every solution.",
-    body: "ankify works next to LeetCode. The Chrome extension records each practice session and its submissions, FSRS brings every problem back just before you'd forget it, and your mistake profile shows which causes of failure keep coming back.",
+    body: "ankileet works next to LeetCode. The Chrome extension records each practice session and its submissions, FSRS brings every problem back just before you'd forget it, and your mistake profile shows which causes of failure keep coming back.",
     start: "Continue with Google",
     getExtension: "Add to Chrome",
     note: "Free to use. Session analysis is optional and runs only on your own Anthropic, OpenAI, or DeepSeek key.",
-    heroAlt: "ankify analysis dashboard showing memory score, lapse rate, and the problems most likely to slip",
+    heroAlt: "ankileet analysis dashboard showing memory score, lapse rate, and the problems most likely to slip",
     stepsTitle: "How it works",
     steps: [
-      ["Practice", "Open a problem on LeetCode and start practice from the ankify panel. Every submission is recorded with its verdict."],
+      ["Practice", "Open a problem on LeetCode and start practice from the ankileet panel. Every submission is recorded with its verdict."],
       ["Rate", "Finish a review and rate how it went. FSRS-6 schedules the next one; a first practice comes back a day later."],
       ["Learn", "Record why an attempt failed, or let session analysis suggest a cause, and watch your mistake profile."],
     ],
@@ -27,7 +27,7 @@ const COPY = {
       ["Practice sessions", "The extension tracks each attempt on LeetCode: submissions, verdicts, and time spent. Nothing is scheduled until you rate a review."],
       ["Mistake profile", "Confirmed causes of failure, counted once per session, show which skills keep slipping across problems."],
       ["New problems", "A daily suggestion of a problem you haven't attempted, chosen from problems similar to ones you practiced, with the reason it was picked."],
-      ["Session analysis, optional", "With your own key, ankify explains why a session went wrong and suggests mistakes for you to confirm. Nothing counts until you do."],
+      ["Session analysis, optional", "With your own key, ankileet explains why a session went wrong and suggests mistakes for you to confirm. Nothing counts until you do."],
     ],
     extras: [
       ["Your key, only if you want it", "Analysis is the only AI feature, and it runs on your own key, encrypted before it's stored."],
@@ -42,14 +42,14 @@ const COPY = {
   zh: {
     eyebrow: "为 LeetCode 设计的间隔复习",
     title: "记住每道题背后的思路。",
-    body: "ankify 就在 LeetCode 旁边。Chrome 扩展记录每次练习和提交，FSRS 在你快要遗忘前把题目带回来，错误画像告诉你哪些失败原因反复出现。",
+    body: "ankileet 就在 LeetCode 旁边。Chrome 扩展记录每次练习和提交，FSRS 在你快要遗忘前把题目带回来，错误画像告诉你哪些失败原因反复出现。",
     start: "使用 Google 开始",
     getExtension: "添加到 Chrome",
     note: "免费使用。练习分析是可选的，只会使用你自己的 Anthropic、OpenAI 或 DeepSeek key。",
-    heroAlt: "ankify 分析仪表盘：记忆率、遗忘率，以及最可能遗忘的题目",
+    heroAlt: "ankileet 分析仪表盘：记忆率、遗忘率，以及最可能遗忘的题目",
     stepsTitle: "如何使用",
     steps: [
-      ["练习", "在 LeetCode 打开题目，在 ankify 面板中开始练习，每次提交和结果都会被记录。"],
+      ["练习", "在 LeetCode 打开题目，在 ankileet 面板中开始练习，每次提交和结果都会被记录。"],
       ["评分", "完成复习后为这次表现评分，FSRS-6 安排下一次复习；首次练习会在一天后复习。"],
       ["总结", "记录失败的原因，或让练习分析给出建议，再看看你的错误画像。"],
     ],
@@ -58,7 +58,7 @@ const COPY = {
       ["练习记录", "扩展记录你在 LeetCode 上的每次尝试：提交、结果和用时。只有你给复习评分后才会安排下一次。"],
       ["错误画像", "确认过的失败原因按练习计数，告诉你哪些能力在不同题目上反复出问题。"],
       ["新题推荐", "每天推荐一道你没做过的题，来自与你练习过的题相似的题目，并说明推荐理由。"],
-      ["练习分析（可选）", "使用你自己的 key，ankify 解释一次练习为什么出错，并建议错误类别由你确认；确认前不会计入。"],
+      ["练习分析（可选）", "使用你自己的 key，ankileet 解释一次练习为什么出错，并建议错误类别由你确认；确认前不会计入。"],
     ],
     extras: [
       ["只在需要时用你的 key", "练习分析是唯一的 AI 功能，只使用你自己的 key，存储前会加密。"],

@@ -8,18 +8,18 @@ export default defineManifest(({ mode }) => {
   const apiOrigin = extensionApiOrigin(mode);
   const includeDevelopmentKey =
     mode === "development" ||
-    process.env.ANKIFY_EXTENSION_BUILD_TARGET === "unpacked";
+    process.env.ANKILEET_EXTENSION_BUILD_TARGET === "unpacked";
 
   return {
     manifest_version: 3,
     minimum_chrome_version: "116",
-    name: "ankify",
+    name: "ankileet",
     description:
       "Practice LeetCode problems with spaced repetition: track each attempt on the problem page and review when it's due.",
     version: "0.3.0",
     ...(includeDevelopmentKey ? { key: DEVELOPMENT_EXTENSION_KEY } : {}),
     action: {
-      default_title: "ankify",
+      default_title: "ankileet",
       default_popup: "src/popup/index.html",
       default_icon: {
         "16": "icons/icon16.png",

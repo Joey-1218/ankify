@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { aiJobCreateRequestSchema } from "@ankify/contracts";
+import { aiJobCreateRequestSchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { isWorkflowEnabled, LEGACY_WORKFLOWS, legacyWorkflowResponse, workflowForAiAction } from "@/server/features";
 import {

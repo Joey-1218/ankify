@@ -8,8 +8,8 @@
  * Problem statements are short paraphrases written for this demo, not copies
  * of LeetCode text.
  */
-import { getDb, schema } from "@ankify/db";
-import { loadDbEnv } from "@ankify/db/client";
+import { getDb, schema } from "@ankileet/db";
+import { loadDbEnv } from "@ankileet/db/client";
 import { and, eq } from "drizzle-orm";
 import { encryptSecret } from "../src/server/secret-box";
 import {
@@ -24,7 +24,7 @@ import {
 loadDbEnv();
 
 if (!isQaProfile()) {
-  throw new Error("demo:seed requires ANKIFY_PROFILE=qa");
+  throw new Error("demo:seed requires ANKILEET_PROFILE=qa");
 }
 
 const DAY = 86_400_000;
@@ -799,10 +799,10 @@ function submission(
 }
 
 function qaAiSettings() {
-  const provider = process.env.ANKIFY_QA_AI_PROVIDER?.trim();
-  const model = process.env.ANKIFY_QA_AI_MODEL?.trim();
-  const apiKey = process.env.ANKIFY_QA_AI_API_KEY?.trim();
-  const reasoningMode = process.env.ANKIFY_QA_AI_REASONING_MODE?.trim() || "fast";
+  const provider = process.env.ANKILEET_QA_AI_PROVIDER?.trim();
+  const model = process.env.ANKILEET_QA_AI_MODEL?.trim();
+  const apiKey = process.env.ANKILEET_QA_AI_API_KEY?.trim();
+  const reasoningMode = process.env.ANKILEET_QA_AI_REASONING_MODE?.trim() || "fast";
   if (!provider || !model || !apiKey) return null;
   if (provider !== "openai" && provider !== "anthropic" && provider !== "deepseek" && provider !== "google") return null;
   return { provider, model, reasoningMode, encryptedApiKey: encryptSecret(apiKey) };

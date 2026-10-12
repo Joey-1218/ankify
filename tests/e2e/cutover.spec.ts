@@ -22,7 +22,7 @@ test("queued work never crosses accounts", async ({ context, leetcode, api, pane
   await expect(page.getByText("First practice in progress")).toBeVisible();
   await context.route(COMMANDS, outage);
   await page.getByRole("button", { name: "Finish" }).click();
-  await expect(page.getByText("Finish saved. It syncs when ankify is reachable.")).toBeVisible();
+  await expect(page.getByText("Finish saved. It syncs when ankileet is reachable.")).toBeVisible();
 
   // Another account signs in on the web while the finish waits.
   const web = await context.newPage();
@@ -43,7 +43,7 @@ test("queued work never crosses accounts", async ({ context, leetcode, api, pane
 });
 
 test("a finish queued before the browser closes syncs after it reopens", async () => {
-  const profile = mkdtempSync(join(tmpdir(), "ankify-profile-"));
+  const profile = mkdtempSync(join(tmpdir(), "ankileet-profile-"));
   try {
     let context = await launchExtensionContext(profile);
     const worker = context.serviceWorkers()[0] ?? await context.waitForEvent("serviceworker");
@@ -58,7 +58,7 @@ test("a finish queued before the browser closes syncs after it reopens", async (
     await expect(page.getByText("First practice in progress")).toBeVisible();
     await context.route(COMMANDS, outage);
     await page.getByRole("button", { name: "Finish" }).click();
-    await expect(page.getByText("Finish saved. It syncs when ankify is reachable.")).toBeVisible();
+    await expect(page.getByText("Finish saved. It syncs when ankileet is reachable.")).toBeVisible();
     await context.close();
 
     // Same profile: the outbox in IndexedDB and the session cookie survive.
@@ -127,6 +127,6 @@ test("the popup and the panel follow the chosen language", async ({ context, lee
   const page = await context.newPage();
   await page.goto(problemUrl(slug));
   await openPanel(page);
-  await expect(page.getByText("这道题还不在你的 ankify 题库中。")).toBeVisible();
+  await expect(page.getByText("这道题还不在你的 ankileet 题库中。")).toBeVisible();
   await expect(page.getByRole("button", { name: "开始练习" })).toBeVisible();
 });

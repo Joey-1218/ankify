@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { captureProblemSchema } from "@ankify/contracts";
+import { captureProblemSchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { captureProblem } from "@/server/capture";
 import { RATE_LIMITS, checkRateLimit, rateLimitResponse } from "@/server/rate-limit";

@@ -1,5 +1,5 @@
-import type { ReviewQueuePayloadDto } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { ReviewQueuePayloadDto } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, asc, eq, inArray, sql } from "drizzle-orm";
 import { dueProblemCondition } from "@/server/due-problems";
 import { getReviewQueueStatus } from "@/server/review-queue";

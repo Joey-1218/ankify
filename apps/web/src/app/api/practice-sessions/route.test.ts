@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { getRequestUser } from "@/server/auth";
 import { createTestDb } from "@/server/test-db";
 import { GET as getDetail } from "./[id]/route";
@@ -23,11 +23,11 @@ const TAB = "aaaaaaaa-0000-4000-8000-00000000000a";
 const params = (id: string) => ({ params: Promise.resolve({ id }) });
 
 function request(path: string, init: { method?: string; body?: unknown; ownerToken?: string } = {}) {
-  return new Request(`https://ankify.test${path}`, {
+  return new Request(`https://ankileet.test${path}`, {
     method: init.method ?? (init.body === undefined ? "GET" : "POST"),
     headers: {
       "content-type": "application/json",
-      ...(init.ownerToken ? { "x-ankify-owner-token": init.ownerToken } : {}),
+      ...(init.ownerToken ? { "x-ankileet-owner-token": init.ownerToken } : {}),
     },
     ...(init.body === undefined ? {} : { body: typeof init.body === "string" ? init.body : JSON.stringify(init.body) }),
   });
@@ -73,7 +73,7 @@ describe("practice session routes", () => {
   });
 
   it("are unavailable while the workflow is switched off", async () => {
-    vi.stubEnv("ANKIFY_DISABLED_WORKFLOWS", "practice_sessions");
+    vi.stubEnv("ANKILEET_DISABLED_WORKFLOWS", "practice_sessions");
     const response = await start(request("/api/practice-sessions", { body: startBody() }));
     expect(response.status).toBe(503);
     expect(await response.json()).toMatchObject({ error: "workflow_disabled" });
@@ -114,7 +114,7 @@ describe("practice session routes", () => {
     expect(await early.json()).toMatchObject({ error: "rating_not_pending", session: { type: "initial_learning" } });
     expect((await postRating(request(`/api/practice-sessions/${session.id}/rating`, { body: { ...rating, rating: 0 } }), params(session.id))).status).toBe(400);
     expect((await postRating(request("/api/practice-sessions/missing/rating", { body: rating }), params("missing"))).status).toBe(404);
-    vi.stubEnv("ANKIFY_DISABLED_WORKFLOWS", "session_rating");
+    vi.stubEnv("ANKILEET_DISABLED_WORKFLOWS", "session_rating");
     expect((await postRating(request(`/api/practice-sessions/${session.id}/rating`, { body: rating }), params(session.id))).status).toBe(503);
   });
 

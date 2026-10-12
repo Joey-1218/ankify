@@ -1,5 +1,5 @@
 import type Stripe from "stripe";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { and, desc, eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { addPaidCredits, removePaidCredits } from "../ai-credits";
@@ -33,7 +33,7 @@ async function getOrCreateCustomer(stripe: Stripe, mode: BillingConfig["mode"], 
   // The idempotency key collapses concurrent first checkouts into one Customer.
   const customer = await stripe.customers.create(
     { email: user.email, name: user.name ?? undefined, metadata: { userId: user.id } },
-    { idempotencyKey: `ankify-customer-${mode}-${user.id}` },
+    { idempotencyKey: `ankileet-customer-${mode}-${user.id}` },
   );
   const value: BillingSettings = { ...stored, customers: { ...stored.customers, [mode]: customer.id } };
   await db

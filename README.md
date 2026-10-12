@@ -1,13 +1,13 @@
 <div align="center">
 
-# ankify
+# ankileet
 
 **Remember the reasoning behind every LeetCode problem you solve.**
 
-ankify works next to LeetCode. The Chrome extension records each practice session and its submissions,<br>
+ankileet works next to LeetCode. The Chrome extension records each practice session and its submissions,<br>
 FSRS brings every problem back just before you'd forget it, and your mistake profile shows which causes of failure keep coming back.
 
-[**Open the web app**](https://ankify-pi.vercel.app) · [**Add to Chrome**](https://chromewebstore.google.com/detail/ankify/gcldkcaidjnkaagngppblefddapdpaeb) · [Self-host](docs/SELF_HOSTING.md)
+[**Open the web app**](https://ankileet.com) · [**Add to Chrome**](https://chromewebstore.google.com/detail/ankify/gcldkcaidjnkaagngppblefddapdpaeb) · [Self-host](docs/SELF_HOSTING.md)
 
 </div>
 
@@ -20,13 +20,13 @@ You solve a problem, move on, and three weeks later you can't remember why the g
 - **Re-solving at random** wastes time on problems you still remember and misses the ones you're about to forget.
 - **A pile of flashcards** is a poor way to review algorithm problems: the real test is solving the problem again.
 
-ankify schedules the **whole problem** and reviews it the way you learned it: by solving it again on LeetCode.
+ankileet schedules the **whole problem** and reviews it the way you learned it: by solving it again on LeetCode.
 
 ## How it works
 
 | 1. Practice | 2. Rate | 3. Learn |
 | --- | --- | --- |
-| Open a problem on LeetCode and click **Start practice** in the ankify panel. Every submission is recorded with its verdict and failing test case. | When a review is due, solve the problem again, finish the session, and rate how it went. FSRS-6 schedules the next review; a first practice comes back a day later. | Record why an attempt failed (or let session analysis suggest a cause) and watch which skills keep slipping across problems. |
+| Open a problem on LeetCode and click **Start practice** in the ankileet panel. Every submission is recorded with its verdict and failing test case. | When a review is due, solve the problem again, finish the session, and rate how it went. FSRS-6 schedules the next review; a first practice comes back a day later. | Record why an attempt failed (or let session analysis suggest a cause) and watch which skills keep slipping across problems. |
 
 ## Features
 
@@ -40,11 +40,11 @@ Confirmed causes of failure (approach, invariant, edge cases, complexity, implem
 
 ### New problems worth trying
 
-Each day the popup and `/suggestions` offer a problem you haven't attempted, chosen from the similar questions of problems you practiced. Once your profile has enough history, suggestions target your recurring weaknesses. Each one says why it was picked, using only what ankify actually knows; skip it, mark it already attempted, or ask for another.
+Each day the popup and `/suggestions` offer a problem you haven't attempted, chosen from the similar questions of problems you practiced. Once your profile has enough history, suggestions target your recurring weaknesses. Each one says why it was picked, using only what ankileet actually knows; skip it, mark it already attempted, or ask for another.
 
 ### Session analysis, with your own key (optional)
 
-After a session, ankify can explain why it went wrong: it reads your attempts, code diffs, and judge output, and suggests mistakes for you to confirm. Nothing counts toward your profile until you do. Analysis runs only on your own Anthropic, OpenAI, DeepSeek, or Google Gemini key, never on a shared one. Keys are encrypted with AES-256-GCM before they reach the database.
+After a session, ankileet can explain why it went wrong: it reads your attempts, code diffs, and judge output, and suggests mistakes for you to confirm. Nothing counts toward your profile until you do. Analysis runs only on your own Anthropic, OpenAI, DeepSeek, or Google Gemini key, never on a shared one. Keys are encrypted with AES-256-GCM before they reach the database.
 
 ### See what's about to slip
 
@@ -66,9 +66,9 @@ After a session, ankify can explain why it went wrong: it reads your attempts, c
 
 ## Get started
 
-1. **Sign in** at [ankify-pi.vercel.app](https://ankify-pi.vercel.app) with Google.
+1. **Sign in** at [ankileet.com](https://ankileet.com) with Google.
 2. **Install the [Chrome extension](https://chromewebstore.google.com/detail/ankify/gcldkcaidjnkaagngppblefddapdpaeb).** It reuses your web login, so there's no token to paste.
-3. **Open any LeetCode problem** and click **Start practice** in the ankify panel.
+3. **Open any LeetCode problem** and click **Start practice** in the ankileet panel.
 4. *(Optional)* **Add your own AI key** in Settings to analyze finished sessions.
 
 Your first practice comes back for review a day after you finish it.

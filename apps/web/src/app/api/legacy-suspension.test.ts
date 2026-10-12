@@ -23,7 +23,7 @@ const { beginAgentTurn, getOwnedAgentStep } = await import("@/server/agent/store
 const { startAiJobForUser } = await import("@/server/ai-generation/start");
 
 const post = (path: string, body: unknown) =>
-  new Request(`https://ankify.test${path}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+  new Request(`https://ankileet.test${path}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
 
 afterEach(() => vi.unstubAllEnvs());
 
@@ -53,7 +53,7 @@ describe("suspended legacy workflows", () => {
   });
 
   it("still serve them when an operator re-enables them explicitly", async () => {
-    vi.stubEnv("ANKIFY_ENABLED_LEGACY_WORKFLOWS", "card_generation");
+    vi.stubEnv("ANKILEET_ENABLED_LEGACY_WORKFLOWS", "card_generation");
     vi.mocked(startAiJobForUser).mockResolvedValueOnce({ id: "j1", status: "queued" } as never);
     const response = await createAiJob(post("/api/ai-jobs", { action: "card_generate", problemId: "p1", requestId: crypto.randomUUID() }));
     expect(response.status).not.toBe(410);

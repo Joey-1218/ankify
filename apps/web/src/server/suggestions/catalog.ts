@@ -1,4 +1,4 @@
-import { difficultyEnum, leetcodeSlugSchema } from "@ankify/contracts";
+import { difficultyEnum, leetcodeSlugSchema } from "@ankileet/contracts";
 import { z } from "zod";
 import committed from "./catalog.json";
 

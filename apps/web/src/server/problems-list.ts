@@ -1,5 +1,5 @@
-import { getDb, schema } from "@ankify/db";
-import type { ProblemsListPayloadDto } from "@ankify/contracts";
+import { getDb, schema } from "@ankileet/db";
+import type { ProblemsListPayloadDto } from "@ankileet/contracts";
 import {
   and,
   desc,

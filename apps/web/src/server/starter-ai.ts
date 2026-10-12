@@ -1,13 +1,13 @@
-import { getDb, schema, type DB } from "@ankify/db";
+import { getDb, schema, type DB } from "@ankileet/db";
 import { and, eq, sql } from "drizzle-orm";
-import type { AiProvider } from "@ankify/core";
+import type { AiProvider } from "@ankileet/core";
 
 /**
  * Starter AI credits: a small, lifetime allowance of AI actions that new users
  * can spend on the server's own provider key before adding their own. Actions
  * cost different amounts (see CREDIT_COST in ai-credits.ts).
  *
- * The feature is off unless ANKIFY_STARTER_AI_API_KEY is set. The overall
+ * The feature is off unless ANKILEET_STARTER_AI_API_KEY is set. The overall
  * spend cap is the provider account's prepaid balance, so the code only has to
  * enforce the per-user allowance. Spending goes through ai-credits.ts, which
  * falls back to purchased credits once the allowance is gone.
@@ -45,12 +45,12 @@ export class StarterCreditsExhaustedError extends Error {
 }
 
 export function readStarterAiConfig(env: Record<string, string | undefined> = process.env): StarterAiConfig | null {
-  const apiKey = env.ANKIFY_STARTER_AI_API_KEY?.trim();
+  const apiKey = env.ANKILEET_STARTER_AI_API_KEY?.trim();
   if (!apiKey) return null;
-  const provider = (env.ANKIFY_STARTER_AI_PROVIDER?.trim() || DEFAULT_PROVIDER) as Exclude<AiProvider, "">;
+  const provider = (env.ANKILEET_STARTER_AI_PROVIDER?.trim() || DEFAULT_PROVIDER) as Exclude<AiProvider, "">;
   if (!PROVIDERS.includes(provider)) return null;
-  const model = env.ANKIFY_STARTER_AI_MODEL?.trim() || DEFAULT_MODEL;
-  const parsedCredits = Number.parseInt(env.ANKIFY_STARTER_AI_CREDITS ?? "", 10);
+  const model = env.ANKILEET_STARTER_AI_MODEL?.trim() || DEFAULT_MODEL;
+  const parsedCredits = Number.parseInt(env.ANKILEET_STARTER_AI_CREDITS ?? "", 10);
   const credits = Number.isFinite(parsedCredits) && parsedCredits >= 0 ? parsedCredits : DEFAULT_CREDITS;
   return { provider, model, apiKey, credits };
 }

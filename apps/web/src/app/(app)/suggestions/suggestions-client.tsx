@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import type { SuggestionAllocateResponseDto, SuggestionDto, SuggestionListDto } from "@ankify/contracts";
+import type { SuggestionAllocateResponseDto, SuggestionDto, SuggestionListDto } from "@ankileet/contracts";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Button, buttonClasses } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";

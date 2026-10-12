@@ -1,4 +1,4 @@
-import type { QuizSession } from "@ankify/db";
+import type { QuizSession } from "@ankileet/db";
 
 export function toAgentSafeQuizState(session: QuizSession) {
   const answers = new Map(session.answersJson.map((answer) => [answer.itemId, answer]));

@@ -32,7 +32,7 @@ export async function GET(req: Request) {
   return new Response(stream, {
     headers: {
       "Cache-Control": "private, no-store",
-      "Content-Disposition": `attachment; filename="ankify-export-${date}.ndjson"`,
+      "Content-Disposition": `attachment; filename="ankileet-export-${date}.ndjson"`,
       "Content-Type": "application/x-ndjson; charset=utf-8",
     },
   });

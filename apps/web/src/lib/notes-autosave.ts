@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 type NotesDraft = { value: string; dirty: boolean; ts: number };
 
 function notesDraftKey(problemId: string) {
-  return `ankify.notes-draft.${problemId}`;
+  return `ankileet.notes-draft.${problemId}`;
 }
 
 export function readNotesDraft(problemId: string): NotesDraft | null {

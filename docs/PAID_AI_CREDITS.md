@@ -1,7 +1,7 @@
 # Paid AI credits
 
 Users without their own AI key can run AI cards, quizzes, and Study Coach on
-ankify's hosted AI key. Every account gets a free allowance (starter credits);
+ankileet's hosted AI key. Every account gets a free allowance (starter credits);
 users can buy more as one-time **credit packs** through Stripe Checkout.
 Architecture context: [ARCHITECTURE.md](ARCHITECTURE.md).
 
@@ -10,13 +10,13 @@ Architecture context: [ARCHITECTURE.md](ARCHITECTURE.md).
 > workflow_suspended`. The webhook, existing balances, the ledger, and refunds
 > keep working, so purchases that are completing or refunded settle normally.
 > An operator can re-enable checkout explicitly with
-> `ANKIFY_ENABLED_LEGACY_WORKFLOWS=credit_checkout`.
+> `ANKILEET_ENABLED_LEGACY_WORKFLOWS=credit_checkout`.
 
 ## Policy
 
 | Rule | Value |
 | --- | --- |
-| Free credits per new account | 20 (`ANKIFY_STARTER_AI_CREDITS`, default 20) |
+| Free credits per new account | 20 (`ANKILEET_STARTER_AI_CREDITS`, default 20) |
 | AI card (generate or follow-up) | 1 credit |
 | Quiz (generate, regenerate, next batch) | 2 credits |
 | Study Coach turn | 5 credits |
@@ -40,7 +40,7 @@ Architecture context: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 | Variable | Purpose |
 | --- | --- |
-| `ANKIFY_STARTER_AI_API_KEY` (+ `_PROVIDER`, `_MODEL`, `_CREDITS`) | Hosted AI key and free allowance. **Required** for paid credits: purchased credits run on this key. |
+| `ANKILEET_STARTER_AI_API_KEY` (+ `_PROVIDER`, `_MODEL`, `_CREDITS`) | Hosted AI key and free allowance. **Required** for paid credits: purchased credits run on this key. |
 | `STRIPE_SECRET_KEY` | Stripe secret or (recommended) restricted key, `sk_`/`rk_` `test`/`live`. |
 | `STRIPE_WEBHOOK_SECRET` | Signing secret (`whsec_...`) of the webhook endpoint for this deployment. |
 
@@ -50,7 +50,7 @@ webhook routes return 404 `billing_disabled` and Settings shows no purchase
 controls. Guards (runtime and `scripts/check-vercel-env.mjs`):
 
 - live keys are refused outside `NODE_ENV=production` and on a declared Preview
-  (`ANKIFY_DEPLOYMENT_ENV=preview`);
+  (`ANKILEET_DEPLOYMENT_ENV=preview`);
 - test keys are refused on a declared Production deployment (test cards would
   otherwise buy real credits);
 - the two Stripe variables must be set together.
@@ -62,7 +62,7 @@ endpoint `https://<domain>/api/billing/webhook` for
 `charge.refunded`, and enable Link (and any other methods) under Payment
 methods. The code never passes `payment_method_types`.
 
-Operational rule: do not remove `ANKIFY_STARTER_AI_API_KEY` while users hold
+Operational rule: do not remove `ANKILEET_STARTER_AI_API_KEY` while users hold
 purchased credits; without it their balance cannot be spent.
 
 ## Packs and pricing
@@ -272,18 +272,18 @@ key simply leaves billing switched off.
    committed `.env.qa`; do not copy `.env.example` or `.env.qa`):
 
    ```bash
-   ANKIFY_STARTER_AI_API_KEY="<provider key>"   # real key with balance to test spending
-   ANKIFY_STARTER_AI_PROVIDER="deepseek"
-   ANKIFY_STARTER_AI_MODEL="deepseek-v4-flash"
-   ANKIFY_STARTER_AI_CREDITS="3"                # small allowance so paid credits are used quickly
+   ANKILEET_STARTER_AI_API_KEY="<provider key>"   # real key with balance to test spending
+   ANKILEET_STARTER_AI_PROVIDER="deepseek"
+   ANKILEET_STARTER_AI_MODEL="deepseek-v4-flash"
+   ANKILEET_STARTER_AI_CREDITS="3"                # small allowance so paid credits are used quickly
 
    STRIPE_SECRET_KEY="sk_test_..."
    STRIPE_WEBHOOK_SECRET="whsec_..."            # from `stripe listen`, below
 
    # Keep the QA account without its own key, so AI spends credits.
-   ANKIFY_QA_AI_PROVIDER=""
-   ANKIFY_QA_AI_MODEL=""
-   ANKIFY_QA_AI_API_KEY=""
+   ANKILEET_QA_AI_PROVIDER=""
+   ANKILEET_QA_AI_MODEL=""
+   ANKILEET_QA_AI_API_KEY=""
    ```
 
 ### 2. Start everything (three terminals)
@@ -309,11 +309,11 @@ key simply leaves billing switched off.
 | 5 | Cancel on Checkout | "Checkout was cancelled…"; nothing changes |
 | 6 | 3-D Secure card `4000 0027 6000 3184` | Credits granted |
 | 7 | Generate an AI card, then a quiz | Card uses 1 free credit (2 left); quiz uses 2 free credits (0 left). Next quiz takes 2 purchased credits |
-| 7b | Give free credits back: `sqlite3 packages/db/qa.db "update settings set value=json_object('used',0) where user_id='ankify-qa-user' and key='starter-ai-usage';"`, reload Settings (3 of 3 left), send a Study Coach message (5 credits) | Free 0 left, purchased −2: the 3 free credits are used first. Ledger has `spend`/`starter`/−3 and `spend`/`paid`/−2 with the same `ref_id` |
-| 8 | Ctrl+C, set `ANKIFY_STARTER_AI_MODEL="does-not-exist"`, `pnpm dev:qa --keep-data`, generate a quiz | "AI provider rejected the generation request"; balance back where it was; in the DB a `spend` −2 and a `refund` +2 row with the same `ref_id` (see [Case 8](#case-8-checking-the-refund)). Then restore the model and restart |
+| 7b | Give free credits back: `sqlite3 packages/db/qa.db "update settings set value=json_object('used',0) where user_id='ankileet-qa-user' and key='starter-ai-usage';"`, reload Settings (3 of 3 left), send a Study Coach message (5 credits) | Free 0 left, purchased −2: the 3 free credits are used first. Ledger has `spend`/`starter`/−3 and `spend`/`paid`/−2 with the same `ref_id` |
+| 8 | Ctrl+C, set `ANKILEET_STARTER_AI_MODEL="does-not-exist"`, `pnpm dev:qa --keep-data`, generate a quiz | "AI provider rejected the generation request"; balance back where it was; in the DB a `spend` −2 and a `refund` +2 row with the same `ref_id` (see [Case 8](#case-8-checking-the-refund)). Then restore the model and restart |
 | 9 | Open Study Coach, send a message | Note "Each message uses 5 AI credits…"; during the reply a warning, and reload shows "Leave site?"; purchased −5 |
 | 10 | Reload during a reply and confirm leaving | Run ends interrupted; no `refund` row; the 5 credits stay spent |
-| 11 | Settings → Advanced account actions. **Don't click Delete in the dialog** (that is case 14) | Warning with your purchased balance and an unchecked acknowledgement; "Type qa@ankify.local to confirm" stays visible above the field while typing; Delete stays disabled until the box is checked and the email matches |
+| 11 | Settings → Advanced account actions. **Don't click Delete in the dialog** (that is case 14) | Warning with your purchased balance and an unchecked acknowledgement; "Type qa@ankileet.local to confirm" stays visible above the field while typing; Delete stays disabled until the box is checked and the email matches |
 | 12 | Dashboard → fully refund payment #1 (simulates a forced reversal) | `charge.refunded [200]`; purchase #1 `refunded`; balance reduced by up to 100; one `stripe_refund` row |
 | 13 | Partially refund a *different* payment (see [Case 13](#case-13-partial-refund)) | `charge.refunded [200]`; dev log `refund needs manual review` with `partial_ignored`; balance, purchase, and ledger unchanged |
 | 14 | Check the box, type the email, delete, confirm | Account deleted; `credit_purchases` and `ai_credit_ledger` rows remain, plus a `forfeit` row. Then `pnpm qa:reset` (servers stopped) or `pnpm dev:qa` to get the QA account back |
@@ -363,7 +363,7 @@ block into the terminal:
 ```bash
 cat > /tmp/prod-check.env <<'EOF'
 VERCEL_ENV=production
-ANKIFY_DEPLOYMENT_ENV=production
+ANKILEET_DEPLOYMENT_ENV=production
 TURSO_DATABASE_URL=libsql://example.turso.io
 TURSO_AUTH_TOKEN=x
 BETTER_AUTH_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -371,8 +371,8 @@ BETTER_AUTH_URL=https://example.com
 GOOGLE_CLIENT_ID=x
 GOOGLE_CLIENT_SECRET=x
 AI_KEY_ENCRYPTION_SECRET=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-ANKIFY_EXTENSION_ORIGINS=chrome-extension://abcdefghijklmnopabcdefghijklmnop
-ANKIFY_STARTER_AI_API_KEY=k
+ANKILEET_EXTENSION_ORIGINS=chrome-extension://abcdefghijklmnopabcdefghijklmnop
+ANKILEET_STARTER_AI_API_KEY=k
 STRIPE_WEBHOOK_SECRET=whsec_x
 EOF
 ```
@@ -389,7 +389,7 @@ env -i PATH="$PATH" STRIPE_SECRET_KEY=sk_test_x node --env-file=/tmp/prod-check.
 env -i PATH="$PATH" STRIPE_SECRET_KEY=sk_live_x node --env-file=/tmp/prod-check.env scripts/check-vercel-env.mjs
 # → "✓ Vercel production environment validated …", exit 0
 
-env -i PATH="$PATH" VERCEL_ENV=preview ANKIFY_DEPLOYMENT_ENV=preview STRIPE_SECRET_KEY=sk_live_x node --env-file=/tmp/prod-check.env scripts/check-vercel-env.mjs
+env -i PATH="$PATH" VERCEL_ENV=preview ANKILEET_DEPLOYMENT_ENV=preview STRIPE_SECRET_KEY=sk_live_x node --env-file=/tmp/prod-check.env scripts/check-vercel-env.mjs
 # → "- Preview must use a Stripe test-mode key …", exit 1
 ```
 
@@ -399,7 +399,7 @@ failed for an unrelated reason. Command-line values win over the env file.
 ### 4. Troubleshooting
 
 - **No pack buttons**: a Stripe variable is missing, the key is not a test key,
-  or `ANKIFY_STARTER_AI_API_KEY` is empty. Restart after editing `.env.qa.local`.
+  or `ANKILEET_STARTER_AI_API_KEY` is empty. Restart after editing `.env.qa.local`.
 - **"AI provider rejected the generation request"**: the provider returned a
   4xx, e.g. `402 Insufficient Balance` (top up the provider account), an
   invalid key, or an unknown model.

@@ -1,4 +1,4 @@
-import type { AiJobCreateRequestInput, PublicAiJobDto } from "@ankify/contracts";
+import type { AiJobCreateRequestInput, PublicAiJobDto } from "@ankileet/contracts";
 
 type ApiRequest = (path: string, init?: RequestInit) => Promise<Response>;
 

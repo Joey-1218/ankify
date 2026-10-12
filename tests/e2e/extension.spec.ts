@@ -6,7 +6,7 @@ import { fixtureSlug, fixtureUrl } from "./leetcode-fixture";
 test("shows the sign-in state without a QA session", async ({ context, extensionId }) => {
   const page = await context.newPage();
   await page.goto(`chrome-extension://${extensionId}/src/popup/index.html`);
-  await expect(page.getByRole("heading", { name: "Connect ankify" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Connect ankileet" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Sign in" })).toBeVisible();
 });
 

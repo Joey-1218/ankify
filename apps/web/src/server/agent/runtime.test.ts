@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { ModelMessage } from "ai";
-import type { AgentSession } from "@ankify/db";
+import type { AgentSession } from "@ankileet/db";
 import { classifyAgentError } from "./errors";
 import {
   buildAgentUserContent,

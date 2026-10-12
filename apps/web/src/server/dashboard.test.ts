@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, expect, it } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { loadDashboard } from "./dashboard";
 import { ingestSessionObservations, runSessionCommand, startPracticeSession } from "./practice-sessions/commands";
 import { createTestDb } from "./test-db";

@@ -7,7 +7,7 @@ import type {
   ReviewOverviewProblemDto,
   ReviewOverviewSessionDto,
   SuggestionDto,
-} from "@ankify/contracts";
+} from "@ankileet/contracts";
 import type { OutboxStatus } from "../background/outbox";
 import type { SuggestionsView } from "../background/suggestions";
 import type { PageMessage } from "../shared/protocol";
@@ -19,8 +19,8 @@ import { BackIcon, Button, GearIcon, Segmented, Spinner, SyncIcon } from "./ui";
 type Theme = "system" | "light" | "dark";
 type Auth = { kind: "loading" } | { kind: "signed_in"; user: AuthUserDto } | { kind: "signed_out" } | { kind: "unknown" };
 
-const API_ORIGIN = __ANKIFY_DEFAULT_API_ORIGIN__;
-const THEME_KEY = "ankify.theme";
+const API_ORIGIN = __ANKILEET_DEFAULT_API_ORIGIN__;
+const THEME_KEY = "ankileet.theme";
 
 /** Closes the toolbar popup after navigating; a copy opened in a tab stays. */
 async function closePopup() {

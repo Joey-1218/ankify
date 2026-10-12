@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { QuizSession } from "@ankify/db";
+import type { QuizSession } from "@ankileet/db";
 import { toAgentSafeQuizState } from "./quiz-context";
 
 const item = {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { SkillDimensionId } from "@ankify/contracts";
+import type { SkillDimensionId } from "@ankileet/contracts";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/field";

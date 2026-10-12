@@ -1,6 +1,6 @@
-import type { SuggestionDto } from "@ankify/contracts";
-import { contextKey, FEED_PARAMS, planSuggestion, type LeetCodeDifficulty, type SkillDimension, type SuggestionCandidate, type SuggestionPlanInput } from "@ankify/core";
-import { getDb, schema, type PracticeSession, type Suggestion } from "@ankify/db";
+import type { SuggestionDto } from "@ankileet/contracts";
+import { contextKey, FEED_PARAMS, planSuggestion, type LeetCodeDifficulty, type SkillDimension, type SuggestionCandidate, type SuggestionPlanInput } from "@ankileet/core";
+import { getDb, schema, type PracticeSession, type Suggestion } from "@ankileet/db";
 import { and, desc, eq, gte, inArray, or } from "drizzle-orm";
 import { legacySourceKey, loadMistakeProfile } from "../mistake-profile";
 import type { DbTransaction } from "../practice-sessions/store";

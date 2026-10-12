@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { practiceSessionListQuerySchema, practiceSessionStartSchema } from "@ankify/contracts";
+import { practiceSessionListQuerySchema, practiceSessionStartSchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { isWorkflowEnabled, workflowDisabledResponse } from "@/server/features";
 import { startPracticeSession } from "@/server/practice-sessions/commands";

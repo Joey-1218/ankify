@@ -3,11 +3,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import type { LeetCodeDifficulty } from "@ankify/core";
+import type { LeetCodeDifficulty } from "@ankileet/core";
 import type {
   ProblemListItemDto,
   ProblemsListPayloadDto,
-} from "@ankify/contracts";
+} from "@ankileet/contracts";
 import { DifficultyPill, FsrsStatePill, Pill } from "@/components/ui/pill";
 import { Surface } from "@/components/ui/surface";
 import { Input, Select } from "@/components/ui/field";

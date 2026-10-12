@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
-import type { AuthUserDto } from "@ankify/contracts";
+import type { AuthUserDto } from "@ankileet/contracts";
 import {
   REVIEW_QUEUE_UPDATED_EVENT,
   type ReviewQueueUpdatedEvent,

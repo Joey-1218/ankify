@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { updateCardPatchSchema } from "@ankify/contracts";
+import { updateCardPatchSchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { updateOwnedCard } from "@/server/card-commands";
 

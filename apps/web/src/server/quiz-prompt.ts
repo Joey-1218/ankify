@@ -1,5 +1,5 @@
-import type { Card, Problem, Submission } from "@ankify/db";
-import type { QuizAnswer, QuizItem } from "@ankify/contracts";
+import type { Card, Problem, Submission } from "@ankileet/db";
+import type { QuizAnswer, QuizItem } from "@ankileet/contracts";
 import type { Language } from "@/lib/i18n";
 
 const TEXT_MAX = 3000;   // problem statement (most LeetCode statements fit; long ones get truncated)

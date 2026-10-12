@@ -1,4 +1,4 @@
-import type { PracticeSessionDto, PublicAiJobDto, SessionAnalysisStateDto } from "@ankify/contracts";
+import type { PracticeSessionDto, PublicAiJobDto, SessionAnalysisStateDto } from "@ankileet/contracts";
 import { describe, expect, it, vi } from "vitest";
 import type { ContentMessage } from "../shared/protocol";
 import type { LeetcodeClient, ListedSubmission, Read } from "./leetcode-client";
@@ -465,7 +465,7 @@ describe("connection and sign-in changes", () => {
     expect(h.pending()).toHaveLength(0);
   });
 
-  it("says when ankify is unreachable during a session, and clears it when a heartbeat lands", async () => {
+  it("says when ankileet is unreachable during a session, and clears it when a heartbeat lands", async () => {
     let down = true;
     const h = harness({
       respond: (message) => {
@@ -483,7 +483,7 @@ describe("connection and sign-in changes", () => {
     expect(h.page.view()).toMatchObject({ reachable: true });
   });
 
-  it("shows sign-in when the ankify session expires mid-session, and recovers when the page is visible again", async () => {
+  it("shows sign-in when the ankileet session expires mid-session, and recovers when the page is visible again", async () => {
     let signedIn = true;
     const h = harness({
       respond: (message) => {

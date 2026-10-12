@@ -1,6 +1,6 @@
 import { and, asc, desc, eq, inArray, ne, sql } from "drizzle-orm";
-import type { AiJobCreateRequestInput, CardDraft, QuizItem } from "@ankify/contracts";
-import { getDb, schema, type AiJob } from "@ankify/db";
+import type { AiJobCreateRequestInput, CardDraft, QuizItem } from "@ankileet/contracts";
+import { getDb, schema, type AiJob } from "@ankileet/db";
 import { MAX_CARDS_PER_PROBLEM, MAX_QUIZ_SESSIONS_PER_PROBLEM } from "@/server/resource-limits";
 import { isWorkflowEnabled, LEGACY_WORKFLOWS } from "@/server/features";
 import { classifyAiJobError, logAiJobError, nonRetryableJobError } from "./errors";

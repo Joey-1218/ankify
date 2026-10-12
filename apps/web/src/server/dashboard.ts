@@ -1,5 +1,5 @@
-import type { PracticeSessionTypeId, ReviewOverviewDto, SkillDimensionId } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { PracticeSessionTypeId, ReviewOverviewDto, SkillDimensionId } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, desc, eq, gte, sql } from "drizzle-orm";
 import { loadMistakeProfile } from "./mistake-profile";
 import { loadReviewOverview } from "./review-overview";

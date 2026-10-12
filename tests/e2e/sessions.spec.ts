@@ -8,7 +8,7 @@ test("a first practice from the panel schedules the first review a day later, wi
   const page = await context.newPage();
   await page.goto(problemUrl(slug));
   await openPanel(page);
-  await expect(page.getByText("Not in your ankify deck yet.")).toBeVisible();
+  await expect(page.getByText("Not in your ankileet deck yet.")).toBeVisible();
   await page.getByRole("button", { name: "Start practice" }).click();
   await expect(page.getByText("First practice in progress")).toBeVisible();
 
@@ -192,7 +192,7 @@ test("SPA navigation follows the problem in the URL", async ({ context, leetcode
 
   await page.evaluate((path) => history.pushState({}, "", path), `/problems/${other}/`);
   await openPanel(page);
-  await expect(page.getByText("Not in your ankify deck yet.")).toBeVisible();
+  await expect(page.getByText("Not in your ankileet deck yet.")).toBeVisible();
   await page.evaluate((path) => history.pushState({}, "", path), `/problems/${slug}/`);
   await openPanel(page);
   await expect(page.getByText("First practice in progress")).toBeVisible();
@@ -206,11 +206,11 @@ test("a finish made during an outage survives a worker restart and syncs later",
   await page.getByRole("button", { name: "Start practice" }).click();
   await expect(page.getByText("First practice in progress")).toBeVisible();
 
-  // ankify's session API becomes unreachable.
+  // ankileet's session API becomes unreachable.
   const outage = (route: import("@playwright/test").Route) => route.abort("internetdisconnected");
   await context.route("**/api/practice-sessions/*/commands", outage);
   await page.getByRole("button", { name: "Finish" }).click();
-  await expect(page.getByText("Finish saved. It syncs when ankify is reachable.")).toBeVisible();
+  await expect(page.getByText("Finish saved. It syncs when ankileet is reachable.")).toBeVisible();
 
   // The worker is killed while the finish waits in the outbox.
   const cdp = await context.newCDPSession(panel);
@@ -334,7 +334,7 @@ test("signing out of LeetCode mid-session warns, signing back in resumes trackin
   await page.getByRole("button", { name: "Submit", exact: true }).click();
   await expect(page.getByText("1 submission, 1 accepted")).toBeVisible({ timeout: 10_000 });
   await expect(page.getByText("Sign in to LeetCode so submissions can be tracked.")).toHaveCount(0);
-  await expect(page.getByText(/Can't reach ankify/)).toHaveCount(0);
+  await expect(page.getByText(/Can't reach ankileet/)).toHaveCount(0);
 
   await page.getByRole("button", { name: "Finish" }).click();
   await page.getByRole("group", { name: "How did the review go?" }).getByRole("button", { name: /Good/ }).click();
@@ -347,9 +347,9 @@ test("signing out of LeetCode mid-session warns, signing back in resumes trackin
   expect(current.session).toMatchObject({ type: "scheduled_review", reviewIntent: "early", status: "active" });
 });
 
-test("signing out of ankify mid-session shows the sign-in view; signing in again (QA, no Google) brings the session back", async ({ context, leetcode, panel }) => {
+test("signing out of ankileet mid-session shows the sign-in view; signing in again (QA, no Google) brings the session back", async ({ context, leetcode, panel }) => {
   void panel; // signs the context in
-  const slug = newProblem(leetcode, "ankify-signout");
+  const slug = newProblem(leetcode, "ankileet-signout");
   const page = await context.newPage();
   await page.goto(problemUrl(slug));
   await openPanel(page);
@@ -361,7 +361,7 @@ test("signing out of ankify mid-session shows the sign-in view; signing in again
   await web.goto(`${API_ORIGIN}/today`);
   await web.evaluate(() => fetch("/api/auth/sign-out", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" }));
   await web.close();
-  await expect(page.getByText("Sign in to ankify to track this problem.")).toBeVisible({ timeout: 25_000 });
+  await expect(page.getByText("Sign in to ankileet to track this problem.")).toBeVisible({ timeout: 25_000 });
 
   // The panel's Sign in opens /login, which in the QA profile signs in without Google.
   const [login] = await Promise.all([context.waitForEvent("page"), page.getByRole("button", { name: "Sign in", exact: true }).click()]);

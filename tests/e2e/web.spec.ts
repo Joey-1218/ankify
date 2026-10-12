@@ -9,7 +9,7 @@ import type { LeetcodeFixtureState } from "./leetcode-fixture";
 type Settings = { review: { dailyReviewLimit: number; initialReviewDelayHours: number }; analysis: { automatic: boolean } };
 
 async function openWeb(context: BrowserContext, path: string, language: "en" | "zh" = "en"): Promise<Page> {
-  await context.addCookies([{ name: "ankify-language", value: language, url: API_ORIGIN }]);
+  await context.addCookies([{ name: "ankileet-language", value: language, url: API_ORIGIN }]);
   const page = await context.newPage();
   await page.goto(`${API_ORIGIN}${path}`);
   return page;
@@ -46,7 +46,7 @@ async function finishedSession(api: Api, leetcode: LeetcodeFixtureState, name: s
 
 test.afterEach(async ({ api, context }) => {
   await api("/api/settings", { body: { analysisAutomatic: false, initialReviewDelayHours: 24, provider: "deepseek", model: "deepseek-chat", apiKey: "" } });
-  await context.addCookies([{ name: "ankify-language", value: "en", url: API_ORIGIN }]);
+  await context.addCookies([{ name: "ankileet-language", value: "en", url: API_ORIGIN }]);
 });
 
 test("settings save the first-review delay and, with the user's own key, automatic analysis", async ({ context, api }) => {
@@ -158,7 +158,7 @@ test("the dashboard shows today's counts, recent practice, and focus areas", asy
   await expect(recent.getByText(/^Last 7 days: \d+ sessions? completed/)).toBeVisible();
   await expect(page.getByRole("region", { name: "Focus areas" }).getByRole("link", { name: "View mistake profile" })).toHaveAttribute("href", "/analysis");
 
-  await context.addCookies([{ name: "ankify-language", value: "zh", url: API_ORIGIN }]);
+  await context.addCookies([{ name: "ankileet-language", value: "zh", url: API_ORIGIN }]);
   await page.reload();
   await expect(page.getByRole("region", { name: "最近练习" })).toBeVisible({ timeout: 30_000 });
   await page.close();

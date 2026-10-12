@@ -1,4 +1,4 @@
-import type { PracticeSessionStartInput } from "@ankify/contracts";
+import type { PracticeSessionStartInput } from "@ankileet/contracts";
 import { expect } from "vitest";
 
 // Shared by the *.concurrency.test.ts files. Each race lives in its own file:

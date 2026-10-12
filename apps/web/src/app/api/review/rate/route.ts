@@ -1,4 +1,4 @@
-import { reviewRatingSchema } from "@ankify/contracts";
+import { reviewRatingSchema } from "@ankileet/contracts";
 import { NextResponse } from "next/server";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { isWorkflowEnabled, legacyWorkflowResponse } from "@/server/features";

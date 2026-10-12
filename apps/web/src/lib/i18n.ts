@@ -1,8 +1,8 @@
 export type Language = "en" | "zh";
 
 export const DEFAULT_LANGUAGE: Language = "en";
-export const LANGUAGE_STORAGE_KEY = "ankify-language";
-export const LANGUAGE_COOKIE_NAME = "ankify-language";
+export const LANGUAGE_STORAGE_KEY = "ankileet-language";
+export const LANGUAGE_COOKIE_NAME = "ankileet-language";
 
 export function normalizeLanguage(value: unknown): Language {
   return value === "zh" ? "zh" : "en";
@@ -144,7 +144,7 @@ export const translations = {
       },
     },
     login: {
-      title: "Unlock ankify",
+      title: "Unlock ankileet",
       openSignup: "Sign in with your Google account.",
       allowlist: "New registrations are temporarily paused. Existing users can continue with Google.",
       failedOpen: "Sign-in failed. Please try again.",
@@ -183,7 +183,7 @@ export const translations = {
     },
     dashboard: {
       reviewOnLeetcode: "Reviews happen on LeetCode: open a problem and the extension tracks the session.",
-      reviewRetired: "The web review page is retired. Reviews now happen on LeetCode: open a due problem, solve it, and rate it in the ankify panel or popup.",
+      reviewRetired: "The web review page is retired. Reviews now happen on LeetCode: open a due problem, solve it, and rate it in the ankileet panel or popup.",
       openNextReview: "Open next review on LeetCode",
       openSuggestions: "Open suggestions",
       caughtUp: "All caught up",
@@ -287,7 +287,7 @@ export const translations = {
       reviewSchedule: "Review schedule",
       keySecurity: "API keys are encrypted before they are stored. Session analysis only ever uses your own key.",
       aiCredits: "AI credits",
-      aiCreditsHelp: "Credits run quizzes, AI cards, and Study Coach on ankify's AI key. Free credits are used first; purchased credits cover whatever they don't. Your own API key always takes priority and never spends credits.",
+      aiCreditsHelp: "Credits run quizzes, AI cards, and Study Coach on ankileet's AI key. Free credits are used first; purchased credits cover whatever they don't. Your own API key always takes priority and never spends credits.",
       creditsFree: (remaining: number, limit: number) => `Free credits: ${remaining} of ${limit} left`,
       paidActive: (balance: number) =>
         `You're using purchased AI credits: ${balance} left. Add your own key below to stop spending credits.`,
@@ -346,7 +346,7 @@ export const translations = {
       initialReviewDelay: "First review after (hours)",
       initialReviewDelayHelp: "After a problem's first practice, its first review is due this many hours later. Only practice started afterwards uses a new value.",
       sessionAnalysis: "Session analysis",
-      sessionAnalysisHelp: "Explains why a finished practice session went wrong, with your own AI key. ankify's hosted key and credits are never used for it.",
+      sessionAnalysisHelp: "Explains why a finished practice session went wrong, with your own AI key. ankileet's hosted key and credits are never used for it.",
       analysisUnavailable: "Session analysis isn't available on this server.",
       analysisNeedsKey: "Add your own AI provider key above. Every finished session, first practice or review, is then analyzed automatically.",
       analysisManualOnly: "Automatic analysis is switched off on this server. Analyze a finished session from the extension panel or its problem page.",
@@ -564,7 +564,7 @@ export const translations = {
       skip: "Skip",
       attempted: "Already attempted",
       openOnLeetcode: "Open on LeetCode",
-      startHint: "Start practice from the ankify panel on the problem page.",
+      startHint: "Start practice from the ankileet panel on the problem page.",
       noneTitle: "No new problem to suggest yet",
       none: "Problems you practice bring similar ones to suggest.",
       failed: "Something went wrong. Try again.",
@@ -893,7 +893,7 @@ export const translations = {
       hints: { again: "完全想不起来", hard: "部分想起但不稳", good: "主思路清楚", easy: "能讲清方法和坑点" },
     },
     login: {
-      title: "解锁 ankify",
+      title: "解锁 ankileet",
       openSignup: "使用 Google 账号登录。",
       allowlist: "新用户注册暂时关闭，已有用户仍可使用 Google 登录。",
       failedOpen: "登录失败，请重试。",
@@ -931,7 +931,7 @@ export const translations = {
     },
     dashboard: {
       reviewOnLeetcode: "复习在 LeetCode 上进行：打开题目，扩展会记录这次练习。",
-      reviewRetired: "网页复习页面已下线。复习改在 LeetCode 上进行：打开到期的题目解题，然后在 ankify 面板或弹窗中评分。",
+      reviewRetired: "网页复习页面已下线。复习改在 LeetCode 上进行：打开到期的题目解题，然后在 ankileet 面板或弹窗中评分。",
       openNextReview: "在 LeetCode 打开下一道复习",
       openSuggestions: "查看推荐",
       caughtUp: "已全部完成",
@@ -1030,7 +1030,7 @@ export const translations = {
       reviewSchedule: "复习计划",
       keySecurity: "API key 会加密后存储。练习分析只会使用你自己的 key。",
       aiCredits: "AI 额度",
-      aiCreditsHelp: "额度用于在 ankify 的 AI key 上生成测验、AI 卡片和使用 Study Coach。优先消耗免费额度，不足的部分由已购额度补足。配置了自己的 API key 后始终优先使用自己的 key，不消耗额度。",
+      aiCreditsHelp: "额度用于在 ankileet 的 AI key 上生成测验、AI 卡片和使用 Study Coach。优先消耗免费额度，不足的部分由已购额度补足。配置了自己的 API key 后始终优先使用自己的 key，不消耗额度。",
       creditsFree: (remaining: number, limit: number) => `免费额度：剩余 ${remaining} / ${limit} 点`,
       paidActive: (balance: number) => `你正在使用已购 AI 额度：剩余 ${balance} 点。在下方填入自己的 key 后将不再消耗额度。`,
       creditsPaid: (balance: number) => `已购额度：${balance} 点`,
@@ -1088,7 +1088,7 @@ export const translations = {
       initialReviewDelay: "首次复习间隔（小时）",
       initialReviewDelayHelp: "题目第一次练习后，首次复习在这么多小时后到期。新的数值只影响之后开始的练习。",
       sessionAnalysis: "练习分析",
-      sessionAnalysisHelp: "用你自己的 AI 密钥解释一次已完成的练习哪里出了问题。ankify 的托管密钥和额度永远不会用于分析。",
+      sessionAnalysisHelp: "用你自己的 AI 密钥解释一次已完成的练习哪里出了问题。ankileet 的托管密钥和额度永远不会用于分析。",
       analysisUnavailable: "此服务器暂不支持练习分析。",
       analysisNeedsKey: "在上方添加你自己的 AI 提供商密钥后，每次完成的练习（首次练习或复习）都会被自动分析。",
       analysisManualOnly: "此服务器已关闭自动分析。可以在扩展面板或题目页分析已完成的练习。",
@@ -1293,7 +1293,7 @@ export const translations = {
       skip: "跳过",
       attempted: "已经做过",
       openOnLeetcode: "在 LeetCode 打开",
-      startHint: "在题目页面的 ankify 面板中开始练习。",
+      startHint: "在题目页面的 ankileet 面板中开始练习。",
       noneTitle: "暂时没有可推荐的新题",
       none: "你练习过的题目会带来相似的新题。",
       failed: "出错了，请重试。",

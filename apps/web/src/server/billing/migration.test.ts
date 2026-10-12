@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, expect, it } from "vitest";
 import { eq } from "drizzle-orm";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { getStarterAiStatus } from "../starter-ai";
 import { createTestDb, tableSql } from "../test-db";
 
@@ -8,8 +8,8 @@ import { createTestDb, tableSql } from "../test-db";
 // representative existing data, then every newer migration, as
 // `pnpm db:migrate` / `pnpm dev:qa` would apply them.
 const testDb = createTestDb();
-process.env.ANKIFY_STARTER_AI_API_KEY = "sk-starter-test";
-process.env.ANKIFY_STARTER_AI_CREDITS = "20";
+process.env.ANKILEET_STARTER_AI_API_KEY = "sk-starter-test";
+process.env.ANKILEET_STARTER_AI_CREDITS = "20";
 
 beforeAll(async () => {
   await testDb.migrate({ through: "0016_" });

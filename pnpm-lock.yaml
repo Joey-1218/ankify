@@ -54,10 +54,10 @@ importers:
 
   apps/extension:
     dependencies:
-      '@ankify/contracts':
+      '@ankileet/contracts':
         specifier: workspace:*
         version: link:../../packages/contracts
-      '@ankify/core':
+      '@ankileet/core':
         specifier: workspace:*
         version: link:../../packages/core
       react:
@@ -109,16 +109,16 @@ importers:
       '@ai-sdk/openai-compatible':
         specifier: ^3.0.27
         version: 3.0.27(zod@4.4.3)
-      '@ankify/api-client':
+      '@ankileet/api-client':
         specifier: workspace:*
         version: link:../../packages/api-client
-      '@ankify/contracts':
+      '@ankileet/contracts':
         specifier: workspace:*
         version: link:../../packages/contracts
-      '@ankify/core':
+      '@ankileet/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@ankify/db':
+      '@ankileet/db':
         specifier: workspace:*
         version: link:../../packages/db
       '@vercel/analytics':
@@ -221,7 +221,7 @@ importers:
 
   packages/api-client:
     dependencies:
-      '@ankify/contracts':
+      '@ankileet/contracts':
         specifier: workspace:*
         version: link:../contracts
     devDependencies:
@@ -251,7 +251,7 @@ importers:
 
   packages/db:
     dependencies:
-      '@ankify/contracts':
+      '@ankileet/contracts':
         specifier: workspace:*
         version: link:../contracts
       '@libsql/client':

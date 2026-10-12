@@ -1,4 +1,4 @@
-# Ankify Extension-First Refactor
+# Ankileet Extension-First Refactor
 
 ## 1. Decisions, repository findings, and baseline
 
@@ -125,7 +125,7 @@ Add `practice_sessions` with:
 - Optional recommendation association.
 - Source-site/account identity when verifiable.
 
-**“Initial learning” means first tracked enrollment in Ankify**, not a claim that the user has never encountered the problem.
+**“Initial learning” means first tracked enrollment in Ankileet**, not a claim that the user has never encountered the problem.
 
 Add `practice_session_submissions` to associate observed submission identities with a session. This table also retains submission-list observations when code details are unavailable:
 
@@ -283,7 +283,7 @@ Live submission-list pagination, account identification, and metadata fields mus
 
 Use trusted extension IndexedDB for the outgoing operation log and session recovery. This gives atomic local writes without another runtime dependency.
 
-- Namespace operations by Ankify account and API origin.
+- Namespace operations by Ankileet account and API origin.
 - Persist operation IDs and payloads before sending.
 - Replay in session order with the same IDs.
 - Retry network failures, 429, and retryable server errors.

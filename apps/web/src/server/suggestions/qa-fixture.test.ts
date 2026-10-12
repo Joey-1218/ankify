@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { ELIGIBLE_SUGGESTION_SLUGS, seedSuggestionFixture, SUGGESTION_SIMILAR_SLUGS } from "../../../scripts/suggestion-fixture";
 import { loadMistakeProfile } from "../mistake-profile";
 import { createTestDb } from "../test-db";

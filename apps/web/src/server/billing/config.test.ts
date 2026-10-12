@@ -4,7 +4,7 @@ import { CREDIT_PACKS, findCreditPack, readBillingConfig, stripeKeyMode } from "
 const stripeEnv = {
   STRIPE_SECRET_KEY: "sk_test_123",
   STRIPE_WEBHOOK_SECRET: "whsec_123",
-  ANKIFY_STARTER_AI_API_KEY: "sk-ai",
+  ANKILEET_STARTER_AI_API_KEY: "sk-ai",
 };
 
 describe("readBillingConfig", () => {
@@ -12,7 +12,7 @@ describe("readBillingConfig", () => {
     expect(readBillingConfig(stripeEnv)).toEqual({ secretKey: "sk_test_123", webhookSecret: "whsec_123", mode: "test" });
     expect(readBillingConfig({ ...stripeEnv, STRIPE_WEBHOOK_SECRET: " " })).toBeNull();
     expect(readBillingConfig({ ...stripeEnv, STRIPE_SECRET_KEY: undefined })).toBeNull();
-    expect(readBillingConfig({ ...stripeEnv, ANKIFY_STARTER_AI_API_KEY: undefined })).toBeNull();
+    expect(readBillingConfig({ ...stripeEnv, ANKILEET_STARTER_AI_API_KEY: undefined })).toBeNull();
     expect(readBillingConfig({ ...stripeEnv, STRIPE_SECRET_KEY: "pk_test_publishable" })).toBeNull();
   });
 
@@ -20,14 +20,14 @@ describe("readBillingConfig", () => {
     const live = { ...stripeEnv, STRIPE_SECRET_KEY: "sk_live_123" };
     expect(readBillingConfig(live)).toBeNull();
     expect(readBillingConfig({ ...live, NODE_ENV: "development" })).toBeNull();
-    expect(readBillingConfig({ ...live, NODE_ENV: "production", ANKIFY_DEPLOYMENT_ENV: "preview" })).toBeNull();
+    expect(readBillingConfig({ ...live, NODE_ENV: "production", ANKILEET_DEPLOYMENT_ENV: "preview" })).toBeNull();
     expect(readBillingConfig({ ...live, NODE_ENV: "production" })?.mode).toBe("live");
-    expect(readBillingConfig({ ...live, NODE_ENV: "production", ANKIFY_DEPLOYMENT_ENV: "production" })?.mode).toBe("live");
+    expect(readBillingConfig({ ...live, NODE_ENV: "production", ANKILEET_DEPLOYMENT_ENV: "production" })?.mode).toBe("live");
   });
 
   it("refuses test keys on a declared Production deployment", () => {
-    expect(readBillingConfig({ ...stripeEnv, NODE_ENV: "production", ANKIFY_DEPLOYMENT_ENV: "production" })).toBeNull();
-    expect(readBillingConfig({ ...stripeEnv, NODE_ENV: "production", ANKIFY_DEPLOYMENT_ENV: "preview" })?.mode).toBe("test");
+    expect(readBillingConfig({ ...stripeEnv, NODE_ENV: "production", ANKILEET_DEPLOYMENT_ENV: "production" })).toBeNull();
+    expect(readBillingConfig({ ...stripeEnv, NODE_ENV: "production", ANKILEET_DEPLOYMENT_ENV: "preview" })?.mode).toBe("test");
   });
 
   it("recognizes secret and restricted key modes", () => {

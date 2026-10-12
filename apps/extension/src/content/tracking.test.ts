@@ -1,4 +1,4 @@
-import type { SessionObservationInput } from "@ankify/contracts";
+import type { SessionObservationInput } from "@ankileet/contracts";
 import { describe, expect, it, vi } from "vitest";
 import { createActivityMeter, MAX_OBSERVED_GAP_MS } from "./activity-meter";
 import type { LeetcodeClient, ListedSubmission, Read, SubmissionDetail } from "./leetcode-client";

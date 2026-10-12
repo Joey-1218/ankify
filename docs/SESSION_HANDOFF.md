@@ -67,9 +67,9 @@ Read `CLAUDE.md` (the rules) and `docs/ARCHITECTURE.md` (the source of truth, up
   - `GET /api/cron/ai-dispatch` (Bearer `CRON_SECRET`) re-sends stranded jobs. It is not scheduled in `vercel.json`.
   - `ai-generation/runner.ts` dispatches every action with an exhaustive `switch`.
 - Flags:
-  - `ANKIFY_DISABLED_WORKFLOWS` is the kill switch. `session_analysis` is now implemented, so it can be switched off there.
-  - `ANKIFY_AUTOMATIC_ANALYSIS=enabled` makes automatic analysis available.
-  - `ANKIFY_QA_AI_BASE_URL` is a fake-provider URL honored only in the QA profile.
+  - `ANKILEET_DISABLED_WORKFLOWS` is the kill switch. `session_analysis` is now implemented, so it can be switched off there.
+  - `ANKILEET_AUTOMATIC_ANALYSIS=enabled` makes automatic analysis available.
+  - `ANKILEET_QA_AI_BASE_URL` is a fake-provider URL honored only in the QA profile.
 - Extension analysis UI:
   - `background/analysis.ts` holds the client.
   - Protocol messages: `analysis_state`, `analysis_start`, `analysis_finding`.
@@ -93,7 +93,7 @@ Read `CLAUDE.md` (the rules) and `docs/ARCHITECTURE.md` (the source of truth, up
 
 ## 3. Work completed
 
-**Fully completed and committed:** Phases 0 to 3, **4A** (`8da210e`), **4B** (`2048edb`), **5.1** (`7cf8343`: migration `0024` candidates, attempt history and coverage, similar-question metadata, deletion history, the catalog generator with an empty catalog) **5.2** (`dbaa73b`: `planSuggestion()` in `packages/core/src/suggestions/`) **5.3** (`19171ea`: migration `0025` suggestions, `/api/suggestions`, the actions, and `/api/attempt-history`) and **5.4** (`4af0c68`: the popup suggestion card, suggestion start, and the page's metadata refresh on `set_baseline`). **Phase 5 passes**; its exceptions are recorded in the checkpoint log (empty catalog, no LeetCode history reads yet, pending live probe). Phase 6A so far: **6A.1** Settings (`6c8a73a`), **6A.2** `/suggestions` (`2130cc2`), **6A.3** the mistake profile on `/analysis` (`7d044cb`, which also fixed the QA worker dying on `SQLITE_BUSY`) **6A.4** the `/today` dashboard (`0dc707e`) and **6A.5** problem history (`9bf7b8d`, which also switched local SQLite to WAL to end cross-process `SQLITE_BUSY` flakes in the browser harness). **Phase 6A passes.** **6B.1** (`c213f5c`: Coach, card/quiz generation and credit sales suspended server-side, re-enabled only with `ANKIFY_ENABLED_LEGACY_WORKFLOWS`) and **6B.2** (`122aa33`: legacy web UI retired, `/review` redirects, onboarding and landing copy rewritten, `flexlayout-react` removed, the lint cap now 5). **Phase 6 passes.** Phase 7 so far:
+**Fully completed and committed:** Phases 0 to 3, **4A** (`8da210e`), **4B** (`2048edb`), **5.1** (`7cf8343`: migration `0024` candidates, attempt history and coverage, similar-question metadata, deletion history, the catalog generator with an empty catalog) **5.2** (`dbaa73b`: `planSuggestion()` in `packages/core/src/suggestions/`) **5.3** (`19171ea`: migration `0025` suggestions, `/api/suggestions`, the actions, and `/api/attempt-history`) and **5.4** (`4af0c68`: the popup suggestion card, suggestion start, and the page's metadata refresh on `set_baseline`). **Phase 5 passes**; its exceptions are recorded in the checkpoint log (empty catalog, no LeetCode history reads yet, pending live probe). Phase 6A so far: **6A.1** Settings (`6c8a73a`), **6A.2** `/suggestions` (`2130cc2`), **6A.3** the mistake profile on `/analysis` (`7d044cb`, which also fixed the QA worker dying on `SQLITE_BUSY`) **6A.4** the `/today` dashboard (`0dc707e`) and **6A.5** problem history (`9bf7b8d`, which also switched local SQLite to WAL to end cross-process `SQLITE_BUSY` flakes in the browser harness). **Phase 6A passes.** **6B.1** (`c213f5c`: Coach, card/quiz generation and credit sales suspended server-side, re-enabled only with `ANKILEET_ENABLED_LEGACY_WORKFLOWS`) and **6B.2** (`122aa33`: legacy web UI retired, `/review` redirects, onboarding and landing copy rewritten, `flexlayout-react` removed, the lint cap now 5). **Phase 6 passes.** Phase 7 so far:
 
 - `890de4e`: the panel is findable.
   - popup "This problem" section;
@@ -161,7 +161,7 @@ The session that finished 4B also fixed:
   - Counted: active jobs, plus jobs with `attempt > 0`. Cache hits and jobs cancelled or unpublished before any attempt are not counted.
 - Automatic analysis:
   - At most one automatic job per session (idempotency key `auto:${sessionId}`).
-  - It stays unavailable until the operator sets `ANKIFY_AUTOMATIC_ANALYSIS=enabled` after verifying the recovery cron.
+  - It stays unavailable until the operator sets `ANKILEET_AUTOMATIC_ANALYSIS=enabled` after verifying the recovery cron.
   - Don't add a cron to `vercel.json` until the Vercel tier is verified: a Hobby plan fails the deploy if a cron runs more than once a day.
 - Publish failures:
   - Manual: the job fails with `queue_publish_failed` and the user gets a 503.

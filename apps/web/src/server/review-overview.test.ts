@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, expect, it } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { ingestSessionObservations, runSessionCommand, startPracticeSession } from "./practice-sessions/commands";
 import { rateProblemReview } from "./review-commands";
 import { loadReviewOverview } from "./review-overview";
@@ -52,7 +52,7 @@ beforeAll(async () => {
   if (!review.ok) throw new Error(review.error);
   await ingestSessionObservations(USER, review.response.session.id, { observations: [{ leetcodeSubmissionId: "11", verdict: "Accepted", submittedAt: new Date(now.getTime() - 8 * 60_000).toISOString() }] }, new Date(now.getTime() - 8 * 60_000));
   await command(review.response.session.id, "finish", new Date(now.getTime() - 5 * 60_000));
-  // Initial learning completed today on a problem new to Ankify.
+  // Initial learning completed today on a problem new to Ankileet.
   const initial = await startPracticeSession(USER, {
     requestId: crypto.randomUUID(), mode: "practice", ownerToken: TAB, supersedePendingRating: false, baseline: { state: "none" },
     target: { kind: "leetcode", problem: { leetcodeSlug: "fresh", leetcodeId: 999, title: "Fresh", difficulty: "Easy", url: "https://leetcode.com/problems/fresh/", topicTags: [], similarSlugs: [] } },

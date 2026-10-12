@@ -1,12 +1,12 @@
-import type { PracticeSessionRatingInput, PracticeSessionRatingResponseDto } from "@ankify/contracts";
+import type { PracticeSessionRatingInput, PracticeSessionRatingResponseDto } from "@ankileet/contracts";
 import {
   effectiveRatingDisposition,
   initialReviewDue,
   rateFullSolve,
   retrievability,
   SCHEDULING_POLICIES,
-} from "@ankify/core";
-import { getDb, schema, type PracticeSession, type Problem } from "@ankify/db";
+} from "@ankileet/core";
+import { getDb, schema, type PracticeSession, type Problem } from "@ankileet/db";
 import { and, eq, isNull, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { markFirstReview } from "@/server/onboarding";

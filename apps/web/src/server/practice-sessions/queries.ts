@@ -3,9 +3,9 @@ import type {
   PracticeSessionDetailDto,
   PracticeSessionListDto,
   PracticeSessionListQuery,
-} from "@ankify/contracts";
-import { effectiveRatingDisposition, isSessionStale, summarizeSession } from "@ankify/core";
-import { getDb, schema, type PracticeSession } from "@ankify/db";
+} from "@ankileet/contracts";
+import { effectiveRatingDisposition, isSessionStale, summarizeSession } from "@ankileet/core";
+import { getDb, schema, type PracticeSession } from "@ankileet/db";
 import { and, asc, desc, eq, gte, inArray, lt, or } from "drizzle-orm";
 import { loadSessionEvidence, toObservationDto, toPracticeSessionDto, toProblemStatusDto } from "./dto";
 
@@ -15,7 +15,7 @@ const ps = schema.practiceSessions;
 const RECENT_COMPLETED_MS = 7 * 86_400_000;
 
 /**
- * What the extension shows on a problem page: the problem's Ankify status,
+ * What the extension shows on a problem page: the problem's Ankileet status,
  * its open session (unless stale), and a completed review awaiting a rating.
  */
 export async function getCurrentPracticeSession(

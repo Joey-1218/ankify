@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
-import type { PracticeSessionStartInput } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { PracticeSessionStartInput } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { iterateAccountExport } from "./account-export";
 import { captureProblem } from "./capture";

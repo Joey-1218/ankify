@@ -1,4 +1,4 @@
-export const REVIEW_QUEUE_UPDATED_EVENT = "ankify:review-queue-updated";
+export const REVIEW_QUEUE_UPDATED_EVENT = "ankileet:review-queue-updated";
 
 export type ReviewQueueUpdatedEvent = CustomEvent<{
   dueCount?: number;

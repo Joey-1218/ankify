@@ -1,4 +1,4 @@
-import type { CapabilitiesDto, CaptureResultDto, ReviewOverviewDto } from "@ankify/contracts";
+import type { CapabilitiesDto, CaptureResultDto, ReviewOverviewDto } from "@ankileet/contracts";
 import type { ContentMessage, PageMessage, SenderContext } from "../shared/protocol";
 import type { AccountStateApi } from "./account";
 import type { AnalysisClient } from "./analysis";

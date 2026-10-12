@@ -5,9 +5,9 @@ import {
   type SessionAnalysisFinding,
   type SessionAnalysisOutput,
   type SessionAnalysisResult,
-} from "@ankify/contracts";
-import { hasAnalyzableCode } from "@ankify/core";
-import { getDb, schema, type AiJob } from "@ankify/db";
+} from "@ankileet/contracts";
+import { hasAnalyzableCode } from "@ankileet/core";
+import { getDb, schema, type AiJob } from "@ankileet/db";
 import { generateText, NoObjectGeneratedError, Output } from "ai";
 import { and, eq, ne } from "drizzle-orm";
 import { buildModel, providerCallOptions } from "../ai";

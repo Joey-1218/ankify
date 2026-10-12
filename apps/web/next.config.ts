@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { loadEnvFile } from "@ankify/db/env";
+import { loadEnvFile } from "@ankileet/db/env";
 
 const appDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(appDir, "../..");
@@ -36,9 +36,9 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 const config: NextConfig = {
-  transpilePackages: ["@ankify/api-client", "@ankify/contracts", "@ankify/core", "@ankify/db"],
+  transpilePackages: ["@ankileet/api-client", "@ankileet/contracts", "@ankileet/core", "@ankileet/db"],
   // Browser tests run their own dev server beside a developer's `pnpm dev`.
-  ...(process.env.ANKIFY_E2E === "1" ? { distDir: ".next-e2e" } : {}),
+  ...(process.env.ANKILEET_E2E === "1" ? { distDir: ".next-e2e" } : {}),
   poweredByHeader: false,
   async headers() {
     return [

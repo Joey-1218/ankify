@@ -58,7 +58,7 @@ export const practiceSessionStartSchema = z
   .object({
     requestId: z.string().uuid(),
     target: z.discriminatedUnion("kind", [
-      /** An Ankify problem, e.g. opened from the review queue. */
+      /** An Ankileet problem, e.g. opened from the review queue. */
       z.object({ kind: z.literal("problem"), problemId: z.string().min(1).max(64) }).strict(),
       /** The LeetCode page the user is on; creates the problem if it is new. */
       z.object({ kind: z.literal("leetcode"), problem: practiceProblemSchema }).strict(),
@@ -266,7 +266,7 @@ export type PracticeSessionDetailDto = {
 };
 
 export type PracticeSessionCurrentDto = {
-  /** Null when the problem is not in Ankify. */
+  /** Null when the problem is not in Ankileet. */
   problem: PracticeProblemStatusDto | null;
   /** The open session, if any (active or interrupted within 24 hours). */
   session: PracticeSessionDto | null;

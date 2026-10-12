@@ -1,5 +1,5 @@
-import type { OnboardingProgressDto } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { OnboardingProgressDto } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, asc, eq, isNull } from "drizzle-orm";
 
 type OnboardingSettings = Omit<OnboardingProgressDto, "complete">;

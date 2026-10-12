@@ -1,4 +1,4 @@
-import type { CapabilitiesDto } from "@ankify/contracts";
+import type { CapabilitiesDto } from "@ankileet/contracts";
 import { enabledWorkflows, isAutomaticAnalysisEnabled, LEGACY_WORKFLOWS } from "./features";
 
 export function getCapabilities(): CapabilitiesDto {

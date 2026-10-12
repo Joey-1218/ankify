@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import type { SimilarQuestionInput } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { SimilarQuestionInput } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { DELETE as deleteProblem } from "@/app/api/problems/[id]/route";
 import { getRequestUser } from "@/server/auth";
@@ -148,7 +148,7 @@ describe("attempt history", () => {
     if (!started.ok) throw new Error(started.error);
     await ingestSessionObservations(USER, started.response.session.id, { observations: [{ leetcodeSubmissionId: "901", verdict: "Wrong Answer", detailUnavailable: true }] }, at(2));
 
-    const remove = (problemId: string) => deleteProblem(new Request(`https://ankify.test/api/problems/${problemId}`, { method: "DELETE" }), { params: Promise.resolve({ id: problemId }) });
+    const remove = (problemId: string) => deleteProblem(new Request(`https://ankileet.test/api/problems/${problemId}`, { method: "DELETE" }), { params: Promise.resolve({ id: problemId }) });
     vi.mocked(getRequestUser).mockResolvedValue({ id: USER } as never);
     expect((await remove(theirs.problem.id)).status).toBe(404);
     expect((await remove(solved.problem.id)).status).toBe(200);

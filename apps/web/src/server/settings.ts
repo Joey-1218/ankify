@@ -1,8 +1,8 @@
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { cache } from "react";
-import type { AnalysisSettings } from "@ankify/contracts";
-import { clampInitialReviewDelayHours, INITIAL_REVIEW_DELAY_HOURS, type AiProvider, type AiReasoningMode } from "@ankify/core";
+import type { AnalysisSettings } from "@ankileet/contracts";
+import { clampInitialReviewDelayHours, INITIAL_REVIEW_DELAY_HOURS, type AiProvider, type AiReasoningMode } from "@ankileet/core";
 import { decryptSecret, encryptSecret, type EncryptedSecret } from "./secret-box";
 import { readStarterAiConfig } from "./starter-ai";
 import { isValidTimeZone, normalizeTimeZone } from "./time-zone";

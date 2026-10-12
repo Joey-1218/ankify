@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { and, eq } from "drizzle-orm";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import {
   addPaidCredits,
   getPaidCreditBalance,
@@ -13,8 +13,8 @@ import { getStarterAiStatus, StarterCreditsExhaustedError } from "./starter-ai";
 import { createTestDb } from "./test-db";
 
 const testDb = createTestDb();
-process.env.ANKIFY_STARTER_AI_API_KEY = "sk-test";
-process.env.ANKIFY_STARTER_AI_CREDITS = "2";
+process.env.ANKILEET_STARTER_AI_API_KEY = "sk-test";
+process.env.ANKILEET_STARTER_AI_CREDITS = "2";
 
 const USER_ID = "user-credits";
 const STARTER_LIMIT = 2;

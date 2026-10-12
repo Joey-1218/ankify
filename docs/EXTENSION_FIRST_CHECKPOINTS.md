@@ -22,10 +22,10 @@ Every checkpoint runs the same commands from the repository root:
 BETTER_AUTH_SECRET=ci-only-better-auth-secret-that-is-long-enough \
 BETTER_AUTH_URL=http://localhost:3000 \
 GOOGLE_CLIENT_ID=ci-google-client GOOGLE_CLIENT_SECRET=ci-google-secret \
-ANKIFY_EXTENSION_API_ORIGIN=https://ankify.example.com \
-ANKIFY_EXTENSION_ORIGINS=chrome-extension://abcdefghijklmnopabcdefghijklmnop \
+ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.example.com \
+ANKILEET_EXTENSION_ORIGINS=chrome-extension://abcdefghijklmnopabcdefghijklmnop \
 AI_KEY_ENCRYPTION_SECRET=0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef \
-TURSO_DATABASE_URL= TURSO_AUTH_TOKEN= LOCAL_DB_PATH=/tmp/ankify-build.db \
+TURSO_DATABASE_URL= TURSO_AUTH_TOKEN= LOCAL_DB_PATH=/tmp/ankileet-build.db \
 pnpm build
 ```
 
@@ -147,7 +147,7 @@ event per session.
 The legacy rating route now advances `schedule_revision` (rating and Undo),
 records `legacy_self_recall_v1` / `self_recall` provenance, and refuses
 problems awaiting initial learning; the due condition excludes them. Pure
-session rules are in `@ankify/core`, wire contracts in `@ankify/contracts`.
+session rules are in `@ankileet/core`, wire contracts in `@ankileet/contracts`.
 
 | Check | Result |
 | --- | --- |
@@ -168,10 +168,10 @@ Status: **PASS**. Commit `e267a7f`. **Phase 1 gate: PASS.**
 Routes: `POST/GET /api/practice-sessions`, `GET /api/practice-sessions/current`,
 `GET /api/practice-sessions/:id`, `POST .../:id/commands`,
 `POST .../:id/submissions`, all authenticated, validated by
-`@ankify/contracts`, returning DTOs, and rate limited (`sessions`, 120/min).
+`@ankileet/contracts`, returning DTOs, and rate limited (`sessions`, 120/min).
 Capture and session start share `server/problem-upsert.ts`. The export adds
 `practice_session` (without owner tokens) and `practice_session_submission`.
-`ANKIFY_DISABLED_WORKFLOWS` disables a workflow and removes it from
+`ANKILEET_DISABLED_WORKFLOWS` disables a workflow and removes it from
 capabilities; `practice_sessions` is advertised.
 
 | Check | Result |
@@ -197,7 +197,7 @@ changes FSRS state or the schedule revision (asserted end to end). Old
 extension capture payloads are unchanged (browser suite).
 
 Not executed: live LeetCode validation (see checkpoint 0). Rollback: set
-`ANKIFY_DISABLED_WORKFLOWS=practice_sessions`; M1 and the identity fix stay.
+`ANKILEET_DISABLED_WORKFLOWS=practice_sessions`; M1 and the identity fix stay.
 
 ## Checkpoint 2.1: scheduling policies
 
@@ -253,7 +253,7 @@ Acceptance: no invented initial recall rating, no default rating, no
 schedule change from capture, voluntary practice, or dashboard reads, and no
 duplicate scheduling. Browser coverage of finish → rate → postpone arrives
 with the extension workflow in Phase 3. Rollback:
-`ANKIFY_DISABLED_WORKFLOWS=session_rating`; already-written states and events
+`ANKILEET_DISABLED_WORKFLOWS=session_rating`; already-written states and events
 stay and are not rewritten.
 
 ## Checkpoint 3.1: durable transport
@@ -308,7 +308,7 @@ LeetCode exception below.**
 | `pnpm test:e2e` | PASS: 15 tests, twice in a row |
 | `pnpm extension:check-manifest` | PASS: 0.3.0, `storage`/`tabs`/`alarms`, popup, no side panel |
 
-Legacy review guard behind `ANKIFY_DISABLED_WORKFLOWS=legacy_review` (426
+Legacy review guard behind `ANKILEET_DISABLED_WORKFLOWS=legacy_review` (426
 `upgrade_required`, advertised in capabilities); durable work scoped by a
 freshly confirmed account (fixes a real cross-account drop found while
 writing the account-switch test; a mutation test confirms the guard); server
@@ -429,7 +429,7 @@ Changes:
     sessions (repeated failures then Accepted, recurrence of a confirmed
     pattern, an improvement test);
   - at most one per session;
-  - offered only when `ANKIFY_AUTOMATIC_ANALYSIS=enabled`.
+  - offered only when `ANKILEET_AUTOMATIC_ANALYSIS=enabled`.
 - Dispatch recovery: `ai_jobs.dispatched_at`, and `redispatchStrandedJobs()`,
   which runs from the popup overview, the analysis state route, and
   `GET /api/cron/ai-dispatch` (Bearer `CRON_SECRET`).
@@ -467,7 +467,7 @@ Tests:
 
 Found and fixed while gating:
 
-- `ANKIFY_DISABLED_WORKFLOWS=session_analysis` refused new jobs, but queued
+- `ANKILEET_DISABLED_WORKFLOWS=session_analysis` refused new jobs, but queued
   jobs, including stranded ones re-sent by recovery, still called the user's
   provider. The executor now checks the switch first and fails the job with
   `workflow_disabled` before any provider call, as the plan's rollback
@@ -498,9 +498,9 @@ Recorded exceptions:
   and DeepSeek is unverified.
 - The Phase 3 **live LeetCode validation is still pending.**
 
-Rollback: add `session_analysis` to `ANKIFY_DISABLED_WORKFLOWS`; new jobs are
+Rollback: add `session_analysis` to `ANKILEET_DISABLED_WORKFLOWS`; new jobs are
 refused and queued ones fail before any provider call. To stop only automatic
-analysis, unset `ANKIFY_AUTOMATIC_ANALYSIS`. The schema changes are additive:
+analysis, unset `ANKILEET_AUTOMATIC_ANALYSIS`. The schema changes are additive:
 analyses, candidates, and confirmed mistakes stay, and the deterministic
 profile has no AI dependency.
 
@@ -666,7 +666,7 @@ Changes:
   - start runs the practice-session start in the same transaction, through
     `startSessionInTransaction()`, extracted from `startPracticeSession()`
     without behavior change;
-  - a problem new to Ankify starts initial learning, and one already in the
+  - a problem new to Ankileet starts initial learning, and one already in the
     deck is started by id, so the suggestion's metadata never overwrites the
     problem's similar questions or topics.
 - `GET /api/suggestions` lists today's suggestions, with each started
@@ -706,7 +706,7 @@ Tests:
   - dropping daily idempotency;
   - requiring only one coverage scope.
 
-Rollback: `ANKIFY_DISABLED_WORKFLOWS=suggestions`. Stored suggestions, attempt
+Rollback: `ANKILEET_DISABLED_WORKFLOWS=suggestions`. Stored suggestions, attempt
 history, and practice sessions started from suggestions stay.
 
 Until 5.4 replaces it, the popup shows its existing placeholder ("Daily
@@ -783,7 +783,7 @@ Recorded exceptions:
   topics) until a later capture.
 - The Phase 3 **live LeetCode validation is still pending.**
 
-Rollback: `ANKIFY_DISABLED_WORKFLOWS=suggestions` hides the popup section.
+Rollback: `ANKILEET_DISABLED_WORKFLOWS=suggestions` hides the popup section.
 `set_baseline` without `problem` behaves exactly as before.
 
 ## Checkpoint 6A.1: settings for the extension-first workflow
@@ -1043,7 +1043,7 @@ Status: **PASS**. No schema change.
   once, even on redelivery.
 - The Stripe webhook, balances, the ledger, and refunds are unchanged.
 - An operator can re-enable one deliberately with
-  `ANKIFY_ENABLED_LEGACY_WORKFLOWS` (no rollback does). The kill switch
+  `ANKILEET_ENABLED_LEGACY_WORKFLOWS` (no rollback does). The kill switch
   still wins.
 - The existing card/quiz accounting and checkout suites opt in the same way,
   so the still-present code stays tested until it is removed.
@@ -1246,21 +1246,21 @@ Gate:
 
 Findings:
 
-- **"Can't reach ankify" covered unrelated failures.**
+- **"Can't reach ankileet" covered unrelated failures.**
   - It was shown when the content script's `sendMessage` threw (worker restarting, or the extension reloaded so the script was orphaned).
   - `import_history` reported a LeetCode read failure as `offline`.
   - The router mapped every non-auth failure of import, capabilities, and notes to `offline`.
   - The live "Review early after re-signing in to LeetCode" report could not be reproduced against the fixture. The scripted flow (sign out mid-session, sign back in, rate, Review early) works. The likeliest live cause is an orphaned script or a worker that missed its first message, both now reported and retried distinctly. The owner still needs to check this live (TEST_GUIDE §1.6).
 - **Offline sync waited out its backoff.** Reconnecting did not sync at once: queued work waited its backoff, and the retry alarm runs no sooner than 30 s.
-- **DevTools' Offline on a LeetCode tab does not cut ankify sync.** All ankify traffic runs in the service worker.
+- **DevTools' Offline on a LeetCode tab does not cut ankileet sync.** All ankileet traffic runs in the service worker.
 
 Changes:
 
 - **Content `send`.** It retries once after 300 ms. An orphaned script reports `extension_reloaded`, which the panel shows as "Reload page", and stops tracking. A worker that never answers reports `extension_unavailable`. The popup bridge retries the same way.
 - **Router errors.** Failures map through `apiFailure()`: `signed_out`, `offline`, `server_error`, `rate_limited`, or the server's code. LeetCode read failures in import are `leetcode_signed_out` or `leetcode_unavailable`.
 - **Panel states.**
-  - A failed heartbeat shows "Can't reach ankify right now. Submissions are saved here…" until one lands.
-  - An expired ankify session shows the sign-in view. The sign-in and offline views re-read when the tab is shown again.
+  - A failed heartbeat shows "Can't reach ankileet right now. Submissions are saved here…" until one lands.
+  - An expired ankileet session shows the sign-in view. The sign-in and offline views re-read when the tab is shown again.
 - **Immediate resync.** Any successful page read, heartbeat, or popup open makes waiting outbox work due now and flushes it. Deliveries made that way nudge the popup and tabs.
 - **Tests.**
   - e2e: LeetCode sign-out and sign-in mid-session, then Review early; an outage before start; an outage during a session and while rating, including immediate sync.
@@ -1335,12 +1335,12 @@ Gate:
 Why automatic analysis was tied to the cron:
 
 - A job commits with the finished session, and the queue send happens after the commit and can fail.
-- A manual job is recovered by the user's own polling; an automatic one had nobody polling, so it was gated behind `ANKIFY_AUTOMATIC_ANALYSIS=enabled` until a cron existed.
+- A manual job is recovered by the user's own polling; an automatic one had nobody polling, so it was gated behind `ANKILEET_AUTOMATIC_ANALYSIS=enabled` until a cron existed.
 - Locally, the QA worker reads the database directly and dispatch is a no-op, so only the flag blocked it.
 
 Changes (the owner's decisions of 2026-10-01: on by default with the user's own key, no daily limit):
 
-- **Deployment flag.** `ANKIFY_AUTOMATIC_ANALYSIS` is now a kill switch: automatic analysis is on unless it is `disabled`. Recovery is request-time (the popup, problem pages, analysis reads), with the cron as an optional backstop. DEPLOYMENT.md asks the owner to decide before deploying to Production.
+- **Deployment flag.** `ANKILEET_AUTOMATIC_ANALYSIS` is now a kill switch: automatic analysis is on unless it is `disabled`. Recovery is request-time (the popup, problem pages, analysis reads), with the cron as an optional backstop. DEPLOYMENT.md asks the owner to decide before deploying to Production.
 - **User setting.** `analysis.automatic` defaults to true. `dailyAutomaticLimit` is removed from contracts, the API, the UI, and planning, and a stored value is ignored. The manual limit (10 a day) stays.
 - **Eligibility.** A completed session with any failed submission that has code qualifies. The reason is recorded as `repeated_failures`, `pattern_recurrence`, or `failed_attempt`. A clean Accepted, an unfinished session, or a failure without code never qualifies.
 - **Planning.** There is one job per session and evidence digest (`auto:<session>:<digest>`). A job starts about 15 s after Finish (`runAfter`), so late verdicts are read; the runner always reads the evidence current at run time. The panel shows "Analysis queued …" right away.
@@ -1527,7 +1527,7 @@ Tests:
   - a clean review analyzed automatically while its rating is asked;
   - closing the tab gives Interrupted and Resume within the old lease;
   - LeetCode sign-out with the cookie kept;
-  - ankify sign-out mid-session, then sign-in from the panel through the QA `/login`.
+  - ankileet sign-out mid-session, then sign-in from the panel through the QA `/login`.
 
 Gate:
 
@@ -1535,7 +1535,7 @@ Gate:
 | --- | --- |
 | `pnpm test` | PASS: 519 tests |
 | `pnpm typecheck`, `pnpm lint` (5 warnings), build, manifest | PASS |
-| `pnpm test:e2e` | PASS: 47 tests in one run. The run before it had 46: the new ankify sign-out spec's `Sign in` locator also matched the collapsed pill, and it was made exact. |
+| `pnpm test:e2e` | PASS: 47 tests in one run. The run before it had 46: the new ankileet sign-out spec's `Sign in` locator also matched the collapsed pill, and it was made exact. |
 | `pnpm test:visual` | PASS: 7 tests, baselines unchanged |
 
 **Still owner-only:** confirm on live leetcode.com that signing out (in this tab or another) shows the LeetCode warning. If not, run `scripts/leetcode-live-probe.js` while signed out and share the report.

@@ -28,15 +28,15 @@ function repoRoot(): string {
  * Load env files for CLI tools (drizzle-kit, migrate.ts).
  *
  * Profile selection:
- *   - ANKIFY_PROFILE=production → load `.env.production.local` (writes to prod Turso)
- *   - ANKIFY_PROFILE=preview    → load `.env.preview.local`    (writes to preview Turso)
- *   - ANKIFY_PROFILE=qa         → load `.env.qa` + `.env.qa.local` (local QA SQLite)
+ *   - ANKILEET_PROFILE=production → load `.env.production.local` (writes to prod Turso)
+ *   - ANKILEET_PROFILE=preview    → load `.env.preview.local`    (writes to preview Turso)
+ *   - ANKILEET_PROFILE=qa         → load `.env.qa` + `.env.qa.local` (local QA SQLite)
  *   - otherwise                  → load `.env.local`            (writes to local SQLite)
  *
  * Next.js dev server doesn't need this — it loads `.env.local` itself. This
  * helper only runs from `tsx` / `drizzle-kit` CLI entry points.
  *
- * Env vars already in `process.env` win over the file (so `ANKIFY_PROFILE=...`
+ * Env vars already in `process.env` win over the file (so `ANKILEET_PROFILE=...`
  * passed on the command line is respected, and CI can override anything).
  */
 export function loadDbEnv() {
@@ -44,7 +44,7 @@ export function loadDbEnv() {
   _envLoaded = true;
 
   const root = repoRoot();
-  const requestedProfile = process.env.ANKIFY_PROFILE;
+  const requestedProfile = process.env.ANKILEET_PROFILE;
   const profile =
     requestedProfile === "production" || requestedProfile === "preview" || requestedProfile === "qa"
       ? requestedProfile
@@ -90,7 +90,7 @@ function buildClient(): Client {
 
   // Profile selection: Turso URL wins. loadDbEnv() guarantees LOCAL_DB_PATH is
   // set when no Turso URL is present, and refuses to fall back to SQLite when
-  // ANKIFY_PROFILE=production. The Vercel runtime sets TURSO_DATABASE_URL via
+  // ANKILEET_PROFILE=production. The Vercel runtime sets TURSO_DATABASE_URL via
   // dashboard env, so production deploys go through the Turso branch.
   const remoteUrl = process.env.TURSO_DATABASE_URL;
   const authToken = process.env.TURSO_AUTH_TOKEN;

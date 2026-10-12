@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { capabilitiesSchema } from "@ankify/contracts";
+import { capabilitiesSchema } from "@ankileet/contracts";
 
 const { getRequestUser, rateProblemReview, undoLatestProblemReview } = vi.hoisted(() => ({
   getRequestUser: vi.fn(),
@@ -33,7 +33,7 @@ describe("legacy review cutover guard", () => {
   });
 
   it("answers old clients with a structured upgrade request once legacy reviews are retired", async () => {
-    vi.stubEnv("ANKIFY_DISABLED_WORKFLOWS", "legacy_review");
+    vi.stubEnv("ANKILEET_DISABLED_WORKFLOWS", "legacy_review");
     for (const response of [await post(rate, { problemId: "p1", rating: 3 }), await post(undo, { problemId: "p1" })]) {
       expect(response.status).toBe(426);
       expect(await response.json()).toMatchObject({ error: "upgrade_required", workflow: "legacy_review" });
@@ -54,7 +54,7 @@ describe("legacy review cutover guard", () => {
 
   it("still requires authentication before anything else", async () => {
     getRequestUser.mockResolvedValue(null);
-    vi.stubEnv("ANKIFY_DISABLED_WORKFLOWS", "legacy_review");
+    vi.stubEnv("ANKILEET_DISABLED_WORKFLOWS", "legacy_review");
     expect((await post(rate, { problemId: "p1", rating: 3 })).status).toBe(401);
   });
 });

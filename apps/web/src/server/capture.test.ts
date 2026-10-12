@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { captureProblemSchema, type CaptureProblemInput } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import { captureProblemSchema, type CaptureProblemInput } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { captureProblem } from "./capture";
 import { MAX_SUBMISSIONS_PER_PROBLEM } from "./resource-limits";

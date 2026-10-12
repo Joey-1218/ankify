@@ -5,7 +5,7 @@
  */
 
 export type ApiFailureKind =
-  /** 401: the Ankify session is missing or expired; pause and ask to sign in. */
+  /** 401: the Ankileet session is missing or expired; pause and ask to sign in. */
   | "auth"
   /** 429: retry after the server's delay. */
   | "rate_limited"
@@ -28,7 +28,7 @@ export type ApiResult<T> =
       body?: unknown;
     };
 
-export const OWNER_TOKEN_HEADER = "X-Ankify-Owner-Token";
+export const OWNER_TOKEN_HEADER = "X-Ankileet-Owner-Token";
 const DEFAULT_TIMEOUT_MS = 20_000;
 
 export type ApiRequest = {

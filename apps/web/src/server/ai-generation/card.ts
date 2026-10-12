@@ -1,7 +1,7 @@
 import { generateText, Output } from "ai";
 import { and, desc, eq } from "drizzle-orm";
-import { cardDraftSchema, type CardDraft } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import { cardDraftSchema, type CardDraft } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { getActiveModel } from "@/server/ai";
 import { buildAiCardDraftPrompt } from "@/server/card-prompt";
 import { getGenerationSettings } from "@/server/settings";

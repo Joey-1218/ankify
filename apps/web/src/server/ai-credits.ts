@@ -1,4 +1,4 @@
-import { getDb, schema, type DB } from "@ankify/db";
+import { getDb, schema, type DB } from "@ankileet/db";
 import { and, eq, gte, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { readBillingConfig } from "./billing/config";

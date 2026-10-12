@@ -3,8 +3,8 @@ import type {
   PracticeSessionCommandInput,
   PracticeSessionStartInput,
   PracticeSessionSubmissionsInput,
-} from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+} from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { iterateAccountExport } from "../account-export";
 import { captureProblem } from "../capture";
@@ -101,7 +101,7 @@ beforeEach(async () => {
 afterAll(() => testDb.cleanup());
 
 describe("starting practice sessions", () => {
-  it("creates an unscheduled problem and an initial-learning session for a problem new to Ankify", async () => {
+  it("creates an unscheduled problem and an initial-learning session for a problem new to Ankileet", async () => {
     const response = await start({ baseline: { state: "none" } });
     expect(response).toMatchObject({
       ok: true,

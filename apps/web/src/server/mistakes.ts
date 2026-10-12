@@ -6,9 +6,9 @@ import type {
   MistakeListQuery,
   MistakePatchInput,
   MistakeRecordDto,
-} from "@ankify/contracts";
-import { skillDimensionEnum } from "@ankify/contracts";
-import { getDb, schema, type MistakeRecord } from "@ankify/db";
+} from "@ankileet/contracts";
+import { skillDimensionEnum } from "@ankileet/contracts";
+import { getDb, schema, type MistakeRecord } from "@ankileet/db";
 import { and, desc, eq, inArray, lt, ne, or, type SQL } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { canonicalJson } from "./practice-sessions/digest";

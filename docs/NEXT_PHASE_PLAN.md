@@ -6,7 +6,7 @@ The extension-first refactor (Phases 0–7, `docs/EXTENSION_FIRST_REFACTOR_PLAN.
 - submission tracking that doesn't update live;
 - a "Rate later" rating that comes back;
 - the popup and the panel disagreeing on state;
-- misleading "Can't reach ankify" errors;
+- misleading "Can't reach ankileet" errors;
 - unreliable offline test steps;
 - leftover features nobody needs: editor reset and "Skill handled well";
 - a cramped problem page;
@@ -132,7 +132,7 @@ Root cause: the background never broadcasts anything. The content script only ha
 
 Design:
 - No new store; the server stays authoritative.
-- After any state-changing message succeeds or is queued (start, finish, rate, skip, observation, outbox flush result, account change), the background bumps a small signal: `chrome.storage.local["ankify.sessionSignal"] = { sessionId, revision, at }`.
+- After any state-changing message succeeds or is queued (start, finish, rate, skip, observation, outbox flush result, account change), the background bumps a small signal: `chrome.storage.local["ankileet.sessionSignal"] = { sessionId, revision, at }`.
 - The content script and the popup both subscribe with `chrome.storage.onChanged` and call their existing `refresh()`.
   - A signal is ignored if its revision is not newer than the revision on screen (the session `revision` column is already in the DTO).
   - Refreshes are debounced to 250 ms.
@@ -148,7 +148,7 @@ Design:
   - Unit test the signal emission (`sessions.test.ts`), and the ordering and debounce of signal handling (`page-session.test.ts`).
   - e2e: rate in the popup and the panel leaves the rating screen; rate in the panel and the popup updates; both show the same next due date.
 
-### 1.4 LeetCode auth vs Ankify auth, specific errors
+### 1.4 LeetCode auth vs Ankileet auth, specific errors
 
 Known defects:
 - `importHistory` reports a LeetCode read failure as `"offline"` (`EXT/content/index.ts:35-36`).
@@ -161,7 +161,7 @@ Changes:
   - `offline`: network or fetch exception.
   - `server_unavailable`: 5xx or 408.
   - `rate_limited`
-  - `signed_out`: Ankify 401, which shows the sign-in view.
+  - `signed_out`: Ankileet 401, which shows the sign-in view.
   - `leetcode_signed_out`
   - `leetcode_unreadable`
   - `extension_reloaded`: `sendMessage` threw with "Extension context invalidated". The fix is to reload the page.
@@ -179,7 +179,7 @@ Changes:
 
 ### 1.5 Offline verification
 
-Fact: every Ankify API call goes through the background service worker (`EXT/background/api.ts`). Taking a LeetCode tab offline in DevTools only blocks LeetCode GraphQL, never Ankify sync.
+Fact: every Ankileet API call goes through the background service worker (`EXT/background/api.ts`). Taking a LeetCode tab offline in DevTools only blocks LeetCode GraphQL, never Ankileet sync.
 
 Automated tests:
 - Extend the existing outage helper (the "outage survives a worker restart" spec) to cut the network:
@@ -195,7 +195,7 @@ Automated tests:
 - Unit: add duplicate delivery and the account-switch race to `outbox.test.ts`.
 
 Manual steps in TEST_GUIDE:
-- "Open chrome://extensions → Ankify → *service worker* → Network → Offline (cuts sync)."
+- "Open chrome://extensions → Ankileet → *service worker* → Network → Offline (cuts sync)."
 - "The LeetCode tab's DevTools only cuts LeetCode reads."
 - Or stop the local dev server to simulate the backend being down.
 
@@ -298,12 +298,12 @@ Changes:
 Why it is tied to the recovery cron today:
 - The job row is committed in the finish transaction. The queue `send` happens after the commit (`publishPlannedJob`, `jobs.ts:322-330`) and can fail.
 - A manual job is recovered by the user's own polling (`redispatchStrandedJobs` from the analysis-state and overview routes).
-- An automatic job has nobody polling, so `features.ts:56-64` gates it behind `ANKIFY_AUTOMATIC_ANALYSIS` until a cron exists.
+- An automatic job has nobody polling, so `features.ts:56-64` gates it behind `ANKILEET_AUTOMATIC_ANALYSIS` until a cron exists.
 - Locally, `dispatchAiJob` is a no-op under QA, and `qa-worker.ts` polls the DB directly. Recovery therefore doesn't matter locally; only the env flag blocks it.
 
 Changes:
 - **Decouple.**
-  - `ANKIFY_AUTOMATIC_ANALYSIS` becomes a pure operator kill switch.
+  - `ANKILEET_AUTOMATIC_ANALYSIS` becomes a pure operator kill switch.
   - It is `enabled` in `.env.qa` and `.env.example` (local), and it stays an explicit Production decision documented in DEPLOYMENT.
   - Request-time recovery stays as it is.
   - Also redispatch the user's stranded jobs from the popup's overview flush, which already happens on every popup open.
@@ -474,7 +474,7 @@ Actively run and debug, never weaken assertions.
   - `pnpm typecheck`
   - `pnpm lint`
   - `pnpm test:e2e`
-  - `ANKIFY_EXTENSION_API_ORIGIN=… pnpm build`
+  - `ANKILEET_EXTENSION_API_ORIGIN=… pnpm build`
   - `pnpm extension:check-manifest`
 
   Read each step's log, not only its exit code.

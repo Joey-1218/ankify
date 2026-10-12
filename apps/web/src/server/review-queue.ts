@@ -1,5 +1,5 @@
-import { getDb, schema } from "@ankify/db";
-import type { QueueStatsDto } from "@ankify/contracts";
+import { getDb, schema } from "@ankileet/db";
+import type { QueueStatsDto } from "@ankileet/contracts";
 import { and, eq, isNull, sql } from "drizzle-orm";
 import { cache } from "react";
 import { dueProblemCondition } from "./due-problems";

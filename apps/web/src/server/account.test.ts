@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { eq } from "drizzle-orm";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { deleteAccount } from "./account";
 import { addPaidCredits } from "./ai-credits";
 import { createTestDb } from "./test-db";

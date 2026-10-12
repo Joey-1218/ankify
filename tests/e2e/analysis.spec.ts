@@ -111,7 +111,7 @@ test("a review is analyzed automatically like a first practice, even when accept
 test("without the user's own key, the panel explains and starts nothing", async ({ context, leetcode, api }) => {
   await api("/api/settings", { body: { ...OWN_KEY, apiKey: "" } });
   const { analysis, slug } = await finishQualifyingSession(context, leetcode, "analysis-no-key");
-  await expect(analysis.getByText("Add your own AI key in ankify settings to analyze sessions.")).toBeVisible();
+  await expect(analysis.getByText("Add your own AI key in ankileet settings to analyze sessions.")).toBeVisible();
   await expect(analysis.getByRole("link", { name: "Open settings" })).toHaveAttribute("href", "http://localhost:4317/settings");
   await expect(analysis.getByRole("button", { name: "Analyze session" })).toHaveCount(0);
   const state = await api<SessionAnalysisStateDto>(`/api/practice-sessions/${await sessionIdOf(api, slug)}/analysis`);

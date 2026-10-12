@@ -1,7 +1,7 @@
 /**
  * Skill dimensions: the mistake-profile taxonomy. The first five IDs are the
  * quiz item scopes, so quiz accuracy per dimension needs no extra data.
- * `@ankify/contracts` mirrors this list as `skillDimensionEnum`.
+ * `@ankileet/contracts` mirrors this list as `skillDimensionEnum`.
  */
 export const SKILL_DIMENSIONS = [
   "approach",

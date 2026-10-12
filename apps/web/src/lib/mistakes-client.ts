@@ -3,10 +3,10 @@ import type {
   MistakeCreateResponseDto,
   MistakePatchInput,
   MistakeRecordDto,
-} from "@ankify/contracts";
-import { SKILL_DIMENSIONS, type SkillDimension } from "@ankify/core";
+} from "@ankileet/contracts";
+import { SKILL_DIMENSIONS, type SkillDimension } from "@ankileet/core";
 
-export const MISTAKES_CHANGED_EVENT = "ankify:mistakes-changed";
+export const MISTAKES_CHANGED_EVENT = "ankileet:mistakes-changed";
 
 export type MistakesChangedEvent = CustomEvent<{ problemId: string }>;
 

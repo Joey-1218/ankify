@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import type { SkillDimension } from "@ankify/core";
+import type { SkillDimension } from "@ankileet/core";
 import { useLanguage } from "@/components/LanguageProvider";
 import { cn } from "@/lib/utils";
 

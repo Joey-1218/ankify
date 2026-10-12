@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { quizAnswerRequestSchema } from "@ankify/contracts";
+import { quizAnswerRequestSchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { answerQuizItem } from "@/server/quiz-commands";
 

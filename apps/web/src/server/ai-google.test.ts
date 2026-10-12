@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { aiProviderEnum } from "@ankify/contracts";
+import { aiProviderEnum } from "@ankileet/contracts";
 import { buildModel, GEMINI_THINKING_HEADROOM_TOKENS, providerCallOptions } from "./ai";
 import { listAvailableAiModels } from "./ai-models";
 

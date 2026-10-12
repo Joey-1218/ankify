@@ -25,7 +25,7 @@ export const quizItemScopeEnum = z.enum([
   "implementation",
   "mistake_review",
 ]);
-/** Mistake-profile taxonomy. Mirrors `SKILL_DIMENSIONS` in @ankify/core; the
+/** Mistake-profile taxonomy. Mirrors `SKILL_DIMENSIONS` in @ankileet/core; the
  *  first five IDs are the quiz item scopes. */
 export const skillDimensionEnum = z.enum([
   "approach",

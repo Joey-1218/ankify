@@ -28,7 +28,7 @@ export function readBillingConfig(env: Record<string, string | undefined> = proc
   // Fail closed on mixed environments: live money only in production builds
   // (never `next dev` or a declared Preview), and never test-mode "payments"
   // granting real credits on a declared Production deployment.
-  const deployment = env.ANKIFY_DEPLOYMENT_ENV?.trim();
+  const deployment = env.ANKILEET_DEPLOYMENT_ENV?.trim();
   if (mode === "live" && (env.NODE_ENV !== "production" || deployment === "preview")) return null;
   if (mode === "test" && deployment === "production") return null;
   return { secretKey, webhookSecret, mode };

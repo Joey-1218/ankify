@@ -31,7 +31,7 @@ export async function openSignedInPopup(context: BrowserContext, extensionId: st
   return page;
 }
 
-/** Calls the Ankify API with the QA session from an extension page. */
+/** Calls the Ankileet API with the QA session from an extension page. */
 export function apiFrom(page: Page): Api {
   return (path, init = {}) =>
     page.evaluate(async ({ origin, path, body, method }) => {

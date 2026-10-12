@@ -13,7 +13,7 @@ import type {
   SessionAnalysisStateDto,
   SessionBaselineInput,
   SkillDimensionId,
-} from "@ankify/contracts";
+} from "@ankileet/contracts";
 import type { ContentMessage } from "../shared/protocol";
 import { createActivityMeter } from "./activity-meter";
 import type { LeetcodeClient } from "./leetcode-client";
@@ -100,7 +100,7 @@ export type PageView =
       availability: LeetcodeAvailability;
       /** The tracked session's submissions seen here but not (yet) in its evidence. */
       local: LocalEvidence;
-      /** Whether ankify answered the last heartbeat; work is saved locally meanwhile. */
+      /** Whether ankileet answered the last heartbeat; work is saved locally meanwhile. */
       reachable: boolean;
       busy: "starting" | "finishing" | "abandoning" | "rating" | "claiming" | null;
       notice: PageNotice | null;
@@ -293,7 +293,7 @@ export function createPageSession(deps: PageSessionDeps) {
       },
       report: async (observations) => {
         const result = await send<PracticeSessionSubmissionsResponseDto>({ type: "session_observations", sessionId, observations });
-        // Nothing was saved (the worker was unreachable, or Ankify is signed
+        // Nothing was saved (the worker was unreachable, or Ankileet is signed
         // out): failing the hand-off makes the poller report these again.
         if (!result.ok) throw new Error(result.error);
         const latest = currentSession();
@@ -463,7 +463,7 @@ export function createPageSession(deps: PageSessionDeps) {
       // Another tab took over or the session ended elsewhere.
       await refresh();
     } else if (!result.ok && result.error === "signed_out") {
-      // The ankify session expired; tracking resumes once signed in again.
+      // The ankileet session expired; tracking resumes once signed in again.
       set({ kind: "signed_out" });
     } else if (!result.ok && tracking === current && view.kind === "ready" && view.reachable) {
       // Outage or overload: submissions keep being saved for later sync.
@@ -674,7 +674,7 @@ export function createPageSession(deps: PageSessionDeps) {
     /** Visibility or focus changed: close the timing interval, and when the
      *  page is active again check LeetCode right away (debounced). */
     onVisibilityChange() {
-      // Back on the page after signing in to ankify (or reconnecting): read again.
+      // Back on the page after signing in to ankileet (or reconnecting): read again.
       if ((view.kind === "signed_out" || view.kind === "offline") && isVisible() && deps.now() - lastRecoverAt >= FOCUS_POLL_DEBOUNCE_MS) {
         lastRecoverAt = deps.now();
         void refresh();

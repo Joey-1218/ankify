@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { aiProviderEnum } from "@ankify/contracts";
+import { aiProviderEnum } from "@ankileet/contracts";
 import { getRequestSessionUser, unauthorizedResponse } from "@/server/auth";
 import { testAiConnection } from "@/server/ai-connection";
 

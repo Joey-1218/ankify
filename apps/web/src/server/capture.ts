@@ -1,5 +1,5 @@
-import type { CaptureProblemInput, CaptureResultDto } from "@ankify/contracts";
-import { getDb } from "@ankify/db";
+import type { CaptureProblemInput, CaptureResultDto } from "@ankileet/contracts";
+import { getDb } from "@ankileet/db";
 import { markFirstCapture } from "@/server/onboarding";
 import { upsertLeetcodeProblem } from "@/server/problem-upsert";
 import { storeSubmissions } from "@/server/submission-store";

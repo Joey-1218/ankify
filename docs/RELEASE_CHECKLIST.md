@@ -1,15 +1,15 @@
-# Ankify release checklist
+# Ankileet release checklist
 
 Use this checklist for the first public release and for later releases that
 change authentication, storage, migrations, permissions, or data handling.
 
-Canonical Production Web/API origin: `https://ankify-pi.vercel.app`.
-`ANKIFY_EXTENSION_API_ORIGIN` is an Extension build-time variable, not a Vercel
+Canonical Production Web/API origin: `https://ankileet.com`.
+`ANKILEET_EXTENSION_API_ORIGIN` is an Extension build-time variable, not a Vercel
 runtime variable.
 
 Canonical Production data target: the Vercel Turso integration database
-`database-ankify` in organization
-`vercel-icfg-mdehlkeeqefnm8sqwfj1zlce`. The personal `ankify-prod` database is
+`database-ankileet` in organization
+`vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg`. The personal `ankileet-prod` database is
 legacy and must not be used for Production migrations. Follow
 [`DEPLOYMENT.md`](DEPLOYMENT.md) for the full identity and verification runbook.
 
@@ -17,7 +17,7 @@ legacy and must not be used for Production migrations. Follow
 
 - [ ] Create a dedicated Preview Turso database. Never point Preview at Production.
 - [ ] Configure the Preview Vercel variables listed in `.env.example`, including
-      `ANKIFY_DEPLOYMENT_ENV=preview` and normally `ANKIFY_DISABLE_SIGNUP=true`.
+      `ANKILEET_DEPLOYMENT_ENV=preview` and normally `ANKILEET_DISABLE_SIGNUP=true`.
 - [ ] Use a stable Preview branch domain for `BETTER_AUTH_URL` and register its
       Google OAuth callback when Preview login is needed.
 - [ ] Apply pending Preview migrations from one controlled terminal:
@@ -29,7 +29,7 @@ legacy and must not be used for Production migrations. Follow
 - [ ] Run the release gate locally:
 
   ```bash
-  ANKIFY_EXTENSION_API_ORIGIN=https://ankify-pi.vercel.app pnpm release:check
+  ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com pnpm release:check
   ```
 
 ## 2. Verify Preview
@@ -54,12 +54,12 @@ legacy and must not be used for Production migrations. Follow
 
 ## 3. Prepare Production data
 
-- [ ] Run `turso org switch vercel-icfg-mdehlkeeqefnm8sqwfj1zlce` and confirm
-      `turso db list` returns `database-ankify` with the canonical integration URL.
-- [ ] Run read-only migration/user/problem counts against `database-ankify` and
+- [ ] Run `turso org switch vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg` and confirm
+      `turso db list` returns `database-ankileet` with the canonical integration URL.
+- [ ] Run read-only migration/user/problem counts against `database-ankileet` and
       compare them with the Drizzle journal and authenticated Production UI.
 - [ ] Confirm Vercel Production uses `TURSO_DATABASE_URL` and
-      `TURSO_AUTH_TOKEN`. Do not use legacy `ANKIFY_NEW_DB_TURSO_*` variables.
+      `TURSO_AUTH_TOKEN`. Do not use legacy `ANKILEET_NEW_DB_TURSO_*` variables.
 - [ ] Confirm Production has its own auth secret, Google OAuth credentials, and
       encryption secret.
 - [ ] Keep `AI_KEY_ENCRYPTION_SECRET` backed up and stable for this database.
@@ -70,7 +70,7 @@ legacy and must not be used for Production migrations. Follow
   ```
 
 - [ ] Use expand/deploy/contract rather than a single breaking migration.
-- [ ] Confirm `ANKIFY_DISABLE_SIGNUP=false` for public registration.
+- [ ] Confirm `ANKILEET_DISABLE_SIGNUP=false` for public registration.
 - [ ] Migration `0012_next_black_tarantula.sql` drops the retired `apikey`
       table. Confirm old manual extension tokens are no longer needed.
 
@@ -78,9 +78,9 @@ legacy and must not be used for Production migrations. Follow
 
 - [ ] In Vercel, use `apps/web` as Root Directory and enable source files from
       outside the root directory.
-- [ ] Confirm all Production variables, `BETTER_AUTH_URL=https://ankify-pi.vercel.app`,
-      and `ANKIFY_DEPLOYMENT_ENV=production`.
-- [ ] Confirm `ANKIFY_EXTENSION_ORIGINS` contains the exact stable extension ID;
+- [ ] Confirm all Production variables, `BETTER_AUTH_URL=https://ankileet.com`,
+      and `ANKILEET_DEPLOYMENT_ENV=production`.
+- [ ] Confirm `ANKILEET_EXTENSION_ORIGINS` contains the exact stable extension ID;
       cookie-session CORS and Better Auth trusted origins depend on it.
 - [ ] Deploy only after CI and `pnpm release:check` pass.
 - [ ] Verify `/login`, `/privacy`, `/terms`, OAuth callback, app redirects,
@@ -88,10 +88,10 @@ legacy and must not be used for Production migrations. Follow
 - [ ] Confirm Vercel runtime logs contain neither provider response bodies nor
       API-key fragments; retain only classified error codes and safe request identifiers.
 - [ ] Confirm the authenticated deployment shows recognizable data from
-      `database-ankify`, not the legacy personal `ankify-prod` database.
+      `database-ankileet`, not the legacy personal `ankileet-prod` database.
 - [ ] Open Study Coach and complete one real Agent turn with a valid provider
       key, including a read-only tool call and streaming response.
-- [ ] Confirm the `ankify-ai-generation` Queue trigger is deployed and one
+- [ ] Confirm the `ankileet-ai-generation` Queue trigger is deployed and one
       queued Card or Quiz job reaches a terminal success state.
 - [ ] In Google Auth Platform, set the audience to External and publish the app.
 - [ ] Use the public root URL as the OAuth homepage, `/privacy` as the privacy
@@ -104,18 +104,18 @@ legacy and must not be used for Production migrations. Follow
 - [ ] Build with the exact HTTPS Production API origin:
 
   ```bash
-  ANKIFY_EXTENSION_API_ORIGIN=https://ankify-pi.vercel.app pnpm --filter @ankify/extension build
+  ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com pnpm --filter @ankileet/extension build
   ```
 
 - [ ] Inspect `apps/extension/dist/manifest.json`: exact LeetCode/API hosts only,
       no localhost, wildcard Vercel, `activeTab`, or `scripting` permissions.
 - [ ] Load the packaged build, test automatic web-session login and capture/review, then refresh
       already-open LeetCode tabs after updating the extension.
-- [ ] Use `https://ankify-pi.vercel.app/privacy` as the Chrome Web Store privacy-policy URL.
+- [ ] Use `https://ankileet.com/privacy` as the Chrome Web Store privacy-policy URL.
 - [ ] Complete the Chrome Web Store privacy disclosures for authentication data,
       website content, user code/submissions, and remote AI processing.
 - [ ] If the Web Store ID differs from the unpacked-build ID, update Production
-      `ANKIFY_EXTENSION_ORIGINS=chrome-extension://<web-store-id>` and redeploy.
+      `ANKILEET_EXTENSION_ORIGINS=chrome-extension://<web-store-id>` and redeploy.
 
 ## 6. Rollout and recovery
 

@@ -6,7 +6,7 @@
  *
  * Ordering: operations of one session are delivered strictly in creation
  * order (observations land before the Finish that depends on their evidence);
- * different sessions do not block each other. Operations belong to one Ankify
+ * different sessions do not block each other. Operations belong to one Ankileet
  * account and API origin and are never replayed under another.
  */
 
@@ -58,7 +58,7 @@ export type DeliveryOutcome =
   /** Delivered except a part that needs the user; keep that part, blocked. */
   | { kind: "blocked"; body: unknown; code: string }
   | { kind: "retry"; retryAfterMs?: number; status: number | null; code?: string }
-  /** The Ankify session expired: pause everything until sign-in. */
+  /** The Ankileet session expired: pause everything until sign-in. */
   | { kind: "auth" }
   | { kind: "rejected"; status: number | null; code: string | null };
 
@@ -230,7 +230,7 @@ export function createOutbox(deps: {
       return (await store.all()).some((operation) => operation.state === "pending");
     },
 
-    /** ankify answered again: make waiting operations due now instead of at
+    /** ankileet answered again: make waiting operations due now instead of at
      *  their backoff time. Blocked parts still wait for the user. */
     async retryNow(scope: OutboxScope) {
       const at = now();

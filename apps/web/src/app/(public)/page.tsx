@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PublicHome } from "./public-home";
 import { getSiteUrl } from "@/lib/site-url";
 
-const title = "ankify · Remember the problems you solve";
+const title = "ankileet · Remember the problems you solve";
 const description =
   "Spaced repetition for LeetCode: capture your problems and failed submissions, then review with FSRS scheduling, AI quizzes built from your own mistakes, and a Study Coach that has read your code.";
 
@@ -16,10 +16,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    siteName: "ankify",
+    siteName: "ankileet",
     title,
     description,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "ankify review workspace with an AI quiz and Study Coach" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "ankileet review workspace with an AI quiz and Study Coach" }],
   },
   twitter: {
     card: "summary_large_image",

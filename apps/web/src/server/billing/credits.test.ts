@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { and, eq } from "drizzle-orm";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { getPaidCreditBalance } from "../ai-credits";
 import { createTestDb } from "../test-db";
 import { findCreditPack } from "./config";
@@ -311,7 +311,7 @@ describe("checkout session creation", () => {
       .mockImplementation((async () => ({ id: `cus_${createCustomer.mock.calls.length}` })) as never);
     const pack = findCreditPack("credits_100")!;
     const user = { id: USER_ID, email: "billing@example.com", name: "Test" };
-    const args = { stripe, user, pack, origin: "https://ankify.test", productName: "ankify AI credits (100)" };
+    const args = { stripe, user, pack, origin: "https://ankileet.test", productName: "ankileet AI credits (100)" };
 
     expect(await createCreditCheckoutSession({ ...args, mode: "test" })).toBe("https://checkout.stripe.test/c");
     await createCreditCheckoutSession({ ...args, mode: "test" });
@@ -324,8 +324,8 @@ describe("checkout session creation", () => {
       client_reference_id: USER_ID,
       metadata: { userId: USER_ID, packId: "credits_100", credits: "100" },
       line_items: [{ quantity: 1, price_data: { currency: "usd", unit_amount: 499 } }],
-      success_url: "https://ankify.test/settings?billing=success&session_id={CHECKOUT_SESSION_ID}#credits",
-      cancel_url: "https://ankify.test/settings?billing=cancelled#credits",
+      success_url: "https://ankileet.test/settings?billing=success&session_id={CHECKOUT_SESSION_ID}#credits",
+      cancel_url: "https://ankileet.test/settings?billing=cancelled#credits",
     });
 
     // Switching to live mode must not reuse the test-mode Customer id.

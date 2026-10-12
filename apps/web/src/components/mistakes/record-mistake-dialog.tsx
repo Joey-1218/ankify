@@ -2,8 +2,8 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import type { MistakeRecordDto } from "@ankify/contracts";
-import type { SkillDimension } from "@ankify/core";
+import type { MistakeRecordDto } from "@ankileet/contracts";
+import type { SkillDimension } from "@ankileet/core";
 import { Button } from "@/components/ui/button";
 import { Field, Textarea } from "@/components/ui/field";
 import { Spinner } from "@/components/ui/spinner";

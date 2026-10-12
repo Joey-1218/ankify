@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { quizSaveCardRequestSchema } from "@ankify/contracts";
+import { quizSaveCardRequestSchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { saveQuizItemAsCard } from "@/server/card-commands";
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { agentTurnRequestSchema, type AgentStreamEvent } from "@ankify/contracts";
+import { agentTurnRequestSchema, type AgentStreamEvent } from "@ankileet/contracts";
 import { getActiveModel } from "@/server/ai";
 import { classifyAgentError, logAgentError } from "@/server/agent/errors";
 import { runStudyCoach } from "@/server/agent/runtime";

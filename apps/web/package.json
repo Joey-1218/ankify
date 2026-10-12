@@ -1,5 +1,5 @@
 {
-  "name": "@ankify/web",
+  "name": "@ankileet/web",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -19,10 +19,10 @@
     "@ai-sdk/google": "4.0.50",
     "@ai-sdk/openai": "^4.0.36",
     "@ai-sdk/openai-compatible": "^3.0.27",
-    "@ankify/api-client": "workspace:*",
-    "@ankify/contracts": "workspace:*",
-    "@ankify/core": "workspace:*",
-    "@ankify/db": "workspace:*",
+    "@ankileet/api-client": "workspace:*",
+    "@ankileet/contracts": "workspace:*",
+    "@ankileet/core": "workspace:*",
+    "@ankileet/db": "workspace:*",
     "@vercel/analytics": "^2.0.1",
     "@vercel/queue": "^0.4.0",
     "@vercel/speed-insights": "^2.0.0",

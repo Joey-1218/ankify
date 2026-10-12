@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { and, eq } from "drizzle-orm";
-import { problemPatchSchema } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import { problemPatchSchema } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { recordDeletedProblem } from "@/server/suggestions/history";
 

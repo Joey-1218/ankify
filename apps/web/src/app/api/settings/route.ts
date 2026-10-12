@@ -11,7 +11,7 @@ import {
   setReviewSettings,
 } from "@/server/settings";
 import { getRequestSessionUser, unauthorizedResponse } from "@/server/auth";
-import { aiProviderEnum, aiReasoningModeEnum } from "@ankify/contracts";
+import { aiProviderEnum, aiReasoningModeEnum } from "@ankileet/contracts";
 import { isValidTimeZone } from "@/server/time-zone";
 
 const settingsSchema = z

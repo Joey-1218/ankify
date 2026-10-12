@@ -14,7 +14,7 @@ export function TimeZoneSync({ userId }: { userId: string }) {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     if (!timeZone) return;
 
-    const syncedKey = `ankify:tz-synced:${userId}`;
+    const syncedKey = `ankileet:tz-synced:${userId}`;
     const remember = () => {
       try {
         localStorage.setItem(syncedKey, timeZone);

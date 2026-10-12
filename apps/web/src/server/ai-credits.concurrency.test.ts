@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, expect, it } from "vitest";
 import { eq } from "drizzle-orm";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { addPaidCredits, getPaidCreditBalance, spendHostedCredit } from "./ai-credits";
 import { StarterCreditsExhaustedError } from "./starter-ai";
 import { createTestDb } from "./test-db";

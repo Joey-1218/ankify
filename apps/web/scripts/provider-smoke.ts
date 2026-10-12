@@ -26,11 +26,11 @@ const PROVIDERS: { provider: Provider; defaultModel: string }[] = [
 // Isolation before any server module loads: a throwaway database, a random
 // encryption secret, no queue (the QA profile's dispatch is a no-op), and no
 // fake-provider redirect.
-process.env.ANKIFY_PROFILE = "qa";
+process.env.ANKILEET_PROFILE = "qa";
 process.env.AI_KEY_ENCRYPTION_SECRET = randomBytes(32).toString("hex");
-process.env.ANKIFY_AUTOMATIC_ANALYSIS = "disabled";
-delete process.env.ANKIFY_QA_AI_BASE_URL;
-delete process.env.ANKIFY_STARTER_AI_API_KEY;
+process.env.ANKILEET_AUTOMATIC_ANALYSIS = "disabled";
+delete process.env.ANKILEET_QA_AI_BASE_URL;
+delete process.env.ANKILEET_STARTER_AI_API_KEY;
 (globalThis as { AI_SDK_LOG_WARNINGS?: boolean }).AI_SDK_LOG_WARNINGS = false;
 
 const keyName = (provider: Provider) => `SMOKE_${provider.toUpperCase()}_API_KEY`;
@@ -57,7 +57,7 @@ async function main() {
   const { createTestDb } = await import("../src/server/test-db");
   const testDb = createTestDb();
   await testDb.migrate();
-  const { getDb, schema } = await import("@ankify/db");
+  const { getDb, schema } = await import("@ankileet/db");
   const { eq } = await import("drizzle-orm");
   const { setAiSettings } = await import("../src/server/settings");
   const { startPracticeSession, ingestSessionObservations, runSessionCommand } = await import("../src/server/practice-sessions/commands");
@@ -161,7 +161,7 @@ async function main() {
       const real = await quietly(() => analyze(`smoke-${provider}`, provider, model, apiKey));
       const result = real.state?.analysis?.result;
       const ok = real.job.status === "succeeded" && result != null;
-      // An empty provider account is outside ankify; reported, not failed.
+      // An empty provider account is outside ankileet; reported, not failed.
       const blocked = real.job.errorCode === "ai_quota_exceeded";
       if (!ok && !blocked) failures += 1;
       rows.push([

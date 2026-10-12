@@ -1,5 +1,5 @@
-import type { LeetcodeAvailability, PracticeProblemInput, SessionObservationInput, SimilarQuestionInput } from "@ankify/contracts";
-import { compareSubmissionIds } from "@ankify/core";
+import type { LeetcodeAvailability, PracticeProblemInput, SessionObservationInput, SimilarQuestionInput } from "@ankileet/contracts";
+import { compareSubmissionIds } from "@ankileet/core";
 
 /**
  * LeetCode adapter for the content script. It calls LeetCode's own GraphQL
@@ -120,7 +120,7 @@ export function createLeetcodeClient(options: LeetcodeClientOptions = {}) {
       similarQuestions: string | null;
     };
     const result = await graphql<{ question: Question | null }>(
-      `query ankifyQuestion($slug: String!) {
+      `query ankileetQuestion($slug: String!) {
          question(titleSlug: $slug) {
            questionFrontendId title titleSlug difficulty content topicTags { name } similarQuestions
          }
@@ -151,7 +151,7 @@ export function createLeetcodeClient(options: LeetcodeClientOptions = {}) {
   async function readAccount(): Promise<Read<{ username: string }>> {
     if (!csrfToken()) return { availability: "signed_out", value: null };
     const result = await graphql<{ userStatus: { isSignedIn: boolean; username: string | null } | null }>(
-      `query ankifyUserStatus { userStatus { isSignedIn username } }`,
+      `query ankileetUserStatus { userStatus { isSignedIn username } }`,
     );
     if (!result.ok) return { availability: result.signedOut ? "signed_out" : "unavailable", value: null };
     const status = result.data.userStatus;
@@ -167,7 +167,7 @@ export function createLeetcodeClient(options: LeetcodeClientOptions = {}) {
    * an explicit answer counts.
    */
   async function confirmSignedOut(): Promise<boolean> {
-    const result = await graphql<{ userStatus: { isSignedIn: boolean } | null }>(`query ankifySignedIn { userStatus { isSignedIn } }`);
+    const result = await graphql<{ userStatus: { isSignedIn: boolean } | null }>(`query ankileetSignedIn { userStatus { isSignedIn } }`);
     if (!result.ok) return result.signedOut;
     return result.data.userStatus?.isSignedIn === false;
   }
@@ -175,7 +175,7 @@ export function createLeetcodeClient(options: LeetcodeClientOptions = {}) {
   async function listPage(slug: string, offset: number, limit: number, lastKey: string | null): Promise<GraphqlResult<SubmissionPage>> {
     if (paginationSupported) {
       const result = await graphql<{ questionSubmissionList: SubmissionPage }>(
-        `query ankifySubmissions($questionSlug: String!, $offset: Int!, $limit: Int!, $lastKey: String) {
+        `query ankileetSubmissions($questionSlug: String!, $offset: Int!, $limit: Int!, $lastKey: String) {
            questionSubmissionList(questionSlug: $questionSlug, offset: $offset, limit: $limit, lastKey: $lastKey) {
              lastKey hasNext submissions { id statusDisplay lang timestamp }
            }
@@ -188,7 +188,7 @@ export function createLeetcodeClient(options: LeetcodeClientOptions = {}) {
       paginationSupported = false;
     }
     const legacy = await graphql<{ questionSubmissionList: SubmissionPage }>(
-      `query ankifySubmissionsLegacy($questionSlug: String!, $offset: Int!, $limit: Int!, $lastKey: String) {
+      `query ankileetSubmissionsLegacy($questionSlug: String!, $offset: Int!, $limit: Int!, $lastKey: String) {
          questionSubmissionList(questionSlug: $questionSlug, offset: $offset, limit: $limit, lastKey: $lastKey) {
            submissions { id statusDisplay lang timestamp }
          }
@@ -263,7 +263,7 @@ export function createLeetcodeClient(options: LeetcodeClientOptions = {}) {
       compileError: string | null;
     };
     const result = await graphql<{ submissionDetails: Details | null }>(
-      `query ankifySubmissionDetails($submissionId: Int!) {
+      `query ankileetSubmissionDetails($submissionId: Int!) {
          submissionDetails(submissionId: $submissionId) {
            code lang { name verboseName } runtimeDisplay memoryDisplay lastTestcase
            expectedOutput codeOutput runtimeError compileError

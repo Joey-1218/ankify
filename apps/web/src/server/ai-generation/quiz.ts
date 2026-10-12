@@ -1,7 +1,7 @@
 import { generateText, Output } from "ai";
 import { and, desc, eq, isNotNull, ne } from "drizzle-orm";
-import { quizDraftSchema, type QuizItem } from "@ankify/contracts";
-import { getDb, schema, type QuizSession } from "@ankify/db";
+import { quizDraftSchema, type QuizItem } from "@ankileet/contracts";
+import { getDb, schema, type QuizSession } from "@ankileet/db";
 import { getActiveModel } from "@/server/ai";
 import { buildQuizPrompt } from "@/server/quiz-prompt";
 import { getGenerationSettings } from "@/server/settings";

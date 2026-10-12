@@ -70,7 +70,7 @@ production-ready.
   - `readBillingConfig()` derives the key mode (`sk_`/`rk_`, `live`/`test`).
   - Live keys are refused unless `NODE_ENV=production` and the deployment is
     not a declared Preview.
-  - Test keys are refused when `ANKIFY_DEPLOYMENT_ENV=production`.
+  - Test keys are refused when `ANKILEET_DEPLOYMENT_ENV=production`.
   - `check-vercel-env.mjs` rejects a test key on Production, a live key on
     Preview, and non-secret key formats.
 - **D3**: `refundHostedCredit()` always runs in `(tx ?? db).transaction()`,
@@ -194,7 +194,7 @@ was not exercised. Migration 0017: PASS on a fresh DB and PASS upgrading from
   5-minute timestamp tolerance. PASS.
 - Redirects: success/cancel URLs are built only from `BETTER_AUTH_URL`. PASS.
 - Logging: billing logs carry only Stripe ids and result codes, and Stripe's
-  own error text masks keys (`sk_test_****`). No card data ever reaches ankify.
+  own error text masks keys (`sk_test_****`). No card data ever reaches ankileet.
   PASS.
 - Mixed environments: fixed (D2, D5).
 - Open / not fixed:
@@ -207,7 +207,7 @@ was not exercised. Migration 0017: PASS on a fresh DB and PASS upgrading from
 - **Retention conflict (decision needed)**: deleting an account cascade-deletes
   `credit_purchases` and `ai_credit_ledger`. The draft terms promise refund
   handling, and a later `charge.refunded` for a deleted account is only logged.
-  Stripe keeps its records, but ankify loses its own audit trail. No retention
+  Stripe keeps its records, but ankileet loses its own audit trail. No retention
   policy was invented.
 
 ## 10. Documentation updates
@@ -243,7 +243,7 @@ was not exercised. Migration 0017: PASS on a fresh DB and PASS upgrading from
   free credits only.
 - Inline `price_data` creates a Stripe product per Session; reporting relies on
   metadata.
-- Paid credits become unusable if `ANKIFY_STARTER_AI_API_KEY` is removed
+- Paid credits become unusable if `ANKILEET_STARTER_AI_API_KEY` is removed
   (documented operational rule).
 
 ## 12. Manual Stripe test procedure
@@ -279,7 +279,7 @@ Preview with a Preview webhook endpoint, before enabling live keys.
 
 Owner decisions applied on 2026-09-28. They replace an interim "refund on
 account closure via support" flow, which has been removed (no support tool, no
-`ANKIFY_SUPPORT_EMAIL`).
+`ANKILEET_SUPPORT_EMAIL`).
 
 - **Costs and prices**: AI card 1 credit, quiz 2, Study Coach turn 5, for free
   and purchased credits alike (`CREDIT_COST`). Free credits are used up first

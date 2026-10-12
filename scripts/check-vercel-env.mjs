@@ -32,14 +32,14 @@ if (vercelEnvironment && !["preview", "production"].includes(vercelEnvironment))
   errors.push("build:vercel only supports Vercel Preview or Production deployments");
 }
 
-const declaredEnvironment = required("ANKIFY_DEPLOYMENT_ENV");
+const declaredEnvironment = required("ANKILEET_DEPLOYMENT_ENV");
 if (
   declaredEnvironment &&
   vercelEnvironment &&
   declaredEnvironment !== vercelEnvironment
 ) {
   errors.push(
-    `ANKIFY_DEPLOYMENT_ENV=${declaredEnvironment} does not match VERCEL_ENV=${vercelEnvironment}`,
+    `ANKILEET_DEPLOYMENT_ENV=${declaredEnvironment} does not match VERCEL_ENV=${vercelEnvironment}`,
   );
 }
 
@@ -67,15 +67,15 @@ if (env.LOCAL_DB_PATH?.trim()) {
   errors.push("LOCAL_DB_PATH must not be set on Vercel");
 }
 
-// Optional starter AI credits: off unless ANKIFY_STARTER_AI_API_KEY is set.
-if (env.ANKIFY_STARTER_AI_API_KEY?.trim()) {
-  const starterProvider = env.ANKIFY_STARTER_AI_PROVIDER?.trim() || "deepseek";
+// Optional starter AI credits: off unless ANKILEET_STARTER_AI_API_KEY is set.
+if (env.ANKILEET_STARTER_AI_API_KEY?.trim()) {
+  const starterProvider = env.ANKILEET_STARTER_AI_PROVIDER?.trim() || "deepseek";
   if (!["anthropic", "openai", "deepseek"].includes(starterProvider)) {
-    errors.push("ANKIFY_STARTER_AI_PROVIDER must be anthropic, openai, or deepseek");
+    errors.push("ANKILEET_STARTER_AI_PROVIDER must be anthropic, openai, or deepseek");
   }
-  const starterCredits = env.ANKIFY_STARTER_AI_CREDITS?.trim();
+  const starterCredits = env.ANKILEET_STARTER_AI_CREDITS?.trim();
   if (starterCredits && !/^\d+$/.test(starterCredits)) {
-    errors.push("ANKIFY_STARTER_AI_CREDITS must be a non-negative integer");
+    errors.push("ANKILEET_STARTER_AI_CREDITS must be a non-negative integer");
   }
 }
 
@@ -86,8 +86,8 @@ const stripeWebhookSecret = env.STRIPE_WEBHOOK_SECRET?.trim();
 if (Boolean(stripeSecretKey) !== Boolean(stripeWebhookSecret)) {
   errors.push("STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET must be set together");
 }
-if (stripeSecretKey && !env.ANKIFY_STARTER_AI_API_KEY?.trim()) {
-  errors.push("Paid AI credits require ANKIFY_STARTER_AI_API_KEY (credits run on that key)");
+if (stripeSecretKey && !env.ANKILEET_STARTER_AI_API_KEY?.trim()) {
+  errors.push("Paid AI credits require ANKILEET_STARTER_AI_API_KEY (credits run on that key)");
 }
 if (stripeSecretKey && !/^(sk|rk)_(live|test)_/.test(stripeSecretKey)) {
   errors.push("STRIPE_SECRET_KEY must be a Stripe secret or restricted key (sk_/rk_ live or test)");
@@ -103,10 +103,10 @@ if (stripeWebhookSecret && !stripeWebhookSecret.startsWith("whsec_")) {
 }
 
 const signupDisabled = /^(1|true|yes)$/i.test(
-  env.ANKIFY_DISABLE_SIGNUP?.trim() ?? "",
+  env.ANKILEET_DISABLE_SIGNUP?.trim() ?? "",
 );
 
-const extensionOrigins = (env.ANKIFY_EXTENSION_ORIGINS ?? "")
+const extensionOrigins = (env.ANKILEET_EXTENSION_ORIGINS ?? "")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
@@ -116,12 +116,12 @@ if (
   )
 ) {
   errors.push(
-    "ANKIFY_EXTENSION_ORIGINS must contain comma-separated chrome-extension://<32-character-id> origins",
+    "ANKILEET_EXTENSION_ORIGINS must contain comma-separated chrome-extension://<32-character-id> origins",
   );
 }
 if (vercelEnvironment === "production" && extensionOrigins.length === 0) {
   errors.push(
-    "ANKIFY_EXTENSION_ORIGINS is required in Production for cookie-session extension authentication",
+    "ANKILEET_EXTENSION_ORIGINS is required in Production for cookie-session extension authentication",
   );
 }
 

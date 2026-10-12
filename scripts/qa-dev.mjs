@@ -36,7 +36,7 @@ function run(commandArgs) {
 await run(["db:migrate:qa"]);
 // --keep-data restarts the servers on the existing QA database without reseeding.
 if (!args.has("--keep-data")) {
-  await run(["--filter", "@ankify/web", args.has("--demo") ? "demo:seed" : "qa:seed"]);
+  await run(["--filter", "@ankileet/web", args.has("--demo") ? "demo:seed" : "qa:seed"]);
 }
 
 if (args.has("--reset-only")) {
@@ -44,11 +44,11 @@ if (args.has("--reset-only")) {
 }
 
 const children = [
-  command(["--filter", "@ankify/web", "dev"]),
-  command(["--filter", "@ankify/web", "qa:worker"]),
+  command(["--filter", "@ankileet/web", "dev"]),
+  command(["--filter", "@ankileet/web", "qa:worker"]),
 ];
 if (args.has("--extension")) {
-  children.push(command(["--filter", "@ankify/extension", "dev"]));
+  children.push(command(["--filter", "@ankileet/extension", "dev"]));
 }
 
 console.log("\nQA ready after the web server starts:");

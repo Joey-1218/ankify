@@ -4,8 +4,8 @@ import {
   aiJobCreateRequestSchema,
   type AiJobCreateRequestInput,
   type PublicAiJobDto,
-} from "@ankify/contracts";
-import { getDb, schema, type AiJob } from "@ankify/db";
+} from "@ankileet/contracts";
+import { getDb, schema, type AiJob } from "@ankileet/db";
 import { MAX_CARDS_PER_PROBLEM } from "@/server/resource-limits";
 import { decryptSecret, encryptSecret, type EncryptedSecret } from "@/server/secret-box";
 import { getAiRuntimeSettings, getGenerationSettings, type AiRuntimeSettings } from "@/server/settings";

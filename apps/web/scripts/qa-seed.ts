@@ -1,6 +1,6 @@
-import type { QuizAnswer, QuizItem } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
-import { loadDbEnv } from "@ankify/db/client";
+import type { QuizAnswer, QuizItem } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
+import { loadDbEnv } from "@ankileet/db/client";
 import { and, eq } from "drizzle-orm";
 import { encryptSecret } from "../src/server/secret-box";
 import { seedSuggestionFixture, SUGGESTION_SIMILAR_SLUGS } from "./suggestion-fixture";
@@ -20,7 +20,7 @@ import {
 loadDbEnv();
 
 if (!isQaProfile()) {
-  throw new Error("qa:seed requires ANKIFY_PROFILE=qa");
+  throw new Error("qa:seed requires ANKILEET_PROFILE=qa");
 }
 
 const now = new Date();
@@ -98,10 +98,10 @@ const twoSumQuizAnswers: QuizAnswer[] = twoSumQuizItems.map((item, index) => ({
 }));
 
 function qaAiSettings() {
-  const provider = process.env.ANKIFY_QA_AI_PROVIDER?.trim();
-  const model = process.env.ANKIFY_QA_AI_MODEL?.trim();
-  const apiKey = process.env.ANKIFY_QA_AI_API_KEY?.trim();
-  const reasoningMode = process.env.ANKIFY_QA_AI_REASONING_MODE?.trim() || "fast";
+  const provider = process.env.ANKILEET_QA_AI_PROVIDER?.trim();
+  const model = process.env.ANKILEET_QA_AI_MODEL?.trim();
+  const apiKey = process.env.ANKILEET_QA_AI_API_KEY?.trim();
+  const reasoningMode = process.env.ANKILEET_QA_AI_REASONING_MODE?.trim() || "fast";
   const configured = provider || model || apiKey;
   if (!configured) return null;
   if (
@@ -111,7 +111,7 @@ function qaAiSettings() {
     (reasoningMode !== "fast" && reasoningMode !== "thinking")
   ) {
     throw new Error(
-      "Set ANKIFY_QA_AI_PROVIDER, ANKIFY_QA_AI_MODEL, ANKIFY_QA_AI_API_KEY, and a valid ANKIFY_QA_AI_REASONING_MODE in .env.qa.local",
+      "Set ANKILEET_QA_AI_PROVIDER, ANKILEET_QA_AI_MODEL, ANKILEET_QA_AI_API_KEY, and a valid ANKILEET_QA_AI_REASONING_MODE in .env.qa.local",
     );
   }
   return {
@@ -140,7 +140,7 @@ async function main() {
 
     await tx.insert(schema.user).values({
       id: QA_USER_ID,
-      name: "Ankify QA",
+      name: "Ankileet QA",
       email: QA_USER_EMAIL,
       emailVerified: true,
       createdAt: ago(60),
@@ -159,7 +159,7 @@ async function main() {
     await tx.delete(schema.user).where(eq(schema.user.id, QA_SECOND_USER_ID));
     await tx.insert(schema.user).values({
       id: QA_SECOND_USER_ID,
-      name: "Ankify QA 2",
+      name: "Ankileet QA 2",
       email: QA_SECOND_USER_EMAIL,
       emailVerified: true,
       createdAt: ago(1),

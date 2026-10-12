@@ -7,12 +7,12 @@ import type { ActivityTotals, TokenRegistry } from "./sessions";
  * only by trusted extension contexts, so owner tokens never reach pages.
  */
 
-const TAB_TOKENS = "ankify.tabTokens";
+const TAB_TOKENS = "ankileet.tabTokens";
 /** Sessions each tab has controlled, released when it closes. */
-const TAB_SESSIONS = "ankify.tabSessions";
+const TAB_SESSIONS = "ankileet.tabSessions";
 const MAX_TAB_SESSIONS = 5;
-const POPUP_TOKEN = "ankify.popupToken";
-const ACTIVITY = "ankify.activity";
+const POPUP_TOKEN = "ankileet.popupToken";
+const ACTIVITY = "ankileet.activity";
 const MAX_ACTIVITY_ENTRIES = 200;
 
 /** Serializes read-modify-write cycles on one storage key. */

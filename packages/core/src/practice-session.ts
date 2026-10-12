@@ -92,7 +92,7 @@ export type SessionKind = { type: PracticeSessionType; reviewIntent: ReviewInten
 export type SessionKindError = "problem_not_found" | "not_enrolled" | "not_due";
 
 /**
- * Which session a start request creates. A problem new to Ankify, or one whose
+ * Which session a start request creates. A problem new to Ankileet, or one whose
  * initial learning never completed, starts initial learning. An enrolled
  * problem is voluntary practice unless the user explicitly chose a review;
  * a due review requires the problem to be due, and an early review of a

@@ -10,25 +10,25 @@ export const dynamic = "force-dynamic";
 
 const COPY = {
   en: {
-    eyebrow: "Welcome to ankify",
+    eyebrow: "Welcome to ankileet",
     title: "Turn solved problems into durable memory.",
-    body: "The extension is ready. Sign in with Google, capture one LeetCode problem, and ankify will guide you through your first scheduled review.",
+    body: "The extension is ready. Sign in with Google, capture one LeetCode problem, and ankileet will guide you through your first scheduled review.",
     signedIn: "Continue setup",
     signIn: "Continue with Google",
     steps: [
-      ["Connect", "The extension securely reuses your ankify web session."],
+      ["Connect", "The extension securely reuses your ankileet web session."],
       ["Capture", "Open a LeetCode problem and bring in the statement plus your submissions."],
       ["Remember", "Use an optional AI quiz or review manually, then let FSRS schedule the next recall."],
     ],
   },
   zh: {
-    eyebrow: "欢迎使用 ankify",
+    eyebrow: "欢迎使用 ankileet",
     title: "把做过的题，变成真正记得住的东西。",
-    body: "扩展已经准备好。使用 Google 登录、捕获一道 LeetCode 题目，ankify 会带你完成第一次定时复习。",
+    body: "扩展已经准备好。使用 Google 登录、捕获一道 LeetCode 题目，ankileet 会带你完成第一次定时复习。",
     signedIn: "继续设置",
     signIn: "使用 Google 继续",
     steps: [
-      ["连接", "扩展会安全复用 ankify 网页登录会话。"],
+      ["连接", "扩展会安全复用 ankileet 网页登录会话。"],
       ["捕获", "打开 LeetCode 题目，同步题面和你的提交记录。"],
       ["记住", "可以用 AI Quiz，也可以手动复习，最后交给 FSRS 安排下次回忆。"],
     ],

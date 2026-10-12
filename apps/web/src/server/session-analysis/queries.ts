@@ -1,6 +1,6 @@
-import type { SessionAnalysisDto, SessionAnalysisStateDto } from "@ankify/contracts";
-import { hasAnalyzableCode } from "@ankify/core";
-import { getDb, schema, type SessionAnalysis } from "@ankify/db";
+import type { SessionAnalysisDto, SessionAnalysisStateDto } from "@ankileet/contracts";
+import { hasAnalyzableCode } from "@ankileet/core";
+import { getDb, schema, type SessionAnalysis } from "@ankileet/db";
 import { and, desc, eq } from "drizzle-orm";
 import { toPublicAiJob } from "../ai-generation/jobs";
 import { isWorkflowEnabled } from "../features";

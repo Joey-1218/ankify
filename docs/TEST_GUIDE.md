@@ -1,4 +1,4 @@
-# ankify test guide (owner review only)
+# ankileet test guide (owner review only)
 
 This file is tracked in git. It explains, in plain language, every feature the
 extension-first refactor built, what it should do, and how to check it by hand.
@@ -14,7 +14,7 @@ what you saw.
 | Panel said "No submission" until **Finish review** | Phase 1a | §1.2 "Submissions appear live" |
 | A popup rating left the panel on its rating screen | Phase 1a | §1.3 "The popup and the panel stay in sync" |
 | "Rate later" let ratings drift; finished reviews kept capturing | Phase 1b | §1.3 (rating rules) |
-| No warning after signing out of LeetCode; "Can't reach ankify" after **Review early** | Phase 1c | §1.6 (first five rows) |
+| No warning after signing out of LeetCode; "Can't reach ankileet" after **Review early** | Phase 1c | §1.6 (first five rows) |
 | DevTools Offline didn't test sync | Phase 1c | §1.7 (which context to cut) |
 | Redundant **Reset editor** | Phase 2 | §1.5 |
 | Confusing **Skill handled well** | Phase 2 | §4.2 |
@@ -60,7 +60,7 @@ Everything runs at `http://localhost:3000`.
 2. In Chrome, open `chrome://extensions` and turn on **Developer mode** (top right).
 3. Click **Load unpacked** and choose `apps/extension/dist-local`.
    - Do **not** choose `apps/extension/dist`. That folder may be a dev-server build that needs `localhost:5173` running, and it fails to load with a manifest or script error.
-4. After rebuilding, click the circular **reload** icon on the ankify card in `chrome://extensions`.
+4. After rebuilding, click the circular **reload** icon on the ankileet card in `chrome://extensions`.
 5. **Reload any LeetCode tab that was already open.** Chrome only injects the extension into pages loaded after it started.
 
 **Expected:** the extension loads with no errors, and its toolbar icon opens the popup.
@@ -72,7 +72,7 @@ Everything runs at `http://localhost:3000`.
 
 **Expected:**
 - If you're signed in on the web, the popup shows your data right away.
-- If not, it shows **Connect ankify** with a **Sign in** button.
+- If not, it shows **Connect ankileet** with a **Sign in** button.
   - After signing in on the web, click **I've signed in** and the popup loads.
 - There is no token to copy or paste.
 
@@ -82,27 +82,27 @@ Everything runs at `http://localhost:3000`.
 
 ### 1.1 The in-page panel
 
-**What it is:** a small ankify panel that sits on every LeetCode problem page
+**What it is:** a small ankileet panel that sits on every LeetCode problem page
 (`leetcode.com/problems/<slug>/`). Collapsed, it is a pill; click the pill to
 expand it.
 
-**How to test:** open a LeetCode problem you have never used with ankify (for
+**How to test:** open a LeetCode problem you have never used with ankileet (for
 example LC 94).
 
 **Expected:**
 - The pill appears near the corner of the page and reads **New problem**.
-- Expanding it shows **Not in your ankify deck yet.** and a **Start practice** button.
+- Expanding it shows **Not in your ankileet deck yet.** and a **Start practice** button.
 - The panel opens by itself when something needs your attention:
   - a due review,
   - a session in progress,
   - a rating waiting.
 - For a problem that needs nothing, it stays collapsed.
 
-If no pill appears, open the popup. The **This problem** section has **Open ankify panel**. If the tab predates the extension, the popup instead says *"ankify isn't running on this tab yet"* and offers **Reload page**.
+If no pill appears, open the popup. The **This problem** section has **Open ankileet panel**. If the tab predates the extension, the popup instead says *"ankileet isn't running on this tab yet"* and offers **Reload page**.
 
 ### 1.2 First practice (initial learning)
 
-**What it is:** the first time you practice a problem, ankify adds it to your
+**What it is:** the first time you practice a problem, ankileet adds it to your
 deck. Its first review is scheduled automatically, with **no rating needed**.
 
 **How to test:**
@@ -119,7 +119,7 @@ deck. Its first review is scheduled automatically, with **no rating needed**.
   - Right after you click LeetCode's **Submit** (or press Ctrl/Cmd+Enter), the panel checks LeetCode every 2 seconds for up to 45 seconds.
   - While LeetCode is still judging, the panel shows *"1 submission is being judged"* with a spinner.
   - Once the verdict is in (usually within a few seconds), the count updates: *"1 submission, 0 accepted"*.
-  - If ankify can't be reached, the submission still counts and the panel adds *"1 submission saved here, waiting to sync"*. That line disappears once it syncs.
+  - If ankileet can't be reached, the submission still counts and the panel adds *"1 submission saved here, waiting to sync"*. That line disappears once it syncs.
   - Without a detected Submit click (for example, if LeetCode changes its button), the regular check still runs every 15 seconds while the tab is visible.
 - **Reproduce the original bug (should no longer happen):** start a review, submit on LeetCode, and keep watching the panel. Before the fix, it said *"No submissions yet"* until **Finish**. Now the count updates within a few seconds.
 - An **Accepted** verdict does **not** end the session; you decide when you're done.
@@ -190,30 +190,30 @@ deck. Its first review is scheduled automatically, with **no rating needed**.
 | Close the tab mid-session, then reopen the problem (right away or later) | *"This session was interrupted."* with **Resume**, in the panel and the popup, within a second or two of closing. **No *Continue here***: that is only for a second tab while the first is still open. Resume continues the same session, with its submissions. (Only after a browser crash, with no time to release, can *Continue here* show for up to a minute.) |
 | Leave a session open for more than a day | It's stale: *"This session is more than a day old. Start a new one."* |
 | Sign out of LeetCode during a session (in this tab or another), then come back to the problem tab | Within a few seconds: *"Sign in to LeetCode so submissions can be tracked."* **This was the reported bug** (the panel stayed unchanged). If it still doesn't appear, run `scripts/leetcode-live-probe.js` while signed out and send the `submissions` part of the report. |
-| Sign back in to LeetCode, return to the problem, and submit | The warning clears and the submission is counted. No *"Can't reach ankify"* appears. |
-| After signing out and back in to LeetCode, click **Review early** on a problem that isn't due | The review starts (*"Review in progress"*). **This was the reported bug**; it should no longer show *"Can't reach ankify"*. If it still does, note the exact message. |
-| Let your ankify session expire (sign out on the web) during a session | Within about 15 seconds the panel shows *"Sign in to ankify to track this problem."* Its **Sign in** opens `/login`. On QA/demo, click **Sign in as the QA user** there. Return to the tab and the session is back. |
-| Reload the extension at `chrome://extensions` while a problem tab is open, then use the panel | *"The ankify extension was updated or reloaded. Reload this page to continue."* with **Reload page**, not a connection error. |
+| Sign back in to LeetCode, return to the problem, and submit | The warning clears and the submission is counted. No *"Can't reach ankileet"* appears. |
+| After signing out and back in to LeetCode, click **Review early** on a problem that isn't due | The review starts (*"Review in progress"*). **This was the reported bug**; it should no longer show *"Can't reach ankileet"*. If it still does, note the exact message. |
+| Let your ankileet session expire (sign out on the web) during a session | Within about 15 seconds the panel shows *"Sign in to ankileet to track this problem."* Its **Sign in** opens `/login`. On QA/demo, click **Sign in as the QA user** there. Return to the tab and the session is back. |
+| Reload the extension at `chrome://extensions` while a problem tab is open, then use the panel | *"The ankileet extension was updated or reloaded. Reload this page to continue."* with **Reload page**, not a connection error. |
 | Start a new review while a finished one still awaits its rating | The panel shows that review's rating first (see 1.3); there is no "Start anyway". |
 
 ### 1.7 Testing offline behavior (read this before using DevTools)
 
-**Which context to cut.** All ankify traffic goes through the extension's **service worker**, not the LeetCode tab. DevTools → Network → **Offline** on a LeetCode tab only blocks LeetCode itself (the panel then warns that LeetCode can't be read); ankify sync keeps working. To simulate ankify being unreachable, do one of these:
+**Which context to cut.** All ankileet traffic goes through the extension's **service worker**, not the LeetCode tab. DevTools → Network → **Offline** on a LeetCode tab only blocks LeetCode itself (the panel then warns that LeetCode can't be read); ankileet sync keeps working. To simulate ankileet being unreachable, do one of these:
 
-- **Recommended:** stop the local server (`Ctrl+C` in the `pnpm dev:qa` terminal), then start it again later. This is exactly "ankify is down".
-- Or cut the worker's network: `chrome://extensions` → ankify → **Inspect views: service worker** → in *that* DevTools window, Network → **Offline**. Untick it to come back.
+- **Recommended:** stop the local server (`Ctrl+C` in the `pnpm dev:qa` terminal), then start it again later. This is exactly "ankileet is down".
+- Or cut the worker's network: `chrome://extensions` → ankileet → **Inspect views: service worker** → in *that* DevTools window, Network → **Offline**. Untick it to come back.
 - Turning the whole computer's Wi-Fi off also works, but it cuts LeetCode too.
 
-**What to check (each with ankify cut as above):**
+**What to check (each with ankileet cut as above):**
 
 | Moment | Expected while cut | Expected when back |
 | --- | --- | --- |
-| Before starting | **Start** shows *"Can't reach ankify. Check your connection."* and nothing starts. | **Start** works; only one session exists. |
-| During a session (submit on LeetCode) | The count still updates, plus *"1 submission saved here, waiting to sync"*. After a heartbeat (≤15 s): *"Can't reach ankify right now. Submissions are saved here and sync when it's back."* | Within a few seconds of the next successful contact (opening the popup, or the panel's next check), the "waiting" lines disappear and the count stays the same. |
-| Finishing | *"Finish saved. It syncs when ankify is reachable."* | The finish lands; for a review, the rating question appears. |
-| Rating | *"Rating saved. It syncs when ankify is reachable."* | The schedule changes **once** (problem page timeline shows one rating). |
+| Before starting | **Start** shows *"Can't reach ankileet. Check your connection."* and nothing starts. | **Start** works; only one session exists. |
+| During a session (submit on LeetCode) | The count still updates, plus *"1 submission saved here, waiting to sync"*. After a heartbeat (≤15 s): *"Can't reach ankileet right now. Submissions are saved here and sync when it's back."* | Within a few seconds of the next successful contact (opening the popup, or the panel's next check), the "waiting" lines disappear and the count stays the same. |
+| Finishing | *"Finish saved. It syncs when ankileet is reachable."* | The finish lands; for a review, the rating question appears. |
+| Rating | *"Rating saved. It syncs when ankileet is reachable."* | The schedule changes **once** (problem page timeline shows one rating). |
 | Close the popup and the tab while something waits | Nothing is lost: it's in the extension's storage. | Opening the popup sends it. The service worker being stopped by Chrome doesn't matter. |
-| Switch ankify accounts while something waits | The waiting work stays with the first account and is never sent as the second. | It syncs when the first account signs in again. |
+| Switch ankileet accounts while something waits | The waiting work stays with the first account and is never sent as the second. | It syncs when the first account signs in again. |
 
 Automated coverage: `tests/e2e/offline.spec.ts`, `sessions.spec.ts` (worker restart), `cutover.spec.ts` (account switch, browser restart, popup closing), and the outbox unit tests (retries, duplicate delivery, backoff).
 
@@ -225,7 +225,7 @@ Automated coverage: `tests/e2e/offline.spec.ts`, `sessions.spec.ts` (worker rest
 
 **Expected sections, top to bottom:**
 1. **This problem**: shown when the current tab is a LeetCode problem.
-   - **Open ankify panel**, or **Reload page** if the panel isn't running yet.
+   - **Open ankileet panel**, or **Reload page** if the panel isn't running yet.
    - A **Notes** box for that problem that saves automatically (*Saving* → *Saved*).
 2. **Rate your reviews**: finished reviews waiting for a rating, each with the four rating buttons.
 3. **Due**: today's due problems, each with "Due today" or "N days overdue" and an **Open** button.
@@ -253,7 +253,7 @@ Changing theme or language takes effect immediately in the popup and the panel.
 
 ## 3. Suggestions: new problems worth trying
 
-**What it is:** ankify picks one problem a day that you have **never attempted**. Candidates come from the "similar questions" of problems you practiced. Once your mistake profile has enough history, picks target your weak categories.
+**What it is:** ankileet picks one problem a day that you have **never attempted**. Candidates come from the "similar questions" of problems you practiced. Once your mistake profile has enough history, picks target your weak categories.
 
 **Where:** the popup's **Try something new** card and the web page `/suggestions`.
 
@@ -265,7 +265,7 @@ Changing theme or language takes effect immediately in the popup and the panel.
 5. Click **Start practice** (popup) or **Open on LeetCode** (web).
 
 **Expected:**
-- Each suggestion explains why it was chosen, using only facts ankify knows. Examples:
+- Each suggestion explains why it was chosen, using only facts ankileet knows. Examples:
   - *"Similar to Two Sum, which you practiced."*
   - *"Similar to X, where you confirmed a mistake (Edge cases)."*
   - *"General practice. A few more sessions will personalize suggestions."*
@@ -361,7 +361,7 @@ Old "handled well" confirmations stay in your data export, but no longer count.
 
 **What it is:** after a finished session, AI reads your attempts, the code diffs between them, and LeetCode's judge output. It then suggests which mistake categories explain the failure.
 
-- It runs **only on your own API key**, never ankify's.
+- It runs **only on your own API key**, never ankileet's.
 - Suggestions count toward your profile only after you confirm them.
 
 ### 5.1 Add your key (Settings → AI provider)
@@ -398,7 +398,7 @@ Providers:
   - *"The evidence doesn't show a clear cause."*
 - Confirmed findings appear in the profile; dismissed ones don't.
 - If more submissions arrive afterwards: *"New submissions arrived after this analysis."* with **Analyze again**.
-- Without your own key: *"Add your own AI key in ankify settings to analyze sessions."* with **Open settings**.
+- Without your own key: *"Add your own AI key in ankileet settings to analyze sessions."* with **Open settings**.
 - A session with no captured code: *"No submitted code was captured for this session."*
 - At most **10 manual analyses per day**.
 - Analyses are written in the **Generation language** from Settings (default English).
@@ -421,7 +421,7 @@ Providers:
    - Rate it. The analysis keeps running and its result appears in the same panel.
 5. A first practice **accepted on the first try** is analyzed too. Only a session with no captured code is skipped (it shows *"No submitted code was captured for this session."*).
 6. Untick the setting → no finished session (practice or review) is analyzed unless you click **Analyze session**.
-7. An operator can switch it off for everyone with `ANKIFY_AUTOMATIC_ANALYSIS=disabled`.
+7. An operator can switch it off for everyone with `ANKILEET_AUTOMATIC_ANALYSIS=disabled`.
 
 **Failure states to check:**
 
@@ -521,11 +521,11 @@ Sections and expected behavior:
 
 ## 7. Time zone follows your device
 
-**What it is:** your time zone decides when "today" starts for due reviews, daily limits, and suggestions. ankify reads it silently from the browser, which needs no permission. Settings no longer shows or offers to change it.
+**What it is:** your time zone decides when "today" starts for due reviews, daily limits, and suggestions. ankileet reads it silently from the browser, which needs no permission. Settings no longer shows or offers to change it.
 
 **How to test:**
 1. On macOS, change the system time zone (System Settings → General → Date & Time).
-2. Reload any ankify web page, or open the extension popup.
+2. Reload any ankileet web page, or open the extension popup.
 
 **Expected:**
 - The account's time zone updates to the new zone automatically, with no prompt.
@@ -547,7 +547,7 @@ Sections and expected behavior:
 **What changed:** the panel, popup, and web app now use LeetCode's colors: dark `#1a1a1a`/`#262626` surfaces, light `#f7f8fa`/white, and LeetCode orange `#ffa116` for primary buttons. Text colors were chosen to stay readable. In light mode, orange *text* is a darker amber, because `#ffa116` on white is hard to read.
 
 **How to test:**
-1. **The panel follows LeetCode's theme, not your OS.** On a LeetCode problem page, switch LeetCode's own theme (avatar menu → Appearance, or the theme toggle). The ankify panel switches with it, without a reload. If it doesn't follow on real LeetCode, tell me what LeetCode's `<html>` element looks like in each theme (DevTools → Elements, the first line).
+1. **The panel follows LeetCode's theme, not your OS.** On a LeetCode problem page, switch LeetCode's own theme (avatar menu → Appearance, or the theme toggle). The ankileet panel switches with it, without a reload. If it doesn't follow on real LeetCode, tell me what LeetCode's `<html>` element looks like in each theme (DevTools → Elements, the first line).
 2. Compare the collapsed pill and the expanded card against LeetCode's own panels: similar surface color, 8 px corners, orange primary button, no heavy shadow.
 3. **Rating buttons:** Again, Hard, Good, and Easy each have a colored left edge plus their name, so they are distinguishable without relying on color.
 4. The expanded panel must not cover LeetCode's **Submit** / **Run** buttons or the result tabs at a normal window size. If it does on your screen, note the window size.
@@ -564,5 +564,5 @@ Sections and expected behavior:
 
 - **Suggestion catalog:** the global catalog hasn't been generated (it needs your signed-in LeetCode session: `scripts/leetcode-catalog.js`). Fresh accounts only get suggestions after practicing problems with similar questions; the QA deck has a fixture (§3).
 - **Live LeetCode:** submission tracking, the Submit-button detection, sign-out handling, and the theme signal are verified only against a local LeetCode fixture. Run `scripts/leetcode-live-probe.js` in a signed-in leetcode.com tab and send the report; then try §1.2, §1.6, and §9 on the real site.
-- **Production automatic analysis:** on by default in this code. Decide before deploying (docs/DEPLOYMENT.md); set `ANKIFY_AUTOMATIC_ANALYSIS=disabled` to hold it.
+- **Production automatic analysis:** on by default in this code. Decide before deploying (docs/DEPLOYMENT.md); set `ANKILEET_AUTOMATIC_ANALYSIS=disabled` to hold it.
 - **No Undo button for a rating:** the server supports undo, but no UI exposes it yet.

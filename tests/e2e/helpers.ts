@@ -19,7 +19,7 @@ export function newProblem(state: LeetcodeFixtureState, name: string) {
  *  something needs attention, so converge on "expanded" instead of toggling. */
 export async function openPanel(page: Page) {
   const slug = new URL(page.url()).pathname.split("/")[2];
-  const pill = page.locator(`[data-ankify-panel][data-slug="${slug}"] [data-key="pill"]`);
+  const pill = page.locator(`[data-ankileet-panel][data-slug="${slug}"] [data-key="pill"]`);
   await expect(async () => {
     if ((await pill.getAttribute("aria-expanded")) !== "true") await pill.click();
     await expect(pill).toHaveAttribute("aria-expanded", "true", { timeout: 1_000 });

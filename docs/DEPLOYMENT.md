@@ -1,6 +1,6 @@
-# Ankify deployment and production data
+# Ankileet deployment and production data
 
-This is the canonical runbook for Ankify Production. Keep the README and
+This is the canonical runbook for Ankileet Production. Keep the README and
 release checklist consistent with this file.
 
 ## Current Production identity
@@ -9,21 +9,21 @@ As of 2026-08-12, Production is:
 
 | Resource | Canonical value |
 | --- | --- |
-| Web/API origin | `https://ankify-pi.vercel.app` |
-| Vercel project | `ankify` (`apps/web` is the Root Directory) |
+| Web/API origin | `https://ankileet.com` |
+| Vercel project | `ankileet` (`apps/web` is the Root Directory) |
 | Database provider | Turso, provisioned through the Vercel Turso integration |
-| Turso organization | `vercel-icfg-mdehlkeeqefnm8sqwfj1zlce` |
-| Turso database | `database-ankify` |
-| Database URL | `libsql://database-ankify-vercel-icfg-mdehlkeeqefnm8sqwfj1zlce.aws-ap-northeast-1.turso.io` |
+| Turso organization | `vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg` |
+| Turso database | `database-ankileet` |
+| Database URL | `libsql://database-ankileet-vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg.aws-us-east-1.turso.io` |
 | Runtime DB variables | `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN` |
 
-The personal Turso database named `ankify-prod` is a legacy database. It is
+The personal Turso database named `ankileet-prod` is a legacy database. It is
 write-blocked and is **not** connected to Vercel Production. Never select a
 database only because the Turso CLI's current organization lists a plausible
 `*-prod` name.
 
-`ANKIFY_NEW_DB_TURSO_DATABASE_URL` and
-`ANKIFY_NEW_DB_TURSO_AUTH_TOKEN` are not read by the application. If these
+`ANKILEET_NEW_DB_TURSO_DATABASE_URL` and
+`ANKILEET_NEW_DB_TURSO_AUTH_TOKEN` are not read by the application. If these
 legacy names still exist in Vercel, do not use them for migrations; the runtime
 source of truth is the `TURSO_*` pair.
 
@@ -36,7 +36,7 @@ source of truth is the `TURSO_*` pair.
   env file.
 - `.env.production.local` is only for an operator running a controlled backup
   or migration. Use the exact integration database URL and a short-lived token
-  created for `database-ankify`; do not copy credentials from the legacy
+  created for `database-ankileet`; do not copy credentials from the legacy
   personal database.
 - `AI_KEY_ENCRYPTION_SECRET` must remain stable for the lifetime of this
   database. Provider API keys are user-owned encrypted settings, not Vercel env
@@ -45,8 +45,8 @@ source of truth is the `TURSO_*` pair.
   owned by Vercel Production and must be live-mode values there (Preview must
   use test mode; `scripts/check-vercel-env.mjs` and the runtime both refuse a
   mismatch). The webhook signing secret belongs to the Dashboard endpoint for
-  `https://ankify-pi.vercel.app/api/billing/webhook`; rotating the endpoint
-  requires updating the secret. Do not remove `ANKIFY_STARTER_AI_API_KEY`
+  `https://ankileet.com/api/billing/webhook`; rotating the endpoint
+  requires updating the secret. Do not remove `ANKILEET_STARTER_AI_API_KEY`
   while users hold purchased credits: their balance runs on that key.
 - Release order for schema changes (including the credit tables): back up and
   migrate first (`pnpm db:release`), then deploy the code that uses them.
@@ -58,16 +58,16 @@ and verify the database name:
 
 ```bash
 turso auth login
-turso org switch vercel-icfg-mdehlkeeqefnm8sqwfj1zlce
+turso org switch vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg
 turso db list
-turso db show database-ankify
+turso db show database-ankileet
 ```
 
-The list must contain `database-ankify` with the URL shown above. Then perform
+The list must contain `database-ankileet` with the URL shown above. Then perform
 read-only checks before creating a write token:
 
 ```bash
-turso db shell database-ankify \
+turso db shell database-ankileet \
   "SELECT COUNT(*) AS migrations FROM __drizzle_migrations; \
    SELECT COUNT(*) AS users FROM user; \
    SELECT COUNT(*) AS problems FROM problems;"
@@ -84,7 +84,7 @@ Create a short-lived token for the verified integration database and put it,
 with the exact database URL, in the gitignored `.env.production.local`:
 
 ```bash
-turso db tokens create database-ankify --expiration 1d
+turso db tokens create database-ankileet --expiration 1d
 pnpm db:release
 ```
 
@@ -101,7 +101,7 @@ Production smoke testing.
 1. Run the release gate:
 
    ```bash
-   ANKIFY_EXTENSION_API_ORIGIN=https://ankify-pi.vercel.app pnpm release:check
+   ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com pnpm release:check
    ```
 
 2. Push the reviewed commit to `main` and wait for the Vercel Production
@@ -117,7 +117,7 @@ Production smoke testing.
    page-context updates, one ToolLoopAgent turn, a read-only tool call,
    streaming completion, and navigation. A valid provider/model/key must be
    saved in the current user's Production Settings before this test.
-6. Verify the `ankify-ai-generation` Queue trigger exists, then run one queued
+6. Verify the `ankileet-ai-generation` Queue trigger exists, then run one queued
    Card or Quiz job through `queued -> running -> succeeded`.
 7. If paid AI credits are enabled, check the Stripe Dashboard webhook endpoint
    shows recent `2xx` deliveries, and that `/settings#credits` lists the packs.
@@ -130,8 +130,8 @@ The Extension API origin is fixed at build time; users cannot redirect a
 published build from Settings.
 
 ```bash
-ANKIFY_EXTENSION_API_ORIGIN=https://ankify-pi.vercel.app \
-  pnpm --filter @ankify/extension build
+ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com \
+  pnpm --filter @ankileet/extension build
 ```
 
 Confirm `apps/extension/dist/manifest.json` contains only the exact LeetCode and
@@ -153,16 +153,16 @@ queued sync and refresh the badge; Chrome shows no install warning for it);
    legacy ratings keep their shapes. The 0.3.0 panel and popup also call the
    session-analysis and suggestion routes, so this web deploy must precede
    the extension; either feature can then be switched off with
-   `ANKIFY_DISABLED_WORKFLOWS`.
+   `ANKILEET_DISABLED_WORKFLOWS`.
 2. Publish 0.3.0 to the Chrome Web Store.
 3. Cutover: once old extensions no longer matter, set
-   `ANKIFY_DISABLED_WORKFLOWS=legacy_review` in Vercel and redeploy. Legacy
+   `ANKILEET_DISABLED_WORKFLOWS=legacy_review` in Vercel and redeploy. Legacy
    `POST /api/review/rate` and `/undo` then answer `426 upgrade_required`, so
    an old client cannot schedule outside practice sessions, and
    `/api/capabilities` lists the deprecation. The web review page uses those
    routes until Phase 6B replaces it; do not retire them before that.
 
-Rollback: remove a workflow from `ANKIFY_DISABLED_WORKFLOWS` and redeploy;
+Rollback: remove a workflow from `ANKILEET_DISABLED_WORKFLOWS` and redeploy;
 `practice_sessions` and `session_rating` can be switched off the same way.
 Installed extensions cannot be downgraded, so a bad extension release is fixed
 forward with a higher version.
@@ -178,9 +178,9 @@ on the user's own saved key, never on the hosted key, and spends no credits.
 | Variable | Where | Purpose |
 | --- | --- | --- |
 | `CRON_SECRET` | Vercel (Production; Preview when testing) | Bearer secret for `GET /api/cron/ai-dispatch`, 32+ random characters. The route answers `404` while it is unset. |
-| `ANKIFY_AUTOMATIC_ANALYSIS` | Vercel | Automatic analysis is **on by default** for users with their own key (each can switch it off in Settings). Set `disabled` to switch it off for everyone. |
-| `ANKIFY_DISABLED_WORKFLOWS` | Vercel | Add `session_analysis` to switch analysis off. |
-| `ANKIFY_QA_AI_BASE_URL` | QA only | Fake-provider URL for browser tests; ignored outside the QA profile. Never set it on Vercel. |
+| `ANKILEET_AUTOMATIC_ANALYSIS` | Vercel | Automatic analysis is **on by default** for users with their own key (each can switch it off in Settings). Set `disabled` to switch it off for everyone. |
+| `ANKILEET_DISABLED_WORKFLOWS` | Vercel | Add `session_analysis` to switch analysis off. |
+| `ANKILEET_QA_AI_BASE_URL` | QA only | Fake-provider URL for browser tests; ignored outside the QA profile. Never set it on Vercel. |
 
 Neither manual nor automatic analysis depends on the cron.
 
@@ -188,7 +188,7 @@ Neither manual nor automatic analysis depends on the cron.
 - **Automatic:** the job is committed with the finished session, set to run about 15 seconds later so late verdicts are included, and published after commit. If that publish fails, the job waits with `dispatched_at` unset.
 - **Recovery:** stranded jobs are re-sent when the same user next opens the popup, loads a problem page, or reads an analysis. The optional cron re-sends them for everyone on a timer.
 
-**Before deploying this code to Production, decide:** automatic analysis becomes active for every user who has saved their own key, with no daily cap. Each finished session with captured code (accepted or not, review or first practice) gets one call, and again only if its evidence changes. To keep it off for now, set `ANKIFY_AUTOMATIC_ANALYSIS=disabled` first.
+**Before deploying this code to Production, decide:** automatic analysis becomes active for every user who has saved their own key, with no daily cap. Each finished session with captured code (accepted or not, review or first practice) gets one call, and again only if its evidence changes. To keep it off for now, set `ANKILEET_AUTOMATIC_ANALYSIS=disabled` first.
 
 To add the timer-based recovery:
 
@@ -202,7 +202,7 @@ To add the timer-based recovery:
    ```
 
 3. Deploy. Then verify that
-   `curl -sS -H "Authorization: Bearer $CRON_SECRET" https://ankify-pi.vercel.app/api/cron/ai-dispatch`
+   `curl -sS -H "Authorization: Bearer $CRON_SECRET" https://ankileet.com/api/cron/ai-dispatch`
    returns `{"stranded":0,"dispatched":0}`, that the same request without the
    header returns `401`, and that the project's Cron Jobs page shows successful
    runs.
@@ -212,8 +212,8 @@ submission and then an Accepted one. Click **Analyze session** in the panel.
 The job should go `queued -> running -> succeeded`, and the findings should
 appear as suggestions to confirm or dismiss.
 
-Rollback: to stop only automatic analysis, set `ANKIFY_AUTOMATIC_ANALYSIS=disabled`.
-To stop all analysis, add `session_analysis` to `ANKIFY_DISABLED_WORKFLOWS`;
+Rollback: to stop only automatic analysis, set `ANKILEET_AUTOMATIC_ANALYSIS=disabled`.
+To stop all analysis, add `session_analysis` to `ANKILEET_DISABLED_WORKFLOWS`;
 new jobs are then refused and queued jobs fail before any provider call. Either
 way, redeploy. Stored analyses, candidates, confirmed mistakes, and the
 deterministic profile stay.
@@ -232,7 +232,7 @@ this code. The cold-start catalog ships empty. To fill it:
 2. Save the output as `apps/web/src/server/suggestions/catalog.json`.
 3. Commit it after `catalog.test.ts` passes.
 
-Rollback: add `suggestions` to `ANKIFY_DISABLED_WORKFLOWS` and redeploy.
+Rollback: add `suggestions` to `ANKILEET_DISABLED_WORKFLOWS` and redeploy.
 Allocation, actions, and history merges then answer `503`. Stored suggestions,
 attempt history, exclusions, and any practice sessions started from
 suggestions stay.
@@ -249,7 +249,7 @@ by default in this code; there is no schema change.
 - The Stripe webhook stays configured: it settles purchases and refunds
   already in flight.
 - To re-enable one deliberately (never as a rollback side effect), set
-  `ANKIFY_ENABLED_LEGACY_WORKFLOWS` (for example `coach`) and redeploy.
+  `ANKILEET_ENABLED_LEGACY_WORKFLOWS` (for example `coach`) and redeploy.
 
 ## Rollback boundaries
 

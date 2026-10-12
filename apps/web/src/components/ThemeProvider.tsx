@@ -19,7 +19,7 @@ const ThemeContext = createContext<{
   theme: "system",
   setTheme: () => {},
 });
-const THEME_EVENT = "ankify:theme-change";
+const THEME_EVENT = "ankileet:theme-change";
 
 function applyThemePreference(preference: ThemePreference) {
   if (preference === "system") {
@@ -30,7 +30,7 @@ function applyThemePreference(preference: ThemePreference) {
 }
 
 function readThemePreference(): ThemePreference {
-  const stored = window.localStorage.getItem("ankify-theme");
+  const stored = window.localStorage.getItem("ankileet-theme");
   return stored === "light" || stored === "dark" ? stored : "system";
 }
 
@@ -56,7 +56,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = useCallback((t: ThemePreference) => {
     applyThemePreference(t);
-    window.localStorage.setItem("ankify-theme", t);
+    window.localStorage.setItem("ankileet-theme", t);
     window.dispatchEvent(new Event(THEME_EVENT));
   }, []);
 

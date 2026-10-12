@@ -49,7 +49,7 @@ export function BrandWordmark({ size = "md", className }: { size?: BrandSize; cl
         className,
       )}
     >
-      ankify<span className="text-accent">.</span>
+      ankileet<span className="text-accent">.</span>
     </span>
   );
 }
@@ -64,7 +64,7 @@ export function BrandLockup({
   className?: string;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-3", className)} aria-label="ankify">
+    <span className={cn("inline-flex items-center gap-3", className)} aria-label="ankileet">
       <BrandMark size={size} />
       <span className="min-w-0 leading-none">
         <BrandWordmark size={size} />
@@ -85,7 +85,7 @@ export function BrandBanner({ className }: { className?: string }) {
         "inline-flex items-center gap-4 rounded-xl border border-border bg-surface px-4 py-3 shadow-card",
         className,
       )}
-      aria-label="ankify spaced repetition"
+      aria-label="ankileet spaced repetition"
     >
       <BrandMark size="lg" />
       <div className="min-w-0">

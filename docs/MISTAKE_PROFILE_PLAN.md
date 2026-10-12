@@ -21,7 +21,7 @@ actionable; "I missed seven Tree questions" is not.
 | Daily practice feed | Engine implemented and tested; app wiring planned ([DAILY_FEED_PLAN.md](DAILY_FEED_PLAN.md)) |
 
 **Non-goals:** AI diagnoses presented as fact; a second scheduler; changing
-FSRS ratings or due dates from mistake data; running user code on ankify
+FSRS ratings or due dates from mistake data; running user code on ankileet
 servers; a knowledge graph; automatically classifying historical submissions.
 
 ## Existing data this builds on
@@ -41,7 +41,7 @@ Verified against `packages/db/src/schema.ts` on the billing branch:
 
 One small, stable set of IDs, shared with quiz item scopes. The canonical list
 is `SKILL_DIMENSIONS` in `packages/core/src/skills.ts`, mirrored by
-`skillDimensionEnum` in `@ankify/contracts` (a test keeps them equal).
+`skillDimensionEnum` in `@ankileet/contracts` (a test keeps them equal).
 
 | ID | Label | Boundary |
 | --- | --- | --- |
@@ -138,7 +138,7 @@ record is the user's own statement.
 
 ## API
 
-All routes call `getRequestUser()`, validate with `@ankify/contracts`, return
+All routes call `getRequestUser()`, validate with `@ankileet/contracts`, return
 `MistakeRecordDto`, and are scoped by `userId`. Every referenced id is checked
 to belong to the same user **and** problem.
 

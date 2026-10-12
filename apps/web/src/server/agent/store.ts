@@ -10,7 +10,7 @@ import type {
   AgentSessionDto,
   AgentSessionSnapshotDto,
   AgentStepDto,
-} from "@ankify/contracts";
+} from "@ankileet/contracts";
 import {
   getDb,
   schema,
@@ -18,7 +18,7 @@ import {
   type AgentRun,
   type AgentSession,
   type AgentStep,
-} from "@ankify/db";
+} from "@ankileet/db";
 import { refundHostedCreditSafely, spendHostedCredit } from "../ai-credits";
 import type { AiRuntimeSettings } from "@/server/settings";
 import { StarterCreditsExhaustedError } from "../starter-ai";

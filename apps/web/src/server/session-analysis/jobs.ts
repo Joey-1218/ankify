@@ -1,6 +1,6 @@
-import type { AiJobCreateRequestInput, AnalysisTrigger } from "@ankify/contracts";
-import { hasAnalyzableCode } from "@ankify/core";
-import { getDb, schema, type AiJob } from "@ankify/db";
+import type { AiJobCreateRequestInput, AnalysisTrigger } from "@ankileet/contracts";
+import { hasAnalyzableCode } from "@ankileet/core";
+import { getDb, schema, type AiJob } from "@ankileet/db";
 import { and, asc, desc, eq, gt, gte, inArray, isNull, lt, or, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { dispatchAiJob } from "../ai-generation/dispatch";

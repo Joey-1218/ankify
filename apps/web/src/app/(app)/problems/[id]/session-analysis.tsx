@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import type { MistakeRecordDto, SessionAnalysisFinding, SessionAnalysisStateDto } from "@ankify/contracts";
+import type { MistakeRecordDto, SessionAnalysisFinding, SessionAnalysisStateDto } from "@ankileet/contracts";
 import { useLanguage } from "@/components/LanguageProvider";
 import { CandidateActions } from "@/components/mistakes/candidate-actions";
 import { Button } from "@/components/ui/button";

@@ -1,9 +1,9 @@
 import type { ExtSettings } from "./messages";
 
-export const SETTINGS_KEY = "ankify.settings";
+export const SETTINGS_KEY = "ankileet.settings";
 
 const DEFAULTS: ExtSettings = {
-  apiBaseUrl: __ANKIFY_DEFAULT_API_ORIGIN__,
+  apiBaseUrl: __ANKILEET_DEFAULT_API_ORIGIN__,
   language: "en",
 };
 

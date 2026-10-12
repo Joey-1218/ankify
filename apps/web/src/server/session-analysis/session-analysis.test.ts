@@ -1,7 +1,7 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { APICallError } from "ai";
 import { MockLanguageModelV4 } from "ai/test";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { buildModel } from "../ai";
 import { dispatchAiJob } from "../ai-generation/dispatch";
@@ -26,9 +26,9 @@ vi.mock("../ai", async (importOriginal) => ({ ...(await importOriginal<typeof im
 process.env.AI_KEY_ENCRYPTION_SECRET = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
 // A hosted key with the same provider and model as the user's own: analysis
 // must never run on it.
-process.env.ANKIFY_STARTER_AI_API_KEY = "sk-hosted";
-process.env.ANKIFY_STARTER_AI_PROVIDER = "openai";
-process.env.ANKIFY_STARTER_AI_MODEL = "gpt-test";
+process.env.ANKILEET_STARTER_AI_API_KEY = "sk-hosted";
+process.env.ANKILEET_STARTER_AI_PROVIDER = "openai";
+process.env.ANKILEET_STARTER_AI_MODEL = "gpt-test";
 
 const testDb = createTestDb();
 const USER = "analysis-owner";
@@ -177,7 +177,7 @@ beforeEach(async () => {
   ]);
   await setAiSettings(USER, { provider: "openai", model: "gpt-test", apiKey: "sk-user" });
   // Automatic analysis is on by default; only its own tests turn it on here.
-  vi.stubEnv("ANKIFY_AUTOMATIC_ANALYSIS", "disabled");
+  vi.stubEnv("ANKILEET_AUTOMATIC_ANALYSIS", "disabled");
   vi.mocked(dispatchAiJob).mockReset().mockResolvedValue(undefined);
   vi.mocked(buildModel).mockReset();
   useModel(FINDINGS);
@@ -335,7 +335,7 @@ describe("manual analysis", () => {
   it("stops queued work without a provider call once the operator switches analysis off", async () => {
     const { sessionId } = await session(["Wrong Answer", "Accepted"]);
     const created = await analyze(sessionId);
-    vi.stubEnv("ANKIFY_DISABLED_WORKFLOWS", "session_analysis");
+    vi.stubEnv("ANKILEET_DISABLED_WORKFLOWS", "session_analysis");
     expect(await requestError(analyze(sessionId))).toEqual({ status: 503, code: "workflow_disabled" });
     await processAiJob(created.id, "worker-1");
     expect(await job(created.id)).toMatchObject({ status: "failed", errorCode: "workflow_disabled" });

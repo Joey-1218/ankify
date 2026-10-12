@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { eq } from "drizzle-orm";
 import { getRequestUser } from "@/server/auth";
 import { ingestSessionObservations, runSessionCommand, startPracticeSession } from "@/server/practice-sessions/commands";
@@ -22,7 +22,7 @@ const TAB = "aaaaaaaa-0000-4000-8000-00000000000a";
 let slug = 0;
 
 function request(path: string, body?: unknown, method = body === undefined ? "GET" : "POST") {
-  return new Request(`https://ankify.test${path}`, {
+  return new Request(`https://ankileet.test${path}`, {
     method,
     headers: { "content-type": "application/json" },
     ...(body === undefined ? {} : { body: typeof body === "string" ? body : JSON.stringify(body) }),

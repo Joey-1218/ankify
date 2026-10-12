@@ -1,5 +1,5 @@
-import type { LeetcodeAvailability, SessionObservationInput } from "@ankify/contracts";
-import { compareSubmissionIds, START_AMBIGUITY_WINDOW_MS } from "@ankify/core";
+import type { LeetcodeAvailability, SessionObservationInput } from "@ankileet/contracts";
+import { compareSubmissionIds, START_AMBIGUITY_WINDOW_MS } from "@ankileet/core";
 import type { LeetcodeClient, ListedSubmission } from "./leetcode-client";
 
 /** Detail fetches per submission before it is reported as unavailable. */

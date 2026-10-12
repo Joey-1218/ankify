@@ -1,5 +1,5 @@
-import type { QuizSessionDto, SubmissionDto } from "@ankify/contracts";
-import { schema, type QuizSession } from "@ankify/db";
+import type { QuizSessionDto, SubmissionDto } from "@ankileet/contracts";
+import { schema, type QuizSession } from "@ankileet/db";
 
 type PublicQuizSessionRow = Pick<
   QuizSession,

@@ -9,7 +9,7 @@ const copy = {
     title: "Privacy policy",
     updated: "Last updated: July 25, 2026",
     intro:
-      "ankify is a spaced-repetition service and Chrome extension for reviewing LeetCode work. This policy explains what data is processed and why.",
+      "ankileet is a spaced-repetition service and Chrome extension for reviewing LeetCode work. This policy explains what data is processed and why.",
     sections: [
       {
         title: "Data we process",
@@ -24,8 +24,8 @@ const copy = {
         title: "Chrome extension behavior",
         body: [
           "The extension runs only on LeetCode problem pages. It reads the current problem and your recent submission details from LeetCode when you capture or sync.",
-          "It may check whether the open problem has a recent accepted submission so it can show a capture reminder. Submission source code is not sent to ankify until you choose capture or sync.",
-          "The extension stores its API origin, preferences, and drafts in Chrome local storage. It reuses the ankify web session cookie through credentialed requests and does not store a separate ankify API token.",
+          "It may check whether the open problem has a recent accepted submission so it can show a capture reminder. Submission source code is not sent to ankileet until you choose capture or sync.",
+          "The extension stores its API origin, preferences, and drafts in Chrome local storage. It reuses the ankileet web session cookie through credentialed requests and does not store a separate ankileet API token.",
         ],
       },
       {
@@ -33,7 +33,7 @@ const copy = {
         body: [
           "Data is used to provide authentication, capture, review scheduling, quizzes, cards, history, data export, and account support.",
           "Hosting and database processing may be provided by Vercel and Turso. Google processes OAuth sign-in. When you use AI features, the selected context is sent to the AI provider whose key you configured (Anthropic, OpenAI, DeepSeek, or a compatible provider) under that provider's terms.",
-          "If you buy AI credits, Stripe processes the payment. ankify receives your purchase amount and status and a Stripe customer id, never your card or Link details. Stripe keeps payment records under its own policy, including after you delete your ankify account.",
+          "If you buy AI credits, Stripe processes the payment. ankileet receives your purchase amount and status and a Stripe customer id, never your card or Link details. Stripe keeps payment records under its own policy, including after you delete your ankileet account.",
           "We do not disclose your study data to unrelated third parties unless required by law or necessary to protect the service.",
         ],
       },
@@ -42,7 +42,7 @@ const copy = {
         body: [
           "Data is retained while your account exists. You can export a streaming NDJSON copy or permanently delete the account and its associated database rows from Settings. If you bought AI credits, records of those purchases (amount, date, pack, Stripe payment ids) and of credit usage are kept after deletion for accounting and payment disputes; they are linked only to your former internal account id, not to your email, name, or study data.",
           "You can sign out of the web session or remove the stored AI key at any time. Provider keys are encrypted at rest with AES-GCM, and access to user-owned records is scoped by user id.",
-          "No internet service can guarantee absolute security. Sign out of ankify if a device or browser profile is compromised.",
+          "No internet service can guarantee absolute security. Sign out of ankileet if a device or browser profile is compromised.",
         ],
       },
     ],
@@ -54,7 +54,7 @@ const copy = {
     title: "隐私政策",
     updated: "最后更新：2026 年 7 月 25 日",
     intro:
-      "ankify 是用于复习 LeetCode 学习内容的间隔重复服务与 Chrome 扩展。本政策说明我们处理哪些数据以及处理目的。",
+      "ankileet 是用于复习 LeetCode 学习内容的间隔重复服务与 Chrome 扩展。本政策说明我们处理哪些数据以及处理目的。",
     sections: [
       {
         title: "我们处理的数据",
@@ -69,8 +69,8 @@ const copy = {
         title: "Chrome 扩展如何工作",
         body: [
           "扩展只在 LeetCode 题目页运行。你选择捕获或同步时，它会读取当前题目及你的近期提交详情。",
-          "扩展可能检查当前题目是否有近期通过记录，以提示你捕获。只有在你选择捕获或同步后，提交源代码才会发送到 ankify。",
-          "扩展会在 Chrome 本地存储 API 地址、偏好和草稿。它通过带凭据请求复用 ankify 网页会话 cookie，不再单独存储 ankify API token。",
+          "扩展可能检查当前题目是否有近期通过记录，以提示你捕获。只有在你选择捕获或同步后，提交源代码才会发送到 ankileet。",
+          "扩展会在 Chrome 本地存储 API 地址、偏好和草稿。它通过带凭据请求复用 ankileet 网页会话 cookie，不再单独存储 ankileet API token。",
         ],
       },
       {
@@ -78,7 +78,7 @@ const copy = {
         body: [
           "数据用于提供登录、捕获、复习调度、测验、卡片、历史、数据导出和账号支持。",
           "Vercel 和 Turso 可能分别处理托管与数据库数据；Google 处理 OAuth 登录。使用 AI 功能时，选定上下文会发送给你配置 key 的 AI 提供商（Anthropic、OpenAI、DeepSeek 或兼容提供商），并受该提供商条款约束。",
-          "购买 AI 额度时，由 Stripe 处理支付。ankify 只接收购买金额、状态和 Stripe 客户 ID，不会获得你的银行卡或 Link 信息。Stripe 会按其自身政策保留支付记录，删除 ankify 账号后亦然。",
+          "购买 AI 额度时，由 Stripe 处理支付。ankileet 只接收购买金额、状态和 Stripe 客户 ID，不会获得你的银行卡或 Link 信息。Stripe 会按其自身政策保留支付记录，删除 ankileet 账号后亦然。",
           "除法律要求或保护服务所必需外，我们不会向无关第三方披露你的学习数据。",
         ],
       },
@@ -87,7 +87,7 @@ const copy = {
         body: [
           "账号存在期间会保留数据。你可以在设置中导出流式 NDJSON 副本，或永久删除账号及其关联数据库记录。如果你购买过 AI 额度，购买记录（金额、日期、套餐、Stripe 付款 ID）和额度使用记录会在删除账号后为记账和付款争议目的保留；这些记录只关联你原来的内部账号 ID，不包含你的邮箱、姓名或学习数据。",
           "你可以随时退出网页登录会话或移除已保存的 AI key。提供商 key 使用 AES-GCM 加密存储，用户数据查询按 user id 隔离。",
-          "任何互联网服务都无法保证绝对安全；设备或浏览器配置泄露时应立即退出 ankify。",
+          "任何互联网服务都无法保证绝对安全；设备或浏览器配置泄露时应立即退出 ankileet。",
         ],
       },
     ],
@@ -120,11 +120,11 @@ export function PrivacyContent() {
           <p className="mt-3 text-sm text-muted">
             {t.contactBody}{" "}
             <a
-              href="https://github.com/Jiminyang1/ankify/issues"
+              href="https://github.com/Joey-1218/ankify/issues"
               className="font-medium text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent"
               rel="noreferrer"
             >
-              github.com/Jiminyang1/ankify/issues
+              github.com/Joey-1218/ankify/issues
             </a>
           </p>
         </section>

@@ -1,5 +1,5 @@
-import type { CardDto } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { CardDto } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { MAX_CARDS_PER_PROBLEM } from "@/server/resource-limits";

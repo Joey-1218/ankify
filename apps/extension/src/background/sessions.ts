@@ -13,7 +13,7 @@ import type {
   ReviewOverviewDto,
   SessionBaselineInput,
   SessionObservationInput,
-} from "@ankify/contracts";
+} from "@ankileet/contracts";
 import type { SessionControl } from "../shared/protocol";
 import type { AccountStateApi } from "./account";
 import type { ApiClient, ApiResult } from "./api";
@@ -104,7 +104,7 @@ export function createSessionController(deps: {
     return flushScope(target);
   }
 
-  /** ankify answered: send what waits now rather than at its backoff time
+  /** ankileet answered: send what waits now rather than at its backoff time
    *  (or Chrome's 30-second minimum alarm). */
   function resumeSync() {
     resuming ??= resume().finally(() => {

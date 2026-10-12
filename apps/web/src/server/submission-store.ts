@@ -1,5 +1,5 @@
-import type { CaptureSubmissionInput } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { CaptureSubmissionInput } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { MAX_SUBMISSIONS_PER_PROBLEM } from "@/server/resource-limits";

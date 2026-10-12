@@ -1,6 +1,6 @@
 import { generateText, Output, tool } from "ai";
 import { z } from "zod";
-import type { AiProvider } from "@ankify/core";
+import type { AiProvider } from "@ankileet/core";
 import { buildModel } from "./ai";
 import { safeErrorForLog } from "./ai-errors";
 import { markAiVerified } from "./onboarding";

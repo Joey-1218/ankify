@@ -5,7 +5,7 @@ import { newProblem, openPanel } from "./helpers";
 import { problemUrl, submit } from "./leetcode-fixture";
 
 /**
- * ankify outages as the extension sees them. All ankify traffic goes through
+ * ankileet outages as the extension sees them. All ankileet traffic goes through
  * the extension's service worker, so the outage is applied to the browser
  * context (which includes the worker), not to the LeetCode tab: DevTools'
  * "Offline" on a LeetCode tab only cuts LeetCode itself.
@@ -13,17 +13,17 @@ import { problemUrl, submit } from "./leetcode-fixture";
 const API = `${API_ORIGIN}/api/**`;
 const outage = (route: Route) => route.abort("internetdisconnected");
 
-test("an outage before starting says ankify is unreachable and creates nothing; the start works once it is back", async ({ context, leetcode, api, panel }) => {
+test("an outage before starting says ankileet is unreachable and creates nothing; the start works once it is back", async ({ context, leetcode, api, panel }) => {
   void panel; // signs the context in
   const slug = newProblem(leetcode, "offline-start");
   const page = await context.newPage();
   await page.goto(problemUrl(slug));
   await openPanel(page);
-  await expect(page.getByText("Not in your ankify deck yet.")).toBeVisible();
+  await expect(page.getByText("Not in your ankileet deck yet.")).toBeVisible();
 
   await context.route(API, outage);
   await page.getByRole("button", { name: "Start practice" }).click();
-  await expect(page.getByRole("alert")).toHaveText("Can't reach ankify. Check your connection.");
+  await expect(page.getByRole("alert")).toHaveText("Can't reach ankileet. Check your connection.");
   await context.unroute(API, outage);
 
   await page.getByRole("button", { name: "Start practice" }).click();
@@ -33,7 +33,7 @@ test("an outage before starting says ankify is unreachable and creates nothing; 
   expect(history.sessions).toHaveLength(1);
 });
 
-test("submissions and a rating made during an outage are saved, shown as waiting, and sync once when ankify is back", async ({ context, leetcode, api, panel }) => {
+test("submissions and a rating made during an outage are saved, shown as waiting, and sync once when ankileet is back", async ({ context, leetcode, api, panel }) => {
   const slug = newProblem(leetcode, "offline-session");
   await api("/api/capture", { body: { leetcodeSlug: slug, leetcodeId: leetcode.problems[slug]!.frontendId, title: leetcode.problems[slug]!.title, difficulty: "Easy", url: problemUrl(slug) } });
   const page = await context.newPage();
@@ -62,7 +62,7 @@ test("submissions and a rating made during an outage are saved, shown as waiting
   // While rating: the rating is kept and applied once when the outage ends.
   await context.route(API, outage);
   await rating.getByRole("button", { name: /Again/ }).click();
-  await expect(page.getByText("Rating saved. It syncs when ankify is reachable.")).toBeVisible();
+  await expect(page.getByText("Rating saved. It syncs when ankileet is reachable.")).toBeVisible();
   await context.unroute(API, outage);
   await expect.poll(async () => {
     await panel.reload();

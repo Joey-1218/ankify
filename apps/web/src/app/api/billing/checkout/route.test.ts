@@ -1,5 +1,5 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { getRequestSessionUser } from "@/server/auth";
 import { createCreditCheckoutSession } from "@/server/billing/credits";
 import { getBilling } from "@/server/billing/stripe";
@@ -22,7 +22,7 @@ const billing = { config: { secretKey: "sk_test_x", webhookSecret: "whsec_x", mo
 
 function post(body: unknown) {
   return POST(
-    new Request("https://ankify.test/api/billing/checkout", {
+    new Request("https://ankileet.test/api/billing/checkout", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: typeof body === "string" ? body : JSON.stringify(body),
@@ -42,7 +42,7 @@ beforeEach(async () => {
   vi.mocked(createCreditCheckoutSession).mockReset().mockResolvedValue("https://checkout.stripe.test/c");
   // Credit sales are suspended by default (Phase 6B); these tests cover the
   // still-present checkout, re-enabled as an operator would.
-  vi.stubEnv("ANKIFY_ENABLED_LEGACY_WORKFLOWS", "credit_checkout");
+  vi.stubEnv("ANKILEET_ENABLED_LEGACY_WORKFLOWS", "credit_checkout");
 });
 afterEach(() => vi.unstubAllEnvs());
 

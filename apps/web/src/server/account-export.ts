@@ -1,5 +1,5 @@
 import { and, asc, eq, getTableColumns, gt } from "drizzle-orm";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 
 const PAGE_SIZE = 100;
 
@@ -55,7 +55,7 @@ export async function* iterateAccountExport(
   yield {
     type: "export",
     data: {
-      format: "ankify-ndjson",
+      format: "ankileet-ndjson",
       version: 1,
       exportedAt: new Date().toISOString(),
     },

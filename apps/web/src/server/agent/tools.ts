@@ -1,8 +1,8 @@
 import { and, asc, desc, eq, isNull, like } from "drizzle-orm";
 import { tool } from "ai";
 import { z } from "zod";
-import type { AgentNavigation, AgentProposal, AgentStepDto } from "@ankify/contracts";
-import { getDb, schema } from "@ankify/db";
+import type { AgentNavigation, AgentProposal, AgentStepDto } from "@ankileet/contracts";
+import { getDb, schema } from "@ankileet/db";
 import { getCurrentQuizSession } from "@/server/ai-generation/quiz";
 import { dueProblemCondition } from "@/server/due-problems";
 import { getReviewQueueStatus } from "@/server/review-queue";

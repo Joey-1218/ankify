@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { AiProvider, AiReasoningMode } from "@ankify/core";
+import type { AiProvider, AiReasoningMode } from "@ankileet/core";
 import { getTranslations, type Language } from "@/lib/i18n";
 import { useLanguage } from "@/components/LanguageProvider";
 import { useTheme } from "@/components/ThemeProvider";
@@ -403,7 +403,7 @@ export function AiSettingsForm({
         </div>
         <Input
           id="ai-api-key"
-          name="ankify-ai-provider-key"
+          name="ankileet-ai-provider-key"
           type="text"
           value={apiKey}
           onChange={(e) => setApiKey(e.target.value)}

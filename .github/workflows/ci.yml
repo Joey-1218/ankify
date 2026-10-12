@@ -13,8 +13,8 @@ jobs:
       BETTER_AUTH_URL: http://localhost:3000
       GOOGLE_CLIENT_ID: ci-google-client
       GOOGLE_CLIENT_SECRET: ci-google-secret
-      ANKIFY_EXTENSION_API_ORIGIN: https://ankify.example.com
-      ANKIFY_EXTENSION_ORIGINS: chrome-extension://abcdefghijklmnopabcdefghijklmnop
+      ANKILEET_EXTENSION_API_ORIGIN: https://ankileet.example.com
+      ANKILEET_EXTENSION_ORIGINS: chrome-extension://abcdefghijklmnopabcdefghijklmnop
       AI_KEY_ENCRYPTION_SECRET: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
       LOCAL_DB_PATH: packages/db/ci.db
 

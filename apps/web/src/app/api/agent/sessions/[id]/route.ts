@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { agentSessionPatchSchema } from "@ankify/contracts";
+import { agentSessionPatchSchema } from "@ankileet/contracts";
 import {
   AgentRequestError,
   deleteAgentSession,

@@ -9,7 +9,7 @@ import {
   type OutboxOperation,
 } from "./outbox";
 
-const scope = { accountId: "user-1", apiOrigin: "https://ankify.test" };
+const scope = { accountId: "user-1", apiOrigin: "https://ankileet.test" };
 let clock = 1_000_000;
 const now = () => clock;
 
@@ -74,7 +74,7 @@ describe("outbox", () => {
     expect([...applied]).toEqual(["finish"]);
   });
 
-  it("pauses everything on an expired Ankify session and keeps the operations", async () => {
+  it("pauses everything on an expired Ankileet session and keeps the operations", async () => {
     clock = 1_000_000;
     const { outbox, store, deliver } = setup(() => ({ kind: "auth" }));
     await outbox.enqueue(op("a", "s1"));
@@ -136,7 +136,7 @@ describe("outbox", () => {
     const { outbox, deliver } = setup(() => ({ kind: "delivered" }));
     await outbox.enqueue(op("mine"));
     await outbox.enqueue(op("theirs", "s9", { accountId: "user-2" }));
-    await outbox.enqueue({ ...op("other-origin"), apiOrigin: "https://staging.ankify.test" });
+    await outbox.enqueue({ ...op("other-origin"), apiOrigin: "https://staging.ankileet.test" });
     await outbox.flush(scope);
     expect(deliver.mock.calls.map(([operation]) => operation.id)).toEqual(["mine"]);
     expect(await outbox.status(scope)).toMatchObject({ pending: 0, otherAccounts: 2 });

@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
-import { sessionAnalysisOutputSchema, type PracticeSessionTypeId, type SessionAnalysisCoverage } from "@ankify/contracts";
+import { sessionAnalysisOutputSchema, type PracticeSessionTypeId, type SessionAnalysisCoverage } from "@ankileet/contracts";
 import { z } from "zod";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq, inArray } from "drizzle-orm";
 import { canonicalJson } from "../practice-sessions/digest";
 import type { DbTransaction } from "../practice-sessions/store";

@@ -1,4 +1,4 @@
-import type { AiProvider } from "@ankify/core";
+import type { AiProvider } from "@ankileet/core";
 import { safeErrorForLog } from "@/server/ai-errors";
 import { decryptSecret } from "@/server/secret-box";
 import { getAiSettings } from "@/server/settings";

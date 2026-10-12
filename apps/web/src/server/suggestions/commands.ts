@@ -6,8 +6,8 @@ import type {
   SuggestionAllocateResponseDto,
   SuggestionDto,
   SuggestionListDto,
-} from "@ankify/contracts";
-import { getDb, schema, type Suggestion } from "@ankify/db";
+} from "@ankileet/contracts";
+import { getDb, schema, type Suggestion } from "@ankileet/db";
 import { and, asc, eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { afterSessionStart, startSessionInTransaction, type StartResult } from "../practice-sessions/commands";
@@ -123,7 +123,7 @@ const ACTION_STATUS = { skip: "skipped", already_attempted: "already_attempted",
  * request id). Skip and Already Attempted store today's replacement in the
  * same transaction; Already Attempted also excludes the problem for good.
  * Start runs the practice-session start in the same transaction: a problem
- * new to Ankify starts initial learning, like any other first practice.
+ * new to Ankileet starts initial learning, like any other first practice.
  */
 export async function actOnSuggestion(
   userId: string,

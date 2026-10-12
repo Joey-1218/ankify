@@ -74,7 +74,7 @@ export function HighlightedCode({
       } catch (error) {
         if (!hasLoggedHighlightError) {
           hasLoggedHighlightError = true;
-          console.error("[ankify] syntax highlighting failed", error);
+          console.error("[ankileet] syntax highlighting failed", error);
         }
         if (!cancelled) setHighlight({ key: cacheKey, html: null });
       }

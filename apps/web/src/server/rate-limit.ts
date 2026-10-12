@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { sql } from "drizzle-orm";
 
 /**

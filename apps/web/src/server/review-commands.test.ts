@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { getDb, schema } from "@ankify/db";
+import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { rateProblemReview, undoLatestProblemReview } from "./review-commands";
 import { loadReviewQueueData } from "./review-queue-data";

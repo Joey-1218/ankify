@@ -8,7 +8,7 @@ import {
   sessionBaselineSchema,
   sessionObservationSchema,
   skillDimensionEnum,
-} from "@ankify/contracts";
+} from "@ankileet/contracts";
 import { z } from "zod";
 
 /**

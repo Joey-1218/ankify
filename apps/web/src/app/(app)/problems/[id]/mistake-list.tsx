@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import type { MistakeListPayloadDto, MistakeRecordDto } from "@ankify/contracts";
+import type { MistakeListPayloadDto, MistakeRecordDto } from "@ankileet/contracts";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { EmptyState } from "@/components/ui/empty-state";

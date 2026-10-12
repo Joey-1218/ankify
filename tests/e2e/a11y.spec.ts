@@ -49,11 +49,11 @@ for (const theme of ["light", "dark"] as const) {
     await page.goto(problemUrl(slug));
     await page.evaluate((value) => document.documentElement.classList.add(value), theme);
     await openPanel(page);
-    await audit(page, `panel, due (${theme})`, "[data-ankify-panel]");
+    await audit(page, `panel, due (${theme})`, "[data-ankileet-panel]");
     await page.getByRole("button", { name: "Start review" }).click();
     await page.getByRole("button", { name: "End as unsuccessful" }).click();
     await expect(page.getByRole("group", { name: "How did the review go?" })).toBeVisible();
-    await audit(page, `panel, rating (${theme})`, "[data-ankify-panel]");
+    await audit(page, `panel, rating (${theme})`, "[data-ankileet-panel]");
     // Leave no rating pending: it would hold up the next review.
     await page.getByRole("button", { name: "Skip rating" }).click();
     await expect(page.getByRole("group", { name: "How did the review go?" })).toHaveCount(0);
@@ -87,7 +87,7 @@ test("keyboard focus is always visible", async ({ context, leetcode, panel }) =>
   const page = await context.newPage();
   await page.goto(problemUrl(slug));
   await openPanel(page);
-  await page.locator('[data-ankify-panel] [data-key="start"]').focus();
+  await page.locator('[data-ankileet-panel] [data-key="start"]').focus();
   await page.keyboard.press("Tab");
   const focused = await outline(page);
   expect(["BUTTON", "A"]).toContain(focused.tag);

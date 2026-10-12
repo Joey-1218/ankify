@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import { practiceSessionCurrentQuerySchema } from "@ankify/contracts";
+import { practiceSessionCurrentQuerySchema } from "@ankileet/contracts";
 import { getRequestUser, unauthorizedResponse } from "@/server/auth";
 import { isWorkflowEnabled, workflowDisabledResponse } from "@/server/features";
 import { requestOwnerToken } from "@/server/practice-sessions/http";
 import { getCurrentPracticeSession } from "@/server/practice-sessions/queries";
 
-/** GET /api/practice-sessions/current?slug=|problemId= — the problem's Ankify
+/** GET /api/practice-sessions/current?slug=|problemId= — the problem's Ankileet
  *  status, open session, and any completed review awaiting a rating. */
 export async function GET(req: Request) {
   const user = await getRequestUser(req);

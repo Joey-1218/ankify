@@ -66,7 +66,7 @@ describe("session lifecycle", () => {
 
 describe("session kind", () => {
   const enrolled = (due: boolean) => ({ enrollment: "enrolled" as const, due });
-  it("starts initial learning for problems new to Ankify or never initialized", () => {
+  it("starts initial learning for problems new to Ankileet or never initialized", () => {
     expect(sessionKindFor("practice", null)).toEqual({ type: "initial_learning", reviewIntent: "none" });
     expect(sessionKindFor("practice", { enrollment: "awaiting_initial", due: false })).toEqual({ type: "initial_learning", reviewIntent: "none" });
     expect(sessionKindFor("due_review", null)).toEqual({ error: "problem_not_found" });
