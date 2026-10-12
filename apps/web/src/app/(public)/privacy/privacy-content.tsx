@@ -7,42 +7,50 @@ import { Surface } from "@/components/ui/surface";
 const copy = {
   en: {
     title: "Privacy policy",
-    updated: "Last updated: July 25, 2026",
+    updated: "Last updated: October 12, 2026",
     intro:
-      "ankileet is a spaced-repetition service and Chrome extension for reviewing LeetCode work. This policy explains what data is processed and why.",
+      "ankileet helps you review LeetCode problems with spaced repetition: a Chrome extension records your practice sessions on LeetCode, and the web app at ankileet.com schedules your reviews. ankileet is an independent project run by its developer and is not affiliated with LeetCode. This policy explains what data is processed, why, and what you can do about it.",
     sections: [
       {
         title: "Data we process",
         body: [
-          "Google account identity used for authentication: user id, name, email address, profile image, sessions, and account linkage.",
-          "Study data you choose to capture or create: LeetCode problem metadata and statements, submission code and results, notes, cards, quizzes, answers, review events, and scheduling state.",
-          "Configuration data: review settings and encrypted AI-provider key envelopes. Raw AI keys are encrypted before storage.",
-          "Basic operational and page-usage telemetry provided by the hosting platform. We do not sell personal data or use it for advertising.",
+          "Your Google account identity, used only to sign you in: your name, email address, profile image, Google account id, and sign-in sessions.",
+          "Practice data: the LeetCode problems you practice (title, difficulty, statement, topics, and similar questions), your practice sessions (start and finish times, active time, ratings), the submissions you make during a session (code, language, verdict, runtime and memory, and the failing test case and judge output), and the LeetCode username they were made from, so one session never mixes two LeetCode accounts.",
+          "What you create or confirm: notes, review schedule and history, and mistake records you confirm.",
+          "Settings: language, time zone, review preferences, and, if you add one, your AI provider, model, and API key. Your API key is encrypted before it is stored.",
+          "Usage data: the hosting platform keeps request logs (such as IP address, time, and path) for operation and security, and Vercel Web Analytics and Speed Insights record page views and performance without advertising identifiers. We do not sell personal data or use it for advertising.",
         ],
       },
       {
-        title: "Chrome extension behavior",
+        title: "Chrome extension",
         body: [
-          "The extension runs only on LeetCode problem pages. It reads the current problem and your recent submission details from LeetCode when you capture or sync.",
-          "It may check whether the open problem has a recent accepted submission so it can show a capture reminder. Submission source code is not sent to ankileet until you choose capture or sync.",
-          "The extension stores its API origin, preferences, and drafts in Chrome local storage. It reuses the ankileet web session cookie through credentialed requests and does not store a separate ankileet API token.",
+          "The extension runs only on leetcode.com problem pages, and it talks only to leetcode.com and ankileet.com.",
+          "When you open a problem page, it sends that problem's identifier to your ankileet account so it can show whether the problem is tracked or due for review.",
+          "Only during a practice session that you start does it read your submissions for that problem from LeetCode (through your existing LeetCode login in the browser) and send them to ankileet. It does not read your browsing history or other pages.",
+          "It reuses your ankileet web sign-in and stores no password or separate API token. Chrome local storage keeps your preferences and the signed-in account, the extension's own IndexedDB keeps practice work waiting to sync, and short-lived tab tokens stay in session storage. Removing the extension deletes this local data.",
         ],
       },
       {
-        title: "How data is used and shared",
+        title: "AI session analysis",
         body: [
-          "Data is used to provide authentication, capture, review scheduling, quizzes, cards, history, data export, and account support.",
-          "Hosting and database processing may be provided by Vercel and Turso. Google processes OAuth sign-in. When you use AI features, the selected context is sent to the AI provider whose key you configured (Anthropic, OpenAI, DeepSeek, or a compatible provider) under that provider's terms.",
-          "If you buy AI credits, Stripe processes the payment. ankileet receives your purchase amount and status and a Stripe customer id, never your card or Link details. Stripe keeps payment records under its own policy, including after you delete your ankileet account.",
-          "We do not disclose your study data to unrelated third parties unless required by law or necessary to protect the service.",
+          "Session analysis is optional and runs only with an API key you provide; ankileet never uses its own key or credits for it.",
+          "When a session is analyzed, the problem details and the session's evidence (submission verdicts, code revisions or diffs, and judge output, limited in size) are sent to the provider you selected: Anthropic, OpenAI, DeepSeek, or Google Gemini. That provider processes the request under its own terms and privacy policy, and usage is billed to your provider account.",
+          "Analysis results are suggestions. A suggested mistake counts toward your mistake profile only after you confirm it.",
+        ],
+      },
+      {
+        title: "Who else processes data",
+        body: [
+          "Service providers that run ankileet: Vercel (hosting, background jobs, and analytics), Turso (database), Google (sign-in), and, only for analysis you enable, the AI provider whose key you saved.",
+          "We do not sell, rent, or share your data for advertising, and we do not disclose it to anyone else unless required by law or necessary to protect the service and its users.",
         ],
       },
       {
         title: "Retention, security, and your choices",
         body: [
-          "Data is retained while your account exists. You can export a streaming NDJSON copy or permanently delete the account and its associated database rows from Settings. If you bought AI credits, records of those purchases (amount, date, pack, Stripe payment ids) and of credit usage are kept after deletion for accounting and payment disputes; they are linked only to your former internal account id, not to your email, name, or study data.",
-          "You can sign out of the web session or remove the stored AI key at any time. Provider keys are encrypted at rest with AES-GCM, and access to user-owned records is scoped by user id.",
-          "No internet service can guarantee absolute security. Sign out of ankileet if a device or browser profile is compromised.",
+          "Your data is kept while your account exists. From Settings you can export a full copy (NDJSON) or permanently delete your account and its data. Database backups made for recovery may still contain deleted data until they are replaced.",
+          "Data is sent over HTTPS, every database query is scoped to the signed-in user, and saved AI keys are encrypted at rest with AES-256-GCM.",
+          "You can remove your saved AI key, sign out, or uninstall the extension at any time. No internet service can guarantee absolute security; sign out of ankileet if a device or browser profile is compromised.",
         ],
       },
     ],
@@ -52,42 +60,50 @@ const copy = {
   },
   zh: {
     title: "隐私政策",
-    updated: "最后更新：2026 年 7 月 25 日",
+    updated: "最后更新：2026 年 10 月 12 日",
     intro:
-      "ankileet 是用于复习 LeetCode 学习内容的间隔重复服务与 Chrome 扩展。本政策说明我们处理哪些数据以及处理目的。",
+      "ankileet 用间隔重复帮助你复习 LeetCode 题目：Chrome 扩展记录你在 LeetCode 上的练习，ankileet.com 网页安排复习。ankileet 是由开发者独立运营的项目，与 LeetCode 无关。本政策说明我们处理哪些数据、为什么处理，以及你可以如何管理。",
     sections: [
       {
         title: "我们处理的数据",
         body: [
-          "用于登录的 Google 账号信息：用户 id、姓名、邮箱、头像、会话和账号关联信息。",
-          "你主动捕获或创建的学习数据：LeetCode 题目信息与题面、提交代码与结果、笔记、卡片、测验、答案、复习事件和调度状态。",
-          "配置数据：复习设置和加密后的 AI 提供商密钥信封。AI key 会先加密再存储。",
-          "托管平台提供的基础运行与页面使用遥测。我们不会出售个人数据，也不会将其用于广告。",
+          "Google 账号身份，仅用于登录：姓名、邮箱、头像、Google 账号 id 和登录会话。",
+          "练习数据：你练习的 LeetCode 题目（标题、难度、题面、标签和相似题目）、练习记录（开始与结束时间、有效时长、评分），练习期间的提交（代码、语言、判题结果、运行时间与内存、失败用例和判题输出），以及提交所用的 LeetCode 用户名，以免一次练习混入两个 LeetCode 账号。",
+          "你创建或确认的内容：笔记、复习计划与历史，以及你确认的错误记录。",
+          "设置：界面语言、时区、复习偏好；如果你添加了 AI 配置，还包括提供商、模型和 API 密钥。API 密钥会先加密再存储。",
+          "使用数据：托管平台为运行和安全保留请求日志（例如 IP 地址、时间和路径）；Vercel Web Analytics 与 Speed Insights 记录页面访问和性能，不使用广告标识。我们不会出售个人数据，也不会将其用于广告。",
         ],
       },
       {
-        title: "Chrome 扩展如何工作",
+        title: "Chrome 扩展",
         body: [
-          "扩展只在 LeetCode 题目页运行。你选择捕获或同步时，它会读取当前题目及你的近期提交详情。",
-          "扩展可能检查当前题目是否有近期通过记录，以提示你捕获。只有在你选择捕获或同步后，提交源代码才会发送到 ankileet。",
-          "扩展会在 Chrome 本地存储 API 地址、偏好和草稿。它通过带凭据请求复用 ankileet 网页会话 cookie，不再单独存储 ankileet API token。",
+          "扩展只在 leetcode.com 的题目页运行，只与 leetcode.com 和 ankileet.com 通信。",
+          "打开题目页时，它会把该题的标识发送到你的 ankileet 账号，以显示这道题是否已在跟踪或到期复习。",
+          "只有在你开始练习后，它才会通过浏览器中已有的 LeetCode 登录读取你在该题的提交，并发送到 ankileet。它不会读取你的浏览历史或其他网页。",
+          "扩展复用你在 ankileet 网页的登录，不保存密码或单独的 API 令牌。Chrome 本地存储保存偏好设置和已登录账号，扩展自己的 IndexedDB 保存等待同步的练习数据，短期的标签页令牌只保存在会话存储中。卸载扩展会删除这些本地数据。",
         ],
       },
       {
-        title: "数据用途与共享",
+        title: "AI 练习分析",
         body: [
-          "数据用于提供登录、捕获、复习调度、测验、卡片、历史、数据导出和账号支持。",
-          "Vercel 和 Turso 可能分别处理托管与数据库数据；Google 处理 OAuth 登录。使用 AI 功能时，选定上下文会发送给你配置 key 的 AI 提供商（Anthropic、OpenAI、DeepSeek 或兼容提供商），并受该提供商条款约束。",
-          "购买 AI 额度时，由 Stripe 处理支付。ankileet 只接收购买金额、状态和 Stripe 客户 ID，不会获得你的银行卡或 Link 信息。Stripe 会按其自身政策保留支付记录，删除 ankileet 账号后亦然。",
-          "除法律要求或保护服务所必需外，我们不会向无关第三方披露你的学习数据。",
+          "练习分析是可选功能，只使用你提供的 API 密钥；ankileet 不会为此使用自己的密钥或额度。",
+          "分析一次练习时，题目信息和该练习的证据（判题结果序列、代码版本或差异、判题输出，有长度上限）会发送给你选择的提供商：Anthropic、OpenAI、DeepSeek 或 Google Gemini。该提供商按其自身条款和隐私政策处理请求，费用计入你的提供商账户。",
+          "分析结果只是建议。建议的错误只有在你确认后才会计入错误画像。",
         ],
       },
       {
-        title: "保留、安全与选择",
+        title: "其他处理数据的服务",
         body: [
-          "账号存在期间会保留数据。你可以在设置中导出流式 NDJSON 副本，或永久删除账号及其关联数据库记录。如果你购买过 AI 额度，购买记录（金额、日期、套餐、Stripe 付款 ID）和额度使用记录会在删除账号后为记账和付款争议目的保留；这些记录只关联你原来的内部账号 ID，不包含你的邮箱、姓名或学习数据。",
-          "你可以随时退出网页登录会话或移除已保存的 AI key。提供商 key 使用 AES-GCM 加密存储，用户数据查询按 user id 隔离。",
-          "任何互联网服务都无法保证绝对安全；设备或浏览器配置泄露时应立即退出 ankileet。",
+          "运行 ankileet 所需的服务提供商：Vercel（托管、后台任务和访问统计）、Turso（数据库）、Google（登录），以及仅在你启用分析时、你保存其密钥的 AI 提供商。",
+          "我们不会出售、出租或为广告共享你的数据；除法律要求或为保护服务及用户所必需外，也不会向其他任何人披露。",
+        ],
+      },
+      {
+        title: "保留、安全与你的选择",
+        body: [
+          "账号存在期间会保留你的数据。你可以在设置中导出完整副本（NDJSON），或永久删除账号及其数据。为恢复而制作的数据库备份在被替换前可能仍包含已删除的数据。",
+          "数据通过 HTTPS 传输，每次数据库查询都限定在当前登录用户范围内，保存的 AI 密钥使用 AES-256-GCM 加密存储。",
+          "你可以随时移除已保存的 AI 密钥、退出登录或卸载扩展。任何互联网服务都无法保证绝对安全；设备或浏览器配置泄露时，请立即退出 ankileet。",
         ],
       },
     ],
