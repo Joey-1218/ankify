@@ -1,12 +1,11 @@
 /**
  * Where "Get the extension" points.
  *
- * Production has a stable Web Store ID. The environment override remains useful
- * for trusted-test or future listing migrations, but users should never fall
- * back to local-development instructions.
+ * Until the Chrome Web Store listing is published, the fallback is the
+ * README's build-from-source instructions. Once it is live, set
+ * `NEXT_PUBLIC_EXTENSION_INSTALL_URL` to the listing in Vercel and redeploy.
  */
-const FALLBACK_INSTALL_URL =
-  "https://chromewebstore.google.com/detail/ankify/gcldkcaidjnkaagngppblefddapdpaeb";
+const FALLBACK_INSTALL_URL = "https://github.com/Joey-1218/ankify#install-the-extension";
 
 export function getExtensionInstallUrl() {
   const configured = process.env.NEXT_PUBLIC_EXTENSION_INSTALL_URL?.trim();

@@ -6,6 +6,7 @@ describe("suggestion catalog", () => {
   it("parses the committed catalog, and suggests nothing from one that was never generated", () => {
     expect(() => parseCatalog(committed)).not.toThrow();
     if (committed.generatedAt === null) expect(catalogCandidates()).toEqual([]);
+    else expect(catalogCandidates().length).toBe(committed.entries.length);
     expect(parseCatalog({ generatedAt: null, rule: null, entries: [{ slug: "two-sum", title: "Two Sum", difficulty: "Easy", topicTags: [] }] })).toEqual([]);
   });
 

@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import type { SuggestionDto } from "@ankileet/contracts";
 import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
@@ -11,6 +11,13 @@ import { setReviewSettings } from "../settings";
 import { createTestDb } from "../test-db";
 import { actOnSuggestion, allocateSuggestion, listSuggestions, MAX_SUGGESTIONS_PER_DAY } from "./commands";
 import { mergeAttemptHistory } from "./history";
+
+// These tests cover similar-question candidates; the committed cold-start
+// catalog (tested in catalog.test.ts) would add unrelated candidates.
+vi.mock("./catalog", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("./catalog")>()),
+  catalogCandidates: () => [],
+}));
 
 const testDb = createTestDb();
 const USER = "suggest-user";

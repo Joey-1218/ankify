@@ -1,9 +1,16 @@
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { getDb, schema } from "@ankileet/db";
 import { ELIGIBLE_SUGGESTION_SLUGS, seedSuggestionFixture, SUGGESTION_SIMILAR_SLUGS } from "../../../scripts/suggestion-fixture";
 import { loadMistakeProfile } from "../mistake-profile";
 import { createTestDb } from "../test-db";
 import { actOnSuggestion, allocateSuggestion } from "./commands";
+
+// These tests cover similar-question candidates; the committed cold-start
+// catalog (tested in catalog.test.ts) would add unrelated candidates.
+vi.mock("./catalog", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("./catalog")>()),
+  catalogCandidates: () => [],
+}));
 
 // The QA deck's suggestion fixture (scripts/suggestion-fixture.ts) must keep
 // making the personalized lane, every exclusion, and exhaustion testable.

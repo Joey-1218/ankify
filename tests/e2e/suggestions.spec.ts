@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import type { SuggestionListDto } from "../../packages/contracts/src";
 import { API_ORIGIN, test, expect } from "./fixtures";
 import { focus, openPanel } from "./helpers";
@@ -62,14 +63,19 @@ test("suggests new problems from the seeded history; skip, another, already atte
   await page.close();
 });
 
-test("an account with no practice history sees a clear empty state", async ({ context, extensionId }) => {
+test("an account with no practice history gets a general-practice pick from the catalog", async ({ context, extensionId }) => {
+  const catalogTitles = (
+    JSON.parse(readFileSync("apps/web/src/server/suggestions/catalog.json", "utf8")) as { entries: { title: string }[] }
+  ).entries.map((entry) => entry.title);
   const web = await context.newPage();
   await web.goto(`${API_ORIGIN}/api/qa/login?account=second`);
   await web.waitForURL(`${API_ORIGIN}/today`);
   const popup = await context.newPage();
   await popup.goto(`chrome-extension://${extensionId}/src/popup/index.html`);
   const section = popup.getByRole("region", { name: "Try something new" });
-  await expect(section.getByText("No new problem to suggest yet. Problems you practice bring similar ones.")).toBeVisible({ timeout: 15_000 });
-  await expect(section.getByRole("group")).toHaveCount(0);
+  const cards = section.getByRole("group");
+  await expect(cards).toHaveCount(1, { timeout: 15_000 });
+  expect(catalogTitles).toContain(await cards.first().getAttribute("aria-label"));
+  await expect(section.getByText("No new problem to suggest yet. Problems you practice bring similar ones.")).toHaveCount(0);
   await web.goto(`${API_ORIGIN}/api/qa/login`);
 });
