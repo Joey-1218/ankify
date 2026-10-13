@@ -9,7 +9,7 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
 [DEVELOPMENT.md](DEVELOPMENT.md) (run and test it),
 [DEPLOYMENT.md](DEPLOYMENT.md) (ship it).
 
-## State (2026-10-12)
+## State (2026-10-13)
 
 - **Live:** `https://ankileet.com` on Vercel (`iad1`) with Turso
   (`aws-us-east-1`), all 26 migrations applied. Google sign-in, practice
@@ -27,7 +27,11 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
   never-attempted problems. Study Coach, AI cards and quizzes, and paid
   credits are suspended in code.
 - **Suggestion catalog:** generated 2026-10-12 (177 problems), so new
-  accounts get suggestions before they have practice history.
+  accounts get a general-practice pick before they have practice history.
+  Too small for the long run; see backlog item 6.
+- **Database:** every deployment uses the one main database,
+  `database-ankileet`. The per-deployment copies from 2026-10-12 were merged
+  into it and deleted (Known issues).
 
 ## History
 
@@ -49,6 +53,13 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
   is `refs/backup/pre-ankileet-rename`.
 - **Launch** (`2ab6249`, `6922425`): patched dependencies, Production docs,
   privacy policy and terms for a free BYOK service.
+- **Post-launch fixes** (2026-10-12/13): ankileet's own extension development
+  key (`2126471`); a build guard against per-deployment database copies
+  (`cec61d9`); Settings drops the "Using your own key ... free credits" notice
+  and both language menus share one set of labels, English / Simplified
+  Chinese, 英语 / 简体中文 in the Chinese UI (`2338d08`); popup screenshot
+  baselines for the ankileet name and the catalog's new-account pick
+  (`38d39ce`).
 
 Planning documents that drove this work (the refactor plan and its
 checkpoint log, the next-phase plan, the mistake-profile and daily-feed
@@ -188,9 +199,11 @@ zip, and upload a new package (DEPLOYMENT.md, "Extension release").
   the copies' data was merged into `database-ankileet` (one user per email,
   duplicate problems folded into the earliest; dumps in the gitignored
   `backups/`), and `check-vercel-env.mjs` now fails a Production build that
-  points at a `dpl-` copy. Once the merge is verified, delete the stranded
-  `dpl-*` databases (`turso db list`). See DEPLOYMENT.md, "One database for
-  every deployment".
+  points at a `dpl-` copy. The merge was verified and the `dpl-*` databases
+  were deleted on 2026-10-13. See DEPLOYMENT.md, "One database for every
+  deployment". The owner's account may still show one stale active Two Sum
+  voluntary session (started 2026-10-12 21:55 UTC) from the merge; finishing
+  or abandoning it is harmless.
 - `@ai-sdk/google` is pinned to `4.0.50`: newer releases target a newer
   provider spec than `ai@7.0.58` and fail typecheck. Upgrade all `ai` and
   `@ai-sdk/*` packages together.

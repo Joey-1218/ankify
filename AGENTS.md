@@ -2,6 +2,10 @@
 
 This file provides guidance to coding agents (Codex and others) working in this repository. `CLAUDE.md` carries the same guidance for Claude Code; keep the two in sync.
 
+**Before starting any work, read [docs/HANDOFF.md](docs/HANDOFF.md)**: the
+current state of Production, open items, known issues, and next steps. Update
+it when you change any of them.
+
 ## Commands
 
 ```bash
