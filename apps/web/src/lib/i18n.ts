@@ -277,8 +277,8 @@ export const translations = {
       interfaceLanguageHelp: "Changes the web interface in this browser after you save. It does not control AI-generated study content.",
       generationLanguage: "Generation language",
       generationLanguageHelp: "The language session analyses are written in. Existing analyses stay as they are.",
-      generationLanguageEnglish: "English",
-      generationLanguageChinese: "Simplified Chinese",
+      languageEnglish: "English",
+      languageChinese: "Simplified Chinese",
       saveLanguageRegion: "Save language",
       aiProvider: "AI provider",
       extensionConnection: "Extension connection",
@@ -334,7 +334,6 @@ export const translations = {
         remaining > 0
           ? `Remove the stored API key? AI features will switch to your free credits (${remaining} left).`
           : "Remove the stored API key? Your free credits are used up, so AI features will stop working until you add a new key.",
-      activeOwnKey: (provider: string, model: string) => `Using your own key: ${provider} · ${model}. Free credits aren't used.`,
       useOwnKey: "Use my own key",
       setAiFirst: "Set provider, model, and an API key first",
       testConnection: "Test connection",
@@ -1020,8 +1019,8 @@ export const translations = {
       interfaceLanguageHelp: "保存后更改当前浏览器里的 Web 界面，不控制 AI 生成的学习内容。",
       generationLanguage: "生成内容语言",
       generationLanguageHelp: "练习分析使用的语言。已有的分析保持不变。",
-      generationLanguageEnglish: "英语",
-      generationLanguageChinese: "简体中文",
+      languageEnglish: "英语",
+      languageChinese: "简体中文",
       saveLanguageRegion: "保存语言",
       aiProvider: "AI 提供商",
       extensionConnection: "扩展连接",
@@ -1076,7 +1075,6 @@ export const translations = {
         remaining > 0
           ? `移除已保存的 API key？移除后 AI 功能会改用免费额度（剩余 ${remaining} 点）。`
           : "移除已保存的 API key？免费额度已用完，在添加新的 key 前，AI 功能将无法使用。",
-      activeOwnKey: (provider: string, model: string) => `正在使用你自己的 key：${provider} · ${model}，不消耗免费额度。`,
       useOwnKey: "改用自己的 key",
       setAiFirst: "请先设置提供商、模型和 API key",
       testConnection: "测试连接",

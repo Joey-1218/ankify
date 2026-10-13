@@ -50,12 +50,6 @@ const MODEL_PRESETS: Record<AiProvider, string[]> = {
 };
 
 type ModelEntry = { id: string; label?: string };
-const PROVIDER_LABELS: Partial<Record<AiProvider, string>> = {
-  anthropic: "Anthropic",
-  openai: "OpenAI",
-  deepseek: "DeepSeek",
-  google: "Google Gemini",
-};
 const SETTINGS_ACTION_CLASS = "min-w-28";
 
 export function AiSettingsForm({
@@ -256,10 +250,6 @@ export function AiSettingsForm({
       {starter.remaining === 0 && (starter.paidBalance ?? 0) > 0
         ? t.settings.paidActive(starter.paidBalance ?? 0)
         : t.settings.starterActive(starter.remaining, starter.limit)}
-    </p>
-  ) : hasStoredApiKey && storedKeyProvider && initial.model ? (
-    <p className="rounded-lg border border-success/25 bg-success/10 px-3 py-2 text-sm leading-6 text-fg">
-      {t.settings.activeOwnKey(PROVIDER_LABELS[storedKeyProvider] ?? storedKeyProvider, initial.model)}
     </p>
   ) : null;
 
@@ -548,8 +538,8 @@ export function LanguageRegionSettingsForm({
             value={interfaceLanguage}
             onValueChange={(value) => setInterfaceLanguage(value as Language)}
           >
-            <option value="en">English</option>
-            <option value="zh">简体中文</option>
+            <option value="en">{t.settings.languageEnglish}</option>
+            <option value="zh">{t.settings.languageChinese}</option>
           </Select>
         </div>
 
@@ -565,8 +555,8 @@ export function LanguageRegionSettingsForm({
             value={generationLanguage}
             onValueChange={(value) => setGenerationLanguage(value as Language)}
           >
-            <option value="en">{t.settings.generationLanguageEnglish}</option>
-            <option value="zh">{t.settings.generationLanguageChinese}</option>
+            <option value="en">{t.settings.languageEnglish}</option>
+            <option value="zh">{t.settings.languageChinese}</option>
           </Select>
         </div>
       </div>
