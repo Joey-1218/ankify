@@ -57,7 +57,8 @@ test.describe("popup", () => {
       await empty.emulateMedia({ colorScheme: theme });
       await empty.setViewportSize({ width: 360, height: 600 });
       await empty.goto(`chrome-extension://${extensionId}/src/popup/index.html`);
-      await expect(empty.getByText("No new problem to suggest yet. Problems you practice bring similar ones.")).toBeVisible();
+      // A new account gets a general-practice pick from the catalog.
+      await expect(empty.getByRole("region", { name: "Try something new" }).getByRole("group")).toHaveCount(1, { timeout: 15_000 });
       await expect(empty).toHaveScreenshot(`popup-empty-${theme}.png`);
       await web.goto(`${API_ORIGIN}/api/qa/login`);
     });

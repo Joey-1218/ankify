@@ -172,8 +172,11 @@ zip, and upload a new package (DEPLOYMENT.md, "Extension release").
    records whose evidence pointed at quizzes.
 5. Retire `legacy_review` routes in code (no client has called them since
    0.3.0).
-6. Keep `catalog.json` fresh by rerunning `scripts/leetcode-catalog.js` now and
-   then.
+6. **Next phase: suggest from all of LeetCode.** The 177-problem
+   `catalog.json` is too small: the same few problems keep coming up, and a
+   "similar to a problem you practiced" pick often loses to a general one.
+   The owner plans to draw suggestions from the full LeetCode problem set.
+   Until then, rerun `scripts/leetcode-catalog.js` now and then.
 
 ## Known issues and risks
 
