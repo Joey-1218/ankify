@@ -28,7 +28,7 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
   credits are suspended in code.
 - **Suggestion catalog:** generated 2026-10-12 (177 problems), so new
   accounts get a general-practice pick before they have practice history.
-  Too small for the long run; see backlog item 6.
+  Too small for the long run; see "Planned for 0.3.1".
 - **Database:** every deployment uses the one main database,
   `database-ankileet`. The per-deployment copies from 2026-10-12 were merged
   into it and deleted (Known issues).
@@ -148,6 +148,24 @@ Later extension updates: bump `version` in
 `apps/extension/manifest.config.ts`, ship the web side first, then build,
 zip, and upload a new package (DEPLOYMENT.md, "Extension release").
 
+### Planned for 0.3.1
+
+The owner wants both of these in the next release (extension 0.3.1 and the
+web side that ships with it):
+
+1. **Suggest from all of LeetCode.** The 177-problem `catalog.json` is too
+   small: the same few problems keep coming up in the daily suggestions, and
+   a "similar to a problem you practiced" pick often loses to a general one.
+   Draw suggestions from the full LeetCode problem set instead. Until then,
+   rerun `scripts/leetcode-catalog.js` now and then.
+2. **ankileet's own icon.** `apps/extension/public/icons` (16, 32, 48, 128 px)
+   are still Ankify's, unchanged since before the fork, so the store listing
+   shows the same picture as Jimin's Ankify listing. Replace them with an
+   ankileet icon, and update the store listing's icon and screenshots with
+   the 0.3.1 upload. The web's `apps/web/public/icon-32.png` and
+   `apple-touch-icon.png` are the same old picture; replace them together
+   (`ankileet-mark.svg`, added at the rename, can be the starting point).
+
 **Owner decisions and console work:**
 
 - Google Auth Platform: verify `ankileet.com` in Search Console, finish
@@ -183,11 +201,6 @@ zip, and upload a new package (DEPLOYMENT.md, "Extension release").
    records whose evidence pointed at quizzes.
 5. Retire `legacy_review` routes in code (no client has called them since
    0.3.0).
-6. **Next phase: suggest from all of LeetCode.** The 177-problem
-   `catalog.json` is too small: the same few problems keep coming up, and a
-   "similar to a problem you practiced" pick often loses to a general one.
-   The owner plans to draw suggestions from the full LeetCode problem set.
-   Until then, rerun `scripts/leetcode-catalog.js` now and then.
 
 ## Known issues and risks
 
