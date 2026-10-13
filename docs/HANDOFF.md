@@ -61,13 +61,81 @@ designs, the paid-credits audit, the manual test guide) were retired on
 
 ## Next steps
 
-**When the store approves the extension** (DEPLOYMENT.md, "After the first
-approval"):
+### When the Chrome Web Store approves the extension
 
-1. Add the store ID to `ANKILEET_EXTENSION_ORIGINS` and set
-   `NEXT_PUBLIC_EXTENSION_INSTALL_URL`; redeploy.
-2. Point the README's "Install the extension" section at the listing.
-3. Install from the store and run one session.
+The store build gets its own 32-letter extension ID, different from the
+unpacked ID (`gcldkcaidjnkaagngppblefddapdpaeb`). The server only accepts
+requests from extension IDs listed in `ANKILEET_EXTENSION_ORIGINS`, so until
+step 2 is done **the store version can't sign in or sync**. Do steps 1–4 the
+same day the approval email arrives.
+
+1. **Find the store ID.** In the Chrome Web Store developer dashboard, open
+   the item: the ID is shown under its name (also the last part of the public
+   listing URL, `https://chromewebstore.google.com/detail/<name>/<ID>`). It is
+   32 letters `a`–`p`. Below, `<ID>` means that value; never type the angle
+   brackets.
+2. **Tell Production about it.** Replace the origins variable, keeping the
+   unpacked ID so your own and testers' unpacked copies keep working, then
+   add the install link (run from the repo root):
+
+   ```bash
+   vercel env rm ANKILEET_EXTENSION_ORIGINS production --yes
+   printf '%s' "chrome-extension://gcldkcaidjnkaagngppblefddapdpaeb,chrome-extension://<ID>" \
+     | vercel env add ANKILEET_EXTENSION_ORIGINS production
+   printf '%s' "https://chromewebstore.google.com/detail/<ID>" \
+     | vercel env add NEXT_PUBLIC_EXTENSION_INSTALL_URL production
+   ```
+
+   Rules the build checks: each origin is exactly `chrome-extension://` plus
+   the ID, comma-separated, no spaces, no trailing slash. In the dashboard
+   instead: Project → Settings → Environment Variables, edit or add the two
+   names for **Production** only.
+3. **Redeploy** so the new values take effect (see "Redeploying" in
+   DEPLOYMENT.md). `NEXT_PUBLIC_*` values are baked in at build time, so this
+   must be a fresh build, not just a restart:
+
+   ```bash
+   vercel ls ankileet --prod                         # copy the newest Ready URL
+   vercel redeploy <that url> --target production
+   vercel ls ankileet --prod                         # wait for the new row: Ready
+   ```
+
+   If the build fails with `ANKILEET_EXTENSION_ORIGINS must contain ...`, the
+   value has a typo or a leftover `<ID>`: fix it in step 2 and redeploy.
+4. **Check it end to end:**
+   - `https://ankileet.com`: "Get the extension" now opens your store listing
+     (`curl -s https://ankileet.com/ | grep -o 'chromewebstore[^"]*'` shows
+     `<ID>`).
+   - In Chrome, remove or turn off the unpacked ankileet (both would add a
+     panel on LeetCode), install from the store, sign in on ankileet.com,
+     click the extension icon: the popup shows your data with no sign-in
+     error.
+   - Open a LeetCode problem, Start practice, submit once, Finish. The session
+     appears on `/today`.
+   - If the popup keeps asking to sign in or says it can't reach ankileet,
+     step 2 or 3 didn't take: check the variable value, then redeploy again.
+5. **Update the README** (`README.md`, "Install the extension"): replace the
+   build-from-source paragraph with a store link, keeping the build steps as
+   an alternative, e.g.
+
+   ```markdown
+   Install **[ankileet from the Chrome Web Store](https://chromewebstore.google.com/detail/<ID>)**.
+
+   To build it yourself instead (Node 22 and pnpm 10): ...the existing steps...
+   ```
+
+   Also point the top-of-page "Install the extension" link at the store URL.
+   Commit and push to `main` (this deploys again, which is fine).
+6. **Tell testers** who used the unpacked zip to remove it and install from
+   the store. Their data is on the server, so nothing is lost.
+7. **Clean up docs:** in DEPLOYMENT.md's Production identity and variables
+   tables, record the store ID and the new `NEXT_PUBLIC_EXTENSION_INSTALL_URL`;
+   in this file, change the State section to "published" and delete this
+   checklist.
+
+Later extension updates: bump `version` in
+`apps/extension/manifest.config.ts`, ship the web side first, then build,
+zip, and upload a new package (DEPLOYMENT.md, "Extension release").
 
 **Owner decisions and console work:**
 
@@ -77,9 +145,18 @@ approval"):
   `ANKILEET_AUTOMATIC_ANALYSIS` to turn it on for users with their own key
   (each can still turn it off in Settings).
 - A daily dispatch-recovery cron is optional on Hobby (DEPLOYMENT.md).
-- A social preview image (`og.png`), a support email for the store and OAuth
-  branding, and optionally renaming the GitHub repo (then update the issue
-  link in `privacy-content.tsx` and the README clone URL).
+- **Social preview image.** `apps/web/public/og.png` (1200×630) is the
+  picture shown when an ankileet.com link is shared in Slack, Discord, X,
+  iMessage, and similar apps (Open Graph / Twitter card metadata in
+  `apps/web/src/app/(public)/page.tsx`). It still shows the old Ankify UI with
+  quizzes and Study Coach. To replace it: run `pnpm dev:demo`, sign in at
+  `http://localhost:3000/api/qa/login`, open `/today` or `/analysis` in a
+  1200×630 window (or crop to it), save the screenshot over `og.png`, update
+  the `alt` text in `page.tsx` to describe it, and ship. Check it with a
+  link-preview tool such as opengraph.xyz; apps cache previews for a while.
+- A support email for the store listing and OAuth branding, and optionally
+  renaming the GitHub repo (then update the issue link in
+  `privacy-content.tsx` and the README clone URL).
 
 **Engineering backlog, roughly in priority order:**
 

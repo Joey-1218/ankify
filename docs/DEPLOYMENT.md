@@ -52,11 +52,29 @@ Not set (legacy, suspended): `ANKILEET_STARTER_AI_*`, `STRIPE_*`,
 `ANKILEET_ENABLED_LEGACY_WORKFLOWS`. See "Legacy workflows" below before
 setting any of them.
 
-Changing a variable does nothing to the running deployment: redeploy after
-saving (`vercel redeploy <current production url> --target production`, or
-Deployments → ⋯ → Redeploy). Set values with `printf '%s' "$VALUE" | vercel env
-add NAME production` so no trailing newline sneaks in, and never paste guide
-placeholders such as `<STORE_ID>` literally.
+Set values with `printf '%s' "$VALUE" | vercel env add NAME production` so no
+trailing newline sneaks in, and never paste guide placeholders such as
+`<STORE_ID>` literally.
+
+### Redeploying
+
+A deployment is a frozen build: it keeps the variables it was built with.
+Saving a variable changes only *future* deployments, so after any variable
+change you **redeploy**: build the same code again with the current
+variables and make that the live site. No code change or push is needed.
+
+- **CLI:** `vercel ls ankileet --prod` lists Production deployments; copy the
+  newest `Ready` URL, then `vercel redeploy <that url> --target production`.
+  Run `vercel ls ankileet --prod` again until the new row is `Ready` (about a
+  minute). ankileet.com switches to it automatically.
+- **Dashboard:** Vercel → ankileet → Deployments → the top Production
+  deployment → ⋯ → Redeploy → confirm.
+- **Any push to `main`** also builds a new deployment with the current
+  variables, so a variable change followed by a code push needs no separate
+  redeploy.
+
+If the redeploy fails, the previous deployment stays live; read its Build
+Logs (table below), fix the variable, and redeploy again.
 
 ## Shipping a change
 
