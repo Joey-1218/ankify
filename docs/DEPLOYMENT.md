@@ -19,7 +19,7 @@ As of 2026-10-12:
 | Database URL | `libsql://database-ankileet-vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg.aws-us-east-1.turso.io` |
 | AI queue | Vercel Queue topic `ankileet-ai-generation` (trigger declared in `apps/web/vercel.json`) |
 | Google OAuth | One Web client. Redirect URIs `https://ankileet.com/api/auth/callback/google` and `http://localhost:3000/api/auth/callback/google` |
-| Extension | Unpacked/dev ID `gcldkcaidjnkaagngppblefddapdpaeb` (fixed by the dev `key` in `apps/extension/manifest.config.ts`). The Chrome Web Store listing gets its own ID |
+| Extension | Unpacked/dev ID `dboijhnmohmpceamddfchbjicdgcgnlg` (fixed by the dev `key` in `apps/extension/manifest.config.ts`). The Chrome Web Store listing gets its own ID |
 
 ankileet began as a fork of Ankify and is deployed independently of it.
 Never run a migration, backup, or deploy against Ankify's resources
@@ -204,7 +204,7 @@ another server.
 
 | Build | Command | Use |
 | --- | --- | --- |
-| Unpacked (keeps the dev `key`, ID `gcldkcaidjnkaagngppblefddapdpaeb`) | `ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com pnpm extension:build:unpacked` → `apps/extension/dist-unpacked` | Your own Chrome and testers during store review (zip the folder) |
+| Unpacked (keeps the dev `key`, ID `dboijhnmohmpceamddfchbjicdgcgnlg`) | `ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com pnpm extension:build:unpacked` → `apps/extension/dist-unpacked` | Your own Chrome and testers during store review (zip the folder) |
 | Store (no `key`) | `ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com pnpm --filter @ankileet/extension build` → `apps/extension/dist` | Zip the folder's contents and upload |
 
 `pnpm extension:check-manifest` enforces the store rules: only `leetcode.com`
@@ -217,13 +217,12 @@ justifications) is in `apps/extension/store-assets/`. Privacy policy URL:
 
 **After the first approval:**
 
-1. Add the store ID to Production: `ANKILEET_EXTENSION_ORIGINS=chrome-extension://gcldkcaidjnkaagngppblefddapdpaeb,chrome-extension://<store id>`,
+1. Add the store ID to Production: `ANKILEET_EXTENSION_ORIGINS=chrome-extension://dboijhnmohmpceamddfchbjicdgcgnlg,chrome-extension://<store id>`,
    and set `NEXT_PUBLIC_EXTENSION_INSTALL_URL=https://chromewebstore.google.com/detail/<store id>`.
    Redeploy. Without the origin, the store build can't sign in.
 2. Point the README's install section at the listing.
 3. Remove the unpacked copy (both would add a panel to LeetCode), install
-   from the store, and run one practice session. The unpacked build shares
-   its ID with Ankify's listing, so the two can't be installed side by side.
+   from the store, and run one practice session.
 
 **Updates:** bump `version` in `apps/extension/manifest.config.ts` (the store
 rejects a version it already has), ship the commit as above, then build, zip,

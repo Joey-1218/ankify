@@ -1,8 +1,11 @@
 import { defineManifest } from "@crxjs/vite-plugin";
 import { extensionApiOrigin } from "./extension-env";
 
+// Public key only: it fixes the unpacked/development extension ID at
+// dboijhnmohmpceamddfchbjicdgcgnlg. ankileet's own key, not Ankify's, so the
+// two never share an ID. Store builds omit it and get the store's ID.
 const DEVELOPMENT_EXTENSION_KEY =
-  "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr06aninDU5S6xFipr/A4IT9Dr0v9wgbhBxPFee5LYa4FP3PvzYf9CyPkQtxlD6UDBAPVj9KIRch0FzyCUCNO8MXN3W6/Y7k/yW0XvHu3g6GvFaXByvsF3OTmAY5J4HZQDuqWWUY1jl7vN5WIxdsMug1bBHW9Z9GqR8OEJ22XGNIi3+UUbBT+r4khmn05jLFNAuqoZaMGXbdqkJu5gwmqv1p6d5K5lStqq9/g4IQsRhBf/36i4v2LDWxb3E6tWHyMUeeN4vn5HapGsp8SlfsOkj2wwCikfGpiiLfqP3V+t3I1rZLPmwTfVl7B2K0CieJfqamIobsT62zi+Oii97560QIDAQAB";
+  "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqQuBtg/mUri1KaZefm7sYRG9uUOc21gsGmBXL0Ev6vFdkF+1go7tDgoTUZluyLf2JCsk60jhOW4zHSYYFzyt6eP76mTGYdtgyMtsabKl/6c4VMA1nV36Gh7UjJlniXWUVIWWwhUzHI1nnM0i9snOFjEZ0qbdYZpoZR4IFoq9cLDJFJ/Hf42DdBoH82yLQceKb/8ZbUWTNp4q13fgI5IqanIZf6CVbaX9aLvmtweL/elaN4WeE/coxmoIxXmDFFiYXj4etFfZ03WL/6jrBofXDg4t+3XGv3Z1pE+mdNdgbCIjGaXUs7YKjamW1X1fpJObUKqskSJ1Kfm2Ztd2grSCRQIDAQAB";
 
 export default defineManifest(({ mode }) => {
   const apiOrigin = extensionApiOrigin(mode);

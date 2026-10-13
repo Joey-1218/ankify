@@ -64,7 +64,7 @@ designs, the paid-credits audit, the manual test guide) were retired on
 ### When the Chrome Web Store approves the extension
 
 The store build gets its own 32-letter extension ID, different from the
-unpacked ID (`gcldkcaidjnkaagngppblefddapdpaeb`). The server only accepts
+unpacked ID (`dboijhnmohmpceamddfchbjicdgcgnlg`). The server only accepts
 requests from extension IDs listed in `ANKILEET_EXTENSION_ORIGINS`, so until
 step 2 is done **the store version can't sign in or sync**. Do steps 1–4 the
 same day the approval email arrives.
@@ -80,7 +80,7 @@ same day the approval email arrives.
 
    ```bash
    vercel env rm ANKILEET_EXTENSION_ORIGINS production --yes
-   printf '%s' "chrome-extension://gcldkcaidjnkaagngppblefddapdpaeb,chrome-extension://<ID>" \
+   printf '%s' "chrome-extension://dboijhnmohmpceamddfchbjicdgcgnlg,chrome-extension://<ID>" \
      | vercel env add ANKILEET_EXTENSION_ORIGINS production
    printf '%s' "https://chromewebstore.google.com/detail/<ID>" \
      | vercel env add NEXT_PUBLIC_EXTENSION_INSTALL_URL production
@@ -189,8 +189,11 @@ zip, and upload a new package (DEPLOYMENT.md, "Extension release").
   Vercel Pro or to Cloudflare Workers (OpenNext, Cloudflare Queues behind
   `dispatchAiJob()`); the custom domain keeps that move invisible to the
   extension.
-- The unpacked build's ID equals Ankify's store listing ID, so the two can't
-  be installed in one Chrome profile.
+- Until 2026-10-12 the unpacked build reused Ankify's development key, so its
+  ID (`gcldkcaidjnkaagngppblefddapdpaeb`) is Ankify's store listing ID. ankileet
+  now has its own key (ID `dboijhnmohmpceamddfchbjicdgcgnlg`); the old ID must
+  not stay in `ANKILEET_EXTENSION_ORIGINS`, because Production would then
+  trust an extension someone else publishes.
 
 ## Working agreements
 
