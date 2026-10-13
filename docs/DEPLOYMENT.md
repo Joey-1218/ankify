@@ -35,7 +35,7 @@ build time, so a bad value fails the deployment instead of the site.
 
 | Variable | Value / rule |
 | --- | --- |
-| `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN` | Managed by the Turso integration. Never paste a short-lived CLI token here |
+| `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN` | Managed by the Turso integration, whose connection must have **no deployment action for Production** (see "One database for every deployment"). Never paste a short-lived CLI token here |
 | `BETTER_AUTH_URL` | `https://ankileet.com` |
 | `BETTER_AUTH_SECRET` | Production-only random secret |
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | The Production OAuth client |
@@ -151,6 +151,32 @@ failed`):
   and the backup, and fix with a **new** migration; never edit an applied one.
 - **Data loss or corruption:** stop and keep the current database and backups
   untouched. Restoring a backup discards everything written after it.
+
+## One database for every deployment
+
+The Turso integration can attach a `branch` **deployment action** to its
+project connection. With it on, every deployment gets its own copy of the
+database (`dpl-<deployment id>` in `turso db list`) and Vercel points only
+that deployment at it. Each deploy then starts from a copy of the main
+database, and everything written since the previous deploy is stranded in
+the previous copy: users look signed out and their history looks deleted.
+Until 2026-10-12 this was on for Production, and `database-ankileet` itself
+never received a write (see HANDOFF.md, "Known issues").
+
+Production must have no deployment action. Check:
+
+```bash
+vercel api /storage/stores/store_OdNZjg8wDnO6Z2Hz --raw \
+  | node -e 'const s=JSON.parse(require("fs").readFileSync(0,"utf8"));for(const p of (s.store??s).projectsMetadata)console.log(p.name,JSON.stringify(p.deployments))'
+```
+
+`actions` must be empty (or list no `production`). To change it: Vercel →
+Storage → `database-ankileet` → Projects → `ankileet` → edit the connection →
+under deployment configuration, clear Production for the branch action, then
+redeploy. `scripts/check-vercel-env.mjs` fails a Production build whose
+`TURSO_DATABASE_URL` points at a `dpl-` branch, so the live site stays on the
+previous deployment instead of starting from an empty copy. After any deploy,
+`turso db list` must show no new `dpl-` database.
 
 ## Database operations
 
@@ -283,7 +309,8 @@ upgrade_required`.
 
 The same steps work for a self-hosted copy: create a Vercel project with Root
 Directory `apps/web`, provision Turso through the integration in a region near
-the function region in `vercel.json`, set the variables above with your own
+the function region in `vercel.json` (with no Production deployment action;
+see "One database for every deployment"), set the variables above with your own
 domain and secrets, register your OAuth redirect URI, run `pnpm db:release`
 against your database, deploy, and build the extension with
 `ANKILEET_EXTENSION_API_ORIGIN=https://<your domain>`.

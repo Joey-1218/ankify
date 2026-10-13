@@ -177,6 +177,17 @@ zip, and upload a new package (DEPLOYMENT.md, "Extension release").
 
 ## Known issues and risks
 
+- **Per-deployment database copies (2026-10-12).** The Turso integration's
+  `branch` deployment action was on for Production, so each of the day's
+  deployments ran on its own `dpl-<deployment id>` copy of the database and
+  `database-ankileet` never received a write; after every deploy users had to
+  sign in again and their history looked deleted. The action was turned off,
+  the copies' data was merged into `database-ankileet` (one user per email,
+  duplicate problems folded into the earliest; dumps in the gitignored
+  `backups/`), and `check-vercel-env.mjs` now fails a Production build that
+  points at a `dpl-` copy. Once the merge is verified, delete the stranded
+  `dpl-*` databases (`turso db list`). See DEPLOYMENT.md, "One database for
+  every deployment".
 - `@ai-sdk/google` is pinned to `4.0.50`: newer releases target a newer
   provider spec than `ai@7.0.58` and fail typecheck. Upgrade all `ai` and
   `@ai-sdk/*` packages together.

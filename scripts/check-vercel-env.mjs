@@ -51,8 +51,17 @@ required("GOOGLE_CLIENT_ID");
 required("GOOGLE_CLIENT_SECRET");
 const encryptionSecret = required("AI_KEY_ENCRYPTION_SECRET");
 
-parseUrl("TURSO_DATABASE_URL", tursoUrl, ["libsql:", "https:"]);
+const databaseUrl = parseUrl("TURSO_DATABASE_URL", tursoUrl, ["libsql:", "https:"]);
 const authUrl = parseUrl("BETTER_AUTH_URL", authUrlValue, ["https:"]);
+
+// The Turso integration's `branch` deployment action gives every deployment its
+// own copy of the database (`dpl-<deployment id>`), so each deploy would start
+// from an empty copy and strand the previous one's data.
+if (vercelEnvironment === "production" && databaseUrl?.hostname.toLowerCase().startsWith("dpl-")) {
+  errors.push(
+    "TURSO_DATABASE_URL points at a per-deployment database branch (dpl-...); Production must use the main database. Turn off the Turso integration's branch deployment action for Production (docs/DEPLOYMENT.md)",
+  );
+}
 
 if (authSecret && authSecret.length < 32) {
   errors.push("BETTER_AUTH_SECRET must be at least 32 characters");
