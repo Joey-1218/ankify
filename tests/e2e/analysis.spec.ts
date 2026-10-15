@@ -1,13 +1,12 @@
 import type { MistakeProfileDto, PracticeSessionCurrentDto, SessionAnalysisStateDto } from "../../packages/contracts/src";
 import { test, expect } from "./fixtures";
-import { focus, newProblem, openPanel } from "./helpers";
+import { focus, newProblem, openPanel, removeOwnKey, useOwnKey } from "./helpers";
 import { problemUrl, submit, type LeetcodeFixtureState } from "./leetcode-fixture";
 import type { BrowserContext } from "@playwright/test";
 
 // The e2e server answers every analysis from a local fake provider (see
 // scripts/e2e-server.mjs); no test reaches a real AI provider.
 const SUMMARY = "The first attempts missed the empty string.";
-const OWN_KEY = { provider: "deepseek", model: "deepseek-chat", apiKey: "e2e-own-key" };
 
 /** Two different failed attempts, then Accepted: qualifies for automatic analysis. */
 async function finishQualifyingSession(context: BrowserContext, leetcode: LeetcodeFixtureState, name: string) {
@@ -36,7 +35,8 @@ test.afterEach(async ({ api }) => {
 });
 
 test("a finished session is analyzed on request, and its findings are confirmed or dismissed", async ({ context, leetcode, api }) => {
-  await api("/api/settings", { body: { ...OWN_KEY, analysisAutomatic: false } });
+  await useOwnKey(api);
+  await api("/api/settings", { body: { analysisAutomatic: false } });
   const { page, slug, analysis } = await finishQualifyingSession(context, leetcode, "analysis-manual");
   await expect(analysis.getByText("Uses your own AI key.")).toBeVisible();
   await analysis.getByRole("button", { name: "Analyze session" }).click();
@@ -68,7 +68,8 @@ test("a finished session is analyzed on request, and its findings are confirmed 
 });
 
 test("with automatic analysis on, a qualifying session is analyzed when it finishes; off, nothing runs", async ({ context, leetcode, api }) => {
-  await api("/api/settings", { body: { ...OWN_KEY, analysisAutomatic: false } });
+  await useOwnKey(api);
+  await api("/api/settings", { body: { analysisAutomatic: false } });
   const off = await finishQualifyingSession(context, leetcode, "analysis-off");
   await expect(off.analysis.getByRole("button", { name: "Analyze session" })).toBeVisible();
   const offState = await api<SessionAnalysisStateDto>(`/api/practice-sessions/${await sessionIdOf(api, off.slug)}/analysis`);
@@ -85,7 +86,8 @@ test("with automatic analysis on, a qualifying session is analyzed when it finis
 });
 
 test("a review is analyzed automatically like a first practice, even when accepted at once, while its rating is asked", async ({ context, leetcode, api }) => {
-  await api("/api/settings", { body: { ...OWN_KEY, analysisAutomatic: true } });
+  await useOwnKey(api);
+  await api("/api/settings", { body: { analysisAutomatic: true } });
   const slug = newProblem(leetcode, "analysis-review");
   await api("/api/capture", { body: { leetcodeSlug: slug, leetcodeId: leetcode.problems[slug]!.frontendId, title: leetcode.problems[slug]!.title, difficulty: "Easy", url: problemUrl(slug) } });
   const page = await context.newPage();
@@ -109,7 +111,7 @@ test("a review is analyzed automatically like a first practice, even when accept
 });
 
 test("without the user's own key, the panel explains and starts nothing", async ({ context, leetcode, api }) => {
-  await api("/api/settings", { body: { ...OWN_KEY, apiKey: "" } });
+  await removeOwnKey(api);
   const { analysis, slug } = await finishQualifyingSession(context, leetcode, "analysis-no-key");
   await expect(analysis.getByText("Add your own AI key in ankileet settings to analyze sessions.")).toBeVisible();
   await expect(analysis.getByRole("link", { name: "Open settings" })).toHaveAttribute("href", "http://localhost:4317/settings");
@@ -120,7 +122,8 @@ test("without the user's own key, the panel explains and starts nothing", async 
 
 
 test("on the web, a session is analyzed from its problem page; findings are corrected, confirmed, or dismissed, and manual entry is secondary", async ({ context, leetcode, api }) => {
-  await api("/api/settings", { body: { ...OWN_KEY, analysisAutomatic: false } });
+  await useOwnKey(api);
+  await api("/api/settings", { body: { analysisAutomatic: false } });
   const { page: panelPage, slug } = await finishQualifyingSession(context, leetcode, "analysis-web");
   // The finish has landed once the first review is scheduled.
   await expect(panelPage.getByText(/Next review/).first()).toBeVisible();
@@ -158,7 +161,8 @@ test("on the web, a session is analyzed from its problem page; findings are corr
 });
 
 test("automatic analysis finishes after the LeetCode tab is closed; the result is on the problem page later", async ({ context, leetcode, api }) => {
-  await api("/api/settings", { body: { ...OWN_KEY, analysisAutomatic: true } });
+  await useOwnKey(api);
+  await api("/api/settings", { body: { analysisAutomatic: true } });
   const { page: panelPage, slug, analysis } = await finishQualifyingSession(context, leetcode, "analysis-closed");
   // Finishing does not wait for the analysis: the tab is closed while it is only queued.
   await expect(analysis.getByText(/Analysis queued/)).toBeVisible();

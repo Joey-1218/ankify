@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   BookOpenCheck,
   Check,
@@ -12,17 +12,10 @@ import {
 } from "lucide-react";
 import type { AiProvider } from "@ankileet/core";
 import type { OnboardingProgressDto } from "@ankileet/contracts";
+import { AiKeySetup } from "@/components/ai-key-setup";
 import { Surface } from "@/components/ui/surface";
 import { Button, buttonClasses } from "@/components/ui/button";
-import { Field, Input, Select } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
-
-const MODEL_PRESETS: Record<Exclude<AiProvider, "">, string[]> = {
-  anthropic: ["claude-sonnet-4-6", "claude-haiku-4-5-20251001"],
-  openai: ["gpt-5.4-mini", "gpt-5.5"],
-  deepseek: ["deepseek-v4-flash", "deepseek-v4-pro"],
-  google: ["gemini-3.8-flash", "gemini-3.5-flash"],
-};
 
 type Copy = {
   eyebrow: string;
@@ -44,18 +37,8 @@ type Copy = {
   aiUses: string[];
   noAi: string;
   noAiUses: string[];
-  provider: string;
-  model: string;
-  apiKey: string;
-  chooseProvider: string;
-  storedKey: string;
-  apiKeyHint: string;
-  testAndSave: string;
-  testing: string;
   cancel: string;
-  testUsage: string;
-  aiSuccess: (model: string, latencyMs: number) => string;
-  aiMissing: string;
+  removeKeyConfirm: string;
   captureTitle: string;
   captureBody: string;
   captureDone: string;
@@ -88,18 +71,8 @@ const COPY: Record<"en" | "zh", Copy> = {
     aiUses: ["Explain why a practice session went wrong", "Suggest mistake categories for you to confirm"],
     noAi: "Does not use AI",
     noAiUses: ["Practice sessions on LeetCode", "FSRS scheduling", "Notes, suggestions, and your mistake profile"],
-    provider: "Provider",
-    model: "Model",
-    apiKey: "API key",
-    chooseProvider: "Choose a provider",
-    storedKey: "A saved key is available for this provider.",
-    apiKeyHint: "Encrypted before storage and never returned to the browser.",
-    testAndSave: "Test and save",
-    testing: "Testing connection…",
     cancel: "Cancel",
-    testUsage: "The connection test makes one tiny model request and may incur a small provider charge.",
-    aiSuccess: (model, latencyMs) => `${model} connected in ${latencyMs} ms.`,
-    aiMissing: "Choose a provider and model, then add its API key.",
+    removeKeyConfirm: "Remove the stored API key? Session analysis stops until you add a new key.",
     captureTitle: "Practice your first problem",
     captureBody: "Open a LeetCode problem and click Start practice in the ankileet panel.",
     captureDone: "First practice started",
@@ -130,18 +103,8 @@ const COPY: Record<"en" | "zh", Copy> = {
     aiUses: ["解释一次练习出错的原因", "建议错误类别，由你确认"],
     noAi: "不会使用 AI",
     noAiUses: ["在 LeetCode 上的练习", "FSRS 调度", "笔记、推荐和错误画像"],
-    provider: "供应商",
-    model: "模型",
-    apiKey: "API Key",
-    chooseProvider: "选择供应商",
-    storedKey: "这个供应商已有保存的 Key。",
-    apiKeyHint: "保存前会加密，之后不会再返回浏览器。",
-    testAndSave: "测试并保存",
-    testing: "正在测试连接…",
     cancel: "取消",
-    testUsage: "连接测试会发起一次很小的模型请求，可能产生少量供应商费用。",
-    aiSuccess: (model, latencyMs) => `${model} 连接成功，用时 ${latencyMs} ms。`,
-    aiMissing: "请选择供应商和模型，并填写对应的 API Key。",
+    removeKeyConfirm: "移除已保存的 API key？在添加新的 key 前，练习分析将无法使用。",
     captureTitle: "练习第一道题",
     captureBody: "打开一道 LeetCode 题目，在 ankileet 面板中点击开始练习。",
     captureDone: "已开始第一次练习",
@@ -172,9 +135,6 @@ export function OnboardingCard({
   const t = COPY[language];
   const [progress, setProgress] = useState(initialProgress);
   const [showAi, setShowAi] = useState(false);
-  const [provider, setProvider] = useState<AiProvider>(initialAi.provider);
-  const [model, setModel] = useState(initialAi.model);
-  const [apiKey, setApiKey] = useState("");
   const [aiBusy, setAiBusy] = useState(false);
   const [aiMessage, setAiMessage] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
 
@@ -198,20 +158,6 @@ export function OnboardingCard({
     Boolean(progress.firstCaptureAt),
     Boolean(progress.firstReviewAt),
   ].filter(Boolean).length;
-  const providerModels = provider ? MODEL_PRESETS[provider] : [];
-  const hasUsableStoredKey =
-    initialAi.hasApiKey && provider === initialAi.provider && Boolean(initialAi.provider);
-  const canSubmitAi = Boolean(provider && model && (apiKey || hasUsableStoredKey));
-
-  const providerOptions = useMemo(
-    () => [
-      { value: "anthropic", label: "Anthropic (Claude)" },
-      { value: "openai", label: "OpenAI" },
-      { value: "deepseek", label: "DeepSeek" },
-      { value: "google", label: "Google Gemini" },
-    ] as const,
-    [],
-  );
 
   async function skipAi() {
     setAiBusy(true);
@@ -230,45 +176,6 @@ export function OnboardingCard({
       setAiMessage({
         kind: "error",
         text: error instanceof Error ? error.message : "Could not update onboarding.",
-      });
-    } finally {
-      setAiBusy(false);
-    }
-  }
-
-  async function testAndSaveAi() {
-    if (!canSubmitAi || !provider) {
-      setAiMessage({ kind: "error", text: t.aiMissing });
-      return;
-    }
-    setAiBusy(true);
-    setAiMessage(null);
-    try {
-      const response = await fetch("/api/settings/ai-test", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          provider,
-          model,
-          ...(apiKey ? { apiKey } : {}),
-          saveOnSuccess: true,
-        }),
-      });
-      const data = (await response.json().catch(() => null)) as
-        | { ok: true; model: string; latencyMs: number }
-        | { ok: false; code?: string; message?: string }
-        | null;
-      if (!response.ok || !data || !data.ok) {
-        throw new Error(data && !data.ok ? data.message || data.code || `HTTP ${response.status}` : `HTTP ${response.status}`);
-      }
-      setApiKey("");
-      setAiMessage({ kind: "ok", text: t.aiSuccess(data.model, data.latencyMs) });
-      await refreshProgress();
-      window.setTimeout(() => setShowAi(false), 900);
-    } catch (error) {
-      setAiMessage({
-        kind: "error",
-        text: error instanceof Error ? error.message : "AI connection failed.",
       });
     } finally {
       setAiBusy(false);
@@ -349,57 +256,17 @@ export function OnboardingCard({
                 <AiUsage title={t.usesAi} items={t.aiUses} tone="accent" />
                 <AiUsage title={t.noAi} items={t.noAiUses} tone="neutral" />
               </div>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                <Field label={t.provider}>
-                  <Select
-                    value={provider}
-                    onValueChange={(value) => {
-                      const next = value as AiProvider;
-                      setProvider(next);
-                      setModel(next ? (MODEL_PRESETS[next][0] ?? "") : "");
-                      setApiKey("");
-                      setAiMessage(null);
-                    }}
-                  >
-                    <option value="">{t.chooseProvider}</option>
-                    {providerOptions.map((option) => (
-                      <option key={option.value} value={option.value}>{option.label}</option>
-                    ))}
-                  </Select>
-                </Field>
-                <Field label={t.model}>
-                  <Input
-                    value={model}
-                    onChange={(event) => setModel(event.target.value)}
-                    list="onboarding-ai-models"
-                    disabled={!provider}
-                    className="font-mono"
-                  />
-                  <datalist id="onboarding-ai-models">
-                    {providerModels.map((preset) => <option key={preset} value={preset} />)}
-                  </datalist>
-                </Field>
-                <Field
-                  label={t.apiKey}
-                  hint={hasUsableStoredKey && !apiKey ? t.storedKey : t.apiKeyHint}
-                  className="sm:col-span-2"
-                >
-                  <Input
-                    type="password"
-                    value={apiKey}
-                    onChange={(event) => setApiKey(event.target.value)}
-                    placeholder={hasUsableStoredKey ? "••••••••" : "sk-…"}
-                    autoComplete="off"
-                    spellCheck={false}
-                    className="font-mono"
-                  />
-                </Field>
+              <div className="mt-5">
+                <AiKeySetup
+                  initial={initialAi}
+                  removeConfirm={t.removeKeyConfirm}
+                  onSaved={() => {
+                    void refreshProgress();
+                    window.setTimeout(() => setShowAi(false), 900);
+                  }}
+                />
               </div>
-              <p className="mt-3 text-xs leading-5 text-muted">{t.testUsage}</p>
               <div className="mt-4 flex flex-wrap items-center gap-2">
-                <Button size="sm" variant="primary" disabled={aiBusy || !canSubmitAi} onClick={() => void testAndSaveAi()}>
-                  {aiBusy ? t.testing : t.testAndSave}
-                </Button>
                 <Button size="sm" disabled={aiBusy} onClick={() => setShowAi(false)}>{t.cancel}</Button>
                 {progress.aiChoice === "not_started" && (
                   <Button size="sm" variant="ghost" disabled={aiBusy} onClick={() => void skipAi()}>{t.skip}</Button>

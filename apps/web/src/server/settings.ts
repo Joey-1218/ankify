@@ -10,9 +10,13 @@ import { DEFAULT_LANGUAGE, normalizeLanguage, type Language } from "@/lib/i18n";
 
 interface AiSettings {
   provider: AiProvider;
+  /** Picked by the server (ai-model-choice.ts), never by the user. */
   model: string;
+  /** Always "fast": analysis runs with thinking off. */
   reasoningMode: AiReasoningMode;
   encryptedApiKey?: EncryptedSecret;
+  /** When the model was last checked against the provider's list (ISO). */
+  modelCheckedAt?: string;
 }
 
 export interface AiRuntimeSettings {
@@ -24,6 +28,8 @@ export interface AiRuntimeSettings {
   source: "user" | "starter";
   /** Starter-credit allowance per user; only set when source is "starter". */
   starterLimit?: number;
+  /** When the user's model was last checked (own key only). */
+  modelCheckedAt?: string;
 }
 
 interface ReviewSettings {
@@ -74,10 +80,8 @@ export async function getAiSettings(userId: string): Promise<AiSettings> {
   const row = rows[0];
   if (!row) return DEFAULT_AI_SETTINGS;
   const value = { ...DEFAULT_AI_SETTINGS, ...(row.value as Partial<AiSettings>) };
-  return {
-    ...value,
-    reasoningMode: value.reasoningMode === "thinking" ? "thinking" : "fast",
-  };
+  // A stored "thinking" from before the mode was retired is ignored.
+  return { ...value, reasoningMode: "fast" };
 }
 
 /**
@@ -115,6 +119,7 @@ function ownRuntimeSettings(settings: AiSettings): AiRuntimeSettings | null {
     reasoningMode: settings.reasoningMode,
     apiKey: decryptSecret(settings.encryptedApiKey),
     source: "user",
+    ...(settings.modelCheckedAt ? { modelCheckedAt: settings.modelCheckedAt } : {}),
   };
 }
 
@@ -126,29 +131,53 @@ export async function getOwnAiRuntimeSettings(userId: string): Promise<AiRuntime
   return ownRuntimeSettings(await getAiSettings(userId));
 }
 
+/**
+ * Stores a provider, its model, and (when given) its key. Only the
+ * verify-and-save flow (ai-connection.ts) writes a new key, so a key is never
+ * stored unless the provider accepted it.
+ */
 export async function setAiSettings(
   userId: string,
-  value: { provider: AiProvider; model: string; reasoningMode?: AiReasoningMode; apiKey?: string },
+  value: { provider: AiProvider; model: string; apiKey?: string; modelCheckedAt?: string },
 ) {
-  const db = getDb();
   const existing = await getAiSettings(userId);
   // A stored key belongs to the provider it was entered for. Never carry it
   // over to a different provider — it would be sent to the wrong API.
   const retainedKey =
     existing.provider === value.provider ? existing.encryptedApiKey : undefined;
-  const next = {
-    ...existing,
+  const next: AiSettings = {
     provider: value.provider,
     model: value.model,
-    reasoningMode: value.reasoningMode ?? existing.reasoningMode,
+    reasoningMode: "fast",
     encryptedApiKey:
       value.apiKey === undefined
         ? retainedKey
         : value.apiKey
           ? encryptSecret(value.apiKey)
           : undefined,
+    ...(value.modelCheckedAt ? { modelCheckedAt: value.modelCheckedAt } : {}),
   };
-  await db
+  await writeAiSettings(userId, next);
+}
+
+/** Removes the stored key; the provider stays so the form opens on the key step. */
+export async function removeAiKey(userId: string) {
+  const existing = await getAiSettings(userId);
+  await writeAiSettings(userId, { provider: existing.provider, model: existing.model, reasoningMode: "fast" });
+}
+
+/**
+ * Records the worker's latest model pick. Skipped if the user changed provider
+ * or removed the key meanwhile.
+ */
+export async function updateAiModel(userId: string, value: { provider: AiProvider; model: string; modelCheckedAt: string }) {
+  const existing = await getAiSettings(userId);
+  if (existing.provider !== value.provider || !existing.encryptedApiKey) return;
+  await writeAiSettings(userId, { ...existing, model: value.model, modelCheckedAt: value.modelCheckedAt });
+}
+
+async function writeAiSettings(userId: string, next: AiSettings) {
+  await getDb()
     .insert(schema.settings)
     .values({ userId, key: KEY_AI, value: next })
     .onConflictDoUpdate({

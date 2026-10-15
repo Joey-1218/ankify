@@ -255,9 +255,32 @@ weakness, share, and rotation code is what `planSuggestion()` reuses.
 3. Otherwise a clear `AI_NOT_CONFIGURED` / `AI_KEY_MISSING` error.
 
 Providers: Anthropic, OpenAI, Google Gemini (`@ai-sdk/google`), and
-OpenAI-compatible presets (DeepSeek) built in `server/ai.ts`. DeepSeek thinking
-can be disabled per call; Gemini counts thinking against the output cap, so
-`providerCallOptions()` keeps its thinking low and adds headroom.
+OpenAI-compatible presets (DeepSeek) built in `server/ai.ts`. Calls run with
+DeepSeek thinking off (the Fast/Thinking choice was retired; a stored
+`reasoningMode` reads as `fast`); Gemini counts thinking against the output
+cap, so `providerCallOptions()` keeps its thinking low and adds headroom.
+
+**Adding a key** (Settings and the /today onboarding card share
+`components/ai-key-setup.tsx`): the user chooses a provider, then enters its
+key; there is no model field. `POST /api/settings/ai-key` →
+`server/ai-connection.ts:verifyAndSaveAiKey()` reads the provider's model list
+with the key, tries the best-ranked models in order with one structured-output
+probe, and stores provider, model, key, and `modelCheckedAt` only when one
+answers. This is the only way to store a key (`POST /api/settings` no longer
+accepts AI fields), so a key entered under the wrong provider is never saved.
+A rejected key whose prefix names another provider (`sk-ant-`, `AIza`,
+`sk-proj-`, DeepSeek's `sk-` + 32 hex) returns `key_provider_mismatch`, and the
+UI offers to switch. `DELETE /api/settings/ai-key` removes the key and keeps
+the provider.
+
+**Model choice** (`server/ai-model-choice.ts`): `rankAnalysisModels()` ranks a
+provider's live list by family rules for its fast tier (newest Claude Haiku,
+GPT `-mini` alias, stable Gemini Flash, DeepSeek Flash), so new releases need no
+code change. `FALLBACK_ANALYSIS_MODEL` is used only when the list can't be read
+or nothing matches. Before each analysis, the worker re-reads the list when the
+pick is older than 7 days (`ensureCurrentAnalysisModel()`; a list it can't read
+keeps the stored model), and after a model-not-found error it picks again and
+retries once.
 
 ## Asynchronous AI generation (cards and quizzes)
 
@@ -304,7 +327,9 @@ One model call explains one completed practice session (`server/session-analysis
   is analyzed exactly like a first practice. Automatic jobs run ~15 s after Finish
   (`runAfter`), so late verdicts are read; one job per session and evidence
   digest (`auto:<session>:<digest>`); no daily cap. Only the user's own key is accepted, at creation and again before
-  execution; there is no hosted fallback and no credit spend.
+  execution; there is no hosted fallback and no credit spend. A provider
+  change since creation fails the job (`ai_configuration_changed`); a newer
+  model picked by the server does not, and the job records the model it ran on.
 - **Evidence**: the whole verdict sequence plus representative code revisions
   (diffs where shorter) and judge output, bounded to 32,000 characters; what was
   left out is recorded in `coverage`. Output is schema-validated once (no repair

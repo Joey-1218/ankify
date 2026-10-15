@@ -6,6 +6,10 @@
  * validation, and the commit) against a throwaway SQLite database. Then it
  * checks that a deliberately invalid key fails at once without a retry.
  *
+ * The key goes through the same verify-and-save step as Settings, so the
+ * model is the one ankileet would pick for a real user (from the provider's
+ * live model list); `SMOKE_<PROVIDER>_MODEL` pins one instead.
+ *
  * It prints provider, model, outcome, and timing only. It never prints keys,
  * request headers, or raw provider responses, and silences all logging while
  * calls run (provider error messages can echo parts of a key).
@@ -16,12 +20,7 @@
 import { randomBytes } from "node:crypto";
 
 type Provider = "deepseek" | "openai" | "anthropic" | "google";
-const PROVIDERS: { provider: Provider; defaultModel: string }[] = [
-  { provider: "deepseek", defaultModel: "deepseek-v4-flash" },
-  { provider: "openai", defaultModel: "gpt-5.4-mini" },
-  { provider: "anthropic", defaultModel: "claude-haiku-4-5-20251001" },
-  { provider: "google", defaultModel: "gemini-3.5-flash" },
-];
+const PROVIDERS: Provider[] = ["deepseek", "openai", "anthropic", "google"];
 
 // Isolation before any server module loads: a throwaway database, a random
 // encryption secret, no queue (the QA profile's dispatch is a no-op), and no
@@ -48,7 +47,7 @@ async function quietly<T>(task: () => Promise<T>): Promise<T> {
 }
 
 async function main() {
-  const configured = PROVIDERS.filter(({ provider }) => process.env[keyName(provider)]);
+  const configured = PROVIDERS.filter((provider) => process.env[keyName(provider)]);
   if (configured.length === 0) {
     console.log("No SMOKE_<PROVIDER>_API_KEY is set. Put keys in .env.smoke.local (git-ignored); see docs/DEVELOPMENT.md.");
     process.exit(1);
@@ -60,6 +59,8 @@ async function main() {
   const { getDb, schema } = await import("@ankileet/db");
   const { eq } = await import("drizzle-orm");
   const { setAiSettings } = await import("../src/server/settings");
+  const { verifyAndSaveAiKey } = await import("../src/server/ai-connection");
+  const { FALLBACK_ANALYSIS_MODEL } = await import("../src/server/ai-model-choice");
   const { startPracticeSession, ingestSessionObservations, runSessionCommand } = await import("../src/server/practice-sessions/commands");
   const { startAiJobForUser } = await import("../src/server/ai-generation/start");
   const { processAiJob } = await import("../src/server/ai-generation/runner");
@@ -141,24 +142,36 @@ async function main() {
     return (await getDb().select().from(schema.aiJobs).where(eq(schema.aiJobs.id, jobId)))[0]!;
   }
 
-  async function analyze(userId: string, provider: Provider, model: string, apiKey: string) {
+  /** Verifies and saves the key like Settings does, or stores a pinned model as is. */
+  async function configure(userId: string, provider: Provider, apiKey: string, pinned?: string) {
     await getDb().insert(schema.user).values({ id: userId, name: "Smoke", email: `${userId}@smoke.test` });
-    await setAiSettings(userId, { provider, model, apiKey });
+    if (pinned) {
+      await setAiSettings(userId, { provider, model: pinned, apiKey, modelCheckedAt: new Date().toISOString() });
+      return pinned;
+    }
+    const verified = await verifyAndSaveAiKey(userId, { provider, apiKey });
+    if (!verified.ok) throw new Error(`key verification failed: ${verified.code}`);
+    return verified.model;
+  }
+
+  async function analyze(userId: string, provider: Provider, apiKey: string, pinned?: string) {
+    const model = await configure(userId, provider, apiKey, pinned);
     const sessionId = await fixtureSession(userId);
     const job = await startAiJobForUser(userId, { action: "session_analyze", practiceSessionId: sessionId, requestId: crypto.randomUUID() });
     const started = Date.now();
     const done = await runJob(job.id);
     const state = await getSessionAnalysisState(userId, sessionId);
-    return { job: done, state, ms: Date.now() - started };
+    return { model, job: done, state, ms: Date.now() - started };
   }
 
   const rows: string[][] = [];
   let failures = 0;
-  for (const { provider, defaultModel } of configured) {
-    const model = process.env[modelName(provider)] || defaultModel;
+  for (const provider of configured) {
+    const pinned = process.env[modelName(provider)] || undefined;
     const apiKey = process.env[keyName(provider)]!;
     try {
-      const real = await quietly(() => analyze(`smoke-${provider}`, provider, model, apiKey));
+      const real = await quietly(() => analyze(`smoke-${provider}`, provider, apiKey, pinned));
+      const model = real.model;
       const result = real.state?.analysis?.result;
       const ok = real.job.status === "succeeded" && result != null;
       // An empty provider account is outside ankileet; reported, not failed.
@@ -177,12 +190,16 @@ async function main() {
       ]);
     } catch (error) {
       failures += 1;
-      rows.push([provider, model, "FAIL", `setup error: ${error instanceof Error ? error.name : "unknown"}`, "-"]);
+      // Only our own messages are printed; a provider's could echo the key.
+      const detail = error instanceof Error && error.message.startsWith("key verification failed") ? error.message : `setup error: ${error instanceof Error ? error.name : "unknown"}`;
+      rows.push([provider, pinned ?? "(auto)", "FAIL", detail, "-"]);
     }
 
-    // An invalid key must fail at once, classified, without a retry.
+    // An invalid key must fail at once, classified, without a retry. It is
+    // stored directly: verification would (rightly) refuse it.
+    const model = pinned ?? FALLBACK_ANALYSIS_MODEL[provider];
     try {
-      const bad = await quietly(() => analyze(`smoke-${provider}-badkey`, provider, model, `invalid-smoke-key-${randomBytes(6).toString("hex")}`));
+      const bad = await quietly(() => analyze(`smoke-${provider}-badkey`, provider, `invalid-smoke-key-${randomBytes(6).toString("hex")}`, model));
       const ok = bad.job.status === "failed" && bad.job.errorCode === "ai_request_rejected" && bad.job.attempt === 1;
       if (!ok) failures += 1;
       rows.push([provider, model, ok ? "PASS" : "FAIL", `invalid key: job ${bad.job.status}, ${bad.job.errorCode ?? "no error code"}, ${bad.job.attempt} attempt(s)`, `${(bad.ms / 1000).toFixed(1)} s`]);
@@ -198,7 +215,7 @@ async function main() {
   const line = (row: string[]) => row.map((cell, column) => cell.padEnd(widths[column]!)).join("  ");
   console.log(line(header));
   for (const row of rows) console.log(line(row));
-  const skipped = PROVIDERS.filter((entry) => !configured.includes(entry)).map((entry) => entry.provider);
+  const skipped = PROVIDERS.filter((provider) => !configured.includes(provider));
   if (skipped.length) console.log(`skipped (no key): ${skipped.join(", ")}`);
   process.exit(failures > 0 ? 1 : 0);
 }

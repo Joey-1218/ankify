@@ -44,7 +44,7 @@ Each day the popup and `/suggestions` offer a problem you haven't attempted, cho
 
 ### Session analysis, with your own key (optional)
 
-After a session, ankileet can explain why it went wrong: it reads your attempts, code diffs, and judge output, and suggests mistakes for you to confirm. Nothing counts toward your profile until you do. Analysis runs only on your own Anthropic, OpenAI, DeepSeek, or Google Gemini key, never on a shared one. Keys are encrypted with AES-256-GCM before they reach the database.
+After a session, ankileet can explain why it went wrong: it reads your attempts, code diffs, and judge output, and suggests mistakes for you to confirm. Nothing counts toward your profile until you do. Analysis runs only on your own Anthropic, OpenAI, DeepSeek, or Google Gemini key, never on a shared one: choose the provider, paste the key, and ankileet checks it and picks that provider's fast, low-cost model for you. Keys are encrypted with AES-256-GCM before they reach the database.
 
 ### See what's about to slip
 

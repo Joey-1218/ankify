@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { expect } from "./fixtures";
+import { expect, type Api } from "./fixtures";
 import type { LeetcodeFixtureState } from "./leetcode-fixture";
 
 // Playwright restarts its worker after a failure, which reloads this module.
@@ -30,4 +30,17 @@ export async function openPanel(page: Page) {
 export async function focus(page: Page) {
   await page.bringToFront();
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
+}
+
+/**
+ * Verifies and saves the QA user's own DeepSeek key, answered by the e2e
+ * server's fake provider. A key is stored only through verification.
+ */
+export async function useOwnKey(api: Api) {
+  expect(await api("/api/settings/ai-key", { body: { provider: "deepseek", apiKey: "e2e-own-key" } })).toMatchObject({ ok: true });
+}
+
+/** Removes the QA user's own key. */
+export async function removeOwnKey(api: Api) {
+  await api("/api/settings/ai-key", { method: "DELETE" });
 }

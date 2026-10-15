@@ -175,14 +175,18 @@ beforeEach(async () => {
     { id: USER, name: "Owner", email: "analysis@example.test" },
     { id: OTHER, name: "Other", email: "analysis-other@example.test" },
   ]);
-  await setAiSettings(USER, { provider: "openai", model: "gpt-test", apiKey: "sk-user" });
+  // A model checked just now: the worker doesn't read the provider's list.
+  await setAiSettings(USER, { provider: "openai", model: "gpt-test", apiKey: "sk-user", modelCheckedAt: new Date().toISOString() });
   // Automatic analysis is on by default; only its own tests turn it on here.
   vi.stubEnv("ANKILEET_AUTOMATIC_ANALYSIS", "disabled");
   vi.mocked(dispatchAiJob).mockReset().mockResolvedValue(undefined);
   vi.mocked(buildModel).mockReset();
   useModel(FINDINGS);
 });
-afterEach(() => vi.unstubAllEnvs());
+afterEach(() => {
+  vi.unstubAllEnvs();
+  vi.unstubAllGlobals();
+});
 afterAll(() => testDb.cleanup());
 
 describe("manual analysis", () => {
@@ -344,13 +348,58 @@ describe("manual analysis", () => {
     expect(await candidates(sessionId)).toEqual([]);
   });
 
-  it("fails a job whose provider or model changed after it was queued", async () => {
+  it("fails a job whose provider changed after it was queued", async () => {
     const { sessionId } = await session(["Wrong Answer", "Accepted"]);
     const created = await analyze(sessionId);
-    await setAiSettings(USER, { provider: "openai", model: "gpt-other", apiKey: "sk-user" });
+    await setAiSettings(USER, { provider: "anthropic", model: "claude-test", apiKey: "sk-ant-user", modelCheckedAt: new Date().toISOString() });
     await processAiJob(created.id, "worker-1");
     expect(await job(created.id)).toMatchObject({ status: "failed", errorCode: "ai_configuration_changed" });
     expect(provider.doGenerateCalls).toHaveLength(0);
+  });
+
+  it("runs a job on the newer model the server picked after it was queued", async () => {
+    const { sessionId } = await session(["Wrong Answer", "Accepted"]);
+    const created = await analyze(sessionId);
+    await setAiSettings(USER, { provider: "openai", model: "gpt-other", modelCheckedAt: new Date().toISOString() });
+    await processAiJob(created.id, "worker-1");
+    expect(await job(created.id)).toMatchObject({ status: "succeeded", model: "gpt-other" });
+    expect(vi.mocked(buildModel).mock.calls[0]![0]).toMatchObject({ model: "gpt-other" });
+    expect((await analyses())[0]).toMatchObject({ model: "gpt-other" });
+  });
+
+  it("picks the model again from the provider's list once a week", async () => {
+    await setAiSettings(USER, { provider: "openai", model: "gpt-5.5", modelCheckedAt: new Date(Date.now() - 8 * 24 * 60 * MIN).toISOString() });
+    const fetchMock = vi.fn(async () => Response.json({ data: [{ id: "gpt-5.5" }, { id: "gpt-5.4-mini" }, { id: "gpt-5.6-mini" }] }));
+    vi.stubGlobal("fetch", fetchMock);
+    const { sessionId } = await session(["Wrong Answer", "Accepted"]);
+    const created = await analyze(sessionId);
+    await processAiJob(created.id, "worker-1");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(await job(created.id)).toMatchObject({ status: "succeeded", model: "gpt-5.6-mini" });
+    const [settingsRow] = await getDb().select().from(schema.settings).where(and(eq(schema.settings.userId, USER), eq(schema.settings.key, "ai")));
+    expect(settingsRow!.value).toMatchObject({ model: "gpt-5.6-mini" });
+    expect(Date.now() - Date.parse((settingsRow!.value as { modelCheckedAt: string }).modelCheckedAt)).toBeLessThan(MIN);
+  });
+
+  it("keeps the stored model when the provider's list can't be read", async () => {
+    await setAiSettings(USER, { provider: "openai", model: "gpt-5.4-mini", modelCheckedAt: undefined });
+    vi.stubGlobal("fetch", vi.fn(async () => { throw new TypeError("fetch failed"); }));
+    const { sessionId } = await session(["Wrong Answer", "Accepted"]);
+    const created = await analyze(sessionId);
+    await processAiJob(created.id, "worker-1");
+    expect(await job(created.id)).toMatchObject({ status: "succeeded", model: "gpt-5.4-mini" });
+  });
+
+  it("picks a new model and retries once when the provider retired the stored one", async () => {
+    const retired = new APICallError({ message: "The model `gpt-test` does not exist", url: "https://api.openai.com/v1/chat/completions", requestBodyValues: {}, statusCode: 404, isRetryable: false });
+    useModel(retired, FINDINGS);
+    vi.stubGlobal("fetch", vi.fn(async () => Response.json({ data: [{ id: "gpt-5.4-mini" }] })));
+    const { sessionId } = await session(["Wrong Answer", "Accepted"]);
+    const created = await analyze(sessionId);
+    await processAiJob(created.id, "worker-1");
+    expect(provider.doGenerateCalls).toHaveLength(2);
+    expect(vi.mocked(buildModel).mock.calls.map((call) => call[0].model)).toEqual(["gpt-test", "gpt-5.4-mini"]);
+    expect(await job(created.id)).toMatchObject({ status: "succeeded", model: "gpt-5.4-mini" });
   });
 
   it("refuses open sessions, sessions without code, and other users' sessions", async () => {

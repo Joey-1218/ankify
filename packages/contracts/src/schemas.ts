@@ -14,6 +14,13 @@ export const submissionStatusEnum = z.enum([
 
 export const aiProviderEnum = z.enum(["anthropic", "openai", "deepseek", "google"]);
 export const aiReasoningModeEnum = z.enum(["fast", "thinking"]);
+
+/** POST /api/settings/ai-key: verify a key for a provider and save it if it works.
+ *  Without `apiKey`, the key already stored for that provider is verified again. */
+export const aiKeyRequestSchema = z.object({
+  provider: aiProviderEnum,
+  apiKey: z.string().trim().min(1).max(512).optional(),
+});
 export const cardAiStatusEnum = z.enum(["candidate", "failed", "ready"]);
 export const quizSessionStatusEnum = z.enum(["active", "completed", "archived"]);
 export const quizItemSourceEnum = z.enum(["statement", "submission", "notes", "card"]);

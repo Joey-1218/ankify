@@ -1,127 +1,126 @@
-import { generateText, Output, tool } from "ai";
+import { generateText, Output } from "ai";
 import { z } from "zod";
-import type { AiProvider } from "@ankileet/core";
+import { aiProviderName } from "@/lib/ai-providers";
 import { buildModel } from "./ai";
 import { safeErrorForLog } from "./ai-errors";
+import { resolveAnalysisModels, type ModelProvider } from "./ai-model-choice";
 import { markAiVerified } from "./onboarding";
 import { decryptSecret } from "./secret-box";
 import { getAiSettings, setAiSettings } from "./settings";
 
 const probeSchema = z.object({ ok: z.literal(true) });
+const VERIFY_TIMEOUT_MS = 175_000;
 
-type TestAiConnectionInput = {
-  provider?: Exclude<AiProvider, "">;
-  model?: string;
+type VerifyAiKeyInput = {
+  provider: ModelProvider;
+  /** Omitted to verify the key already stored for this provider again. */
   apiKey?: string;
-  saveOnSuccess?: boolean;
 };
 
-type MissingConfigurationResult = {
-  ok: false;
-  code: "missing_provider" | "missing_model" | "missing_api_key";
-};
-
-type TestAiConnectionResult =
-  | MissingConfigurationResult
-  | {
-      ok: true;
-      provider: Exclude<AiProvider, "">;
-      model: string;
-      saved: boolean;
-      latencyMs: number;
-    }
+export type VerifyAiKeyResult =
+  | { ok: true; provider: ModelProvider; model: string; latencyMs: number }
   | {
       ok: false;
       code: string;
       message: string;
-      provider: Exclude<AiProvider, "">;
-      model: string;
-      latencyMs: number;
+      provider: ModelProvider;
+      /** For `key_provider_mismatch`: the provider the key appears to belong to. */
+      detectedProvider?: ModelProvider;
     };
 
-export async function testAiConnection(
-  userId: string,
-  input: TestAiConnectionInput,
-): Promise<TestAiConnectionResult> {
+/**
+ * Checks a key against its provider and stores it only if it works: the
+ * provider's model list is read with the key, the fast-tier models are tried
+ * in order with one structured-output call (the shape session analysis
+ * uses), and the first that answers is saved with the key. Nothing is stored
+ * on failure, so a key entered under the wrong provider never looks
+ * configured.
+ */
+export async function verifyAndSaveAiKey(userId: string, input: VerifyAiKeyInput): Promise<VerifyAiKeyResult> {
+  const { provider } = input;
   const stored = await getAiSettings(userId);
-  const provider = input.provider ?? (stored.provider || undefined);
-  const model = input.model ?? (stored.model || undefined);
   const apiKey =
     input.apiKey ??
-    (provider === stored.provider && stored.encryptedApiKey
-      ? safeDecrypt(stored.encryptedApiKey)
-      : undefined);
-
-  if (!provider) return { ok: false, code: "missing_provider" };
-  if (!model) return { ok: false, code: "missing_model" };
-  if (!apiKey) return { ok: false, code: "missing_api_key" };
+    (provider === stored.provider && stored.encryptedApiKey ? safeDecrypt(stored.encryptedApiKey) : undefined);
+  if (!apiKey) {
+    return { ok: false, code: "missing_api_key", message: "Add an API key for this provider.", provider };
+  }
 
   const startedAt = Date.now();
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 175_000);
-
+  const timer = setTimeout(() => controller.abort(), VERIFY_TIMEOUT_MS);
   try {
-    const llm = buildModel({ provider, model, apiKey }, { disableThinking: true });
-    await generateText({
-      model: llm,
-      output: Output.object({ schema: probeSchema }),
-      system: "You are a connection probe. Respond with {\"ok\": true}.",
-      prompt: 'Respond with the JSON object {"ok": true} and nothing else.',
-      temperature: 0,
-      abortSignal: controller.signal,
-    });
-    const toolProbe = await generateText({
-      model: llm,
-      prompt: "Call confirm_connection with ok=true.",
-      tools: {
-        confirm_connection: tool({
-          description: "Confirm that this model supports tool calling.",
-          inputSchema: probeSchema,
-          execute: async ({ ok }) => ({ ok }),
-        }),
-      },
-      toolChoice: { type: "tool", toolName: "confirm_connection" },
-      temperature: 0,
-      abortSignal: controller.signal,
-    });
-    if (toolProbe.toolResults.length !== 1) throw new Error("tool_call_not_supported");
+    const resolved = await resolveAnalysisModels(provider, apiKey, controller.signal);
+    if (!resolved.ok) return keyRejected(provider, apiKey);
 
-    if (input.saveOnSuccess) {
-      await setAiSettings(userId, {
-        provider,
-        model,
-        reasoningMode: provider === stored.provider ? stored.reasoningMode : "fast",
-        apiKey: input.apiKey,
-      });
+    let failure: { code: string; message: string } | null = null;
+    for (const model of resolved.candidates) {
+      try {
+        await generateText({
+          model: buildModel({ provider, model, apiKey }, { disableThinking: true }),
+          output: Output.object({ schema: probeSchema }),
+          system: "You are a connection probe. Respond with {\"ok\": true}.",
+          prompt: 'Respond with the JSON object {"ok": true} and nothing else.',
+          temperature: 0,
+          maxRetries: 0,
+          abortSignal: controller.signal,
+        });
+      } catch (error) {
+        console.warn("[ai-key] provider probe failed", safeErrorForLog(error));
+        failure = classifyAiError(error);
+        if (failure.code === "invalid_api_key") return keyRejected(provider, apiKey);
+        // This model is unavailable to the key, or busy; the next one may not be.
+        if (failure.code === "model_not_found" || failure.code === "forbidden" || failure.code === "provider_unavailable") continue;
+        return { ok: false, ...failure, provider };
+      }
+
+      await setAiSettings(userId, { provider, model, apiKey, modelCheckedAt: new Date().toISOString() });
       await markAiVerified(userId);
-    } else if (
-      input.apiKey === undefined &&
-      provider === stored.provider &&
-      model === stored.model &&
-      stored.encryptedApiKey
-    ) {
-      await markAiVerified(userId);
+      return { ok: true, provider, model, latencyMs: Date.now() - startedAt };
     }
-
-    return {
-      ok: true,
-      provider,
-      model,
-      saved: Boolean(input.saveOnSuccess),
-      latencyMs: Date.now() - startedAt,
-    };
-  } catch (error) {
-    console.warn("[ai-test] provider probe failed", safeErrorForLog(error));
+    if (failure?.code === "provider_unavailable") return { ok: false, ...failure, provider };
     return {
       ok: false,
-      ...classifyAiError(error),
+      code: "no_usable_model",
+      message: `${aiProviderName(provider)} accepted the key but none of its fast models answered. Check the key's model access.`,
       provider,
-      model,
-      latencyMs: Date.now() - startedAt,
     };
   } finally {
     clearTimeout(timer);
   }
+}
+
+/**
+ * The provider a key's prefix names, when the prefix is unambiguous. Plain
+ * `sk-` keys are left alone except DeepSeek's `sk-` + 32 lowercase hex, which
+ * no OpenAI key format uses.
+ */
+export function detectKeyProvider(apiKey: string): ModelProvider | null {
+  const key = apiKey.trim();
+  if (key.startsWith("sk-ant-")) return "anthropic";
+  if (key.startsWith("AIza")) return "google";
+  if (/^sk-(proj|svcacct|admin)-/.test(key)) return "openai";
+  if (/^sk-[0-9a-f]{32}$/.test(key)) return "deepseek";
+  return null;
+}
+
+function keyRejected(provider: ModelProvider, apiKey: string): VerifyAiKeyResult {
+  const detected = detectKeyProvider(apiKey);
+  if (detected && detected !== provider) {
+    return {
+      ok: false,
+      code: "key_provider_mismatch",
+      message: `${aiProviderName(provider)} rejected this key. It looks like a ${aiProviderName(detected)} key.`,
+      provider,
+      detectedProvider: detected,
+    };
+  }
+  return {
+    ok: false,
+    code: "invalid_api_key",
+    message: `${aiProviderName(provider)} rejected this key. Check that it is a ${aiProviderName(provider)} key, or choose another provider.`,
+    provider,
+  };
 }
 
 function safeDecrypt(
@@ -134,9 +133,17 @@ function safeDecrypt(
   }
 }
 
-function classifyAiError(error: unknown): { code: string; message: string } {
+export function classifyAiError(error: unknown): { code: string; message: string } {
   const raw = error instanceof Error ? error.message : String(error);
   const lower = raw.toLowerCase();
+  const status = (error as { statusCode?: unknown } | null)?.statusCode;
+  if (status === 401) return { code: "invalid_api_key", message: "API key was rejected by the provider." };
+  if (status === 403) return { code: "forbidden", message: "API key does not have access to this model." };
+  if (status === 404) return { code: "model_not_found", message: "Model id was not recognized by the provider." };
+  if (status === 429) return { code: "quota_or_rate_limit", message: "Provider returned a rate limit or quota error." };
+  if (typeof status === "number" && status >= 500) {
+    return { code: "provider_unavailable", message: "The provider is busy or unavailable right now. Try again in a minute." };
+  }
 
   if (lower.includes("aborted") || lower.includes("timeout")) {
     return { code: "timeout", message: "Provider did not respond within 3 minutes." };
@@ -145,6 +152,7 @@ function classifyAiError(error: unknown): { code: string; message: string } {
     lower.includes("401") ||
     lower.includes("unauthorized") ||
     lower.includes("invalid api key") ||
+    lower.includes("incorrect api key") ||
     lower.includes("api key not valid") ||
     lower.includes("authentication")
   ) {
@@ -157,6 +165,7 @@ function classifyAiError(error: unknown): { code: string; message: string } {
     lower.includes("404") ||
     lower.includes("not found") ||
     lower.includes("model_not_found") ||
+    lower.includes("model not exist") ||
     lower.includes("does not exist")
   ) {
     return { code: "model_not_found", message: "Model id was not recognized by the provider." };

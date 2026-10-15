@@ -5,7 +5,7 @@ import { installLeetcodeFixture, type LeetcodeFixtureState } from "./leetcode-fi
 export const API_ORIGIN = "http://localhost:4317";
 export const EXTENSION_PATH = resolve("apps/extension/dist-e2e");
 
-type Api = <T>(path: string, init?: { body?: unknown; method?: string }) => Promise<T>;
+export type Api = <T>(path: string, init?: { body?: unknown; method?: string }) => Promise<T>;
 
 export async function launchExtensionContext(userDataDir = "") {
   const context = await chromium.launchPersistentContext(userDataDir, {

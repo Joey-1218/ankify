@@ -37,16 +37,33 @@ const FAKE_ANALYSIS = {
     { category: "complexity", cause: "The first version rescanned the string.", nextStep: null, confidence: "low", evidence: [{ attempt: "S2", startLine: null, endLine: null }] },
   ],
 };
+// It accepts any key except "e2e-rejected-key", lists two DeepSeek models
+// (Settings verifies a key against the list, then with a connection probe),
+// and answers the probe with {"ok": true}.
+const REJECTED_KEY = "e2e-rejected-key";
 const fakeProvider = createServer((req, res) => {
+  if (req.headers.authorization === `Bearer ${REJECTED_KEY}`) {
+    res.writeHead(401, { "content-type": "application/json" }).end(JSON.stringify({ error: { message: "Authentication Fails", type: "authentication_error" } }));
+    return;
+  }
+  if (req.method === "GET" && req.url?.endsWith("/models")) {
+    res.writeHead(200, { "content-type": "application/json" }).end(JSON.stringify({
+      object: "list",
+      data: [{ id: "deepseek-v4-pro", object: "model" }, { id: "deepseek-v4-flash", object: "model" }],
+    }));
+    return;
+  }
   if (req.method !== "POST" || !req.url?.endsWith("/chat/completions")) {
     res.writeHead(404).end();
     return;
   }
-  req.resume();
+  let body = "";
+  req.on("data", (chunk) => (body += chunk));
   req.on("end", () => {
+    const content = body.includes("connection probe") ? { ok: true } : FAKE_ANALYSIS;
     res.writeHead(200, { "content-type": "application/json" }).end(JSON.stringify({
       id: "fake-completion", object: "chat.completion", created: Math.floor(Date.now() / 1000), model: "fake",
-      choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(FAKE_ANALYSIS) }, finish_reason: "stop" }],
+      choices: [{ index: 0, message: { role: "assistant", content: JSON.stringify(content) }, finish_reason: "stop" }],
       usage: { prompt_tokens: 1000, completion_tokens: 80, total_tokens: 1080 },
     }));
   });

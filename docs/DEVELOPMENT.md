@@ -73,7 +73,7 @@ extension reuses that session. A bare production build without
 | `pnpm typecheck`, `pnpm lint` | All packages; web lint allows its 5 known warnings |
 | `pnpm test:e2e` | Playwright on bundled Chromium (run `pnpm test:e2e:install` once): ~47 browser tests with the real extension, an isolated QA server, a LeetCode fixture, a fake AI provider, and axe accessibility checks |
 | `pnpm test:visual` | Screenshot regression for the panel, popup, and web pages, light and dark (baselines in `tests/visual/__screenshots__`) |
-| `pnpm qa:provider-smoke` | One real analysis per provider key in `.env.smoke.local` (`SMOKE_DEEPSEEK_API_KEY`, `SMOKE_OPENAI_API_KEY`, `SMOKE_ANTHROPIC_API_KEY`, `SMOKE_GOOGLE_API_KEY`, optional `SMOKE_<P>_MODEL`), plus an invalid-key check. All four passed on 2026-10-01 |
+| `pnpm qa:provider-smoke` | One real analysis per provider key in `.env.smoke.local` (`SMOKE_DEEPSEEK_API_KEY`, `SMOKE_OPENAI_API_KEY`, `SMOKE_ANTHROPIC_API_KEY`, `SMOKE_GOOGLE_API_KEY`, optional `SMOKE_<P>_MODEL` to pin a model; otherwise the key goes through Settings' verify-and-save and the model is auto-picked), plus an invalid-key check. All four passed on 2026-10-01; on 2026-10-15 DeepSeek passed (auto-picked `deepseek-flash`), the OpenAI and Anthropic keys were rejected (401, replace them), and Gemini answered 503 "high demand" |
 | `ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com pnpm release:check` | The full gate before merging to main |
 
 Keep deliberate-concurrency DB tests in `*.concurrency.test.ts` files: local
@@ -114,7 +114,9 @@ after user-visible changes:
    DevTools), then submit, finish, and rate: each says it's saved and will
    sync; after restarting with `pnpm dev:qa --keep-data`, it lands once. Queued work never syncs to a
    different ankileet account; it waits for the first one.
-6. **Analysis:** with your own key saved in Settings, Analyze session (or let
+6. **Analysis:** in Settings choose a provider, then add its key (Back
+   returns to the provider choice). A key the provider rejects is not saved;
+   a working one shows the auto-picked analysis model. Then Analyze session (or let
    automatic analysis run ~15 s after Finish); suggested mistakes can be
    confirmed, recategorized, or dismissed and count only once confirmed. An
    invalid key fails at once with a clear message.

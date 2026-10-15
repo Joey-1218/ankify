@@ -5,21 +5,15 @@ import {
   getAnalysisSettings,
   getGenerationSettings,
   getReviewSettings,
-  setAiSettings,
   setAnalysisSettings,
   setGenerationSettings,
   setReviewSettings,
 } from "@/server/settings";
 import { getRequestSessionUser, unauthorizedResponse } from "@/server/auth";
-import { aiProviderEnum, aiReasoningModeEnum } from "@ankileet/contracts";
 import { isValidTimeZone } from "@/server/time-zone";
 
 const settingsSchema = z
   .object({
-    provider: aiProviderEnum.optional(),
-    model: z.string().min(1).optional(),
-    reasoningMode: aiReasoningModeEnum.optional(),
-    apiKey: z.string().optional(),
     dailyReviewLimit: z.number().int().min(1).max(100).optional(),
     initialReviewDelayHours: z.number().int().min(1).max(168).optional(),
     timeZone: z.string().max(128).refine(isValidTimeZone, "Invalid IANA time zone.").optional(),
@@ -32,10 +26,10 @@ const settingsSchema = z
       value.initialReviewDelayHours != null ||
       value.timeZone != null ||
       value.generationLanguage != null ||
-      value.analysisAutomatic != null ||
-      Boolean(value.provider && value.model),
+      value.analysisAutomatic != null,
     {
-      message: "Provide AI provider/model, review settings, or generation settings.",
+      // AI keys are saved only after verification: POST /api/settings/ai-key.
+      message: "Provide review, generation, or analysis settings.",
     },
   );
 
@@ -54,7 +48,6 @@ export async function GET(req: Request) {
     ai: {
       provider: ai.provider,
       model: ai.model,
-      reasoningMode: ai.reasoningMode,
       hasApiKey: Boolean(ai.encryptedApiKey),
     },
     review,
@@ -71,14 +64,6 @@ export async function POST(req: Request) {
   const parsed = settingsSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json({ error: "invalid_payload", issues: parsed.error.issues }, { status: 400 });
-  }
-  if (parsed.data.provider && parsed.data.model) {
-    await setAiSettings(user.id, {
-      provider: parsed.data.provider,
-      model: parsed.data.model,
-      reasoningMode: parsed.data.reasoningMode,
-      apiKey: parsed.data.apiKey,
-    });
   }
   if (parsed.data.dailyReviewLimit != null || parsed.data.timeZone != null || parsed.data.initialReviewDelayHours != null) {
     await setReviewSettings(user.id, {

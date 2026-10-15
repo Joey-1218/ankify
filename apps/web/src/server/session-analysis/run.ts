@@ -11,6 +11,7 @@ import { getDb, schema, type AiJob } from "@ankileet/db";
 import { generateText, NoObjectGeneratedError, Output } from "ai";
 import { and, eq, ne } from "drizzle-orm";
 import { buildModel, providerCallOptions } from "../ai";
+import { ensureCurrentAnalysisModel, isModelNotFoundError } from "../ai-model-choice";
 import { nonRetryableJobError } from "../ai-generation/errors";
 import { loadRunningJob, markSucceeded } from "../ai-generation/jobs";
 import { isWorkflowEnabled } from "../features";
@@ -40,14 +41,17 @@ export async function runSessionAnalysisJob(job: AiJob, input: AnalyzeInput) {
   if (!isWorkflowEnabled("session_analysis")) {
     throw nonRetryableJobError("workflow_disabled", "Session analysis is temporarily unavailable.");
   }
-  const ai = await getOwnAiRuntimeSettings(job.userId);
-  if (!ai) throw nonRetryableJobError("own_key_required", "Add your own AI key in Settings to analyze sessions.");
-  if (ai.provider !== job.provider || ai.model !== job.model) {
+  const own = await getOwnAiRuntimeSettings(job.userId);
+  if (!own) throw nonRetryableJobError("own_key_required", "Add your own AI key in Settings to analyze sessions.");
+  // The model is the server's pick and may move to a newer one between
+  // creation and execution; only a provider change invalidates the job.
+  if (own.provider !== job.provider) {
     throw nonRetryableJobError("ai_configuration_changed", "Your AI settings changed. Analyze the session again.");
   }
   const evidence = await loadAnalysisEvidence(getDb(), job.userId, input.practiceSessionId);
   if (!evidence) throw nonRetryableJobError("session_not_found", "The practice session no longer exists.");
   if (!hasAnalyzableCode(evidence.attempts)) throw nonRetryableJobError("insufficient_evidence", "No submitted code was captured for this session.");
+  let ai = await ensureCurrentAnalysisModel(job.userId, own);
 
   // Another job may have analyzed exactly this evidence meanwhile.
   const cached = await findCachedAnalysis(getDb(), job.userId, evidence, ai);
@@ -58,12 +62,21 @@ export async function runSessionAnalysisJob(job: AiJob, input: AnalyzeInput) {
 
   const language = job.generationLanguage === "zh" ? "zh" : "en";
   const { system, prompt, coverage, attempts } = buildAnalysisPrompt(evidence, language);
-  const { output, usage } = await callAnalyzer(ai, system, prompt);
-  await commitAnalysis(job, evidence, coverage, toAnalysisResult(output, attempts), usage, ai);
+  let analyzed;
+  try {
+    analyzed = await callAnalyzer(ai, system, prompt);
+  } catch (error) {
+    if (!isModelNotFoundError(error)) throw error;
+    // The provider retired the model: pick again and retry once on the new one.
+    const repicked = await ensureCurrentAnalysisModel(job.userId, ai, { force: true });
+    if (repicked.model === ai.model) throw error;
+    ai = repicked;
+    analyzed = await callAnalyzer(ai, system, prompt);
+  }
+  await commitAnalysis(job, evidence, coverage, toAnalysisResult(analyzed.output, attempts), analyzed.usage, ai);
 }
 
 async function callAnalyzer(ai: AiRuntimeSettings, system: string, prompt: string) {
-  const usesDeepSeekThinking = ai.provider === "deepseek" && ai.reasoningMode === "thinking";
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), ANALYSIS_TIMEOUT_MS);
   try {
@@ -75,7 +88,7 @@ async function callAnalyzer(ai: AiRuntimeSettings, system: string, prompt: strin
       ...providerCallOptions(ai, ANALYSIS_OUTPUT_TOKENS),
       // One provider call per job attempt; the job allows three attempts.
       maxRetries: 0,
-      ...(!usesDeepSeekThinking ? { temperature: 0.2 } : {}),
+      temperature: 0.2,
       abortSignal: controller.signal,
     });
     return {
@@ -161,6 +174,10 @@ async function commitAnalysis(
       return;
     }
     const analysisId = `sa_${job.id}`;
+    if (job.model !== ai.model) {
+      // The job ran on a newer model than the one it was created with.
+      await tx.update(schema.aiJobs).set({ model: ai.model }).where(and(eq(schema.aiJobs.id, job.id), eq(schema.aiJobs.userId, job.userId)));
+    }
     const m = schema.mistakeRecords;
     // A newer analysis replaces the earlier ones' open suggestions for this
     // session; what the user confirmed or dismissed stays.

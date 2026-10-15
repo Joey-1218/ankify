@@ -1,7 +1,7 @@
 import type { BrowserContext, Page } from "@playwright/test";
 import type { PracticeSessionCurrentDto, ProblemsListPayloadDto, SessionAnalysisStateDto, SuggestionListDto } from "../../packages/contracts/src";
 import { API_ORIGIN, test, expect } from "./fixtures";
-import { newProblem } from "./helpers";
+import { newProblem, removeOwnKey, useOwnKey } from "./helpers";
 import type { LeetcodeFixtureState } from "./leetcode-fixture";
 
 // Web surfaces of the extension-first workflow, signed in as the QA user
@@ -45,12 +45,49 @@ async function finishedSession(api: Api, leetcode: LeetcodeFixtureState, name: s
 }
 
 test.afterEach(async ({ api, context }) => {
-  await api("/api/settings", { body: { analysisAutomatic: false, initialReviewDelayHours: 24, provider: "deepseek", model: "deepseek-chat", apiKey: "" } });
+  await api("/api/settings", { body: { analysisAutomatic: false, initialReviewDelayHours: 24 } });
+  await removeOwnKey(api);
   await context.addCookies([{ name: "ankileet-language", value: "en", url: API_ORIGIN }]);
 });
 
+test("settings add a key in two steps and never store one the provider rejects", async ({ context, api }) => {
+  // A known start whatever ran before: DeepSeek chosen, no key stored.
+  await useOwnKey(api);
+  await removeOwnKey(api);
+  const page = await openWeb(context, "/settings");
+  const ai = page.getByRole("region", { name: "AI provider" });
+
+  // A removed key keeps its provider, so the form opens on the key step.
+  // Back returns to the provider choice; a wrong pick can be undone too.
+  await expect(ai.getByText("Provider: DeepSeek")).toBeVisible();
+  await ai.getByRole("button", { name: "Back" }).click();
+  await ai.getByRole("button", { name: "OpenAI" }).click();
+  await expect(ai.getByText("Provider: OpenAI")).toBeVisible();
+  await ai.getByRole("button", { name: "Back" }).click();
+  await ai.getByRole("button", { name: "DeepSeek" }).click();
+  await expect(ai.getByText("Provider: DeepSeek")).toBeVisible();
+  await expect(ai.getByRole("combobox")).toHaveCount(0);
+
+  // Step 2: the fake provider rejects this key, so nothing is stored.
+  await ai.getByLabel("DeepSeek API key").fill("e2e-rejected-key");
+  await ai.getByRole("button", { name: "Verify and save" }).click();
+  await expect(ai.getByRole("alert")).toContainText("DeepSeek rejected this key");
+  expect((await api<{ ai: { hasApiKey: boolean } }>("/api/settings")).ai.hasApiKey).toBe(false);
+
+  await ai.getByLabel("DeepSeek API key").fill("e2e-own-key");
+  await ai.getByRole("button", { name: "Verify and save" }).click();
+  await expect(ai.getByText("Key verified and saved.")).toBeVisible({ timeout: 30_000 });
+  await expect(ai.getByText("deepseek-v4-flash")).toBeVisible();
+  expect((await api<{ ai: { provider: string; model: string; hasApiKey: boolean } }>("/api/settings")).ai).toEqual({
+    provider: "deepseek",
+    model: "deepseek-v4-flash",
+    hasApiKey: true,
+  });
+  await page.close();
+});
+
 test("settings save the first-review delay and, with the user's own key, automatic analysis", async ({ context, api }) => {
-  await api("/api/settings", { body: { provider: "deepseek", model: "deepseek-chat", apiKey: "" } });
+  await removeOwnKey(api);
   const page = await openWeb(context, "/settings");
   const analysis = page.getByRole("region", { name: "Session analysis" });
   await expect(analysis.getByText("Add your own AI provider key above. Every finished session, first practice or review, is then analyzed automatically.")).toBeVisible({ timeout: 30_000 });
@@ -60,7 +97,7 @@ test("settings save the first-review delay and, with the user's own key, automat
   await expect(page.getByRole("status").filter({ hasText: "Saved" }).first()).toBeVisible();
   expect((await api<Settings>("/api/settings")).review.initialReviewDelayHours).toBe(48);
 
-  await api("/api/settings", { body: { provider: "deepseek", model: "deepseek-chat", apiKey: "e2e-own-key" } });
+  await useOwnKey(api);
   await page.reload();
   await expect(page.getByLabel("First review after (hours)")).toHaveValue("48");
   // This spec's setup switched it off; it is on by default (unit-tested). There is no daily cap to set.
@@ -122,7 +159,7 @@ test("the suggestions page acts on the same items as the popup", async ({ contex
 test("the mistake profile lists analysis suggestions apart and counts one only once confirmed", async ({ context, api, leetcode }) => {
   // A finished session with three attempts, analyzed with the user's own key
   // (the harness answers from its fake provider).
-  await api("/api/settings", { body: { provider: "deepseek", model: "deepseek-chat", apiKey: "e2e-own-key" } });
+  await useOwnKey(api);
   const { sessionId, title } = await finishedSession(api, leetcode, "web-profile");
   await api("/api/ai-jobs", { body: { action: "session_analyze", practiceSessionId: sessionId, requestId: crypto.randomUUID() } });
   await expect.poll(async () => (await api<SessionAnalysisStateDto>(`/api/practice-sessions/${sessionId}/analysis`)).job?.status, { timeout: 30_000 }).toBe("succeeded");

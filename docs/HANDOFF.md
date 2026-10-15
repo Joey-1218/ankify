@@ -9,7 +9,7 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
 [DEVELOPMENT.md](DEVELOPMENT.md) (run and test it),
 [DEPLOYMENT.md](DEPLOYMENT.md) (ship it).
 
-## State (2026-10-13)
+## State (2026-10-15)
 
 - **Live:** `https://ankileet.com` on Vercel (`iad1`) with Turso
   (`aws-us-east-1`), all 26 migrations applied. Google sign-in, practice
@@ -65,6 +65,16 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
   whole active deck loads at once so sorting is correct past 100 problems;
   new sorts and columns for date added, last practiced, LeetCode number, and
   times practiced; the sort is kept in the URL.
+- **AI key setup fix** (2026-10-15): a tester saved a DeepSeek key while
+  Settings still said OpenAI / gpt-5.5. Save stored provider, model, and key
+  without checking them, so the key was sent to OpenAI and analysis failed.
+  Now Settings and onboarding ask for a provider first, then its key (with
+  Back), and store the key only after the provider accepts it. A key that looks like another provider's
+  gets "Use X instead". There is no model field: the server picks the
+  provider's fast model from its live list and re-checks it weekly. Existing
+  users move to the picked model before their next analysis. The DeepSeek
+  Fast/Thinking toggle is gone. See ARCHITECTURE.md, "Adding a key" and
+  "Model choice".
 
 Planning documents that drove this work (the refactor plan and its
 checkpoint log, the next-phase plan, the mistake-profile and daily-feed
@@ -222,6 +232,13 @@ web side that ships with it):
   deployment". The owner's account may still show one stale active Two Sum
   voluntary session (started 2026-10-12 21:55 UTC) from the merge; finishing
   or abandoning it is harmless.
+- **Analysis model choice depends on provider naming.** The rules in
+  `server/ai-model-choice.ts` (Haiku, GPT `-mini`, Gemini Flash, DeepSeek
+  Flash) assume the fast tier keeps those family names; if a provider renames
+  it, the pick falls back to `FALLBACK_ANALYSIS_MODEL`. `pnpm
+  qa:provider-smoke` shows each provider's live pick. On 2026-10-15 the smoke
+  keys for OpenAI and Anthropic were rejected (401) and need replacing in
+  `.env.smoke.local`; Gemini answered 503 "high demand" that day.
 - `@ai-sdk/google` is pinned to `4.0.50`: newer releases target a newer
   provider spec than `ai@7.0.58` and fail typecheck. Upgrade all `ai` and
   `@ai-sdk/*` packages together.
