@@ -17,10 +17,14 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
   verified end to end in Production.
 - **Extension 0.3.0:** **published** on the Chrome Web Store on 2026-10-15
   ([listing](https://chromewebstore.google.com/detail/ankileet/ghkeifmaeopfjhnhakkeeafkalagndnj), ID `ghkeifmaeopfjhnhakkeeafkalagndnj`).
-  Production accepts both the store ID and the unpacked ID. While the Google
-  OAuth app is in Testing mode, only listed test users can sign in.
-- **Gate:** `pnpm release:check` passes: about 520 unit tests, 47 browser
-  tests, builds, manifest check; the audit leaves only low/moderate advisories.
+  Production accepts both the store ID and the unpacked ID. The Google OAuth
+  app is published (In production), so anyone with a Google account can sign
+  in; no test-user list.
+- **Gate:** `pnpm release:check` passes: 557 unit tests, 54 browser tests,
+  7 screenshot tests, builds, manifest check; the audit leaves only
+  low/moderate advisories. Git worktrees under `.claude/worktrees/` make the
+  root `eslint .` and vitest scan their copies, so remove them before running
+  the gate.
 - **Product scope:** spaced repetition of whole LeetCode problems. The
   extension tracks practice sessions on leetcode.com; FSRS-6 schedules each
   problem; finished sessions can be analyzed on the user's own AI key; the
@@ -90,10 +94,6 @@ designs, the paid-credits audit, the manual test guide) were retired on
 
 ### Now that the extension is public
 
-- **Publish the Google OAuth app** (Google Auth Platform → Audience → Publish
-  app, External). In Testing mode, anyone not listed as a test user is turned
-  away at Google sign-in, so store users can install the extension but not
-  sign in.
 - **Tell testers** who used the unpacked build to remove it and install from
   the store. Their data is on the server, so nothing is lost.
 
@@ -123,8 +123,9 @@ web side that ships with it):
 
 **Owner decisions and console work:**
 
-- Google Auth Platform: verify `ankileet.com` in Search Console and finish
-  Branding (publishing the app is the first item above).
+- Google Auth Platform (optional polish): verify `ankileet.com` in Search
+  Console and finish Branding. The app is already published, so sign-in is
+  open to everyone either way.
 - Automatic analysis is `disabled` in Production. Unset
   `ANKILEET_AUTOMATIC_ANALYSIS` to turn it on for users with their own key
   (each can still turn it off in Settings).
@@ -176,9 +177,13 @@ web side that ships with it):
   `server/ai-model-choice.ts` (Haiku, GPT `-mini`, Gemini Flash, DeepSeek
   Flash) assume the fast tier keeps those family names; if a provider renames
   it, the pick falls back to `FALLBACK_ANALYSIS_MODEL`. `pnpm
-  qa:provider-smoke` shows each provider's live pick. On 2026-10-15 the smoke
-  keys for OpenAI and Anthropic were rejected (401) and need replacing in
-  `.env.smoke.local`; Gemini answered 503 "high demand" that day.
+  qa:provider-smoke` shows each provider's live pick. On 2026-10-15, with
+  fresh keys, DeepSeek (`deepseek-flash`), OpenAI (`gpt-5.4-mini`), and
+  Anthropic (`claude-haiku-5-5`) passed end to end. Gemini verified on
+  `gemini-3.7-flash` (3.8 Flash was busy), but its analysis got 503 "high
+  demand" on all three attempts. The worker retries the same model on a 503;
+  switching to the next ranked model, as verification does, is a possible
+  improvement.
 - `@ai-sdk/google` is pinned to `4.0.50`: newer releases target a newer
   provider spec than `ai@7.0.58` and fail typecheck. Upgrade all `ai` and
   `@ai-sdk/*` packages together.

@@ -263,9 +263,10 @@ Google Auth Platform (Cloud Console), for the Production client:
   domain as a **Domain** property in Search Console with the same Google
   account, put its `google-site-verification=…` TXT record in Vercel DNS
   (`vercel dns add ankileet.com @ TXT "google-site-verification=…"`), and verify.
-- **Audience:** External. While in Testing, only listed test users can sign
-  in. Publishing with only `openid`, `email`, and `profile` scopes needs no
-  security review, though Google may verify the branding.
+- **Audience:** External, published (In production): anyone with a Google
+  account can sign in, with no test-user list. With only `openid`, `email`,
+  and `profile` scopes this needs no security review, though Google may
+  verify the branding.
 
 ## AI dispatch recovery (optional cron)
 
