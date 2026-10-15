@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { useLanguage } from "@/components/LanguageProvider";
 import { notifyReviewQueueUpdated } from "@/lib/review-queue-event";
 
@@ -45,7 +46,8 @@ export function ArchiveProblemButton({
   return (
     <>
       <Button onClick={toggleArchive} disabled={busy} title={archived ? t.detail.unarchiveHint : t.detail.archiveHint}>
-        {busy ? "…" : archived ? t.detail.unarchive : t.detail.archive}
+        {busy && <Spinner />}
+        {archived ? t.detail.unarchive : t.detail.archive}
       </Button>
       {error && <p className="text-xs text-danger">{error}</p>}
     </>

@@ -1,5 +1,5 @@
 import type { BrowserContext, Page } from "@playwright/test";
-import type { PracticeSessionCurrentDto, SessionAnalysisStateDto, SuggestionListDto } from "../../packages/contracts/src";
+import type { PracticeSessionCurrentDto, ProblemsListPayloadDto, SessionAnalysisStateDto, SuggestionListDto } from "../../packages/contracts/src";
 import { API_ORIGIN, test, expect } from "./fixtures";
 import { newProblem } from "./helpers";
 import type { LeetcodeFixtureState } from "./leetcode-fixture";
@@ -231,13 +231,80 @@ test("a long problem statement uses the page's own scrolling, at desktop and pho
   await page.close();
 });
 
+/** The problems list at a width that shows every column, once its first load settled. */
+async function openProblems(context: BrowserContext, path = "/problems"): Promise<Page> {
+  await context.addCookies([{ name: "ankileet-language", value: "en", url: API_ORIGIN }]);
+  const page = await context.newPage();
+  await page.setViewportSize({ width: 1440, height: 900 });
+  // In development the list refetches once after hydration.
+  await page.goto(`${API_ORIGIN}${path}`, { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1, name: "Problems" })).toBeVisible({ timeout: 30_000 });
+  return page;
+}
+
+async function captureProblem(api: Api, leetcode: LeetcodeFixtureState, name: string, title: string) {
+  const slug = newProblem(leetcode, name);
+  return api<{ problemId: string }>("/api/capture", {
+    body: { leetcodeSlug: slug, title, difficulty: "Easy", url: `https://leetcode.com/problems/${slug}/`, topicTags: [], similarSlugs: [] },
+  });
+}
+
 test("the problems table names its columns in full", async ({ context, panel }) => {
   void panel; // signs the context in
-  const page = await openWeb(context, "/problems");
-  await page.setViewportSize({ width: 1440, height: 900 });
+  const page = await openProblems(context);
   const headers = page.getByRole("columnheader");
-  await expect(headers).toHaveText(["Problem", "Difficulty", "Next review", "Reviews", "Times forgotten", "Memory state"]);
+  await expect(headers).toHaveText(["", "Problem", "Difficulty", "Next review", "Last practiced", "Practiced", "Reviews", "Times forgotten", "Memory state", "Added"]);
+  // Counts start with the largest.
   await page.getByRole("button", { name: "Times forgotten" }).click();
-  await expect(page.getByRole("columnheader", { name: "Times forgotten" })).toHaveAttribute("aria-sort", "ascending");
+  await expect(page.getByRole("columnheader", { name: "Times forgotten" })).toHaveAttribute("aria-sort", "descending");
+  await page.close();
+});
+
+test("problems are archived and restored together from the list", async ({ context, api, leetcode }) => {
+  const stamp = `bulk-${Date.now()}`;
+  const titles = [`E2E ${stamp} one`, `E2E ${stamp} two`];
+  for (const [index, title] of titles.entries()) await captureProblem(api, leetcode, `web-bulk-${index}`, title);
+  const page = await openProblems(context);
+  const search = page.getByRole("searchbox", { name: "Search problems by title or number" });
+  const rows = page.getByRole("link", { name: new RegExp(stamp) });
+
+  await search.fill(stamp);
+  await expect(rows).toHaveCount(2);
+  await page.getByRole("checkbox", { name: "Select all shown problems" }).check();
+  await page.getByRole("button", { name: "Archive 2 problems" }).click();
+  await expect(rows).toHaveCount(0);
+  const active = await api<ProblemsListPayloadDto>(`/api/problems?search=${stamp}`);
+  expect(active.problems).toHaveLength(0);
+
+  await page.getByRole("combobox", { name: "Filter by FSRS state" }).click();
+  await page.getByRole("option", { name: "Archived" }).click();
+  await expect(rows).toHaveCount(2);
+  for (const title of titles) await page.getByRole("checkbox", { name: `Select ${title}` }).check();
+  await page.getByRole("button", { name: "Unarchive 2 problems" }).click();
+  await expect(rows).toHaveCount(0);
+  const restored = await api<ProblemsListPayloadDto>(`/api/problems?search=${stamp}`);
+  expect(restored.problems.map((problem) => problem.title).sort()).toEqual(titles);
+  await page.close();
+});
+
+test("the problems sort lives in the URL and survives a visit to a problem", async ({ context, api, leetcode }) => {
+  const title = `E2E newest ${Date.now()}`;
+  await captureProblem(api, leetcode, "web-sort-newest", title);
+  const page = await openProblems(context, "/problems?sort=added&dir=desc");
+  const added = page.getByRole("columnheader", { name: "Added" });
+  await expect(added).toHaveAttribute("aria-sort", "descending");
+  const newest = page.getByRole("row").nth(1).getByRole("link");
+  await expect(newest).toContainText(title);
+
+  await newest.click();
+  await expect(page).toHaveURL(/\/problems\/[^/?]+$/);
+  await page.goBack();
+  await expect(page).toHaveURL(`${API_ORIGIN}/problems?sort=added&dir=desc`);
+  await expect(added).toHaveAttribute("aria-sort", "descending");
+
+  await page.getByRole("combobox", { name: "Sort by" }).click();
+  await page.getByRole("option", { name: "LeetCode number" }).click();
+  await expect(page).toHaveURL(`${API_ORIGIN}/problems?sort=number&dir=asc`);
+  await expect(page.getByRole("columnheader", { name: "Problem", exact: true })).toHaveAttribute("aria-sort", "ascending");
   await page.close();
 });

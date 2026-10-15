@@ -554,7 +554,17 @@ extension reuses the web session cookie, and production CORS allows only
   popup's review overview, the last week's completed sessions, recent
   practice, focus areas from the profile, and today's suggestions.
 - `/problems` and `/problems/[id]`:
-  - archive, unarchive, delete;
+  - archive, unarchive, delete; the list archives or unarchives several
+    selected problems at once (`POST /api/problems/archive`, which refuses
+    to unarchive past the active-problem cap);
+  - the list loads the whole active deck in one page (the cap counts only
+    active problems), so search, filters, and sorting see every problem.
+    Sort keys (`problems-sort.ts`, kept in `?sort=&dir=`): next review, date
+    added, last practiced (latest completed session of any type, else the
+    last rating), LeetCode number, title, difficulty, reviews, times
+    forgotten, times practiced. "Ready to archive" lists likely-mastered
+    problems (`isMasteryCandidate()` in core: steady review, 3+ rated
+    reviews, stability of 90+ days);
   - the Mistakes tab;
   - the Sessions tab (evidence, active time, rating);
   - History as the scheduling timeline of ratings and initial-review

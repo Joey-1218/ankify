@@ -6,6 +6,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./fsrs": "./src/fsrs.ts",
+    "./mastery": "./src/mastery.ts",
     "./types": "./src/types.ts"
   },
   "scripts": {

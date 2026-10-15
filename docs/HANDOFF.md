@@ -60,6 +60,11 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
   Chinese, 英语 / 简体中文 in the Chinese UI (`2338d08`); popup screenshot
   baselines for the ankileet name and the catalog's new-account pick
   (`38d39ce`).
+- **Problems list management** (2026-10-15): bulk archive/unarchive from the
+  list with a "Ready to archive" filter for likely-mastered problems; the
+  whole active deck loads at once so sorting is correct past 100 problems;
+  new sorts and columns for date added, last practiced, LeetCode number, and
+  times practiced; the sort is kept in the URL.
 
 Planning documents that drove this work (the refactor plan and its
 checkpoint log, the next-phase plan, the mistake-profile and daily-feed

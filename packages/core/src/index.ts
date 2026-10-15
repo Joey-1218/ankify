@@ -1,5 +1,6 @@
 export * from "./types";
 export * from "./fsrs";
+export * from "./mastery";
 export * from "./quiz-format";
 export * from "./skills";
 export * from "./daily-feed";

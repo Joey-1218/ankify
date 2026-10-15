@@ -73,7 +73,7 @@ test("keyboard focus is always visible", async ({ context, leetcode, panel }) =>
 
   const web = await context.newPage();
   await web.goto(`${API_ORIGIN}/problems`);
-  await expect(web.getByRole("columnheader", { name: "Problem" })).toBeVisible({ timeout: 30_000 });
+  await expect(web.getByRole("columnheader", { name: "Problem", exact: true })).toBeVisible({ timeout: 30_000 });
   for (let step = 0; step < 6; step += 1) {
     await web.keyboard.press("Tab");
     const focused = await outline(web);

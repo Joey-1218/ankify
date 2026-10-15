@@ -166,8 +166,21 @@ export type ProblemListItemDto = {
   fsrsState: "new" | "learning" | "review" | "relearning";
   /** `awaiting_initial`: first practice not finished; no review is scheduled. */
   enrollment: "enrolled" | "awaiting_initial";
+  fsrsStability: number | null;
+  /** Latest completed practice session (any type); legacy problems without
+   *  sessions fall back to their last rating. */
+  lastPracticedAt: string | null;
+  /** Completed practice sessions of any type. */
+  practiceCount: number;
   archivedAt: string | null;
   createdAt: string;
+};
+
+export type ProblemsArchiveResponseDto = {
+  ok: true;
+  /** Problems whose archive state actually changed. */
+  updated: number;
+  dueCount: number;
 };
 
 export type ProblemsListPayloadDto = {
@@ -175,6 +188,8 @@ export type ProblemsListPayloadDto = {
   dueCount: number;
   serverNow: string;
   totalCount?: number;
+  /** Archived problems; like `totalCount`, sent with the first page only. */
+  archivedCount?: number;
   nextCursor: string | null;
 };
 

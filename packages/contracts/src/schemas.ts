@@ -349,6 +349,16 @@ export const problemPatchSchema = z
   .strict()
   .refine((o) => o.notes !== undefined || o.archived !== undefined, { message: "empty_patch" });
 
+/** POST /api/problems/archive — archive or unarchive several problems at once
+ *  from the problems list. At most the per-user problem cap. */
+export const problemsArchiveSchema = z
+  .object({
+    problemIds: z.array(z.string().min(1).max(64)).min(1).max(2_000),
+    archived: z.boolean(),
+  })
+  .strict();
+export type ProblemsArchiveInput = z.infer<typeof problemsArchiveSchema>;
+
 /** POST /api/review/undo — revert the most recent rating of a problem. */
 export const reviewUndoSchema = z.object({
   problemId: z.string().min(1).max(64),
