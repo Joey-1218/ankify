@@ -67,7 +67,7 @@ test.describe("popup", () => {
 
 const PAGES: { name: string; path: string; ready: (page: Page) => Promise<void> }[] = [
   { name: "today", path: "/today", ready: async (page) => void (await expect(page.getByRole("heading", { level: 1 })).toBeVisible()) },
-  { name: "problems", path: "/problems", ready: async (page) => void (await expect(page.getByRole("columnheader", { name: "Problem" })).toBeVisible()) },
+  { name: "problems", path: "/problems", ready: async (page) => void (await expect(page.getByRole("columnheader", { name: "Problem", exact: true })).toBeVisible()) },
   { name: "problem", path: "/problems/qa-problem-two-sum", ready: async (page) => void (await expect(page.getByRole("heading", { level: 1, name: /Two Sum/ })).toBeVisible()) },
   { name: "analysis", path: "/analysis", ready: async (page) => void (await expect(page.getByRole("region", { name: "Mistake profile" })).toBeVisible()) },
   { name: "suggestions", path: "/suggestions", ready: async (page) => void (await expect(page.getByRole("heading", { level: 1 })).toBeVisible()) },
