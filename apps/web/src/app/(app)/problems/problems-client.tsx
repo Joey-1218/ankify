@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import type { LeetCodeDifficulty } from "@ankileet/core";
 import type {
@@ -40,6 +41,7 @@ export default function ProblemsPage({
   initialData: ProblemsListPayloadDto;
 }) {
   const { language, t } = useLanguage();
+  const router = useRouter();
   const [problems, setProblems] = useState<ProblemListItemDto[]>(
     initialData.problems,
   );
@@ -406,7 +408,12 @@ export default function ProblemsPage({
                 return (
                   <tr
                     key={p.id}
-                    className="border-b border-border/50 transition-colors hover:bg-subtle/50"
+                    onClick={(e) => {
+                      // The title link navigates itself (and opens new tabs); a drag that selects text is not a click.
+                      if ((e.target as HTMLElement).closest("a") || !window.getSelection()?.isCollapsed) return;
+                      router.push(`/problems/${p.id}`);
+                    }}
+                    className="cursor-pointer border-b border-border/50 transition-colors hover:bg-subtle/50"
                   >
                     <td className="px-4 py-2.5">
                       <Link
