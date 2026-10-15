@@ -1,9 +1,10 @@
 /**
  * Where "Get the extension" points.
  *
- * Until the Chrome Web Store listing is published, the fallback is the
- * README's build-from-source instructions. Once it is live, set
- * `NEXT_PUBLIC_EXTENSION_INSTALL_URL` to the listing in Vercel and redeploy.
+ * Production sets `NEXT_PUBLIC_EXTENSION_INSTALL_URL` to the Chrome Web Store
+ * listing (baked in at build time, so redeploy after changing it). Without
+ * it, e.g. in a self-hosted copy, the link falls back to the README's
+ * build-from-source instructions.
  */
 const FALLBACK_INSTALL_URL = "https://github.com/Joey-1218/ankify#install-the-extension";
 

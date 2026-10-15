@@ -7,7 +7,7 @@
 ankileet works next to LeetCode. The Chrome extension records each practice session and its submissions,<br>
 FSRS brings every problem back just before you'd forget it, and your mistake profile shows which causes of failure keep coming back.
 
-[**Open the web app**](https://ankileet.com) · [**Install the extension**](#install-the-extension) · [Develop](docs/DEVELOPMENT.md)
+[**Open the web app**](https://ankileet.com) · [**Install the extension**](https://chromewebstore.google.com/detail/ankileet/ghkeifmaeopfjhnhakkeeafkalagndnj) · [Develop](docs/DEVELOPMENT.md)
 
 </div>
 
@@ -67,7 +67,7 @@ After a session, ankileet can explain why it went wrong: it reads your attempts,
 ## Get started
 
 1. **Sign in** at [ankileet.com](https://ankileet.com) with Google.
-2. **Install the [Chrome extension](#install-the-extension).** It reuses your web login, so there's no token to paste.
+2. **Install the [Chrome extension](https://chromewebstore.google.com/detail/ankileet/ghkeifmaeopfjhnhakkeeafkalagndnj).** It reuses your web login, so there's no token to paste.
 3. **Open any LeetCode problem** and click **Start practice** in the ankileet panel.
 4. *(Optional)* **Add your own AI key** in Settings to analyze finished sessions.
 
@@ -75,7 +75,9 @@ Your first practice comes back for review a day after you finish it.
 
 ## Install the extension
 
-The Chrome Web Store listing is on its way. Until then, build the extension from this repository (Node 22 and pnpm 10):
+Install **[ankileet from the Chrome Web Store](https://chromewebstore.google.com/detail/ankileet/ghkeifmaeopfjhnhakkeeafkalagndnj)**, then refresh any LeetCode tab that was already open.
+
+To build it yourself instead (Node 22 and pnpm 10):
 
 ```bash
 git clone https://github.com/Joey-1218/ankify.git && cd ankify

@@ -15,9 +15,10 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
   (`aws-us-east-1`), all 26 migrations applied. Google sign-in, practice
   sessions through the extension, and BYOK session analysis (DeepSeek) were
   verified end to end in Production.
-- **Extension 0.3.0:** submitted to the Chrome Web Store, **in review**.
-  Testers use the unpacked Production build (see DEPLOYMENT.md). While the
-  Google OAuth app is in Testing mode, testers must be listed as test users.
+- **Extension 0.3.0:** **published** on the Chrome Web Store on 2026-10-15
+  ([listing](https://chromewebstore.google.com/detail/ankileet/ghkeifmaeopfjhnhakkeeafkalagndnj), ID `ghkeifmaeopfjhnhakkeeafkalagndnj`).
+  Production accepts both the store ID and the unpacked ID. While the Google
+  OAuth app is in Testing mode, only listed test users can sign in.
 - **Gate:** `pnpm release:check` passes: about 520 unit tests, 47 browser
   tests, builds, manifest check; the audit leaves only low/moderate advisories.
 - **Product scope:** spaced repetition of whole LeetCode problems. The
@@ -87,77 +88,16 @@ designs, the paid-credits audit, the manual test guide) were retired on
 
 ## Next steps
 
-### When the Chrome Web Store approves the extension
+### Now that the extension is public
 
-The store build gets its own 32-letter extension ID, different from the
-unpacked ID (`dboijhnmohmpceamddfchbjicdgcgnlg`). The server only accepts
-requests from extension IDs listed in `ANKILEET_EXTENSION_ORIGINS`, so until
-step 2 is done **the store version can't sign in or sync**. Do steps 1–4 the
-same day the approval email arrives.
+- **Publish the Google OAuth app** (Google Auth Platform → Audience → Publish
+  app, External). In Testing mode, anyone not listed as a test user is turned
+  away at Google sign-in, so store users can install the extension but not
+  sign in.
+- **Tell testers** who used the unpacked build to remove it and install from
+  the store. Their data is on the server, so nothing is lost.
 
-1. **Find the store ID.** In the Chrome Web Store developer dashboard, open
-   the item: the ID is shown under its name (also the last part of the public
-   listing URL, `https://chromewebstore.google.com/detail/<name>/<ID>`). It is
-   32 letters `a`–`p`. Below, `<ID>` means that value; never type the angle
-   brackets.
-2. **Tell Production about it.** Replace the origins variable, keeping the
-   unpacked ID so your own and testers' unpacked copies keep working, then
-   add the install link (run from the repo root):
-
-   ```bash
-   vercel env rm ANKILEET_EXTENSION_ORIGINS production --yes
-   printf '%s' "chrome-extension://dboijhnmohmpceamddfchbjicdgcgnlg,chrome-extension://<ID>" \
-     | vercel env add ANKILEET_EXTENSION_ORIGINS production
-   printf '%s' "https://chromewebstore.google.com/detail/<ID>" \
-     | vercel env add NEXT_PUBLIC_EXTENSION_INSTALL_URL production
-   ```
-
-   Rules the build checks: each origin is exactly `chrome-extension://` plus
-   the ID, comma-separated, no spaces, no trailing slash. In the dashboard
-   instead: Project → Settings → Environment Variables, edit or add the two
-   names for **Production** only.
-3. **Redeploy** so the new values take effect (see "Redeploying" in
-   DEPLOYMENT.md). `NEXT_PUBLIC_*` values are baked in at build time, so this
-   must be a fresh build, not just a restart:
-
-   ```bash
-   vercel ls ankileet --prod                         # copy the newest Ready URL
-   vercel redeploy <that url> --target production
-   vercel ls ankileet --prod                         # wait for the new row: Ready
-   ```
-
-   If the build fails with `ANKILEET_EXTENSION_ORIGINS must contain ...`, the
-   value has a typo or a leftover `<ID>`: fix it in step 2 and redeploy.
-4. **Check it end to end:**
-   - `https://ankileet.com`: "Get the extension" now opens your store listing
-     (`curl -s https://ankileet.com/ | grep -o 'chromewebstore[^"]*'` shows
-     `<ID>`).
-   - In Chrome, remove or turn off the unpacked ankileet (both would add a
-     panel on LeetCode), install from the store, sign in on ankileet.com,
-     click the extension icon: the popup shows your data with no sign-in
-     error.
-   - Open a LeetCode problem, Start practice, submit once, Finish. The session
-     appears on `/today`.
-   - If the popup keeps asking to sign in or says it can't reach ankileet,
-     step 2 or 3 didn't take: check the variable value, then redeploy again.
-5. **Update the README** (`README.md`, "Install the extension"): replace the
-   build-from-source paragraph with a store link, keeping the build steps as
-   an alternative, e.g.
-
-   ```markdown
-   Install **[ankileet from the Chrome Web Store](https://chromewebstore.google.com/detail/<ID>)**.
-
-   To build it yourself instead (Node 22 and pnpm 10): ...the existing steps...
-   ```
-
-   Also point the top-of-page "Install the extension" link at the store URL.
-   Commit and push to `main` (this deploys again, which is fine).
-6. **Tell testers** who used the unpacked zip to remove it and install from
-   the store. Their data is on the server, so nothing is lost.
-7. **Clean up docs:** in DEPLOYMENT.md's Production identity and variables
-   tables, record the store ID and the new `NEXT_PUBLIC_EXTENSION_INSTALL_URL`;
-   in this file, change the State section to "published" and delete this
-   checklist.
+### Extension updates
 
 Later extension updates: bump `version` in
 `apps/extension/manifest.config.ts`, ship the web side first, then build,
@@ -183,8 +123,8 @@ web side that ships with it):
 
 **Owner decisions and console work:**
 
-- Google Auth Platform: verify `ankileet.com` in Search Console, finish
-  Branding, and publish the app (External), so anyone can sign in.
+- Google Auth Platform: verify `ankileet.com` in Search Console and finish
+  Branding (publishing the app is the first item above).
 - Automatic analysis is `disabled` in Production. Unset
   `ANKILEET_AUTOMATIC_ANALYSIS` to turn it on for users with their own key
   (each can still turn it off in Settings).

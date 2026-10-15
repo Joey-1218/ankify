@@ -19,7 +19,7 @@ As of 2026-10-12:
 | Database URL | `libsql://database-ankileet-vercel-icfg-zya5xbvroaxq7vt9lfgh5xfg.aws-us-east-1.turso.io` |
 | AI queue | Vercel Queue topic `ankileet-ai-generation` (trigger declared in `apps/web/vercel.json`) |
 | Google OAuth | One Web client. Redirect URIs `https://ankileet.com/api/auth/callback/google` and `http://localhost:3000/api/auth/callback/google` |
-| Extension | Unpacked/dev ID `dboijhnmohmpceamddfchbjicdgcgnlg` (fixed by the dev `key` in `apps/extension/manifest.config.ts`). The Chrome Web Store listing gets its own ID |
+| Extension | Chrome Web Store ID `ghkeifmaeopfjhnhakkeeafkalagndnj` ([listing](https://chromewebstore.google.com/detail/ankileet/ghkeifmaeopfjhnhakkeeafkalagndnj), published 2026-10-15). Unpacked/dev ID `dboijhnmohmpceamddfchbjicdgcgnlg` (fixed by the dev `key` in `apps/extension/manifest.config.ts`) |
 
 ankileet began as a fork of Ankify and is deployed independently of it.
 Never run a migration, backup, or deploy against Ankify's resources
@@ -41,11 +41,11 @@ build time, so a bad value fails the deployment instead of the site.
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | The Production OAuth client |
 | `AI_KEY_ENCRYPTION_SECRET` | **Never change it.** Rotating or losing it makes every saved user AI key unreadable, even after a backup restore. Keep a copy in a password manager |
 | `ANKILEET_DEPLOYMENT_ENV` | `production` |
-| `ANKILEET_EXTENSION_ORIGINS` | Comma-separated `chrome-extension://<32-letter id>` origins, no trailing slash. Today: the unpacked ID. After store approval: the unpacked ID **and** the store ID |
+| `ANKILEET_EXTENSION_ORIGINS` | Comma-separated `chrome-extension://<32-letter id>` origins, no trailing slash. Both IDs: `chrome-extension://dboijhnmohmpceamddfchbjicdgcgnlg,chrome-extension://ghkeifmaeopfjhnhakkeeafkalagndnj`. Without the store ID, the store build can't sign in or sync |
 | `ANKILEET_DISABLE_SIGNUP` | `false`. `true` pauses new accounts; existing users still sign in |
 | `ANKILEET_AUTOMATIC_ANALYSIS` | `disabled` today. Unset it to turn automatic analysis on for users with their own key |
 | `ANKILEET_DISABLED_WORKFLOWS` | Optional kill switches, e.g. `legacy_review`, `session_analysis`, `suggestions` |
-| `NEXT_PUBLIC_EXTENSION_INSTALL_URL` | Unset until the store listing is live (the site then links to the README's build instructions). Then `https://chromewebstore.google.com/detail/<store id>` |
+| `NEXT_PUBLIC_EXTENSION_INSTALL_URL` | `https://chromewebstore.google.com/detail/ankileet/ghkeifmaeopfjhnhakkeeafkalagndnj`. Baked in at build time: redeploy after changing it. Unset, the site links to the README's build instructions |
 | `CRON_SECRET` | Optional; only with the dispatch cron below |
 
 Not set (legacy, suspended): `ANKILEET_STARTER_AI_*`, `STRIPE_*`,
@@ -241,14 +241,10 @@ Store listing material (icon, screenshots, description, permission
 justifications) is in `apps/extension/store-assets/`. Privacy policy URL:
 `https://ankileet.com/privacy`.
 
-**After the first approval:**
-
-1. Add the store ID to Production: `ANKILEET_EXTENSION_ORIGINS=chrome-extension://dboijhnmohmpceamddfchbjicdgcgnlg,chrome-extension://<store id>`,
-   and set `NEXT_PUBLIC_EXTENSION_INSTALL_URL=https://chromewebstore.google.com/detail/<store id>`.
-   Redeploy. Without the origin, the store build can't sign in.
-2. Point the README's install section at the listing.
-3. Remove the unpacked copy (both would add a panel to LeetCode), install
-   from the store, and run one practice session.
+**Published** 2026-10-15 as ID `ghkeifmaeopfjhnhakkeeafkalagndnj`. Its origin is in
+`ANKILEET_EXTENSION_ORIGINS` and the listing is `NEXT_PUBLIC_EXTENSION_INSTALL_URL`
+(see Production variables). To test the store build, remove the unpacked copy
+first: both would add a panel to LeetCode.
 
 **Updates:** bump `version` in `apps/extension/manifest.config.ts` (the store
 rejects a version it already has), ship the commit as above, then build, zip,
