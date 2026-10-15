@@ -568,7 +568,8 @@ export default function ProblemsPage({
                       isSelected && "bg-subtle/70",
                     )}
                   >
-                    <td className="w-10 py-0 pl-4 pr-0">
+                    {/* Selecting never reaches a click handler on the row (which may open the problem). */}
+                    <td className="w-10 py-0 pl-4 pr-0" onClick={(e) => e.stopPropagation()}>
                       {/* The label widens the hit area around the small checkbox. */}
                       <label className="flex min-h-10 cursor-pointer items-center">
                         <input
