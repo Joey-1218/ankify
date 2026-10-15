@@ -1,4 +1,4 @@
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import { API_ORIGIN, test, expect } from "./fixtures";
 
 /** The whole row of the Problems list opens the problem; the title link keeps its own behavior. */
@@ -13,13 +13,19 @@ async function openList(page: Page) {
   return row;
 }
 
+/** The cells a click should open the problem from: not the title link, nor a selection checkbox. */
+function plainCells(page: Page, row: Locator) {
+  return row.getByRole("cell").filter({ hasNot: page.getByRole("link") }).filter({ hasNot: page.getByRole("checkbox") });
+}
+
 test("clicking anywhere on a problem row opens its detail page", async ({ context, panel }) => {
   void panel; // signs the context in
   const page = await context.newPage();
-  // Every cell but the title, which is a link of its own.
-  for (const cell of [1, 2, 3, 4, 5]) {
+  const count = await plainCells(page, await openList(page)).count();
+  expect(count).toBeGreaterThanOrEqual(5);
+  for (let cell = 0; cell < count; cell += 1) {
     const row = await openList(page);
-    await row.getByRole("cell").nth(cell).click();
+    await plainCells(page, row).nth(cell).click();
     await expect(page).toHaveURL(DETAIL);
   }
   await page.close();
@@ -60,7 +66,8 @@ test("selecting text in a row does not navigate", async ({ context, panel }) => 
   void panel;
   const page = await context.newPage();
   const row = await openList(page);
-  const box = (await row.getByRole("cell").nth(2).boundingBox())!;
+  // The next-review cell: plain text, wide enough to drag across.
+  const box = (await plainCells(page, row).nth(1).boundingBox())!;
   await page.mouse.move(box.x + 2, box.y + box.height / 2);
   await page.mouse.down();
   await page.mouse.move(box.x + box.width - 2, box.y + box.height / 2, { steps: 5 });
