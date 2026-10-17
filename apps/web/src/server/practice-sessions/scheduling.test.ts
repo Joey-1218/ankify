@@ -212,15 +212,48 @@ describe("session ratings", () => {
     expect(await runSessionCommand(USER, s2, { type: "undo_rating", requestId: uuid() }, at(2 * HOUR))).toMatchObject({ ok: false, error: "undo_conflict" });
   });
 
-  it("lets a review ended unsuccessfully be rated Again", async () => {
+  it("rates a review ended unsuccessfully Again at Finish, from its completion time", async () => {
     await insertDueProblem("p1", "one");
-    const sessionId = await completedReview("p1", T0, "unsuccessful");
-    expect((await sessionRow(sessionId)).outcome).toBe("failed");
-    const result = await ratePracticeSession(USER, sessionId, { requestId: uuid(), rating: 1 }, at(HOUR));
-    expect(result.ok).toBe(true);
-    expect(await problemRow("p1")).toMatchObject({ fsrsLapses: 1, fsrsState: "review" });
-    const row = await problemRow("p1");
-    expect(row.fsrsDue!.getTime() - at(20 * MIN).getTime()).toBeGreaterThanOrEqual(DAY);
+    const before = await problemRow("p1");
+    const { session } = await start({ target: { kind: "problem", problemId: "p1" }, mode: "due_review" }, T0);
+    const input = { type: "finish" as const, requestId: uuid(), ownerToken: TAB, result: "unsuccessful" as const, occurredAt: at(20 * MIN).toISOString() };
+    const finished = await runSessionCommand(USER, session.id, input, at(20 * MIN));
+    expect(finished).toMatchObject({ ok: true, response: { session: { outcome: "failed", rating: { disposition: "submitted" } } } });
+
+    const expected = rateFullSolve(problemFsrsState(before), 1, at(20 * MIN)).next;
+    expect(await problemRow("p1")).toMatchObject({ fsrsLapses: 1, fsrsDue: expected.due, fsrsLastReview: at(20 * MIN), scheduleRevision: 1 });
+    const ratings = (await events("p1")).filter((event) => event.eventType === "self_recall_rated");
+    expect(ratings).toHaveLength(1);
+    expect(ratings[0]).toMatchObject({
+      practiceSessionId: session.id, fsrsRating: 1, requestId: null, scheduleRevision: 1, occurredAt: at(20 * MIN),
+      metadata: { automatic: "unsuccessful_finish", undo: { reps: 3 }, result: { nextDue: expected.due!.toISOString() } },
+    });
+
+    // A lost response replays without rating twice; a manual rating is refused.
+    const replay = await runSessionCommand(USER, session.id, input, at(30 * MIN));
+    expect(replay).toMatchObject({ ok: true, response: { idempotentReplay: true, session: { rating: { disposition: "submitted" } } } });
+    expect(await ratePracticeSession(USER, session.id, { requestId: uuid(), rating: 3 }, at(HOUR))).toMatchObject({ ok: false, error: "rating_not_pending" });
+    expect((await events("p1")).filter((event) => event.eventType === "self_recall_rated")).toHaveLength(1);
+
+    // It can be undone like any session rating.
+    expect(await runSessionCommand(USER, session.id, { type: "undo_rating", requestId: uuid() }, at(2 * HOUR))).toMatchObject({ ok: true });
+    expect(scheduling(await problemRow("p1"))).toEqual(scheduling(before));
+  });
+
+  it("never rates an unsuccessful voluntary practice, or a review whose problem was rescheduled meanwhile", async () => {
+    await insertDueProblem("p1", "one", { enrollment: "enrolled" });
+    await insertDueProblem("p2", "two");
+    const voluntary = await start({ target: { kind: "problem", problemId: "p1" } }, T0);
+    await finish(voluntary.session.id, at(10 * MIN), "unsuccessful");
+    expect(await sessionRow(voluntary.session.id)).toMatchObject({ outcome: "failed", ratingDisposition: "not_applicable" });
+    expect((await events("p1")).filter((event) => event.eventType === "self_recall_rated")).toHaveLength(0);
+
+    const review = await start({ target: { kind: "problem", problemId: "p2" }, mode: "due_review" }, T0);
+    await rateProblemReview(USER, { problemId: "p2", rating: 4, requestId: uuid() });
+    const legacy = await problemRow("p2");
+    const finished = await finish(review.session.id, at(10 * MIN), "unsuccessful");
+    expect(finished.session.rating.disposition).toBe("superseded");
+    expect(await problemRow("p2")).toEqual(legacy);
   });
 
   it("rates deferred and early reviews, but never dismissed, expired, voluntary, abandoned, or unfinished sessions", async () => {
