@@ -100,10 +100,13 @@ after user-visible changes:
 2. **First practice:** on a new problem, Start practice; submissions appear in
    the panel live with verdicts; Accepted shows Finish but doesn't end the
    session; finishing schedules a first review a day later, with no rating.
+   Finish with no submission (or none accepted) stops to ask: Keep working,
+   or Finish anyway (recorded as not solved).
 3. **Review:** open a due review from the popup; the session starts before the
    page loads; after Finish, rate (Again/Hard/Good/Easy) or skip; the next
    review date moves; a second due review won't start until the pending rating
-   is resolved.
+   is resolved. Finish anyway on a review without an Accepted submission
+   rates it Again at once ("Rated Again. Next review ...").
 4. **Other practice:** a deck problem that isn't due offers Practice without
    reviewing (never moves the schedule) and Review early (ends with a
    rating). A second tab of a live session offers Continue here; closing the
@@ -123,11 +126,16 @@ after user-visible changes:
 7. **Suggestions:** the popup and `/suggestions` offer a never-attempted
    problem with its reason; Start, Skip, Already attempted, and Another
    suggestion each work once.
-8. **Web:** `/today`, `/problems` and a problem page (Sessions, Mistakes,
+8. **Delete a session:** on a problem page's Sessions tab, Delete a finished
+   session; the dialog says what it undoes. A rated review's schedule goes
+   back to before it; a deleted first practice puts the problem back to
+   awaiting first practice. Deleting an older review while a newer one's
+   rating stands says to delete that one first.
+9. **Web:** `/today`, `/problems` and a problem page (Sessions, Mistakes,
    History tabs), `/analysis` (profile, then FSRS charts), `/settings` (export
    and delete account), in light and dark, English and 中文, at phone width,
    and by keyboard (every focused control shows the orange ring).
-9. **LeetCode itself:** the panel follows LeetCode's theme without a reload
+10. **LeetCode itself:** the panel follows LeetCode's theme without a reload
    and never covers Submit/Run; signing out of LeetCode mid-session shows a
    warning rather than "no submissions".
 

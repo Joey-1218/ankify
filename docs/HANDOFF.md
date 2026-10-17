@@ -9,20 +9,29 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
 [DEVELOPMENT.md](DEVELOPMENT.md) (run and test it),
 [DEPLOYMENT.md](DEPLOYMENT.md) (ship it).
 
-## State (2026-10-15)
+## State (2026-10-17)
 
 - **Live:** `https://ankileet.com` on Vercel (`iad1`) with Turso
-  (`aws-us-east-1`), all 26 migrations applied. Google sign-in, practice
+  (`aws-us-east-1`), migrations 0000–0025 applied. Google sign-in, practice
   sessions through the extension, and BYOK session analysis (DeepSeek) were
   verified end to end in Production.
+- **Branch `feat/session-endings` (2026-10-17, not merged or deployed):**
+  honest session endings and session deletion (History). It adds migration
+  `0026_session_delete_review_events_fk`, a `review_events` table rebuild,
+  so run `pnpm db:release` (backup + migrate) before deploying its web side
+  (DEPLOYMENT.md). The migrator turns foreign keys off for the batch, so the
+  DROP keeps `mistake_records.review_event_id` (covered by
+  `migration-0026.test.ts`).
 - **Extension 0.3.0:** **published** on the Chrome Web Store on 2026-10-15
   ([listing](https://chromewebstore.google.com/detail/ankileet/ghkeifmaeopfjhnhakkeeafkalagndnj), ID `ghkeifmaeopfjhnhakkeeafkalagndnj`).
   Production accepts both the store ID and the unpacked ID. The Google OAuth
   app is published (In production), so anyone with a Google account can sign
   in; no test-user list.
-- **Gate:** `pnpm release:check` passes: 557 unit tests, 54 browser tests,
-  7 screenshot tests, builds, manifest check; the audit leaves only
-  low/moderate advisories. Git worktrees under `.claude/worktrees/` make the
+- **Gate:** `ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com pnpm
+  release:check` passes on `feat/session-endings` (2026-10-17): 571 unit
+  tests, 55 browser tests, 7 screenshot tests, builds, manifest check; the
+  audit leaves only low/moderate advisories. Without the origin the
+  extension build fails closed, after the tests. Git worktrees under `.claude/worktrees/` make the
   root `eslint .` and vitest scan their copies, so remove them before running
   the gate.
 - **Product scope:** spaced repetition of whole LeetCode problems. The
@@ -80,6 +89,15 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
   users move to the picked model before their next analysis. The DeepSeek
   Fast/Thinking toggle is gone. See ARCHITECTURE.md, "Adding a key" and
   "Model choice".
+- **Session endings and deletion** (2026-10-17, `feat/session-endings`): a
+  tester clicked Finish without submitting; the wrong solution was never
+  seen, and the empty session counted as a finished attempt. Now Finish
+  stops when nothing was submitted or accepted (Keep working, or Finish
+  anyway as not solved), a review finished as not solved is rated Again at
+  once, "End as unsuccessful" is gone, and a finished session can be
+  deleted on the web problem page, undoing its rating or first-review
+  schedule (migration 0026). See ARCHITECTURE.md, "Review scheduling" and
+  "Practice sessions".
 
 Planning documents that drove this work (the refactor plan and its
 checkpoint log, the next-phase plan, the mistake-profile and daily-feed
@@ -120,6 +138,12 @@ web side that ships with it):
    the 0.3.1 upload. The web's `apps/web/public/icon-32.png` and
    `apple-touch-icon.png` are the same old picture; replace them together
    (`ankileet-mark.svg`, added at the rename, can be the starting point).
+3. **Session endings and deletion** (`feat/session-endings`, built): the
+   panel's Finish check, automatic Again for a review finished as not
+   solved, "End as unsuccessful" removed, and Delete on the web Sessions
+   tab. The web side (and migration 0026) ships first; a 0.3.0 extension
+   still works against it (its "End as unsuccessful" just rates Again
+   without asking).
 
 **Owner decisions and console work:**
 
@@ -192,6 +216,11 @@ web side that ships with it):
 - The time zone comes from the device (web `TimeZoneSync`, the extension's
   overview request); Settings doesn't show it.
 - The e2e QA settings persist across specs; keep specs independent of order.
+  `web.spec.ts` "the suggestions page acts on the same items as the popup"
+  passes alone and in the full suite, but fails (on `main` too) when run
+  with only the outbox tests of `cutover.spec.ts` and `sessions.spec.ts`
+  before it: the replacement's "Already attempted" card stays. Not
+  investigated yet.
 - Vercel Hobby is for non-commercial use. Before charging money, move to
   Vercel Pro or to Cloudflare Workers (OpenNext, Cloudflare Queues behind
   `dispatchAiJob()`); the custom domain keeps that move invisible to the
