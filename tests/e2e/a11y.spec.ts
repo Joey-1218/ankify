@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import type { Page } from "@playwright/test";
 import { API_ORIGIN, test, expect } from "./fixtures";
-import { newProblem, openPanel } from "./helpers";
+import { finishWithRatingPending, newProblem, openPanel } from "./helpers";
 import { problemUrl } from "./leetcode-fixture";
 
 /**
@@ -51,8 +51,11 @@ for (const theme of ["light", "dark"] as const) {
     await openPanel(page);
     await audit(page, `panel, due (${theme})`, "[data-ankileet-panel]");
     await page.getByRole("button", { name: "Start review" }).click();
-    await page.getByRole("button", { name: "End as unsuccessful" }).click();
-    await expect(page.getByRole("group", { name: "How did the review go?" })).toBeVisible();
+    await page.getByRole("button", { name: "Finish" }).click();
+    await expect(page.getByRole("button", { name: "Finish anyway" })).toBeVisible();
+    await audit(page, `panel, finish check (${theme})`, "[data-ankileet-panel]");
+    await page.getByRole("button", { name: "Keep working" }).click();
+    await finishWithRatingPending(page, leetcode, slug);
     await audit(page, `panel, rating (${theme})`, "[data-ankileet-panel]");
     // Leave no rating pending: it would hold up the next review.
     await page.getByRole("button", { name: "Skip rating" }).click();

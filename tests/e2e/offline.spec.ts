@@ -44,24 +44,24 @@ test("submissions and a rating made during an outage are saved, shown as waiting
 
   // During the session: the submission counts at once and waits to sync.
   await context.route(API, outage);
-  submit(leetcode, slug, "Wrong Answer");
+  submit(leetcode, slug, "Accepted");
   await page.getByRole("button", { name: "Submit", exact: true }).click();
-  await expect(page.getByText("1 submission, 0 accepted")).toBeVisible({ timeout: 10_000 });
+  await expect(page.getByText("1 submission, 1 accepted")).toBeVisible({ timeout: 10_000 });
   await expect(page.getByText("1 submission saved here, waiting to sync")).toBeVisible();
 
   // Back online: opening the popup replays the outbox; the page hears of it.
   await context.unroute(API, outage);
   await panel.reload();
   await expect(page.getByText("1 submission saved here, waiting to sync")).toHaveCount(0, { timeout: 10_000 });
-  await expect(page.getByText("1 submission, 0 accepted")).toBeVisible();
+  await expect(page.getByText("1 submission, 1 accepted")).toBeVisible();
 
-  await page.getByRole("button", { name: "End as unsuccessful" }).click();
+  await page.getByRole("button", { name: "Finish" }).click();
   const rating = page.getByRole("group", { name: "How did the review go?" });
   await expect(rating).toBeVisible();
 
   // While rating: the rating is kept and applied once when the outage ends.
   await context.route(API, outage);
-  await rating.getByRole("button", { name: /Again/ }).click();
+  await rating.getByRole("button", { name: /Good/ }).click();
   await expect(page.getByText("Rating saved. It syncs when ankileet is reachable.")).toBeVisible();
   await context.unroute(API, outage);
   await expect.poll(async () => {
@@ -72,5 +72,5 @@ test("submissions and a rating made during an outage are saved, shown as waiting
 
   const current = await api<PracticeSessionCurrentDto>(`/api/practice-sessions/current?slug=${slug}`);
   const history = await api<PracticeSessionListDto>(`/api/practice-sessions?problemId=${current.problem!.id}`);
-  expect(history.sessions).toMatchObject([{ outcome: "failed", evidence: { submissions: 1 }, rating: { disposition: "submitted" } }]);
+  expect(history.sessions).toMatchObject([{ outcome: "accepted", evidence: { submissions: 1 }, rating: { disposition: "submitted" } }]);
 });

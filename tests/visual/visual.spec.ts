@@ -1,6 +1,6 @@
 import type { Page } from "@playwright/test";
 import { API_ORIGIN, test, expect } from "../e2e/fixtures";
-import { newProblem, openPanel } from "../e2e/helpers";
+import { finishWithRatingPending, newProblem, openPanel } from "../e2e/helpers";
 import { problemUrl } from "../e2e/leetcode-fixture";
 
 /**
@@ -136,9 +136,14 @@ test.describe("embedded panel", () => {
       await expect(page.getByText("Review in progress")).toBeVisible();
       await expect(page).toHaveScreenshot(`panel-active-${theme}.png`, { mask: [page.getByText(/min active/)] });
 
+      // Finish without a submission stops to ask first.
+      await page.getByRole("button", { name: "Finish" }).click();
+      await expect(page.getByRole("button", { name: "Finish anyway" })).toBeVisible();
+      await expect(page).toHaveScreenshot(`panel-finish-check-${theme}.png`, { mask: [page.getByText(/min active/)] });
+      await page.getByRole("button", { name: "Keep working" }).click();
+
       // The rating asked for right after Finish.
-      await page.getByRole("button", { name: "End as unsuccessful" }).click();
-      await expect(page.getByRole("group", { name: "How did the review go?" })).toBeVisible();
+      await finishWithRatingPending(page, leetcode, due);
       await expect(page).toHaveScreenshot(`panel-rating-${theme}.png`, { mask: [page.getByText(/or it lapses/)] });
 
       // Rated: the next review is shown.

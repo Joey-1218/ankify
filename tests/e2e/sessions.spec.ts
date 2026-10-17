@@ -1,6 +1,6 @@
 import type { PracticeSessionCurrentDto, PracticeSessionListDto } from "../../packages/contracts/src";
 import { API_ORIGIN, test, expect } from "./fixtures";
-import { focus, newProblem, openPanel } from "./helpers";
+import { finishWithRatingPending, focus, newProblem, openPanel } from "./helpers";
 import { problemUrl, submit, submitJudging } from "./leetcode-fixture";
 
 test("a first practice from the panel schedules the first review a day later, without a rating", async ({ context, leetcode, api }) => {
@@ -27,7 +27,7 @@ test("a first practice from the panel schedules the first review a day later, wi
   expect(history.sessions).toMatchObject([{ type: "initial_learning", status: "completed", outcome: "accepted", rating: { disposition: "not_applicable" } }]);
 });
 
-test("a due review ended unsuccessfully is rated Again from the panel", async ({ context, leetcode, api }) => {
+test("Finish stops without an accepted submission; Finish anyway rates the review Again", async ({ context, leetcode, api }) => {
   const slug = newProblem(leetcode, "again");
   await api("/api/capture", { body: { leetcodeSlug: slug, leetcodeId: leetcode.problems[slug]!.frontendId, title: leetcode.problems[slug]!.title, difficulty: "Easy", url: problemUrl(slug) } });
   const page = await context.newPage();
@@ -36,17 +36,25 @@ test("a due review ended unsuccessfully is rated Again from the panel", async ({
   await expect(page.getByText("Due for review.")).toBeVisible();
   await page.getByRole("button", { name: "Start review" }).click();
   await expect(page.getByText("Review in progress")).toBeVisible();
+  await expect(page.getByRole("button", { name: "End as unsuccessful" })).toHaveCount(0);
+
+  // Nothing submitted: Finish asks first, and Keep working goes back.
+  await page.getByRole("button", { name: "Finish" }).click();
+  const check = page.getByRole("alert").filter({ hasText: "You haven't submitted in this session." });
+  await expect(check).toBeVisible();
+  await expect(check.getByText("Finishing anyway records this review as not solved and rates it Again.")).toBeVisible();
+  await page.getByRole("button", { name: "Keep working" }).click();
+  await expect(check).toHaveCount(0);
+
+  // A failed submission: Finish asks again, and Finish anyway rates Again.
   submit(leetcode, slug, "Wrong Answer");
   await focus(page);
   await expect(page.getByText("1 submission, 0 accepted")).toBeVisible({ timeout: 20_000 });
-
-  await page.getByRole("button", { name: "End as unsuccessful" }).click();
-  const rating = page.getByRole("group", { name: "How did the review go?" });
-  await expect(rating).toBeVisible();
-  // Nothing is preselected.
-  await expect(rating.locator("[aria-pressed=true], [aria-checked=true]")).toHaveCount(0);
-  await rating.getByRole("button", { name: /Again/ }).click();
-  await expect(page.getByRole("status")).toHaveText(/Next review (tomorrow|in \d+ (hours|days))/);
+  await page.getByRole("button", { name: "Finish" }).click();
+  await expect(page.getByRole("alert").filter({ hasText: "None of this session's submissions has been accepted." })).toBeVisible();
+  await page.getByRole("button", { name: "Finish anyway" }).click();
+  await expect(page.getByRole("status")).toHaveText(/Rated Again\. Next review (tomorrow|in \d+ (hours|days))/);
+  await expect(page.getByRole("group", { name: "How did the review go?" })).toHaveCount(0);
 
   const current = await api<PracticeSessionCurrentDto>(`/api/practice-sessions/current?slug=${slug}`);
   expect(current).toMatchObject({ session: null, pendingRating: null, problem: { fsrsState: "review", scheduleRevision: 1, due: false } });
@@ -107,8 +115,7 @@ test("another review starts only after the finished one is rated or skipped, and
   await firstPage.goto(problemUrl(first));
   await openPanel(firstPage);
   await firstPage.getByRole("button", { name: "Start review" }).click();
-  await firstPage.getByRole("button", { name: "End as unsuccessful" }).click();
-  await expect(firstPage.getByRole("group", { name: "How did the review go?" })).toBeVisible();
+  await finishWithRatingPending(firstPage, leetcode, first);
   await firstPage.close();
   const before = await api<PracticeSessionCurrentDto>(`/api/practice-sessions/current?slug=${first}`);
 
@@ -128,7 +135,7 @@ test("another review starts only after the finished one is rated or skipped, and
   const after = await api<PracticeSessionCurrentDto>(`/api/practice-sessions/current?slug=${first}`);
   expect(after.problem).toMatchObject({ scheduleRevision: before.problem!.scheduleRevision, fsrsDue: before.problem!.fsrsDue });
   const history = await api<PracticeSessionListDto>(`/api/practice-sessions?problemId=${after.problem!.id}`);
-  expect(history.sessions[0]).toMatchObject({ outcome: "failed", rating: { disposition: "dismissed" } });
+  expect(history.sessions[0]).toMatchObject({ outcome: "accepted", rating: { disposition: "dismissed" } });
 });
 
 test("a reloaded page keeps its session, and another tab takes over only when asked", async ({ context, leetcode, api }) => {
@@ -210,6 +217,8 @@ test("a finish made during an outage survives a worker restart and syncs later",
   const outage = (route: import("@playwright/test").Route) => route.abort("internetdisconnected");
   await context.route("**/api/practice-sessions/*/commands", outage);
   await page.getByRole("button", { name: "Finish" }).click();
+  // Nothing was submitted, so Finish asks first.
+  await page.getByRole("button", { name: "Finish anyway" }).click();
   await expect(page.getByText("Finish saved. It syncs when ankileet is reachable.")).toBeVisible();
 
   // The worker is killed while the finish waits in the outbox.
@@ -280,8 +289,7 @@ test("a rating in the popup clears the panel's rating, and a rating in the panel
     await openPanel(page);
     await page.getByRole("button", { name: "Start review" }).click();
     await expect(page.getByText("Review in progress")).toBeVisible();
-    await page.getByRole("button", { name: "End as unsuccessful" }).click();
-    await expect(page.getByRole("group", { name: "How did the review go?" })).toBeVisible();
+    await finishWithRatingPending(page, leetcode, slug);
     return page;
   };
 

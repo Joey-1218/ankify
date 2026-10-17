@@ -57,7 +57,8 @@ export type BackgroundOutcome<T> = { ok: true; response: T; queued?: false } | {
 export type PageNotice =
   | { kind: "error"; error: BackgroundFailure["error"]; session?: PracticeSessionDto }
   | { kind: "queued"; action: "finish" | "abandon" | "rating" | "rating_decision" }
-  | { kind: "rated"; nextDue: string | null }
+  /** `again`: a review finished as not solved, rated Again automatically. */
+  | { kind: "rated"; nextDue: string | null; again?: boolean }
   /** Another problem's review was rated or skipped; this one can start now. */
   | { kind: "unblocked" };
 
@@ -70,6 +71,9 @@ export type LocalEvidence = {
 };
 
 const NO_LOCAL_EVIDENCE: LocalEvidence = { judging: 0, unsynced: [] };
+
+/** Why Finish stopped to ask first: nothing submitted, or nothing accepted. */
+export type FinishCheck = "no_submissions" | "not_accepted";
 
 /** The page-state answer, plus how many of the session's observations wait in the outbox. */
 export type PageStateResponse = PracticeSessionCurrentDto & { localSync?: { pendingObservations: number } };
@@ -104,6 +108,8 @@ export type PageView =
       reachable: boolean;
       busy: "starting" | "finishing" | "abandoning" | "rating" | "claiming" | null;
       notice: PageNotice | null;
+      /** Finish stopped: "Keep working", or "Finish anyway" as not solved. */
+      finishCheck: FinishCheck | null;
       /** The latest session completed in the last week, which analysis refers to. */
       recentCompleted: PracticeSessionDto | null;
       analysis: AnalysisView | null;
@@ -180,8 +186,11 @@ export function createPageSession(deps: PageSessionDeps) {
     const base: Extract<PageView, { kind: "ready" }> =
       view.kind === "ready"
         ? view
-        : { kind: "ready", problem: null, session: null, pendingRating: null, blockingRating: null, availability: "available", local: NO_LOCAL_EVIDENCE, reachable: true, busy: null, notice: null, recentCompleted: null, analysis: null };
-    set({ ...base, ...patch });
+        : { kind: "ready", problem: null, session: null, pendingRating: null, blockingRating: null, availability: "available", local: NO_LOCAL_EVIDENCE, reachable: true, busy: null, notice: null, finishCheck: null, recentCompleted: null, analysis: null };
+    const next = { ...base, ...patch };
+    // The check follows the evidence: a new submission updates or clears it.
+    if (next.finishCheck) next.finishCheck = finishCheckOf(next);
+    set(next);
     syncTracking();
     syncAnalysis();
     if (patch.busy === null && refreshAfterBusy) {
@@ -583,13 +592,21 @@ export function createPageSession(deps: PageSessionDeps) {
       claimed(await send({ type: "session_control", sessionId: session.id, control: { command: "resume" } }));
     },
 
-    /** Reports every submission LeetCode shows first, so the outcome reflects them. */
+    /**
+     * Reports every submission LeetCode shows first, so the outcome reflects
+     * them. Finish stops once when nothing was submitted or accepted (see
+     * `finishCheckOf`); "Finish anyway" then ends the session as not solved.
+     */
     async finish(result: "solved" | "unsuccessful") {
       const session = currentSession();
       if (!session) return;
-      ready({ busy: "finishing", notice: null });
+      ready({ busy: "finishing", notice: null, finishCheck: null });
       await pollIfDue(true);
       await reportActivity().catch(() => undefined);
+      if (result === "solved" && view.kind === "ready") {
+        const check = finishCheckOf(view);
+        if (check) return ready({ busy: null, finishCheck: check });
+      }
       const response = await send<PracticeSessionCommandResponseDto>({
         type: "session_control",
         sessionId: session.id,
@@ -602,9 +619,17 @@ export function createPageSession(deps: PageSessionDeps) {
       if (response.queued) return ready({ busy: null, session: { ...session, status: "completed" }, notice: { kind: "queued", action: "finish" } });
       const completed = response.response.session;
       ready({ session: completed, pendingRating: completed.rating.disposition === "pending" ? completed : null });
-      // Finishing can schedule the problem (initial learning); read it back.
+      // Finishing can schedule the problem (initial learning, or a review
+      // finished as not solved, rated Again at once); read it back.
       await refresh();
-      ready({ busy: null, notice: null });
+      const again = completed.type === "scheduled_review" && completed.rating.disposition === "submitted";
+      const nextDue = view.kind === "ready" ? (view.problem?.fsrsDue ?? null) : null;
+      ready({ busy: null, notice: again ? { kind: "rated", nextDue, again: true } : null });
+    },
+
+    /** Dismisses the Finish check; the session goes on. */
+    keepWorking() {
+      ready({ finishCheck: null });
     },
 
     async abandon() {
@@ -705,3 +730,20 @@ export function createPageSession(deps: PageSessionDeps) {
 }
 
 export type PageSession = ReturnType<typeof createPageSession>;
+
+/**
+ * Whether Finish should stop and ask first, from what tracking saw in the
+ * session this tab controls: no submission at all, or none accepted. Only
+ * when LeetCode could be read throughout and nothing is still being judged;
+ * otherwise not seeing a submission proves nothing, and Finish goes ahead.
+ */
+export function finishCheckOf(view: Extract<PageView, { kind: "ready" }>): FinishCheck | null {
+  const session = view.session;
+  if (!session || session.status !== "active" || session.ownership !== "you") return null;
+  if (view.availability !== "available" || view.local.judging > 0 || session.evidence.ambiguous > 0) return null;
+  if (session.capture.completeness !== "complete") return null;
+  if (session.capture.baselineState !== "established" && session.capture.baselineState !== "none") return null;
+  const unsynced = view.local.unsynced;
+  if (session.evidence.accepted + unsynced.filter((item) => item.accepted).length > 0) return null;
+  return session.evidence.submissions + unsynced.length === 0 ? "no_submissions" : "not_accepted";
+}

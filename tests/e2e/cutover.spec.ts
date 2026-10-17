@@ -4,7 +4,7 @@ import { join } from "node:path";
 import type { Route } from "@playwright/test";
 import type { PracticeSessionCurrentDto, PracticeSessionListDto } from "../../packages/contracts/src";
 import { API_ORIGIN, apiFrom, expect, launchExtensionContext, openSignedInPopup, test } from "./fixtures";
-import { newProblem, openPanel } from "./helpers";
+import { finishWithRatingPending, newProblem, openPanel } from "./helpers";
 import { installLeetcodeFixture, problemUrl, type LeetcodeFixtureState } from "./leetcode-fixture";
 
 const COMMANDS = "**/api/practice-sessions/*/commands";
@@ -22,6 +22,8 @@ test("queued work never crosses accounts", async ({ context, leetcode, api, pane
   await expect(page.getByText("First practice in progress")).toBeVisible();
   await context.route(COMMANDS, outage);
   await page.getByRole("button", { name: "Finish" }).click();
+  // Nothing was submitted, so Finish asks first.
+  await page.getByRole("button", { name: "Finish anyway" }).click();
   await expect(page.getByText("Finish saved. It syncs when ankileet is reachable.")).toBeVisible();
 
   // Another account signs in on the web while the finish waits.
@@ -58,6 +60,8 @@ test("a finish queued before the browser closes syncs after it reopens", async (
     await expect(page.getByText("First practice in progress")).toBeVisible();
     await context.route(COMMANDS, outage);
     await page.getByRole("button", { name: "Finish" }).click();
+    // Nothing was submitted, so Finish asks first.
+    await page.getByRole("button", { name: "Finish anyway" }).click();
     await expect(page.getByText("Finish saved. It syncs when ankileet is reachable.")).toBeVisible();
     await context.close();
 
@@ -85,8 +89,7 @@ test("a rating sent as the popup closes still lands", async ({ context, leetcode
   await page.goto(problemUrl(slug));
   await openPanel(page);
   await page.getByRole("button", { name: "Start review" }).click();
-  await page.getByRole("button", { name: "End as unsuccessful" }).click();
-  await expect(page.getByRole("group", { name: "How did the review go?" })).toBeVisible();
+  await finishWithRatingPending(page, leetcode, slug);
 
   const current = () => api<PracticeSessionCurrentDto>(`/api/practice-sessions/current?slug=${slug}`);
   const pending = (await current()).pendingRating!;

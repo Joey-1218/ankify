@@ -81,6 +81,11 @@ function harness(options: {
   };
 }
 
+const evidence = (submissions: number, accepted: number): Pick<PracticeSessionDto, "evidence"> => ({
+  evidence: { submissions, accepted, failed: submissions - accepted, pendingDetails: 0, ambiguous: 0, firstAcceptedAt: accepted > 0 ? START : null },
+});
+const ACCEPTED = evidence(1, 1);
+
 const current = (overrides: Partial<PracticeSessionDto> | null = {}, capture: Partial<PracticeSessionDto["capture"]> = {}) => ({
   ok: true,
   response: { problem, session: overrides ? session(overrides, capture) : null, pendingRating: null },
@@ -209,12 +214,12 @@ describe("page session", () => {
     let done = false;
     const h = harness({
       respond: (message) => {
-        if (message.type === "page_state") return done ? { ok: true, response: { problem, session: null, pendingRating: finished } } : current();
+        if (message.type === "page_state") return done ? { ok: true, response: { problem, session: null, pendingRating: finished } } : current(ACCEPTED);
         if (message.type === "session_control") {
           done = true;
           return { ok: true, response: { ok: true, session: finished } };
         }
-        return { ok: true, response: { ok: true, session: session() } };
+        return { ok: true, response: { ok: true, session: session(ACCEPTED) } };
       },
     });
     await h.page.refresh();
@@ -351,6 +356,78 @@ describe("live submission tracking", () => {
     await h.tick(SUBMIT_POLL_MS);
     expect(h.sent.filter((message) => message.type === "session_observations")).toHaveLength(2);
     expect(h.page.view()).toMatchObject({ local: { unsynced: [{ id: "1001", accepted: false }] } });
+  });
+});
+
+describe("Finish without an accepted submission", () => {
+  it("stops when nothing was submitted; Finish anyway ends the review as not solved, rated Again", async () => {
+    const rated = session({ status: "completed", outcome: "failed", ownership: "none", rating: { disposition: "submitted", expiresAt: null } });
+    const after = { ...problem, due: false, fsrsDue: "2026-09-30T12:00:00.000Z", scheduleRevision: 1 };
+    let done = false;
+    const h = harness({
+      respond: (message) => {
+        if (message.type === "page_state") return done ? { ok: true, response: { problem: after, session: null, pendingRating: null, recentCompleted: rated } } : current();
+        if (message.type === "session_control") {
+          done = true;
+          return { ok: true, response: { ok: true, session: rated } };
+        }
+        return { ok: true, response: { ok: true, session: session() } };
+      },
+    });
+    await h.page.refresh();
+    await h.page.finish("solved");
+    expect(h.page.view()).toMatchObject({ finishCheck: "no_submissions", busy: null, session: { status: "active" } });
+    expect(h.sent.some((message) => message.type === "session_control")).toBe(false);
+    // Still tracking: submitting now is picked up as usual.
+    expect(h.pending().length).toBeGreaterThan(0);
+
+    await h.page.finish("unsuccessful");
+    expect(h.sent.find((message) => message.type === "session_control")).toMatchObject({ control: { command: "finish", result: "unsuccessful" } });
+    expect(h.page.view()).toMatchObject({
+      finishCheck: null, pendingRating: null, busy: null,
+      notice: { kind: "rated", again: true, nextDue: "2026-09-30T12:00:00.000Z" },
+    });
+  });
+
+  it("stops when nothing was accepted, until Keep working, or until an Accepted submission arrives", async () => {
+    let latest = session(evidence(1, 0));
+    const h = harness({
+      respond: (message) =>
+        message.type === "page_state" ? { ok: true, response: { problem, session: latest, pendingRating: null } } : { ok: true, response: { ok: true, session: latest } },
+    });
+    await h.page.refresh();
+    await h.page.finish("solved");
+    expect(h.page.view()).toMatchObject({ finishCheck: "not_accepted" });
+    h.page.keepWorking();
+    expect(h.page.view()).toMatchObject({ finishCheck: null });
+
+    await h.page.finish("solved");
+    expect(h.page.view()).toMatchObject({ finishCheck: "not_accepted" });
+    latest = session(evidence(2, 1));
+    await h.page.refresh();
+    expect(h.page.view()).toMatchObject({ finishCheck: null, session: { evidence: { accepted: 1 } } });
+    expect(h.sent.some((message) => message.type === "session_control")).toBe(false);
+  });
+
+  it("goes ahead when LeetCode could not be read throughout, or a submission is still being judged", async () => {
+    const finished = session({ status: "completed", outcome: "unknown", ownership: "none", rating: { disposition: "pending", expiresAt: START } });
+    const finishWith = async (options: { capture?: Partial<PracticeSessionDto["capture"]>; listing?: ListedSubmission[] }) => {
+      const h = harness({
+        listing: () => ({ availability: "available", value: { complete: true, submissions: options.listing ?? [] } }),
+        respond: (message) =>
+          message.type === "page_state"
+            ? current({}, options.capture)
+            : message.type === "session_control"
+              ? { ok: true, response: { ok: true, session: finished } }
+              : { ok: true, response: { ok: true, session: session({}, options.capture) } },
+      });
+      await h.page.refresh();
+      await h.page.finish("solved");
+      return h.sent.filter((message) => message.type === "session_control");
+    };
+    expect(await finishWith({ capture: { completeness: "partial" } })).toHaveLength(1);
+    expect(await finishWith({ capture: { baselineState: "unavailable", baselineSubmissionId: null } })).toHaveLength(1);
+    expect(await finishWith({ listing: [listed("1001", "Other", true)] })).toHaveLength(1);
   });
 });
 

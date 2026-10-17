@@ -221,6 +221,27 @@ test("a problem's page lists its sessions and scheduling timeline, with no retir
   await page.close();
 });
 
+test("a finished session is deleted from the problem page, undoing the first review it scheduled", async ({ context, api, leetcode }) => {
+  const { slug, title } = await finishedSession(api, leetcode, "web-delete");
+  const { problem } = await api<PracticeSessionCurrentDto>(`/api/practice-sessions/current?slug=${slug}`);
+  expect(problem).toMatchObject({ enrollment: "enrolled" });
+  const page = await openWeb(context, `/problems/${problem!.id}`);
+  await expect(page.getByRole("heading", { level: 1, name: title })).toBeVisible({ timeout: 30_000 });
+
+  await page.getByRole("tab", { name: /Sessions/ }).click();
+  await page.getByRole("tabpanel").getByRole("button", { name: "Delete this session" }).click();
+  const dialog = page.getByRole("alertdialog", { name: "Delete this session?" });
+  await expect(dialog.getByText(/goes back to awaiting first practice/)).toBeVisible();
+  await expect(dialog.getByText(/Your LeetCode submissions stay/)).toBeVisible();
+  await dialog.getByRole("button", { name: "Delete", exact: true }).click();
+  await expect(dialog).toHaveCount(0);
+  await expect(page.getByRole("tabpanel").getByText("No practice sessions yet")).toBeVisible();
+
+  const after = await api<PracticeSessionCurrentDto>(`/api/practice-sessions/current?slug=${slug}`);
+  expect(after.problem).toMatchObject({ enrollment: "awaiting_initial", fsrsDue: null, due: false });
+  await page.close();
+});
+
 test("legacy review, Study Coach, and card controls are retired from the web", async ({ context, api, leetcode }) => {
   const page = await openWeb(context, "/review");
   await expect(page).toHaveURL(/\/today\?retired=review$/, { timeout: 30_000 });
