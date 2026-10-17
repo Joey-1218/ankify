@@ -104,11 +104,15 @@ describe("practice session invariants", () => {
     await event("e8", "self_recall_rated", null);
   });
 
-  it("refuses to delete a session that scheduling history refers to, but cascades with its problem", async () => {
+  it("keeps scheduling history of a deleted session without its link, and cascades with its problem", async () => {
     await session("s1");
     await observation("o1", "s1");
     await client.execute("INSERT INTO review_events (id, user_id, problem_id, event_type, practice_session_id) VALUES ('e1', 'user-1', 'problem-1', 'self_recall_rated', 's1')");
-    await expect(client.execute("DELETE FROM practice_sessions WHERE id = 's1'")).rejects.toThrow();
+    await client.execute("DELETE FROM practice_sessions WHERE id = 's1'");
+    expect((await client.execute("SELECT practice_session_id FROM review_events WHERE id = 'e1'")).rows[0]?.practice_session_id).toBeNull();
+    expect(Number((await client.execute("SELECT count(*) AS count FROM practice_session_submissions")).rows[0]?.count)).toBe(0);
+    await session("s2");
+    await client.execute("INSERT INTO review_events (id, user_id, problem_id, event_type, practice_session_id) VALUES ('e2', 'user-1', 'problem-1', 'fsrs_scheduled', 's2')");
     await client.execute("DELETE FROM problems WHERE id = 'problem-1'");
     for (const table of ["practice_sessions", "practice_session_submissions", "review_events"]) {
       const result = await client.execute(`SELECT count(*) AS count FROM ${table}`);
