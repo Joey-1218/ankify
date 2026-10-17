@@ -2,7 +2,7 @@ import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vites
 import { getDb, schema } from "@ankileet/db";
 import { getRequestUser } from "@/server/auth";
 import { createTestDb } from "@/server/test-db";
-import { GET as getDetail } from "./[id]/route";
+import { DELETE as deleteSession, GET as getDetail } from "./[id]/route";
 import { POST as postCommand } from "./[id]/commands/route";
 import { POST as postRating } from "./[id]/rating/route";
 import { POST as postSubmissions } from "./[id]/submissions/route";
@@ -68,8 +68,9 @@ describe("practice session routes", () => {
       getDetail(request("/api/practice-sessions/s1"), params("s1")),
       postCommand(request("/api/practice-sessions/s1/commands", { body: { type: "defer_rating", requestId: crypto.randomUUID() } }), params("s1")),
       postSubmissions(request("/api/practice-sessions/s1/submissions", { body: { observations: [{ leetcodeSubmissionId: "1", verdict: "Accepted" }] } }), params("s1")),
+      deleteSession(request("/api/practice-sessions/s1", { method: "DELETE" }), params("s1")),
     ]);
-    expect(responses.map((response) => response.status)).toEqual([401, 401, 401, 401, 401, 401]);
+    expect(responses.map((response) => response.status)).toEqual([401, 401, 401, 401, 401, 401, 401]);
   });
 
   it("are unavailable while the workflow is switched off", async () => {
@@ -116,6 +117,22 @@ describe("practice session routes", () => {
     expect((await postRating(request("/api/practice-sessions/missing/rating", { body: rating }), params("missing"))).status).toBe(404);
     vi.stubEnv("ANKILEET_DISABLED_WORKFLOWS", "session_rating");
     expect((await postRating(request(`/api/practice-sessions/${session.id}/rating`, { body: rating }), params(session.id))).status).toBe(503);
+  });
+
+  it("deletes only finished sessions: 409 while open, then 200, then 404", async () => {
+    const { session } = await (await start(request("/api/practice-sessions", { body: startBody() }))).json();
+    const remove = () => deleteSession(request(`/api/practice-sessions/${session.id}`, { method: "DELETE" }), params(session.id));
+    const open = await remove();
+    expect(open.status).toBe(409);
+    expect(await open.json()).toMatchObject({ error: "invalid_transition", session: { id: session.id } });
+
+    const finish = { type: "finish", requestId: crypto.randomUUID(), ownerToken: TAB, result: "unsuccessful", occurredAt: new Date().toISOString() };
+    expect((await postCommand(request(`/api/practice-sessions/${session.id}/commands`, { body: finish }), params(session.id))).status).toBe(200);
+    const deleted = await remove();
+    expect(deleted.status).toBe(200);
+    expect(await deleted.json()).toMatchObject({ ok: true, deletedSessionId: session.id, problem: { enrollment: "awaiting_initial", fsrsDue: null } });
+    expect((await remove()).status).toBe(404);
+    expect((await getDetail(request(`/api/practice-sessions/${session.id}`), params(session.id))).status).toBe(404);
   });
 
   it("reports ownership relative to the tab's owner-token header", async () => {

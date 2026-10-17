@@ -6,11 +6,11 @@ import {
   retrievability,
   SCHEDULING_POLICIES,
 } from "@ankileet/core";
-import { getDb, schema, type PracticeSession, type Problem } from "@ankileet/db";
+import { getDb, schema, type PracticeSession, type Problem, type ReviewEvent } from "@ankileet/db";
 import { and, eq, isNull, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { markFirstReview } from "@/server/onboarding";
-import { fsrsWriteColumns, problemFsrsState, undoRatingEvent, undoSnapshot } from "@/server/review-commands";
+import { fsrsWriteColumns, problemFsrsState, undoRatingEvent, undoRevisionFor, undoSnapshot } from "@/server/review-commands";
 import { payloadDigest } from "./digest";
 import { toProblemStatusDto } from "./dto";
 import {
@@ -62,6 +62,41 @@ export async function initializeProblemSchedule(
     occurredAt: completedAt,
   });
   return problem;
+}
+
+/**
+ * Reverts a first-review schedule (an `fsrs_scheduled` event) inside the
+ * caller's transaction: the problem awaits initial learning again, with no
+ * due date, the schedule revision advances, and the event is stamped undone.
+ * Refused while a later scheduling change is still in effect, like rating Undo.
+ */
+export async function undoInitialSchedule(
+  tx: DbTransaction,
+  userId: string,
+  event: ReviewEvent,
+  now: Date,
+): Promise<{ ok: true } | { ok: false; error: "undo_conflict" }> {
+  const guard = await undoRevisionFor(tx, userId, event);
+  if (!guard.ok || guard.expectedRevision == null) return { ok: false, error: "undo_conflict" };
+  const p = schema.problems;
+  const [updated] = await tx
+    .update(p)
+    .set({ enrollment: "awaiting_initial", fsrsDue: null, scheduleRevision: sql`${p.scheduleRevision} + 1`, updatedAt: now })
+    .where(
+      and(
+        eq(p.id, event.problemId),
+        eq(p.userId, userId),
+        eq(p.enrollment, "enrolled"),
+        eq(p.scheduleRevision, guard.expectedRevision),
+      ),
+    )
+    .returning({ id: p.id });
+  if (!updated) return { ok: false, error: "undo_conflict" };
+  await tx
+    .update(schema.reviewEvents)
+    .set({ undoneAt: now })
+    .where(and(eq(schema.reviewEvents.id, event.id), eq(schema.reviewEvents.userId, userId)));
+  return { ok: true };
 }
 
 /**

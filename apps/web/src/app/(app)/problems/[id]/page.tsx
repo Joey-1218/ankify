@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import type { PracticeSessionDto } from "@ankileet/contracts";
+import { SESSION_STALE_AFTER_MS } from "@ankileet/core";
 import { DifficultyPill, FsrsStatePill, Pill } from "@/components/ui/pill";
 import { Surface } from "@/components/ui/surface";
 import { Markdown } from "@/components/ui/markdown";
@@ -14,6 +16,7 @@ import { ArchiveProblemButton } from "./archive-problem-button";
 import { DeleteProblemButton } from "./delete-problem-button";
 import { NotesEditor } from "./notes-editor";
 import { MistakeList } from "./mistake-list";
+import { DeleteSessionButton } from "./delete-session-button";
 import { SessionAnalysis } from "./session-analysis";
 import { loadProblemDetail } from "@/server/problem-detail";
 
@@ -21,6 +24,13 @@ const RATING_TONES: Record<number, "danger" | "warning" | "success" | "accent" |
 
 function currentTimeMs() {
   return Date.now();
+}
+
+/** Finished sessions can be deleted; an interrupted one only once it is stale
+ *  history (no activity for 24 hours), since until then it can be resumed. */
+function deletable(session: PracticeSessionDto) {
+  if (session.status === "completed" || session.status === "abandoned") return true;
+  return session.status === "interrupted" && currentTimeMs() - Date.parse(session.timing.lastActivityAt) > SESSION_STALE_AFTER_MS;
 }
 
 function ratingLabel(rating: number | null, t: Awaited<ReturnType<typeof getRequestTranslations>>) {
@@ -102,6 +112,7 @@ export default async function ProblemDetail({ params }: { params: Promise<{ id: 
                 <Pill tone={state === "accepted" ? "success" : state === "failed" ? "danger" : "neutral"}>{t.dashboard.states[state] ?? state}</Pill>
                 {rating != null && <Pill tone={RATING_TONES[rating] ?? "neutral"}>{t.sessions.ratedAs(String(ratingLabel(rating, t)))}</Pill>}
                 <span className="ml-auto text-xs text-muted">{formatRelative(session.timing.startedAt)}</span>
+                {deletable(session) && <DeleteSessionButton session={session} />}
               </div>
               <p className="text-xs text-muted">
                 {t.sessions.evidence(session.evidence.submissions, session.evidence.accepted)} · {t.sessions.activeMinutes(Math.round(session.timing.activeMs / 60_000))}

@@ -93,16 +93,44 @@ export function undoSnapshot(state: FsrsCardState) {
 const SCHEDULING_EVENT_TYPES = ["self_recall_rated", "fsrs_scheduled"] as const;
 
 /**
+ * Whether a scheduling event still accounts for the problem's schedule, and
+ * the revision an Undo must find. Every FSRS write advances the revision by
+ * one and every Undo by one more, so the schedule is unchanged since the event
+ * exactly when the revision equals the event's plus two per later scheduling
+ * event that was itself undone. Any later event still in effect blocks Undo.
+ * Events from before migration 0021 have no revision (`expectedRevision: null`).
+ */
+export async function undoRevisionFor(
+  tx: DbTransaction,
+  userId: string,
+  event: Pick<ReviewEvent, "problemId" | "scheduleRevision">,
+): Promise<{ ok: true; expectedRevision: number | null } | { ok: false }> {
+  if (event.scheduleRevision == null) return { ok: true, expectedRevision: null };
+  const e = schema.reviewEvents;
+  const later = await tx
+    .select({ undoneAt: e.undoneAt })
+    .from(e)
+    .where(
+      and(
+        eq(e.userId, userId),
+        eq(e.problemId, event.problemId),
+        inArray(e.eventType, [...SCHEDULING_EVENT_TYPES]),
+        gt(e.scheduleRevision, event.scheduleRevision),
+      ),
+    );
+  if (later.some((row) => row.undoneAt == null)) return { ok: false };
+  return { ok: true, expectedRevision: event.scheduleRevision + 2 * later.length };
+}
+
+/**
  * Reverts one rating event inside the caller's transaction: restores the
  * pre-rating FSRS state, advances the schedule revision, stamps `undoneAt`,
  * and marks a session's rating undone (it can never be rated again).
  *
- * The event must still account for the current schedule. Every FSRS write
- * advances the revision by one and every Undo by one more, so the schedule is
- * unchanged since the event exactly when the revision equals the event's plus
- * two per later scheduling event that was itself undone. Any other write,
- * even one that keeps the repetition count, is caught. Events from before
- * migration 0021 have no revision and keep the legacy repetition check.
+ * The event must still account for the current schedule (`undoRevisionFor`);
+ * any other write, even one that keeps the repetition count, is caught.
+ * Events from before migration 0021 have no revision and keep the legacy
+ * repetition check.
  */
 export async function undoRatingEvent(
   tx: DbTransaction,
@@ -114,23 +142,9 @@ export async function undoRatingEvent(
   if (!snapshot.success || event.undoneAt != null) return { ok: false, error: "nothing_to_undo" };
   const previous = snapshot.data;
   const p = schema.problems;
-  const e = schema.reviewEvents;
-  let expectedRevision: number | null = null;
-  if (event.scheduleRevision != null) {
-    const later = await tx
-      .select({ undoneAt: e.undoneAt })
-      .from(e)
-      .where(
-        and(
-          eq(e.userId, userId),
-          eq(e.problemId, event.problemId),
-          inArray(e.eventType, [...SCHEDULING_EVENT_TYPES]),
-          gt(e.scheduleRevision, event.scheduleRevision),
-        ),
-      );
-    if (later.some((row) => row.undoneAt == null)) return { ok: false, error: "undo_conflict" };
-    expectedRevision = event.scheduleRevision + 2 * later.length;
-  }
+  const guard = await undoRevisionFor(tx, userId, event);
+  if (!guard.ok) return { ok: false, error: "undo_conflict" };
+  const { expectedRevision } = guard;
   const [updated] = await tx
     .update(p)
     .set({

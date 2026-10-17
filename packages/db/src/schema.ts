@@ -463,9 +463,9 @@ export const reviewEvents = sqliteTable(
     cardId: text("card_id").references(() => cards.id, { onDelete: "set null" }),
     submissionId: text("submission_id").references(() => submissions.id, { onDelete: "set null" }),
     // Scheduling provenance for events written after migration 0021; older
-    // events keep NULL. A session is deleted only with its problem or user,
-    // which also deletes these events, so the reference needs no action.
-    practiceSessionId: text("practice_session_id").references(() => practiceSessions.id),
+    // events keep NULL. Deleting a session first undoes its scheduling events
+    // (they stay as history, `undoneAt` stamped) and then clears the link.
+    practiceSessionId: text("practice_session_id").references(() => practiceSessions.id, { onDelete: "set null" }),
     policyVersion: text("policy_version"),
     reviewMethod: text("review_method", { enum: ["self_recall", "leetcode_full_solve"] }),
     /** The problem's schedule revision produced by this event. */
