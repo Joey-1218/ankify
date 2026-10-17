@@ -12,23 +12,23 @@ Read in this order: [CLAUDE.md](../CLAUDE.md) (rules and UI conventions),
 ## State (2026-10-17)
 
 - **Live:** `https://ankileet.com` on Vercel (`iad1`) with Turso
-  (`aws-us-east-1`), migrations 0000–0025 applied. Google sign-in, practice
+  (`aws-us-east-1`), all 27 migrations applied. Google sign-in, practice
   sessions through the extension, and BYOK session analysis (DeepSeek) were
   verified end to end in Production.
-- **Branch `feat/session-endings` (2026-10-17, not merged or deployed):**
-  honest session endings and session deletion (History). It adds migration
-  `0026_session_delete_review_events_fk`, a `review_events` table rebuild,
-  so run `pnpm db:release` (backup + migrate) before deploying its web side
-  (DEPLOYMENT.md). The migrator turns foreign keys off for the batch, so the
-  DROP keeps `mistake_records.review_event_id` (covered by
-  `migration-0026.test.ts`).
+- **Session endings and deletion: web side live since 2026-10-17** (`bb9e95e`,
+  deployment `ankileet-olqb9tkwz`; smoke checks passed). Migration
+  `0026_session_delete_review_events_fk` (a `review_events` rebuild) was
+  applied first; it kept all 93 events (backup
+  `backups/database-ankileet-20261017-164848.db`). The panel changes ship
+  with the 0.3.1 extension upload. That push to `main` did not start a
+  Vercel build by itself; it was deployed from the dashboard.
 - **Extension 0.3.0:** **published** on the Chrome Web Store on 2026-10-15
   ([listing](https://chromewebstore.google.com/detail/ankileet/ghkeifmaeopfjhnhakkeeafkalagndnj), ID `ghkeifmaeopfjhnhakkeeafkalagndnj`).
   Production accepts both the store ID and the unpacked ID. The Google OAuth
   app is published (In production), so anyone with a Google account can sign
   in; no test-user list.
 - **Gate:** `ANKILEET_EXTENSION_API_ORIGIN=https://ankileet.com pnpm
-  release:check` passes on `feat/session-endings` (2026-10-17): 571 unit
+  release:check` passes (2026-10-17): 571 unit
   tests, 55 browser tests, 7 screenshot tests, builds, manifest check; the
   audit leaves only low/moderate advisories. Without the origin the
   extension build fails closed, after the tests. Git worktrees under `.claude/worktrees/` make the
@@ -138,12 +138,10 @@ web side that ships with it):
    the 0.3.1 upload. The web's `apps/web/public/icon-32.png` and
    `apple-touch-icon.png` are the same old picture; replace them together
    (`ankileet-mark.svg`, added at the rename, can be the starting point).
-3. **Session endings and deletion** (`feat/session-endings`, built): the
-   panel's Finish check, automatic Again for a review finished as not
-   solved, "End as unsuccessful" removed, and Delete on the web Sessions
-   tab. The web side (and migration 0026) ships first; a 0.3.0 extension
-   still works against it (its "End as unsuccessful" just rates Again
-   without asking).
+3. **Session endings** (merged; web side live): upload the panel's Finish
+   check and the removal of "End as unsuccessful" with 0.3.1. Until then
+   the 0.3.0 extension works against the live server; its "End as
+   unsuccessful" now rates a review Again without asking.
 
 **Owner decisions and console work:**
 
