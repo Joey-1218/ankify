@@ -92,8 +92,10 @@ suspended (`ANKILEET_ENABLED_LEGACY_WORKFLOWS` re-enables one deliberately).
   what stored metadata shows.
 - **FSRS is problem-level**; only the rating of a completed review session
   (or the legacy rating route) changes the schedule, and a first practice
-  schedules its first review without a rating. `review_events` is append-only
-  (undo stamps `undoneAt`).
+  schedules its first review without a rating. A review finished as not
+  solved is rated Again in the finish transaction. `review_events` is
+  append-only (undo stamps `undoneAt`); deleting a session undoes its
+  scheduling event first and is refused while a later change is in effect.
 - **Tests**: DB tests use `createTestDb()` from `apps/web/src/server/test-db.ts`;
   keep deliberate-concurrency tests in their own `*.concurrency.test.ts` file.
 

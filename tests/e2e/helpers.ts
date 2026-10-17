@@ -1,6 +1,6 @@
 import type { Page } from "@playwright/test";
 import { expect, type Api } from "./fixtures";
-import type { LeetcodeFixtureState } from "./leetcode-fixture";
+import { submit, type LeetcodeFixtureState } from "./leetcode-fixture";
 
 // Playwright restarts its worker after a failure, which reloads this module.
 // A fixed start would then reuse ids of problems already in the run's
@@ -30,6 +30,16 @@ export async function openPanel(page: Page) {
 export async function focus(page: Page) {
   await page.bringToFront();
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
+}
+
+/** Submits Accepted and finishes the open review, so its rating is asked.
+ *  (A review finished as not solved is rated Again without asking.) */
+export async function finishWithRatingPending(page: Page, state: LeetcodeFixtureState, slug: string) {
+  submit(state, slug, "Accepted");
+  await focus(page);
+  await expect(page.getByText("1 submission, 1 accepted")).toBeVisible({ timeout: 20_000 });
+  await page.getByRole("button", { name: "Finish" }).click();
+  await expect(page.getByRole("group", { name: "How did the review go?" })).toBeVisible();
 }
 
 /**

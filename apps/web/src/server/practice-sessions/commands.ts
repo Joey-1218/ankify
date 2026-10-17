@@ -24,13 +24,13 @@ import {
 import { getDb, schema, type PracticeSession, type PracticeSessionSubmission, type Problem } from "@ankileet/db";
 import { and, asc, eq, inArray, ne, or } from "drizzle-orm";
 import { nanoid } from "nanoid";
-import { markFirstCapture } from "@/server/onboarding";
+import { markFirstCapture, markFirstReview } from "@/server/onboarding";
 import { getReviewSettings } from "@/server/settings";
 import { loadAutomaticAnalysisContext, planAutomaticAnalysis, publishPlannedJob } from "@/server/session-analysis/jobs";
 import { findLeetcodeProblem, upsertLeetcodeProblem } from "@/server/problem-upsert";
 import { storeSubmissions } from "@/server/submission-store";
 import { payloadDigest } from "./digest";
-import { initializeProblemSchedule, undoSessionRating } from "./scheduling";
+import { applySessionRating, initializeProblemSchedule, undoSessionRating } from "./scheduling";
 import { isProblemDue, loadSessionEvidence, toProblemStatusDto, worseCompleteness } from "./dto";
 import {
   fail,
@@ -303,6 +303,7 @@ export async function runSessionCommand(
   const initialReviewDelayHours = input.type === "finish" ? (await getReviewSettings(userId)).initialReviewDelayHours : 0;
   const automaticAnalysis = input.type === "finish" ? await loadAutomaticAnalysisContext(userId) : null;
   let plannedAnalysis: string | null = null;
+  let ratedAgain = false;
   const { requestId, ...payload } = input;
   const digest = payloadDigest({ sessionId, ...payload });
 
@@ -380,6 +381,15 @@ export async function runSessionCommand(
           // interrupted sessions never schedule anything.
           problem = (await initializeProblemSchedule(tx, userId, next, completed.at, initialReviewDelayHours, now)) ?? problem;
         }
+        // A review ended unsuccessfully is a lapse: it is rated Again at once,
+        // from the completion time, instead of waiting for a rating.
+        if (input.result === "unsuccessful" && disposition === "pending" && effectiveRatingDisposition(next, problem.scheduleRevision, now) === "pending") {
+          const applied = await applySessionRating(tx, userId, next, problem, 1, { automatic: "unsuccessful_finish" }, now);
+          if (applied) {
+            ({ rated: next, problem } = applied);
+            ratedAgain = true;
+          }
+        }
         // The automatic analysis intent commits with the completion.
         if (automaticAnalysis) plannedAnalysis = await planAutomaticAnalysis(tx, userId, next.id, automaticAnalysis, now);
         break;
@@ -441,6 +451,11 @@ export async function runSessionCommand(
     return { ok: true, response };
   });
   if (result.ok) await publishPlannedJob(plannedAnalysis);
+  if (result.ok && ratedAgain) {
+    await markFirstReview(userId).catch((error) => {
+      console.warn("[onboarding] failed to record first review", error);
+    });
+  }
   return result;
 }
 

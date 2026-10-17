@@ -56,7 +56,7 @@ export async function loadReviewOverview(userId: string, cap = 20, now = new Dat
       .orderBy(asc(ps.completedAt)),
     db
       .select({
-        initialLearning: sql<number>`coalesce(sum(case when ${schema.reviewEvents.eventType} = 'fsrs_scheduled' then 1 else 0 end), 0)`,
+        initialLearning: sql<number>`coalesce(sum(case when ${schema.reviewEvents.eventType} = 'fsrs_scheduled' and ${schema.reviewEvents.undoneAt} is null then 1 else 0 end), 0)`,
       })
       .from(schema.reviewEvents)
       .where(and(eq(schema.reviewEvents.userId, userId), gte(schema.reviewEvents.occurredAt, startOfDay))),

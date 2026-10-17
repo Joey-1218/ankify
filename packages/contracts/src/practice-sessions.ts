@@ -300,6 +300,14 @@ export type PracticeSessionCommandResponseDto = {
   idempotentReplay: boolean;
 };
 
+/** DELETE /api/practice-sessions/:id — the session is gone; `problem` is
+ *  its problem after the session's scheduling was undone. */
+export type PracticeSessionDeleteResponseDto = {
+  ok: true;
+  deletedSessionId: string;
+  problem: PracticeProblemStatusDto;
+};
+
 export type PracticeSessionRatingResponseDto = {
   ok: true;
   session: PracticeSessionDto;

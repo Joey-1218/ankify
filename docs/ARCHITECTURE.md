@@ -54,7 +54,7 @@ Tables (all in `packages/db/src/schema.ts`):
 | `practice_sessions`, `practice_session_submissions`, `practice_session_commands` | Tracked attempts on LeetCode, their submission observations, and command idempotency records (see Practice sessions) |
 | `cards` | Q&A flashcards; `aiStatus` `candidate | failed | ready`; integer `version` for optimistic concurrency |
 | `quiz_sessions` | 5-item quizzes (`active | completed | archived`), answers, score |
-| `review_events` | Append-only history with FSRS snapshots; ratings are undone by stamping `undoneAt`; newer events record session, policy, method, and schedule-revision provenance |
+| `review_events` | Append-only history with FSRS snapshots; ratings are undone by stamping `undoneAt`; newer events record session, policy, method, and schedule-revision provenance (the session link is cleared when the session is deleted, after its events were undone) |
 | `mistake_records` | Causes of failure, confirmed by the user (or AI candidates awaiting confirmation), linked to a submission, quiz answer, rating, or practice session, with structured evidence references; partial unique indexes dedupe per source and category |
 | `practice_improvements` | Retired "Skill handled well" confirmations. Kept for history and export; no longer written or counted (improvement is derived from clean reviews) |
 | `ai_jobs` | Durable async card, quiz, and session-analysis commands (see below) |
@@ -105,7 +105,13 @@ Tables (all in `packages/db/src/schema.ts`):
   unchanged since the session started. One rating event per session is
   enforced by a unique index; the response is stored for replay. Voluntary
   practice, capture, and dashboard visits never change the schedule.
-- The rating is due right after Finish: rate, or skip (`dismiss_rating`).
+- A review finished as not solved (`result: "unsuccessful"`, the panel's
+  "Finish anyway") is rated Again in the finish transaction: failing to
+  produce a correct solution is a lapse, and Hard/Good/Easy all mean
+  recall succeeded. The event has no request id and
+  `metadata.automatic: "unsuccessful_finish"`; it undoes like any rating.
+  Not for a review whose schedule changed since it started (superseded).
+- Otherwise the rating is due right after Finish: rate, or skip (`dismiss_rating`).
   `defer_rating` answers `rating_defer_retired`. An unresolved rating
   expires 24 hours after completion (computed on read) without touching
   FSRS. A due or early review does not start while another problem's
@@ -137,6 +143,14 @@ Pure rules live in `packages/core/src/practice-session.ts`, services in
 - **Kinds**: `initial_learning` (a problem new to Ankileet, created
   `awaiting_initial` and kept out of the queue), `scheduled_review` (due, or
   explicitly started early), `voluntary_practice` (never changes the schedule).
+- **Finish check** (extension panel, `finishCheckOf()` in `page-session.ts`):
+  Finish stops and asks first when the session has no submission, or none
+  accepted, provided LeetCode could be read throughout (complete capture,
+  baseline set, available now) and nothing is still being judged. "Keep
+  working" goes back; "Finish anyway" sends `unsuccessful`. When tracking
+  was unreliable, not seeing a submission proves nothing and Finish goes
+  ahead. The check follows the evidence, so a new submission updates or
+  clears it.
 - **Lifecycle**: `active` → `completed` | `abandoned`. An active session whose
   owner lease lapsed reads as `interrupted` (never a failure); after 24 hours
   without activity it is stale history and a new session is required. One
@@ -160,8 +174,21 @@ Pure rules live in `packages/core/src/practice-session.ts`, services in
 - **Timing**: estimated foreground (`activeMs`) and tracked (`observedMs`)
   time are stored apart from wall time; completion times from the client are
   clamped into the session window and flagged when adjusted.
+- **Deletion** (`DELETE /api/practice-sessions/:id`, `delete.ts`, the web
+  problem page only): a finished or stale session the user calls invalid is
+  deleted with what it did, in one transaction. Its rating is undone, or the
+  first review its initial learning scheduled (the problem awaits initial
+  learning again, unscheduled); either is refused with `undo_conflict` while
+  a later scheduling change is in effect, by the same revision rule as Undo
+  (`undoRevisionFor()`), so the newest goes first. Its mistake records are
+  deleted; observations, commands, analyses, AI jobs, and improvements
+  cascade; the undone events stay with the link cleared. LeetCode
+  submissions stay with the problem. A live open session is abandoned
+  instead (`invalid_transition`), and nothing is deleted while its problem
+  has another live open session (`open_session_conflict`). A running
+  analysis of a deleted session commits nothing (`loadRunningJob()`).
 - **API**: `POST/GET /api/practice-sessions`, `GET /api/practice-sessions/current`,
-  `GET /api/practice-sessions/:id`, `POST .../:id/commands`,
+  `GET/DELETE /api/practice-sessions/:id`, `POST .../:id/commands`,
   `POST .../:id/submissions`. Tabs send `X-Ankileet-Owner-Token` on reads.
 - **Kill switch**: `ANKILEET_DISABLED_WORKFLOWS` (comma-separated workflow ids)
   disables a workflow's routes and removes it from `GET /api/capabilities`.
@@ -537,7 +564,7 @@ The extension is the daily surface. Three contexts, each with one job:
   `unavailable`, or `partial`, so an error is never "no submissions"), tracks
   the practice session of the problem in the URL (`page-session.ts`: foreground
   activity from visibility and focus only, polling every 15 s while visible and
-  at once on focus, a final poll before Finish), and renders the compact panel
+  at once on focus, a final poll before Finish, then the Finish check), and renders the compact panel
   in a shadow root (`panel.ts`). Resetting LeetCode's editor is an explicit
   action; "Import past submissions" stores history for a problem already in
   the deck through `POST /api/capture` (never a schedule change).
@@ -591,9 +618,10 @@ extension reuses the web session cookie, and production CORS allows only
     problems (`isMasteryCandidate()` in core: steady review, 3+ rated
     reviews, stability of 90+ days);
   - the Mistakes tab;
-  - the Sessions tab (evidence, active time, rating);
+  - the Sessions tab (evidence, active time, rating, and Delete for a
+    finished or stale session, with a confirmation that says what it undoes);
   - History as the scheduling timeline of ratings and initial-review
-    schedules;
+    schedules (undone ones hidden);
   - the next review date;
   - "Practice on LeetCode".
 - `/suggestions`: today's new-problem suggestions, the same items as the

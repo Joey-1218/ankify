@@ -7,7 +7,6 @@ import { captureProblem } from "./capture";
 import { loadMistakeProfile } from "./mistake-profile";
 import { createMistake, updateMistake } from "./mistakes";
 import { ingestSessionObservations, runSessionCommand, startPracticeSession } from "./practice-sessions/commands";
-import { ratePracticeSession } from "./practice-sessions/scheduling";
 import { undoLatestProblemReview } from "./review-commands";
 import { createTestDb } from "./test-db";
 
@@ -166,10 +165,9 @@ describe("mistake profile", () => {
     const started = await startPracticeSession(USER, { requestId: uuid(), target: { kind: "problem", problemId: "due" }, mode: "due_review", ownerToken: TAB, supersedePendingRating: false }, at(0));
     if (!started.ok) throw new Error(started.error);
     const sessionId = started.response.session.id;
+    // Ending a review unsuccessfully rates it Again at once.
     await runSessionCommand(USER, sessionId, { type: "finish", requestId: uuid(), ownerToken: TAB, result: "unsuccessful", occurredAt: at(MIN).toISOString() }, at(MIN));
-    const ratingRequest = uuid();
-    await ratePracticeSession(USER, sessionId, { requestId: ratingRequest, rating: 1 }, at(2 * MIN));
-    await record({ sourceType: "review", reviewRequestId: ratingRequest, requestId: uuid(), problemId: "due", primaryCategory: "conceptual" });
+    await record({ sourceType: "practice_session", practiceSessionId: sessionId, requestId: uuid(), problemId: "due", primaryCategory: "conceptual" });
 
     let profile = await loadMistakeProfile(USER);
     expect(profile.signals.ratings.again).toBe(1);

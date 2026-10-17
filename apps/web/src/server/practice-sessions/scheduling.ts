@@ -6,11 +6,11 @@ import {
   retrievability,
   SCHEDULING_POLICIES,
 } from "@ankileet/core";
-import { getDb, schema, type PracticeSession, type Problem } from "@ankileet/db";
+import { getDb, schema, type PracticeSession, type Problem, type ReviewEvent } from "@ankileet/db";
 import { and, eq, isNull, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { markFirstReview } from "@/server/onboarding";
-import { fsrsWriteColumns, problemFsrsState, undoRatingEvent, undoSnapshot } from "@/server/review-commands";
+import { fsrsWriteColumns, problemFsrsState, undoRatingEvent, undoRevisionFor, undoSnapshot } from "@/server/review-commands";
 import { payloadDigest } from "./digest";
 import { toProblemStatusDto } from "./dto";
 import {
@@ -65,6 +65,41 @@ export async function initializeProblemSchedule(
 }
 
 /**
+ * Reverts a first-review schedule (an `fsrs_scheduled` event) inside the
+ * caller's transaction: the problem awaits initial learning again, with no
+ * due date, the schedule revision advances, and the event is stamped undone.
+ * Refused while a later scheduling change is still in effect, like rating Undo.
+ */
+export async function undoInitialSchedule(
+  tx: DbTransaction,
+  userId: string,
+  event: ReviewEvent,
+  now: Date,
+): Promise<{ ok: true } | { ok: false; error: "undo_conflict" }> {
+  const guard = await undoRevisionFor(tx, userId, event);
+  if (!guard.ok || guard.expectedRevision == null) return { ok: false, error: "undo_conflict" };
+  const p = schema.problems;
+  const [updated] = await tx
+    .update(p)
+    .set({ enrollment: "awaiting_initial", fsrsDue: null, scheduleRevision: sql`${p.scheduleRevision} + 1`, updatedAt: now })
+    .where(
+      and(
+        eq(p.id, event.problemId),
+        eq(p.userId, userId),
+        eq(p.enrollment, "enrolled"),
+        eq(p.scheduleRevision, guard.expectedRevision),
+      ),
+    )
+    .returning({ id: p.id });
+  if (!updated) return { ok: false, error: "undo_conflict" };
+  await tx
+    .update(schema.reviewEvents)
+    .set({ undoneAt: now })
+    .where(and(eq(schema.reviewEvents.id, event.id), eq(schema.reviewEvents.userId, userId)));
+  return { ok: true };
+}
+
+/**
  * The one FSRS rating of a completed review. In one transaction: check the
  * session is a completed review whose rating is still pending or deferred and
  * whose problem schedule is unchanged since it started; compute FSRS once from
@@ -108,57 +143,14 @@ export async function ratePracticeSession(
           : await updateSession(tx, userId, session, { ratingDisposition: disposition }, now);
       return fail("rating_not_pending", await dtoOf(current));
     }
-    const [existing] = await tx
-      .select({ id: schema.reviewEvents.id })
-      .from(schema.reviewEvents)
-      .where(
-        and(
-          eq(schema.reviewEvents.userId, userId),
-          eq(schema.reviewEvents.practiceSessionId, session.id),
-          eq(schema.reviewEvents.eventType, "self_recall_rated"),
-        ),
-      )
-      .limit(1);
-    if (existing) return fail("rating_not_pending", await dtoOf(session));
-
-    const reviewedAt = session.completedAt;
-    const state = problemFsrsState(problem);
-    const { next } = rateFullSolve(state, input.rating, reviewedAt);
-    const p = schema.problems;
-    const [updated] = await tx
-      .update(p)
-      .set({ ...fsrsWriteColumns(next), updatedAt: now })
-      .where(and(eq(p.id, problem.id), eq(p.userId, userId), eq(p.scheduleRevision, session.scheduleRevisionAtStart)))
-      .returning();
-    if (!updated) return fail("rating_not_pending", await dtoOf(session));
-
-    await tx.insert(schema.reviewEvents).values({
-      id: nanoid(12),
-      userId,
-      problemId: problem.id,
-      eventType: "self_recall_rated",
-      fsrsRating: input.rating,
-      requestId: input.requestId,
-      practiceSessionId: session.id,
-      policyVersion: SCHEDULING_POLICIES.leetcodeFullSolve,
-      reviewMethod: "leetcode_full_solve",
-      scheduleRevision: updated.scheduleRevision,
-      fsrsStabilitySnap: next.stability,
-      fsrsDifficultySnap: next.difficulty,
-      fsrsRetrievabilitySnap: state.state === "new" ? null : retrievability(state, reviewedAt),
-      metadata: {
-        undo: undoSnapshot(state),
-        result: { nextDue: next.due?.toISOString() ?? null },
-        ratedAt: now.toISOString(),
-      },
-      occurredAt: reviewedAt,
-    });
-    const rated = await updateSession(tx, userId, session, { ratingDisposition: "submitted" }, now);
+    const applied = await applySessionRating(tx, userId, session, problem, input.rating, { requestId: input.requestId }, now);
+    if (!applied) return fail("rating_not_pending", await dtoOf(session));
+    const { rated, problem: updated, nextDue } = applied;
     const response: PracticeSessionRatingResponseDto = {
       ok: true,
       session: await dtoOf(rated, updated),
       problem: toProblemStatusDto(updated, now),
-      nextDue: next.due?.toISOString() ?? null,
+      nextDue,
       idempotentReplay: false,
     };
     await recordCommand(tx, { userId, sessionId, requestId: input.requestId, command: "rate", payloadDigest: digest, response }, now);
@@ -171,6 +163,75 @@ export async function ratePracticeSession(
     });
   }
   return result;
+}
+
+/**
+ * Writes the rating of a completed review inside the caller's transaction:
+ * FSRS once from the completion time, the problem at the next schedule
+ * revision (only if unchanged since the session started), the session-linked
+ * event (unique per session), and the session marked rated. `null` when the
+ * session already has a rating event or its problem was rescheduled. The
+ * caller checks the session is a completed review with a pending rating.
+ */
+export async function applySessionRating(
+  tx: DbTransaction,
+  userId: string,
+  session: PracticeSession,
+  problem: Problem,
+  rating: 1 | 2 | 3 | 4,
+  source: { requestId: string } | { automatic: "unsuccessful_finish" },
+  now: Date,
+) {
+  if (!session.completedAt) return null;
+  const [existing] = await tx
+    .select({ id: schema.reviewEvents.id })
+    .from(schema.reviewEvents)
+    .where(
+      and(
+        eq(schema.reviewEvents.userId, userId),
+        eq(schema.reviewEvents.practiceSessionId, session.id),
+        eq(schema.reviewEvents.eventType, "self_recall_rated"),
+      ),
+    )
+    .limit(1);
+  if (existing) return null;
+
+  const reviewedAt = session.completedAt;
+  const state = problemFsrsState(problem);
+  const { next } = rateFullSolve(state, rating, reviewedAt);
+  const p = schema.problems;
+  const [updated] = await tx
+    .update(p)
+    .set({ ...fsrsWriteColumns(next), updatedAt: now })
+    .where(and(eq(p.id, problem.id), eq(p.userId, userId), eq(p.scheduleRevision, session.scheduleRevisionAtStart)))
+    .returning();
+  if (!updated) return null;
+
+  const nextDue = next.due?.toISOString() ?? null;
+  await tx.insert(schema.reviewEvents).values({
+    id: nanoid(12),
+    userId,
+    problemId: problem.id,
+    eventType: "self_recall_rated",
+    fsrsRating: rating,
+    requestId: "requestId" in source ? source.requestId : null,
+    practiceSessionId: session.id,
+    policyVersion: SCHEDULING_POLICIES.leetcodeFullSolve,
+    reviewMethod: "leetcode_full_solve",
+    scheduleRevision: updated.scheduleRevision,
+    fsrsStabilitySnap: next.stability,
+    fsrsDifficultySnap: next.difficulty,
+    fsrsRetrievabilitySnap: state.state === "new" ? null : retrievability(state, reviewedAt),
+    metadata: {
+      undo: undoSnapshot(state),
+      result: { nextDue },
+      ratedAt: now.toISOString(),
+      ...("automatic" in source ? { automatic: source.automatic } : {}),
+    },
+    occurredAt: reviewedAt,
+  });
+  const rated = await updateSession(tx, userId, session, { ratingDisposition: "submitted" }, now);
+  return { rated, problem: updated, nextDue };
 }
 
 /** Undo for a session's rating (see `undoRatingEvent`). */

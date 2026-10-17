@@ -1,5 +1,5 @@
 import { getDb, schema } from "@ankileet/db";
-import { and, desc, eq, isNull, or } from "drizzle-orm";
+import { and, desc, eq, inArray, isNull } from "drizzle-orm";
 import { listProblemMistakes } from "./mistakes";
 import { listPracticeSessions } from "./practice-sessions/queries";
 import { publicSubmissionColumns, toSubmissionDto } from "./public-dto";
@@ -20,7 +20,8 @@ export async function loadProblemDetail(userId: string, problemId: string) {
       .where(and(eq(schema.submissions.userId, userId), eq(schema.submissions.problemId, problemId)))
       .orderBy(desc(schema.submissions.submittedAt))
       .limit(10),
-    // The scheduling timeline: ratings (not undone) and initial-review schedules.
+    // The scheduling timeline: ratings and initial-review schedules, not undone
+    // (Undo, or deleting the session that made them).
     db
       .select()
       .from(schema.reviewEvents)
@@ -28,10 +29,8 @@ export async function loadProblemDetail(userId: string, problemId: string) {
         and(
           eq(schema.reviewEvents.userId, userId),
           eq(schema.reviewEvents.problemId, problemId),
-          or(
-            and(eq(schema.reviewEvents.eventType, "self_recall_rated"), isNull(schema.reviewEvents.undoneAt)),
-            eq(schema.reviewEvents.eventType, "fsrs_scheduled"),
-          ),
+          inArray(schema.reviewEvents.eventType, ["self_recall_rated", "fsrs_scheduled"]),
+          isNull(schema.reviewEvents.undoneAt),
         ),
       )
       .orderBy(desc(schema.reviewEvents.occurredAt))

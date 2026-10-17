@@ -1,6 +1,6 @@
 import type { MistakeRecordDto, PracticeModeId, PracticeSessionDto, SessionAnalysisFinding, SkillDimensionId } from "@ankileet/contracts";
 import { relativeDay, type ExtensionStrings, type Language } from "../shared/i18n";
-import type { AnalysisView, PageNotice, PageSession, PageView } from "./page-session";
+import type { AnalysisView, FinishCheck, PageNotice, PageSession, PageView } from "./page-session";
 import { PANEL_STYLES } from "./panel-styles";
 
 type Child = Node | string | null | false | undefined;
@@ -337,7 +337,8 @@ export function mountPanel(deps: {
 
   function noticeBlock(t: ExtensionStrings, notice: PageNotice) {
     if (notice.kind === "rated") {
-      return h("p", { class: "notice", role: "status" }, t.rating.nextReview(relativeDay(notice.nextDue, deps.language())));
+      const when = relativeDay(notice.nextDue, deps.language());
+      return h("p", { class: "notice", role: "status" }, notice.again ? t.rating.ratedAgain(when) : t.rating.nextReview(when));
     }
     if (notice.kind === "unblocked") return h("p", { class: "notice", role: "status" }, t.rating.unblocked);
     if (notice.kind === "queued") {
@@ -408,6 +409,7 @@ export function mountPanel(deps: {
     const submissions = session.evidence.submissions + local.unsynced.length;
     const accepted = session.evidence.accepted + local.unsynced.filter((item) => item.accepted).length;
     const minutes = Math.round(session.timing.activeMs / 60_000);
+    const check = view.kind === "ready" ? view.finishCheck : null;
     return h(
       "div",
       { class: "stack" },
@@ -425,14 +427,24 @@ export function mountPanel(deps: {
       minutes > 0 ? h("p", { class: "text muted small" }, t.panel.activeTime(minutes)) : null,
       availability !== "available" ? h("p", { class: "notice", "data-tone": "warning" }, t.panel.tracking[availability]) : null,
       view.kind === "ready" && !view.reachable ? h("p", { class: "notice", "data-tone": "warning", role: "status" }, t.panel.unreachable) : null,
-      button("finish", t.panel.finish, () => void deps.page.finish("solved"), { variant: "primary", block: true, spinning: busyState === "finishing" }),
-      accepted === 0 ? h("p", { class: "text muted small" }, t.panel.noAcceptedYet) : null,
-      h(
-        "div",
-        { class: "row" },
-        button("end-unsuccessful", t.panel.endUnsuccessful, () => void deps.page.finish("unsuccessful")),
-        button("abandon", t.panel.abandon, () => void deps.page.abandon(), { variant: "danger", spinning: busyState === "abandoning" }),
-      ),
+      check ? finishCheckBlock(t, session, check) : button("finish", t.panel.finish, () => void deps.page.finish("solved"), { variant: "primary", block: true, spinning: busyState === "finishing" }),
+      !check && submissions === 0 ? h("p", { class: "text muted small" }, t.panel.noSubmissionYet) : null,
+      !check && submissions > 0 && accepted === 0 ? h("p", { class: "text muted small" }, t.panel.noAcceptedYet) : null,
+      h("div", { class: "row" }, button("abandon", t.panel.abandon, () => void deps.page.abandon(), { variant: "danger", spinning: busyState === "abandoning" })),
+    );
+  }
+
+  /** Finish stopped: nothing was submitted or accepted. Keep working, or
+   *  finish as not solved (a review is then rated Again). */
+  function finishCheckBlock(t: ExtensionStrings, session: PracticeSessionDto, check: FinishCheck) {
+    const busyState = view.kind === "ready" ? view.busy : null;
+    return h(
+      "div",
+      { class: "stack", role: "alert", "data-key": "finish-check" },
+      h("p", { class: "notice", "data-tone": "warning" }, t.panel.finishCheck[check]),
+      h("p", { class: "text muted small" }, t.panel.finishAnywayEffect[session.type]),
+      button("keep-working", t.panel.keepWorking, () => deps.page.keepWorking(), { variant: "primary", block: true }),
+      button("finish-anyway", t.panel.finishAnyway, () => void deps.page.finish("unsuccessful"), { variant: "danger", block: true, spinning: busyState === "finishing" }),
     );
   }
 
