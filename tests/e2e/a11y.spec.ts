@@ -36,10 +36,11 @@ for (const theme of ["light", "dark"] as const) {
     }
     // The built-in lists' author groups, open.
     await page.goto(`${API_ORIGIN}/lists`);
-    for (const group of await page.getByRole("button", { expanded: false }).filter({ hasText: "lists" }).all()) await group.click();
+    const groups = [page.getByRole("button", { name: /^Carl/ }), page.getByRole("button", { name: /^灵茶山艾府/ })];
+    for (const group of groups) await group.click();
     await expect(page.getByRole("link", { name: "Extra Problems" })).toBeVisible();
     await audit(page, `/lists, groups open (${theme})`);
-    for (const group of await page.getByRole("button", { expanded: true }).all()) await group.click();
+    for (const group of groups) await group.click();
     await page.close();
   });
 

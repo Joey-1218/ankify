@@ -91,7 +91,7 @@ export function ListHeader({ list, excludedCount }: { list: StudyListSummaryDto;
               {list.sourceUrl && (
                 <>
                   {" · "}
-                  <a href={list.sourceUrl} target="_blank" rel="noreferrer" className="text-accent hover:underline">
+                  <a href={list.sourceUrl} target="_blank" rel="noreferrer" className="text-accent underline underline-offset-2">
                     {t.lists.source}
                   </a>
                 </>
