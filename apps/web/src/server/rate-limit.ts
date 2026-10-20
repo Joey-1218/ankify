@@ -30,6 +30,8 @@ export const RATE_LIMITS = {
   mistakes: { limit: 60, windowMs: 60_000 },
   /** Suggestion allocations and actions, and attempt-history merges. */
   suggestions: { limit: 60, windowMs: 60_000 },
+  /** Study list writes (create, follow, items, order): user-paced. */
+  lists: { limit: 60, windowMs: 60_000 },
   /** Stripe Checkout Session creation: each call hits the Stripe API. */
   billing: { limit: 10, windowMs: 60_000 },
 } as const;

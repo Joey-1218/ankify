@@ -141,13 +141,19 @@ export function parseBuiltinList(raw: unknown): BuiltinList {
   };
 }
 
-let cached: { lists: BuiltinList[]; byId: Map<string, BuiltinList>; patternsBySlug: Map<string, PatternId[]> } | null = null;
+let cached: {
+  lists: BuiltinList[];
+  byId: Map<string, BuiltinList>;
+  patternsBySlug: Map<string, PatternId[]>;
+  problemBySlug: Map<string, BuiltinListItem>;
+} | null = null;
 
 function load() {
   if (cached) return cached;
   const lists = SOURCES.map(parseBuiltinList);
   const byId = new Map<string, BuiltinList>();
   const patternsBySlug = new Map<string, PatternId[]>();
+  const problemBySlug = new Map<string, BuiltinListItem>();
   for (const list of lists) {
     if (byId.has(list.id)) throw new Error(`Two built-in study lists share the id ${list.id}.`);
     byId.set(list.id, list);
@@ -155,10 +161,16 @@ function load() {
       const patterns = patternsBySlug.get(item.slug) ?? [];
       if (!patterns.includes(item.pattern)) patterns.push(item.pattern);
       patternsBySlug.set(item.slug, patterns);
+      if (!problemBySlug.has(item.slug)) problemBySlug.set(item.slug, item);
     }
   }
-  cached = { lists, byId, patternsBySlug };
+  cached = { lists, byId, patternsBySlug, problemBySlug };
   return cached;
+}
+
+/** A problem's metadata as the built-in lists hold it (read from LeetCode), or null. */
+export function builtinProblem(slug: string): BuiltinListItem | null {
+  return load().problemBySlug.get(slug) ?? null;
 }
 
 /** Every built-in list, in display order. */

@@ -302,3 +302,7 @@ export type PatternId = keyof typeof PATTERNS;
 export function isPatternId(value: string): value is PatternId {
   return Object.hasOwn(PATTERNS, value);
 }
+
+export function patternName(id: PatternId): { en: string; zh: string } {
+  return PATTERNS[id];
+}

@@ -5,3 +5,4 @@ export * from "./practice-sessions";
 export * from "./review-overview";
 export * from "./session-analysis";
 export * from "./suggestions";
+export * from "./study-lists";
