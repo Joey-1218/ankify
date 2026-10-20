@@ -19,7 +19,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ id: string }> }
 /** PATCH /api/study-lists/:id — rename (custom lists), pause or resume, reweight. */
 export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }> }) {
   const write = await readListWrite(req, studyListPatchSchema);
-  if ("response" in write) return write.response;
+  if (!write.ok) return write.response;
   const { id } = await ctx.params;
   const result = await updateStudyList(write.user.id, id, write.input);
   if (!result.ok) return studyListErrorResponse(result);

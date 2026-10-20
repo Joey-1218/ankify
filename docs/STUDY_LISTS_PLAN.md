@@ -1,8 +1,9 @@
 # Study lists: design and plan
 
-Status: agreed with the owner on 2026-10-20; implementation in progress (see
-"Phases"). When a phase ships, move its settled design into ARCHITECTURE.md
-and mark it done here. Retire this file when every phase is done.
+Status: agreed with the owner on 2026-10-20; phases 1 and 2 are done (their
+settled design is in ARCHITECTURE.md, "Study lists"), phases 3 and 4 are next.
+When a phase ships, move its settled design into ARCHITECTURE.md and mark it
+done here. Retire this file when every phase is done.
 
 ## Goal
 
@@ -119,22 +120,25 @@ BuiltinList { id, version, name{en,zh}, author, sourceUrl, generatedAt,
               excluded[{ cnId, title, reason }] }
 ```
 
-New tables (one migration):
+New tables (migration `0027_study_lists`, phase 2):
 
-- `study_lists`: one row per user list or followed built-in list. `user_id`,
-  `kind` (`my_problems` | `custom` | `builtin`), `builtin_id` (for
-  `builtin`), `name` (for `custom`), `active`, `share`, `position`,
-  timestamps. Unique: (user, builtin_id) for followed lists; one
-  `my_problems` per user.
-- `study_list_items`: items of `custom` and `my_problems` lists. `user_id`,
-  `list_id`, `slug`, `title`, `difficulty`, `position` (gapped integers for
-  cheap reorder), `added_at`. Unique (list, slug). Built-in items are never
-  copied into the table; progress joins `problems` by (user, slug).
-- Settings key `study_plan`: `dailyMinutes` (default 60), `maxNewPerDay`
-  (default 5), `hidePatternsOnToday` (default true).
+- `study_lists`: one row per custom list or followed built-in list. `user_id`,
+  `kind` (`custom` | `builtin`), `builtin_id` (for `builtin`), `name` (for
+  `custom`), `request_id`, `active`, `share`, `position`, timestamps.
+  Unique: (user, builtin_id) for followed lists; (user, request_id).
+- `study_list_items`: items of custom lists. `user_id`, `list_id`, `slug`,
+  `leetcode_id`, `title`, `title_zh`, `difficulty`, `position`, timestamps.
+  Unique (list, slug). Built-in items are never copied into the table;
+  progress joins `problems` by (user, slug).
+- Settings key `study_plan` (phase 3): `dailyMinutes` (default 60),
+  `maxNewPerDay` (default 5), `hidePatternsOnToday` (default true).
 
-Migration backfill: create every user's My problems list and add each of
-their non-deleted problems to it.
+**My problems is computed, not stored** (decided in phase 2): it is every
+problem in the deck that is in no custom list and no followed built-in list.
+That gives the agreed behavior (problems started outside a list land there;
+removing a problem from its last list or unfollowing a list puts it back)
+with no backfill and nothing to keep in sync. It holds only problems already
+in the deck, so it never supplies new problems and has no pacing settings.
 
 A problem's patterns: every pattern of every built-in section containing its
 slug, whether or not the user follows that list. Patterns live in the
@@ -171,13 +175,11 @@ Sections that differ only in level (basic, advanced) share a pattern.
   archived. Items whose slug is only in `attempt_history` show "attempted
   before" and are still offered.
 - **Next up** of a list: the first not-started item in list order.
-- **Start from a list**: the normal practice-session start
-  (`startSessionInTransaction()`), with the list's metadata as the target;
-  the new problem joins My problems only if it is in no active list.
-- **Problems started on LeetCode** (extension, not from a list): added to My
-  problems in the start transaction when they are new to Ankileet.
-- **Remove from a list**: deletes the item; if the problem then belongs to no
-  list, it is added to My problems in the same transaction.
+- **Start from a list**: open the problem on LeetCode; the extension starts
+  the session as for any problem, and the problem joins its lists by slug.
+- **Problems started on LeetCode** outside any list show in My problems.
+- **Remove from a list**: deletes the item; a problem in no other list shows
+  in My problems again.
 - **Follow / unfollow / copy** a built-in list; copy creates a `custom` list
   whose items are the built-in items at that moment.
 - **Same-day re-solve**: an early review whose problem was last scheduled or
@@ -204,11 +206,12 @@ pattern mastery (transfer evidence) than reviews of known problems.
 
 ## Phases
 
-1. **Built-in list data**: import script, committed JSON for the first list,
-   schema, loader, tests. (No UI.)
-2. **Lists**: migration, My problems backfill, list API (contracts first),
-   `/lists` and `/lists/[id]` pages, follow/copy, add/remove/reorder, start
-   from a list, auto-add to My problems.
+1. **Built-in list data** (done): import script, committed JSON for all 12
+   lists, schema, loader, tests.
+2. **Lists** (done): migration, list API (contracts first), `/lists`,
+   `/lists/[id]`, and `/lists/builtin/[builtinId]` pages, follow/copy,
+   add/remove/reorder, the problem page's Lists panel. Starting a problem
+   from a list is opening it on LeetCode (the extension starts the session).
 3. **Today planner**: `study_plan` settings, time-budget pacing, shares,
    interleaved reviews with hidden patterns, weak-pattern priority, check
    problems, same-day rule.
@@ -238,8 +241,9 @@ All 12 lists from 灵茶山艾府's index post
 | Linked lists, trees, and backtracking | 426 | 411 | 13 |
 | Strings | 96 | 78 | 2 |
 
-The files total 1.3 MB; phase 2 should load a list only when it is needed
-(dynamic import per list id) rather than all at once.
+The files total 1.3 MB of server-only JSON, parsed once per server instance
+on first use. Patterns (phase 4) need every list anyway, so they are not
+loaded per list.
 
 ## Open items
 

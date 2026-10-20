@@ -127,10 +127,18 @@ A list-based practice workflow: built-in lists (灵茶山艾府's 12
 topic lists, moved to leetcode.com), playlist-style user lists, a daily time
 budget for new problems, and a pattern axis in the mistake profile. Design,
 owner decisions, and phases: [STUDY_LISTS_PLAN.md](STUDY_LISTS_PLAN.md).
-Work happens on branch `claude/determined-pasteur-cid59n`. Done: the list
-data and importer (phase 1, all 12 lists). Next: phase 2 (lists in the
-database and the web UI), on the owner's go-ahead. Ask the author before
-shipping the lists to users.
+Work happens on branch `claude/determined-pasteur-cid59n` (not merged, not
+deployed). Done: phase 1 (the importer and all 12 lists) and phase 2 (lists
+in the database, the list API, `/lists` pages, and the problem page's Lists
+panel; ARCHITECTURE.md, "Study lists"). Next: phase 3, the Today planner
+(daily time budget, list shares, interleaved reviews), then phase 4, the
+pattern x cause mistake profile.
+
+Before deploying: apply migration `0027_study_lists` to Production first
+(`pnpm db:release`, DEPLOYMENT.md), since the list pages and the problem
+page read the new tables. Browser tests run in a cloud container only with
+a scratch `PLAYWRIGHT_BROWSERS_PATH` that maps Playwright's expected
+Chromium build to the installed one (the container's build is older).
 
 ### Planned for 0.3.1
 

@@ -22,7 +22,7 @@ async function audit(page: Page, label: string, include?: string) {
   expect(describe(blocking), `${label}: serious or critical axe violations`).toEqual([]);
 }
 
-const PAGES = ["/today", "/problems", "/problems/qa-problem-two-sum", "/analysis", "/suggestions", "/settings"];
+const PAGES = ["/today", "/lists", "/lists/builtin/sliding-window-two-pointers", "/problems", "/problems/qa-problem-two-sum", "/analysis", "/suggestions", "/settings"];
 
 for (const theme of ["light", "dark"] as const) {
   test(`web pages pass axe in ${theme}`, async ({ context, panel }) => {

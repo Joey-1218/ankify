@@ -26,14 +26,14 @@ export function studyListErrorResponse(failure: StudyListFailure) {
  */
 export async function readListWrite<T>(req: Request, schema: z.ZodType<T>, maxBytes = 4_096) {
   const user = await getRequestUser(req);
-  if (!user) return { response: unauthorizedResponse() } as const;
+  if (!user) return { ok: false, response: unauthorizedResponse() } as const;
   const limit = await checkRateLimit(user.id, "lists", RATE_LIMITS.lists);
-  if (!limit.ok) return { response: rateLimitResponse(limit.retryAfterSec) } as const;
+  if (!limit.ok) return { ok: false, response: rateLimitResponse(limit.retryAfterSec) } as const;
   const body = await readJsonBody(req, maxBytes);
   if (!body.ok) {
-    return { response: NextResponse.json({ error: body.error }, { status: body.error === "payload_too_large" ? 413 : 400 }) } as const;
+    return { ok: false, response: NextResponse.json({ error: body.error }, { status: body.error === "payload_too_large" ? 413 : 400 }) } as const;
   }
   const parsed = schema.safeParse(body.value);
-  if (!parsed.success) return { response: NextResponse.json({ error: "invalid_payload", issues: parsed.error.issues }, { status: 400 }) } as const;
-  return { user, input: parsed.data } as const;
+  if (!parsed.success) return { ok: false, response: NextResponse.json({ error: "invalid_payload", issues: parsed.error.issues }, { status: 400 }) } as const;
+  return { ok: true, user, input: parsed.data } as const;
 }

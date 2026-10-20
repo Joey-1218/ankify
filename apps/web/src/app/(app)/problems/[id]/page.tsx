@@ -19,6 +19,8 @@ import { MistakeList } from "./mistake-list";
 import { DeleteSessionButton } from "./delete-session-button";
 import { SessionAnalysis } from "./session-analysis";
 import { loadProblemDetail } from "@/server/problem-detail";
+import { loadProblemStudyLists } from "@/server/study-lists/lists";
+import { ProblemLists } from "./problem-lists";
 
 const RATING_TONES: Record<number, "danger" | "warning" | "success" | "accent" | "neutral"> = { 1: "danger", 2: "warning", 3: "success", 4: "accent" };
 
@@ -47,8 +49,8 @@ export default async function ProblemDetail({ params }: { params: Promise<{ id: 
   const user = await requirePageUser();
   const [t, language] = await Promise.all([getRequestTranslations(), getRequestLanguage()]);
   const { id } = await params;
-  const detail = await loadProblemDetail(user.id, id);
-  if (!detail) notFound();
+  const [detail, studyLists] = await Promise.all([loadProblemDetail(user.id, id), loadProblemStudyLists(user.id, id)]);
+  if (!detail || !studyLists) notFound();
   const { problem, submissions, timeline, sessions, mistakes } = detail;
   const dateFormat = new Intl.DateTimeFormat(language === "zh" ? "zh-CN" : "en", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
   const ratingBySession = new Map(timeline.flatMap((event) => (event.kind === "rated" && event.practiceSessionId ? [[event.practiceSessionId, event.rating] as const] : [])));
@@ -202,6 +204,8 @@ export default async function ProblemDetail({ params }: { params: Promise<{ id: 
               <MetaRow label={t.detail.lastReviewed} value={formatRelative(problem.fsrsLastReview)} />
             </dl>
           </Surface>
+
+          <ProblemLists problemId={problem.id} lists={studyLists} />
 
           {problem.archivedAt != null && (
             <p className="rounded-lg border border-border bg-subtle px-3 py-2 text-xs text-muted">

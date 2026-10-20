@@ -15,7 +15,7 @@ export async function GET(req: Request) {
 /** POST /api/study-lists — create a custom list, follow a built-in one, or copy one. Idempotent per `requestId`. */
 export async function POST(req: Request) {
   const write = await readListWrite(req, studyListCreateSchema);
-  if ("response" in write) return write.response;
+  if (!write.ok) return write.response;
   const result = await createStudyList(write.user.id, write.input);
   if (!result.ok) return studyListErrorResponse(result);
   const detail = await loadStudyListDetail(write.user.id, { kind: "list", id: result.listId });

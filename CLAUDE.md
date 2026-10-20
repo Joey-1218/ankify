@@ -54,7 +54,9 @@ In one paragraph: `apps/web` (Next.js 16 App Router, logic in `src/server/`),
 `packages/contracts` (Zod schemas + DTOs), and `packages/api-client` (AI-job
 client). The extension tracks practice sessions on LeetCode and syncs them
 through a durable outbox; FSRS changes only when a completed review session
-is rated. Session analysis runs as durable `ai_jobs` through a Vercel Queue
+is rated. Practice is organized in study lists: built-in lists (committed
+data), custom lists, and My problems (computed: problems in no other list).
+Session analysis runs as durable `ai_jobs` through a Vercel Queue
 on the user's own key. Study Coach, card/quiz generation, and credit sales are
 suspended (`ANKILEET_ENABLED_LEGACY_WORKFLOWS` re-enables one deliberately).
 
@@ -96,6 +98,11 @@ suspended (`ANKILEET_ENABLED_LEGACY_WORKFLOWS` re-enables one deliberately).
   solved is rated Again in the finish transaction. `review_events` is
   append-only (undo stamps `undoneAt`); deleting a session undoes its
   scheduling event first and is refused while a later change is in effect.
+- **Built-in study lists are generated**: edit the config in
+  `scripts/study-lists/` and rerun `pnpm study-lists:import`, never the JSON
+  in `server/study-lists/builtin/`. Pattern ids in `patterns.ts` are stable;
+  rename a label, never an id. List items take titles from the server's own
+  rows, never from the request.
 - **Tests**: DB tests use `createTestDb()` from `apps/web/src/server/test-db.ts`;
   keep deliberate-concurrency tests in their own `*.concurrency.test.ts` file.
 
