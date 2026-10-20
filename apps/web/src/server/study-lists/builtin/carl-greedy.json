@@ -1,0 +1,411 @@
+{
+  "id": "carl-greedy",
+  "name": {
+    "en": "Greedy",
+    "zh": "贪心算法"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/greedy/",
+  "sourceUpdatedAt": null,
+  "generatedAt": "2026-10-20T23:12:00.399Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Greedy basics",
+        "zh": "贪心基础"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Intervals",
+        "zh": "区间问题"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Advanced",
+        "zh": "进阶"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Assigning cookies",
+        "zh": "分发饼干"
+      },
+      "pattern": "greedy.extremes",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Wiggle subsequences",
+        "zh": "摆动序列"
+      },
+      "pattern": "greedy.adjacent_differ",
+      "optional": false
+    },
+    {
+      "id": "1.3",
+      "chapterId": "1",
+      "title": {
+        "en": "Maximum subarray",
+        "zh": "最大子数组和"
+      },
+      "pattern": "dp.max_subarray",
+      "optional": false
+    },
+    {
+      "id": "1.4",
+      "chapterId": "1",
+      "title": {
+        "en": "Stock trading",
+        "zh": "买卖股票"
+      },
+      "pattern": "greedy.other",
+      "optional": false
+    },
+    {
+      "id": "1.5",
+      "chapterId": "1",
+      "title": {
+        "en": "Jump games",
+        "zh": "跳跃游戏"
+      },
+      "pattern": "dp.jump_game",
+      "optional": false
+    },
+    {
+      "id": "1.6",
+      "chapterId": "1",
+      "title": {
+        "en": "Maximizing a sum",
+        "zh": "最大化数组和"
+      },
+      "pattern": "greedy.extremes",
+      "optional": false
+    },
+    {
+      "id": "1.7",
+      "chapterId": "1",
+      "title": {
+        "en": "Gas stations",
+        "zh": "加油站"
+      },
+      "pattern": "greedy.other",
+      "optional": false
+    },
+    {
+      "id": "1.8",
+      "chapterId": "1",
+      "title": {
+        "en": "Two passes",
+        "zh": "两次遍历"
+      },
+      "pattern": "greedy.thinking_two_passes",
+      "optional": false
+    },
+    {
+      "id": "1.9",
+      "chapterId": "1",
+      "title": {
+        "en": "Making change",
+        "zh": "找零"
+      },
+      "pattern": "greedy.extremes",
+      "optional": false
+    },
+    {
+      "id": "1.10",
+      "chapterId": "1",
+      "title": {
+        "en": "Two dimensions",
+        "zh": "两个维度"
+      },
+      "pattern": "greedy.other",
+      "optional": false
+    },
+    {
+      "id": "2.1",
+      "chapterId": "2",
+      "title": {
+        "en": "Choosing points",
+        "zh": "选点"
+      },
+      "pattern": "greedy.intervals_points",
+      "optional": false
+    },
+    {
+      "id": "2.2",
+      "chapterId": "2",
+      "title": {
+        "en": "Non-overlapping intervals",
+        "zh": "不重叠区间"
+      },
+      "pattern": "greedy.intervals_disjoint",
+      "optional": false
+    },
+    {
+      "id": "2.3",
+      "chapterId": "2",
+      "title": {
+        "en": "Merging intervals",
+        "zh": "合并区间"
+      },
+      "pattern": "greedy.intervals_merge",
+      "optional": false
+    },
+    {
+      "id": "3.1",
+      "chapterId": "3",
+      "title": {
+        "en": "Digits",
+        "zh": "数字"
+      },
+      "pattern": "greedy.math",
+      "optional": false
+    },
+    {
+      "id": "3.2",
+      "chapterId": "3",
+      "title": {
+        "en": "Greedy on a tree",
+        "zh": "树上贪心"
+      },
+      "pattern": "dp.tree_dominating_set",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "assign-cookies",
+      "frontendId": "455",
+      "title": {
+        "en": "Assign Cookies",
+        "zh": "分发饼干"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "wiggle-subsequence",
+      "frontendId": "376",
+      "title": {
+        "en": "Wiggle Subsequence",
+        "zh": "摆动序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-subarray",
+      "frontendId": "53",
+      "title": {
+        "en": "Maximum Subarray",
+        "zh": "最大子数组和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "best-time-to-buy-and-sell-stock-ii",
+      "frontendId": "122",
+      "title": {
+        "en": "Best Time to Buy and Sell Stock II",
+        "zh": "买卖股票的最佳时机 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "jump-game",
+      "frontendId": "55",
+      "title": {
+        "en": "Jump Game",
+        "zh": "跳跃游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "jump-game-ii",
+      "frontendId": "45",
+      "title": {
+        "en": "Jump Game II",
+        "zh": "跳跃游戏 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-sum-of-array-after-k-negations",
+      "frontendId": "1005",
+      "title": {
+        "en": "Maximize Sum Of Array After K Negations",
+        "zh": "K 次取反后最大化的数组和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "gas-station",
+      "frontendId": "134",
+      "title": {
+        "en": "Gas Station",
+        "zh": "加油站"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "candy",
+      "frontendId": "135",
+      "title": {
+        "en": "Candy",
+        "zh": "分发糖果"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "lemonade-change",
+      "frontendId": "860",
+      "title": {
+        "en": "Lemonade Change",
+        "zh": "柠檬水找零"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "queue-reconstruction-by-height",
+      "frontendId": "406",
+      "title": {
+        "en": "Queue Reconstruction by Height",
+        "zh": "根据身高重建队列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.10",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-arrows-to-burst-balloons",
+      "frontendId": "452",
+      "title": {
+        "en": "Minimum Number of Arrows to Burst Balloons",
+        "zh": "用最少数量的箭引爆气球"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "non-overlapping-intervals",
+      "frontendId": "435",
+      "title": {
+        "en": "Non-overlapping Intervals",
+        "zh": "无重叠区间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "partition-labels",
+      "frontendId": "763",
+      "title": {
+        "en": "Partition Labels",
+        "zh": "划分字母区间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "merge-intervals",
+      "frontendId": "56",
+      "title": {
+        "en": "Merge Intervals",
+        "zh": "合并区间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "monotone-increasing-digits",
+      "frontendId": "738",
+      "title": {
+        "en": "Monotone Increasing Digits",
+        "zh": "单调递增的数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-cameras",
+      "frontendId": "968",
+      "title": {
+        "en": "Binary Tree Cameras",
+        "zh": "监控二叉树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    }
+  ],
+  "excluded": []
+}

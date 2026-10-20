@@ -1,0 +1,148 @@
+{
+  "id": "carl-linked-list",
+  "name": {
+    "en": "Linked Lists",
+    "zh": "链表"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/linked-list/",
+  "sourceUpdatedAt": null,
+  "generatedAt": "2026-10-20T23:12:05.390Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Linked lists",
+        "zh": "链表"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Removing nodes",
+        "zh": "删除节点"
+      },
+      "pattern": "linked_list.delete",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Designing a linked list",
+        "zh": "设计链表"
+      },
+      "pattern": "linked_list.design",
+      "optional": false
+    },
+    {
+      "id": "1.3",
+      "chapterId": "1",
+      "title": {
+        "en": "Reversing a linked list",
+        "zh": "反转链表"
+      },
+      "pattern": "linked_list.reverse",
+      "optional": false
+    },
+    {
+      "id": "1.4",
+      "chapterId": "1",
+      "title": {
+        "en": "Removing the n-th node from the end",
+        "zh": "删除倒数第 N 个节点"
+      },
+      "pattern": "linked_list.gap_pointers",
+      "optional": false
+    },
+    {
+      "id": "1.6",
+      "chapterId": "1",
+      "title": {
+        "en": "Cycle detection",
+        "zh": "环形链表"
+      },
+      "pattern": "linked_list.fast_slow",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "remove-linked-list-elements",
+      "frontendId": "203",
+      "title": {
+        "en": "Remove Linked List Elements",
+        "zh": "移除链表元素"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "design-linked-list",
+      "frontendId": "707",
+      "title": {
+        "en": "Design Linked List",
+        "zh": "设计链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-linked-list",
+      "frontendId": "206",
+      "title": {
+        "en": "Reverse Linked List",
+        "zh": "反转链表"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "remove-nth-node-from-end-of-list",
+      "frontendId": "19",
+      "title": {
+        "en": "Remove Nth Node From End of List",
+        "zh": "删除链表的倒数第 N 个结点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-cycle-ii",
+      "frontendId": "142",
+      "title": {
+        "en": "Linked List Cycle II",
+        "zh": "环形链表 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "面试题 02.07",
+      "title": "链表相交",
+      "sectionId": "1.5",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}

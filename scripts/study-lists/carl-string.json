@@ -1,0 +1,37 @@
+{
+  "id": "carl-string",
+  "source": "programmercarl",
+  "name": {
+    "en": "Strings",
+    "zh": "字符串"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/string/",
+  "chapters": {
+    "1": {
+      "en": "Strings",
+      "zh": "字符串"
+    }
+  },
+  "articles": {
+    "0344-reverse-string": "1.1",
+    "0541-reverse-string-ii": "1.1",
+    "kamacoder-0054-replace-digits": "1.1",
+    "0151-reverse-words-in-a-string": "1.1",
+    "kamacoder-0055-right-rotate-string": "1.1",
+    "0028-find-the-index-of-the-first-occurrence-in-a-string": "1.2",
+    "0459-repeated-substring-pattern": "1.2"
+  },
+  "sections": {
+    "1.1": {
+      "en": "Reversing strings",
+      "zh": "反转字符串",
+      "pattern": "two_pointers.reverse"
+    },
+    "1.2": {
+      "en": "KMP",
+      "zh": "KMP",
+      "pattern": "string.kmp"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "carl-monotonic-stack",
+  "source": "programmercarl",
+  "name": {
+    "en": "Monotonic Stack",
+    "zh": "单调栈"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/monotonic-stack/",
+  "chapters": {
+    "1": {
+      "en": "Monotonic stack",
+      "zh": "单调栈"
+    }
+  },
+  "articles": {
+    "0739-daily-temperatures": "1.1",
+    "0496-next-greater-element-i": "1.1",
+    "0503-next-greater-element-ii": "1.1",
+    "0042-trapping-rain-water": "1.2",
+    "0084-largest-rectangle-in-histogram": "1.2"
+  },
+  "sections": {
+    "1.1": {
+      "en": "Next greater element",
+      "zh": "下一个更大元素",
+      "pattern": "monotonic_stack.basic"
+    },
+    "1.2": {
+      "en": "Rain water and histograms",
+      "zh": "接雨水与柱状图",
+      "pattern": "monotonic_stack.rectangle"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "id": "carl-stack-queue",
+  "source": "programmercarl",
+  "name": {
+    "en": "Stacks and Queues",
+    "zh": "栈与队列"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/stack-queue/",
+  "chapters": {
+    "1": {
+      "en": "Stacks and queues",
+      "zh": "栈与队列"
+    }
+  },
+  "articles": {
+    "0232-implement-queue-using-stacks": "1.1",
+    "0225-implement-stack-using-queues": "1.1",
+    "0020-valid-parentheses": "1.2",
+    "1047-remove-all-adjacent-duplicates-in-string": "1.3",
+    "0150-evaluate-reverse-polish-notation": "1.4",
+    "0239-sliding-window-maximum": "1.5",
+    "0347-top-k-frequent-elements": "1.6"
+  },
+  "sections": {
+    "1.1": {
+      "en": "Building one from the other",
+      "zh": "互相实现",
+      "pattern": "ds.queue_design"
+    },
+    "1.2": {
+      "en": "Valid parentheses",
+      "zh": "有效的括号",
+      "pattern": "ds.stack_parentheses"
+    },
+    "1.3": {
+      "en": "Removing adjacent duplicates",
+      "zh": "删除相邻重复项",
+      "pattern": "ds.stack_adjacent"
+    },
+    "1.4": {
+      "en": "Expression evaluation",
+      "zh": "表达式求值",
+      "pattern": "ds.stack_expression"
+    },
+    "1.5": {
+      "en": "Monotonic queues",
+      "zh": "单调队列",
+      "pattern": "ds.monotonic_queue"
+    },
+    "1.6": {
+      "en": "Priority queues",
+      "zh": "优先级队列",
+      "pattern": "ds.heap_kth"
+    }
+  }
+}

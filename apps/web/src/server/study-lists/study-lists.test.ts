@@ -6,7 +6,7 @@ import { upsertLeetcodeProblem } from "../problem-upsert";
 import { mergeAttemptHistory } from "../suggestions/history";
 import { createTestDb } from "../test-db";
 import { getBuiltinList } from "./builtin";
-import { addStudyListItem, createStudyList, deleteStudyList, removeStudyListItem, reorderStudyListItems, updateStudyList } from "./commands";
+import { addStudyListItem, createStudyList, deleteStudyList, removeStudyListItem, reorderStudyListItems, reorderStudyLists, updateStudyList } from "./commands";
 import { loadProblemStudyLists, loadStudyListDetail, loadStudyListsOverview } from "./lists";
 
 const testDb = createTestDb();
@@ -52,9 +52,13 @@ describe("study lists", () => {
 
     let overview = await loadStudyListsOverview(USER);
     expect(overview.lists[0]).toMatchObject({ kind: "my_problems", id: null, progress: { total: 2, started: 2, learned: 2 } });
-    expect(overview.builtin).toHaveLength(12);
+    expect(overview.builtinGroups.map((group) => [group.authorId, group.lists.length])).toEqual([
+      ["carl", 12],
+      ["endlesscheng", 12],
+    ]);
     // A built-in list counts the user's progress whether or not it is followed.
-    expect(overview.builtin.find((list) => list.builtinId === BUILTIN)).toMatchObject({ followed: false, progress: { started: 1 } });
+    const builtinSummaries = overview.builtinGroups.flatMap((group) => group.lists);
+    expect(builtinSummaries.find((list) => list.builtinId === BUILTIN)).toMatchObject({ followed: false, progress: { started: 1 } });
 
     const follow = await create({ action: "follow", requestId: uuid(), builtinId: BUILTIN });
     overview = await loadStudyListsOverview(USER);
@@ -154,6 +158,26 @@ describe("study lists", () => {
     const overview = await loadStudyListsOverview(USER);
     expect(overview.lists.find((list) => list.id === custom.listId)).toMatchObject({ name: { en: "After" }, share: 3, active: true });
     expect(overview.lists.find((list) => list.id === followed.listId)).toMatchObject({ active: false, followed: true });
+  });
+
+  it("reorders the user's lists, My problems staying first, and only with every list named once", async () => {
+    const ids = (await loadStudyListsOverview(USER)).lists.flatMap((list) => (list.id ? [list.id] : []));
+    expect(ids.length).toBeGreaterThan(1);
+    const reversed = [...ids].reverse();
+    expect(await reorderStudyLists(USER, reversed)).toEqual({ ok: true });
+    const overview = await loadStudyListsOverview(USER);
+    expect(overview.lists[0]!.kind).toBe("my_problems");
+    expect(overview.lists.slice(1).map((list) => list.id)).toEqual(reversed);
+    // A new list goes last.
+    const added = await create({ action: "create", requestId: uuid(), name: "Newest" });
+    expect((await loadStudyListsOverview(USER)).lists.at(-1)!.id).toBe(added.listId);
+    const all = [...reversed, added.listId];
+    expect(await reorderStudyLists(USER, reversed)).toMatchObject({ ok: false, error: "order_mismatch" });
+    expect(await reorderStudyLists(USER, [...all, all[0]!])).toMatchObject({ ok: false, error: "order_mismatch" });
+    const theirs = await create({ action: "create", requestId: uuid(), name: "Not yours" }, OTHER);
+    expect(await reorderStudyLists(USER, [...all.slice(1), theirs.listId])).toMatchObject({ ok: false, error: "order_mismatch" });
+    await deleteStudyList(USER, added.listId);
+    await deleteStudyList(OTHER, theirs.listId);
   });
 
   it("lists a problem's memberships and the custom lists it could join", async () => {

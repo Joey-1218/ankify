@@ -246,13 +246,40 @@ All 12 lists from 灵茶山艾府's index post
 | Linked lists, trees, and backtracking | 426 | 411 | 13 |
 | Strings | 96 | 78 | 2 |
 
+Carl's (代码随想录) lists from [programmercarl.com/algo](https://programmercarl.com/algo/),
+added the same day: his 11 core topics in the site's order, graph theory left
+out (its problems are on Kamacoder, in ACM mode), and his extra problems.
+Each article is a source of problems: its own problem is core, the ones it
+recommends (相关题目推荐) are stretch, and a problem is kept once per list.
+221 items, 200 unique problems, 16 of them in no 灵茶山艾府 list (2,750
+unique problems across all 24 lists); 3 new patterns (`array.simulation`,
+`hash.basic`, `linked_list.design`).
+
+| List | Items | Stretch | Excluded (Kamacoder, 剑指 Offer, 面试题) |
+| --- | --- | --- | --- |
+| Arrays | 13 | 7 | 3 |
+| Linked Lists | 5 | 0 | 1 |
+| Hash Tables | 11 | 3 | 0 |
+| Strings | 5 | 0 | 2 |
+| Two Pointers | 12 | 4 | 2 |
+| Stacks and Queues | 7 | 0 | 0 |
+| Binary Trees | 40 | 2 | 0 |
+| Backtracking | 14 | 0 | 0 |
+| Greedy | 17 | 0 | 0 |
+| Dynamic Programming | 37 | 0 | 0 |
+| Monotonic Stack | 5 | 0 | 0 |
+| Extra Problems | 55 | 0 | 3 |
+
+In English, every label is our own (the lists and their order are borrowed,
+not the wording); only an author's name may be Chinese.
+
 The files total 1.3 MB of server-only JSON, parsed once per server instance
 on first use. Patterns (phase 4) need every list anyway, so they are not
 loaded per list.
 
 ## Open items
 
-- Ask 灵茶山艾府 for permission before shipping the lists to users. Only
+- Ask 灵茶山艾府 and Carl for permission before shipping the lists to users. Only
   problem identities, LeetCode's titles, ratings, and the section structure
   are stored (none of the posts' text), but the selection and grouping are
   the author's work, and every list page credits and links the source post.

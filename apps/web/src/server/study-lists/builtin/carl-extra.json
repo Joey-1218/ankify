@@ -1,0 +1,1256 @@
+{
+  "id": "carl-extra",
+  "name": {
+    "en": "Extra Problems",
+    "zh": "额外题目"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/other/",
+  "sourceUpdatedAt": null,
+  "generatedAt": "2026-10-20T23:11:57.787Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Backtracking, greedy, and DP",
+        "zh": "回溯、贪心与动态规划"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Linked lists",
+        "zh": "链表"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Arrays, simulation, and bits",
+        "zh": "数组、模拟与位运算"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Arrays and strings",
+        "zh": "数组与字符串"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Binary trees",
+        "zh": "二叉树"
+      }
+    },
+    {
+      "id": "6",
+      "title": {
+        "en": "Graphs and search",
+        "zh": "图论与搜索"
+      }
+    },
+    {
+      "id": "7",
+      "title": {
+        "en": "Hash tables",
+        "zh": "哈希表"
+      }
+    },
+    {
+      "id": "8",
+      "title": {
+        "en": "Backtracking and DP",
+        "zh": "回溯与动态规划"
+      }
+    },
+    {
+      "id": "9",
+      "title": {
+        "en": "Strings and simulation",
+        "zh": "字符串与模拟"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Palindromic substrings",
+        "zh": "回文子串"
+      },
+      "pattern": "dp.interval",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "N-Queens",
+        "zh": "N 皇后"
+      },
+      "pattern": "backtracking.search",
+      "optional": false
+    },
+    {
+      "id": "1.3",
+      "chapterId": "1",
+      "title": {
+        "en": "Palindrome partitioning",
+        "zh": "分割回文串"
+      },
+      "pattern": "dp.partition_optimal",
+      "optional": false
+    },
+    {
+      "id": "1.4",
+      "chapterId": "1",
+      "title": {
+        "en": "Greedy simulation",
+        "zh": "贪心模拟"
+      },
+      "pattern": "greedy.other",
+      "optional": false
+    },
+    {
+      "id": "1.5",
+      "chapterId": "1",
+      "title": {
+        "en": "Increasing subsequences",
+        "zh": "递增子序列"
+      },
+      "pattern": "dp.lis",
+      "optional": false
+    },
+    {
+      "id": "1.6",
+      "chapterId": "1",
+      "title": {
+        "en": "Balanced strings",
+        "zh": "平衡字符串"
+      },
+      "pattern": "greedy.other",
+      "optional": false
+    },
+    {
+      "id": "2.1",
+      "chapterId": "2",
+      "title": {
+        "en": "Swapping nodes",
+        "zh": "交换节点"
+      },
+      "pattern": "linked_list.other",
+      "optional": false
+    },
+    {
+      "id": "2.2",
+      "chapterId": "2",
+      "title": {
+        "en": "Cycle detection",
+        "zh": "环形链表"
+      },
+      "pattern": "linked_list.fast_slow",
+      "optional": false
+    },
+    {
+      "id": "2.3",
+      "chapterId": "2",
+      "title": {
+        "en": "Reordering a list",
+        "zh": "重排链表"
+      },
+      "pattern": "linked_list.mixed",
+      "optional": false
+    },
+    {
+      "id": "2.4",
+      "chapterId": "2",
+      "title": {
+        "en": "Intersections",
+        "zh": "链表相交"
+      },
+      "pattern": "linked_list.two_pointers",
+      "optional": false
+    },
+    {
+      "id": "2.5",
+      "chapterId": "2",
+      "title": {
+        "en": "Palindromic lists",
+        "zh": "回文链表"
+      },
+      "pattern": "linked_list.mixed",
+      "optional": false
+    },
+    {
+      "id": "3.1",
+      "chapterId": "3",
+      "title": {
+        "en": "Next permutation",
+        "zh": "下一个排列"
+      },
+      "pattern": "array.simulation",
+      "optional": false
+    },
+    {
+      "id": "3.2",
+      "chapterId": "3",
+      "title": {
+        "en": "Binary search",
+        "zh": "二分查找"
+      },
+      "pattern": "binary_search.basic",
+      "optional": false
+    },
+    {
+      "id": "3.3",
+      "chapterId": "3",
+      "title": {
+        "en": "Rotating an array",
+        "zh": "旋转数组"
+      },
+      "pattern": "two_pointers.reverse",
+      "optional": false
+    },
+    {
+      "id": "3.4",
+      "chapterId": "3",
+      "title": {
+        "en": "Moving zeroes",
+        "zh": "移动零"
+      },
+      "pattern": "two_pointers.in_place",
+      "optional": false
+    },
+    {
+      "id": "3.5",
+      "chapterId": "3",
+      "title": {
+        "en": "Prefix sums",
+        "zh": "前缀和"
+      },
+      "pattern": "ds.prefix_sum",
+      "optional": false
+    },
+    {
+      "id": "3.6",
+      "chapterId": "3",
+      "title": {
+        "en": "Two pointers",
+        "zh": "双指针"
+      },
+      "pattern": "two_pointers.same_direction",
+      "optional": false
+    },
+    {
+      "id": "3.7",
+      "chapterId": "3",
+      "title": {
+        "en": "Counting occurrences",
+        "zh": "计数"
+      },
+      "pattern": "hash.basic",
+      "optional": false
+    },
+    {
+      "id": "3.8",
+      "chapterId": "3",
+      "title": {
+        "en": "Counting bits",
+        "zh": "位计数"
+      },
+      "pattern": "bits.basic",
+      "optional": false
+    },
+    {
+      "id": "3.9",
+      "chapterId": "3",
+      "title": {
+        "en": "Counting smaller numbers",
+        "zh": "统计更小的数"
+      },
+      "pattern": "hash.basic",
+      "optional": false
+    },
+    {
+      "id": "4.1",
+      "chapterId": "4",
+      "title": {
+        "en": "Spiral matrix",
+        "zh": "螺旋矩阵"
+      },
+      "pattern": "array.simulation",
+      "optional": false
+    },
+    {
+      "id": "5.1",
+      "chapterId": "5",
+      "title": {
+        "en": "Comparing trees",
+        "zh": "比较二叉树"
+      },
+      "pattern": "binary_tree.bottom_up",
+      "optional": false
+    },
+    {
+      "id": "5.2",
+      "chapterId": "5",
+      "title": {
+        "en": "Next pointers",
+        "zh": "右侧指针"
+      },
+      "pattern": "binary_tree.bfs",
+      "optional": false
+    },
+    {
+      "id": "5.3",
+      "chapterId": "5",
+      "title": {
+        "en": "Root-to-leaf numbers",
+        "zh": "根到叶数字"
+      },
+      "pattern": "binary_tree.top_down",
+      "optional": false
+    },
+    {
+      "id": "5.4",
+      "chapterId": "5",
+      "title": {
+        "en": "Balancing a search tree",
+        "zh": "平衡二叉搜索树"
+      },
+      "pattern": "binary_tree.bst",
+      "optional": false
+    },
+    {
+      "id": "6.1",
+      "chapterId": "6",
+      "title": {
+        "en": "Word ladder",
+        "zh": "单词接龙"
+      },
+      "pattern": "graph.bfs_modeling",
+      "optional": false
+    },
+    {
+      "id": "6.2",
+      "chapterId": "6",
+      "title": {
+        "en": "Grid search",
+        "zh": "网格搜索"
+      },
+      "pattern": "grid.dfs",
+      "optional": false
+    },
+    {
+      "id": "6.3",
+      "chapterId": "6",
+      "title": {
+        "en": "Topological sort",
+        "zh": "拓扑排序"
+      },
+      "pattern": "graph.topo",
+      "optional": false
+    },
+    {
+      "id": "6.4",
+      "chapterId": "6",
+      "title": {
+        "en": "More grid search",
+        "zh": "更多网格搜索"
+      },
+      "pattern": "grid.dfs",
+      "optional": false
+    },
+    {
+      "id": "6.5",
+      "chapterId": "6",
+      "title": {
+        "en": "Union-find",
+        "zh": "并查集"
+      },
+      "pattern": "ds.union_find",
+      "optional": false
+    },
+    {
+      "id": "6.6",
+      "chapterId": "6",
+      "title": {
+        "en": "Island areas",
+        "zh": "岛屿面积"
+      },
+      "pattern": "grid.dfs",
+      "optional": false
+    },
+    {
+      "id": "6.7",
+      "chapterId": "6",
+      "title": {
+        "en": "Shortest paths",
+        "zh": "最短路"
+      },
+      "pattern": "graph.dijkstra",
+      "optional": false
+    },
+    {
+      "id": "6.8",
+      "chapterId": "6",
+      "title": {
+        "en": "Graph DFS",
+        "zh": "图的深搜"
+      },
+      "pattern": "graph.dfs",
+      "optional": false
+    },
+    {
+      "id": "6.9",
+      "chapterId": "6",
+      "title": {
+        "en": "Making a large island",
+        "zh": "最大人工岛"
+      },
+      "pattern": "grid.mixed",
+      "optional": false
+    },
+    {
+      "id": "6.10",
+      "chapterId": "6",
+      "title": {
+        "en": "Reachability",
+        "zh": "可达性"
+      },
+      "pattern": "graph.dfs",
+      "optional": false
+    },
+    {
+      "id": "6.11",
+      "chapterId": "6",
+      "title": {
+        "en": "Enclaves and closed islands",
+        "zh": "飞地与封闭岛屿"
+      },
+      "pattern": "grid.dfs",
+      "optional": false
+    },
+    {
+      "id": "6.12",
+      "chapterId": "6",
+      "title": {
+        "en": "All-pairs shortest paths",
+        "zh": "多源最短路"
+      },
+      "pattern": "graph.floyd",
+      "optional": false
+    },
+    {
+      "id": "6.13",
+      "chapterId": "6",
+      "title": {
+        "en": "Star graphs",
+        "zh": "星型图"
+      },
+      "pattern": "graph.other",
+      "optional": false
+    },
+    {
+      "id": "6.14",
+      "chapterId": "6",
+      "title": {
+        "en": "Path existence",
+        "zh": "路径存在"
+      },
+      "pattern": "ds.union_find",
+      "optional": false
+    },
+    {
+      "id": "7.1",
+      "chapterId": "7",
+      "title": {
+        "en": "Character mappings",
+        "zh": "字符映射"
+      },
+      "pattern": "hash.basic",
+      "optional": false
+    },
+    {
+      "id": "8.1",
+      "chapterId": "8",
+      "title": {
+        "en": "Itineraries",
+        "zh": "行程"
+      },
+      "pattern": "graph.euler",
+      "optional": false
+    },
+    {
+      "id": "8.2",
+      "chapterId": "8",
+      "title": {
+        "en": "Stock with a fee",
+        "zh": "含手续费的股票"
+      },
+      "pattern": "dp.stock",
+      "optional": false
+    },
+    {
+      "id": "9.1",
+      "chapterId": "9",
+      "title": {
+        "en": "Simulation",
+        "zh": "模拟"
+      },
+      "pattern": "array.simulation",
+      "optional": false
+    },
+    {
+      "id": "9.2",
+      "chapterId": "9",
+      "title": {
+        "en": "Comparing strings",
+        "zh": "比较字符串"
+      },
+      "pattern": "two_pointers.same_direction",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "longest-palindromic-substring",
+      "frontendId": "5",
+      "title": {
+        "en": "Longest Palindromic Substring",
+        "zh": "最长回文子串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "n-queens-ii",
+      "frontendId": "52",
+      "title": {
+        "en": "N-Queens II",
+        "zh": "N 皇后 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "palindrome-partitioning-ii",
+      "frontendId": "132",
+      "title": {
+        "en": "Palindrome Partitioning II",
+        "zh": "分割回文串 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "dota2-senate",
+      "frontendId": "649",
+      "title": {
+        "en": "Dota2 Senate",
+        "zh": "Dota2 参议院"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-longest-increasing-subsequence",
+      "frontendId": "673",
+      "title": {
+        "en": "Number of Longest Increasing Subsequence",
+        "zh": "最长递增子序列的个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "split-a-string-in-balanced-strings",
+      "frontendId": "1221",
+      "title": {
+        "en": "Split a String in Balanced Strings",
+        "zh": "分割平衡字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "swap-nodes-in-pairs",
+      "frontendId": "24",
+      "title": {
+        "en": "Swap Nodes in Pairs",
+        "zh": "两两交换链表中的节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-cycle",
+      "frontendId": "141",
+      "title": {
+        "en": "Linked List Cycle",
+        "zh": "环形链表"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "reorder-list",
+      "frontendId": "143",
+      "title": {
+        "en": "Reorder List",
+        "zh": "重排链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "intersection-of-two-linked-lists",
+      "frontendId": "160",
+      "title": {
+        "en": "Intersection of Two Linked Lists",
+        "zh": "相交链表"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "palindrome-linked-list",
+      "frontendId": "234",
+      "title": {
+        "en": "Palindrome Linked List",
+        "zh": "回文链表"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "next-permutation",
+      "frontendId": "31",
+      "title": {
+        "en": "Next Permutation",
+        "zh": "下一个排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-first-and-last-position-of-element-in-sorted-array",
+      "frontendId": "34",
+      "title": {
+        "en": "Find First and Last Position of Element in Sorted Array",
+        "zh": "在排序数组中查找元素的第一个和最后一个位置"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "search-insert-position",
+      "frontendId": "35",
+      "title": {
+        "en": "Search Insert Position",
+        "zh": "搜索插入位置"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "rotate-array",
+      "frontendId": "189",
+      "title": {
+        "en": "Rotate Array",
+        "zh": "轮转数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "move-zeroes",
+      "frontendId": "283",
+      "title": {
+        "en": "Move Zeroes",
+        "zh": "移动零"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.4",
+      "level": "core"
+    },
+    {
+      "slug": "find-pivot-index",
+      "frontendId": "724",
+      "title": {
+        "en": "Find Pivot Index",
+        "zh": "寻找数组的中心下标"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "sort-array-by-parity-ii",
+      "frontendId": "922",
+      "title": {
+        "en": "Sort Array By Parity II",
+        "zh": "按奇偶排序数组 II"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.6",
+      "level": "core"
+    },
+    {
+      "slug": "valid-mountain-array",
+      "frontendId": "941",
+      "title": {
+        "en": "Valid Mountain Array",
+        "zh": "有效的山脉数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.6",
+      "level": "core"
+    },
+    {
+      "slug": "unique-number-of-occurrences",
+      "frontendId": "1207",
+      "title": {
+        "en": "Unique Number of Occurrences",
+        "zh": "独一无二的出现次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.7",
+      "level": "core"
+    },
+    {
+      "slug": "sort-integers-by-the-number-of-1-bits",
+      "frontendId": "1356",
+      "title": {
+        "en": "Sort Integers by The Number of 1 Bits",
+        "zh": "根据数字二进制下 1 的数目排序"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "how-many-numbers-are-smaller-than-the-current-number",
+      "frontendId": "1365",
+      "title": {
+        "en": "How Many Numbers Are Smaller Than the Current Number",
+        "zh": "有多少小于当前数字的数字"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.9",
+      "level": "core"
+    },
+    {
+      "slug": "spiral-matrix",
+      "frontendId": "54",
+      "title": {
+        "en": "Spiral Matrix",
+        "zh": "螺旋矩阵"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "spiral-matrix-ii",
+      "frontendId": "59",
+      "title": {
+        "en": "Spiral Matrix II",
+        "zh": "螺旋矩阵 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "same-tree",
+      "frontendId": "100",
+      "title": {
+        "en": "Same Tree",
+        "zh": "相同的树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "populating-next-right-pointers-in-each-node",
+      "frontendId": "116",
+      "title": {
+        "en": "Populating Next Right Pointers in Each Node",
+        "zh": "填充每个节点的下一个右侧节点指针"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "sum-root-to-leaf-numbers",
+      "frontendId": "129",
+      "title": {
+        "en": "Sum Root to Leaf Numbers",
+        "zh": "求根节点到叶节点数字之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "balance-a-binary-search-tree",
+      "frontendId": "1382",
+      "title": {
+        "en": "Balance a Binary Search Tree",
+        "zh": "将二叉搜索树变平衡"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "word-ladder",
+      "frontendId": "127",
+      "title": {
+        "en": "Word Ladder",
+        "zh": "单词接龙"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "surrounded-regions",
+      "frontendId": "130",
+      "title": {
+        "en": "Surrounded Regions",
+        "zh": "被围绕的区域"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-islands",
+      "frontendId": "200",
+      "title": {
+        "en": "Number of Islands",
+        "zh": "岛屿数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.2",
+      "level": "core"
+    },
+    {
+      "slug": "course-schedule",
+      "frontendId": "207",
+      "title": {
+        "en": "Course Schedule",
+        "zh": "课程表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.3",
+      "level": "core"
+    },
+    {
+      "slug": "course-schedule-ii",
+      "frontendId": "210",
+      "title": {
+        "en": "Course Schedule II",
+        "zh": "课程表 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.3",
+      "level": "core"
+    },
+    {
+      "slug": "pacific-atlantic-water-flow",
+      "frontendId": "417",
+      "title": {
+        "en": "Pacific Atlantic Water Flow",
+        "zh": "太平洋大西洋水流问题"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.4",
+      "level": "core"
+    },
+    {
+      "slug": "island-perimeter",
+      "frontendId": "463",
+      "title": {
+        "en": "Island Perimeter",
+        "zh": "岛屿的周长"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.4",
+      "level": "core"
+    },
+    {
+      "slug": "redundant-connection",
+      "frontendId": "684",
+      "title": {
+        "en": "Redundant Connection",
+        "zh": "冗余连接"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.5",
+      "level": "core"
+    },
+    {
+      "slug": "redundant-connection-ii",
+      "frontendId": "685",
+      "title": {
+        "en": "Redundant Connection II",
+        "zh": "冗余连接 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.5",
+      "level": "core"
+    },
+    {
+      "slug": "max-area-of-island",
+      "frontendId": "695",
+      "title": {
+        "en": "Max Area of Island",
+        "zh": "岛屿的最大面积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.6",
+      "level": "core"
+    },
+    {
+      "slug": "network-delay-time",
+      "frontendId": "743",
+      "title": {
+        "en": "Network Delay Time",
+        "zh": "网络延迟时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.7",
+      "level": "core"
+    },
+    {
+      "slug": "cheapest-flights-within-k-stops",
+      "frontendId": "787",
+      "title": {
+        "en": "Cheapest Flights Within K Stops",
+        "zh": "K 站中转内最便宜的航班"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.7",
+      "level": "core"
+    },
+    {
+      "slug": "all-paths-from-source-to-target",
+      "frontendId": "797",
+      "title": {
+        "en": "All Paths From Source to Target",
+        "zh": "所有可能的路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.8",
+      "level": "core"
+    },
+    {
+      "slug": "making-a-large-island",
+      "frontendId": "827",
+      "title": {
+        "en": "Making A Large Island",
+        "zh": "最大人工岛"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.9",
+      "level": "core"
+    },
+    {
+      "slug": "keys-and-rooms",
+      "frontendId": "841",
+      "title": {
+        "en": "Keys and Rooms",
+        "zh": "钥匙和房间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.10",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-enclaves",
+      "frontendId": "1020",
+      "title": {
+        "en": "Number of Enclaves",
+        "zh": "飞地的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.11",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-closed-islands",
+      "frontendId": "1254",
+      "title": {
+        "en": "Number of Closed Islands",
+        "zh": "统计封闭岛屿的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.11",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+      "frontendId": "1334",
+      "title": {
+        "en": "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+        "zh": "阈值距离内邻居最少的城市"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.12",
+      "level": "core"
+    },
+    {
+      "slug": "find-center-of-star-graph",
+      "frontendId": "1791",
+      "title": {
+        "en": "Find Center of Star Graph",
+        "zh": "找出星型图的中心节点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.13",
+      "level": "core"
+    },
+    {
+      "slug": "find-if-path-exists-in-graph",
+      "frontendId": "1971",
+      "title": {
+        "en": "Find if Path Exists in Graph",
+        "zh": "寻找图中是否存在路径"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.14",
+      "level": "core"
+    },
+    {
+      "slug": "isomorphic-strings",
+      "frontendId": "205",
+      "title": {
+        "en": "Isomorphic Strings",
+        "zh": "同构字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-common-characters",
+      "frontendId": "1002",
+      "title": {
+        "en": "Find Common Characters",
+        "zh": "查找共用字符"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "reconstruct-itinerary",
+      "frontendId": "332",
+      "title": {
+        "en": "Reconstruct Itinerary",
+        "zh": "重新安排行程"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8.1",
+      "level": "core"
+    },
+    {
+      "slug": "best-time-to-buy-and-sell-stock-with-transaction-fee",
+      "frontendId": "714",
+      "title": {
+        "en": "Best Time to Buy and Sell Stock with Transaction Fee",
+        "zh": "买卖股票的最佳时机含手续费"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8.2",
+      "level": "core"
+    },
+    {
+      "slug": "robot-return-to-origin",
+      "frontendId": "657",
+      "title": {
+        "en": "Robot Return to Origin",
+        "zh": "机器人能否返回原点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9.1",
+      "level": "core"
+    },
+    {
+      "slug": "backspace-string-compare",
+      "frontendId": "844",
+      "title": {
+        "en": "Backspace String Compare",
+        "zh": "比较含退格的字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9.2",
+      "level": "core"
+    },
+    {
+      "slug": "long-pressed-name",
+      "frontendId": "925",
+      "title": {
+        "en": "Long Pressed Name",
+        "zh": "长按键入"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9.2",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "offer-05-replace-spaces",
+      "title": "替换数字",
+      "sectionId": "4.2",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "offer-58-ii-left-rotate-string",
+      "title": "右旋字符串",
+      "sectionId": "4.2",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCR 146",
+      "title": "螺旋遍历二维数组",
+      "sectionId": "4.1",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}

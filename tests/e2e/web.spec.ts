@@ -50,6 +50,44 @@ test.afterEach(async ({ api, context }) => {
   await context.addCookies([{ name: "ankileet-language", value: "en", url: API_ORIGIN }]);
 });
 
+test("lists reorder from the keyboard, delete after a confirmation, and group built-in lists by author", async ({ context, panel }) => {
+  void panel; // signs the context in
+  const page = await openWeb(context, "/lists");
+  const stamp = Date.now();
+  const names = [`E2E first ${stamp}`, `E2E second ${stamp}`];
+  for (const name of names) {
+    const created = await page.request.post(`${API_ORIGIN}/api/study-lists`, { data: { action: "create", requestId: crypto.randomUUID(), name } });
+    expect(created.status()).toBe(201);
+  }
+  await page.reload();
+  const yours = page.getByRole("region", { name: "Your lists" });
+  const order = async () => (await yours.getByRole("link").allTextContents()).filter((text) => text.startsWith("E2E"));
+  expect(await order()).toEqual(names);
+
+  const saved = page.waitForResponse((response) => response.url().endsWith("/api/study-lists") && response.request().method() === "PUT");
+  await yours.getByRole("button", { name: `Reorder ${names[0]}` }).press("ArrowDown");
+  expect((await saved).status()).toBe(200);
+  await page.reload();
+  expect(await order()).toEqual([names[1], names[0]]);
+
+  for (const name of names) {
+    await yours.getByRole("button", { name: `Delete list: ${name}` }).click();
+    await page.getByRole("alertdialog").getByRole("button", { name: "Delete list" }).click();
+    await expect(yours.getByRole("link", { name })).toHaveCount(0);
+  }
+
+  // Built-in lists: one collapsed group per author, remembered once opened.
+  const carl = page.getByRole("button", { name: /^Carl/ });
+  await expect(carl).toHaveAttribute("aria-expanded", "false");
+  await expect(page.getByRole("link", { name: "Extra Problems" })).toBeHidden();
+  await carl.click();
+  await expect(page.getByRole("link", { name: "Extra Problems" })).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole("button", { name: /^Carl/ })).toHaveAttribute("aria-expanded", "true");
+  await page.getByRole("button", { name: /^Carl/ }).click();
+  await page.close();
+});
+
 test("settings add a key in two steps and never store one the provider rejects", async ({ context, api }) => {
   // A known start whatever ran before: DeepSeek chosen, no key stored.
   await useOwnKey(api);

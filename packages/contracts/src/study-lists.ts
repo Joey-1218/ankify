@@ -48,6 +48,10 @@ export type StudyListItemAddInput = z.infer<typeof studyListItemAddSchema>;
 export const studyListOrderSchema = z.object({ itemIds: z.array(rowId).max(2_000) }).strict();
 export type StudyListOrderInput = z.infer<typeof studyListOrderSchema>;
 
+/** PUT /api/study-lists — the order of the user's lists (My problems stays first): every list id, once. */
+export const studyListsOrderSchema = z.object({ listIds: z.array(rowId).max(50) }).strict();
+export type StudyListsOrderInput = z.infer<typeof studyListsOrderSchema>;
+
 export type LocalizedTextDto = { en: string; zh: string };
 
 export type StudyListKind = "my_problems" | "custom" | "builtin";
@@ -88,7 +92,8 @@ export type StudyListSummaryDto = {
   kind: StudyListKind;
   builtinId: string | null;
   name: LocalizedTextDto;
-  author: string | null;
+  /** A built-in list's author, as the UI shows it. */
+  author: LocalizedTextDto | null;
   sourceUrl: string | null;
   followed: boolean;
   active: boolean;
@@ -116,7 +121,7 @@ export type StudyListDetailDto = {
   chapters: StudyListChapterDto[];
   sections: StudyListSectionDto[];
   entries: StudyListEntryDto[];
-  /** leetcode.cn-only problems of the source that are not included. */
+  /** Problems of the source that are not on leetcode.com, so not included. */
   excludedCount: number;
   /** The user's custom lists, as targets for "Add to list". */
   customLists: { id: string; name: string }[];
@@ -125,9 +130,11 @@ export type StudyListDetailDto = {
 export type StudyListsOverviewDto = {
   /** My problems first, then the user's lists in their order. */
   lists: StudyListSummaryDto[];
-  /** Every built-in list, followed or not. */
-  builtin: StudyListSummaryDto[];
+  /** Every built-in list, followed or not, grouped by author in display order. */
+  builtinGroups: StudyListAuthorGroupDto[];
 };
+
+export type StudyListAuthorGroupDto = { authorId: string; name: LocalizedTextDto; lists: StudyListSummaryDto[] };
 
 /** A problem's lists, for its page: where it is, and where it could go. */
 export type ProblemStudyListsDto = {

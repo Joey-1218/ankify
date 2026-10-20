@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Route } from "next";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
-import { Check, ChevronDown, ChevronUp, Plus, X } from "lucide-react";
+import { Check, ChevronDown, GripVertical, Plus, X } from "lucide-react";
 import type { StudyListDetailDto, StudyListEntryDto, StudyListEntryState } from "@ankileet/contracts";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { Surface } from "@/components/ui/surface";
 import { cn } from "@/lib/utils";
 import { pick, sendJson } from "./api";
+import { dropIndicatorClass, useSortable } from "./sortable";
 
 const STATE_TONE: Record<StudyListEntryState, "neutral" | "warning" | "accent" | "success"> = {
   not_started: "neutral",
@@ -61,21 +62,21 @@ export function ListEntries({ detail }: { detail: StudyListDetailDto }) {
     setAdded((current) => new Set(current).add(`${target}:${entry.slug}`));
   }
 
-  async function move(index: number, delta: -1 | 1) {
-    const order = [...entries];
-    const [entry] = order.splice(index, 1);
-    order.splice(index + delta, 0, entry!);
+  async function reorder(order: StudyListEntryDto[]) {
+    const previous = entries;
     setEntries(order);
-    setBusy(`move:${entry!.key}`);
+    setBusy("order");
     setError(null);
     const result = await sendJson("PUT", `/api/study-lists/${list.id}/items`, { itemIds: order.map((item) => item.itemId) });
     setBusy(null);
     if (!result.ok) {
-      setEntries(entries);
+      setEntries(previous);
       return setError(result.error);
     }
     router.refresh();
   }
+
+  const sortable = useSortable({ items: entries, keyOf: (entry) => entry.key, onReorder: (order) => void reorder(order), disabled: !editable || busy != null });
 
   async function remove(entry: StudyListEntryDto) {
     setBusy(`remove:${entry.key}`);
@@ -87,11 +88,30 @@ export function ListEntries({ detail }: { detail: StudyListDetailDto }) {
     router.refresh();
   }
 
-  const row = (entry: StudyListEntryDto, index: number) => (
+  const row = (entry: StudyListEntryDto) => (
     <EntryRow
       key={entry.key}
       entry={entry}
       next={entry.key === nextKey}
+      sortable={
+        editable
+          ? {
+              rowProps: sortable.rowProps(entry.key),
+              className: cn(sortable.dragging === entry.key && "bg-subtle opacity-70", dropIndicatorClass(sortable.indicator(entry.key))),
+              handle: (
+                <button
+                  type="button"
+                  {...sortable.handleProps(entry.key)}
+                  aria-label={t.lists.reorder(pick(entry.title, language))}
+                  title={t.lists.reorderHelp}
+                  className="-ml-2 rounded p-1 text-muted hover:bg-subtle hover:text-fg"
+                >
+                  <GripVertical className="h-4 w-4" aria-hidden />
+                </button>
+              ),
+            }
+          : null
+      }
       actions={
         <>
           {target && (
@@ -106,17 +126,9 @@ export function ListEntries({ detail }: { detail: StudyListDetailDto }) {
             </Button>
           )}
           {editable && (
-            <>
-              <Button size="icon" variant="ghost" aria-label={t.lists.moveUp} disabled={busy != null || index === 0} onClick={() => void move(index, -1)}>
-                <ChevronUp className="h-4 w-4" aria-hidden />
-              </Button>
-              <Button size="icon" variant="ghost" aria-label={t.lists.moveDown} disabled={busy != null || index === entries.length - 1} onClick={() => void move(index, 1)}>
-                <ChevronDown className="h-4 w-4" aria-hidden />
-              </Button>
-              <Button size="icon" variant="ghost" aria-label={t.lists.remove} disabled={busy != null} onClick={() => void remove(entry)}>
-                {busy === `remove:${entry.key}` ? <Spinner /> : <X className="h-4 w-4" aria-hidden />}
-              </Button>
-            </>
+            <Button size="icon" variant="ghost" aria-label={`${t.lists.remove}: ${pick(entry.title, language)}`} disabled={busy != null} onClick={() => void remove(entry)}>
+              {busy === `remove:${entry.key}` ? <Spinner /> : <X className="h-4 w-4" aria-hidden />}
+            </Button>
           )}
         </>
       }
@@ -166,12 +178,12 @@ function Chapters({
 }: {
   detail: StudyListDetailDto;
   entries: StudyListEntryDto[];
-  row: (entry: StudyListEntryDto, index: number) => React.ReactNode;
+  row: (entry: StudyListEntryDto) => React.ReactNode;
 }) {
   const { t, language } = useLanguage();
   const bySection = useMemo(() => {
-    const map = new Map<string, { entry: StudyListEntryDto; index: number }[]>();
-    entries.forEach((entry, index) => map.set(entry.sectionId!, [...(map.get(entry.sectionId!) ?? []), { entry, index }]));
+    const map = new Map<string, StudyListEntryDto[]>();
+    entries.forEach((entry) => map.set(entry.sectionId!, [...(map.get(entry.sectionId!) ?? []), entry]));
     return map;
   }, [entries]);
   const nextSection = detail.list.nextUp?.sectionId ?? null;
@@ -181,8 +193,8 @@ function Chapters({
       {detail.chapters.map((chapter) => {
         const sections = detail.sections.filter((section) => section.chapterId === chapter.id);
         const chapterEntries = sections.flatMap((section) => bySection.get(section.id) ?? []);
-        const learned = new Set(chapterEntries.filter(({ entry }) => LEARNED.has(entry.state)).map(({ entry }) => entry.slug)).size;
-        const total = new Set(chapterEntries.map(({ entry }) => entry.slug)).size;
+        const learned = new Set(chapterEntries.filter((entry) => LEARNED.has(entry.state)).map((entry) => entry.slug)).size;
+        const total = new Set(chapterEntries.map((entry) => entry.slug)).size;
         const holdsNext = sections.some((section) => section.id === nextSection);
         return (
           <Surface as="details" key={chapter.id} className="group overflow-hidden" open={holdsNext || undefined}>
@@ -197,7 +209,7 @@ function Chapters({
               {sections.map((section) => {
                 const items = bySection.get(section.id) ?? [];
                 if (items.length === 0) return null;
-                const sectionLearned = new Set(items.filter(({ entry }) => LEARNED.has(entry.state)).map(({ entry }) => entry.slug)).size;
+                const sectionLearned = new Set(items.filter((entry) => LEARNED.has(entry.state)).map((entry) => entry.slug)).size;
                 const showTitle = section.id !== chapter.id;
                 return (
                   <section key={section.id} aria-label={pick(section.title, language)}>
@@ -205,9 +217,9 @@ function Chapters({
                       {showTitle && <h3 className="text-sm font-medium">{pick(section.title, language)}</h3>}
                       <span className="text-xs text-muted">{pick(section.pattern.name, language)}</span>
                       {section.optional && <Pill>{t.lists.levels.optional}</Pill>}
-                      <span className="ml-auto text-xs text-muted tabular-nums">{t.lists.sectionProgress(sectionLearned, new Set(items.map(({ entry }) => entry.slug)).size)}</span>
+                      <span className="ml-auto text-xs text-muted tabular-nums">{t.lists.sectionProgress(sectionLearned, new Set(items.map((entry) => entry.slug)).size)}</span>
                     </div>
-                    <ul className="divide-y divide-border">{items.map(({ entry, index }) => row(entry, index))}</ul>
+                    <ul className="divide-y divide-border">{items.map(row)}</ul>
                   </section>
                 );
               })}
@@ -219,11 +231,14 @@ function Chapters({
   );
 }
 
-function EntryRow({ entry, next, actions }: { entry: StudyListEntryDto; next: boolean; actions: React.ReactNode }) {
+type EntrySortable = { rowProps: Record<string, string>; className: string | undefined; handle: React.ReactNode };
+
+function EntryRow({ entry, next, actions, sortable }: { entry: StudyListEntryDto; next: boolean; actions: React.ReactNode; sortable: EntrySortable | null }) {
   const { t, language } = useLanguage();
   const title = pick(entry.title, language);
   return (
-    <li className={cn("flex flex-wrap items-center gap-x-3 gap-y-1.5 px-4 py-2.5", next && "bg-accent-soft/50")}>
+    <li {...sortable?.rowProps} className={cn("flex flex-wrap items-center gap-x-3 gap-y-1.5 px-4 py-2.5", next && "bg-accent-soft/50", sortable?.className)}>
+      {sortable?.handle}
       <span className="w-12 shrink-0 text-xs text-muted tabular-nums">{entry.leetcodeId ?? ""}</span>
       <span className="min-w-0 flex-1">
         {entry.problemId ? (

@@ -1,0 +1,147 @@
+{
+  "id": "carl-dynamic-programming",
+  "source": "programmercarl",
+  "name": {
+    "en": "Dynamic Programming",
+    "zh": "动态规划"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/dynamic-programming/",
+  "chapters": {
+    "1": {
+      "en": "DP basics",
+      "zh": "动态规划基础"
+    },
+    "2": {
+      "en": "Knapsack",
+      "zh": "背包问题"
+    },
+    "3": {
+      "en": "House robber",
+      "zh": "打家劫舍"
+    },
+    "4": {
+      "en": "Stock trading",
+      "zh": "股票问题"
+    },
+    "5": {
+      "en": "Subsequences",
+      "zh": "子序列问题"
+    },
+    "6": {
+      "en": "Palindromes",
+      "zh": "回文问题"
+    }
+  },
+  "articles": {
+    "0509-fibonacci-number": "1.1",
+    "0070-climbing-stairs": "1.1",
+    "0746-min-cost-climbing-stairs": "1.1",
+    "0062-unique-paths": "1.2",
+    "0063-unique-paths-ii": "1.2",
+    "0343-integer-break": "1.3",
+    "0096-unique-binary-search-trees": "1.3",
+    "0416-partition-equal-subset-sum": "2.1",
+    "1049-last-stone-weight-ii": "2.1",
+    "0494-target-sum": "2.1",
+    "0474-ones-and-zeroes": "2.1",
+    "0518-coin-change-ii": "2.2",
+    "0377-combination-sum-iv": "2.2",
+    "0322-coin-change": "2.2",
+    "0279-perfect-squares": "2.2",
+    "0139-word-break": "2.2",
+    "0198-house-robber": "3.1",
+    "0213-house-robber-ii": "3.1",
+    "0337-house-robber-iii": "3.2",
+    "0121-best-time-to-buy-and-sell-stock": "4.1",
+    "0122-best-time-to-buy-and-sell-stock-ii-dynamic-programming": "4.1",
+    "0123-best-time-to-buy-and-sell-stock-iii": "4.1",
+    "0188-best-time-to-buy-and-sell-stock-iv": "4.1",
+    "0309-best-time-to-buy-and-sell-stock-with-cooldown": "4.1",
+    "0714-best-time-to-buy-and-sell-stock-with-transaction-fee-dynamic-programming": "4.1",
+    "0300-longest-increasing-subsequence": "5.1",
+    "0674-longest-continuous-increasing-subsequence": "5.1",
+    "0718-maximum-length-of-repeated-subarray": "5.2",
+    "1143-longest-common-subsequence": "5.2",
+    "1035-uncrossed-lines": "5.2",
+    "0053-maximum-subarray-dynamic-programming": "5.3",
+    "0392-is-subsequence": "5.4",
+    "0115-distinct-subsequences": "5.4",
+    "0583-delete-operation-for-two-strings": "5.4",
+    "0072-edit-distance": "5.4",
+    "0647-palindromic-substrings": "6.1",
+    "0516-longest-palindromic-subsequence": "6.2"
+  },
+  "sections": {
+    "1.1": {
+      "en": "Fibonacci and climbing stairs",
+      "zh": "斐波那契与爬楼梯",
+      "pattern": "dp.climbing_stairs"
+    },
+    "1.2": {
+      "en": "Grid paths",
+      "zh": "网格路径",
+      "pattern": "dp.grid"
+    },
+    "1.3": {
+      "en": "Splitting and counting",
+      "zh": "拆分与计数",
+      "pattern": "dp.linear_1d"
+    },
+    "2.1": {
+      "en": "0-1 knapsack",
+      "zh": "01 背包",
+      "pattern": "dp.knapsack_01"
+    },
+    "2.2": {
+      "en": "Unbounded knapsack",
+      "zh": "完全背包",
+      "pattern": "dp.knapsack_unbounded"
+    },
+    "3.1": {
+      "en": "Robbing in a line or a circle",
+      "zh": "线性与环形",
+      "pattern": "dp.house_robber"
+    },
+    "3.2": {
+      "en": "Robbing a tree",
+      "zh": "树形",
+      "pattern": "dp.tree_independent_set"
+    },
+    "4.1": {
+      "en": "Buying and selling stock",
+      "zh": "买卖股票",
+      "pattern": "dp.stock"
+    },
+    "5.1": {
+      "en": "Increasing subsequences",
+      "zh": "递增子序列",
+      "pattern": "dp.lis"
+    },
+    "5.2": {
+      "en": "Common subsequences",
+      "zh": "公共子序列",
+      "pattern": "dp.lcs"
+    },
+    "5.3": {
+      "en": "Maximum subarray",
+      "zh": "最大子数组和",
+      "pattern": "dp.max_subarray"
+    },
+    "5.4": {
+      "en": "Edit distance",
+      "zh": "编辑距离",
+      "pattern": "dp.lcs"
+    },
+    "6.1": {
+      "en": "Palindromic substrings",
+      "zh": "回文子串",
+      "pattern": "dp.interval"
+    },
+    "6.2": {
+      "en": "Palindromic subsequences",
+      "zh": "回文子序列",
+      "pattern": "dp.palindrome_subsequence"
+    }
+  }
+}

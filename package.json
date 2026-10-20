@@ -31,6 +31,7 @@
     "extension:build:unpacked": "pnpm --filter @ankileet/extension build:unpacked",
     "extension:check-manifest": "node scripts/check-extension-manifest.mjs",
     "study-lists:import": "node scripts/study-list-import.mjs",
+    "study-lists:import-carl": "node scripts/study-list-import-carl.mjs",
     "db:generate": "pnpm --filter @ankileet/db generate",
     "db:migrate": "pnpm --filter @ankileet/db migrate",
     "db:migrate:qa": "pnpm --filter @ankileet/db migrate:qa",

@@ -1,0 +1,334 @@
+{
+  "id": "carl-extra",
+  "source": "programmercarl",
+  "name": {
+    "en": "Extra Problems",
+    "zh": "额外题目"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/other/",
+  "chapters": {
+    "1": {
+      "en": "Backtracking, greedy, and DP",
+      "zh": "回溯、贪心与动态规划"
+    },
+    "2": {
+      "en": "Linked lists",
+      "zh": "链表"
+    },
+    "3": {
+      "en": "Arrays, simulation, and bits",
+      "zh": "数组、模拟与位运算"
+    },
+    "4": {
+      "en": "Arrays and strings",
+      "zh": "数组与字符串"
+    },
+    "5": {
+      "en": "Binary trees",
+      "zh": "二叉树"
+    },
+    "6": {
+      "en": "Graphs and search",
+      "zh": "图论与搜索"
+    },
+    "7": {
+      "en": "Hash tables",
+      "zh": "哈希表"
+    },
+    "8": {
+      "en": "Backtracking and DP",
+      "zh": "回溯与动态规划"
+    },
+    "9": {
+      "en": "Strings and simulation",
+      "zh": "字符串与模拟"
+    }
+  },
+  "articles": {
+    "0005-longest-palindromic-substring": "1.1",
+    "0052-n-queens-ii": "1.2",
+    "0132-palindrome-partitioning-ii": "1.3",
+    "0649-dota2-senate": "1.4",
+    "0673-number-of-longest-increasing-subsequence": "1.5",
+    "1221-split-a-string-in-balanced-strings": "1.6",
+    "0024-swap-nodes-in-pairs": "2.1",
+    "0141-linked-list-cycle": "2.2",
+    "0143-reorder-list": "2.3",
+    "0160-intersection-of-two-linked-lists": "2.4",
+    "0234-palindrome-linked-list": "2.5",
+    "0031-next-permutation": "3.1",
+    "0034-find-first-and-last-position-of-element-in-sorted-array": "3.2",
+    "0035-search-insert-position": "3.2",
+    "0189-rotate-array": "3.3",
+    "0283-move-zeroes": "3.4",
+    "0724-find-pivot-index": "3.5",
+    "0922-sort-array-by-parity-ii": "3.6",
+    "0941-valid-mountain-array": "3.6",
+    "1207-unique-number-of-occurrences": "3.7",
+    "1356-sort-integers-by-the-number-of-1-bits": "3.8",
+    "1365-how-many-numbers-are-smaller-than-the-current-number": "3.9",
+    "0054-spiral-matrix": "4.1",
+    "offer-05-replace-spaces": "4.2",
+    "offer-58-ii-left-rotate-string": "4.2",
+    "0100-same-tree": "5.1",
+    "0116-populating-next-right-pointers-in-each-node": "5.2",
+    "0129-sum-root-to-leaf-numbers": "5.3",
+    "1382-balance-a-binary-search-tree": "5.4",
+    "0127-word-ladder": "6.1",
+    "0130-surrounded-regions": "6.2",
+    "0200-number-of-islands-bfs": "6.2",
+    "0200-number-of-islands-dfs": "6.2",
+    "0207-course-schedule": "6.3",
+    "0210-course-schedule-ii": "6.3",
+    "0417-pacific-atlantic-water-flow": "6.4",
+    "0463-island-perimeter": "6.4",
+    "0684-redundant-connection": "6.5",
+    "0685-redundant-connection-ii": "6.5",
+    "0695-max-area-of-island": "6.6",
+    "0743-network-delay-time": "6.7",
+    "0787-cheapest-flights-within-k-stops": "6.7",
+    "0797-all-paths-from-source-to-target": "6.8",
+    "0827-making-a-large-island": "6.9",
+    "0841-keys-and-rooms": "6.10",
+    "1020-number-of-enclaves": "6.11",
+    "1254-number-of-closed-islands": "6.11",
+    "1334-find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance": "6.12",
+    "1791-find-center-of-star-graph": "6.13",
+    "1971-find-if-path-exists-in-graph": "6.14",
+    "0205-isomorphic-strings": "7.1",
+    "1002-find-common-characters": "7.1",
+    "0332-reconstruct-itinerary": "8.1",
+    "0714-best-time-to-buy-and-sell-stock-with-transaction-fee": "8.2",
+    "0657-robot-return-to-origin": "9.1",
+    "0844-backspace-string-compare": "9.2",
+    "0925-long-pressed-name": "9.2"
+  },
+  "sections": {
+    "1.1": {
+      "en": "Palindromic substrings",
+      "zh": "回文子串",
+      "pattern": "dp.interval"
+    },
+    "1.2": {
+      "en": "N-Queens",
+      "zh": "N 皇后",
+      "pattern": "backtracking.search"
+    },
+    "1.3": {
+      "en": "Palindrome partitioning",
+      "zh": "分割回文串",
+      "pattern": "dp.partition_optimal"
+    },
+    "1.4": {
+      "en": "Greedy simulation",
+      "zh": "贪心模拟",
+      "pattern": "greedy.other"
+    },
+    "1.5": {
+      "en": "Increasing subsequences",
+      "zh": "递增子序列",
+      "pattern": "dp.lis"
+    },
+    "1.6": {
+      "en": "Balanced strings",
+      "zh": "平衡字符串",
+      "pattern": "greedy.other"
+    },
+    "2.1": {
+      "en": "Swapping nodes",
+      "zh": "交换节点",
+      "pattern": "linked_list.other"
+    },
+    "2.2": {
+      "en": "Cycle detection",
+      "zh": "环形链表",
+      "pattern": "linked_list.fast_slow"
+    },
+    "2.3": {
+      "en": "Reordering a list",
+      "zh": "重排链表",
+      "pattern": "linked_list.mixed"
+    },
+    "2.4": {
+      "en": "Intersections",
+      "zh": "链表相交",
+      "pattern": "linked_list.two_pointers"
+    },
+    "2.5": {
+      "en": "Palindromic lists",
+      "zh": "回文链表",
+      "pattern": "linked_list.mixed"
+    },
+    "3.1": {
+      "en": "Next permutation",
+      "zh": "下一个排列",
+      "pattern": "array.simulation"
+    },
+    "3.2": {
+      "en": "Binary search",
+      "zh": "二分查找",
+      "pattern": "binary_search.basic"
+    },
+    "3.3": {
+      "en": "Rotating an array",
+      "zh": "旋转数组",
+      "pattern": "two_pointers.reverse"
+    },
+    "3.4": {
+      "en": "Moving zeroes",
+      "zh": "移动零",
+      "pattern": "two_pointers.in_place"
+    },
+    "3.5": {
+      "en": "Prefix sums",
+      "zh": "前缀和",
+      "pattern": "ds.prefix_sum"
+    },
+    "3.6": {
+      "en": "Two pointers",
+      "zh": "双指针",
+      "pattern": "two_pointers.same_direction"
+    },
+    "3.7": {
+      "en": "Counting occurrences",
+      "zh": "计数",
+      "pattern": "hash.basic"
+    },
+    "3.8": {
+      "en": "Counting bits",
+      "zh": "位计数",
+      "pattern": "bits.basic"
+    },
+    "3.9": {
+      "en": "Counting smaller numbers",
+      "zh": "统计更小的数",
+      "pattern": "hash.basic"
+    },
+    "4.1": {
+      "en": "Spiral matrix",
+      "zh": "螺旋矩阵",
+      "pattern": "array.simulation"
+    },
+    "4.2": {
+      "en": "String manipulation",
+      "zh": "字符串操作",
+      "pattern": "two_pointers.reverse"
+    },
+    "5.1": {
+      "en": "Comparing trees",
+      "zh": "比较二叉树",
+      "pattern": "binary_tree.bottom_up"
+    },
+    "5.2": {
+      "en": "Next pointers",
+      "zh": "右侧指针",
+      "pattern": "binary_tree.bfs"
+    },
+    "5.3": {
+      "en": "Root-to-leaf numbers",
+      "zh": "根到叶数字",
+      "pattern": "binary_tree.top_down"
+    },
+    "5.4": {
+      "en": "Balancing a search tree",
+      "zh": "平衡二叉搜索树",
+      "pattern": "binary_tree.bst"
+    },
+    "6.1": {
+      "en": "Word ladder",
+      "zh": "单词接龙",
+      "pattern": "graph.bfs_modeling"
+    },
+    "6.2": {
+      "en": "Grid search",
+      "zh": "网格搜索",
+      "pattern": "grid.dfs"
+    },
+    "6.3": {
+      "en": "Topological sort",
+      "zh": "拓扑排序",
+      "pattern": "graph.topo"
+    },
+    "6.4": {
+      "en": "More grid search",
+      "zh": "更多网格搜索",
+      "pattern": "grid.dfs"
+    },
+    "6.5": {
+      "en": "Union-find",
+      "zh": "并查集",
+      "pattern": "ds.union_find"
+    },
+    "6.6": {
+      "en": "Island areas",
+      "zh": "岛屿面积",
+      "pattern": "grid.dfs"
+    },
+    "6.7": {
+      "en": "Shortest paths",
+      "zh": "最短路",
+      "pattern": "graph.dijkstra"
+    },
+    "6.8": {
+      "en": "Graph DFS",
+      "zh": "图的深搜",
+      "pattern": "graph.dfs"
+    },
+    "6.9": {
+      "en": "Making a large island",
+      "zh": "最大人工岛",
+      "pattern": "grid.mixed"
+    },
+    "6.10": {
+      "en": "Reachability",
+      "zh": "可达性",
+      "pattern": "graph.dfs"
+    },
+    "6.11": {
+      "en": "Enclaves and closed islands",
+      "zh": "飞地与封闭岛屿",
+      "pattern": "grid.dfs"
+    },
+    "6.12": {
+      "en": "All-pairs shortest paths",
+      "zh": "多源最短路",
+      "pattern": "graph.floyd"
+    },
+    "6.13": {
+      "en": "Star graphs",
+      "zh": "星型图",
+      "pattern": "graph.other"
+    },
+    "6.14": {
+      "en": "Path existence",
+      "zh": "路径存在",
+      "pattern": "ds.union_find"
+    },
+    "7.1": {
+      "en": "Character mappings",
+      "zh": "字符映射",
+      "pattern": "hash.basic"
+    },
+    "8.1": {
+      "en": "Itineraries",
+      "zh": "行程",
+      "pattern": "graph.euler"
+    },
+    "8.2": {
+      "en": "Stock with a fee",
+      "zh": "含手续费的股票",
+      "pattern": "dp.stock"
+    },
+    "9.1": {
+      "en": "Simulation",
+      "zh": "模拟",
+      "pattern": "array.simulation"
+    },
+    "9.2": {
+      "en": "Comparing strings",
+      "zh": "比较字符串",
+      "pattern": "two_pointers.same_direction"
+    }
+  }
+}

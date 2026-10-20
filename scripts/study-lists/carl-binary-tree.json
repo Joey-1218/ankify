@@ -1,0 +1,125 @@
+{
+  "id": "carl-binary-tree",
+  "source": "programmercarl",
+  "name": {
+    "en": "Binary Trees",
+    "zh": "二叉树"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/binary-tree/",
+  "chapters": {
+    "1": {
+      "en": "Traversal",
+      "zh": "遍历"
+    },
+    "2": {
+      "en": "Properties",
+      "zh": "属性"
+    },
+    "3": {
+      "en": "Building and merging",
+      "zh": "构造与合并"
+    },
+    "4": {
+      "en": "Binary search trees",
+      "zh": "二叉搜索树"
+    }
+  },
+  "articles": {
+    "recursive-binary-tree-traversal": "1.1",
+    "iterative-binary-tree-traversal": "1.1",
+    "0102-binary-tree-level-order-traversal": "1.2",
+    "0226-invert-binary-tree": "2.1",
+    "0101-symmetric-tree": "2.1",
+    "0104-maximum-depth-of-binary-tree": "2.2",
+    "0111-minimum-depth-of-binary-tree": "2.2",
+    "0222-count-complete-tree-nodes": "2.3",
+    "0110-balanced-binary-tree": "2.3",
+    "0257-binary-tree-paths": "2.4",
+    "0404-sum-of-left-leaves": "2.5",
+    "0513-find-bottom-left-tree-value": "2.5",
+    "0112-path-sum": "2.6",
+    "0106-construct-binary-tree-from-inorder-and-postorder-traversal": "3.1",
+    "0654-maximum-binary-tree": "3.1",
+    "0617-merge-two-binary-trees": "3.1",
+    "0700-search-in-a-binary-search-tree": "4.1",
+    "0098-validate-binary-search-tree": "4.1",
+    "0530-minimum-absolute-difference-in-bst": "4.1",
+    "0501-find-mode-in-binary-search-tree": "4.1",
+    "0236-lowest-common-ancestor-of-a-binary-tree": "4.2",
+    "0235-lowest-common-ancestor-of-a-binary-search-tree": "4.2",
+    "0701-insert-into-a-binary-search-tree": "4.3",
+    "0450-delete-node-in-a-bst": "4.3",
+    "0669-trim-a-binary-search-tree": "4.3",
+    "0108-convert-sorted-array-to-binary-search-tree": "4.4",
+    "0538-convert-bst-to-greater-tree": "4.4",
+    "weekly-review-20201003": null
+  },
+  "sections": {
+    "1.1": {
+      "en": "Depth-first traversal",
+      "zh": "深度优先遍历",
+      "pattern": "binary_tree.traverse"
+    },
+    "1.2": {
+      "en": "Level-order traversal",
+      "zh": "层序遍历",
+      "pattern": "binary_tree.bfs"
+    },
+    "2.1": {
+      "en": "Inverting and symmetry",
+      "zh": "翻转与对称",
+      "pattern": "binary_tree.bottom_up"
+    },
+    "2.2": {
+      "en": "Depth",
+      "zh": "深度",
+      "pattern": "binary_tree.bottom_up"
+    },
+    "2.3": {
+      "en": "Node counts and balance",
+      "zh": "节点个数与平衡",
+      "pattern": "binary_tree.bottom_up"
+    },
+    "2.4": {
+      "en": "Paths",
+      "zh": "路径",
+      "pattern": "binary_tree.backtracking"
+    },
+    "2.5": {
+      "en": "Left leaves and the bottom row",
+      "zh": "左叶子与最底层",
+      "pattern": "binary_tree.top_down"
+    },
+    "2.6": {
+      "en": "Path sums",
+      "zh": "路径总和",
+      "pattern": "binary_tree.backtracking"
+    },
+    "3.1": {
+      "en": "Building and merging trees",
+      "zh": "构造与合并二叉树",
+      "pattern": "binary_tree.build"
+    },
+    "4.1": {
+      "en": "Searching and validating",
+      "zh": "搜索与验证",
+      "pattern": "binary_tree.bst"
+    },
+    "4.2": {
+      "en": "Lowest common ancestors",
+      "zh": "最近公共祖先",
+      "pattern": "binary_tree.lca"
+    },
+    "4.3": {
+      "en": "Inserting, deleting, and trimming",
+      "zh": "插入、删除与修剪",
+      "pattern": "binary_tree.insert_delete"
+    },
+    "4.4": {
+      "en": "Building and converting",
+      "zh": "构造与转换",
+      "pattern": "binary_tree.bst"
+    }
+  }
+}

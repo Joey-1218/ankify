@@ -1,0 +1,48 @@
+{
+  "id": "carl-hash-table",
+  "source": "programmercarl",
+  "name": {
+    "en": "Hash Tables",
+    "zh": "哈希表"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/hash-table/",
+  "chapters": {
+    "1": {
+      "en": "Hash tables",
+      "zh": "哈希表"
+    }
+  },
+  "articles": {
+    "0242-valid-anagram": "1.1",
+    "0349-intersection-of-two-arrays": "1.2",
+    "0202-happy-number": "1.2",
+    "0001-two-sum": "1.3",
+    "0454-4sum-ii": "1.3",
+    "0383-ransom-note": "1.3",
+    "0015-3sum": "1.4",
+    "0018-4sum": "1.4"
+  },
+  "sections": {
+    "1.1": {
+      "en": "Counting with arrays",
+      "zh": "数组计数",
+      "pattern": "hash.basic"
+    },
+    "1.2": {
+      "en": "Sets",
+      "zh": "集合",
+      "pattern": "hash.basic"
+    },
+    "1.3": {
+      "en": "Maps",
+      "zh": "映射",
+      "pattern": "hash.basic"
+    },
+    "1.4": {
+      "en": "Three and four sums",
+      "zh": "三数之和与四数之和",
+      "pattern": "two_pointers.opposite"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "id": "carl-string",
+  "name": {
+    "en": "Strings",
+    "zh": "字符串"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/string/",
+  "sourceUpdatedAt": null,
+  "generatedAt": "2026-10-20T23:12:17.098Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Strings",
+        "zh": "字符串"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Reversing strings",
+        "zh": "反转字符串"
+      },
+      "pattern": "two_pointers.reverse",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "KMP",
+        "zh": "KMP"
+      },
+      "pattern": "string.kmp",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "reverse-string",
+      "frontendId": "344",
+      "title": {
+        "en": "Reverse String",
+        "zh": "反转字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-string-ii",
+      "frontendId": "541",
+      "title": {
+        "en": "Reverse String II",
+        "zh": "反转字符串 II"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-words-in-a-string",
+      "frontendId": "151",
+      "title": {
+        "en": "Reverse Words in a String",
+        "zh": "反转字符串中的单词"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-index-of-the-first-occurrence-in-a-string",
+      "frontendId": "28",
+      "title": {
+        "en": "Find the Index of the First Occurrence in a String",
+        "zh": "找出字符串中第一个匹配项的下标"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "repeated-substring-pattern",
+      "frontendId": "459",
+      "title": {
+        "en": "Repeated Substring Pattern",
+        "zh": "重复的子字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "kamacoder-0054-replace-digits",
+      "title": "替换数字",
+      "sectionId": "1.1",
+      "reason": "not_on_leetcode"
+    },
+    {
+      "sourceId": "kamacoder-0055-right-rotate-stri",
+      "title": "右旋字符串",
+      "sectionId": "1.1",
+      "reason": "not_on_leetcode"
+    }
+  ]
+}

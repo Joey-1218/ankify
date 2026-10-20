@@ -87,7 +87,7 @@ export function ListHeader({ list, excludedCount }: { list: StudyListSummaryDto;
           )}
           {list.author && (
             <p className="text-sm text-muted">
-              {t.lists.by(list.author)}
+              {t.lists.by(pick(list.author, language))}
               {list.sourceUrl && (
                 <>
                   {" · "}

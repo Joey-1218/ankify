@@ -260,3 +260,23 @@ export async function reorderStudyListItems(
     return { ok: true };
   });
 }
+
+/** Puts the user's lists in the given order (My problems is not a row and stays first); it must name every list exactly once. */
+export async function reorderStudyLists(userId: string, listIds: readonly string[], now = new Date()): Promise<{ ok: true } | StudyListFailure> {
+  return getDb().transaction(async (tx) => {
+    const rows = await tx.select({ id: l.id, position: l.position }).from(l).where(eq(l.userId, userId));
+    const current = new Map(rows.map((row) => [row.id, row.position]));
+    if (new Set(listIds).size !== listIds.length || listIds.length !== current.size || listIds.some((id) => !current.has(id))) {
+      return fail("order_mismatch", "The order must name every list exactly once.");
+    }
+    const moved = listIds.flatMap((id, position) => (current.get(id) === position ? [] : [{ id, position }]));
+    if (moved.length) {
+      const cases = sql.join(moved.map((row) => sql`when ${row.id} then ${row.position}`), sql` `);
+      await tx
+        .update(l)
+        .set({ position: sql`case ${l.id} ${cases} end`, updatedAt: now })
+        .where(and(eq(l.userId, userId), inArray(l.id, moved.map((row) => row.id))));
+    }
+    return { ok: true };
+  });
+}

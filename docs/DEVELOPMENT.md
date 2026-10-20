@@ -93,10 +93,16 @@ a signed-in `leetcode.com/problems/<slug>/` page:
 ## Adding a built-in study list
 
 Built-in lists are generated files in
-`apps/web/src/server/study-lists/builtin/`, one per list, read from a public
-problem list post on leetcode.cn (灵茶山艾府's lists share one format) plus
-LeetCode's own metadata. Only problem identities, LeetCode titles, ratings,
-and the section structure are kept; none of the post's text.
+`apps/web/src/server/study-lists/builtin/`, one per list, from a public
+source plus LeetCode's own metadata. Only problem identities, LeetCode
+titles, ratings, and the order and section structure are kept; none of the
+source's text. Every English label is our own: in English, only an author's
+name may be Chinese (`builtin.test.ts` fails on Chinese in any English
+label). Each author is registered in `BUILTIN_AUTHORS` in
+`study-lists/builtin.ts`, with the display name in both languages; /lists
+shows one collapsible group per author, in that order.
+
+### From a leetcode.cn post (灵茶山艾府)
 
 1. Run `pnpm study-lists:import --init <post-url> <list-id>`. It writes
    `scripts/study-lists/<list-id>.json` with every chapter (`一、` headings)
@@ -121,9 +127,31 @@ and the section structure are kept; none of the post's text.
    same English titles from leetcode.cn (rerun against leetcode.com before
    launch), and `--input post.html` reads a saved copy of the post. Behind a
    proxy, prefix the command with `NODE_USE_ENV_PROXY=1`.
-3. Register the file in `SOURCES` in `study-lists/builtin.ts` (the array's
-   order is the order users see).
-4. Run `pnpm vitest run apps/web/src/server/study-lists scripts/study-list-import.test.mjs`
+
+### From programmercarl.com (代码随想录)
+
+1. Run `pnpm study-lists:import-carl --init https://programmercarl.com/algo/<topic>/ carl-<topic> --cache <dir>`.
+   It reads the topic page's articles in order and each article's LeetCode
+   links, and writes `scripts/study-lists/carl-<topic>.json` with one
+   section per article (`source: "programmercarl"`). Group consecutive
+   articles into sections in `articles` (article file name -> section id),
+   map a recap that only repeats problems (周末总结) to `null`, and fill in
+   the English and Chinese labels and patterns. Articles without problems
+   (basics, summaries) need no entry; Kamacoder (卡码网) and 剑指 Offer
+   articles that are mapped are recorded under `excluded`.
+2. Run `pnpm study-lists:import-carl scripts/study-lists/carl-<topic>.json --cache <dir>`.
+   An article's own problem (力扣题目链接, or a heading's problem) is core,
+   problems under 相关题目推荐 are stretch, and a problem is kept once per
+   list (core first). An article that links no problem but is named after
+   one (`0207-course-schedule`) gets that problem, its number checked on
+   leetcode.com. Problems not on leetcode.com go to `excluded`. `--cache`
+   keeps fetched pages, since the site resets connections now and then.
+
+### Then, for either source
+
+3. Register the file in `SOURCES` in `study-lists/builtin.ts` under its
+   author (each array's order is the order users see).
+4. Run `pnpm vitest run apps/web/src/server/study-lists scripts`
    and commit the config, the generated file, and the registry line. To pick
    up the author's later edits, rerun step 2 and commit the result.
 

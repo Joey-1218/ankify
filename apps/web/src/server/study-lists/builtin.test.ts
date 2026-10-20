@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { builtinLists, getBuiltinList, parseBuiltinList, patternsForSlug } from "./builtin";
+import { BUILTIN_AUTHORS, builtinLists, getBuiltinList, parseBuiltinList, patternsForSlug } from "./builtin";
 import { PATTERNS } from "./patterns";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -42,7 +42,7 @@ describe("built-in study lists", () => {
     for (const file of readdirSync(configDir).filter((name) => name.endsWith(".json"))) {
       const config = readJson(path.join(configDir, file)) as { id: string; sections: Record<string, { pattern: string; optional?: boolean }> };
       const list = getBuiltinList(config.id);
-      expect(list, `${file}: run scripts/study-list-import.mjs`).not.toBeNull();
+      expect(list, `${file}: run the importer (DEVELOPMENT.md, "Adding a built-in study list")`).not.toBeNull();
       for (const section of list!.sections) {
         // A config edit is not live until the list is regenerated.
         expect(config.sections[section.id], `${config.id} section ${section.id}`).toMatchObject({ pattern: section.pattern });
@@ -50,6 +50,30 @@ describe("built-in study lists", () => {
         if (config.sections[section.id]!.optional) expect(section.optional).toBe(true);
       }
     }
+  });
+
+  it("registers every list under a known author, authors in display order", () => {
+    const authors = BUILTIN_AUTHORS.map((author) => author.id);
+    const order = builtinLists().map((list) => authors.indexOf(list.authorId));
+    expect(order.every((index) => index >= 0)).toBe(true);
+    expect(order).toEqual([...order].sort((a, b) => a - b));
+    for (const author of BUILTIN_AUTHORS) expect(builtinLists().some((list) => list.authorId === author.id), author.id).toBe(true);
+  });
+
+  // We borrow the lists and their order, not the source's wording: in
+  // English, only an author's own name may be Chinese.
+  it("has no Chinese in any English label", () => {
+    const cjk = /[\u3400-\u9fff\uf900-\ufaff]/;
+    for (const list of builtinLists()) {
+      const labels = [
+        ["name", list.name.en],
+        ...list.chapters.map((chapter) => [`chapter ${chapter.id}`, chapter.title.en]),
+        ...list.sections.map((section) => [`section ${section.id}`, section.title.en]),
+        ...list.items.map((item) => [item.slug, item.title.en]),
+      ];
+      for (const [where, text] of labels) expect(cjk.test(text!), `${list.id} ${where}: ${text}`).toBe(false);
+    }
+    for (const [id, name] of Object.entries(PATTERNS)) expect(cjk.test(name.en), id).toBe(false);
   });
 
   it("names every pattern in both languages", () => {
@@ -89,7 +113,10 @@ describe("built-in study lists", () => {
     for (const item of list.items) counts.set(item.slug, (counts.get(item.slug) ?? 0) + 1);
     const twice = [...counts].find(([, count]) => count > 1)![0];
     const sections = list.items.filter((item) => item.slug === twice).map((item) => item.pattern);
-    expect(patternsForSlug(twice)).toEqual([...new Set(sections)]);
+    expect(patternsForSlug(twice)).toEqual(expect.arrayContaining([...new Set(sections)]));
+    // Every list counts, followed or not.
+    const everywhere = builtinLists().flatMap((other) => other.items.filter((item) => item.slug === twice).map((item) => item.pattern));
+    expect([...patternsForSlug(twice)].sort()).toEqual([...new Set(everywhere)].sort());
     expect(patternsForSlug("not-in-any-list")).toEqual([]);
   });
 });
@@ -113,5 +140,27 @@ describe("the first built-in list", () => {
     const order = list.sections.map((section) => section.id);
     const positions = list.items.map((item) => order.indexOf(item.sectionId));
     expect(positions).toEqual([...positions].sort((a, b) => a - b));
+  });
+});
+
+describe("Carl's lists", () => {
+  it("hold only leetcode.com problems, once per list, with the rest accounted for", () => {
+    const carl = builtinLists().filter((list) => list.authorId === "carl");
+    expect(carl).toHaveLength(12);
+    for (const list of carl) {
+      expect(new Set(list.items.map((item) => item.slug)).size, list.id).toBe(list.items.length);
+    }
+    // 面试题 02.07 is leetcode.cn only; Kamacoder problems are not on LeetCode.
+    expect(getBuiltinList("carl-linked-list")!.excluded).toMatchObject([{ sourceId: "面试题 02.07", reason: "leetcode_cn_only" }]);
+    expect(getBuiltinList("carl-string")!.excluded.map((entry) => entry.reason)).toEqual(["not_on_leetcode", "not_on_leetcode"]);
+  });
+
+  it("puts an article's own problem first and its related ones after, as stretch", () => {
+    const array = getBuiltinList("carl-array")!;
+    const removal = array.items.filter((item) => item.sectionId === "1.2").map((item) => [item.slug, item.level]);
+    expect(removal[0]).toEqual(["remove-element", "core"]);
+    // 977 has its own article later, so it is core there and not repeated here.
+    expect(removal.map(([slug]) => slug)).not.toContain("squares-of-a-sorted-array");
+    expect(array.items.find((item) => item.slug === "squares-of-a-sorted-array")).toMatchObject({ sectionId: "1.3", level: "core" });
   });
 });

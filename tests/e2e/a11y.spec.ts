@@ -22,7 +22,7 @@ async function audit(page: Page, label: string, include?: string) {
   expect(describe(blocking), `${label}: serious or critical axe violations`).toEqual([]);
 }
 
-const PAGES = ["/today", "/lists", "/lists/builtin/sliding-window-two-pointers", "/problems", "/problems/qa-problem-two-sum", "/analysis", "/suggestions", "/settings"];
+const PAGES = ["/today", "/lists", "/lists/builtin/sliding-window-two-pointers", "/lists/builtin/carl-binary-tree", "/problems", "/problems/qa-problem-two-sum", "/analysis", "/suggestions", "/settings"];
 
 for (const theme of ["light", "dark"] as const) {
   test(`web pages pass axe in ${theme}`, async ({ context, panel }) => {
@@ -34,6 +34,12 @@ for (const theme of ["light", "dark"] as const) {
       await expect(page.getByRole("heading", { level: 1 }).first()).toBeVisible({ timeout: 30_000 });
       await audit(page, `${path} (${theme})`);
     }
+    // The built-in lists' author groups, open.
+    await page.goto(`${API_ORIGIN}/lists`);
+    for (const group of await page.getByRole("button", { expanded: false }).filter({ hasText: "lists" }).all()) await group.click();
+    await expect(page.getByRole("link", { name: "Extra Problems" })).toBeVisible();
+    await audit(page, `/lists, groups open (${theme})`);
+    for (const group of await page.getByRole("button", { expanded: true }).all()) await group.click();
     await page.close();
   });
 

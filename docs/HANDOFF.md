@@ -123,8 +123,9 @@ zip, and upload a new package (DEPLOYMENT.md, "Extension release").
 
 ### Study lists (in progress)
 
-A list-based practice workflow: built-in lists (灵茶山艾府's 12
-topic lists, moved to leetcode.com), playlist-style user lists, a daily time
+A list-based practice workflow: built-in lists (Carl's 12 and
+灵茶山艾府's 12 topic lists, moved to leetcode.com, grouped by author on
+`/lists`), playlist-style user lists (drag to reorder), a daily time
 budget for new problems, and a pattern axis in the mistake profile. Design,
 owner decisions, and phases: [STUDY_LISTS_PLAN.md](STUDY_LISTS_PLAN.md).
 Work happens on branch `claude/determined-pasteur-cid59n` (not merged, not
@@ -132,8 +133,11 @@ deployed). Done: phase 1 (the importer and all 12 lists), phase 2 (lists in
 the database, the list API, `/lists` pages, and the problem page's Lists
 panel), and phase 3 (Today's plan: a daily time budget for new problems,
 list shares, weak-pattern priority and check problems, interleaved reviews,
-study-plan settings, and the same-day re-solve rule); ARCHITECTURE.md,
-"Study lists". Next: phase 4, the pattern x cause grid on `/analysis`.
+study-plan settings, and the same-day re-solve rule), then Carl's lists
+(`scripts/study-list-import-carl.mjs`) and the `/lists` refresh (author
+groups, dragging lists and custom-list items, delete or unfollow in place);
+ARCHITECTURE.md, "Study lists". Next: phase 4, the pattern x cause grid on
+`/analysis`.
 
 Before deploying: apply migration `0027_study_lists` to Production first
 (`pnpm db:release`, DEPLOYMENT.md), since the list pages and the problem

@@ -10,7 +10,7 @@ import type {
 import { getDb, schema, type StudyList, type StudyListItem } from "@ankileet/db";
 import { and, asc, eq } from "drizzle-orm";
 import type { DbTransaction } from "../practice-sessions/store";
-import { builtinLists, getBuiltinList, type BuiltinList } from "./builtin";
+import { BUILTIN_AUTHORS, builtinAuthorName, builtinLists, getBuiltinList, type BuiltinList } from "./builtin";
 import { patternName } from "./patterns";
 
 type Db = ReturnType<typeof getDb> | DbTransaction;
@@ -179,7 +179,7 @@ function summaryOf(
 const builtinBase = (list: BuiltinList) => ({
   kind: "builtin" as const,
   name: list.name,
-  author: list.author,
+  author: builtinAuthorName(list.authorId),
   sourceUrl: list.sourceUrl,
   builtinId: list.id,
 });
@@ -215,7 +215,13 @@ export async function loadStudyListsOverview(userId: string): Promise<StudyLists
         return resolved ? [summaryOf(resolved.base, row, resolved.entries)] : [];
       }),
     ],
-    builtin: builtinLists().map((list) => summaryOf(builtinBase(list), followed.get(list.id) ?? null, builtinEntries(list, index))),
+    builtinGroups: BUILTIN_AUTHORS.map((author) => ({
+      authorId: author.id,
+      name: author.name,
+      lists: builtinLists()
+        .filter((list) => list.authorId === author.id)
+        .map((list) => summaryOf(builtinBase(list), followed.get(list.id) ?? null, builtinEntries(list, index))),
+    })).filter((group) => group.lists.length > 0),
   };
 }
 
@@ -246,7 +252,7 @@ export async function loadStudyListDetail(userId: string, ref: StudyListRef, db:
     chapters: builtin.chapters,
     sections: builtin.sections.map((section) => ({ ...section, pattern: { id: section.pattern, name: patternName(section.pattern) } })),
     entries,
-    excludedCount: builtin.excluded.filter((entry) => entry.reason === "leetcode_cn_only").length,
+    excludedCount: builtin.excluded.filter((entry) => entry.reason !== "same_as").length,
     customLists,
   };
 }

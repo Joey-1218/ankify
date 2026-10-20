@@ -253,7 +253,7 @@ async function graphql(site, query, variables = {}) {
   }
 }
 
-async function readMetadata(site, slugs, fields) {
+export async function readMetadata(site, slugs, fields) {
   const metadata = new Map();
   for (let start = 0; start < slugs.length; start += BATCH) {
     const batch = slugs.slice(start, start + BATCH);
@@ -308,6 +308,7 @@ async function init(args) {
 
 async function importList(args) {
   const config = JSON.parse(await readFile(args.config, "utf8"));
+  if (config.source === "programmercarl") throw new Error(`${args.config} is a programmercarl.com config; use study-list-import-carl.mjs.`);
   const post = await loadPost(config.sourceUrl, args.input);
   const parsed = parsePost(post.content, config);
   const { kept, excluded } = await resolveSiteOnly(parsed, config, slugForFrontendId);

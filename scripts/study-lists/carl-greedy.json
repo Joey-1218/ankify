@@ -1,0 +1,120 @@
+{
+  "id": "carl-greedy",
+  "source": "programmercarl",
+  "name": {
+    "en": "Greedy",
+    "zh": "贪心算法"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/greedy/",
+  "chapters": {
+    "1": {
+      "en": "Greedy basics",
+      "zh": "贪心基础"
+    },
+    "2": {
+      "en": "Intervals",
+      "zh": "区间问题"
+    },
+    "3": {
+      "en": "Advanced",
+      "zh": "进阶"
+    }
+  },
+  "articles": {
+    "0455-assign-cookies": "1.1",
+    "0376-wiggle-subsequence": "1.2",
+    "0053-maximum-subarray": "1.3",
+    "0122-best-time-to-buy-and-sell-stock-ii": "1.4",
+    "0055-jump-game": "1.5",
+    "0045-jump-game-ii": "1.5",
+    "1005-maximize-sum-of-array-after-k-negations": "1.6",
+    "0134-gas-station": "1.7",
+    "0135-candy": "1.8",
+    "0860-lemonade-change": "1.9",
+    "0406-queue-reconstruction-by-height": "1.10",
+    "0452-minimum-number-of-arrows-to-burst-balloons": "2.1",
+    "0435-non-overlapping-intervals": "2.2",
+    "0763-partition-labels": "2.3",
+    "0056-merge-intervals": "2.3",
+    "0738-monotone-increasing-digits": "3.1",
+    "0968-binary-tree-cameras": "3.2"
+  },
+  "sections": {
+    "1.1": {
+      "en": "Assigning cookies",
+      "zh": "分发饼干",
+      "pattern": "greedy.extremes"
+    },
+    "1.2": {
+      "en": "Wiggle subsequences",
+      "zh": "摆动序列",
+      "pattern": "greedy.adjacent_differ"
+    },
+    "1.3": {
+      "en": "Maximum subarray",
+      "zh": "最大子数组和",
+      "pattern": "dp.max_subarray"
+    },
+    "1.4": {
+      "en": "Stock trading",
+      "zh": "买卖股票",
+      "pattern": "greedy.other"
+    },
+    "1.5": {
+      "en": "Jump games",
+      "zh": "跳跃游戏",
+      "pattern": "dp.jump_game"
+    },
+    "1.6": {
+      "en": "Maximizing a sum",
+      "zh": "最大化数组和",
+      "pattern": "greedy.extremes"
+    },
+    "1.7": {
+      "en": "Gas stations",
+      "zh": "加油站",
+      "pattern": "greedy.other"
+    },
+    "1.8": {
+      "en": "Two passes",
+      "zh": "两次遍历",
+      "pattern": "greedy.thinking_two_passes"
+    },
+    "1.9": {
+      "en": "Making change",
+      "zh": "找零",
+      "pattern": "greedy.extremes"
+    },
+    "1.10": {
+      "en": "Two dimensions",
+      "zh": "两个维度",
+      "pattern": "greedy.other"
+    },
+    "2.1": {
+      "en": "Choosing points",
+      "zh": "选点",
+      "pattern": "greedy.intervals_points"
+    },
+    "2.2": {
+      "en": "Non-overlapping intervals",
+      "zh": "不重叠区间",
+      "pattern": "greedy.intervals_disjoint"
+    },
+    "2.3": {
+      "en": "Merging intervals",
+      "zh": "合并区间",
+      "pattern": "greedy.intervals_merge"
+    },
+    "3.1": {
+      "en": "Digits",
+      "zh": "数字",
+      "pattern": "greedy.math"
+    },
+    "3.2": {
+      "en": "Greedy on a tree",
+      "zh": "树上贪心",
+      "pattern": "dp.tree_dominating_set"
+    }
+  }
+}

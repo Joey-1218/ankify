@@ -7,7 +7,7 @@ import { DELETE as deleteList, GET as getList, PATCH as patchList } from "./[id]
 import { DELETE as deleteItem } from "./[id]/items/[itemId]/route";
 import { POST as postItem, PUT as putOrder } from "./[id]/items/route";
 import { GET as getBuiltin } from "./builtin/[builtinId]/route";
-import { GET as getOverview, POST as postList } from "./route";
+import { GET as getOverview, POST as postList, PUT as putListOrder } from "./route";
 
 // Route-level checks: authentication, validation, and status mapping. List
 // rules are covered in server/study-lists/study-lists.test.ts.
@@ -42,6 +42,7 @@ describe("study list routes", () => {
     expect((await getList(request("/api/study-lists/my-problems"), params({ id: "my-problems" }))).status).toBe(401);
     expect((await getBuiltin(request("/api/study-lists/builtin/math"), params({ builtinId: "math" }))).status).toBe(401);
     expect((await deleteList(request("/api/study-lists/x", "DELETE"), params({ id: "x" }))).status).toBe(401);
+    expect((await putListOrder(request("/api/study-lists", "PUT", { listIds: [] }))).status).toBe(401);
   });
 
   it("validate input and map errors to statuses", async () => {
@@ -82,6 +83,9 @@ describe("study list routes", () => {
 
     const overview = (await (await getOverview(request("/api/study-lists"))).json()) as StudyListsOverviewDto;
     expect(overview.lists.map((entry) => entry.kind)).toEqual(["my_problems", "custom"]);
+    expect((await putListOrder(request("/api/study-lists", "PUT", { listIds: "x" }))).status).toBe(400);
+    expect((await putListOrder(request("/api/study-lists", "PUT", { listIds: [] }))).status).toBe(409);
+    expect((await putListOrder(request("/api/study-lists", "PUT", { listIds: [list.id] }))).status).toBe(200);
     expect((await deleteList(request("/", "DELETE"), params({ id: list.id! }))).status).toBe(200);
     expect((await deleteList(request("/", "DELETE"), params({ id: list.id! }))).status).toBe(404);
   });
