@@ -7,8 +7,8 @@
   "author": "灵茶山艾府",
   "sourceUrl": "https://leetcode.cn/discuss/post/3578981/ti-dan-hua-dong-chuang-kou-ding-chang-bu-rzz7/",
   "sourceUpdatedAt": "2026-09-12T08:35:25.251470+00:00",
-  "generatedAt": "2026-10-20T18:20:32.306Z",
-  "metadataSite": "leetcode.cn",
+  "generatedAt": "2026-10-20T19:18:27.587Z",
+  "metadataSite": "leetcode.com",
   "chapters": [
     {
       "id": "1",
@@ -836,7 +836,7 @@
       "frontendId": "1004",
       "title": {
         "en": "Max Consecutive Ones III",
-        "zh": "最大连续 1 的个数 III"
+        "zh": "最大连续1的个数 III"
       },
       "difficulty": "Medium",
       "paidOnly": false,
@@ -1109,7 +1109,7 @@
       "frontendId": "487",
       "title": {
         "en": "Max Consecutive Ones II",
-        "zh": "最大连续 1 的个数 II"
+        "zh": "最大连续1的个数 II"
       },
       "difficulty": "Medium",
       "paidOnly": true,
@@ -1876,7 +1876,7 @@
       "frontendId": "1471",
       "title": {
         "en": "The k Strongest Values in an Array",
-        "zh": "数组中的 K 个最强值"
+        "zh": "数组中的 k 个最强值"
       },
       "difficulty": "Medium",
       "paidOnly": false,
@@ -3254,7 +3254,7 @@
       "frontendId": "4038",
       "title": {
         "en": "Count Integers Appearing in a Single Block",
-        "zh": "统计特殊整数个数"
+        "zh": "计算单个区间中出现的整数数量"
       },
       "difficulty": "Easy",
       "paidOnly": false,

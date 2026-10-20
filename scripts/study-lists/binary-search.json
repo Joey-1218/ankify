@@ -1,0 +1,80 @@
+{
+  "id": "binary-search",
+  "name": {
+    "en": "Binary Search",
+    "zh": "二分算法"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/SqopEo/",
+  "headings": {},
+  "chapters": {
+    "1": {
+      "en": "Binary search",
+      "zh": "二分查找"
+    },
+    "2": {
+      "en": "Binary search on the answer",
+      "zh": "二分答案"
+    },
+    "3": {
+      "en": "Ternary search",
+      "zh": "三分法"
+    },
+    "4": {
+      "en": "Other",
+      "zh": "其他"
+    }
+  },
+  "sections": {
+    "1.1": {
+      "en": "Basics",
+      "zh": "基础",
+      "pattern": "binary_search.basic"
+    },
+    "1.2": {
+      "en": "Advanced",
+      "zh": "进阶",
+      "pattern": "binary_search.basic"
+    },
+    "2.1": {
+      "en": "Finding the minimum",
+      "zh": "求最小",
+      "pattern": "binary_search.answer_min"
+    },
+    "2.2": {
+      "en": "Finding the maximum",
+      "zh": "求最大",
+      "pattern": "binary_search.answer_max"
+    },
+    "2.3": {
+      "en": "Searching an indirect value",
+      "zh": "二分间接值",
+      "pattern": "binary_search.answer_indirect"
+    },
+    "2.4": {
+      "en": "Minimizing the maximum",
+      "zh": "最小化最大值",
+      "pattern": "binary_search.min_max"
+    },
+    "2.5": {
+      "en": "Maximizing the minimum",
+      "zh": "最大化最小值",
+      "pattern": "binary_search.max_min"
+    },
+    "2.6": {
+      "en": "K-th smallest or largest",
+      "zh": "第 K 小/大",
+      "pattern": "binary_search.kth"
+    },
+    "3": {
+      "en": "Ternary search",
+      "zh": "三分法",
+      "pattern": "binary_search.ternary"
+    },
+    "4": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "binary_search.other"
+    }
+  }
+}

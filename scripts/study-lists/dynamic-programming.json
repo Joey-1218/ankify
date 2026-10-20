@@ -1,0 +1,397 @@
+{
+  "id": "dynamic-programming",
+  "name": {
+    "en": "Dynamic Programming",
+    "zh": "动态规划"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/tXLS3i/",
+  "headings": {
+    "专题：输出具体方案（打印方案）": "t1",
+    "专题：前后缀分解": "t2",
+    "专题：跳跃游戏": "t3",
+    "其他": "t4"
+  },
+  "chapters": {
+    "1": {
+      "en": "Introductory DP",
+      "zh": "入门 DP"
+    },
+    "2": {
+      "en": "Grid DP",
+      "zh": "网格图 DP"
+    },
+    "3": {
+      "en": "Knapsack",
+      "zh": "背包"
+    },
+    "4": {
+      "en": "Classic linear DP",
+      "zh": "经典线性 DP"
+    },
+    "5": {
+      "en": "Partition DP",
+      "zh": "划分型 DP"
+    },
+    "6": {
+      "en": "State machine DP",
+      "zh": "状态机 DP"
+    },
+    "7": {
+      "en": "Other linear DP",
+      "zh": "其他线性 DP"
+    },
+    "8": {
+      "en": "Interval DP",
+      "zh": "区间 DP"
+    },
+    "9": {
+      "en": "Bitmask DP",
+      "zh": "状态压缩 DP（状压 DP）"
+    },
+    "10": {
+      "en": "Digit DP",
+      "zh": "数位 DP"
+    },
+    "11": {
+      "en": "DP optimizations",
+      "zh": "优化 DP"
+    },
+    "12": {
+      "en": "Tree DP",
+      "zh": "树形 DP"
+    },
+    "13": {
+      "en": "Graph DP",
+      "zh": "图 DP"
+    },
+    "14": {
+      "en": "Game DP",
+      "zh": "博弈 DP"
+    },
+    "15": {
+      "en": "Probability and expectation DP",
+      "zh": "概率 DP、期望 DP"
+    },
+    "t1": {
+      "en": "Topic: reconstructing the solution",
+      "zh": "专题：输出具体方案（打印方案）"
+    },
+    "t2": {
+      "en": "Topic: prefix and suffix decomposition",
+      "zh": "专题：前后缀分解"
+    },
+    "t3": {
+      "en": "Topic: jump games",
+      "zh": "专题：跳跃游戏"
+    },
+    "t4": {
+      "en": "Other",
+      "zh": "其他"
+    }
+  },
+  "sections": {
+    "1.1": {
+      "en": "Climbing stairs",
+      "zh": "爬楼梯",
+      "pattern": "dp.climbing_stairs"
+    },
+    "1.2": {
+      "en": "House robber",
+      "zh": "打家劫舍",
+      "pattern": "dp.house_robber"
+    },
+    "1.3": {
+      "en": "Maximum subarray sum",
+      "zh": "最大子数组和（最大子段和）",
+      "pattern": "dp.max_subarray"
+    },
+    "2.1": {
+      "en": "Basics",
+      "zh": "基础",
+      "pattern": "dp.grid"
+    },
+    "2.2": {
+      "en": "Advanced",
+      "zh": "进阶",
+      "pattern": "dp.grid"
+    },
+    "3.1": {
+      "en": "0-1 knapsack",
+      "zh": "0-1 背包",
+      "pattern": "dp.knapsack_01"
+    },
+    "3.2": {
+      "en": "Unbounded knapsack",
+      "zh": "完全背包",
+      "pattern": "dp.knapsack_unbounded"
+    },
+    "3.3": {
+      "en": "Bounded knapsack",
+      "zh": "多重背包",
+      "pattern": "dp.knapsack_bounded",
+      "optional": true
+    },
+    "3.4": {
+      "en": "Group knapsack",
+      "zh": "分组背包",
+      "pattern": "dp.knapsack_group"
+    },
+    "3.5": {
+      "en": "Knapsack on a tree",
+      "zh": "树上背包",
+      "pattern": "dp.knapsack_tree",
+      "optional": true
+    },
+    "4.1.1": {
+      "en": "Longest common subsequence: basics",
+      "zh": "最长公共子序列（LCS）：基础",
+      "pattern": "dp.lcs"
+    },
+    "4.1.2": {
+      "en": "Longest common subsequence: advanced",
+      "zh": "最长公共子序列（LCS）：进阶",
+      "pattern": "dp.lcs"
+    },
+    "4.2.1": {
+      "en": "Longest increasing subsequence: basics",
+      "zh": "最长递增子序列（LIS）：基础",
+      "pattern": "dp.lis"
+    },
+    "4.2.2": {
+      "en": "Longest increasing subsequence: advanced",
+      "zh": "最长递增子序列（LIS）：进阶",
+      "pattern": "dp.lis"
+    },
+    "5.1": {
+      "en": "Can it be partitioned",
+      "zh": "判定能否划分",
+      "pattern": "dp.partition_feasible"
+    },
+    "5.2": {
+      "en": "Optimal partition",
+      "zh": "最优划分",
+      "pattern": "dp.partition_optimal"
+    },
+    "5.3": {
+      "en": "Partition into a given number of parts",
+      "zh": "约束划分个数",
+      "pattern": "dp.partition_count"
+    },
+    "6.1": {
+      "en": "Buying and selling stock",
+      "zh": "买卖股票",
+      "pattern": "dp.stock"
+    },
+    "6.2": {
+      "en": "Basics",
+      "zh": "基础",
+      "pattern": "dp.state_machine"
+    },
+    "6.3": {
+      "en": "Advanced",
+      "zh": "进阶",
+      "pattern": "dp.state_machine"
+    },
+    "7.1": {
+      "en": "One-dimensional DP",
+      "zh": "一维 DP",
+      "pattern": "dp.linear_1d"
+    },
+    "7.2": {
+      "en": "Non-overlapping intervals",
+      "zh": "不相交区间",
+      "pattern": "dp.disjoint_intervals"
+    },
+    "7.3": {
+      "en": "Subarray DP",
+      "zh": "子数组 DP",
+      "pattern": "dp.subarray"
+    },
+    "7.4": {
+      "en": "Valid subsequence DP",
+      "zh": "合法子序列 DP",
+      "pattern": "dp.subsequence"
+    },
+    "7.5": {
+      "en": "Submatrix DP",
+      "zh": "子矩形 DP",
+      "pattern": "dp.submatrix"
+    },
+    "7.6": {
+      "en": "Multidimensional DP",
+      "zh": "多维 DP",
+      "pattern": "dp.multidimensional"
+    },
+    "7.7": {
+      "en": "Counting DP",
+      "zh": "计数 DP",
+      "pattern": "dp.counting"
+    },
+    "8.1": {
+      "en": "Longest palindromic subsequence",
+      "zh": "最长回文子序列",
+      "pattern": "dp.palindrome_subsequence"
+    },
+    "8.2": {
+      "en": "Interval DP",
+      "zh": "区间 DP",
+      "pattern": "dp.interval"
+    },
+    "9.1": {
+      "en": "Permutation bitmask DP: neighbors independent",
+      "zh": "排列型状压 DP ① 相邻无关",
+      "pattern": "dp.bitmask_perm_independent"
+    },
+    "9.2": {
+      "en": "Permutation bitmask DP: neighbors related",
+      "zh": "排列型状压 DP ② 相邻相关",
+      "pattern": "dp.bitmask_perm_adjacent"
+    },
+    "9.3": {
+      "en": "Traveling salesman (TSP)",
+      "zh": "旅行商问题（TSP）",
+      "pattern": "dp.tsp"
+    },
+    "9.4": {
+      "en": "Subset bitmask DP",
+      "zh": "子集状压 DP",
+      "pattern": "dp.bitmask_subset"
+    },
+    "9.5": {
+      "en": "Broken-profile DP",
+      "zh": "轮廓线 DP",
+      "pattern": "dp.profile"
+    },
+    "9.6": {
+      "en": "SOS DP",
+      "zh": "SOS DP",
+      "pattern": "dp.sos"
+    },
+    "9.7": {
+      "en": "Other bitmask DP",
+      "zh": "其他状压 DP",
+      "pattern": "dp.bitmask_other"
+    },
+    "10.1": {
+      "en": "Counting valid numbers",
+      "zh": "统计合法元素的数目",
+      "pattern": "dp.digit_count"
+    },
+    "10.2": {
+      "en": "Summing values of valid numbers",
+      "zh": "统计合法元素的价值总和",
+      "pattern": "dp.digit_sum"
+    },
+    "10.3": {
+      "en": "Other digit DP",
+      "zh": "其他数位 DP",
+      "pattern": "dp.digit_other"
+    },
+    "11.1": {
+      "en": "Prefix sum optimization",
+      "zh": "前缀和优化 DP",
+      "pattern": "dp.opt_prefix_sum"
+    },
+    "11.2": {
+      "en": "Monotonic stack optimization",
+      "zh": "单调栈优化 DP",
+      "pattern": "dp.opt_monotonic_stack"
+    },
+    "11.3": {
+      "en": "Monotonic queue optimization",
+      "zh": "单调队列优化 DP",
+      "pattern": "dp.opt_monotonic_queue"
+    },
+    "11.4": {
+      "en": "Fenwick tree or segment tree optimization",
+      "zh": "树状数组/线段树优化 DP",
+      "pattern": "dp.opt_tree"
+    },
+    "11.5": {
+      "en": "Trie optimization",
+      "zh": "字典树优化 DP",
+      "pattern": "dp.opt_trie"
+    },
+    "11.6": {
+      "en": "Matrix exponentiation",
+      "zh": "矩阵快速幂优化 DP",
+      "pattern": "dp.opt_matrix"
+    },
+    "11.7": {
+      "en": "Convex hull trick",
+      "zh": "斜率优化 DP",
+      "pattern": "dp.opt_slope"
+    },
+    "11.8": {
+      "en": "WQS binary search (Aliens trick)",
+      "zh": "WQS 二分优化 DP",
+      "pattern": "dp.opt_wqs"
+    },
+    "11.9": {
+      "en": "Other optimizations",
+      "zh": "其他优化 DP",
+      "pattern": "dp.opt_other"
+    },
+    "12.1": {
+      "en": "Tree diameter",
+      "zh": "树的直径",
+      "pattern": "dp.tree_diameter"
+    },
+    "12.2": {
+      "en": "Maximum independent set on a tree",
+      "zh": "树上最大独立集",
+      "pattern": "dp.tree_independent_set"
+    },
+    "12.3": {
+      "en": "Minimum dominating set on a tree",
+      "zh": "树上最小支配集",
+      "pattern": "dp.tree_dominating_set"
+    },
+    "12.4": {
+      "en": "Rerooting DP",
+      "zh": "换根 DP",
+      "pattern": "dp.tree_reroot"
+    },
+    "12.5": {
+      "en": "Other tree DP",
+      "zh": "其他树形 DP",
+      "pattern": "dp.tree_other"
+    },
+    "13": {
+      "en": "Graph DP",
+      "zh": "图 DP",
+      "pattern": "dp.graph"
+    },
+    "14": {
+      "en": "Game DP",
+      "zh": "博弈 DP",
+      "pattern": "dp.game"
+    },
+    "15": {
+      "en": "Probability and expectation DP",
+      "zh": "概率 DP、期望 DP",
+      "pattern": "dp.probability"
+    },
+    "t1": {
+      "en": "Reconstructing the solution",
+      "zh": "专题：输出具体方案（打印方案）",
+      "pattern": "dp.reconstruct"
+    },
+    "t2": {
+      "en": "Prefix and suffix decomposition",
+      "zh": "专题：前后缀分解",
+      "pattern": "dp.prefix_suffix"
+    },
+    "t3": {
+      "en": "Jump games",
+      "zh": "专题：跳跃游戏",
+      "pattern": "dp.jump_game"
+    },
+    "t4": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "dp.other"
+    }
+  }
+}

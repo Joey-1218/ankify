@@ -1,0 +1,1921 @@
+{
+  "id": "binary-search",
+  "name": {
+    "en": "Binary Search",
+    "zh": "二分算法"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/SqopEo/",
+  "sourceUpdatedAt": "2026-10-19T03:06:03.741531+00:00",
+  "generatedAt": "2026-10-20T19:18:36.370Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Binary search",
+        "zh": "二分查找"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Binary search on the answer",
+        "zh": "二分答案"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Ternary search",
+        "zh": "三分法"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Basics",
+        "zh": "基础"
+      },
+      "pattern": "binary_search.basic",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Advanced",
+        "zh": "进阶"
+      },
+      "pattern": "binary_search.basic",
+      "optional": false
+    },
+    {
+      "id": "2.1",
+      "chapterId": "2",
+      "title": {
+        "en": "Finding the minimum",
+        "zh": "求最小"
+      },
+      "pattern": "binary_search.answer_min",
+      "optional": false
+    },
+    {
+      "id": "2.2",
+      "chapterId": "2",
+      "title": {
+        "en": "Finding the maximum",
+        "zh": "求最大"
+      },
+      "pattern": "binary_search.answer_max",
+      "optional": false
+    },
+    {
+      "id": "2.3",
+      "chapterId": "2",
+      "title": {
+        "en": "Searching an indirect value",
+        "zh": "二分间接值"
+      },
+      "pattern": "binary_search.answer_indirect",
+      "optional": false
+    },
+    {
+      "id": "2.4",
+      "chapterId": "2",
+      "title": {
+        "en": "Minimizing the maximum",
+        "zh": "最小化最大值"
+      },
+      "pattern": "binary_search.min_max",
+      "optional": false
+    },
+    {
+      "id": "2.5",
+      "chapterId": "2",
+      "title": {
+        "en": "Maximizing the minimum",
+        "zh": "最大化最小值"
+      },
+      "pattern": "binary_search.max_min",
+      "optional": false
+    },
+    {
+      "id": "2.6",
+      "chapterId": "2",
+      "title": {
+        "en": "K-th smallest or largest",
+        "zh": "第 K 小/大"
+      },
+      "pattern": "binary_search.kth",
+      "optional": false
+    },
+    {
+      "id": "3",
+      "chapterId": "3",
+      "title": {
+        "en": "Ternary search",
+        "zh": "三分法"
+      },
+      "pattern": "binary_search.ternary",
+      "optional": false
+    },
+    {
+      "id": "4",
+      "chapterId": "4",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "binary_search.other",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "find-first-and-last-position-of-element-in-sorted-array",
+      "frontendId": "34",
+      "title": {
+        "en": "Find First and Last Position of Element in Sorted Array",
+        "zh": "在排序数组中查找元素的第一个和最后一个位置"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "search-insert-position",
+      "frontendId": "35",
+      "title": {
+        "en": "Search Insert Position",
+        "zh": "搜索插入位置"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "binary-search",
+      "frontendId": "704",
+      "title": {
+        "en": "Binary Search",
+        "zh": "二分查找"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-smallest-letter-greater-than-target",
+      "frontendId": "744",
+      "title": {
+        "en": "Find Smallest Letter Greater Than Target",
+        "zh": "寻找比目标字母大的最小字母"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-count-of-positive-integer-and-negative-integer",
+      "frontendId": "2529",
+      "title": {
+        "en": "Maximum Count of Positive Integer and Negative Integer",
+        "zh": "正整数和负整数的最大计数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-distance-value-between-two-arrays",
+      "frontendId": "1385",
+      "title": {
+        "en": "Find the Distance Value Between Two Arrays",
+        "zh": "两个数组间的距离值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1235,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "compare-strings-by-frequency-of-the-smallest-character",
+      "frontendId": "1170",
+      "title": {
+        "en": "Compare Strings by Frequency of the Smallest Character",
+        "zh": "比较字符串最小字母出现频次"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1432,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "successful-pairs-of-spells-and-potions",
+      "frontendId": "2300",
+      "title": {
+        "en": "Successful Pairs of Spells and Potions",
+        "zh": "咒语和药水的成功对数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1477,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-subsequence-with-limited-sum",
+      "frontendId": "2389",
+      "title": {
+        "en": "Longest Subsequence With Limited Sum",
+        "zh": "和有限的最长子序列"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "range-frequency-queries",
+      "frontendId": "2080",
+      "title": {
+        "en": "Range Frequency Queries",
+        "zh": "区间内查询数字的频率"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1702,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "closest-equal-element-queries",
+      "frontendId": "3488",
+      "title": {
+        "en": "Closest Equal Element Queries",
+        "zh": "距离最小相等元素查询"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-fair-pairs",
+      "frontendId": "2563",
+      "title": {
+        "en": "Count the Number of Fair Pairs",
+        "zh": "统计公平数对的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1721,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "snapshot-array",
+      "frontendId": "1146",
+      "title": {
+        "en": "Snapshot Array",
+        "zh": "快照数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1771,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "time-based-key-value-store",
+      "frontendId": "981",
+      "title": {
+        "en": "Time Based Key-Value Store",
+        "zh": "基于时间的键值存储"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "implement-router",
+      "frontendId": "3508",
+      "title": {
+        "en": "Implement Router",
+        "zh": "设计路由器"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1851,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-k-closest-elements",
+      "frontendId": "658",
+      "title": {
+        "en": "Find K Closest Elements",
+        "zh": "找到 K 个最接近的元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-absolute-sum-difference",
+      "frontendId": "1818",
+      "title": {
+        "en": "Minimum Absolute Sum Difference",
+        "zh": "绝对差值和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1934,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "online-election",
+      "frontendId": "911",
+      "title": {
+        "en": "Online Election",
+        "zh": "在线选举"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2001,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-distance-to-target-color",
+      "frontendId": "1182",
+      "title": {
+        "en": "Shortest Distance to Target Color",
+        "zh": "与目标颜色间的最短距离"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-team-size-with-overlapping-intervals",
+      "frontendId": "3893",
+      "title": {
+        "en": "Maximum Team Size with Overlapping Intervals",
+        "zh": "最大重叠区间团队规模"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-relative-loss-after-buying-chocolates",
+      "frontendId": "2819",
+      "title": {
+        "en": "Minimum Relative Loss After Buying Chocolates",
+        "zh": "购买巧克力后的最小相对损失"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "search-a-2d-matrix",
+      "frontendId": "74",
+      "title": {
+        "en": "Search a 2D Matrix",
+        "zh": "搜索二维矩阵"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "element-appearing-more-than-25-in-sorted-array",
+      "frontendId": "1287",
+      "title": {
+        "en": "Element Appearing More Than 25% In Sorted Array",
+        "zh": "有序数组中出现次数超过25%的元素"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "closest-nodes-queries-in-a-binary-search-tree",
+      "frontendId": "2476",
+      "title": {
+        "en": "Closest Nodes Queries in a Binary Search Tree",
+        "zh": "二叉搜索树最近节点查询"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1597,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "most-beautiful-item-for-each-query",
+      "frontendId": "2070",
+      "title": {
+        "en": "Most Beautiful Item for Each Query",
+        "zh": "每一个查询的最大美丽值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1724,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "count-of-unfinished-tasks-after-each-shift",
+      "frontendId": "4012",
+      "title": {
+        "en": "Count of Unfinished Tasks After Each Shift",
+        "zh": "统计每个班次结束后的未完成任务数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1736,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "check-if-a-number-is-majority-element-in-a-sorted-array",
+      "frontendId": "1150",
+      "title": {
+        "en": "Check If a Number Is Majority Element in a Sorted Array",
+        "zh": "检查一个数是否在数组中占绝大多数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "find-the-smallest-divisor-given-a-threshold",
+      "frontendId": "1283",
+      "title": {
+        "en": "Find the Smallest Divisor Given a Threshold",
+        "zh": "使结果不超过阈值的最小除数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1542,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-complete-trips",
+      "frontendId": "2187",
+      "title": {
+        "en": "Minimum Time to Complete Trips",
+        "zh": "完成旅途的最少时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1641,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "capacity-to-ship-packages-within-d-days",
+      "frontendId": "1011",
+      "title": {
+        "en": "Capacity To Ship Packages Within D Days",
+        "zh": "在 D 天内送达包裹的能力"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1725,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "koko-eating-bananas",
+      "frontendId": "875",
+      "title": {
+        "en": "Koko Eating Bananas",
+        "zh": "爱吃香蕉的珂珂"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1766,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-initial-strength-to-defeat-all-monsters",
+      "frontendId": "4008",
+      "title": {
+        "en": "Minimum Initial Strength to Defeat All Monsters",
+        "zh": "击败所有怪物的最小初始强度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1776,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-seconds-to-make-mountain-height-zero",
+      "frontendId": "3296",
+      "title": {
+        "en": "Minimum Number of Seconds to Make Mountain Height Zero",
+        "zh": "移山所需的最少秒数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-activate-string",
+      "frontendId": "3639",
+      "title": {
+        "en": "Minimum Time to Activate String",
+        "zh": "变为活跃状态的最小时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1853,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "heaters",
+      "frontendId": "475",
+      "title": {
+        "en": "Heaters",
+        "zh": "供暖器"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-repair-cars",
+      "frontendId": "2594",
+      "title": {
+        "en": "Minimum Time to Repair Cars",
+        "zh": "修车的最少时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1915,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-days-to-make-m-bouquets",
+      "frontendId": "1482",
+      "title": {
+        "en": "Minimum Number of Days to Make m Bouquets",
+        "zh": "制作 m 束花所需的最少天数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1946,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-threshold-path-with-limited-heavy-edges",
+      "frontendId": "3924",
+      "title": {
+        "en": "Minimum Threshold Path With Limited Heavy Edges",
+        "zh": "有限重边的最小阈值路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2080,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "earliest-second-to-mark-indices-i",
+      "frontendId": "3048",
+      "title": {
+        "en": "Earliest Second to Mark Indices I",
+        "zh": "标记所有下标的最早秒数 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2263,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-repair-edges-to-traverse-a-graph",
+      "frontendId": "3807",
+      "title": {
+        "en": "Minimum Cost to Repair Edges to Traverse a Graph",
+        "zh": "修复边以遍历图的最小成本"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-eat-all-grains",
+      "frontendId": "2604",
+      "title": {
+        "en": "Minimum Time to Eat All Grains",
+        "zh": "吃掉所有谷子的最短时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-numbers-non-positive",
+      "frontendId": "2702",
+      "title": {
+        "en": "Minimum Operations to Make Numbers Non-positive",
+        "zh": "使数字变为非正数的最小操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-k-to-reduce-array-within-limit",
+      "frontendId": "3824",
+      "title": {
+        "en": "Minimum K to Reduce Array Within Limit",
+        "zh": "减小数组使其满足条件的最小 K 值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1531,
+      "sectionId": "2.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "minimum-speed-to-arrive-on-time",
+      "frontendId": "1870",
+      "title": {
+        "en": "Minimum Speed to Arrive on Time",
+        "zh": "准时到达的列车最小时速"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1676,
+      "sectionId": "2.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "separate-squares-i",
+      "frontendId": "3453",
+      "title": {
+        "en": "Separate Squares I",
+        "zh": "分割正方形 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1735,
+      "sectionId": "2.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "h-index-ii",
+      "frontendId": "275",
+      "title": {
+        "en": "H-Index II",
+        "zh": "H 指数 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-candies-allocated-to-k-children",
+      "frontendId": "2226",
+      "title": {
+        "en": "Maximum Candies Allocated to K Children",
+        "zh": "每个小孩最多能分到多少糖果"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1646,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-longest-special-substring-that-occurs-thrice-ii",
+      "frontendId": "2982",
+      "title": {
+        "en": "Find Longest Special Substring That Occurs Thrice II",
+        "zh": "找出出现至少三次的最长特殊子字符串 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1773,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-maximum-number-of-marked-indices",
+      "frontendId": "2576",
+      "title": {
+        "en": "Find the Maximum Number of Marked Indices",
+        "zh": "求出最多标记下标"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1843,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-removable-characters",
+      "frontendId": "1898",
+      "title": {
+        "en": "Maximum Number of Removable Characters",
+        "zh": "可移除字符的最大数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1913,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-value-at-a-given-index-in-a-bounded-array",
+      "frontendId": "1802",
+      "title": {
+        "en": "Maximum Value at a Given Index in a Bounded Array",
+        "zh": "有界数组中指定下标处的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1929,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "furthest-building-you-can-reach",
+      "frontendId": "1642",
+      "title": {
+        "en": "Furthest Building You Can Reach",
+        "zh": "可以到达的最远建筑"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1962,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-alloys",
+      "frontendId": "2861",
+      "title": {
+        "en": "Maximum Number of Alloys",
+        "zh": "最大合金数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1981,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k",
+      "frontendId": "3007",
+      "title": {
+        "en": "Maximum Number That Sum of the Prices Is Less Than or Equal to K",
+        "zh": "价值和小于等于 K 的最大数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2258,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-running-time-of-n-computers",
+      "frontendId": "2141",
+      "title": {
+        "en": "Maximum Running Time of N Computers",
+        "zh": "同时运行 N 台电脑的最长时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2265,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "escape-the-spreading-fire",
+      "frontendId": "2258",
+      "title": {
+        "en": "Escape the Spreading Fire",
+        "zh": "逃离火灾"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2347,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-tasks-you-can-assign",
+      "frontendId": "2071",
+      "title": {
+        "en": "Maximum Number of Tasks You Can Assign",
+        "zh": "你可以安排的最多任务数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2648,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-font-to-fit-a-sentence-in-a-screen",
+      "frontendId": "1618",
+      "title": {
+        "en": "Maximum Font to Fit a Sentence in a Screen",
+        "zh": "找出适应屏幕的最大字号"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "cutting-ribbons",
+      "frontendId": "1891",
+      "title": {
+        "en": "Cutting Ribbons",
+        "zh": "割绳子"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "pour-water-between-buckets-to-make-water-levels-equal",
+      "frontendId": "2137",
+      "title": {
+        "en": "Pour Water Between Buckets to Make Water Levels Equal",
+        "zh": "通过倒水操作让所有的水桶所含水量相等"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-sized-array",
+      "frontendId": "3344",
+      "title": {
+        "en": "Maximum Sized Array",
+        "zh": "最大尺寸数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-average-subarray-ii",
+      "frontendId": "644",
+      "title": {
+        "en": "Maximum Average Subarray II",
+        "zh": "子数组最大平均数 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-points-inside-the-square",
+      "frontendId": "3143",
+      "title": {
+        "en": "Maximum Points Inside the Square",
+        "zh": "正方形中的最多点数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1697,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "sell-diminishing-valued-colored-balls",
+      "frontendId": "1648",
+      "title": {
+        "en": "Sell Diminishing-Valued Colored Balls",
+        "zh": "销售价值减少的颜色球"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2050,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "split-array-largest-sum",
+      "frontendId": "410",
+      "title": {
+        "en": "Split Array Largest Sum",
+        "zh": "分割数组的最大值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimized-maximum-of-products-distributed-to-any-store",
+      "frontendId": "2064",
+      "title": {
+        "en": "Minimized Maximum of Products Distributed to Any Store",
+        "zh": "分配给商店的最多商品的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1886,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-maximum-component-cost",
+      "frontendId": "3613",
+      "title": {
+        "en": "Minimize Maximum Component Cost",
+        "zh": "最小化连通分量的最大成本"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-limit-of-balls-in-a-bag",
+      "frontendId": "1760",
+      "title": {
+        "en": "Minimum Limit of Balls in a Bag",
+        "zh": "袋子里最少数目的球"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1940,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "path-with-minimum-effort",
+      "frontendId": "1631",
+      "title": {
+        "en": "Path With Minimum Effort",
+        "zh": "最小体力消耗路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1948,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-maximum-of-array",
+      "frontendId": "2439",
+      "title": {
+        "en": "Minimize Maximum of Array",
+        "zh": "最小化数组中的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1965,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "house-robber-iv",
+      "frontendId": "2560",
+      "title": {
+        "en": "House Robber IV",
+        "zh": "打家劫舍 IV"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2081,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "swim-in-rising-water",
+      "frontendId": "778",
+      "title": {
+        "en": "Swim in Rising Water",
+        "zh": "水位上升的泳池中游泳"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2097,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-the-maximum-difference-of-pairs",
+      "frontendId": "2616",
+      "title": {
+        "en": "Minimize the Maximum Difference of Pairs",
+        "zh": "最小化数对的最大差值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2155,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-the-maximum-edge-weight-of-graph",
+      "frontendId": "3419",
+      "title": {
+        "en": "Minimize the Maximum Edge Weight of Graph",
+        "zh": "图的最大边权的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2243,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-the-maximum-of-two-arrays",
+      "frontendId": "2513",
+      "title": {
+        "en": "Minimize the Maximum of Two Arrays",
+        "zh": "最小化两个数组中的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2302,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-complete-all-deliveries",
+      "frontendId": "3733",
+      "title": {
+        "en": "Minimum Time to Complete All Deliveries",
+        "zh": "完成所有送货任务的最少时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-substring-with-identical-characters-ii",
+      "frontendId": "3399",
+      "title": {
+        "en": "Smallest Substring With Identical Characters II",
+        "zh": "字符相同的最短子字符串 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2376,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-stability-factor-of-array",
+      "frontendId": "3605",
+      "title": {
+        "en": "Minimum Stability Factor of Array",
+        "zh": "数组的最小稳定性因子"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2410,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-max-distance-to-gas-station",
+      "frontendId": "774",
+      "title": {
+        "en": "Minimize Max Distance to Gas Station",
+        "zh": "最小化去加油站的最大距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-score-of-numbers-in-ranges",
+      "frontendId": "3281",
+      "title": {
+        "en": "Maximize Score of Numbers in Ranges",
+        "zh": "范围内整数的最大得分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1768,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "network-recovery-pathways",
+      "frontendId": "3620",
+      "title": {
+        "en": "Network Recovery Pathways",
+        "zh": "恢复网络路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1998,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-tastiness-of-candy-basket",
+      "frontendId": "2517",
+      "title": {
+        "en": "Maximum Tastiness of Candy Basket",
+        "zh": "礼盒的最大甜蜜度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2021,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "magnetic-force-between-two-balls",
+      "frontendId": "1552",
+      "title": {
+        "en": "Magnetic Force Between Two Balls",
+        "zh": "两球之间的磁力"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-partition-factor",
+      "frontendId": "3710",
+      "title": {
+        "en": "Maximum Partition Factor",
+        "zh": "最大划分因子"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2135,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-safest-path-in-a-grid",
+      "frontendId": "2812",
+      "title": {
+        "en": "Find the Safest Path in a Grid",
+        "zh": "找出最安全路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2154,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-minimum-powered-city",
+      "frontendId": "2528",
+      "title": {
+        "en": "Maximize the Minimum Powered City",
+        "zh": "最大化城市的最小电量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2236,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-spanning-tree-stability-with-upgrades",
+      "frontendId": "3600",
+      "title": {
+        "en": "Maximize Spanning Tree Stability with Upgrades",
+        "zh": "升级后最大生成树稳定性"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2301,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-minimum-game-score",
+      "frontendId": "3449",
+      "title": {
+        "en": "Maximize the Minimum Game Score",
+        "zh": "最大化游戏分数的最小值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2748,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-distance-between-points-on-a-square",
+      "frontendId": "3464",
+      "title": {
+        "en": "Maximize the Distance Between Points on a Square",
+        "zh": "正方形上的点之间的最大距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2806,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "path-with-maximum-minimum-value",
+      "frontendId": "1102",
+      "title": {
+        "en": "Path With Maximum Minimum Value",
+        "zh": "得分最高的路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "divide-chocolate",
+      "frontendId": "1231",
+      "title": {
+        "en": "Divide Chocolate",
+        "zh": "分享巧克力"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "kth-smallest-number-in-multiplication-table",
+      "frontendId": "668",
+      "title": {
+        "en": "Kth Smallest Number in Multiplication Table",
+        "zh": "乘法表中第k小的数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "kth-smallest-element-in-a-sorted-matrix",
+      "frontendId": "378",
+      "title": {
+        "en": "Kth Smallest Element in a Sorted Matrix",
+        "zh": "有序矩阵中第 K 小的元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "find-k-th-smallest-pair-distance",
+      "frontendId": "719",
+      "title": {
+        "en": "Find K-th Smallest Pair Distance",
+        "zh": "找出第 K 小的数对距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "nth-magical-number",
+      "frontendId": "878",
+      "title": {
+        "en": "Nth Magical Number",
+        "zh": "第 N 个神奇数字"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1897,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "ugly-number-iii",
+      "frontendId": "1201",
+      "title": {
+        "en": "Ugly Number III",
+        "zh": "丑数 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2039,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "preimage-size-of-factorial-zeroes-function",
+      "frontendId": "793",
+      "title": {
+        "en": "Preimage Size of Factorial Zeroes Function",
+        "zh": "阶乘函数后 K 个零"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2100,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "find-k-pairs-with-smallest-sums",
+      "frontendId": "373",
+      "title": {
+        "en": "Find K Pairs with Smallest Sums",
+        "zh": "查找和最小的 K 对数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows",
+      "frontendId": "1439",
+      "title": {
+        "en": "Find the Kth Smallest Sum of a Matrix With Sorted Rows",
+        "zh": "有序矩阵中的第 k 个最小数组和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2134,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "k-th-smallest-prime-fraction",
+      "frontendId": "786",
+      "title": {
+        "en": "K-th Smallest Prime Fraction",
+        "zh": "第 K 个最小的质数分数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2169,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-total-value",
+      "frontendId": "3971",
+      "title": {
+        "en": "Maximum Total Value",
+        "zh": "最大总价值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2195,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "kth-smallest-amount-with-single-denomination-combination",
+      "frontendId": "3116",
+      "title": {
+        "en": "Kth Smallest Amount With Single Denomination Combination",
+        "zh": "单面值组合的第 K 小金额"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2387,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-median-of-the-uniqueness-array",
+      "frontendId": "3134",
+      "title": {
+        "en": "Find the Median of the Uniqueness Array",
+        "zh": "找出唯一性数组的中位数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2451,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "kth-smallest-product-of-two-sorted-arrays",
+      "frontendId": "2040",
+      "title": {
+        "en": "Kth Smallest Product of Two Sorted Arrays",
+        "zh": "两个有序数组的第 K 小乘积"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2518,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-k-sum-of-an-array",
+      "frontendId": "2386",
+      "title": {
+        "en": "Find the K-Sum of an Array",
+        "zh": "找出数组的第 K 大和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2648,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "range-sum-of-sorted-subarray-sums",
+      "frontendId": "1508",
+      "title": {
+        "en": "Range Sum of Sorted Subarray Sums",
+        "zh": "子数组和排序后的区间和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-total-subarray-value-ii",
+      "frontendId": "3691",
+      "title": {
+        "en": "Maximum Total Subarray Value II",
+        "zh": "最大子数组总值 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-threshold-for-inversion-pairs-count",
+      "frontendId": "3520",
+      "title": {
+        "en": "Minimum Threshold for Inversion Pairs Count",
+        "zh": "逆序对计数的最小阈值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "kth-smallest-subarray-sum",
+      "frontendId": "1918",
+      "title": {
+        "en": "Kth Smallest Subarray Sum",
+        "zh": "第 K 小的子数组和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "best-position-for-a-service-centre",
+      "frontendId": "1515",
+      "title": {
+        "en": "Best Position for a Service Centre",
+        "zh": "服务中心的最佳位置"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2157,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "sqrtx",
+      "frontendId": "69",
+      "title": {
+        "en": "Sqrt(x)",
+        "zh": "x 的平方根 "
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "first-bad-version",
+      "frontendId": "278",
+      "title": {
+        "en": "First Bad Version",
+        "zh": "第一个错误的版本"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "guess-number-higher-or-lower",
+      "frontendId": "374",
+      "title": {
+        "en": "Guess Number Higher or Lower",
+        "zh": "猜数字大小"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "find-peak-element",
+      "frontendId": "162",
+      "title": {
+        "en": "Find Peak Element",
+        "zh": "寻找峰值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "find-a-peak-element-ii",
+      "frontendId": "1901",
+      "title": {
+        "en": "Find a Peak Element II",
+        "zh": "寻找峰值 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "peak-index-in-a-mountain-array",
+      "frontendId": "852",
+      "title": {
+        "en": "Peak Index in a Mountain Array",
+        "zh": "山脉数组的峰顶索引"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "find-in-mountain-array",
+      "frontendId": "1095",
+      "title": {
+        "en": "Find in Mountain Array",
+        "zh": "山脉数组中查找目标值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1827,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "find-minimum-in-rotated-sorted-array",
+      "frontendId": "153",
+      "title": {
+        "en": "Find Minimum in Rotated Sorted Array",
+        "zh": "寻找旋转排序数组中的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "find-minimum-in-rotated-sorted-array-ii",
+      "frontendId": "154",
+      "title": {
+        "en": "Find Minimum in Rotated Sorted Array II",
+        "zh": "寻找旋转排序数组中的最小值 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "search-in-rotated-sorted-array",
+      "frontendId": "33",
+      "title": {
+        "en": "Search in Rotated Sorted Array",
+        "zh": "搜索旋转排序数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "search-in-rotated-sorted-array-ii",
+      "frontendId": "81",
+      "title": {
+        "en": "Search in Rotated Sorted Array II",
+        "zh": "搜索旋转排序数组 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "count-complete-tree-nodes",
+      "frontendId": "222",
+      "title": {
+        "en": "Count Complete Tree Nodes",
+        "zh": "完全二叉树的节点个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "kth-missing-positive-number",
+      "frontendId": "1539",
+      "title": {
+        "en": "Kth Missing Positive Number",
+        "zh": "第 k 个缺失的正整数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "k-th-smallest-remaining-even-integer-in-subarray-queries",
+      "frontendId": "3911",
+      "title": {
+        "en": "K-th Smallest Remaining Even Integer in Subarray Queries",
+        "zh": "移除子数组元素后第 K 小偶数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2156,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "single-element-in-a-sorted-array",
+      "frontendId": "540",
+      "title": {
+        "en": "Single Element in a Sorted Array",
+        "zh": "有序数组中的单一元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "median-of-two-sorted-arrays",
+      "frontendId": "4",
+      "title": {
+        "en": "Median of Two Sorted Arrays",
+        "zh": "寻找两个正序数组的中位数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "fixed-point",
+      "frontendId": "1064",
+      "title": {
+        "en": "Fixed Point",
+        "zh": "不动点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "search-in-a-sorted-array-of-unknown-size",
+      "frontendId": "702",
+      "title": {
+        "en": "Search in a Sorted Array of Unknown Size",
+        "zh": "搜索长度未知的有序数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-equal-numbers-blocks",
+      "frontendId": "2936",
+      "title": {
+        "en": "Number of Equal Numbers Blocks",
+        "zh": "包含相等值数字块的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "missing-element-in-sorted-array",
+      "frontendId": "1060",
+      "title": {
+        "en": "Missing Element in Sorted Array",
+        "zh": "有序数组中的缺失元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "find-smallest-common-element-in-all-rows",
+      "frontendId": "1198",
+      "title": {
+        "en": "Find Smallest Common Element in All Rows",
+        "zh": "找出所有行中最小公共元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "leftmost-column-with-at-least-a-one",
+      "frontendId": "1428",
+      "title": {
+        "en": "Leftmost Column with at Least a One",
+        "zh": "至少有一个 1 的最左端列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-index-of-the-large-integer",
+      "frontendId": "1533",
+      "title": {
+        "en": "Find the Index of the Large Integer",
+        "zh": "找到最大整数的索引"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "median-of-a-row-wise-sorted-matrix",
+      "frontendId": "2387",
+      "title": {
+        "en": "Median of a Row Wise Sorted Matrix",
+        "zh": "行排序矩阵的中位数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-rectangle-enclosing-black-pixels",
+      "frontendId": "302",
+      "title": {
+        "en": "Smallest Rectangle Enclosing Black Pixels",
+        "zh": "包含全部黑色像素的最小矩形"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "LCP 08",
+      "title": "剧情触发时间",
+      "sectionId": "1.2",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 78",
+      "title": "城墙防线",
+      "sectionId": "2.2",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 12",
+      "title": "小张刷题计划",
+      "sectionId": "2.4",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}

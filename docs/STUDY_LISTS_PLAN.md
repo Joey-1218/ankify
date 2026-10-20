@@ -217,11 +217,33 @@ pattern mastery (transfer evidence) than reviews of known problems.
 Each phase passes `pnpm typecheck`, `pnpm lint`, and `pnpm test` before it is
 committed, and updates ARCHITECTURE.md and HANDOFF.md.
 
+## Imported lists (2026-10-20)
+
+All 12 lists from 灵茶山艾府's index post
+([如何科学刷题](https://leetcode.cn/discuss/post/3141566/ru-he-ke-xue-shua-ti-by-endlesscheng-q3yd/),
+"完整题单"), metadata read from leetcode.com, 288 patterns:
+
+| List | Items | Unique problems | Excluded (leetcode.cn only or same as) |
+| --- | --- | --- | --- |
+| Sliding window and two pointers | 281 | 274 | 5 |
+| Binary search | 135 | 135 | 3 |
+| Monotonic stack | 63 | 63 | 0 |
+| Grid graphs | 66 | 66 | 8 |
+| Bit manipulation | 127 | 126 | 2 |
+| Graph algorithms | 173 | 170 | 9 |
+| Dynamic programming | 708 | 607 | 27 |
+| Common data structures | 628 | 585 | 24 |
+| Math | 329 | 319 | 15 |
+| Greedy and thinking | 540 | 512 | 11 |
+| Linked lists, trees, and backtracking | 426 | 411 | 13 |
+| Strings | 96 | 78 | 2 |
+
+The files total 1.3 MB; phase 2 should load a list only when it is needed
+(dynamic import per list id) rather than all at once.
+
 ## Open items
 
-- `leetcode.com` is not reachable from the cloud dev environment, so the first
-  import reads metadata (English titles, difficulty, paid flag) from
-  leetcode.cn's API and records `metadataSite: "leetcode.cn"`. Rerun the
-  import with leetcode.com reachable to verify every slug and take
-  leetcode.com's paid flags before launch.
-- Ask 灵茶山艾府 before promoting the lists publicly.
+- Ask 灵茶山艾府 for permission before shipping the lists to users. Only
+  problem identities, LeetCode's titles, ratings, and the section structure
+  are stored (none of the posts' text), but the selection and grouping are
+  the author's work, and every list page credits and links the source post.

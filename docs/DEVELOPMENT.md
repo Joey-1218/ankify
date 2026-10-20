@@ -98,21 +98,29 @@ problem list post on leetcode.cn (灵茶山艾府's lists share one format) plus
 LeetCode's own metadata. Only problem identities, LeetCode titles, ratings,
 and the section structure are kept; none of the post's text.
 
-1. Write `scripts/study-lists/<list-id>.json`: the list's names, author,
-   source URL, a title for each chapter (`一、` headings) and each section
-   (`§x.y` headings, or a chapter with problems directly under it), and the
-   section's pattern. Copy an existing config as the template. A new pattern
-   goes into `apps/web/src/server/study-lists/patterns.ts` with English and
-   Chinese names; never rename an existing pattern id.
+1. Run `pnpm study-lists:import --init <post-url> <list-id>`. It writes
+   `scripts/study-lists/<list-id>.json` with every chapter (`一、` headings)
+   and section (`§x.y` headings, or a chapter with problems directly under
+   it) that holds problems, their Chinese titles, and the optional (选做)
+   flags. Fill in the list's names and author, each English title, and each
+   section's pattern (sections that differ only in level, like 基础 and 进阶,
+   share one). An unnumbered `##` heading with problems (专题：…) needs an
+   entry in `headings` mapping it to a section id, plus that chapter and
+   section. A new pattern goes into
+   `apps/web/src/server/study-lists/patterns.ts` with English and Chinese
+   names; never rename an existing pattern id.
 2. Run `pnpm study-lists:import scripts/study-lists/<list-id>.json`. It reads
    the post, maps every section (an unmapped section or an unexpected link
    format stops it), reads metadata from leetcode.com, and writes
    `builtin/<list-id>.json`. leetcode.cn-only problems are replaced only when
    the post says they are the same as a listed problem (`同 X 题`) or the
    config's `replacements` names one; the rest are listed under `excluded`.
+   A section that repeats a problem keeps it once; code blocks and links to
+   write-ups are skipped. Chinese titles come from leetcode.cn's API.
    Where leetcode.com is unreachable, `--metadata-site leetcode.cn` reads the
    same English titles from leetcode.cn (rerun against leetcode.com before
-   launch), and `--input post.html` reads a saved copy of the post.
+   launch), and `--input post.html` reads a saved copy of the post. Behind a
+   proxy, prefix the command with `NODE_USE_ENV_PROXY=1`.
 3. Register the file in `SOURCES` in `study-lists/builtin.ts` (the array's
    order is the order users see).
 4. Run `pnpm vitest run apps/web/src/server/study-lists scripts/study-list-import.test.mjs`

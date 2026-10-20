@@ -1,0 +1,7512 @@
+{
+  "id": "greedy",
+  "name": {
+    "en": "Greedy and Thinking",
+    "zh": "贪心与思维"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/g6KTKL/",
+  "sourceUpdatedAt": "2026-08-19T08:28:07.887092+00:00",
+  "generatedAt": "2026-10-20T19:21:25.375Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Greedy strategies",
+        "zh": "贪心策略"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Interval greedy",
+        "zh": "区间贪心"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "String greedy",
+        "zh": "字符串贪心"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Math greedy",
+        "zh": "数学贪心"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Thinking problems",
+        "zh": "思维题"
+      }
+    },
+    {
+      "id": "6",
+      "title": {
+        "en": "Constructive problems",
+        "zh": "构造题"
+      }
+    },
+    {
+      "id": "7",
+      "title": {
+        "en": "Interactive problems",
+        "zh": "交互题"
+      }
+    },
+    {
+      "id": "8",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Start from the smallest or largest",
+        "zh": "从最小/最大开始贪心"
+      },
+      "pattern": "greedy.extremes",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Pairing within one sequence",
+        "zh": "单序列配对"
+      },
+      "pattern": "greedy.pair_one",
+      "optional": false
+    },
+    {
+      "id": "1.3",
+      "chapterId": "1",
+      "title": {
+        "en": "Pairing across two sequences",
+        "zh": "双序列配对"
+      },
+      "pattern": "greedy.pair_two",
+      "optional": false
+    },
+    {
+      "id": "1.4",
+      "chapterId": "1",
+      "title": {
+        "en": "Start from the leftmost or rightmost",
+        "zh": "从最左/最右开始贪心"
+      },
+      "pattern": "greedy.ends",
+      "optional": false
+    },
+    {
+      "id": "1.5",
+      "chapterId": "1",
+      "title": {
+        "en": "Partition greedy",
+        "zh": "划分型贪心"
+      },
+      "pattern": "greedy.partition",
+      "optional": false
+    },
+    {
+      "id": "1.6",
+      "chapterId": "1",
+      "title": {
+        "en": "Enumerate, then greedy",
+        "zh": "先枚举，再贪心"
+      },
+      "pattern": "greedy.enumerate_then",
+      "optional": false
+    },
+    {
+      "id": "1.7",
+      "chapterId": "1",
+      "title": {
+        "en": "Exchange argument",
+        "zh": "交换论证法"
+      },
+      "pattern": "greedy.exchange",
+      "optional": false
+    },
+    {
+      "id": "1.8",
+      "chapterId": "1",
+      "title": {
+        "en": "Adjacent elements differ",
+        "zh": "相邻不同"
+      },
+      "pattern": "greedy.adjacent_differ",
+      "optional": false
+    },
+    {
+      "id": "1.9",
+      "chapterId": "1",
+      "title": {
+        "en": "Regret greedy",
+        "zh": "反悔贪心"
+      },
+      "pattern": "greedy.regret",
+      "optional": false
+    },
+    {
+      "id": "2.1",
+      "chapterId": "2",
+      "title": {
+        "en": "Non-overlapping intervals",
+        "zh": "不相交区间"
+      },
+      "pattern": "greedy.intervals_disjoint",
+      "optional": false
+    },
+    {
+      "id": "2.2",
+      "chapterId": "2",
+      "title": {
+        "en": "Grouping intervals",
+        "zh": "区间分组"
+      },
+      "pattern": "greedy.intervals_grouping",
+      "optional": false
+    },
+    {
+      "id": "2.3",
+      "chapterId": "2",
+      "title": {
+        "en": "Choosing points for intervals",
+        "zh": "区间选点"
+      },
+      "pattern": "greedy.intervals_points",
+      "optional": false
+    },
+    {
+      "id": "2.4",
+      "chapterId": "2",
+      "title": {
+        "en": "Covering with intervals",
+        "zh": "区间覆盖"
+      },
+      "pattern": "greedy.intervals_cover",
+      "optional": false
+    },
+    {
+      "id": "2.5",
+      "chapterId": "2",
+      "title": {
+        "en": "Merging intervals",
+        "zh": "合并区间"
+      },
+      "pattern": "greedy.intervals_merge",
+      "optional": false
+    },
+    {
+      "id": "2.6",
+      "chapterId": "2",
+      "title": {
+        "en": "Other",
+        "zh": "其他区间贪心"
+      },
+      "pattern": "greedy.intervals_other",
+      "optional": false
+    },
+    {
+      "id": "3.1",
+      "chapterId": "3",
+      "title": {
+        "en": "Smallest or largest lexicographic order",
+        "zh": "字典序最小/最大"
+      },
+      "pattern": "greedy.lexicographic",
+      "optional": false
+    },
+    {
+      "id": "3.2",
+      "chapterId": "3",
+      "title": {
+        "en": "Palindrome greedy",
+        "zh": "回文串贪心"
+      },
+      "pattern": "greedy.palindrome",
+      "optional": false
+    },
+    {
+      "id": "4.1",
+      "chapterId": "4",
+      "title": {
+        "en": "Basics",
+        "zh": "基础"
+      },
+      "pattern": "greedy.math",
+      "optional": false
+    },
+    {
+      "id": "4.2",
+      "chapterId": "4",
+      "title": {
+        "en": "Product greedy",
+        "zh": "乘积贪心"
+      },
+      "pattern": "greedy.product",
+      "optional": false
+    },
+    {
+      "id": "4.3",
+      "chapterId": "4",
+      "title": {
+        "en": "Rearrangement inequality",
+        "zh": "排序不等式"
+      },
+      "pattern": "greedy.rearrangement",
+      "optional": false
+    },
+    {
+      "id": "4.4",
+      "chapterId": "4",
+      "title": {
+        "en": "AM-GM inequality",
+        "zh": "均值不等式"
+      },
+      "pattern": "greedy.am_gm",
+      "optional": false
+    },
+    {
+      "id": "4.5",
+      "chapterId": "4",
+      "title": {
+        "en": "Median greedy",
+        "zh": "中位数贪心"
+      },
+      "pattern": "greedy.median",
+      "optional": false
+    },
+    {
+      "id": "4.6",
+      "chapterId": "4",
+      "title": {
+        "en": "Induction",
+        "zh": "归纳法"
+      },
+      "pattern": "greedy.induction",
+      "optional": false
+    },
+    {
+      "id": "4.7",
+      "chapterId": "4",
+      "title": {
+        "en": "Other",
+        "zh": "其他数学贪心"
+      },
+      "pattern": "greedy.math_other",
+      "optional": false
+    },
+    {
+      "id": "5.1",
+      "chapterId": "5",
+      "title": {
+        "en": "From special cases to the general one",
+        "zh": "从特殊到一般"
+      },
+      "pattern": "greedy.thinking_special_to_general",
+      "optional": false
+    },
+    {
+      "id": "5.2",
+      "chapterId": "5",
+      "title": {
+        "en": "Brain teasers",
+        "zh": "脑筋急转弯"
+      },
+      "pattern": "greedy.thinking_brain_teaser",
+      "optional": false
+    },
+    {
+      "id": "5.3",
+      "chapterId": "5",
+      "title": {
+        "en": "Equivalent transformation",
+        "zh": "等价转化"
+      },
+      "pattern": "greedy.thinking_transformation",
+      "optional": false
+    },
+    {
+      "id": "5.4",
+      "chapterId": "5",
+      "title": {
+        "en": "Thinking in reverse",
+        "zh": "逆向思维"
+      },
+      "pattern": "greedy.thinking_reverse",
+      "optional": false
+    },
+    {
+      "id": "5.5",
+      "chapterId": "5",
+      "title": {
+        "en": "Contribution technique",
+        "zh": "贡献法"
+      },
+      "pattern": "greedy.thinking_contribution",
+      "optional": false
+    },
+    {
+      "id": "5.6",
+      "chapterId": "5",
+      "title": {
+        "en": "Two passes",
+        "zh": "两次扫描"
+      },
+      "pattern": "greedy.thinking_two_passes",
+      "optional": false
+    },
+    {
+      "id": "5.7",
+      "chapterId": "5",
+      "title": {
+        "en": "Swapping elements",
+        "zh": "交换元素"
+      },
+      "pattern": "greedy.thinking_swaps",
+      "optional": false
+    },
+    {
+      "id": "5.8",
+      "chapterId": "5",
+      "title": {
+        "en": "Case analysis",
+        "zh": "分类讨论"
+      },
+      "pattern": "greedy.thinking_case_analysis",
+      "optional": false
+    },
+    {
+      "id": "6",
+      "chapterId": "6",
+      "title": {
+        "en": "Constructive problems",
+        "zh": "构造题"
+      },
+      "pattern": "greedy.constructive",
+      "optional": false
+    },
+    {
+      "id": "7",
+      "chapterId": "7",
+      "title": {
+        "en": "Interactive problems",
+        "zh": "交互题"
+      },
+      "pattern": "greedy.interactive",
+      "optional": false
+    },
+    {
+      "id": "8",
+      "chapterId": "8",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "greedy.other",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "apple-redistribution-into-boxes",
+      "frontendId": "3074",
+      "title": {
+        "en": "Apple Redistribution into Boxes",
+        "zh": "重新分装苹果"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1198,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-deletions-for-at-most-k-distinct-characters",
+      "frontendId": "3545",
+      "title": {
+        "en": "Minimum Deletions for At Most K Distinct Characters",
+        "zh": "不同字符数量最多为 K 时的最少删除数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1211,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-expression-of-three-elements",
+      "frontendId": "3745",
+      "title": {
+        "en": "Maximize Expression of Three Elements",
+        "zh": "三元素表达式的最大值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1218,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-bags-with-full-capacity-of-rocks",
+      "frontendId": "2279",
+      "title": {
+        "en": "Maximum Bags With Full Capacity of Rocks",
+        "zh": "装满石头的背包的最大数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1249,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-ice-cream-bars",
+      "frontendId": "1833",
+      "title": {
+        "en": "Maximum Ice Cream Bars",
+        "zh": "雪糕的最大数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1253,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-of-buying-candies-with-discount",
+      "frontendId": "2144",
+      "title": {
+        "en": "Minimum Cost of Buying Candies With Discount",
+        "zh": "打折购买糖果的最小开销"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1261,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-sum-of-array-after-k-negations",
+      "frontendId": "1005",
+      "title": {
+        "en": "Maximize Sum Of Array After K Negations",
+        "zh": "K 次取反后最大化的数组和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1275,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "least-number-of-unique-integers-after-k-removals",
+      "frontendId": "1481",
+      "title": {
+        "en": "Least Number of Unique Integers after K Removals",
+        "zh": "不同整数的最少数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1284,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-subsequence-in-non-increasing-order",
+      "frontendId": "1403",
+      "title": {
+        "en": "Minimum Subsequence in Non-Increasing Order",
+        "zh": "非递增顺序的最小子序列"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1288,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "divide-an-array-into-subarrays-with-minimum-cost-i",
+      "frontendId": "3010",
+      "title": {
+        "en": "Divide an Array Into Subarrays With Minimum Cost I",
+        "zh": "将数组分成最小总代价的子数组 I"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1292,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "reduce-array-size-to-the-half",
+      "frontendId": "1338",
+      "title": {
+        "en": "Reduce Array Size to The Half",
+        "zh": "数组大小减半"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1303,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-units-on-a-truck",
+      "frontendId": "1710",
+      "title": {
+        "en": "Maximum Units on a Truck",
+        "zh": "卡车上的最大单元数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1310,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-happiness-of-selected-children",
+      "frontendId": "3075",
+      "title": {
+        "en": "Maximize Happiness of Selected Children",
+        "zh": "幸福值最大化的选择方案"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1326,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-integers-to-choose-from-a-range-i",
+      "frontendId": "2554",
+      "title": {
+        "en": "Maximum Number of Integers to Choose From a Range I",
+        "zh": "从一个范围内选择最多整数 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1333,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "destroying-asteroids",
+      "frontendId": "2126",
+      "title": {
+        "en": "Destroying Asteroids",
+        "zh": "摧毁小行星"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1335,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "rearrange-array-to-maximize-prefix-score",
+      "frontendId": "2587",
+      "title": {
+        "en": "Rearrange Array to Maximize Prefix Score",
+        "zh": "重排数组以得到最大前缀分数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1337,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "largest-perimeter-triangle",
+      "frontendId": "976",
+      "title": {
+        "en": "Largest Perimeter Triangle",
+        "zh": "三角形的最大周长"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1341,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-coins-you-can-get",
+      "frontendId": "1561",
+      "title": {
+        "en": "Maximum Number of Coins You Can Get",
+        "zh": "你可以获得的最大硬币数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1406,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-median-sum-of-subsequences-of-size-3",
+      "frontendId": "3627",
+      "title": {
+        "en": "Maximum Median Sum of Subsequences of Size 3",
+        "zh": "中位数之和的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-sum-with-at-most-k-elements",
+      "frontendId": "3462",
+      "title": {
+        "en": "Maximum Sum With at Most K Elements",
+        "zh": "提取至多 K 个元素的最大总和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1416,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-subsequence-of-length-k-with-the-largest-sum",
+      "frontendId": "2099",
+      "title": {
+        "en": "Find Subsequence of Length K With the Largest Sum",
+        "zh": "找到和最大的长度为 K 的子序列"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1447,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-total-height-of-unique-towers",
+      "frontendId": "3301",
+      "title": {
+        "en": "Maximize the Total Height of Unique Towers",
+        "zh": "高度互不相同的最大塔高和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1448,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-increment-to-make-array-unique",
+      "frontendId": "945",
+      "title": {
+        "en": "Minimum Increment to Make Array Unique",
+        "zh": "使数组唯一的最小增量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1448,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-element-after-decreasing-and-rearranging",
+      "frontendId": "1846",
+      "title": {
+        "en": "Maximum Element After Decreasing and Rearranging",
+        "zh": "减小和重新排列数组后的最大元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1454,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-alternating-sum-of-squares",
+      "frontendId": "3727",
+      "title": {
+        "en": "Maximum Alternating Sum of Squares",
+        "zh": "最大交替平方和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1455,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-deletions-to-make-character-frequencies-unique",
+      "frontendId": "1647",
+      "title": {
+        "en": "Minimum Deletions to Make Character Frequencies Unique",
+        "zh": "字符频次唯一的最小删除次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1510,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-polygon-with-the-largest-perimeter",
+      "frontendId": "2971",
+      "title": {
+        "en": "Find Polygon With the Largest Perimeter",
+        "zh": "找到最大周长的多边形"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1521,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-split-of-positive-even-integers",
+      "frontendId": "2178",
+      "title": {
+        "en": "Maximum Split of Positive Even Integers",
+        "zh": "拆分成最多数目的正偶数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1538,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "array-of-doubled-pairs",
+      "frontendId": "954",
+      "title": {
+        "en": "Array of Doubled Pairs",
+        "zh": "二倍数对数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1548,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-make-rope-colorful",
+      "frontendId": "1578",
+      "title": {
+        "en": "Minimum Time to Make Rope Colorful",
+        "zh": "使绳子变成彩色的最短时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1574,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-score-by-changing-two-elements",
+      "frontendId": "2567",
+      "title": {
+        "en": "Minimum Score by Changing Two Elements",
+        "zh": "修改两个元素的最小分数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1609,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-difference-between-largest-and-smallest-value-in-three-moves",
+      "frontendId": "1509",
+      "title": {
+        "en": "Minimum Difference Between Largest and Smallest Value in Three Moves",
+        "zh": "三次操作后最大值与最小值的最小差"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1653,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "mice-and-cheese",
+      "frontendId": "2611",
+      "title": {
+        "en": "Mice and Cheese",
+        "zh": "老鼠和奶酪"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1663,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-distinct-elements-after-operations",
+      "frontendId": "3397",
+      "title": {
+        "en": "Maximum Number of Distinct Elements After Operations",
+        "zh": "执行操作后不同元素的最大数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1687,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "eat-pizzas",
+      "frontendId": "3457",
+      "title": {
+        "en": "Eat Pizzas!",
+        "zh": "吃披萨"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1704,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-points-after-choosing-k-tasks",
+      "frontendId": "3767",
+      "title": {
+        "en": "Maximize Points After Choosing K Tasks",
+        "zh": "选择 K 个任务的最大总分数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1704,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "greatest-sum-divisible-by-three",
+      "frontendId": "1262",
+      "title": {
+        "en": "Greatest Sum Divisible by Three",
+        "zh": "可被三整除的最大和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1762,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "bag-of-tokens",
+      "frontendId": "948",
+      "title": {
+        "en": "Bag of Tokens",
+        "zh": "令牌放置"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1762,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "equal-sum-arrays-with-minimum-number-of-operations",
+      "frontendId": "1775",
+      "title": {
+        "en": "Equal Sum Arrays With Minimum Number of Operations",
+        "zh": "通过最少操作次数使数组的和相等"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1850,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-sum-of-squared-difference",
+      "frontendId": "2333",
+      "title": {
+        "en": "Minimum Sum of Squared Difference",
+        "zh": "最小差值平方和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2011,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-total-from-optimal-activation-order",
+      "frontendId": "3645",
+      "title": {
+        "en": "Maximum Total from Optimal Activation Order",
+        "zh": "最优激活顺序得到的最大总和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2019,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-items-from-sale-ii",
+      "frontendId": "3947",
+      "title": {
+        "en": "Maximum Number of Items From Sale II",
+        "zh": "购买最多物品数目 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2215,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-running-time-of-n-computers",
+      "frontendId": "2141",
+      "title": {
+        "en": "Maximum Running Time of N Computers",
+        "zh": "同时运行 N 台电脑的最长时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2265,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "how-many-apples-can-you-put-into-the-basket",
+      "frontendId": "1196",
+      "title": {
+        "en": "How Many Apples Can You Put into the Basket",
+        "zh": "最多可以买到的苹果数量"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-health-to-beat-game",
+      "frontendId": "2214",
+      "title": {
+        "en": "Minimum Health to Beat Game",
+        "zh": "通关游戏所需的最低生命值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-total-sum-with-threshold-constraints",
+      "frontendId": "3763",
+      "title": {
+        "en": "Maximum Total Sum with Threshold Constraints",
+        "zh": "带阈值约束的最大总和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-calories-burnt-from-jumps",
+      "frontendId": "3730",
+      "title": {
+        "en": "Maximum Calories Burnt from Jumps",
+        "zh": "跳跃燃烧的最大卡路里"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-profit-from-task-assignment",
+      "frontendId": "3476",
+      "title": {
+        "en": "Maximize Profit from Task Assignment",
+        "zh": "最大化任务分配的利润"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "subsequence-of-size-k-with-the-largest-even-sum",
+      "frontendId": "2098",
+      "title": {
+        "en": "Subsequence of Size K With the Largest Even Sum",
+        "zh": "长度为 K 的最大偶数和子序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-price-to-fill-a-bag",
+      "frontendId": "2548",
+      "title": {
+        "en": "Maximum Price to Fill a Bag",
+        "zh": "填满背包的最大价格"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-potholes-that-can-be-fixed",
+      "frontendId": "3119",
+      "title": {
+        "en": "Maximum Number of Potholes That Can Be Fixed",
+        "zh": "最大数量的可修复坑洼"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-integers-to-choose-from-a-range-ii",
+      "frontendId": "2557",
+      "title": {
+        "en": "Maximum Number of Integers to Choose From a Range II",
+        "zh": "从一个范围内选择最多整数 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-difference-between-highest-and-lowest-of-k-scores",
+      "frontendId": "1984",
+      "title": {
+        "en": "Minimum Difference Between Highest and Lowest of K Scores",
+        "zh": "学生分数的最小差值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1306,
+      "sectionId": "1.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-distance-in-arrays",
+      "frontendId": "624",
+      "title": {
+        "en": "Maximum Distance in Arrays",
+        "zh": "数组列表中的最大距离"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "smallest-range-ii",
+      "frontendId": "910",
+      "title": {
+        "en": "Smallest Range II",
+        "zh": "最小差值 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2135,
+      "sectionId": "1.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "minimum-operations-to-form-subsequence-with-target-sum",
+      "frontendId": "2835",
+      "title": {
+        "en": "Minimum Operations to Form Subsequence With Target Sum",
+        "zh": "使子序列的和等于目标的最少操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2207,
+      "sectionId": "1.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "minimum-array-sum",
+      "frontendId": "3366",
+      "title": {
+        "en": "Minimum Array Sum",
+        "zh": "最小数组和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "array-partition",
+      "frontendId": "561",
+      "title": {
+        "en": "Array Partition",
+        "zh": "数组拆分"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-maximum-pair-sum-in-array",
+      "frontendId": "1877",
+      "title": {
+        "en": "Minimize Maximum Pair Sum in Array",
+        "zh": "数组中最大数对和的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1301,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "boats-to-save-people",
+      "frontendId": "881",
+      "title": {
+        "en": "Boats to Save People",
+        "zh": "救生艇"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1530,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-greatness-of-an-array",
+      "frontendId": "2592",
+      "title": {
+        "en": "Maximize Greatness of an Array",
+        "zh": "最大化数组的伟大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1569,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-maximum-number-of-marked-indices",
+      "frontendId": "2576",
+      "title": {
+        "en": "Find the Maximum Number of Marked Indices",
+        "zh": "求出最多标记下标"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1843,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-moves-to-seat-everyone",
+      "frontendId": "2037",
+      "title": {
+        "en": "Minimum Number of Moves to Seat Everyone",
+        "zh": "使每位学生都有座位的最少移动次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1357,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "assign-cookies",
+      "frontendId": "455",
+      "title": {
+        "en": "Assign Cookies",
+        "zh": "分发饼干"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1381,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-matching-of-players-with-trainers",
+      "frontendId": "2410",
+      "title": {
+        "en": "Maximum Matching of Players With Trainers",
+        "zh": "运动员和训练师的最大匹配数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1381,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-a-string-can-break-another-string",
+      "frontendId": "1433",
+      "title": {
+        "en": "Check If a String Can Break Another String",
+        "zh": "检查一个字符串是否可以打破另一个字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1436,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "advantage-shuffle",
+      "frontendId": "870",
+      "title": {
+        "en": "Advantage Shuffle",
+        "zh": "优势洗牌"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1648,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "most-profit-assigning-work",
+      "frontendId": "826",
+      "title": {
+        "en": "Most Profit Assigning Work",
+        "zh": "安排工作以达到最大收益"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1709,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-make-arrays-similar",
+      "frontendId": "2449",
+      "title": {
+        "en": "Minimum Number of Operations to Make Arrays Similar",
+        "zh": "使数组相似的最少操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2076,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-space-wasted-from-packaging",
+      "frontendId": "1889",
+      "title": {
+        "en": "Minimum Space Wasted From Packaging",
+        "zh": "装包裹的最小浪费空间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2214,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "rearranging-fruits",
+      "frontendId": "2561",
+      "title": {
+        "en": "Rearranging Fruits",
+        "zh": "重排水果"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2222,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-tasks-you-can-assign",
+      "frontendId": "2071",
+      "title": {
+        "en": "Maximum Number of Tasks You Can Assign",
+        "zh": "你可以安排的最多任务数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2648,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "find-minimum-time-to-finish-all-jobs-ii",
+      "frontendId": "2323",
+      "title": {
+        "en": "Find Minimum Time to Finish All Jobs II",
+        "zh": "完成所有工作的最短时间 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-columns-strictly-increasing",
+      "frontendId": "3402",
+      "title": {
+        "en": "Minimum Operations to Make Columns Strictly Increasing",
+        "zh": "使每一列严格递增的最少操作次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1246,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-binary-array-elements-equal-to-one-i",
+      "frontendId": "3191",
+      "title": {
+        "en": "Minimum Operations to Make Binary Array Elements Equal to One I",
+        "zh": "使二进制数组全部等于 1 的最少操作次数 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1312,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-the-array-increasing",
+      "frontendId": "1827",
+      "title": {
+        "en": "Minimum Operations to Make the Array Increasing",
+        "zh": "最少操作使数组递增"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1315,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-convert-string",
+      "frontendId": "2027",
+      "title": {
+        "en": "Minimum Moves to Convert String",
+        "zh": "转换字符串的最少操作次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1346,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "can-place-flowers",
+      "frontendId": "605",
+      "title": {
+        "en": "Can Place Flowers",
+        "zh": "种花问题"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-rectangles-to-cover-points",
+      "frontendId": "3111",
+      "title": {
+        "en": "Minimum Rectangles to Cover Points",
+        "zh": "覆盖所有点的最少矩形数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1401,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "remove-adjacent-almost-equal-characters",
+      "frontendId": "2957",
+      "title": {
+        "en": "Remove Adjacent Almost-Equal Characters",
+        "zh": "消除相邻近似相等字符"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1430,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-binary-array-elements-equal-to-one-ii",
+      "frontendId": "3192",
+      "title": {
+        "en": "Minimum Operations to Make Binary Array Elements Equal to One II",
+        "zh": "使二进制数组全部等于 1 的最少操作次数 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1433,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-suffix-flips",
+      "frontendId": "1529",
+      "title": {
+        "en": "Minimum Suffix Flips",
+        "zh": "最少的后缀翻转次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "largest-element-in-an-array-after-merge-operations",
+      "frontendId": "2789",
+      "title": {
+        "en": "Largest Element in an Array after Merge Operations",
+        "zh": "合并后数组中的最大元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1485,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "transform-array-to-all-equal-elements",
+      "frontendId": "3576",
+      "title": {
+        "en": "Transform Array to All Equal Elements",
+        "zh": "数组元素相等转换"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1489,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-bitwise-xor-after-rearrangement",
+      "frontendId": "3849",
+      "title": {
+        "en": "Maximum Bitwise XOR After Rearrangement",
+        "zh": "重新排列后的最大按位异或值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1556,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "decrease-elements-to-make-array-zigzag",
+      "frontendId": "1144",
+      "title": {
+        "en": "Decrease Elements To Make Array Zigzag",
+        "zh": "递减元素使数组呈锯齿状"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1559,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-operations-to-move-ones-to-the-end",
+      "frontendId": "3228",
+      "title": {
+        "en": "Maximum Number of Operations to Move Ones to the End",
+        "zh": "将 1 移动到末尾的最大操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1593,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-food-buckets-to-feed-the-hamsters",
+      "frontendId": "2086",
+      "title": {
+        "en": "Minimum Number of Food Buckets to Feed the Hamsters",
+        "zh": "喂食仓鼠的最小食物桶数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1623,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-reduce-an-integer-to-0",
+      "frontendId": "2571",
+      "title": {
+        "en": "Minimum Operations to Reduce an Integer to 0",
+        "zh": "将整数减少到零需要的最少操作数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1649,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-balance-circular-array",
+      "frontendId": "3776",
+      "title": {
+        "en": "Minimum Moves to Balance Circular Array",
+        "zh": "使循环数组余额非负的最少移动次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1740,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "score-after-flipping-matrix",
+      "frontendId": "861",
+      "title": {
+        "en": "Score After Flipping Matrix",
+        "zh": "翻转矩阵后的得分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1818,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-transform-binary-string",
+      "frontendId": "3980",
+      "title": {
+        "en": "Minimum Operations to Transform Binary String",
+        "zh": "变换二进制字符串的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1846,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-division-operations-to-make-array-non-decreasing",
+      "frontendId": "3326",
+      "title": {
+        "en": "Minimum Division Operations to Make Array Non Decreasing",
+        "zh": "使数组非递减的最少除法操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1864,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "delete-columns-to-make-sorted-ii",
+      "frontendId": "955",
+      "title": {
+        "en": "Delete Columns to Make Sorted II",
+        "zh": "删列造序 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1876,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-swaps-to-arrange-a-binary-grid",
+      "frontendId": "1536",
+      "title": {
+        "en": "Minimum Swaps to Arrange a Binary Grid",
+        "zh": "排布二进制网格的最少交换次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1881,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "make-costs-of-paths-equal-in-a-binary-tree",
+      "frontendId": "2673",
+      "title": {
+        "en": "Make Costs of Paths Equal in a Binary Tree",
+        "zh": "使二叉树所有路径值相等的最小代价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1917,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "avoid-flood-in-the-city",
+      "frontendId": "1488",
+      "title": {
+        "en": "Avoid Flood in The City",
+        "zh": "避免洪水泛滥"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1974,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-replacements-to-sort-the-array",
+      "frontendId": "2366",
+      "title": {
+        "en": "Minimum Replacements to Sort the Array",
+        "zh": "将数组排序的最少替换次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2060,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-minimum-powered-city",
+      "frontendId": "2528",
+      "title": {
+        "en": "Maximize the Minimum Powered City",
+        "zh": "最大化城市的最小电量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2236,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-minimum-game-score",
+      "frontendId": "3449",
+      "title": {
+        "en": "Maximize the Minimum Game Score",
+        "zh": "最大化游戏分数的最小值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2748,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "merge-operations-to-turn-array-into-a-palindrome",
+      "frontendId": "2422",
+      "title": {
+        "en": "Merge Operations to Turn Array Into a Palindrome",
+        "zh": "使用合并操作将数组转换为回文序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "split-a-string-in-balanced-strings",
+      "frontendId": "1221",
+      "title": {
+        "en": "Split a String in Balanced Strings",
+        "zh": "分割平衡字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1220,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "optimal-partition-of-string",
+      "frontendId": "2405",
+      "title": {
+        "en": "Optimal Partition of String",
+        "zh": "子字符串的最优划分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1355,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "partition-array-such-that-maximum-difference-is-k",
+      "frontendId": "2294",
+      "title": {
+        "en": "Partition Array Such That Maximum Difference Is K",
+        "zh": "划分数组使最大差为 K"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1416,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-groups-entering-a-competition",
+      "frontendId": "2358",
+      "title": {
+        "en": "Maximum Number of Groups Entering a Competition",
+        "zh": "分组的最大数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1503,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "partition-string-into-substrings-with-values-at-most-k",
+      "frontendId": "2522",
+      "title": {
+        "en": "Partition String Into Substrings With Values at Most K",
+        "zh": "将字符串分割成值不超过 K 的子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1605,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-maximum-number-of-non-intersecting-substrings",
+      "frontendId": "3557",
+      "title": {
+        "en": "Find Maximum Number of Non Intersecting Substrings",
+        "zh": "不相交子字符串的最大数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1720,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-non-overlapping-subarrays-with-sum-equals-target",
+      "frontendId": "1546",
+      "title": {
+        "en": "Maximum Number of Non-Overlapping Subarrays With Sum Equals Target",
+        "zh": "和为目标值且不重叠的非空子数组的最大数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1855,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-split-into-subarrays-with-gcd-greater-than-one",
+      "frontendId": "2436",
+      "title": {
+        "en": "Minimum Split Into Subarrays With GCD Greater Than One",
+        "zh": "使子数组最大公约数大于一的最小分割数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimizing-array-after-replacing-pairs-with-their-product",
+      "frontendId": "2892",
+      "title": {
+        "en": "Minimizing Array After Replacing Pairs With Their Product",
+        "zh": "将相邻元素相乘后得到最小化数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "removing-minimum-number-of-magic-beans",
+      "frontendId": "2171",
+      "title": {
+        "en": "Removing Minimum Number of Magic Beans",
+        "zh": "拿出最少数目的魔法豆"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1748,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-deletions-to-make-string-k-special",
+      "frontendId": "3085",
+      "title": {
+        "en": "Minimum Deletions to Make String K-Special",
+        "zh": "成为 K 特殊字符串需要删除的最少字符数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1765,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "largest-submatrix-with-rearrangements",
+      "frontendId": "1727",
+      "title": {
+        "en": "Largest Submatrix With Rearrangements",
+        "zh": "重新排列后的最大子矩阵"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1927,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-the-integer-zero",
+      "frontendId": "2749",
+      "title": {
+        "en": "Minimum Operations to Make the Integer Zero",
+        "zh": "得到整数零需要执行的最少操作数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2132,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-groups-to-create-a-valid-assignment",
+      "frontendId": "2910",
+      "title": {
+        "en": "Minimum Number of Groups to Create a Valid Assignment",
+        "zh": "合法分组的最少组数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2132,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-total-beauty-of-the-gardens",
+      "frontendId": "2234",
+      "title": {
+        "en": "Maximum Total Beauty of the Gardens",
+        "zh": "花园的最大总美丽值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2562,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-maximum-pair-sum-in-array",
+      "frontendId": "1877",
+      "title": {
+        "en": "Minimize Maximum Pair Sum in Array",
+        "zh": "数组中最大数对和的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1301,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-processing-time",
+      "frontendId": "2895",
+      "title": {
+        "en": "Minimum Processing Time",
+        "zh": "最小处理时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1352,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-element-after-decreasing-and-rearranging",
+      "frontendId": "1846",
+      "title": {
+        "en": "Maximum Element After Decreasing and Rearranging",
+        "zh": "减小和重新排列数组后的最大元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1454,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "eat-pizzas",
+      "frontendId": "3457",
+      "title": {
+        "en": "Eat Pizzas!",
+        "zh": "吃披萨"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1704,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-initial-energy-to-finish-tasks",
+      "frontendId": "1665",
+      "title": {
+        "en": "Minimum Initial Energy to Finish Tasks",
+        "zh": "完成所有任务的最少初始能量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1901,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-amount-of-damage-dealt-to-bob",
+      "frontendId": "3273",
+      "title": {
+        "en": "Minimum Amount of Damage Dealt to Bob",
+        "zh": "对 Bob 造成的最少伤害"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2013,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "earliest-possible-day-of-full-bloom",
+      "frontendId": "2136",
+      "title": {
+        "en": "Earliest Possible Day of Full Bloom",
+        "zh": "全部开花的最早一天"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2033,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "rearranging-fruits",
+      "frontendId": "2561",
+      "title": {
+        "en": "Rearranging Fruits",
+        "zh": "重排水果"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2222,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "largest-number",
+      "frontendId": "179",
+      "title": {
+        "en": "Largest Number",
+        "zh": "最大数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.7",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-possible-number-by-binary-concatenation",
+      "frontendId": "3309",
+      "title": {
+        "en": "Maximum Possible Number by Binary Concatenation",
+        "zh": "连接二进制表示可形成的最大数值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.7",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-value-of-concatenated-binary-segments",
+      "frontendId": "3897",
+      "title": {
+        "en": "Maximum Value of Concatenated Binary Segments",
+        "zh": "连接二进制片段得到的最大值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1998,
+      "sectionId": "1.7",
+      "level": "stretch"
+    },
+    {
+      "slug": "minimum-money-required-before-transactions",
+      "frontendId": "2412",
+      "title": {
+        "en": "Minimum Money Required Before Transactions",
+        "zh": "完成所有交易的初始最少钱数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2092,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-amount-of-time-to-fill-cups",
+      "frontendId": "2335",
+      "title": {
+        "en": "Minimum Amount of Time to Fill Cups",
+        "zh": "装满杯子需要的最短总时长"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1360,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "partition-array-into-k-distinct-groups",
+      "frontendId": "3659",
+      "title": {
+        "en": "Partition Array Into K-Distinct Groups",
+        "zh": "数组元素分组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1440,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-score-from-removing-stones",
+      "frontendId": "1753",
+      "title": {
+        "en": "Maximum Score From Removing Stones",
+        "zh": "移除石子的最大得分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1488,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "reorganize-string",
+      "frontendId": "767",
+      "title": {
+        "en": "Reorganize String",
+        "zh": "重构字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1681,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "distant-barcodes",
+      "frontendId": "1054",
+      "title": {
+        "en": "Distant Barcodes",
+        "zh": "距离相等的条形码"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1702,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-array-length-after-pair-removals",
+      "frontendId": "2856",
+      "title": {
+        "en": "Minimum Array Length After Pair Removals",
+        "zh": "删除数对后的最小数组长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1750,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-weeks-for-which-you-can-work",
+      "frontendId": "1953",
+      "title": {
+        "en": "Maximum Number of Weeks for Which You Can Work",
+        "zh": "你可以工作的最大周数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1804,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-swaps-to-avoid-forbidden-values",
+      "frontendId": "3785",
+      "title": {
+        "en": "Minimum Swaps to Avoid Forbidden Values",
+        "zh": "避免禁用值的最小交换次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2052,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "two-letter-card-game",
+      "frontendId": "3664",
+      "title": {
+        "en": "Two-Letter Card Game",
+        "zh": "两个字母卡牌游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2158,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-array-elements-zero",
+      "frontendId": "3495",
+      "title": {
+        "en": "Minimum Operations to Make Array Elements Zero",
+        "zh": "使数组元素都变为零的最少操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2206,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-equalize-array",
+      "frontendId": "3139",
+      "title": {
+        "en": "Minimum Cost to Equalize Array",
+        "zh": "使数组中所有元素相等的最小开销"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2666,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "task-scheduler",
+      "frontendId": "621",
+      "title": {
+        "en": "Task Scheduler",
+        "zh": "任务调度器"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "rearrange-string-k-distance-apart",
+      "frontendId": "358",
+      "title": {
+        "en": "Rearrange String k Distance Apart",
+        "zh": "K 距离间隔重排字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "string-without-aaa-or-bbb",
+      "frontendId": "984",
+      "title": {
+        "en": "String Without AAA or BBB",
+        "zh": "不含 AAA 或 BBB 的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "stretch"
+    },
+    {
+      "slug": "longest-happy-string",
+      "frontendId": "1405",
+      "title": {
+        "en": "Longest Happy String",
+        "zh": "最长快乐字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1821,
+      "sectionId": "1.8",
+      "level": "stretch"
+    },
+    {
+      "slug": "furthest-building-you-can-reach",
+      "frontendId": "1642",
+      "title": {
+        "en": "Furthest Building You Can Reach",
+        "zh": "可以到达的最远建筑"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1962,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "course-schedule-iii",
+      "frontendId": "630",
+      "title": {
+        "en": "Course Schedule III",
+        "zh": "课程表 III"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-refueling-stops",
+      "frontendId": "871",
+      "title": {
+        "en": "Minimum Number of Refueling Stops",
+        "zh": "最低加油次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2074,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "zero-array-transformation-iii",
+      "frontendId": "3362",
+      "title": {
+        "en": "Zero Array Transformation III",
+        "zh": "零数组变换 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2424,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-elegance-of-a-k-length-subsequence",
+      "frontendId": "2813",
+      "title": {
+        "en": "Maximum Elegance of a K-Length Subsequence",
+        "zh": "子序列最大优雅度"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2582,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "earliest-second-to-mark-indices-ii",
+      "frontendId": "3049",
+      "title": {
+        "en": "Earliest Second to Mark Indices II",
+        "zh": "标记所有下标的最早秒数 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 3111,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-transactions-without-negative-balance",
+      "frontendId": "3711",
+      "title": {
+        "en": "Maximum Transactions Without Negative Balance",
+        "zh": "不出现负余额的最大交易额"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "make-the-prefix-sum-non-negative",
+      "frontendId": "2599",
+      "title": {
+        "en": "Make the Prefix Sum Non-negative",
+        "zh": "使前缀和数组非负"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "non-overlapping-intervals",
+      "frontendId": "435",
+      "title": {
+        "en": "Non-overlapping Intervals",
+        "zh": "无重叠区间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-length-of-pair-chain",
+      "frontendId": "646",
+      "title": {
+        "en": "Maximum Length of Pair Chain",
+        "zh": "最长数对链"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-non-overlapping-substrings",
+      "frontendId": "1520",
+      "title": {
+        "en": "Maximum Number of Non-Overlapping Substrings",
+        "zh": "最多的不重叠子字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2363,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "select-k-disjoint-special-substrings",
+      "frontendId": "3458",
+      "title": {
+        "en": "Select K Disjoint Special Substrings",
+        "zh": "选择 K 个互不重叠的特殊子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "divide-intervals-into-minimum-number-of-groups",
+      "frontendId": "2406",
+      "title": {
+        "en": "Divide Intervals Into Minimum Number of Groups",
+        "zh": "将区间分为最少组数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1713,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "meeting-rooms-ii",
+      "frontendId": "253",
+      "title": {
+        "en": "Meeting Rooms II",
+        "zh": "会议室 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-arrows-to-burst-balloons",
+      "frontendId": "452",
+      "title": {
+        "en": "Minimum Number of Arrows to Burst Balloons",
+        "zh": "用最少数量的箭引爆气球"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "set-intersection-size-at-least-two",
+      "frontendId": "757",
+      "title": {
+        "en": "Set Intersection Size At Least Two",
+        "zh": "设置交集大小至少为2"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2379,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-complete-all-tasks",
+      "frontendId": "2589",
+      "title": {
+        "en": "Minimum Time to Complete All Tasks",
+        "zh": "完成所有任务的最少时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2381,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "jump-game-ii",
+      "frontendId": "45",
+      "title": {
+        "en": "Jump Game II",
+        "zh": "跳跃游戏 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "video-stitching",
+      "frontendId": "1024",
+      "title": {
+        "en": "Video Stitching",
+        "zh": "视频拼接"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1746,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-taps-to-open-to-water-a-garden",
+      "frontendId": "1326",
+      "title": {
+        "en": "Minimum Number of Taps to Open to Water a Garden",
+        "zh": "灌溉花园的最少水龙头数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1885,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "merge-intervals",
+      "frontendId": "56",
+      "title": {
+        "en": "Merge Intervals",
+        "zh": "合并区间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "insert-interval",
+      "frontendId": "57",
+      "title": {
+        "en": "Insert Interval",
+        "zh": "插入区间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "points-that-intersect-with-cars",
+      "frontendId": "2848",
+      "title": {
+        "en": "Points That Intersect With Cars",
+        "zh": "与车相交的点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "jump-game",
+      "frontendId": "55",
+      "title": {
+        "en": "Jump Game",
+        "zh": "跳跃游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "partition-labels",
+      "frontendId": "763",
+      "title": {
+        "en": "Partition Labels",
+        "zh": "划分字母区间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1443,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "count-days-without-meetings",
+      "frontendId": "3169",
+      "title": {
+        "en": "Count Days Without Meetings",
+        "zh": "无需开会的工作日"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1483,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-energy-to-maintain-brightness",
+      "frontendId": "3951",
+      "title": {
+        "en": "Minimum Energy to Maintain Brightness",
+        "zh": "维持亮度的最小总能量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1530,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "filter-occupied-intervals",
+      "frontendId": "3975",
+      "title": {
+        "en": "Filter Occupied Intervals",
+        "zh": "筛选忙碌区间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1533,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-lights-to-illuminate-a-road",
+      "frontendId": "3964",
+      "title": {
+        "en": "Minimum Lights to Illuminate a Road",
+        "zh": "照亮道路的最少灯泡数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1572,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "count-ways-to-group-overlapping-ranges",
+      "frontendId": "2580",
+      "title": {
+        "en": "Count Ways to Group Overlapping Ranges",
+        "zh": "统计将重叠区间合并成组的方案数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1632,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-grid-can-be-cut-into-sections",
+      "frontendId": "3394",
+      "title": {
+        "en": "Check if Grid can be Cut into Sections",
+        "zh": "判断网格图能否被切割成块"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1916,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-good-partitions",
+      "frontendId": "2963",
+      "title": {
+        "en": "Count the Number of Good Partitions",
+        "zh": "统计好分割方案的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1985,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "split-the-array-to-make-coprime-products",
+      "frontendId": "2584",
+      "title": {
+        "en": "Split the Array to Make Coprime Products",
+        "zh": "分割数组使乘积互质"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2159,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "add-bold-tag-in-string",
+      "frontendId": "616",
+      "title": {
+        "en": "Add Bold Tag in String",
+        "zh": "给字符串添加加粗标签"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "bold-words-in-string",
+      "frontendId": "758",
+      "title": {
+        "en": "Bold Words in String",
+        "zh": "字符串中的加粗单词"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-connected-groups-by-inserting-interval",
+      "frontendId": "3323",
+      "title": {
+        "en": "Minimize Connected Groups by Inserting Interval",
+        "zh": "通过插入区间最小化连通组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "employee-free-time",
+      "frontendId": "759",
+      "title": {
+        "en": "Employee Free Time",
+        "zh": "员工空闲时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-maximal-uncovered-ranges",
+      "frontendId": "2655",
+      "title": {
+        "en": "Find Maximal Uncovered Ranges",
+        "zh": "寻找最大长度的未覆盖区间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "remove-covered-intervals",
+      "frontendId": "1288",
+      "title": {
+        "en": "Remove Covered Intervals",
+        "zh": "删除被覆盖区间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "two-best-non-overlapping-events",
+      "frontendId": "2054",
+      "title": {
+        "en": "Two Best Non-Overlapping Events",
+        "zh": "两个最好的不重叠活动"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1883,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-eaten-apples",
+      "frontendId": "1705",
+      "title": {
+        "en": "Maximum Number of Eaten Apples",
+        "zh": "吃苹果的最大数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1930,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-events-that-can-be-attended",
+      "frontendId": "1353",
+      "title": {
+        "en": "Maximum Number of Events That Can Be Attended",
+        "zh": "最多可以参加的会议数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2016,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-69-number",
+      "frontendId": "1323",
+      "title": {
+        "en": "Maximum 69 Number",
+        "zh": "6 和 9 组成的最大数字"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1194,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "largest-integer-with-given-digit-sum",
+      "frontendId": "4000",
+      "title": {
+        "en": "Largest Integer With Given Digit Sum",
+        "zh": "给定数位和的最大整数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1200,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-string-after-a-swap",
+      "frontendId": "3216",
+      "title": {
+        "en": "Lexicographically Smallest String After a Swap",
+        "zh": "交换后字典序最小的字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1243,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-palindrome",
+      "frontendId": "2697",
+      "title": {
+        "en": "Lexicographically Smallest Palindrome",
+        "zh": "字典序最小回文串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1304,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-palindromic-rearrangement-i",
+      "frontendId": "3517",
+      "title": {
+        "en": "Smallest Palindromic Rearrangement I",
+        "zh": "最小回文排列 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1357,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-value-after-insertion",
+      "frontendId": "1881",
+      "title": {
+        "en": "Maximum Value after Insertion",
+        "zh": "插入后的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1381,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-string-after-substring-operation",
+      "frontendId": "2734",
+      "title": {
+        "en": "Lexicographically Smallest String After Substring Operation",
+        "zh": "执行子串操作后的字典序最小字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1405,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "max-difference-you-can-get-from-changing-an-integer",
+      "frontendId": "1432",
+      "title": {
+        "en": "Max Difference You Can Get From Changing an Integer",
+        "zh": "改变一个整数能得到的最大差值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1427,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "largest-number-after-mutating-substring",
+      "frontendId": "1946",
+      "title": {
+        "en": "Largest Number After Mutating Substring",
+        "zh": "子字符串突变后可能得到的最大整数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1445,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-string-with-a-given-numeric-value",
+      "frontendId": "1663",
+      "title": {
+        "en": "Smallest String With A Given Numeric Value",
+        "zh": "具有给定数值的最小字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1461,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "break-a-palindrome",
+      "frontendId": "1328",
+      "title": {
+        "en": "Break a Palindrome",
+        "zh": "破坏回文串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1474,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "remove-digit-from-number-to-maximize-result",
+      "frontendId": "2259",
+      "title": {
+        "en": "Remove Digit From Number to Maximize Result",
+        "zh": "移除指定数字得到的最大结果"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-difference-by-remapping-a-digit",
+      "frontendId": "2566",
+      "title": {
+        "en": "Maximum Difference by Remapping a Digit",
+        "zh": "替换一个数字后的最大差值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-swap",
+      "frontendId": "670",
+      "title": {
+        "en": "Maximum Swap",
+        "zh": "最大交换"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-string-after-operations-with-constraint",
+      "frontendId": "3106",
+      "title": {
+        "en": "Lexicographically Smallest String After Operations With Constraint",
+        "zh": "满足距离约束且字典序最小的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1515,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-sum-of-squares-of-digits",
+      "frontendId": "3723",
+      "title": {
+        "en": "Maximize Sum of Squares of Digits",
+        "zh": "数位平方和的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1537,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "previous-permutation-with-one-swap",
+      "frontendId": "1053",
+      "title": {
+        "en": "Previous Permutation With One Swap",
+        "zh": "交换一次的先前排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1633,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "construct-smallest-number-from-di-string",
+      "frontendId": "2375",
+      "title": {
+        "en": "Construct Smallest Number From DI String",
+        "zh": "根据模式串构造最小数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1642,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "construct-string-with-repeat-limit",
+      "frontendId": "2182",
+      "title": {
+        "en": "Construct String With Repeat Limit",
+        "zh": "构造限制重复的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1680,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "monotone-increasing-digits",
+      "frontendId": "738",
+      "title": {
+        "en": "Monotone Increasing Digits",
+        "zh": "单调递增的数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-lexicographically-largest-string-from-the-box-i",
+      "frontendId": "3403",
+      "title": {
+        "en": "Find the Lexicographically Largest String From the Box I",
+        "zh": "从盒子中找出字典序最大的字符串 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1762,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-minimum-string-after-removing-stars",
+      "frontendId": "3170",
+      "title": {
+        "en": "Lexicographically Minimum String After Removing Stars",
+        "zh": "删除星号以后字典序最小的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1772,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "largest-multiple-of-three",
+      "frontendId": "1363",
+      "title": {
+        "en": "Largest Multiple of Three",
+        "zh": "形成三的最大倍数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1823,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-negated-permutation-that-sums-to-target",
+      "frontendId": "3752",
+      "title": {
+        "en": "Lexicographically Smallest Negated Permutation that Sums to Target",
+        "zh": "字典序最小和为目标值且绝对值是排列的数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1827,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "largest-merge-of-two-strings",
+      "frontendId": "1754",
+      "title": {
+        "en": "Largest Merge Of Two Strings",
+        "zh": "构造字典序最大的合并字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1829,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-string-with-swaps",
+      "frontendId": "1202",
+      "title": {
+        "en": "Smallest String With Swaps",
+        "zh": "交换字符串中的元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1855,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "using-a-robot-to-print-the-lexicographically-smallest-string",
+      "frontendId": "2434",
+      "title": {
+        "en": "Using a Robot to Print the Lexicographically Smallest String",
+        "zh": "使用机器人打印字典序最小的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1953,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "make-lexicographically-smallest-array-by-swapping-elements",
+      "frontendId": "2948",
+      "title": {
+        "en": "Make Lexicographically Smallest Array by Swapping Elements",
+        "zh": "交换得到字典序最小的数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2047,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits",
+      "frontendId": "1505",
+      "title": {
+        "en": "Minimum Possible Integer After at Most K Adjacent Swaps On Digits",
+        "zh": "最多 K 次交换相邻数位后得到的最小整数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2337,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-generated-string",
+      "frontendId": "3474",
+      "title": {
+        "en": "Lexicographically Smallest Generated String",
+        "zh": "字典序最小的生成字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2605,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "split-concatenated-strings",
+      "frontendId": "555",
+      "title": {
+        "en": "Split Concatenated Strings",
+        "zh": "分割连接字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "make-string-anti-palindrome",
+      "frontendId": "3088",
+      "title": {
+        "en": "Make String Anti-palindrome",
+        "zh": "使字符串反回文"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-permutation-greater-than-target",
+      "frontendId": "3720",
+      "title": {
+        "en": "Lexicographically Smallest Permutation Greater Than Target",
+        "zh": "大于目标字符串的最小字典序排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1958,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-palindromic-permutation-greater-than-target",
+      "frontendId": "3734",
+      "title": {
+        "en": "Lexicographically Smallest Palindromic Permutation Greater Than Target",
+        "zh": "大于目标字符串的最小字典序回文排列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2330,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-beautiful-string",
+      "frontendId": "2663",
+      "title": {
+        "en": "Lexicographically Smallest Beautiful String",
+        "zh": "字典序最小的美丽字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2416,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "next-greater-numerically-balanced-number",
+      "frontendId": "2048",
+      "title": {
+        "en": "Next Greater Numerically Balanced Number",
+        "zh": "下一个更大的数值平衡数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "next-special-palindrome-number",
+      "frontendId": "3646",
+      "title": {
+        "en": "Next Special Palindrome Number",
+        "zh": "下一个特殊回文数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-divisible-digit-product-ii",
+      "frontendId": "3348",
+      "title": {
+        "en": "Smallest Divisible Digit Product II",
+        "zh": "最小可整除数位乘积 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 3101,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "longest-palindrome",
+      "frontendId": "409",
+      "title": {
+        "en": "Longest Palindrome",
+        "zh": "最长回文串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-palindrome",
+      "frontendId": "2697",
+      "title": {
+        "en": "Lexicographically Smallest Palindrome",
+        "zh": "字典序最小回文串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1304,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-palindromic-rearrangement-i",
+      "frontendId": "3517",
+      "title": {
+        "en": "Smallest Palindromic Rearrangement I",
+        "zh": "最小回文排列 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1357,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "valid-palindrome-ii",
+      "frontendId": "680",
+      "title": {
+        "en": "Valid Palindrome II",
+        "zh": "验证回文串 II"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "break-a-palindrome",
+      "frontendId": "1328",
+      "title": {
+        "en": "Break a Palindrome",
+        "zh": "破坏回文串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1474,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "construct-k-palindrome-strings",
+      "frontendId": "1400",
+      "title": {
+        "en": "Construct K Palindrome Strings",
+        "zh": "构造 K 个回文字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1530,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-palindrome-by-concatenating-two-letter-words",
+      "frontendId": "2131",
+      "title": {
+        "en": "Longest Palindrome by Concatenating Two Letter Words",
+        "zh": "连接两字母单词得到的最长回文串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1557,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "largest-palindromic-number",
+      "frontendId": "2384",
+      "title": {
+        "en": "Largest Palindromic Number",
+        "zh": "最大回文数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1636,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-palindromes-after-operations",
+      "frontendId": "3035",
+      "title": {
+        "en": "Maximum Palindromes After Operations",
+        "zh": "回文字符串的最大数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1857,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "split-two-strings-to-make-palindrome",
+      "frontendId": "1616",
+      "title": {
+        "en": "Split Two Strings to Make Palindrome",
+        "zh": "分割两个字符串得到回文串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1868,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-chunked-palindrome-decomposition",
+      "frontendId": "1147",
+      "title": {
+        "en": "Longest Chunked Palindrome Decomposition",
+        "zh": "段式回文"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1912,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-moves-to-make-palindrome",
+      "frontendId": "2193",
+      "title": {
+        "en": "Minimum Number of Moves to Make Palindrome",
+        "zh": "得到回文串的最少操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2091,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-palindromic-permutation-greater-than-target",
+      "frontendId": "3734",
+      "title": {
+        "en": "Lexicographically Smallest Palindromic Permutation Greater Than Target",
+        "zh": "大于目标字符串的最小字典序回文排列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2330,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "next-special-palindrome-number",
+      "frontendId": "3646",
+      "title": {
+        "en": "Next Special Palindrome Number",
+        "zh": "下一个特殊回文数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "palindrome-permutation",
+      "frontendId": "266",
+      "title": {
+        "en": "Palindrome Permutation",
+        "zh": "回文排列"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "merge-operations-to-turn-array-into-a-palindrome",
+      "frontendId": "2422",
+      "title": {
+        "en": "Merge Operations to Turn Array Into a Palindrome",
+        "zh": "使用合并操作将数组转换为回文序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "next-palindrome-using-same-digits",
+      "frontendId": "1842",
+      "title": {
+        "en": "Next Palindrome Using Same Digits",
+        "zh": "下个由相同数字构成的回文串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "make-string-anti-palindrome",
+      "frontendId": "3088",
+      "title": {
+        "en": "Make String Anti-palindrome",
+        "zh": "使字符串反回文"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-sum-of-four-digit-number-after-splitting-digits",
+      "frontendId": "2160",
+      "title": {
+        "en": "Minimum Sum of Four Digit Number After Splitting Digits",
+        "zh": "拆分数位后四位数字的最小和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1314,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "split-with-minimum-sum",
+      "frontendId": "2578",
+      "title": {
+        "en": "Split With Minimum Sum",
+        "zh": "最小和分割"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1351,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-rounds-to-complete-all-tasks",
+      "frontendId": "2244",
+      "title": {
+        "en": "Minimum Rounds to Complete All Tasks",
+        "zh": "完成所有任务需要的最少轮数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1372,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-make-array-empty",
+      "frontendId": "2870",
+      "title": {
+        "en": "Minimum Number of Operations to Make Array Empty",
+        "zh": "使数组为空的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1392,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-move-chips-to-the-same-position",
+      "frontendId": "1217",
+      "title": {
+        "en": "Minimum Cost to Move Chips to The Same Position",
+        "zh": "玩筹码"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1408,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "apply-operations-to-make-sum-of-array-greater-than-or-equal-to-k",
+      "frontendId": "3091",
+      "title": {
+        "en": "Apply Operations to Make Sum of Array Greater Than or Equal to k",
+        "zh": "执行操作使数据元素之和大于等于 K"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1522,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "integer-replacement",
+      "frontendId": "397",
+      "title": {
+        "en": "Integer Replacement",
+        "zh": "整数替换"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-product-of-three-numbers",
+      "frontendId": "628",
+      "title": {
+        "en": "Maximum Product of Three Numbers",
+        "zh": "三个数的最大乘积"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-product-of-three-elements-after-one-replacement",
+      "frontendId": "3732",
+      "title": {
+        "en": "Maximum Product of Three Elements After One Replacement",
+        "zh": "一次替换后的三元素最大乘积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1529,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-length-of-subarray-with-positive-product",
+      "frontendId": "1567",
+      "title": {
+        "en": "Maximum Length of Subarray With Positive Product",
+        "zh": "乘积为正数的最长子数组长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1710,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-total-price-after-applying-discounts",
+      "frontendId": "4014",
+      "title": {
+        "en": "Minimum Total Price After Applying Discounts",
+        "zh": "应用折扣后的最低总价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1192,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-total-sum-of-k-selected-elements",
+      "frontendId": "3974",
+      "title": {
+        "en": "Maximum Total Sum of K Selected Elements",
+        "zh": "K 个元素的最大总和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1263,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-total-importance-of-roads",
+      "frontendId": "2285",
+      "title": {
+        "en": "Maximum Total Importance of Roads",
+        "zh": "道路的最大总重要性"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1496,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-pushes-to-type-word-ii",
+      "frontendId": "3016",
+      "title": {
+        "en": "Minimum Number of Pushes to Type Word II",
+        "zh": "输入单词需要的最少按键次数 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1534,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "reducing-dishes",
+      "frontendId": "1402",
+      "title": {
+        "en": "Reducing Dishes",
+        "zh": "做菜顺序"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1679,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-spending-after-buying-items",
+      "frontendId": "2931",
+      "title": {
+        "en": "Maximum Spending After Buying Items",
+        "zh": "购买物品的最大开销"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1822,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-sum-obtained-of-any-permutation",
+      "frontendId": "1589",
+      "title": {
+        "en": "Maximum Sum Obtained of Any Permutation",
+        "zh": "所有排列中的最大和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1871,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-product-sum-of-two-arrays",
+      "frontendId": "1874",
+      "title": {
+        "en": "Minimize Product Sum of Two Arrays",
+        "zh": "两个数组的最小乘积和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-keypresses",
+      "frontendId": "2268",
+      "title": {
+        "en": "Minimum Number of Keypresses",
+        "zh": "最少按键次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "rearranging-fruits",
+      "frontendId": "2561",
+      "title": {
+        "en": "Rearranging Fruits",
+        "zh": "重排水果"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2222,
+      "sectionId": "4.3",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-sum-of-edge-values-in-a-graph",
+      "frontendId": "3547",
+      "title": {
+        "en": "Maximum Sum of Edge Values in a Graph",
+        "zh": "图中边值的最大和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.3",
+      "level": "stretch"
+    },
+    {
+      "slug": "replace-question-marks-in-string-to-minimize-its-value",
+      "frontendId": "3081",
+      "title": {
+        "en": "Replace Question Marks in String to Minimize Its Value",
+        "zh": "替换字符串中的问号使分数最小"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1905,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-non-zero-product-of-the-array-elements",
+      "frontendId": "1969",
+      "title": {
+        "en": "Minimum Non-Zero Product of the Array Elements",
+        "zh": "数组元素的最小非零乘积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1967,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-xor-product",
+      "frontendId": "2939",
+      "title": {
+        "en": "Maximum Xor Product",
+        "zh": "最大异或乘积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2128,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-sum-of-squares-of-digits",
+      "frontendId": "3723",
+      "title": {
+        "en": "Maximize Sum of Squares of Digits",
+        "zh": "数位平方和的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1537,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "apply-operations-on-array-to-maximize-sum-of-squares",
+      "frontendId": "2897",
+      "title": {
+        "en": "Apply Operations on Array to Maximize Sum of Squares",
+        "zh": "对数组执行操作使平方和最大"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2301,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-equal-array-elements-ii",
+      "frontendId": "462",
+      "title": {
+        "en": "Minimum Moves to Equal Array Elements II",
+        "zh": "最小操作次数使数组元素相等 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-a-uni-value-grid",
+      "frontendId": "2033",
+      "title": {
+        "en": "Minimum Operations to Make a Uni-Value Grid",
+        "zh": "获取单值网格的最小操作数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1672,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-make-array-equal",
+      "frontendId": "2448",
+      "title": {
+        "en": "Minimum Cost to Make Array Equal",
+        "zh": "使数组相等的最小开销"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2005,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "make-k-subarray-sums-equal",
+      "frontendId": "2607",
+      "title": {
+        "en": "Make K-Subarray Sums Equal",
+        "zh": "使子数组元素和相等"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2071,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-make-array-equalindromic",
+      "frontendId": "2967",
+      "title": {
+        "en": "Minimum Cost to Make Array Equalindromic",
+        "zh": "使数组成为等数数组的最小代价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2116,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "allocate-mailboxes",
+      "frontendId": "1478",
+      "title": {
+        "en": "Allocate Mailboxes",
+        "zh": "安排邮筒"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2190,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "apply-operations-to-maximize-frequency-score",
+      "frontendId": "2968",
+      "title": {
+        "en": "Apply Operations to Maximize Frequency Score",
+        "zh": "执行操作使频率分数最大"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2444,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-adjacent-swaps-for-k-consecutive-ones",
+      "frontendId": "1703",
+      "title": {
+        "en": "Minimum Adjacent Swaps for K Consecutive Ones",
+        "zh": "得到连续 K 个 1 的最少相邻交换次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2467,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-equalize-subarrays",
+      "frontendId": "3762",
+      "title": {
+        "en": "Minimum Operations to Equalize Subarrays",
+        "zh": "使数组元素相等的最小操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2497,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-pick-k-ones",
+      "frontendId": "3086",
+      "title": {
+        "en": "Minimum Moves to Pick K Ones",
+        "zh": "拾起 K 个 1 需要的最少行动次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2673,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-good-caption",
+      "frontendId": "3441",
+      "title": {
+        "en": "Minimum Cost Good Caption",
+        "zh": "变成好标题的最少代价"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "best-meeting-point",
+      "frontendId": "296",
+      "title": {
+        "en": "Best Meeting Point",
+        "zh": "最佳的碰头地点"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-array-modulo-alternating-i",
+      "frontendId": "3937",
+      "title": {
+        "en": "Minimum Operations to Make Array Modulo Alternating I",
+        "zh": "使数组变为模交替数组的最少操作次数 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.5",
+      "level": "stretch"
+    },
+    {
+      "slug": "minimum-number-of-coins-to-be-added",
+      "frontendId": "2952",
+      "title": {
+        "en": "Minimum Number of Coins to be Added",
+        "zh": "需要添加的硬币的最小数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1784,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "patching-array",
+      "frontendId": "330",
+      "title": {
+        "en": "Patching Array",
+        "zh": "按要求补齐数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-consecutive-values-you-can-make",
+      "frontendId": "1798",
+      "title": {
+        "en": "Maximum Number of Consecutive Values You Can Make",
+        "zh": "你能构造出连续值的最大数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1931,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k",
+      "frontendId": "1414",
+      "title": {
+        "en": "Find the Minimum Number of Fibonacci Numbers Whose Sum Is K",
+        "zh": "和为 K 的最少斐波那契数字数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1466,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-median-of-array-equal-to-k",
+      "frontendId": "3107",
+      "title": {
+        "en": "Minimum Operations to Make Median of Array Equal to K",
+        "zh": "使数组中位数等于 K 的最少操作数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1605,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "reach-a-number",
+      "frontendId": "754",
+      "title": {
+        "en": "Reach a Number",
+        "zh": "到达终点数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-rounding-error-to-meet-target",
+      "frontendId": "1058",
+      "title": {
+        "en": "Minimize Rounding Error to Meet Target",
+        "zh": "最小化舍入误差以满足目标"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "construct-the-longest-new-string",
+      "frontendId": "2745",
+      "title": {
+        "en": "Construct the Longest New String",
+        "zh": "构造最长的新字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1607,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "mice-and-cheese",
+      "frontendId": "2611",
+      "title": {
+        "en": "Mice and Cheese",
+        "zh": "老鼠和奶酪"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1663,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "two-city-scheduling",
+      "frontendId": "1029",
+      "title": {
+        "en": "Two City Scheduling",
+        "zh": "两地调度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-additions-to-make-valid-string",
+      "frontendId": "2645",
+      "title": {
+        "en": "Minimum Additions to Make Valid String",
+        "zh": "构造有效字符串的最少插入数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-topmost-element-after-k-moves",
+      "frontendId": "2202",
+      "title": {
+        "en": "Maximize the Topmost Element After K Moves",
+        "zh": "K 次操作后最大化顶端元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1717,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-impossible-or",
+      "frontendId": "2568",
+      "title": {
+        "en": "Minimum Impossible OR",
+        "zh": "最小无法得到的或值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1754,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-binary-string-after-change",
+      "frontendId": "1702",
+      "title": {
+        "en": "Maximum Binary String After Change",
+        "zh": "修改后的最大二进制字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1825,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-length-of-array-using-operations",
+      "frontendId": "3012",
+      "title": {
+        "en": "Minimize Length of Array Using Operations",
+        "zh": "通过操作使数组长度最小"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1833,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-impossible-sequence-of-rolls",
+      "frontendId": "2350",
+      "title": {
+        "en": "Shortest Impossible Sequence of Rolls",
+        "zh": "不可能得到的最短骰子序列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1961,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "jump-game-ix",
+      "frontendId": "3660",
+      "title": {
+        "en": "Jump Game IX",
+        "zh": "跳跃游戏 IX"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2187,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "super-washing-machines",
+      "frontendId": "517",
+      "title": {
+        "en": "Super Washing Machines",
+        "zh": "超级洗衣机"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-total-cost-to-make-arrays-unequal",
+      "frontendId": "2499",
+      "title": {
+        "en": "Minimum Total Cost to Make Arrays Unequal",
+        "zh": "让数组不相等的最小总代价"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2633,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-the-maximum-adjacent-element-difference",
+      "frontendId": "3357",
+      "title": {
+        "en": "Minimize the Maximum Adjacent Element Difference",
+        "zh": "最小化相邻元素的最大差值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 3077,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-unlocked-indices-to-sort-nums",
+      "frontendId": "3431",
+      "title": {
+        "en": "Minimum Unlocked Indices to Sort Nums",
+        "zh": "对数字排序的最小解锁下标"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "neither-minimum-nor-maximum",
+      "frontendId": "2733",
+      "title": {
+        "en": "Neither Minimum nor Maximum",
+        "zh": "既不是最小值也不是最大值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1148,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-partitions-with-even-sum-difference",
+      "frontendId": "3432",
+      "title": {
+        "en": "Count Partitions with Even Sum Difference",
+        "zh": "统计元素和差值为偶数的分区方案"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1200,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "construct-uniform-parity-array-i",
+      "frontendId": "3875",
+      "title": {
+        "en": "Construct Uniform Parity Array I",
+        "zh": "构造奇偶一致的数组 I"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1200,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "largest-odd-number-in-string",
+      "frontendId": "1903",
+      "title": {
+        "en": "Largest Odd Number in String",
+        "zh": "字符串中的最大奇数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1249,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "even-number-of-knight-moves",
+      "frontendId": "3996",
+      "title": {
+        "en": "Even Number of Knight Moves",
+        "zh": "偶数次骑士移动"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1260,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-distinct-numbers-on-board",
+      "frontendId": "2549",
+      "title": {
+        "en": "Count Distinct Numbers on Board",
+        "zh": "统计桌面上的不同数字"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1266,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-string-length-after-balanced-removals",
+      "frontendId": "3746",
+      "title": {
+        "en": "Minimum String Length After Balanced Removals",
+        "zh": "等量移除后的字符串最小长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1327,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "strictly-palindromic-number",
+      "frontendId": "2396",
+      "title": {
+        "en": "Strictly Palindromic Number",
+        "zh": "严格回文的数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1329,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "partitioning-into-minimum-number-of-deci-binary-numbers",
+      "frontendId": "1689",
+      "title": {
+        "en": "Partitioning Into Minimum Number Of Deci-Binary Numbers",
+        "zh": "十-二进制数的最少数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1355,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-substrings-with-distinct-start",
+      "frontendId": "3760",
+      "title": {
+        "en": "Maximum Substrings With Distinct Start",
+        "zh": "不同首字母的子字符串数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1364,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-equalize-array",
+      "frontendId": "3674",
+      "title": {
+        "en": "Minimum Operations to Equalize Array",
+        "zh": "数组元素相等的最小操作次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1369,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-total-subarray-value-i",
+      "frontendId": "3689",
+      "title": {
+        "en": "Maximum Total Subarray Value I",
+        "zh": "最大子数组总值 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1371,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "two-furthest-houses-with-different-colors",
+      "frontendId": "2078",
+      "title": {
+        "en": "Two Furthest Houses With Different Colors",
+        "zh": "两栋颜色不同且距离最远的房子"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "range-addition-ii",
+      "frontendId": "598",
+      "title": {
+        "en": "Range Addition II",
+        "zh": "区间加法 II"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-uncommon-subsequence-i",
+      "frontendId": "521",
+      "title": {
+        "en": "Longest Uncommon Subsequence I",
+        "zh": "最长特殊序列 Ⅰ"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-transform-string",
+      "frontendId": "3675",
+      "title": {
+        "en": "Minimum Operations to Transform String",
+        "zh": "转换字符串的最小操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1414,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "vowels-game-in-a-string",
+      "frontendId": "3227",
+      "title": {
+        "en": "Vowels Game in a String",
+        "zh": "字符串元音游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1452,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-balanced-shipments",
+      "frontendId": "3638",
+      "title": {
+        "en": "Maximum Balanced Shipments",
+        "zh": "平衡装运的最大数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1463,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-subsequence-with-non-zero-bitwise-xor",
+      "frontendId": "3702",
+      "title": {
+        "en": "Longest Subsequence With Non-Zero Bitwise XOR",
+        "zh": "按位异或非零的最长子序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1489,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-reach-target-array",
+      "frontendId": "3810",
+      "title": {
+        "en": "Minimum Operations to Reach Target Array",
+        "zh": "变成目标数组的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1492,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-subarray-with-maximum-bitwise-and",
+      "frontendId": "2419",
+      "title": {
+        "en": "Longest Subarray With Maximum Bitwise AND",
+        "zh": "按位与最大的最长子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1496,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-make-arrays-identical",
+      "frontendId": "3424",
+      "title": {
+        "en": "Minimum Cost to Make Arrays Identical",
+        "zh": "将数组变相同的最小代价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1503,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-all-groups-of-farmland",
+      "frontendId": "1992",
+      "title": {
+        "en": "Find All Groups of Farmland",
+        "zh": "找到所有的农场组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1539,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-domino-rotations-for-equal-row",
+      "frontendId": "1007",
+      "title": {
+        "en": "Minimum Domino Rotations For Equal Row",
+        "zh": "行相等的最少多米诺旋转"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1541,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-it-is-possible-to-split-array",
+      "frontendId": "2811",
+      "title": {
+        "en": "Check if it is Possible to Split Array",
+        "zh": "判断是否能拆分数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1543,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-total-cost-to-process-all-elements",
+      "frontendId": "3987",
+      "title": {
+        "en": "Minimum Total Cost to Process All Elements",
+        "zh": "处理所有元素的成本"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1550,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "island-perimeter",
+      "frontendId": "463",
+      "title": {
+        "en": "Island Perimeter",
+        "zh": "岛屿的周长"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-collisions-on-a-road",
+      "frontendId": "2211",
+      "title": {
+        "en": "Count Collisions on a Road",
+        "zh": "统计道路上的碰撞次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1581,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game",
+      "frontendId": "877",
+      "title": {
+        "en": "Stone Game",
+        "zh": "石子游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1590,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-points-after-enemy-battles",
+      "frontendId": "3207",
+      "title": {
+        "en": "Maximum Points After Enemy Battles",
+        "zh": "与敌人战斗后的最大分数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1591,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "final-element-after-subarray-deletions",
+      "frontendId": "3828",
+      "title": {
+        "en": "Final Element After Subarray Deletions",
+        "zh": "删除子数组后的最终元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1591,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-largest-almost-missing-integer",
+      "frontendId": "3471",
+      "title": {
+        "en": "Find the Largest Almost Missing Integer",
+        "zh": "找出最大的几近缺失整数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "apply-bitwise-operations-to-make-strings-equal",
+      "frontendId": "2546",
+      "title": {
+        "en": "Apply Bitwise Operations to Make Strings Equal",
+        "zh": "执行逐位运算使字符串相等"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1605,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "last-moment-before-all-ants-fall-out-of-a-plank",
+      "frontendId": "1503",
+      "title": {
+        "en": "Last Moment Before All Ants Fall Out of a Plank",
+        "zh": "所有蚂蚁掉下来前的最后一刻"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1619,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "happy-students",
+      "frontendId": "2860",
+      "title": {
+        "en": "Happy Students",
+        "zh": "让所有学生保持开心的分组方法数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1626,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "remove-palindromic-subsequences",
+      "frontendId": "1332",
+      "title": {
+        "en": "Remove Palindromic Subsequences",
+        "zh": "删除回文子序列"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1629,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-matrix-sum",
+      "frontendId": "1975",
+      "title": {
+        "en": "Maximum Matrix Sum",
+        "zh": "最大方阵和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1648,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-coloring-game",
+      "frontendId": "1145",
+      "title": {
+        "en": "Binary Tree Coloring Game",
+        "zh": "二叉树着色游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1741,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-homecoming-of-a-robot-in-a-grid",
+      "frontendId": "2087",
+      "title": {
+        "en": "Minimum Cost Homecoming of a Robot in a Grid",
+        "zh": "网格图中机器人回家的最小代价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1744,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-occurrences-of-a-substring",
+      "frontendId": "1297",
+      "title": {
+        "en": "Maximum Number of Occurrences of a Substring",
+        "zh": "子串的最大出现次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1748,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-computer-unlocking-permutations",
+      "frontendId": "3577",
+      "title": {
+        "en": "Count the Number of Computer Unlocking Permutations",
+        "zh": "统计计算机解锁顺序排列数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1750,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "reach-end-of-array-with-max-score",
+      "frontendId": "3282",
+      "title": {
+        "en": "Reach End of Array With Max Score",
+        "zh": "到达数组末尾的最大得分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1772,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-k-to-sort-a-permutation",
+      "frontendId": "3644",
+      "title": {
+        "en": "Maximum K to Sort a Permutation",
+        "zh": "排序排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1775,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-make-all-characters-equal",
+      "frontendId": "2712",
+      "title": {
+        "en": "Minimum Cost to Make All Characters Equal",
+        "zh": "使所有字符相等的最小成本"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1791,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-difference-score-in-a-grid",
+      "frontendId": "3148",
+      "title": {
+        "en": "Maximum Difference Score in a Grid",
+        "zh": "矩阵中的最大得分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1820,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-binary-subsequence-less-than-or-equal-to-k",
+      "frontendId": "2311",
+      "title": {
+        "en": "Longest Binary Subsequence Less Than or Equal to K",
+        "zh": "小于等于 K 的最长二进制子序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1840,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "the-latest-time-to-catch-a-bus",
+      "frontendId": "2332",
+      "title": {
+        "en": "The Latest Time to Catch a Bus",
+        "zh": "坐上公交的最晚时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1841,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-sum-of-device-ratings",
+      "frontendId": "3961",
+      "title": {
+        "en": "Maximize Sum of Device Ratings",
+        "zh": "设备评分的最大和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1880,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-or",
+      "frontendId": "2680",
+      "title": {
+        "en": "Maximum OR",
+        "zh": "最大或值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1912,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "movement-of-robots",
+      "frontendId": "2731",
+      "title": {
+        "en": "Movement of Robots",
+        "zh": "移动机器人"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1923,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "disconnect-path-in-a-binary-matrix-by-at-most-one-flip",
+      "frontendId": "2556",
+      "title": {
+        "en": "Disconnect Path in a Binary Matrix by at Most One Flip",
+        "zh": "二进制矩阵中翻转最多一次使路径不连通"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2369,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-total-operations",
+      "frontendId": "3353",
+      "title": {
+        "en": "Minimum Total Operations",
+        "zh": "最小总操作数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "largest-subarray-length-k",
+      "frontendId": "1708",
+      "title": {
+        "en": "Largest Subarray Length K",
+        "zh": "长度为 K 的最大子数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-path-with-alternating-directions-i",
+      "frontendId": "3596",
+      "title": {
+        "en": "Minimum Cost Path with Alternating Directions I",
+        "zh": "交替方向的最小路径代价 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-score-after-pair-deletions",
+      "frontendId": "3496",
+      "title": {
+        "en": "Maximize Score After Pair Deletions",
+        "zh": "最大化配对删除后的得分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-that-makes-result-of-bitwise-and-zero",
+      "frontendId": "3125",
+      "title": {
+        "en": "Maximum Number That Makes Result of Bitwise AND Zero",
+        "zh": "使得按位与结果为 0 的最大数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-pairs-of-equal-substrings-with-minimum-difference",
+      "frontendId": "1794",
+      "title": {
+        "en": "Count Pairs of Equal Substrings With Minimum Difference",
+        "zh": "统计距离最小的子串对个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-equal-array-elements",
+      "frontendId": "453",
+      "title": {
+        "en": "Minimum Moves to Equal Array Elements",
+        "zh": "最小操作次数使数组元素相等"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-array-values-equal-to-k",
+      "frontendId": "3375",
+      "title": {
+        "en": "Minimum Operations to Make Array Values Equal to K",
+        "zh": "使数组的值全部为 K 的最少操作次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1383,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-strings-can-be-made-equal-with-operations-ii",
+      "frontendId": "2840",
+      "title": {
+        "en": "Check if Strings Can be Made Equal With Operations II",
+        "zh": "判断通过操作能否让字符串相等 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1486,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-changes-to-make-binary-string-beautiful",
+      "frontendId": "2914",
+      "title": {
+        "en": "Minimum Number of Changes to Make Binary String Beautiful",
+        "zh": "使二进制字符串变美丽的最少修改次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1480,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "rearrange-k-substrings-to-form-target-string",
+      "frontendId": "3365",
+      "title": {
+        "en": "Rearrange K Substrings to Form Target String",
+        "zh": "重排子字符串以形成目标字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1514,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "determine-if-two-strings-are-close",
+      "frontendId": "1657",
+      "title": {
+        "en": "Determine if Two Strings Are Close",
+        "zh": "确定两个字符串是否接近"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1530,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-equalize-arrays-using-swaps",
+      "frontendId": "3868",
+      "title": {
+        "en": "Minimum Cost to Equalize Arrays Using Swaps",
+        "zh": "通过交换使数组相等的最小花费"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1579,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-split-into-ones",
+      "frontendId": "3857",
+      "title": {
+        "en": "Minimum Cost to Split into Ones",
+        "zh": "拆分到 1 的最小总代价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "put-marbles-in-bags",
+      "frontendId": "2551",
+      "title": {
+        "en": "Put Marbles in Bags",
+        "zh": "将珠子放入背包中"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2042,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "perfect-rectangle",
+      "frontendId": "391",
+      "title": {
+        "en": "Perfect Rectangle",
+        "zh": "完美矩形"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-string-is-transformable-with-substring-sort-operations",
+      "frontendId": "1585",
+      "title": {
+        "en": "Check If String Is Transformable With Substring Sort Operations",
+        "zh": "检查字符串是否可以通过排序子字符串得到另一个字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2333,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "moving-stones-until-consecutive-ii",
+      "frontendId": "1040",
+      "title": {
+        "en": "Moving Stones Until Consecutive II",
+        "zh": "移动石子直到连续 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2456,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "fancy-sequence",
+      "frontendId": "1622",
+      "title": {
+        "en": "Fancy Sequence",
+        "zh": "奇妙序列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2476,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "group-shifted-strings",
+      "frontendId": "249",
+      "title": {
+        "en": "Group Shifted Strings",
+        "zh": "移位字符串分组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "group-anagrams",
+      "frontendId": "49",
+      "title": {
+        "en": "Group Anagrams",
+        "zh": "字母异位词分组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-ones",
+      "frontendId": "1183",
+      "title": {
+        "en": "Maximum Number of Ones",
+        "zh": "矩阵中 1 的最大数量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-reach-target-score",
+      "frontendId": "2139",
+      "title": {
+        "en": "Minimum Moves to Reach Target Score",
+        "zh": "得到目标值的最少行动次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1417,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-have-distinct-elements",
+      "frontendId": "3779",
+      "title": {
+        "en": "Minimum Number of Operations to Have Distinct Elements",
+        "zh": "得到互不相同元素的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1444,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-make-elements-in-array-distinct",
+      "frontendId": "3396",
+      "title": {
+        "en": "Minimum Number of Operations to Make Elements in Array Distinct",
+        "zh": "使数组元素互不相同所需的最少操作次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "taking-maximum-energy-from-the-mystic-dungeon",
+      "frontendId": "3147",
+      "title": {
+        "en": "Taking Maximum Energy From the Mystic Dungeon",
+        "zh": "从魔法师身上吸取的最大能量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1460,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "reordered-power-of-2",
+      "frontendId": "869",
+      "title": {
+        "en": "Reordered Power of 2",
+        "zh": "重新排序得到 2 的幂"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1505,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-numbers-of-function-calls-to-make-target-array",
+      "frontendId": "1558",
+      "title": {
+        "en": "Minimum Numbers of Function Calls to Make Target Array",
+        "zh": "得到目标数组的最少函数调用次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1637,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "brick-wall",
+      "frontendId": "554",
+      "title": {
+        "en": "Brick Wall",
+        "zh": "砖墙"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "reaching-points",
+      "frontendId": "780",
+      "title": {
+        "en": "Reaching Points",
+        "zh": "到达终点"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1897,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "pacific-atlantic-water-flow",
+      "frontendId": "417",
+      "title": {
+        "en": "Pacific Atlantic Water Flow",
+        "zh": "太平洋大西洋水流问题"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "broken-calculator",
+      "frontendId": "991",
+      "title": {
+        "en": "Broken Calculator",
+        "zh": "坏了的计算器"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1909,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "encrypt-and-decrypt-strings",
+      "frontendId": "2227",
+      "title": {
+        "en": "Encrypt and Decrypt Strings",
+        "zh": "加密解密字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1945,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "construct-target-array-with-multiple-sums",
+      "frontendId": "1354",
+      "title": {
+        "en": "Construct Target Array With Multiple Sums",
+        "zh": "多次求和构造目标数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2015,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-point-is-reachable",
+      "frontendId": "2543",
+      "title": {
+        "en": "Check if Point Is Reachable",
+        "zh": "判断一个点是否可以到达"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2221,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-k-th-character-in-string-game-ii",
+      "frontendId": "3307",
+      "title": {
+        "en": "Find the K-th Character in String Game II",
+        "zh": "找出第 K 个字符 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2232,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "process-string-with-special-operations-ii",
+      "frontendId": "3614",
+      "title": {
+        "en": "Process String with Special Operations II",
+        "zh": "用特殊操作处理字符串 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-the-maximum-edge-weight-of-graph",
+      "frontendId": "3419",
+      "title": {
+        "en": "Minimize the Maximum Edge Weight of Graph",
+        "zh": "图的最大边权的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2243,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-one-bit-operations-to-make-integers-zero",
+      "frontendId": "1611",
+      "title": {
+        "en": "Minimum One Bit Operations to Make Integers Zero",
+        "zh": "使整数变为 0 的最少操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2345,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-reach-target-in-grid",
+      "frontendId": "3609",
+      "title": {
+        "en": "Minimum Moves to Reach Target in Grid",
+        "zh": "到达目标点的最小移动次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2419,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "stamping-the-sequence",
+      "frontendId": "936",
+      "title": {
+        "en": "Stamping The Sequence",
+        "zh": "戳印序列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2583,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "transform-to-chessboard",
+      "frontendId": "782",
+      "title": {
+        "en": "Transform to Chessboard",
+        "zh": "变为棋盘"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "k-empty-slots",
+      "frontendId": "683",
+      "title": {
+        "en": "K Empty Slots",
+        "zh": "K 个关闭的灯泡"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-hamming-distances",
+      "frontendId": "3141",
+      "title": {
+        "en": "Maximum Hamming Distances",
+        "zh": "最大汉明距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "power-grid-maintenance",
+      "frontendId": "3607",
+      "title": {
+        "en": "Power Grid Maintenance",
+        "zh": "电网维护"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1700,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-matrix-after-queries",
+      "frontendId": "2718",
+      "title": {
+        "en": "Sum of Matrix After Queries",
+        "zh": "查询后矩阵的和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1769,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-activate-string",
+      "frontendId": "3639",
+      "title": {
+        "en": "Minimum Time to Activate String",
+        "zh": "变为活跃状态的最小时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1853,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "last-day-where-you-can-still-cross",
+      "frontendId": "1970",
+      "title": {
+        "en": "Last Day Where You Can Still Cross",
+        "zh": "你能穿过矩阵的最后一天"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2124,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-segment-sum-after-removals",
+      "frontendId": "2382",
+      "title": {
+        "en": "Maximum Segment Sum After Removals",
+        "zh": "删除操作后的最大子段和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2136,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "bricks-falling-when-hit",
+      "frontendId": "803",
+      "title": {
+        "en": "Bricks Falling When Hit",
+        "zh": "打砖块"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2765,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "count-commas-in-range-ii",
+      "frontendId": "3871",
+      "title": {
+        "en": "Count Commas in Range II",
+        "zh": "统计范围内的逗号 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1381,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "vowels-of-all-substrings",
+      "frontendId": "2063",
+      "title": {
+        "en": "Vowels of All Substrings",
+        "zh": "所有子字符串中的元音"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1663,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "distribute-coins-in-binary-tree",
+      "frontendId": "979",
+      "title": {
+        "en": "Distribute Coins in Binary Tree",
+        "zh": "在二叉树中分配硬币"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1709,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-all-odd-length-subarrays",
+      "frontendId": "1588",
+      "title": {
+        "en": "Sum of All Odd Length Subarrays",
+        "zh": "所有奇数长度子数组的和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "total-score-of-dungeon-runs",
+      "frontendId": "3771",
+      "title": {
+        "en": "Total Score of Dungeon Runs",
+        "zh": "探索地牢的得分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1981,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-fuel-cost-to-report-to-the-capital",
+      "frontendId": "2477",
+      "title": {
+        "en": "Minimum Fuel Cost to Report to the Capital",
+        "zh": "到达首都的最少油耗"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2012,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "power-of-heroes",
+      "frontendId": "2681",
+      "title": {
+        "en": "Power of Heroes",
+        "zh": "英雄的力量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2060,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-k-digit-numbers-in-a-range",
+      "frontendId": "3855",
+      "title": {
+        "en": "Sum of K-Digit Numbers in a Range",
+        "zh": "给定范围内 K 位数字之和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2085,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "total-sum-of-interaction-cost-in-tree-groups",
+      "frontendId": "3786",
+      "title": {
+        "en": "Total Sum of Interaction Cost in Tree Groups",
+        "zh": "树组的交互代价总和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2139,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-subsequence-widths",
+      "frontendId": "891",
+      "title": {
+        "en": "Sum of Subsequence Widths",
+        "zh": "子序列宽度之和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2183,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-and-minimum-sums-of-at-most-size-k-subsequences",
+      "frontendId": "3428",
+      "title": {
+        "en": "Maximum and Minimum Sums of at Most Size K Subsequences",
+        "zh": "最多 K 个元素的子序列的最值之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "manhattan-distances-of-all-arrangements-of-pieces",
+      "frontendId": "3426",
+      "title": {
+        "en": "Manhattan Distances of All Arrangements of Pieces",
+        "zh": "所有安放棋子方案的曼哈顿距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2443,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-imbalance-numbers-of-all-subarrays",
+      "frontendId": "2763",
+      "title": {
+        "en": "Sum of Imbalance Numbers of All Subarrays",
+        "zh": "所有子数组中不平衡数字之和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "candy",
+      "frontendId": "135",
+      "title": {
+        "en": "Candy",
+        "zh": "分发糖果"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.6",
+      "level": "core"
+    },
+    {
+      "slug": "find-maximum-value-in-a-constrained-sequence",
+      "frontendId": "3796",
+      "title": {
+        "en": "Find Maximum Value in a Constrained Sequence",
+        "zh": "找到带限制序列的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1833,
+      "sectionId": "5.6",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-minimum-amount-of-time-to-brew-potions",
+      "frontendId": "3494",
+      "title": {
+        "en": "Find the Minimum Amount of Time to Brew Potions",
+        "zh": "酿造药水需要的最少总时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2042,
+      "sectionId": "5.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-building-height",
+      "frontendId": "1840",
+      "title": {
+        "en": "Maximum Building Height",
+        "zh": "最高建筑高度"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2374,
+      "sectionId": "5.6",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-string-with-swaps",
+      "frontendId": "1202",
+      "title": {
+        "en": "Smallest String With Swaps",
+        "zh": "交换字符串中的元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1855,
+      "sectionId": "5.7",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-hamming-distance-after-swap-operations",
+      "frontendId": "1722",
+      "title": {
+        "en": "Minimize Hamming Distance After Swap Operations",
+        "zh": "执行交换操作后的最小汉明距离"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1892,
+      "sectionId": "5.7",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-alternating-sum-using-swaps",
+      "frontendId": "3695",
+      "title": {
+        "en": "Maximize Alternating Sum Using Swaps",
+        "zh": "交换元素后的最大交替和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1984,
+      "sectionId": "5.7",
+      "level": "core"
+    },
+    {
+      "slug": "make-lexicographically-smallest-array-by-swapping-elements",
+      "frontendId": "2948",
+      "title": {
+        "en": "Make Lexicographically Smallest Array by Swapping Elements",
+        "zh": "交换得到字典序最小的数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2047,
+      "sectionId": "5.7",
+      "level": "core"
+    },
+    {
+      "slug": "categorize-box-according-to-criteria",
+      "frontendId": "2525",
+      "title": {
+        "en": "Categorize Box According to Criteria",
+        "zh": "根据规则将箱子分类"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1301,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "lemonade-change",
+      "frontendId": "860",
+      "title": {
+        "en": "Lemonade Change",
+        "zh": "柠檬水找零"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-value-of-the-rearranged-number",
+      "frontendId": "2165",
+      "title": {
+        "en": "Smallest Value of the Rearranged Number",
+        "zh": "重排数字的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1362,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "removing-minimum-and-maximum-from-array",
+      "frontendId": "2091",
+      "title": {
+        "en": "Removing Minimum and Maximum From Array",
+        "zh": "从数组中移除最大值和最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1384,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "moving-stones-until-consecutive",
+      "frontendId": "1033",
+      "title": {
+        "en": "Moving Stones Until Consecutive",
+        "zh": "移动石子直到连续"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1421,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "construct-uniform-parity-array-ii",
+      "frontendId": "3876",
+      "title": {
+        "en": "Construct Uniform Parity Array II",
+        "zh": "构造奇偶一致的数组 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1444,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-equal-sum-of-two-arrays-after-replacing-zeros",
+      "frontendId": "2918",
+      "title": {
+        "en": "Minimum Equal Sum of Two Arrays After Replacing Zeros",
+        "zh": "数组的最小相等和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1526,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "distribute-money-to-maximum-children",
+      "frontendId": "2591",
+      "title": {
+        "en": "Distribute Money to Maximum Children",
+        "zh": "将钱分给最多的儿童"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1531,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "longest-palindrome-by-concatenating-two-letter-words",
+      "frontendId": "2131",
+      "title": {
+        "en": "Longest Palindrome by Concatenating Two Letter Words",
+        "zh": "连接两字母单词得到的最长回文串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1557,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-acquire-required-items",
+      "frontendId": "3789",
+      "title": {
+        "en": "Minimum Cost to Acquire Required Items",
+        "zh": "采购的最小花费"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1580,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-a-special-number",
+      "frontendId": "2844",
+      "title": {
+        "en": "Minimum Operations to Make a Special Number",
+        "zh": "生成特殊数字的最少操作"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1588,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-swaps-to-make-strings-equal",
+      "frontendId": "1247",
+      "title": {
+        "en": "Minimum Swaps to Make Strings Equal",
+        "zh": "交换字符使得字符串相同"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1597,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "push-dominoes",
+      "frontendId": "838",
+      "title": {
+        "en": "Push Dominoes",
+        "zh": "推多米诺"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1638,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-the-array-alternating",
+      "frontendId": "2170",
+      "title": {
+        "en": "Minimum Operations to Make the Array Alternating",
+        "zh": "使数组变成交替数组的最少操作数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1663,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-topmost-element-after-k-moves",
+      "frontendId": "2202",
+      "title": {
+        "en": "Maximize the Topmost Element After K Moves",
+        "zh": "K 次操作后最大化顶端元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1717,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-flips-to-make-binary-string-coherent",
+      "frontendId": "3922",
+      "title": {
+        "en": "Minimum Flips to Make Binary String Coherent",
+        "zh": "使二进制字符串连贯的最少翻转次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1759,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "find-longest-special-substring-that-occurs-thrice-ii",
+      "frontendId": "2982",
+      "title": {
+        "en": "Find Longest Special Substring That Occurs Thrice II",
+        "zh": "找出出现至少三次的最长特殊子字符串 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1773,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-transform-array",
+      "frontendId": "3724",
+      "title": {
+        "en": "Minimum Operations to Transform Array",
+        "zh": "转换数组的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1790,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-capture-the-queen",
+      "frontendId": "3001",
+      "title": {
+        "en": "Minimum Moves to Capture The Queen",
+        "zh": "捕获黑皇后需要的最少移动次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1797,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "remove-letter-to-equalize-frequency",
+      "frontendId": "2423",
+      "title": {
+        "en": "Remove Letter To Equalize Frequency",
+        "zh": "删除字符使频率相同"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-maximize-last-elements-in-arrays",
+      "frontendId": "2934",
+      "title": {
+        "en": "Minimum Operations to Maximize Last Elements in Arrays",
+        "zh": "最大化数组末位元素的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1803,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-make-two-binary-strings-equal",
+      "frontendId": "3800",
+      "title": {
+        "en": "Minimum Cost to Make Two Binary Strings Equal",
+        "zh": "使二进制字符串相等的最小成本"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1841,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-set-cooking-time",
+      "frontendId": "2162",
+      "title": {
+        "en": "Minimum Cost to Set Cooking Time",
+        "zh": "设置时间的最少代价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1852,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-sort-a-permutation",
+      "frontendId": "3942",
+      "title": {
+        "en": "Minimum Operations to Sort a Permutation",
+        "zh": "排序排列的最少操作数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1855,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-sort-a-string",
+      "frontendId": "3863",
+      "title": {
+        "en": "Minimum Operations to Sort a String",
+        "zh": "将一个字符串排序的最小操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1860,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "reschedule-meetings-for-maximum-free-time-ii",
+      "frontendId": "3440",
+      "title": {
+        "en": "Reschedule Meetings for Maximum Free Time II",
+        "zh": "重新安排会议得到最多空余时间 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1998,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-sortable-integers",
+      "frontendId": "3886",
+      "title": {
+        "en": "Sum of Sortable Integers",
+        "zh": "可排序整数求和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1999,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "sum-game",
+      "frontendId": "1927",
+      "title": {
+        "en": "Sum Game",
+        "zh": "求和游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2005,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "add-edges-to-make-degrees-of-all-nodes-even",
+      "frontendId": "2508",
+      "title": {
+        "en": "Add Edges to Make Degrees of All Nodes Even",
+        "zh": "添加边使所有节点度数都为偶数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2060,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-flips-to-make-binary-grid-palindromic-ii",
+      "frontendId": "3240",
+      "title": {
+        "en": "Minimum Number of Flips to Make Binary Grid Palindromic II",
+        "zh": "最少翻转次数使二进制矩阵回文 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2080,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-array-parity-alternating",
+      "frontendId": "3854",
+      "title": {
+        "en": "Minimum Operations to Make Array Parity Alternating",
+        "zh": "使数组奇偶交替的最少操作"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2095,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "equal-sum-grid-partition-ii",
+      "frontendId": "3548",
+      "title": {
+        "en": "Equal Sum Grid Partition II",
+        "zh": "等和矩阵分割 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2245,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game-ix",
+      "frontendId": "2029",
+      "title": {
+        "en": "Stone Game IX",
+        "zh": "石子游戏 IX"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2277,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "split-message-based-on-limit",
+      "frontendId": "2468",
+      "title": {
+        "en": "Split Message Based on Limit",
+        "zh": "根据限制分割消息"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2382,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "strong-password-checker",
+      "frontendId": "420",
+      "title": {
+        "en": "Strong Password Checker",
+        "zh": "强密码检验器"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-reach-target-in-grid",
+      "frontendId": "3609",
+      "title": {
+        "en": "Minimum Moves to Reach Target in Grid",
+        "zh": "到达目标点的最小移动次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2419,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "moving-stones-until-consecutive-ii",
+      "frontendId": "1040",
+      "title": {
+        "en": "Moving Stones Until Consecutive II",
+        "zh": "移动石子直到连续 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2456,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "self-crossing",
+      "frontendId": "335",
+      "title": {
+        "en": "Self Crossing",
+        "zh": "路径交叉"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-subarray-to-maximize-array-value",
+      "frontendId": "1330",
+      "title": {
+        "en": "Reverse Subarray To Maximize Array Value",
+        "zh": "翻转子数组得到最大的数组值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2482,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-minimum-area-to-cover-all-ones-ii",
+      "frontendId": "3197",
+      "title": {
+        "en": "Find the Minimum Area to Cover All Ones II",
+        "zh": "包含所有 1 的最小矩形面积 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2541,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-array-sum",
+      "frontendId": "3366",
+      "title": {
+        "en": "Minimum Array Sum",
+        "zh": "最小数组和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-total-cost-to-make-arrays-unequal",
+      "frontendId": "2499",
+      "title": {
+        "en": "Minimum Total Cost to Make Arrays Unequal",
+        "zh": "让数组不相等的最小总代价"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2633,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "construct-2d-grid-matching-graph-layout",
+      "frontendId": "3311",
+      "title": {
+        "en": "Construct 2D Grid Matching Graph Layout",
+        "zh": "构造符合图结构的二维矩阵"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2664,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-equalize-array",
+      "frontendId": "3139",
+      "title": {
+        "en": "Minimum Cost to Equalize Array",
+        "zh": "使数组中所有元素相等的最小开销"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2666,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-houses-at-a-certain-distance-ii",
+      "frontendId": "3017",
+      "title": {
+        "en": "Count the Number of Houses at a Certain Distance II",
+        "zh": "按距离统计房屋对数目 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2709,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "palindrome-rearrangement-queries",
+      "frontendId": "2983",
+      "title": {
+        "en": "Palindrome Rearrangement Queries",
+        "zh": "回文串重新排列查询"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2780,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "subsequences-with-a-unique-middle-mode-i",
+      "frontendId": "3395",
+      "title": {
+        "en": "Subsequences with a Unique Middle Mode I",
+        "zh": "唯一中间众数子序列 I"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2800,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-the-maximum-adjacent-element-difference",
+      "frontendId": "3357",
+      "title": {
+        "en": "Minimize the Maximum Adjacent Element Difference",
+        "zh": "最小化相邻元素的最大差值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 3077,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "the-earliest-and-latest-rounds-where-players-compete",
+      "frontendId": "1900",
+      "title": {
+        "en": "The Earliest and Latest Rounds Where Players Compete",
+        "zh": "最佳运动员的比拼回合"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.8",
+      "level": "core"
+    },
+    {
+      "slug": "find-n-unique-integers-sum-up-to-zero",
+      "frontendId": "1304",
+      "title": {
+        "en": "Find N Unique Integers Sum up to Zero",
+        "zh": "和为零的 N 个不同整数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1167,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "create-grid-with-exactly-one-path",
+      "frontendId": "3963",
+      "title": {
+        "en": "Create Grid With Exactly One Path",
+        "zh": "构造恰好一条路径的网格"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1311,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "di-string-match",
+      "frontendId": "942",
+      "title": {
+        "en": "DI String Match",
+        "zh": "增减字符串匹配"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1444,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "array-with-elements-not-equal-to-average-of-neighbors",
+      "frontendId": "1968",
+      "title": {
+        "en": "Array With Elements Not Equal to Average of Neighbors",
+        "zh": "构造元素不等于两相邻元素平均值的数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1499,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "reconstruct-a-2-row-binary-matrix",
+      "frontendId": "1253",
+      "title": {
+        "en": "Reconstruct a 2-Row Binary Matrix",
+        "zh": "重构 2 行二进制矩阵"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1506,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "convert-integer-to-the-sum-of-two-no-zero-integers",
+      "frontendId": "1317",
+      "title": {
+        "en": "Convert Integer to the Sum of Two No-Zero Integers",
+        "zh": "将整数转换为两个无零整数的和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-unique-xor-triplets-i",
+      "frontendId": "3513",
+      "title": {
+        "en": "Number of Unique XOR Triplets I",
+        "zh": "不同 XOR 三元组的数目 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1663,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "construct-string-with-repeat-limit",
+      "frontendId": "2182",
+      "title": {
+        "en": "Construct String With Repeat Limit",
+        "zh": "构造限制重复的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1680,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "inverse-coin-change",
+      "frontendId": "3592",
+      "title": {
+        "en": "Inverse Coin Change",
+        "zh": "硬币面值还原"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1701,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "pancake-sorting",
+      "frontendId": "969",
+      "title": {
+        "en": "Pancake Sorting",
+        "zh": "煎饼排序"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "queue-reconstruction-by-height",
+      "frontendId": "406",
+      "title": {
+        "en": "Queue Reconstruction by Height",
+        "zh": "根据身高重建队列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "find-valid-matrix-given-row-and-column-sums",
+      "frontendId": "1605",
+      "title": {
+        "en": "Find Valid Matrix Given Row and Column Sums",
+        "zh": "给定行和列的和求可行矩阵"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1868,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "construct-smallest-number-from-di-string",
+      "frontendId": "2375",
+      "title": {
+        "en": "Construct Smallest Number From DI String",
+        "zh": "根据模式串构造最小数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "wiggle-sort-ii",
+      "frontendId": "324",
+      "title": {
+        "en": "Wiggle Sort II",
+        "zh": "摆动排序 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "create-grid-with-exactly-k-paths-i",
+      "frontendId": "3988",
+      "title": {
+        "en": "Create Grid With Exactly K Paths I",
+        "zh": "创建一个恰好有 K 条路径的网格图 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2055,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "beautiful-arrangement-ii",
+      "frontendId": "667",
+      "title": {
+        "en": "Beautiful Arrangement II",
+        "zh": "优美的排列 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "recover-the-original-array",
+      "frontendId": "2122",
+      "title": {
+        "en": "Recover the Original Array",
+        "zh": "还原原数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2159,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "find-unique-binary-string",
+      "frontendId": "1980",
+      "title": {
+        "en": "Find Unique Binary String",
+        "zh": "找出不同的二进制字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "generate-schedule",
+      "frontendId": "3680",
+      "title": {
+        "en": "Generate Schedule",
+        "zh": "生成赛程"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2378,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "beautiful-array",
+      "frontendId": "932",
+      "title": {
+        "en": "Beautiful Array",
+        "zh": "漂亮数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-groups-with-increasing-length",
+      "frontendId": "2790",
+      "title": {
+        "en": "Maximum Number of Groups With Increasing Length",
+        "zh": "长度递增组的最大数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2620,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "construct-2d-grid-matching-graph-layout",
+      "frontendId": "3311",
+      "title": {
+        "en": "Construct 2D Grid Matching Graph Layout",
+        "zh": "构造符合图结构的二维矩阵"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2664,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-string-with-lcp",
+      "frontendId": "2573",
+      "title": {
+        "en": "Find the String with LCP",
+        "zh": "找出对应 LCP 矩阵的字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2682,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "find-array-given-subset-sums",
+      "frontendId": "1982",
+      "title": {
+        "en": "Find Array Given Subset Sums",
+        "zh": "从子集的和还原数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2872,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "wiggle-sort",
+      "frontendId": "280",
+      "title": {
+        "en": "Wiggle Sort",
+        "zh": "摆动排序"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "find-permutation",
+      "frontendId": "484",
+      "title": {
+        "en": "Find Permutation",
+        "zh": "寻找排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "create-grid-with-exactly-k-paths-ii",
+      "frontendId": "3990",
+      "title": {
+        "en": "Create Grid With Exactly K Paths II",
+        "zh": "创建一个恰好有 K 条路径的网格图 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "first-bad-version",
+      "frontendId": "278",
+      "title": {
+        "en": "First Bad Version",
+        "zh": "第一个错误的版本"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "guess-number-higher-or-lower",
+      "frontendId": "374",
+      "title": {
+        "en": "Guess Number Higher or Lower",
+        "zh": "猜数字大小"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "find-positive-integer-solution-for-a-given-equation",
+      "frontendId": "1237",
+      "title": {
+        "en": "Find Positive Integer Solution for a Given Equation",
+        "zh": "找出给定方程的正整数解"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "find-in-mountain-array",
+      "frontendId": "1095",
+      "title": {
+        "en": "Find in Mountain Array",
+        "zh": "山脉数组中查找目标值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1827,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "guess-the-word",
+      "frontendId": "843",
+      "title": {
+        "en": "Guess the Word",
+        "zh": "猜猜这个单词"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2078,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "count-houses-in-a-circular-street",
+      "frontendId": "2728",
+      "title": {
+        "en": "Count Houses in a Circular Street",
+        "zh": "计算一个环形街道上的房屋数量"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-celebrity",
+      "frontendId": "277",
+      "title": {
+        "en": "Find the Celebrity",
+        "zh": "搜寻名人"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-unique-categories",
+      "frontendId": "2782",
+      "title": {
+        "en": "Number of Unique Categories",
+        "zh": "唯一类别的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "guess-the-number-using-bitwise-questions-i",
+      "frontendId": "3064",
+      "title": {
+        "en": "Guess the Number Using Bitwise Questions I",
+        "zh": "使用按位查询猜测数字 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "guess-the-number-using-bitwise-questions-ii",
+      "frontendId": "3094",
+      "title": {
+        "en": "Guess the Number Using Bitwise Questions II",
+        "zh": "使用按位查询猜测数字 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "leftmost-column-with-at-least-a-one",
+      "frontendId": "1428",
+      "title": {
+        "en": "Leftmost Column with at Least a One",
+        "zh": "至少有一个 1 的最左端列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "search-in-a-sorted-array-of-unknown-size",
+      "frontendId": "702",
+      "title": {
+        "en": "Search in a Sorted Array of Unknown Size",
+        "zh": "搜索长度未知的有序数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-index-of-the-large-integer",
+      "frontendId": "1533",
+      "title": {
+        "en": "Find the Index of the Large Integer",
+        "zh": "找到最大整数的索引"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-equal-numbers-blocks",
+      "frontendId": "2936",
+      "title": {
+        "en": "Number of Equal Numbers Blocks",
+        "zh": "包含相等值数字块的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-font-to-fit-a-sentence-in-a-screen",
+      "frontendId": "1618",
+      "title": {
+        "en": "Maximum Font to Fit a Sentence in a Screen",
+        "zh": "找出适应屏幕的最大字号"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "guess-the-majority-in-a-hidden-array",
+      "frontendId": "1538",
+      "title": {
+        "en": "Guess the Majority in a Hidden Array",
+        "zh": "找出隐藏数组中出现次数最多的元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "robot-room-cleaner",
+      "frontendId": "489",
+      "title": {
+        "en": "Robot Room Cleaner",
+        "zh": "扫地机器人"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-path-in-a-hidden-grid",
+      "frontendId": "1778",
+      "title": {
+        "en": "Shortest Path in a Hidden Grid",
+        "zh": "未知网格中的最短路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-path-cost-in-a-hidden-grid",
+      "frontendId": "1810",
+      "title": {
+        "en": "Minimum Path Cost in a Hidden Grid",
+        "zh": "隐藏网格下的最小消耗路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ships-in-a-rectangle",
+      "frontendId": "1274",
+      "title": {
+        "en": "Number of Ships in a Rectangle",
+        "zh": "矩形内船只的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "furthest-point-from-origin",
+      "frontendId": "2833",
+      "title": {
+        "en": "Furthest Point From Origin",
+        "zh": "距离原点最远的点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1294,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-value-of-the-partition",
+      "frontendId": "2740",
+      "title": {
+        "en": "Find the Value of the Partition",
+        "zh": "找出分区值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1302,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "matrix-similarity-after-cyclic-shifts",
+      "frontendId": "2946",
+      "title": {
+        "en": "Matrix Similarity After Cyclic Shifts",
+        "zh": "循环移位后的矩阵相似检查"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1406,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "make-array-non-decreasing",
+      "frontendId": "3523",
+      "title": {
+        "en": "Make Array Non-decreasing",
+        "zh": "非递减数组的最大长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1435,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "rabbits-in-forest",
+      "frontendId": "781",
+      "title": {
+        "en": "Rabbits in Forest",
+        "zh": "森林中的兔子"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1453,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "robot-bounded-in-circle",
+      "frontendId": "1041",
+      "title": {
+        "en": "Robot Bounded In Circle",
+        "zh": "困于环中的机器人"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1521,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-adjacent-swaps-to-alternate-parity",
+      "frontendId": "3587",
+      "title": {
+        "en": "Minimum Adjacent Swaps to Alternate Parity",
+        "zh": "最小相邻交换至奇偶交替"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1548,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-swaps-to-make-the-binary-string-alternating",
+      "frontendId": "1864",
+      "title": {
+        "en": "Minimum Number of Swaps to Make the Binary String Alternating",
+        "zh": "构成交替字符串需要的最小交换次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1601,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "merge-triplets-to-form-target-triplet",
+      "frontendId": "1899",
+      "title": {
+        "en": "Merge Triplets to Form Target Triplet",
+        "zh": "合并若干三元组以形成目标三元组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1636,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "frog-jump-ii",
+      "frontendId": "2498",
+      "title": {
+        "en": "Frog Jump II",
+        "zh": "青蛙过河 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1759,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "gas-station",
+      "frontendId": "134",
+      "title": {
+        "en": "Gas Station",
+        "zh": "加油站"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-manhattan-distance-after-k-changes",
+      "frontendId": "3443",
+      "title": {
+        "en": "Maximum Manhattan Distance After K Changes",
+        "zh": "K 次修改后的最大曼哈顿距离"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1856,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "earliest-finish-time-for-land-and-water-rides-ii",
+      "frontendId": "3635",
+      "title": {
+        "en": "Earliest Finish Time for Land and Water Rides II",
+        "zh": "最早完成陆地和水上游乐设施的时间 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1870,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-size-of-a-set-after-removals",
+      "frontendId": "3002",
+      "title": {
+        "en": "Maximum Size of a Set After Removals",
+        "zh": "移除后集合的最多元素数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1917,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-people-to-teach",
+      "frontendId": "1733",
+      "title": {
+        "en": "Minimum Number of People to Teach",
+        "zh": "需要教语言的最少人数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1984,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "split-array-into-consecutive-subsequences",
+      "frontendId": "659",
+      "title": {
+        "en": "Split Array into Consecutive Subsequences",
+        "zh": "分割数组为连续子序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "find-a-good-subset-of-the-matrix",
+      "frontendId": "2732",
+      "title": {
+        "en": "Find a Good Subset of the Matrix",
+        "zh": "找到矩阵中的好子集"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2240,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-generated-string",
+      "frontendId": "3474",
+      "title": {
+        "en": "Lexicographically Smallest Generated String",
+        "zh": "字典序最小的生成字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2605,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-adjacent-swaps-to-make-a-valid-array",
+      "frontendId": "2340",
+      "title": {
+        "en": "Minimum Adjacent Swaps to Make a Valid Array",
+        "zh": "生成有效数组的最少交换次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "longest-common-prefix-after-at-most-one-removal",
+      "frontendId": "3460",
+      "title": {
+        "en": "Longest Common Prefix After at Most One Removal",
+        "zh": "最多删除一次后的最长公共前缀"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "count-houses-in-a-circular-street-ii",
+      "frontendId": "2753",
+      "title": {
+        "en": "Count Houses in a Circular Street II",
+        "zh": "计算一个环形街道上的房屋数量 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "LCP 40",
+      "title": "心算挑战",
+      "sectionId": "1.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCS 02",
+      "title": "完成一半题目",
+      "sectionId": "1.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 30",
+      "title": "魔塔游戏",
+      "sectionId": "1.9",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 32",
+      "title": "批量处理任务",
+      "sectionId": "2.3",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCS 01",
+      "title": "下载插件",
+      "sectionId": "4.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 24",
+      "title": "数字游戏",
+      "sectionId": "4.5",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 48",
+      "title": "无限棋局",
+      "sectionId": "5.8",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 21",
+      "title": "追逐游戏",
+      "sectionId": "5.8",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 03",
+      "title": "机器人大冒险",
+      "sectionId": "8",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 26",
+      "title": "导航装置",
+      "sectionId": "8",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 70",
+      "title": "沙地治理",
+      "sectionId": "8",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}

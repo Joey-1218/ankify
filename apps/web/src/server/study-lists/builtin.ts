@@ -1,6 +1,17 @@
 import { difficultyEnum, leetcodeSlugSchema } from "@ankileet/contracts";
 import { z } from "zod";
+import binarySearch from "./builtin/binary-search.json";
+import bitManipulation from "./builtin/bit-manipulation.json";
+import dataStructures from "./builtin/data-structures.json";
+import dynamicProgramming from "./builtin/dynamic-programming.json";
+import graphAlgorithms from "./builtin/graph-algorithms.json";
+import greedy from "./builtin/greedy.json";
+import gridGraphs from "./builtin/grid-graphs.json";
+import linkedListsTreesBacktracking from "./builtin/linked-lists-trees-backtracking.json";
+import math from "./builtin/math.json";
+import monotonicStack from "./builtin/monotonic-stack.json";
 import slidingWindowTwoPointers from "./builtin/sliding-window-two-pointers.json";
+import strings from "./builtin/strings.json";
 import { isPatternId, type PatternId } from "./patterns";
 
 /**
@@ -10,7 +21,21 @@ import { isPatternId, type PatternId } from "./patterns";
  * list, see DEVELOPMENT.md, "Adding a built-in study list"; builtin.test.ts
  * fails when a file in `builtin/` is not registered here.
  */
-const SOURCES: readonly unknown[] = [slidingWindowTwoPointers];
+const SOURCES: readonly unknown[] = [
+  // 灵茶山艾府's lists, in the order of his index post.
+  slidingWindowTwoPointers,
+  binarySearch,
+  monotonicStack,
+  gridGraphs,
+  bitManipulation,
+  graphAlgorithms,
+  dynamicProgramming,
+  dataStructures,
+  math,
+  greedy,
+  linkedListsTreesBacktracking,
+  strings,
+];
 
 const localized = z.object({ en: z.string().min(1).max(200), zh: z.string().min(1).max(200) }).strict();
 

@@ -123,12 +123,14 @@ zip, and upload a new package (DEPLOYMENT.md, "Extension release").
 
 ### Study lists (in progress)
 
-A list-based practice workflow: built-in lists (starting with 灵茶山艾府's
-sliding window and two pointers list, moved to leetcode.com), playlist-style
-user lists, a daily time budget for new problems, and a pattern axis in the
-mistake profile. Design, owner decisions, and phases:
-[STUDY_LISTS_PLAN.md](STUDY_LISTS_PLAN.md). Work happens on branch
-`claude/determined-pasteur-cid59n`.
+A list-based practice workflow: built-in lists (灵茶山艾府's 12
+topic lists, moved to leetcode.com), playlist-style user lists, a daily time
+budget for new problems, and a pattern axis in the mistake profile. Design,
+owner decisions, and phases: [STUDY_LISTS_PLAN.md](STUDY_LISTS_PLAN.md).
+Work happens on branch `claude/determined-pasteur-cid59n`. Done: the list
+data and importer (phase 1, all 12 lists). Next: phase 2 (lists in the
+database and the web UI), on the owner's go-ahead. Ask the author before
+shipping the lists to users.
 
 ### Planned for 0.3.1
 

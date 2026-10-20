@@ -1,0 +1,55 @@
+{
+  "id": "monotonic-stack",
+  "name": {
+    "en": "Monotonic Stack",
+    "zh": "单调栈"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/9oZFK9/",
+  "headings": {},
+  "chapters": {
+    "1": {
+      "en": "Monotonic stack",
+      "zh": "单调栈"
+    },
+    "2": {
+      "en": "Rectangles",
+      "zh": "矩形"
+    },
+    "3": {
+      "en": "Contribution technique",
+      "zh": "贡献法"
+    },
+    "4": {
+      "en": "Smallest lexicographic order",
+      "zh": "最小字典序"
+    }
+  },
+  "sections": {
+    "1.1": {
+      "en": "Basics",
+      "zh": "基础",
+      "pattern": "monotonic_stack.basic"
+    },
+    "1.2": {
+      "en": "Advanced",
+      "zh": "进阶",
+      "pattern": "monotonic_stack.basic"
+    },
+    "2": {
+      "en": "Rectangle areas",
+      "zh": "矩形",
+      "pattern": "monotonic_stack.rectangle"
+    },
+    "3": {
+      "en": "Contribution technique",
+      "zh": "贡献法",
+      "pattern": "monotonic_stack.contribution"
+    },
+    "4": {
+      "en": "Smallest lexicographic order",
+      "zh": "最小字典序",
+      "pattern": "monotonic_stack.lexicographic"
+    }
+  }
+}

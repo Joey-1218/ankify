@@ -46,7 +46,8 @@ describe("built-in study lists", () => {
       for (const section of list!.sections) {
         // A config edit is not live until the list is regenerated.
         expect(config.sections[section.id], `${config.id} section ${section.id}`).toMatchObject({ pattern: section.pattern });
-        expect(Boolean(config.sections[section.id]!.optional)).toBe(section.optional);
+        // Optional comes from the config or the source's 选做 marker.
+        if (config.sections[section.id]!.optional) expect(section.optional).toBe(true);
       }
     }
   });
