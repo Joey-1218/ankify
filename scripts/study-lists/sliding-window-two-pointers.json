@@ -1,0 +1,37 @@
+{
+  "id": "sliding-window-two-pointers",
+  "name": { "en": "Sliding Window and Two Pointers", "zh": "滑动窗口与双指针" },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/3578981/ti-dan-hua-dong-chuang-kou-ding-chang-bu-rzz7/",
+  "stopAtHeading": "思考",
+  "stretchLabels": ["思维扩展", "进阶"],
+  "chapters": {
+    "1": { "en": "Fixed-length sliding window", "zh": "定长滑动窗口" },
+    "2": { "en": "Variable-length sliding window", "zh": "不定长滑动窗口" },
+    "3": { "en": "Two pointers on one sequence", "zh": "单序列双指针" },
+    "4": { "en": "Two pointers on two sequences", "zh": "双序列双指针" },
+    "5": { "en": "Three pointers", "zh": "三指针" },
+    "6": { "en": "Group loop", "zh": "分组循环" }
+  },
+  "sections": {
+    "1.1": { "en": "Basics", "zh": "基础", "pattern": "sliding_window.fixed" },
+    "1.2": { "en": "Advanced", "zh": "进阶", "pattern": "sliding_window.fixed", "optional": true },
+    "2.1.1": { "en": "Longest or largest: basics", "zh": "求最长/最大：基础", "pattern": "sliding_window.variable.longest" },
+    "2.1.2": { "en": "Longest or largest: advanced", "zh": "求最长/最大：进阶", "pattern": "sliding_window.variable.longest", "optional": true },
+    "2.2": { "en": "Shortest or smallest", "zh": "求最短/最小", "pattern": "sliding_window.variable.shortest" },
+    "2.3.1": { "en": "Counting subarrays: shorter is valid", "zh": "求子数组个数：越短越合法", "pattern": "sliding_window.variable.count_at_most" },
+    "2.3.2": { "en": "Counting subarrays: longer is valid", "zh": "求子数组个数：越长越合法", "pattern": "sliding_window.variable.count_at_least" },
+    "2.3.3": { "en": "Counting subarrays: exactly k", "zh": "求子数组个数：恰好型", "pattern": "sliding_window.variable.count_exact" },
+    "2.4": { "en": "Other", "zh": "其他", "pattern": "sliding_window.variable.other", "optional": true },
+    "3.1": { "en": "Reversing a string", "zh": "反转字符串", "pattern": "two_pointers.reverse" },
+    "3.2": { "en": "Pointers moving toward each other", "zh": "相向双指针", "pattern": "two_pointers.opposite" },
+    "3.3": { "en": "Pointers moving the same way", "zh": "同向双指针", "pattern": "two_pointers.same_direction" },
+    "3.4": { "en": "Pointers moving apart", "zh": "背向双指针", "pattern": "two_pointers.outward" },
+    "3.5": { "en": "In-place modification", "zh": "原地修改", "pattern": "two_pointers.in_place" },
+    "3.6": { "en": "Two pointers on a matrix", "zh": "矩阵上的双指针", "pattern": "two_pointers.matrix" },
+    "4.1": { "en": "Two pointers", "zh": "双指针", "pattern": "two_sequences.two_pointers" },
+    "4.2": { "en": "Subsequence checks", "zh": "判断子序列", "pattern": "two_sequences.subsequence" },
+    "5": { "en": "Three pointers", "zh": "三指针", "pattern": "three_pointers" },
+    "6": { "en": "Group loop", "zh": "分组循环", "pattern": "group_loop" }
+  }
+}
