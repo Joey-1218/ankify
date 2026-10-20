@@ -121,6 +121,15 @@ Later extension updates: bump `version` in
 `apps/extension/manifest.config.ts`, ship the web side first, then build,
 zip, and upload a new package (DEPLOYMENT.md, "Extension release").
 
+### Study lists (in progress)
+
+A list-based practice workflow: built-in lists (starting with 灵茶山艾府's
+sliding window and two pointers list, moved to leetcode.com), playlist-style
+user lists, a daily time budget for new problems, and a pattern axis in the
+mistake profile. Design, owner decisions, and phases:
+[STUDY_LISTS_PLAN.md](STUDY_LISTS_PLAN.md). Work happens on branch
+`claude/determined-pasteur-cid59n`.
+
 ### Planned for 0.3.1
 
 The owner wants both of these in the next release (extension 0.3.1 and the
