@@ -135,3 +135,52 @@ export type ProblemStudyListsDto = {
   memberOf: { id: string | null; kind: StudyListKind; name: LocalizedTextDto; builtinId: string | null }[];
   customLists: { id: string; name: string; contains: boolean }[];
 };
+
+/** Why a new problem is on today's plan. */
+export type TodayPickReason =
+  /** The next problem of a pattern that keeps failing: practice on fresh problems. */
+  | "weak_pattern"
+  /** An unseen problem of a pattern that looks strong: a first-try solve confirms it. */
+  | "check"
+  /** The list's next problem in order. */
+  | "next";
+
+export type TodayNewProblemDto = {
+  slug: string;
+  leetcodeId: number | null;
+  title: LocalizedTextDto;
+  difficulty: "Easy" | "Medium" | "Hard";
+  url: string;
+  state: "not_started" | "attempted_before";
+  list: { id: string; kind: "custom" | "builtin"; builtinId: string | null; name: LocalizedTextDto };
+  pattern: StudyListPatternDto | null;
+  reason: TodayPickReason;
+  /** Past the day's plan ("one more new problem"). */
+  extra: boolean;
+};
+
+export type TodayPlanDto = {
+  dateKey: string;
+  settings: { dailyMinutes: number; maxNewPerDay: number; hidePatternsOnToday: boolean };
+  pace: {
+    /** Reviews the day holds: due now within the daily limit, plus those done today. */
+    reviews: number;
+    reviewMinutes: number;
+    newMinutes: number;
+    /** Whether the typical times are the user's own medians (else defaults). */
+    ownTimes: { review: boolean; new: boolean };
+    /** New problems the budget buys today, including those already started. */
+    newSlots: number;
+    newStartedToday: number;
+    plannedMinutes: number;
+  };
+  activeLists: number;
+  /** Planned new problems still to start, then any extras asked for. */
+  newProblems: TodayNewProblemDto[];
+  /** Whether a list still has a problem to offer past these. */
+  moreAvailable: boolean;
+  /** Due problem ids in today's interleaved order. */
+  reviewOrder: string[];
+  /** Patterns of due problems, only when Today shows them. */
+  reviewPatterns: Record<string, StudyListPatternDto[]>;
+};

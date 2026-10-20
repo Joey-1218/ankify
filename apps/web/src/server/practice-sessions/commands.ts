@@ -22,10 +22,11 @@ import {
   sessionKindFor,
 } from "@ankileet/core";
 import { getDb, schema, type PracticeSession, type PracticeSessionSubmission, type Problem } from "@ankileet/db";
-import { and, asc, eq, inArray, ne, or } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, isNull, ne, or } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { markFirstCapture, markFirstReview } from "@/server/onboarding";
 import { getReviewSettings } from "@/server/settings";
+import { formatDateKeyInTimeZone, normalizeTimeZone } from "@/server/time-zone";
 import { loadAutomaticAnalysisContext, planAutomaticAnalysis, publishPlannedJob } from "@/server/session-analysis/jobs";
 import { findLeetcodeProblem, upsertLeetcodeProblem } from "@/server/problem-upsert";
 import { storeSubmissions } from "@/server/submission-store";
@@ -132,10 +133,14 @@ export async function startSessionInTransaction(
     if (lookup.kind === "conflict") return fail("duplicate_problem_conflict");
     existing = lookup.kind === "found" ? lookup.problem : null;
   }
-  const kind = sessionKindFor(
-    input.mode,
-    existing ? { enrollment: existing.enrollment, due: isProblemDue({ ...existing, archivedAt: null }, now) } : null,
-  );
+  const due = existing ? isProblemDue({ ...existing, archivedAt: null }, now) : false;
+  // A second solve on the day a problem was scheduled or rated is practice:
+  // it never moves the schedule (memories consolidate overnight).
+  const mode =
+    input.mode === "early_review" && existing?.enrollment === "enrolled" && !due && (await scheduledToday(tx, userId, existing.id, now))
+      ? "practice"
+      : input.mode;
+  const kind = sessionKindFor(mode, existing ? { enrollment: existing.enrollment, due } : null);
   if ("error" in kind) return fail(kind.error);
 
   // A formal review waits until every other finished review is rated or
@@ -265,6 +270,27 @@ export async function startSessionInTransaction(
   const response = await respond(created!, { created: true, supersededSessionIds: live.map((session) => session.id) });
   await recordCommand(tx, { userId, sessionId: created!.id, requestId, command: "start", payloadDigest: digest, response }, now);
   return { ok: true, response };
+}
+
+/** Whether the problem's latest schedule change (first-review schedule or rating, not undone) was today, in the user's time zone. */
+async function scheduledToday(tx: DbTransaction, userId: string, problemId: string, now: Date) {
+  const e = schema.reviewEvents;
+  const [[latest], [review]] = await Promise.all([
+    tx
+      .select({ occurredAt: e.occurredAt })
+      .from(e)
+      .where(and(eq(e.userId, userId), eq(e.problemId, problemId), inArray(e.eventType, ["fsrs_scheduled", "self_recall_rated"]), isNull(e.undoneAt)))
+      .orderBy(desc(e.occurredAt))
+      .limit(1),
+    tx
+      .select({ value: schema.settings.value })
+      .from(schema.settings)
+      .where(and(eq(schema.settings.userId, userId), eq(schema.settings.key, "review")))
+      .limit(1),
+  ]);
+  if (!latest) return false;
+  const timeZone = normalizeTimeZone((review?.value as { timeZone?: unknown } | undefined)?.timeZone);
+  return formatDateKeyInTimeZone(latest.occurredAt, timeZone) === formatDateKeyInTimeZone(now, timeZone);
 }
 
 /** The oldest finished review, on another problem, whose rating is still due. */

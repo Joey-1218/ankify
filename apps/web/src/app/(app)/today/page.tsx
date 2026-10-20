@@ -14,14 +14,18 @@ import { PageFrame } from "@/components/ui/page";
 import { getAiSettings } from "@/server/settings";
 import { getOnboardingProgress } from "@/server/onboarding";
 import { loadDashboard, type DashboardSession } from "@/server/dashboard";
+import { loadTodayPlan } from "@/server/study-plan/today";
 import { OnboardingCard } from "./onboarding-card";
+import { PlanCard } from "./plan-card";
 
 export const dynamic = "force-dynamic";
 
 /** The dashboard: the popup's daily view plus recent practice and focus areas. */
-export default async function HomePage({ searchParams }: { searchParams: Promise<{ retired?: string | string[] }> }) {
+export default async function HomePage({ searchParams }: { searchParams: Promise<{ retired?: string | string[]; more?: string | string[] }> }) {
   const user = await requirePageUser();
-  const reviewRetired = (await searchParams).retired === "review";
+  const params = await searchParams;
+  const reviewRetired = params.retired === "review";
+  const extra = Math.max(0, Math.trunc(Number(typeof params.more === "string" ? params.more : 0)) || 0);
   const [t, language] = await Promise.all([getRequestTranslations(), getRequestLanguage()]);
   const [dashboard, onboarding, ai] = await Promise.all([
     loadDashboard(user.id),
@@ -31,7 +35,11 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
   const d = t.dashboard;
   const { overview, profile, recent, week } = dashboard;
   const { counts } = overview;
-  const next = overview.due[0];
+  const plan = await loadTodayPlan(user.id, { due: overview.due.map((item) => ({ id: item.id, slug: item.leetcodeSlug })), extra });
+  // Due reviews in today's interleaved order: patterns mixed, stable all day.
+  const rank = new Map(plan.reviewOrder.map((id, index) => [id, index]));
+  const due = [...overview.due].sort((a, b) => (rank.get(a.id) ?? 0) - (rank.get(b.id) ?? 0));
+  const next = due[0];
   const firstName = getUserFirstName(user.name, user.email);
   const welcomeMessage = counts.dueNow > 0 ? t.home.welcomeDue : recent.length > 0 ? t.home.welcomeDone : t.home.welcomeEmpty;
   const category = (id: string) => t.mistakes.categories[id as keyof typeof t.mistakes.categories] ?? id;
@@ -94,6 +102,8 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         </div>
       </Surface>
 
+      <PlanCard plan={plan} t={t} language={language} extra={extra} />
+
       {(overview.pendingRatings.length > 0 || overview.openSessions.length > 0) && (
         <Surface role="status" className="space-y-1 p-4 text-sm">
           {overview.pendingRatings.length > 0 && <p>{d.pendingRatings(overview.pendingRatings.length)}</p>}
@@ -101,15 +111,18 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         </Surface>
       )}
 
-      {overview.due.length > 0 && (
+      {due.length > 0 && (
         <section aria-label={d.dueTitle} className="space-y-3">
           <h2 className="text-lg font-semibold">{d.dueTitle}</h2>
           <Surface as="ul" className="divide-y divide-border overflow-hidden">
-            {overview.due.map((item) => (
+            {due.map((item) => (
               <li key={item.id} className="flex flex-wrap items-center gap-3 px-4 py-3">
                 <Link href={`/problems/${item.id}` as Route} className="min-w-0 flex-1 truncate text-sm font-medium hover:underline">
                   {item.title}
                 </Link>
+                {(plan.reviewPatterns[item.id] ?? []).map((pattern) => (
+                  <Pill key={pattern.id}>{language === "zh" ? pattern.name.zh : pattern.name.en}</Pill>
+                ))}
                 <DifficultyPill difficulty={item.difficulty} language={language} />
                 <span className="text-xs text-muted">{item.overdueDays > 0 ? d.overdueDays(item.overdueDays) : d.dueToday}</span>
                 <a href={item.url} target="_blank" rel="noreferrer" className="text-sm font-medium text-accent hover:underline">

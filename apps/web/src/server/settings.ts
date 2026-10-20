@@ -2,7 +2,14 @@ import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { cache } from "react";
 import type { AnalysisSettings } from "@ankileet/contracts";
-import { clampInitialReviewDelayHours, INITIAL_REVIEW_DELAY_HOURS, type AiProvider, type AiReasoningMode } from "@ankileet/core";
+import {
+  clampInitialReviewDelayHours,
+  INITIAL_REVIEW_DELAY_HOURS,
+  STUDY_PLAN_DEFAULTS,
+  STUDY_PLAN_LIMITS,
+  type AiProvider,
+  type AiReasoningMode,
+} from "@ankileet/core";
 import { decryptSecret, encryptSecret, type EncryptedSecret } from "./secret-box";
 import { readStarterAiConfig } from "./starter-ai";
 import { isValidTimeZone, normalizeTimeZone } from "./time-zone";
@@ -70,6 +77,7 @@ const KEY_AI = "ai";
 const KEY_REVIEW = "review";
 const KEY_GENERATION = "generation";
 const KEY_ANALYSIS = "analysis";
+const KEY_STUDY_PLAN = "study_plan";
 
 export async function getAiSettings(userId: string): Promise<AiSettings> {
   const db = getDb();
@@ -290,3 +298,47 @@ export async function setAnalysisSettings(userId: string, value: Partial<Analysi
   return next;
 }
 
+/** How Today paces new problems (docs/STUDY_LISTS_PLAN.md, "Pacing"). */
+export interface StudyPlanSettings {
+  /** Minutes of practice a day: reviews first, new problems with the rest. */
+  dailyMinutes: number;
+  /** At most this many new problems a day; the user may raise it freely. */
+  maxNewPerDay: number;
+  /** Hide pattern names of due reviews on Today until they are finished. */
+  hidePatternsOnToday: boolean;
+}
+
+function clampInt(value: unknown, fallback: number, { min, max }: { min: number; max: number }) {
+  if (typeof value !== "number" || !Number.isFinite(value)) return fallback;
+  return Math.max(min, Math.min(max, Math.round(value)));
+}
+
+export async function getStudyPlanSettings(userId: string): Promise<StudyPlanSettings> {
+  const [row] = await getDb()
+    .select()
+    .from(schema.settings)
+    .where(and(eq(schema.settings.userId, userId), eq(schema.settings.key, KEY_STUDY_PLAN)));
+  const value = (row?.value ?? {}) as Partial<StudyPlanSettings>;
+  return {
+    dailyMinutes: clampInt(value.dailyMinutes, STUDY_PLAN_DEFAULTS.dailyMinutes, STUDY_PLAN_LIMITS.dailyMinutes),
+    maxNewPerDay: clampInt(value.maxNewPerDay, STUDY_PLAN_DEFAULTS.maxNewPerDay, STUDY_PLAN_LIMITS.maxNewPerDay),
+    hidePatternsOnToday: typeof value.hidePatternsOnToday === "boolean" ? value.hidePatternsOnToday : STUDY_PLAN_DEFAULTS.hidePatternsOnToday,
+  };
+}
+
+export async function setStudyPlanSettings(userId: string, value: Partial<StudyPlanSettings>) {
+  const existing = await getStudyPlanSettings(userId);
+  const next: StudyPlanSettings = {
+    dailyMinutes: clampInt(value.dailyMinutes ?? existing.dailyMinutes, STUDY_PLAN_DEFAULTS.dailyMinutes, STUDY_PLAN_LIMITS.dailyMinutes),
+    maxNewPerDay: clampInt(value.maxNewPerDay ?? existing.maxNewPerDay, STUDY_PLAN_DEFAULTS.maxNewPerDay, STUDY_PLAN_LIMITS.maxNewPerDay),
+    hidePatternsOnToday: value.hidePatternsOnToday ?? existing.hidePatternsOnToday,
+  };
+  await getDb()
+    .insert(schema.settings)
+    .values({ userId, key: KEY_STUDY_PLAN, value: next })
+    .onConflictDoUpdate({
+      target: [schema.settings.userId, schema.settings.key],
+      set: { value: next, updatedAt: new Date() },
+    });
+  return next;
+}

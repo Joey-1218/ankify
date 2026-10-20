@@ -278,3 +278,47 @@ export async function loadProblemStudyLists(userId: string, problemId: string): 
       .map((row) => ({ id: row.id, name: row.name!, contains: contains(row) })),
   };
 }
+
+export type ActiveListCandidates = {
+  id: string;
+  kind: "custom" | "builtin";
+  builtinId: string | null;
+  name: { en: string; zh: string };
+  share: number;
+  /** Every entry, for attributing recent first practices to the list. */
+  slugs: ReadonlySet<string>;
+  /** Entries not started yet (attempted-before included), in list order, one per slug. */
+  candidates: StudyListEntryDto[];
+  /** Pattern per section (built-in lists only). */
+  sectionPatterns: ReadonlyMap<string, { id: string; name: { en: string; zh: string } }>;
+};
+
+/** The user's active lists in their order, with what each could offer next. */
+export async function loadActiveListCandidates(userId: string, db: Db = getDb()): Promise<ActiveListCandidates[]> {
+  const [index, lists] = await Promise.all([loadPracticeIndex(db, userId), loadUserLists(db, userId)]);
+  return lists.rows
+    .filter((row) => row.active)
+    .flatMap((row) => {
+      const resolved = rowEntries(row, lists, index);
+      if (!resolved) return [];
+      const builtin = row.kind === "builtin" ? getBuiltinList(row.builtinId!) : null;
+      const seen = new Set<string>();
+      const candidates = resolved.entries.filter(
+        (entry) => (entry.state === "not_started" || entry.state === "attempted_before") && !seen.has(entry.slug) && seen.add(entry.slug),
+      );
+      return [
+        {
+          id: row.id,
+          kind: row.kind,
+          builtinId: row.builtinId,
+          name: resolved.base.name,
+          share: row.share,
+          slugs: new Set(resolved.entries.map((entry) => entry.slug)),
+          candidates,
+          sectionPatterns: new Map(
+            (builtin?.sections ?? []).map((section) => [section.id, { id: section.pattern, name: patternName(section.pattern) }]),
+          ),
+        },
+      ];
+    });
+}

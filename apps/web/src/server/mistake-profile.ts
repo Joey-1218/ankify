@@ -1,14 +1,19 @@
 import type { MistakeProfileDto } from "@ankileet/contracts";
 import {
   computeMistakeProfile,
+  computePatternProfile,
+  contextKey,
   FEED_PARAMS,
   PROFILE_READINESS,
+  summarizeSession,
   type FsrsRating,
+  type PatternStat,
   type ProfileMistakeInput,
   type ProfileSessionInput,
 } from "@ankileet/core";
 import { getDb, schema } from "@ankileet/db";
 import { and, eq, gte, isNotNull, isNull, ne, or } from "drizzle-orm";
+import { patternsForSlug } from "./study-lists/builtin";
 
 const TREND_DAYS = 30;
 const MAX_EXAMPLES = 3;
@@ -28,13 +33,8 @@ export function legacySourceKey(row: {
   return `record:${row.id}`;
 }
 
-/**
- * The mistake profile from the user's own records, sessions, and ratings in
- * the last 90 days. Every query is scoped by user; aggregation happens in
- * `computeMistakeProfile()` (see `@ankileet/core`), so nothing derived is stored
- * that Undo, dismissal, or deletion could leave stale.
- */
-export async function loadMistakeProfile(userId: string, now = new Date()): Promise<MistakeProfileDto> {
+/** Sessions, mistake records, and ratings of the last 90 days, user-scoped, as profile inputs. */
+async function loadProfileEvidence(userId: string, now: Date) {
   const db = getDb();
   const since = new Date(now.getTime() - FEED_PARAMS.maxEvidenceAgeDays * 86_400_000);
   const ps = schema.practiceSessions;
@@ -47,12 +47,12 @@ export async function loadMistakeProfile(userId: string, now = new Date()): Prom
 
   const [sessionRows, mistakeRows, legacyRatingRows, observationRows, sessionRatingRows] = await Promise.all([
     db
-      .select({ session: ps, title: p.title, topicTags: p.topicTags })
+      .select({ session: ps, title: p.title, slug: p.leetcodeSlug, topicTags: p.topicTags })
       .from(ps)
       .innerJoin(p, and(eq(p.id, ps.problemId), eq(p.userId, ps.userId)))
       .where(sessionInWindow),
     db
-      .select({ mistake: m, title: p.title, topicTags: p.topicTags })
+      .select({ mistake: m, title: p.title, slug: p.leetcodeSlug, topicTags: p.topicTags })
       .from(m)
       .innerJoin(p, and(eq(p.id, m.problemId), eq(p.userId, m.userId)))
       .where(and(eq(m.userId, userId), gte(m.createdAt, since), ne(m.status, "dismissed"))),
@@ -82,9 +82,9 @@ export async function loadMistakeProfile(userId: string, now = new Date()): Prom
       .where(and(eq(e.userId, userId), eq(e.eventType, "self_recall_rated"), isNull(e.undoneAt), sessionInWindow)),
   ]);
 
-  const problems = new Map<string, { title: string; topicTags: string[] }>();
+  const problems = new Map<string, { title: string; slug: string; topicTags: string[] }>();
   for (const row of [...sessionRows.map((item) => ({ id: item.session.problemId, ...item })), ...mistakeRows.map((item) => ({ id: item.mistake.problemId, ...item }))]) {
-    problems.set(row.id, { title: row.title, topicTags: row.topicTags });
+    problems.set(row.id, { title: row.title, slug: row.slug, topicTags: row.topicTags });
   }
   const topicsOf = (problemId: string) => problems.get(problemId)?.topicTags ?? [];
 
@@ -125,13 +125,20 @@ export async function loadMistakeProfile(userId: string, now = new Date()): Prom
     legacySourceKey: legacySourceKey(row),
   }));
 
-  const profile = computeMistakeProfile({
-    now,
-    trendDays: TREND_DAYS,
-    sessions,
-    mistakes,
-    legacyRatings: legacyRatingRows.map((row) => ({ problemId: row.problemId, topics: row.topicTags, rating: row.rating as FsrsRating, at: row.occurredAt })),
-  });
+  const legacyRatings = legacyRatingRows.map((row) => ({ problemId: row.problemId, topics: row.topicTags, rating: row.rating as FsrsRating, at: row.occurredAt }));
+  const typeBySession = new Map(sessionRows.map(({ session }) => [session.id, session.type]));
+  return { sessions, mistakes, legacyRatings, mistakeRows, problems, typeBySession };
+}
+
+/**
+ * The mistake profile from the user's own records, sessions, and ratings in
+ * the last 90 days. Every query is scoped by user; aggregation happens in
+ * `computeMistakeProfile()` (see `@ankileet/core`), so nothing derived is stored
+ * that Undo, dismissal, or deletion could leave stale.
+ */
+export async function loadMistakeProfile(userId: string, now = new Date()): Promise<MistakeProfileDto> {
+  const { sessions, mistakes, legacyRatings, mistakeRows, problems } = await loadProfileEvidence(userId, now);
+  const profile = computeMistakeProfile({ now, trendDays: TREND_DAYS, sessions, mistakes, legacyRatings });
 
   const mistakeById = new Map(mistakeRows.map(({ mistake }) => [mistake.id, mistake]));
   const describe = (id: string) => {
@@ -170,4 +177,39 @@ export async function loadMistakeProfile(userId: string, now = new Date()): Prom
     signals: profile.signals,
     incomplete: profile.incomplete,
   };
+}
+
+/**
+ * Pattern mastery from the same evidence: each session and confirmed mistake
+ * counts for the patterns of its problem (built-in list sections holding its
+ * slug). Problems in no built-in list have no pattern.
+ */
+export async function loadPatternProfile(userId: string, now = new Date()): Promise<PatternStat[]> {
+  const { sessions, mistakes, problems, typeBySession } = await loadProfileEvidence(userId, now);
+  const patternsOf = (problemId: string) => {
+    const slug = problems.get(problemId)?.slug;
+    return slug ? patternsForSlug(slug) : [];
+  };
+  return computePatternProfile({
+    now,
+    sessions: sessions.map((session) => ({
+      id: session.id,
+      problemId: session.problemId,
+      patterns: patternsOf(session.problemId),
+      type: typeBySession.get(session.id) ?? "voluntary_practice",
+      status: session.status,
+      outcome: session.outcome,
+      completedAt: session.completedAt,
+      rating: session.rating,
+      firstTryAccepted: summarizeSession(session.verdicts).firstTryAccepted,
+    })),
+    mistakes: mistakes.map((mistake) => ({
+      problemId: mistake.problemId,
+      patterns: patternsOf(mistake.problemId),
+      category: mistake.category,
+      status: mistake.status,
+      createdAt: mistake.createdAt,
+      contextKey: contextKey(mistake),
+    })),
+  });
 }

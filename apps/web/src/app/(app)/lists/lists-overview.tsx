@@ -7,12 +7,15 @@ import { useState } from "react";
 import { STUDY_LIST_NAME_MAX, type StudyListsOverviewDto, type StudyListSummaryDto } from "@ankileet/contracts";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/field";
+import { Input, Select } from "@/components/ui/field";
 import { Pill } from "@/components/ui/pill";
 import { Spinner } from "@/components/ui/spinner";
 import { Surface } from "@/components/ui/surface";
 import { pick, sendJson } from "./api";
 import { ProgressBar } from "./progress-bar";
+
+/** The share choices offered (the API takes 1-10). */
+const SHARES = [1, 2, 3, 4, 5] as const;
 
 export function listHref(list: StudyListSummaryDto): Route {
   if (list.kind === "my_problems") return "/lists/my-problems" as Route;
@@ -63,6 +66,23 @@ export function ListsOverview({ overview }: { overview: StudyListsOverviewDto })
                 </Link>
                 {list.author && <span className="text-xs text-muted">{t.lists.by(list.author)}</span>}
                 {list.followed && !list.active && <Pill tone="warning">{t.lists.paused}</Pill>}
+                {list.followed && list.active && (
+                  <Select
+                    size="sm"
+                    value={String(list.share)}
+                    onValueChange={(value) => void run(`share:${list.id}`, "PATCH", `/api/study-lists/${list.id}`, { share: Number(value) })}
+                    disabled={busy != null}
+                    aria-label={`${t.lists.share}: ${list.kind === "my_problems" ? t.lists.myProblems : pick(list.name, language)}`}
+                    title={t.lists.share}
+                    className="w-20"
+                  >
+                    {SHARES.map((share) => (
+                      <option key={share} value={String(share)}>
+                        {t.lists.shareOption(share)}
+                      </option>
+                    ))}
+                  </Select>
+                )}
                 {list.followed && (
                   <Button
                     size="xs"

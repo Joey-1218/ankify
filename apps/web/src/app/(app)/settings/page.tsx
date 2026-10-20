@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { requirePageUser } from "@/server/auth";
 import { getRequestTranslations } from "@/server/i18n";
-import { getAiSettings, getAnalysisSettings, getGenerationSettings, getReviewSettings } from "@/server/settings";
+import { getAiSettings, getAnalysisSettings, getGenerationSettings, getReviewSettings, getStudyPlanSettings } from "@/server/settings";
 import { isAutomaticAnalysisEnabled, isWorkflowEnabled } from "@/server/features";
 import { getHostedCreditStatus } from "@/server/ai-credits";
 import { CREDIT_PACKS } from "@/server/billing/config";
@@ -15,6 +15,7 @@ import {
   AppearanceSettingsForm,
   LanguageRegionSettingsForm,
   ReviewSettingsForm,
+  StudyPlanSettingsForm,
 } from "./form";
 import { InfoTip } from "@/components/ui/info-tip";
 import { Surface } from "@/components/ui/surface";
@@ -48,13 +49,14 @@ export default async function SettingsPage({
   const user = await requirePageUser();
   // Fulfill a returning Checkout before reading balances so they include it.
   const billingNotice = await resolveBillingNotice(user.id, await searchParams);
-  const [ai, credits, purchases, generation, review, analysis, t] = await Promise.all([
+  const [ai, credits, purchases, generation, review, analysis, studyPlan, t] = await Promise.all([
     getAiSettings(user.id),
     getHostedCreditStatus(user.id),
     listCreditPurchases(user.id),
     getGenerationSettings(user.id),
     getReviewSettings(user.id),
     getAnalysisSettings(user.id),
+    getStudyPlanSettings(user.id),
     getRequestTranslations(),
   ]);
   // Analysis runs only on the user's own complete configuration.
@@ -159,6 +161,10 @@ export default async function SettingsPage({
                 {t.settings.installExtension}
               </a>
             </div>
+          </SettingsSection>
+
+          <SettingsSection id="study-plan" title={t.settings.studyPlan} info={t.settings.studyPlanHelp}>
+            <StudyPlanSettingsForm initial={studyPlan} />
           </SettingsSection>
 
           <SettingsSection title={t.settings.reviewSchedule}>

@@ -60,6 +60,9 @@ function collectOptions(children: React.ReactNode): SelectOption[] {
   return options;
 }
 
+/** `sm` matches the `sm` button height, for a select inside a row of small controls. */
+const SELECT_SIZE = { sm: "min-h-8 px-2.5 py-1 text-xs", md: "" } as const;
+
 export function Select({
   className,
   children,
@@ -67,11 +70,13 @@ export function Select({
   onValueChange,
   disabled = false,
   id,
+  size = "md",
   ...rest
 }: Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children" | "onChange" | "value"> & {
   children: React.ReactNode;
   value: string;
   onValueChange: (value: string) => void;
+  size?: keyof typeof SELECT_SIZE;
 }) {
   const generatedId = useId();
   const selectId = id ?? `select-${generatedId}`;
@@ -177,6 +182,7 @@ export function Select({
         onKeyDown={handleKeyDown}
         className={cn(
           FIELD_BASE,
+          SELECT_SIZE[size],
           "flex cursor-pointer items-center justify-between gap-3 text-left",
           open && "border-accent-solid/40 ring-2 ring-accent-solid/30",
         )}

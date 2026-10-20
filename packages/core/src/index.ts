@@ -8,3 +8,4 @@ export * from "./practice-session";
 export * from "./profile";
 export * from "./session-analysis";
 export * from "./suggestions";
+export * from "./study-plan";

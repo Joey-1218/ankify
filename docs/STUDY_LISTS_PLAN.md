@@ -1,7 +1,7 @@
 # Study lists: design and plan
 
-Status: agreed with the owner on 2026-10-20; phases 1 and 2 are done (their
-settled design is in ARCHITECTURE.md, "Study lists"), phases 3 and 4 are next.
+Status: agreed with the owner on 2026-10-20; phases 1 to 3 are done (their
+settled design is in ARCHITECTURE.md, "Study lists"), phase 4 is next.
 When a phase ships, move its settled design into ARCHITECTURE.md and mark it
 done here. Retire this file when every phase is done.
 
@@ -212,10 +212,15 @@ pattern mastery (transfer evidence) than reviews of known problems.
    `/lists/[id]`, and `/lists/builtin/[builtinId]` pages, follow/copy,
    add/remove/reorder, the problem page's Lists panel. Starting a problem
    from a list is opening it on LeetCode (the extension starts the session).
-3. **Today planner**: `study_plan` settings, time-budget pacing, shares,
-   interleaved reviews with hidden patterns, weak-pattern priority, check
-   problems, same-day rule.
-4. **Pattern profile**: pattern stats and the pattern x cause grid.
+3. **Today planner** (done): `study_plan` settings, time-budget pacing,
+   list shares, interleaved reviews with hidden patterns, weak-pattern
+   priority, check problems, the same-day rule, and the pattern stats the
+   planner needs (`computePatternProfile()`, including causes per pattern).
+   The extension popup keeps its most-overdue-first order; only Today
+   interleaves.
+4. **Pattern profile**: the pattern x cause grid on `/analysis` from the
+   phase 3 stats, weak patterns on Today's focus card, and links from a weak
+   pattern to its section's next unseen problems.
 
 Each phase passes `pnpm typecheck`, `pnpm lint`, and `pnpm test` before it is
 committed, and updates ARCHITECTURE.md and HANDOFF.md.

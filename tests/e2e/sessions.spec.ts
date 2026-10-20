@@ -320,7 +320,7 @@ test("a rating in the popup clears the panel's rating, and a rating in the panel
   expect(current.problem).toMatchObject({ scheduleRevision: 1 });
 });
 
-test("signing out of LeetCode mid-session warns, signing back in resumes tracking, and Review early still starts", async ({ context, leetcode, api, panel }) => {
+test("signing out of LeetCode mid-session warns, signing back in resumes tracking, and Review early still starts (as practice the same day)", async ({ context, leetcode, api, panel }) => {
   void panel; // signs the context in
   const slug = newProblem(leetcode, "relogin");
   await api("/api/capture", { body: { leetcodeSlug: slug, leetcodeId: leetcode.problems[slug]!.frontendId, title: leetcode.problems[slug]!.title, difficulty: "Easy", url: problemUrl(slug) } });
@@ -348,11 +348,13 @@ test("signing out of LeetCode mid-session warns, signing back in resumes trackin
   await page.getByRole("group", { name: "How did the review go?" }).getByRole("button", { name: /Good/ }).click();
   await expect(page.getByText(/Next review/).first()).toBeVisible();
 
-  // Review early after the sign-in round trip: a review starts, no connection error.
+  // Review early after the sign-in round trip: a session starts, no connection
+  // error. The problem was rated today, so the re-solve is practice and never
+  // moves the schedule (same-day rule).
   await page.getByRole("button", { name: "Review early" }).click();
-  await expect(page.getByText("Review in progress")).toBeVisible();
+  await expect(page.getByText("Practice in progress")).toBeVisible();
   const current = await api<PracticeSessionCurrentDto>(`/api/practice-sessions/current?slug=${slug}`);
-  expect(current.session).toMatchObject({ type: "scheduled_review", reviewIntent: "early", status: "active" });
+  expect(current.session).toMatchObject({ type: "voluntary_practice", reviewIntent: "none", status: "active" });
 });
 
 test("signing out of ankileet mid-session shows the sign-in view; signing in again (QA, no Google) brings the session back", async ({ context, leetcode, panel }) => {
