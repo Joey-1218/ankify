@@ -28,13 +28,14 @@ import { isPatternId, type PatternId } from "./patterns";
 
 /**
  * The authors whose lists are built in, in the order /lists shows them.
- * `name` is what the UI shows (in English, only the author's own name may be
- * Chinese); `source` is the `author` the generated files carry. Ids are
+ * `name` is what the UI shows, in one form for every author and language:
+ * the Chinese name, then the English one in parentheses (in English, only an
+ * author's name may be Chinese); `source` is the `author` the generated files carry. Ids are
  * stable: they key the remembered open groups on /lists.
  */
 export const BUILTIN_AUTHORS = [
-  { id: "carl", name: { en: "Carl (代码随想录)", zh: "代码随想录" }, source: "代码随想录" },
-  { id: "endlesscheng", name: { en: "灵茶山艾府 (EndlessCheng)", zh: "灵茶山艾府" }, source: "灵茶山艾府" },
+  { id: "carl", name: { en: "代码随想录 (Carl)", zh: "代码随想录 (Carl)" }, source: "代码随想录" },
+  { id: "endlesscheng", name: { en: "灵茶山艾府 (EndlessCheng)", zh: "灵茶山艾府 (EndlessCheng)" }, source: "灵茶山艾府" },
 ] as const;
 
 export type BuiltinAuthorId = (typeof BUILTIN_AUTHORS)[number]["id"];

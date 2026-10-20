@@ -77,14 +77,14 @@ test("lists reorder from the keyboard, delete after a confirmation, and group bu
   }
 
   // Built-in lists: one collapsed group per author, remembered once opened.
-  const carl = page.getByRole("button", { name: /^Carl/ });
+  const carl = page.getByRole("button", { name: /^代码随想录/ });
   await expect(carl).toHaveAttribute("aria-expanded", "false");
   await expect(page.getByRole("link", { name: "Extra Problems" })).toBeHidden();
   await carl.click();
   await expect(page.getByRole("link", { name: "Extra Problems" })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole("button", { name: /^Carl/ })).toHaveAttribute("aria-expanded", "true");
-  await page.getByRole("button", { name: /^Carl/ }).click();
+  await expect(page.getByRole("button", { name: /^代码随想录/ })).toHaveAttribute("aria-expanded", "true");
+  await page.getByRole("button", { name: /^代码随想录/ }).click();
   await page.close();
 });
 

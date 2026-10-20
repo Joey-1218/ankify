@@ -355,6 +355,12 @@ function AuthorGroups({ groups, busy, onFollow }: { groups: StudyListAuthorGroup
                 const title = pick(list.name, language);
                 const { learned, started, total } = list.progress;
                 const percent = total > 0 ? Math.round((learned / total) * 100) : 0;
+                const bar = (
+                  <>
+                    <ProgressBar label={title} valueText={t.lists.progress(learned, started, total)} learned={learned} started={started} total={total} />
+                    <span className="w-8 shrink-0 text-right text-xs text-muted tabular-nums">{percent}%</span>
+                  </>
+                );
                 return (
                   <li key={list.builtinId} className="group/row flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-subtle/60">
                     <span className="w-5 shrink-0 text-right text-xs text-muted tabular-nums" aria-hidden>
@@ -365,11 +371,10 @@ function AuthorGroups({ groups, busy, onFollow }: { groups: StudyListAuthorGroup
                         {title}
                       </Link>
                       <span className="mt-0.5 block truncate text-xs text-muted tabular-nums">{t.lists.listMeta(total, learned)}</span>
+                      {/* Phones: the bar sits under the name, so the name keeps its width. */}
+                      <span className="mt-2 flex items-center gap-2 sm:hidden">{bar}</span>
                     </span>
-                    <span className="hidden w-32 shrink-0 items-center gap-2 sm:flex">
-                      <ProgressBar label={title} valueText={t.lists.progress(learned, started, total)} learned={learned} started={started} total={total} />
-                      <span className="w-8 text-right text-xs text-muted tabular-nums">{percent}%</span>
-                    </span>
+                    <span className="hidden w-32 shrink-0 items-center gap-2 sm:flex">{bar}</span>
                     <span className="flex shrink-0 justify-end sm:w-24">
                       {list.followed ? (
                         <span className="inline-flex items-center gap-1 text-xs font-medium text-success">

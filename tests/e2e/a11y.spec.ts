@@ -36,7 +36,7 @@ for (const theme of ["light", "dark"] as const) {
     }
     // The built-in lists' author groups, open.
     await page.goto(`${API_ORIGIN}/lists`);
-    const groups = [page.getByRole("button", { name: /^Carl/ }), page.getByRole("button", { name: /^灵茶山艾府/ })];
+    const groups = [page.getByRole("button", { name: /^代码随想录/ }), page.getByRole("button", { name: /^灵茶山艾府/ })];
     for (const group of groups) await group.click();
     await expect(page.getByRole("link", { name: "Extra Problems" })).toBeVisible();
     await audit(page, `/lists, groups open (${theme})`);
