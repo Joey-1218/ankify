@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Route } from "next";
 import { useRouter } from "next/navigation";
 import { useMemo, useState, useSyncExternalStore } from "react";
-import { ChevronDown, GripVertical } from "lucide-react";
+import { Check, ChevronDown, GripVertical } from "lucide-react";
 import { STUDY_LIST_NAME_MAX, type StudyListAuthorGroupDto, type StudyListsOverviewDto, type StudyListSummaryDto } from "@ankileet/contracts";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Button } from "@/components/ui/button";
@@ -320,61 +320,76 @@ function AuthorGroups({ groups, busy, onFollow }: { groups: StudyListAuthorGroup
   const toggle = (authorId: string) => storeOpenGroups(open.includes(authorId) ? open.filter((id) => id !== authorId) : [...open, authorId]);
 
   return (
-    <div className="space-y-3">
-      {groups.map((group) => {
+    <Surface className="divide-y divide-border">
+      {groups.map((group, index) => {
         const isOpen = open.includes(group.authorId);
         const followed = group.lists.filter((list) => list.followed).length;
         const panelId = `author-${group.authorId}`;
         const name = pick(group.name, language);
+        const first = index === 0;
+        const last = index === groups.length - 1;
         return (
           <section key={group.authorId} aria-label={name}>
-            <h3 className={cn("z-10 bg-bg", isOpen && "sticky pb-3")} style={isOpen ? { top: navHeight } : undefined}>
+            <h3 className={cn("z-10 bg-surface", isOpen && "sticky", first && "rounded-t-xl", last && !isOpen && "rounded-b-xl")} style={isOpen ? { top: navHeight } : undefined}>
               <button
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(group.authorId)}
-                className="flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-surface px-4 py-3 text-left transition hover:bg-subtle"
+                className={cn(
+                  "flex w-full items-center gap-4 px-5 py-4 text-left transition-colors",
+                  isOpen ? "bg-accent-soft/60 shadow-[inset_0_-1px_0_0_rgb(var(--border))] backdrop-blur" : "bg-surface hover:bg-subtle",
+                  first && "rounded-t-xl",
+                  last && !isOpen && "rounded-b-xl",
+                )}
               >
-                <span className="flex min-w-0 items-center gap-2 font-semibold">
-                  <ChevronDown className={cn("h-4 w-4 shrink-0 text-muted transition", !isOpen && "-rotate-90")} aria-hidden />
-                  <span className="truncate">{name}</span>
+                <span className="min-w-0 flex-1">
+                  <span className={cn("block truncate font-semibold", isOpen && "text-accent")}>{name}</span>
+                  <span className="mt-0.5 block text-xs text-muted tabular-nums">{t.lists.groupCount(group.lists.length, followed)}</span>
                 </span>
-                <span className="shrink-0 text-xs font-normal text-muted tabular-nums">{t.lists.groupCount(group.lists.length, followed)}</span>
+                <ChevronDown className={cn("h-4 w-4 shrink-0 text-muted transition-transform duration-200", isOpen && "rotate-180 text-accent")} aria-hidden />
               </button>
             </h3>
-            <div id={panelId} hidden={!isOpen} className={cn("gap-3 sm:grid-cols-2 lg:grid-cols-3", isOpen ? "grid" : "hidden")}>
-              {group.lists.map((list) => (
-                <Surface key={list.builtinId} className="flex flex-col gap-3 p-4">
-                  <div className="flex items-start justify-between gap-2">
-                    <Link href={listHref(list)} className="font-medium hover:underline">
-                      {pick(list.name, language)}
-                    </Link>
-                    {list.followed ? (
-                      <Pill tone="success">{t.lists.following}</Pill>
-                    ) : (
-                      <Button size="xs" variant="secondary" disabled={busy != null} onClick={() => onFollow(list)}>
-                        {busy === `follow:${list.builtinId}` && <Spinner />}
-                        {t.lists.follow}
-                      </Button>
-                    )}
-                  </div>
-                  <div className="mt-auto space-y-1.5">
-                    <ProgressBar
-                      label={pick(list.name, language)}
-                      valueText={t.lists.progress(list.progress.learned, list.progress.started, list.progress.total)}
-                      learned={list.progress.learned}
-                      started={list.progress.started}
-                      total={list.progress.total}
-                    />
-                    <p className="text-xs text-muted tabular-nums">{t.lists.progress(list.progress.learned, list.progress.started, list.progress.total)}</p>
-                  </div>
-                </Surface>
-              ))}
-            </div>
+            <ol id={panelId} hidden={!isOpen} className={cn("divide-y divide-border", isOpen ? "block" : "hidden", last && "overflow-hidden rounded-b-xl")}>
+              {group.lists.map((list, position) => {
+                const title = pick(list.name, language);
+                const { learned, started, total } = list.progress;
+                const percent = total > 0 ? Math.round((learned / total) * 100) : 0;
+                return (
+                  <li key={list.builtinId} className="group/row flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-subtle/60">
+                    <span className="w-5 shrink-0 text-right text-xs text-muted tabular-nums" aria-hidden>
+                      {position + 1}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <Link href={listHref(list)} className="block truncate text-sm font-medium hover:text-accent">
+                        {title}
+                      </Link>
+                      <span className="mt-0.5 block truncate text-xs text-muted tabular-nums">{t.lists.listMeta(total, learned)}</span>
+                    </span>
+                    <span className="hidden w-32 shrink-0 items-center gap-2 sm:flex">
+                      <ProgressBar label={title} valueText={t.lists.progress(learned, started, total)} learned={learned} started={started} total={total} />
+                      <span className="w-8 text-right text-xs text-muted tabular-nums">{percent}%</span>
+                    </span>
+                    <span className="flex shrink-0 justify-end sm:w-24">
+                      {list.followed ? (
+                        <span className="inline-flex items-center gap-1 text-xs font-medium text-success">
+                          <Check className="h-3.5 w-3.5" aria-hidden />
+                          {t.lists.following}
+                        </span>
+                      ) : (
+                        <Button size="xs" variant="secondary" disabled={busy != null} onClick={() => onFollow(list)} aria-label={`${t.lists.follow}: ${title}`}>
+                          {busy === `follow:${list.builtinId}` && <Spinner />}
+                          {t.lists.follow}
+                        </Button>
+                      )}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
           </section>
         );
       })}
-    </div>
+    </Surface>
   );
 }

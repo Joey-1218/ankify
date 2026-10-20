@@ -705,9 +705,10 @@ extension reuses the web session cookie, and production CORS allows only
   user's lists with progress, next up, share, Pause/Resume, and Delete or
   Unfollow (after a confirmation), reordered by dragging a row's handle
   (pointer events, so touch works too) or with the arrow keys on it; a
-  new-list form. Built-in lists: one collapsible group per author,
-  collapsed until opened (the browser remembers which, in localStorage),
-  with a header that sticks under the nav while the group scrolls.
+  new-list form. Built-in lists: an always-open accordion, one item per
+  author, collapsed until opened (the browser remembers which, in
+  localStorage), with a header that sticks under the nav while its lists
+  scroll; each list is a numbered row with its size, progress, and Follow.
   `/lists/builtin/[builtinId]` shows a built-in list by chapter and section
   (pattern, level, rating, state) with Follow, Unfollow, Pause, and Copy;
   `/lists/[id]` and `/lists/my-problems` show a custom list (drag to
