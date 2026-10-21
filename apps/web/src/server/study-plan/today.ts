@@ -1,4 +1,4 @@
-import type { StudyListPatternDto, TodayNewProblemDto, TodayPlanDto } from "@ankileet/contracts";
+import type { TodayNewProblemDto, TodayPlanDto } from "@ankileet/contracts";
 import { FEED_PARAMS, interleave, paceDay, planNewProblems, STUDY_PLAN_DEFAULTS, typicalMinutes } from "@ankileet/core";
 import { getDb, schema } from "@ankileet/db";
 import { and, eq, gte, inArray, isNull, sql } from "drizzle-orm";
@@ -6,8 +6,8 @@ import { dueProblemCondition } from "../due-problems";
 import { loadPatternProfile } from "../mistake-profile";
 import { getReviewSettings, getStudyPlanSettings } from "../settings";
 import { patternsForSlug } from "../study-lists/builtin";
-import { loadActiveListCandidates, type ActiveListCandidates } from "../study-lists/lists";
-import { patternName } from "../study-lists/patterns";
+import { loadActiveListCandidates, loadPatternPractice, type ActiveListCandidates } from "../study-lists/lists";
+import { patternDto } from "../study-lists/patterns";
 import { formatDateKeyInTimeZone, getZonedDayBounds } from "../time-zone";
 
 const DAY_MS = 86_400_000;
@@ -15,8 +15,8 @@ const DAY_MS = 86_400_000;
 export const CHECK_INTERVAL_DAYS = 14;
 /** "One more new problem" past the plan, at most this many a day. */
 export const MAX_EXTRA_NEW = 20;
-
-const patternDto = (id: string): StudyListPatternDto => ({ id, name: patternName(id as Parameters<typeof patternName>[0]) });
+/** Weak patterns on the focus card, at most. */
+const MAX_FOCUS_PATTERNS = 3;
 
 /** The pattern of a list entry: its section's in a built-in list, else the problem's first. */
 function entryPattern(list: ActiveListCandidates, entry: { slug: string; sectionId: string | null }) {
@@ -140,6 +140,9 @@ export async function loadTodayPlan(
     };
   });
 
+  const focus = patterns.filter((stat) => stat.weak).slice(0, MAX_FOCUS_PATTERNS);
+  const practice = await loadPatternPractice(userId, focus.map((stat) => stat.pattern), { limit: 1 }, db);
+
   const seed = `${userId}:${dateKey}:reviews`;
   const firstPattern = (slug: string) => patternsForSlug(slug)[0] ?? null;
   return {
@@ -161,5 +164,11 @@ export async function loadTodayPlan(
     reviewPatterns: plan.hidePatternsOnToday
       ? {}
       : Object.fromEntries(options.due.map((item) => [item.id, patternsForSlug(item.slug).map(patternDto)])),
+    // Shown whatever hidePatternsOnToday says: it names weak patterns, not which due review needs one.
+    focusPatterns: focus.map((stat) => ({
+      pattern: patternDto(stat.pattern),
+      weakness: Math.round(stat.weakness * 1000) / 1000,
+      next: practice.get(stat.pattern)?.[0] ?? null,
+    })),
   };
 }

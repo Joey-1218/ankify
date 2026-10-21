@@ -121,30 +121,39 @@ Later extension updates: bump `version` in
 `apps/extension/manifest.config.ts`, ship the web side first, then build,
 zip, and upload a new package (DEPLOYMENT.md, "Extension release").
 
-### Study lists (in progress)
+### Study lists (done on the branch, not merged)
 
 A list-based practice workflow: built-in lists (Carl's 12 and
 灵茶山艾府's 12 topic lists, moved to leetcode.com, grouped by author on
-`/lists`), playlist-style user lists (drag to reorder), a daily time
-budget for new problems, and a pattern axis in the mistake profile. Design,
-owner decisions, and phases: [STUDY_LISTS_PLAN.md](STUDY_LISTS_PLAN.md).
+`/lists`), playlist-style user lists (drag to reorder, a row menu to pause,
+rename, or delete), a daily time budget for new problems, and a pattern
+axis in the mistake profile. The settled design is in ARCHITECTURE.md,
+"Study lists" (the planning doc was retired once every phase shipped).
 Work happens on branch `claude/determined-pasteur-cid59n` (not merged, not
-deployed). Done: phase 1 (the importer and all 12 lists), phase 2 (lists in
-the database, the list API, `/lists` pages, and the problem page's Lists
-panel), and phase 3 (Today's plan: a daily time budget for new problems,
-equal turns across active lists (shares were removed later), weak-pattern priority and check problems, interleaved reviews,
-study-plan settings, and the same-day re-solve rule), then Carl's lists
-(`scripts/study-list-import-carl.mjs`) and the `/lists` refresh (author
-groups, dragging lists and custom-list items, delete or unfollow in place);
-ARCHITECTURE.md, "Study lists". Next: phase 4, the pattern x cause grid on
-`/analysis`.
+deployed). All four phases are done:
+
+1. the importers and all 24 lists;
+2. lists in the database, the list API, the `/lists` pages, and the
+   problem page's Lists panel;
+3. Today's plan: a daily time budget, equal turns across active lists,
+   weak-pattern priority and check problems, interleaved reviews,
+   study-plan settings, and the same-day re-solve rule;
+4. the pattern profile: the pattern x cause grid on `/analysis`
+   (`GET /api/mistakes/patterns`), weak patterns with a problem to practice
+   next on Today's focus card.
+
+Later polish on the branch: per-list shares removed (equal turns), My
+problems pinned as the first row of Your lists, and an "All lists" back
+button on every list page.
 
 Before deploying: apply migration `0027_study_lists` to Production first
 (`pnpm db:release`, DEPLOYMENT.md), since the list pages and the problem
-page read the new tables (phase 3 adds no migration; its settings live in
-`settings`). The web screenshot baselines (Today, Problems, problem page)
-must be regenerated on the owner's machine after review, since the nav, the
-problem page, and Today changed. Browser tests run in a cloud container only with
+page read the new tables (phases 3 and 4 add no migration; settings live in
+`settings`). The web screenshot baselines (Today, Lists, `/analysis`,
+Problems, problem page) must be regenerated on the owner's machine after
+review, since the nav, the problem page, Today, and `/analysis` changed.
+Ask 灵茶山艾府 and Carl for permission before shipping the lists to users.
+Browser tests run in a cloud container only with
 a scratch `PLAYWRIGHT_BROWSERS_PATH` that maps Playwright's expected
 Chromium build to the installed one (the container's build is older).
 

@@ -1,7 +1,7 @@
 import { unitHash } from "../daily-feed/random";
 
 /**
- * Which new problems fill the day's slots (docs/STUDY_LISTS_PLAN.md, "Today").
+ * Which new problems fill the day's slots (docs/ARCHITECTURE.md, "Study lists").
  *
  * - Slots go to active lists in proportion to their shares by a deficit
  *   round-robin over recent history: `deficit = share · (served + handed out

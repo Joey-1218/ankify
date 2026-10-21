@@ -5,9 +5,9 @@ import { iterateAccountExport } from "../account-export";
 import { upsertLeetcodeProblem } from "../problem-upsert";
 import { mergeAttemptHistory } from "../suggestions/history";
 import { createTestDb } from "../test-db";
-import { getBuiltinList } from "./builtin";
+import { builtinLists, getBuiltinList } from "./builtin";
 import { addStudyListItem, createStudyList, deleteStudyList, removeStudyListItem, reorderStudyListItems, reorderStudyLists, updateStudyList } from "./commands";
-import { loadProblemStudyLists, loadStudyListDetail, loadStudyListsOverview } from "./lists";
+import { loadPatternPractice, loadProblemStudyLists, loadStudyListDetail, loadStudyListsOverview } from "./lists";
 
 const testDb = createTestDb();
 const USER = "lists-user";
@@ -205,5 +205,46 @@ describe("study lists", () => {
     expect(lists.every((list) => list.userId === USER)).toBe(true);
     expect(lists.some((list) => list.name === "Theirs")).toBe(false);
     expect(exported.some((row) => row.type === "study_list_item")).toBe(true);
+  });
+});
+
+describe("pattern practice", () => {
+  const LEARNER = "lists-practice";
+  const SHORTEST = "sliding_window.variable.shortest";
+  // Slugs with the pattern across the given lists, in their order, each once.
+  const slugsIn = (ids: readonly string[]) => [
+    ...new Set(ids.flatMap((id) => getBuiltinList(id)!.items.filter((item) => item.pattern === SHORTEST).map((item) => item.slug))),
+  ];
+  const everyList = () => builtinLists().map((list) => list.id);
+  const picked = (picks: Awaited<ReturnType<typeof loadPatternPractice>>) => picks.get(SHORTEST)!.map((pick) => pick.slug);
+
+  it("offers never-attempted problems with a pattern, from followed lists first, each once", async () => {
+    await getDb().insert(schema.user).values({ id: LEARNER, email: "lists-practice@example.test", name: "Practice" });
+    // Carl's array list has the pattern too, and comes first in display order.
+    expect(everyList().indexOf("carl-array")).toBeLessThan(everyList().indexOf(BUILTIN));
+    expect(slugsIn(["carl-array"]).length).toBeGreaterThan(0);
+
+    const fresh = await loadPatternPractice(LEARNER, [SHORTEST, "no.such_pattern"]);
+    expect(picked(fresh)).toEqual(slugsIn(everyList()).slice(0, 3));
+    expect(fresh.get("no.such_pattern")).toEqual([]);
+    const first = fresh.get(SHORTEST)![0]!;
+    expect(first).toMatchObject({ url: `https://leetcode.com/problems/${first.slug}/`, list: { builtinId: "carl-array", name: { en: expect.any(String) } } });
+    expect(Number.isInteger(first.leetcodeId)).toBe(true);
+
+    // Following a list puts it first; started and attempted problems drop out.
+    const follow = await create({ action: "follow", requestId: uuid(), builtinId: BUILTIN }, LEARNER);
+    const ours = slugsIn([BUILTIN]);
+    await addProblem(ours[0]!, "awaiting_initial", LEARNER);
+    await mergeAttemptHistory(LEARNER, { source: "user_marked", sourceAccount: null, entries: [{ slug: ours[1]!, status: "attempted" }] });
+    const followed = await loadPatternPractice(LEARNER, [SHORTEST], { limit: 2 });
+    expect(picked(followed)).toEqual(slugsIn([BUILTIN, ...everyList()]).filter((slug) => slug !== ours[0] && slug !== ours[1]).slice(0, 2));
+    expect(followed.get(SHORTEST)![0]!.list.builtinId).toBe(BUILTIN);
+
+    // A paused list is followed but gives nothing first; the deck stays the learner's own.
+    await updateStudyList(LEARNER, follow.listId, { active: false });
+    expect(picked(await loadPatternPractice(LEARNER, [SHORTEST], { limit: 1 }))).toEqual(
+      slugsIn(everyList()).filter((slug) => slug !== ours[0] && slug !== ours[1]).slice(0, 1),
+    );
+    expect(picked(await loadPatternPractice(OTHER, [SHORTEST], { limit: 50 }))).toContain(ours[0]);
   });
 });

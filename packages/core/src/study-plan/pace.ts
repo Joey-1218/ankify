@@ -1,6 +1,6 @@
 /**
- * Pacing new problems by a daily time budget (docs/STUDY_LISTS_PLAN.md,
- * "Pacing"). Reviews come first and are never cut to fit; the time left buys
+ * Pacing new problems by a daily time budget (docs/ARCHITECTURE.md, "Study
+ * lists"). Reviews come first and are never cut to fit; the time left buys
  * new problems, up to a daily cap. Early on there is little to review, so
  * more new problems fit; as reviews build up, new problems taper by
  * themselves, and the day's total stays near the budget.

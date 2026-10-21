@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { leetcodeSlugSchema } from "./schemas";
+import { leetcodeSlugSchema, type SkillDimensionId } from "./schemas";
 
 /**
  * Study lists: built-in lists (committed data, followed by reference),
@@ -188,4 +188,43 @@ export type TodayPlanDto = {
   reviewOrder: string[];
   /** Patterns of due problems, only when Today shows them. */
   reviewPatterns: Record<string, StudyListPatternDto[]>;
+  /** The weakest patterns (up to 3), each with a never-attempted problem to practice it, if one is left. */
+  focusPatterns: { pattern: StudyListPatternDto; weakness: number; next: PatternProblemDto | null }[];
+};
+
+/** A never-attempted problem that practices a pattern, from a built-in list section with it. */
+export type PatternProblemDto = {
+  slug: string;
+  leetcodeId: number;
+  title: LocalizedTextDto;
+  difficulty: "Easy" | "Medium" | "Hard";
+  url: string;
+  list: { builtinId: string; name: LocalizedTextDto };
+};
+
+/** How one pattern holds up in the user's sessions and confirmed mistakes (last 90 days). */
+export type PatternStatDto = {
+  pattern: StudyListPatternDto;
+  sessions: number;
+  problems: number;
+  /** First practices of problems new to the user, and how many were accepted on the first try. */
+  newProblems: { total: number; firstTry: number };
+  weakness: number;
+  /** Enough sessions and problems to call it weak or strong. */
+  ready: boolean;
+  weak: boolean;
+  strong: boolean;
+  /** Confirmed mistake contexts per cause. */
+  causes: Partial<Record<SkillDimensionId, number>>;
+  /** For a weak pattern: problems to practice it next (lists the user follows first). */
+  next: PatternProblemDto[];
+};
+
+/** GET /api/mistakes/patterns — the pattern x cause profile. */
+export type PatternProfileDto = {
+  generatedAt: string;
+  windowDays: number;
+  required: { sessions: number; problems: number };
+  /** Weak patterns first (weakest first), then the rest by sessions. */
+  patterns: PatternStatDto[];
 };

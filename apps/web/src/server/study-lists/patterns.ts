@@ -1,3 +1,5 @@
+import type { StudyListPatternDto } from "@ankileet/contracts";
+
 /**
  * Problem-solving patterns: the technique a built-in list section practices,
  * finer than LeetCode's topic tags ("Sliding Window" covers both fixed- and
@@ -308,4 +310,9 @@ export function isPatternId(value: string): value is PatternId {
 
 export function patternName(id: PatternId): { en: string; zh: string } {
   return PATTERNS[id];
+}
+
+/** A pattern as DTOs carry it. Ids come from parsed built-in lists, so they are known. */
+export function patternDto(id: string): StudyListPatternDto {
+  return { id, name: patternName(id as PatternId) };
 }

@@ -17,6 +17,7 @@ import { loadDashboard, type DashboardSession } from "@/server/dashboard";
 import { loadTodayPlan } from "@/server/study-plan/today";
 import { OnboardingCard } from "./onboarding-card";
 import { PlanCard } from "./plan-card";
+import { pick } from "../lists/api";
 
 export const dynamic = "force-dynamic";
 
@@ -134,7 +135,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         </section>
       )}
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <Surface as="section" aria-label={d.recent} className="space-y-3 p-5">
           <div>
             <h2 className="text-base font-semibold">{d.recent}</h2>
@@ -165,6 +166,28 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 <li key={item.category}>{d.focusItem(category(item.category), item.contexts, item.problems)}</li>
               ))}
             </ul>
+          )}
+          {plan.focusPatterns.length > 0 && (
+            <div className="space-y-2 border-t border-border pt-3">
+              <h3 className="text-sm font-semibold">{d.weakPatterns}</h3>
+              <ul className="space-y-2 text-sm">
+                {plan.focusPatterns.map(({ pattern, next }) => (
+                  <li key={pattern.id}>
+                    <span className="font-medium">{pick(pattern.name, language)}</span>
+                    {next ? (
+                      <span className="block">
+                        <span className="text-muted">{d.practiceNext} </span>
+                        <a href={next.url} target="_blank" rel="noreferrer" className="text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent">
+                          {next.leetcodeId}. {pick(next.title, language)}
+                        </a>
+                      </span>
+                    ) : (
+                      <span className="block text-muted">{d.patternUsedUp}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
           <Link href="/analysis" className="inline-block text-sm font-medium text-accent hover:underline">
             {d.viewProfile}

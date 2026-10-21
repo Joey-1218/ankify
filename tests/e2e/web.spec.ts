@@ -8,9 +8,24 @@ import type { LeetcodeFixtureState } from "./leetcode-fixture";
 // (the `panel` fixture signs in through /api/qa/login).
 type Settings = { review: { dailyReviewLimit: number; initialReviewDelayHours: number }; analysis: { automatic: boolean } };
 
-async function openWeb(context: BrowserContext, path: string, language: "en" | "zh" = "en"): Promise<Page> {
+/**
+ * The language a page renders in: the cookie the server reads, and the choice
+ * the browser stored, which the client keeps over the cookie (so a page left
+ * in English by an earlier test would switch a Chinese one back).
+ */
+async function setLanguage(context: BrowserContext, page: Page, language: "en" | "zh") {
   await context.addCookies([{ name: "ankileet-language", value: language, url: API_ORIGIN }]);
+  // Runs before the app on every load of this page; a later call runs last and wins.
+  await page.addInitScript((value) => {
+    try {
+      localStorage.setItem("ankileet-language", value);
+    } catch {}
+  }, language);
+}
+
+async function openWeb(context: BrowserContext, path: string, language: "en" | "zh" = "en"): Promise<Page> {
   const page = await context.newPage();
+  await setLanguage(context, page, language);
   await page.goto(`${API_ORIGIN}${path}`);
   return page;
 }
@@ -242,7 +257,7 @@ test("the dashboard shows today's counts, recent practice, and focus areas", asy
   await expect(recent.getByText(/^Last 7 days: \d+ sessions? completed/)).toBeVisible();
   await expect(page.getByRole("region", { name: "Focus areas" }).getByRole("link", { name: "View mistake profile" })).toHaveAttribute("href", "/analysis");
 
-  await context.addCookies([{ name: "ankileet-language", value: "zh", url: API_ORIGIN }]);
+  await setLanguage(context, page, "zh");
   await page.reload();
   await expect(page.getByRole("region", { name: "最近练习" })).toBeVisible({ timeout: 30_000 });
   await page.close();
@@ -338,8 +353,8 @@ test("a long problem statement uses the page's own scrolling, at desktop and pho
 
 /** The problems list at a width that shows every column, once its first load settled. */
 async function openProblems(context: BrowserContext, path = "/problems"): Promise<Page> {
-  await context.addCookies([{ name: "ankileet-language", value: "en", url: API_ORIGIN }]);
   const page = await context.newPage();
+  await setLanguage(context, page, "en");
   await page.setViewportSize({ width: 1440, height: 900 });
   // In development the list refetches once after hydration.
   await page.goto(`${API_ORIGIN}${path}`, { waitUntil: "networkidle" });

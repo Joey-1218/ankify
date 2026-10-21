@@ -3,7 +3,8 @@ import type { PracticeSessionStartInput } from "@ankileet/contracts";
 import { getDb, schema } from "@ankileet/db";
 import { runSessionCommand, startPracticeSession } from "../practice-sessions/commands";
 import { setStudyPlanSettings } from "../settings";
-import { getBuiltinList } from "../study-lists/builtin";
+import { mergeAttemptHistory } from "../suggestions/history";
+import { builtinLists, getBuiltinList } from "../study-lists/builtin";
 import { createStudyList, updateStudyList } from "../study-lists/commands";
 import { createTestDb } from "../test-db";
 import { loadTodayPlan } from "./today";
@@ -113,6 +114,20 @@ describe("today's plan", () => {
     }
     const plan = await loadTodayPlan(USER, { due: [] }, NOW);
     expect(plan.newProblems[0]).toMatchObject({ slug: shortest[2]!.slug, reason: "weak_pattern", pattern: { id: "sliding_window.variable.shortest" } });
+    // The focus card names it, with the same problem to practice next, even while due reviews hide their patterns.
+    expect(plan.settings.hidePatternsOnToday).toBe(true);
+    expect(plan.focusPatterns).toEqual([
+      {
+        pattern: { id: "sliding_window.variable.shortest", name: expect.objectContaining({ en: expect.any(String) }) },
+        weakness: expect.any(Number),
+        next: expect.objectContaining({ slug: shortest[2]!.slug, list: { builtinId: LIST, name: getBuiltinList(LIST)!.name } }),
+      },
+    ]);
+
+    // Once every built-in problem with the pattern is attempted, nothing is left to practice it.
+    const rest = builtinLists().flatMap((list) => list.items.filter((item) => item.pattern === "sliding_window.variable.shortest").map((item) => item.slug));
+    await mergeAttemptHistory(USER, { source: "user_marked", sourceAccount: null, entries: [...new Set(rest)].map((slug) => ({ slug, status: "attempted" as const })) });
+    expect((await loadTodayPlan(USER, { due: [] }, NOW)).focusPatterns).toMatchObject([{ pattern: { id: "sliding_window.variable.shortest" }, next: null }]);
   });
 
   it("interleaves due reviews in a stable order and shows their patterns only when asked", async () => {

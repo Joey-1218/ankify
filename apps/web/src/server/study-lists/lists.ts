@@ -1,4 +1,5 @@
 import type {
+  PatternProblemDto,
   ProblemStudyListsDto,
   StudyListDetailDto,
   StudyListEntryDto,
@@ -324,4 +325,39 @@ export async function loadActiveListCandidates(userId: string, db: Db = getDb())
         },
       ];
     });
+}
+
+/**
+ * Never-attempted problems that practice each pattern, at most `limit` per
+ * pattern, from the built-in sections with it: the lists the user follows
+ * and has not paused come first, in the user's order, then the other
+ * built-in lists in display order. A problem shows once per pattern.
+ */
+export async function loadPatternPractice(
+  userId: string,
+  patterns: readonly string[],
+  { limit = 3 }: { limit?: number } = {},
+  db: Db = getDb(),
+): Promise<Map<string, PatternProblemDto[]>> {
+  const picks = new Map(patterns.map((pattern) => [pattern, [] as PatternProblemDto[]]));
+  if (picks.size === 0 || limit <= 0) return picks;
+  const [index, lists] = await Promise.all([loadPracticeIndex(db, userId), loadUserLists(db, userId)]);
+  const followed = lists.rows.filter((row) => row.kind === "builtin" && row.active).map((row) => row.builtinId!);
+  const order = [...new Set([...followed, ...builtinLists().map((list) => list.id)])].flatMap((id) => getBuiltinList(id) ?? []);
+  for (const list of order) {
+    for (const item of list.items) {
+      const found = picks.get(item.pattern);
+      if (!found || found.length >= limit || found.some((pick) => pick.slug === item.slug)) continue;
+      if (stateOf(index, item.slug).state !== "not_started") continue;
+      found.push({
+        slug: item.slug,
+        leetcodeId: Number(item.frontendId),
+        title: item.title,
+        difficulty: item.difficulty,
+        url: leetcodeProblemUrl(item.slug),
+        list: { builtinId: list.id, name: list.name },
+      });
+    }
+  }
+  return picks;
 }

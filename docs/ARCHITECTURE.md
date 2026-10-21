@@ -402,10 +402,16 @@ One model call explains one completed practice session (`server/session-analysis
 
 ## Study lists
 
-Practice is organized in lists (design and phases:
-[STUDY_LISTS_PLAN.md](STUDY_LISTS_PLAN.md)). FSRS stays problem-level: a
-problem in several lists has one schedule, and practicing it anywhere counts
-everywhere. Lists organize problems and pace new ones (Today planner below).
+Practice is organized in lists: a user who doesn't know what to practice
+follows a list in order. FSRS stays problem-level: a problem in several lists
+has one schedule, and practicing it anywhere counts everywhere. Lists
+organize problems and pace new ones (Today planner below); the patterns of
+their sections give the mistake profile a technique axis (Pattern profile
+below). The design follows a few learning principles: a review is a full
+re-solve (retrieval), FSRS spaces reviews, Today interleaves patterns and
+hides their names so recognizing one is part of the work, new problems are
+paced by time so reviews never pile up, and a pattern's mastery weighs
+first tries on unseen problems most (transfer).
 
 - **Built-in lists** are committed data in
   `apps/web/src/server/study-lists/builtin/<id>.json`, generated from a
@@ -418,9 +424,23 @@ everywhere. Lists organize problems and pace new ones (Today planner below).
   English and Chinese titles, difficulty, paid flag, contest rating, the
   level (`core`, `optional`, `stretch`), and chapters and sections with a
   pattern each; every English label is our own, and only an author's name
-  may be Chinese in English. 24 lists are imported, all on leetcode.com:
-  Carl's (代码随想录) 11 core topics (graph theory left out: its problems are
-  on Kamacoder) and his extra problems, and 灵茶山艾府's 12 topic lists.
+  may be Chinese in English. 24 lists are imported (2026-10-20), all on
+  leetcode.com, 2,750 unique problems:
+  - 灵茶山艾府's 12 topic lists from his index post
+    ([如何科学刷题](https://leetcode.cn/discuss/post/3141566/ru-he-ke-xue-shua-ti-by-endlesscheng-q3yd/)).
+    leetcode.cn-only problems (LCP, LCR, 面试题) are replaced by their
+    leetcode.com twin only when the post says they are the same (`同 X 题`),
+    else left out; a list page notes how many are not included.
+  - Carl's (代码随想录) 11 core topics in the order of
+    [programmercarl.com/algo](https://programmercarl.com/algo/) (graph theory
+    left out: its problems are on Kamacoder) and his extra problems. Each
+    article's own problem is core, the ones it recommends (相关题目推荐) are
+    stretch; 221 items, 200 unique problems.
+  - Optional (选做) and premium problems are ordinary entries; nothing skips
+    them. The files total 1.3 MB of server-only JSON, parsed once per server
+    instance on first use. Only problem identities, LeetCode's titles,
+    ratings, and the section structure are stored (none of the authors'
+    text), and every list page credits and links its source.
 - **Patterns** (`patterns.ts`) name the technique a section practices,
   finer than LeetCode topics. Ids are stable (history will be keyed by them);
   a problem's patterns are those of every built-in section containing its
@@ -459,7 +479,12 @@ everywhere. Lists organize problems and pace new ones (Today planner below).
     reviewMinutes) / newMinutes)` clamped to [0, maxNewPerDay], minus new
     problems already started today. Reviews are never cut. Typical times are
     12 and 35 minutes until five completed sessions of a kind exist, then the
-    median of `practice_sessions.active_ms` (last 90 days).
+    median of `practice_sessions.active_ms` (last 90 days). Why a budget
+    and not a fixed count: simulated with the app's FSRS settings on the
+    272-problem list, 1 new problem a day climbs from 42 to 133 minutes a
+    day by month 9 and 2 a day peaks near 200 by month 3, while a 60-minute
+    budget stays near 60 (about 1.4 new a day in week 1, 0.6 by month 6). A
+    60-day look-ahead planner did no better.
   - Slots go to active lists in equal turns through a deficit round-robin over the
     last 14 days of first practices (each counted for the first active list
     holding it), ties broken by a seeded hash. Within a list: the next unseen
@@ -477,6 +502,23 @@ everywhere. Lists organize problems and pace new ones (Today planner below).
     the day) that never puts two problems of one pattern next to each other
     when an order like that exists; their patterns are hidden unless the
     setting is off. The extension popup keeps most overdue first.
+  - Pause: a paused list gives no new problems; reviews of its started
+    problems stay on schedule (FSRS never looks at lists).
+- **Pattern profile** (`patternProfileDto()` in `server/mistake-profile.ts`,
+  from the same pattern stats as the planner): `/analysis` shows a pattern x
+  cause grid, one row per pattern with evidence (weak ones first, weakest
+  first, then the rest by sessions): status (Weak, Strong, Steady, or too few
+  sessions), sessions and problems, new problems solved on the first try,
+  and one column per confirmed cause, shaded by count. A weak pattern lists
+  up to 3 problems to practice it next (`loadPatternPractice()` in
+  `lists.ts`): never-attempted problems (no problem row, nothing in
+  `attempt_history`) from built-in sections with the pattern, from the lists
+  the user follows and has not paused first, in the user's order, then the
+  other built-in lists in display order, each problem once. Today's focus
+  card names the 3 weakest patterns with one such problem each
+  (`TodayPlanDto.focusPatterns`); it shows whatever `hidePatternsOnToday`
+  says, since it names weak patterns, not which due review needs one.
+  `/analysis` reads the evidence once for both profiles (`loadProfiles()`).
 - **API** (contracts in `packages/contracts/src/study-lists.ts`):
   `GET/POST/PUT /api/study-lists` (overview with built-in lists grouped by
   author; create, follow, copy; the order of the user's lists, every list
@@ -485,9 +527,11 @@ everywhere. Lists organize problems and pace new ones (Today planner below).
   rename custom lists, pause or resume; delete or unfollow),
   `POST/PUT /api/study-lists/:id/items` (add by problem id or built-in slug;
   reorder with every item id once), `DELETE /api/study-lists/:id/items/:itemId`,
-  `GET /api/study-lists/builtin/:builtinId`, and
-  `GET /api/problems/:id/study-lists`. Lists and items are in the account
-  export.
+  `GET /api/study-lists/builtin/:builtinId`,
+  `GET /api/problems/:id/study-lists`, and `GET /api/mistakes/patterns`
+  (the pattern profile). Lists and items are in the account export.
+- **Open item**: ask 灵茶山艾府 and Carl for permission before shipping the
+  lists to users: the selection and grouping are their work.
 
 ## New-problem suggestions
 
@@ -701,8 +745,9 @@ extension reuses the web session cookie, and production CORS allows only
 - `/today`: the dashboard and onboarding. `server/dashboard.ts` gathers the
   popup's review overview, the last week's completed sessions, recent
   practice, focus areas from the profile, and today's suggestions; Today's
-  plan (`loadTodayPlan()`) adds the day's new problems from the active lists
-  and orders the due reviews (see Study lists, "Today planner").
+  plan (`loadTodayPlan()`) adds the day's new problems from the active lists,
+  orders the due reviews, and adds weak patterns to the focus card (see
+  Study lists, "Today planner" and "Pattern profile").
 - `/lists`: two areas, both made of the same list row (name, size and
   learned count, a detail line, a progress bar with a percentage, which sits
   under the name on phones, and an action). Your lists: My problems pinned
@@ -743,7 +788,9 @@ extension reuses the web session cookie, and production CORS allows only
   - "Practice on LeetCode".
 - `/suggestions`: today's new-problem suggestions, the same items as the
   popup.
-- `/analysis`: the mistake profile, then the FSRS dashboard.
+- `/analysis`: the mistake profile, the pattern x cause grid (it scrolls
+  inside its panel on a phone, the pattern column staying put), then the
+  FSRS dashboard.
 - `/settings`: AI provider, AI credits, language and region, study plan
   (daily time, new problems per day, hiding patterns on Today), review
   schedule and first-review delay, session-analysis automation, account

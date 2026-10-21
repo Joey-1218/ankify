@@ -298,7 +298,7 @@ export async function setAnalysisSettings(userId: string, value: Partial<Analysi
   return next;
 }
 
-/** How Today paces new problems (docs/STUDY_LISTS_PLAN.md, "Pacing"). */
+/** How Today paces new problems (docs/ARCHITECTURE.md, "Study lists"). */
 export interface StudyPlanSettings {
   /** Minutes of practice a day: reviews first, new problems with the rest. */
   dailyMinutes: number;

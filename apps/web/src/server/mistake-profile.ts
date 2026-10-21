@@ -1,9 +1,10 @@
-import type { MistakeProfileDto } from "@ankileet/contracts";
+import type { MistakeProfileDto, PatternProfileDto } from "@ankileet/contracts";
 import {
   computeMistakeProfile,
   computePatternProfile,
   contextKey,
   FEED_PARAMS,
+  PATTERN_PARAMS,
   PROFILE_READINESS,
   summarizeSession,
   type FsrsRating,
@@ -14,10 +15,14 @@ import {
 import { getDb, schema } from "@ankileet/db";
 import { and, eq, gte, isNotNull, isNull, ne, or } from "drizzle-orm";
 import { patternsForSlug } from "./study-lists/builtin";
+import { loadPatternPractice } from "./study-lists/lists";
+import { patternDto } from "./study-lists/patterns";
 
 const TREND_DAYS = 30;
 const MAX_EXAMPLES = 3;
 const MAX_CANDIDATES = 20;
+/** Problems to practice next under each weak pattern. */
+const MAX_PRACTICE = 3;
 
 /** The legacy context of a record made outside a practice session. */
 export function legacySourceKey(row: {
@@ -137,7 +142,12 @@ async function loadProfileEvidence(userId: string, now: Date) {
  * that Undo, dismissal, or deletion could leave stale.
  */
 export async function loadMistakeProfile(userId: string, now = new Date()): Promise<MistakeProfileDto> {
-  const { sessions, mistakes, legacyRatings, mistakeRows, problems } = await loadProfileEvidence(userId, now);
+  return mistakeProfileOf(await loadProfileEvidence(userId, now), now);
+}
+
+type ProfileEvidence = Awaited<ReturnType<typeof loadProfileEvidence>>;
+
+function mistakeProfileOf({ sessions, mistakes, legacyRatings, mistakeRows, problems }: ProfileEvidence, now: Date): MistakeProfileDto {
   const profile = computeMistakeProfile({ now, trendDays: TREND_DAYS, sessions, mistakes, legacyRatings });
 
   const mistakeById = new Map(mistakeRows.map(({ mistake }) => [mistake.id, mistake]));
@@ -185,7 +195,48 @@ export async function loadMistakeProfile(userId: string, now = new Date()): Prom
  * slug). Problems in no built-in list have no pattern.
  */
 export async function loadPatternProfile(userId: string, now = new Date()): Promise<PatternStat[]> {
-  const { sessions, mistakes, problems, typeBySession } = await loadProfileEvidence(userId, now);
+  return patternProfileOf(await loadProfileEvidence(userId, now), now);
+}
+
+/** Both profiles from one read of the evidence (the /analysis page shows both). */
+export async function loadProfiles(userId: string, now = new Date()): Promise<{ profile: MistakeProfileDto; patterns: PatternStat[] }> {
+  const evidence = await loadProfileEvidence(userId, now);
+  return { profile: mistakeProfileOf(evidence, now), patterns: patternProfileOf(evidence, now) };
+}
+
+/**
+ * The pattern x cause profile as /analysis and its API show it: weak
+ * patterns first (weakest first), each with problems to practice next, then
+ * the rest by sessions.
+ */
+export async function patternProfileDto(userId: string, patterns: readonly PatternStat[], now = new Date()): Promise<PatternProfileDto> {
+  const weak = patterns.filter((stat) => stat.weak);
+  const rest = patterns.filter((stat) => !stat.weak).sort((a, b) => b.sessions - a.sessions || a.pattern.localeCompare(b.pattern));
+  const next = await loadPatternPractice(userId, weak.map((stat) => stat.pattern), { limit: MAX_PRACTICE });
+  return {
+    generatedAt: now.toISOString(),
+    windowDays: FEED_PARAMS.maxEvidenceAgeDays,
+    required: { sessions: PATTERN_PARAMS.readySessions, problems: PATTERN_PARAMS.readyProblems },
+    patterns: [...weak, ...rest].map((stat) => ({
+      pattern: patternDto(stat.pattern),
+      sessions: stat.sessions,
+      problems: stat.problems,
+      newProblems: stat.newProblems,
+      weakness: Math.round(stat.weakness * 1000) / 1000,
+      ready: stat.ready,
+      weak: stat.weak,
+      strong: stat.strong,
+      causes: stat.causes,
+      next: next.get(stat.pattern) ?? [],
+    })),
+  };
+}
+
+export async function loadPatternProfileDto(userId: string, now = new Date()): Promise<PatternProfileDto> {
+  return patternProfileDto(userId, await loadPatternProfile(userId, now), now);
+}
+
+function patternProfileOf({ sessions, mistakes, problems, typeBySession }: ProfileEvidence, now: Date): PatternStat[] {
   const patternsOf = (problemId: string) => {
     const slug = problems.get(problemId)?.slug;
     return slug ? patternsForSlug(slug) : [];
