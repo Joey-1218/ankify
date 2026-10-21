@@ -121,7 +121,7 @@ Later extension updates: bump `version` in
 `apps/extension/manifest.config.ts`, ship the web side first, then build,
 zip, and upload a new package (DEPLOYMENT.md, "Extension release").
 
-### Study lists (done on the branch, not merged)
+### Study lists (merged to main 2026-10-20)
 
 A list-based practice workflow: built-in lists (Carl's 12 and
 灵茶山艾府's 12 topic lists, moved to leetcode.com, grouped by author on
@@ -129,8 +129,8 @@ A list-based practice workflow: built-in lists (Carl's 12 and
 rename, or delete), a daily time budget for new problems, and a pattern
 axis in the mistake profile. The settled design is in ARCHITECTURE.md,
 "Study lists" (the planning doc was retired once every phase shipped).
-Work happens on branch `claude/determined-pasteur-cid59n` (not merged, not
-deployed). All four phases are done:
+Merged from branch `claude/determined-pasteur-cid59n`; migration
+`0027_study_lists` was applied to Production first. All four phases are done:
 
 1. the importers and all 24 lists;
 2. lists in the database, the list API, the `/lists` pages, and the
@@ -150,10 +150,7 @@ playlist-style add-to-list dialog, and a redesigned problem page (header
 with actions and list links, a stats strip, full-width tabs; the resizable
 side rail is gone).
 
-Before deploying: apply migration `0027_study_lists` to Production first
-(`pnpm db:release`, DEPLOYMENT.md), since the list pages and the problem
-page read the new tables (phases 3 and 4 add no migration; settings live in
-`settings`). The web screenshot baselines (Today, Lists, `/analysis`,
+Still open: the web screenshot baselines (Today, Lists, `/analysis`,
 Problems, problem page) must be regenerated on the owner's machine after
 review, since the nav, the problem page, Today, and `/analysis` changed.
 Ask 灵茶山艾府 and Carl for permission before shipping the lists to users.
