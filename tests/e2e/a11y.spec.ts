@@ -41,6 +41,15 @@ for (const theme of ["light", "dark"] as const) {
     await expect(page.getByRole("link", { name: "Extra Problems" })).toBeVisible();
     await audit(page, `/lists, groups open (${theme})`);
     for (const group of groups) await group.click();
+    // A list row's actions menu, open.
+    const created = await page.request.post(`${API_ORIGIN}/api/study-lists`, { data: { action: "create", requestId: crypto.randomUUID(), name: `A11y ${theme}` } });
+    const { list } = (await created.json()) as { list: { id: string } };
+    await page.reload();
+    await page.getByRole("button", { name: `Actions: A11y ${theme}` }).click();
+    await expect(page.getByRole("menu")).toBeVisible();
+    await audit(page, `/lists, row menu open (${theme})`);
+    await page.keyboard.press("Escape");
+    await page.request.delete(`${API_ORIGIN}/api/study-lists/${list.id}`);
     await page.close();
   });
 

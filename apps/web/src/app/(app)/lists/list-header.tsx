@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Route } from "next";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ArrowLeft, Pin } from "lucide-react";
 import type { StudyListSummaryDto } from "@ankileet/contracts";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Button, buttonClasses } from "@/components/ui/button";
@@ -61,7 +62,8 @@ export function ListHeader({ list, excludedCount }: { list: StudyListSummaryDto;
   const { learned, started, total } = list.progress;
   return (
     <header className="space-y-4">
-      <Link href="/lists" className="text-sm text-muted hover:text-accent">
+      <Link href="/lists" className={buttonClasses({ variant: "ghost", size: "sm", className: "-ml-3" })}>
+        <ArrowLeft className="h-4 w-4" aria-hidden />
         {t.lists.back}
       </Link>
       <div className="min-w-0 space-y-1">
@@ -83,7 +85,10 @@ export function ListHeader({ list, excludedCount }: { list: StudyListSummaryDto;
               </Button>
             </form>
           ) : (
-            <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+            <h1 className="flex items-center gap-2 text-2xl font-semibold tracking-tight">
+              {list.kind === "my_problems" && <Pin className="h-5 w-5 text-muted" aria-label={t.lists.pinned} />}
+              {title}
+            </h1>
           )}
           {list.author && (
             <p className="text-sm text-muted">
@@ -99,6 +104,7 @@ export function ListHeader({ list, excludedCount }: { list: StudyListSummaryDto;
             </p>
           )}
           {list.kind === "my_problems" && <p className="text-sm text-muted">{t.lists.myProblemsHelp}</p>}
+          {list.followed && !list.active && <p className="text-sm text-muted">{t.lists.pausedHelp}</p>}
           {excludedCount > 0 && <p className="text-xs text-muted">{t.lists.excluded(excludedCount)}</p>}
       </div>
       <div className="flex flex-wrap items-center justify-between gap-3">

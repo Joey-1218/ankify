@@ -942,8 +942,8 @@ export const suggestions = sqliteTable(
  * study_lists / study_list_items
  * The user's study lists: playlist-style `custom` lists and followed
  * `builtin` lists (whose content is committed data, never copied here). My
- * problems is not stored: it is every problem in no other list. `active` and
- * `share` pace new problems on Today. Items belong to custom lists only and
+ * problems is not stored: it is every problem in no other list. `active`
+ * pauses new problems on Today (reviews continue). Items belong to custom lists only and
  * name problems by slug, so a list can hold problems not yet in the deck.
  * ──────────────────────────────────────────────────────────────────────────── */
 export const studyLists = sqliteTable(
@@ -961,7 +961,7 @@ export const studyLists = sqliteTable(
     /** Idempotency of the creating request. */
     requestId: text("request_id").notNull(),
     active: integer("active", { mode: "boolean" }).notNull().default(true),
-    /** Relative weight among active lists when new problems are handed out. */
+    /** Unused since shares were removed (2026-10-21): every active list gets equal turns. */
     share: integer("share").notNull().default(1),
     position: integer("position").notNull().default(0),
     createdAt: ts("created_at"),

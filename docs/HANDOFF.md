@@ -132,7 +132,7 @@ Work happens on branch `claude/determined-pasteur-cid59n` (not merged, not
 deployed). Done: phase 1 (the importer and all 12 lists), phase 2 (lists in
 the database, the list API, `/lists` pages, and the problem page's Lists
 panel), and phase 3 (Today's plan: a daily time budget for new problems,
-list shares, weak-pattern priority and check problems, interleaved reviews,
+equal turns across active lists (shares were removed later), weak-pattern priority and check problems, interleaved reviews,
 study-plan settings, and the same-day re-solve rule), then Carl's lists
 (`scripts/study-list-import-carl.mjs`) and the `/lists` refresh (author
 groups, dragging lists and custom-list items, delete or unfollow in place);

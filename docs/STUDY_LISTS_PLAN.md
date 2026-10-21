@@ -95,9 +95,9 @@ Fixed counts are not stable: 1/day climbs from 42 to 133 minutes by month 9;
 2/day peaks near 200 minutes by month 3. A 60-day look-ahead planner did no
 better than the simple rule.
 
-Each active list has a **share** (weight, default 1). New-problem slots go to
-lists by a seeded deficit round-robin over the shares (the suggestion
-planner's rotation), so over a week each list gets its share. Weak-pattern
+New-problem slots go to the active lists in equal turns by a seeded deficit
+round-robin (the suggestion planner's rotation). (Per-list shares were tried
+and removed on 2026-10-21: the owner found the weight control confusing.) Weak-pattern
 priority and the strong-pattern check decide *which* item fills a slot, not
 how many slots there are. "One more new problem" is always available.
 

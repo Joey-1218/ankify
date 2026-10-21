@@ -4,12 +4,13 @@ import Link from "next/link";
 import type { Route } from "next";
 import { useRouter } from "next/navigation";
 import { useMemo, useState, useSyncExternalStore } from "react";
-import { Check, ChevronDown, GripVertical } from "lucide-react";
+import { Check, ChevronDown, GripVertical, Pin } from "lucide-react";
 import { STUDY_LIST_NAME_MAX, type StudyListAuthorGroupDto, type StudyListsOverviewDto, type StudyListSummaryDto } from "@ankileet/contracts";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
-import { Input, Select } from "@/components/ui/field";
+import { Input } from "@/components/ui/field";
+import { Menu, type MenuItem } from "@/components/ui/menu";
 import { Pill } from "@/components/ui/pill";
 import { Spinner } from "@/components/ui/spinner";
 import { Surface } from "@/components/ui/surface";
@@ -18,8 +19,6 @@ import { pick, sendJson } from "./api";
 import { ProgressBar } from "./progress-bar";
 import { dropIndicatorClass, useSortable } from "./sortable";
 
-/** The share choices offered (the API takes 1-10). */
-const SHARES = [1, 2, 3, 4, 5] as const;
 /** localStorage: the author groups the viewer left open. */
 const OPEN_GROUPS_KEY = "ankileet.lists.openGroups";
 
@@ -31,8 +30,9 @@ export function listHref(list: StudyListSummaryDto): Route {
 
 /**
  * /lists in two areas: the user's lists (My problems pinned first, the rest
- * reordered by dragging, deleted or unfollowed in place) and the built-in
- * lists, one collapsible group per author.
+ * reordered by dragging, with Pause, Rename, and Delete or Unfollow in a row
+ * menu) and the built-in lists, one accordion item per author. Both use the
+ * same row.
  */
 export function ListsOverview({ overview }: { overview: StudyListsOverviewDto }) {
   const { t, language } = useLanguage();
@@ -41,6 +41,7 @@ export function ListsOverview({ overview }: { overview: StudyListsOverviewDto })
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [confirming, setConfirming] = useState<StudyListSummaryDto | null>(null);
+  const [renaming, setRenaming] = useState<{ id: string; name: string } | null>(null);
   const mine = overview.lists[0]!;
   const [order, setOrder] = useState(() => overview.lists.slice(1));
   const [seeded, setSeeded] = useState(overview.lists);
@@ -86,105 +87,112 @@ export function ListsOverview({ overview }: { overview: StudyListsOverviewDto })
     }
   };
 
-  const sortable = useSortable({ items: order, keyOf: (list) => list.id!, onReorder: (next) => void reorder(next), disabled: busy != null });
+  const rename = async () => {
+    if (!renaming || !renaming.name.trim()) return;
+    if (await run(`rename:${renaming.id}`, "PATCH", `/api/study-lists/${renaming.id}`, { name: renaming.name.trim() })) setRenaming(null);
+  };
 
-  const row = (list: StudyListSummaryDto) => {
+  const sortable = useSortable({ items: order, keyOf: (list) => list.id!, onReorder: (next) => void reorder(next), disabled: busy != null || renaming != null });
+
+  const menuFor = (list: StudyListSummaryDto, title: string): MenuItem[] => [
+    {
+      key: "active",
+      label: list.active ? t.lists.pause : t.lists.resume,
+      description: list.active ? t.lists.pausedHelp : t.lists.resumeHelp,
+      disabled: busy != null,
+      onSelect: () => void run(`active:${list.id}`, "PATCH", `/api/study-lists/${list.id}`, { active: !list.active }),
+    },
+    ...(list.kind === "custom"
+      ? [{ key: "rename", label: t.lists.rename, disabled: busy != null, onSelect: () => setRenaming({ id: list.id!, name: title }) }]
+      : []),
+    {
+      key: "remove",
+      label: list.kind === "custom" ? t.lists.deleteList : t.lists.unfollow,
+      tone: list.kind === "custom" ? ("danger" as const) : ("default" as const),
+      disabled: busy != null,
+      onSelect: () => {
+        setError(null);
+        setConfirming(list);
+      },
+    },
+  ];
+
+  const yourRow = (list: StudyListSummaryDto) => {
     const title = titleOf(list);
-    const drop = list.id ? sortable.indicator(list.id) : null;
-    return (
-      <li
-        key={list.id ?? list.kind}
-        {...(list.id ? sortable.rowProps(list.id) : {})}
-        className={cn(
-          "relative space-y-2 px-4 py-3",
-          list.id && sortable.dragging === list.id && "bg-subtle opacity-70",
-          dropIndicatorClass(drop),
+    const pinned = list.kind === "my_problems";
+    const editing = renaming && renaming.id === list.id ? renaming : null;
+    const detail = pinned ? (
+      t.lists.myProblemsHelp
+    ) : (
+      <>
+        {list.author && <>{pick(list.author, language)}</>}
+        {list.author && list.nextUp && " · "}
+        {list.nextUp && (
+          <a href={list.nextUp.url} target="_blank" rel="noreferrer" className="text-accent hover:underline">
+            {t.lists.nextUpLabel(pick(list.nextUp.title, language))}
+          </a>
         )}
-      >
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          {list.id ? (
+      </>
+    );
+    return (
+      <ListRow
+        key={list.id ?? list.kind}
+        list={list}
+        title={title}
+        rowProps={list.id ? sortable.rowProps(list.id) : undefined}
+        className={cn(
+          "first:rounded-t-xl last:rounded-b-xl",
+          pinned && "bg-subtle/50",
+          list.id && sortable.dragging === list.id && "bg-subtle opacity-70",
+          list.id ? dropIndicatorClass(sortable.indicator(list.id)) : undefined,
+        )}
+        lead={
+          pinned ? (
+            <Pin className="h-4 w-4 text-muted" aria-label={t.lists.pinned} />
+          ) : (
             <button
               type="button"
-              {...sortable.handleProps(list.id)}
+              {...sortable.handleProps(list.id!)}
               aria-label={t.lists.reorder(title)}
               title={t.lists.reorderHelp}
-              className="-ml-2 rounded p-1 text-muted hover:bg-subtle hover:text-fg"
+              className="rounded p-1 text-muted hover:bg-subtle hover:text-fg"
             >
               <GripVertical className="h-4 w-4" aria-hidden />
             </button>
-          ) : (
-            <span className="-ml-2 w-6" aria-hidden />
-          )}
-          <span className="min-w-0 flex-1 basis-40">
-            <Link href={listHref(list)} className="block truncate font-medium hover:underline">
-              {title}
-            </Link>
-            {list.author && <span className="block truncate text-xs text-muted">{t.lists.by(pick(list.author, language))}</span>}
-          </span>
-          <span className="ml-auto flex flex-wrap items-center gap-2">
-            {list.followed && !list.active && <Pill tone="warning">{t.lists.paused}</Pill>}
-            {list.followed && list.active && (
-              <Select
-                size="sm"
-                value={String(list.share)}
-                onValueChange={(value) => void run(`share:${list.id}`, "PATCH", `/api/study-lists/${list.id}`, { share: Number(value) })}
-                disabled={busy != null}
-                aria-label={`${t.lists.share}: ${title}`}
-                title={t.lists.share}
-                className="w-20"
-              >
-                {SHARES.map((share) => (
-                  <option key={share} value={String(share)}>
-                    {t.lists.shareOption(share)}
-                  </option>
-                ))}
-              </Select>
-            )}
-            {list.followed && (
-              <Button
-                size="xs"
-                variant="ghost"
-                disabled={busy != null}
-                title={t.lists.pausedHelp}
-                onClick={() => void run(`active:${list.id}`, "PATCH", `/api/study-lists/${list.id}`, { active: !list.active })}
-              >
-                {busy === `active:${list.id}` && <Spinner />}
-                {list.active ? t.lists.pause : t.lists.resume}
+          )
+        }
+        heading={
+          editing ? (
+            <form
+              className="flex flex-wrap items-center gap-2"
+              onSubmit={(event) => {
+                event.preventDefault();
+                void rename();
+              }}
+            >
+              <Input
+                value={editing.name}
+                onChange={(event) => setRenaming({ id: editing.id, name: event.target.value })}
+                onKeyDown={(event) => event.key === "Escape" && setRenaming(null)}
+                maxLength={STUDY_LIST_NAME_MAX}
+                aria-label={t.lists.newListName}
+                className="h-8 w-56"
+                autoFocus
+              />
+              <Button type="submit" size="xs" variant="primary" disabled={busy != null || editing.name.trim().length === 0}>
+                {busy === `rename:${editing.id}` && <Spinner />}
+                {t.common.save}
               </Button>
-            )}
-            {list.followed && (
-              <Button
-                size="xs"
-                variant="ghost"
-                className={list.kind === "custom" ? "text-danger" : undefined}
-                disabled={busy != null}
-                aria-label={`${list.kind === "custom" ? t.lists.deleteList : t.lists.unfollow}: ${title}`}
-                onClick={() => {
-                  setError(null);
-                  setConfirming(list);
-                }}
-              >
-                {list.kind === "custom" ? t.lists.deleteList : t.lists.unfollow}
+              <Button type="button" size="xs" variant="ghost" onClick={() => setRenaming(null)}>
+                {t.common.cancel}
               </Button>
-            )}
-          </span>
-        </div>
-        <ProgressBar
-          label={title}
-          valueText={t.lists.progress(list.progress.learned, list.progress.started, list.progress.total)}
-          learned={list.progress.learned}
-          started={list.progress.started}
-          total={list.progress.total}
-        />
-        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-muted">
-          <span className="tabular-nums">{t.lists.progress(list.progress.learned, list.progress.started, list.progress.total)}</span>
-          {list.nextUp && (
-            <a href={list.nextUp.url} target="_blank" rel="noreferrer" className="truncate text-accent hover:underline">
-              {t.lists.nextUpLabel(pick(list.nextUp.title, language))}
-            </a>
-          )}
-        </div>
-      </li>
+            </form>
+          ) : undefined
+        }
+        badges={list.followed && !list.active ? <Pill tone="warning">{t.lists.paused}</Pill> : null}
+        detail={detail}
+        trailing={pinned ? null : <Menu label={t.lists.actions(title)} items={menuFor(list, title)} />}
+      />
     );
   };
 
@@ -200,9 +208,9 @@ export function ListsOverview({ overview }: { overview: StudyListsOverviewDto })
         <h2 id="lists-yours" className="text-lg font-semibold">
           {t.lists.yours}
         </h2>
-        <Surface as="ul" className="divide-y divide-border overflow-hidden">
-          {row(mine)}
-          {order.map(row)}
+        <Surface as="ul" className="divide-y divide-border">
+          {yourRow(mine)}
+          {order.map(yourRow)}
         </Surface>
         <form
           className="flex flex-wrap items-center gap-2"
@@ -251,12 +259,72 @@ export function ListsOverview({ overview }: { overview: StudyListsOverviewDto })
   );
 }
 
+/**
+ * One list as a row, the same in Your lists and in an author's lists: a lead
+ * (handle, pin, or number), the name with its size and learned count, a
+ * detail line, the progress bar with a percentage (under the name on phones),
+ * and a trailing action.
+ */
+function ListRow({
+  list,
+  title,
+  lead,
+  heading,
+  badges,
+  detail,
+  trailing,
+  className,
+  rowProps,
+}: {
+  list: StudyListSummaryDto;
+  title: string;
+  lead: React.ReactNode;
+  /** Replaces the name link (an inline rename form). */
+  heading?: React.ReactNode;
+  badges?: React.ReactNode;
+  detail?: React.ReactNode;
+  trailing: React.ReactNode;
+  className?: string;
+  rowProps?: Record<string, string>;
+}) {
+  const { t } = useLanguage();
+  const { learned, started, total } = list.progress;
+  const percent = total > 0 ? Math.round((learned / total) * 100) : 0;
+  const bar = (
+    <>
+      <ProgressBar label={title} valueText={t.lists.progress(learned, started, total)} learned={learned} started={started} total={total} />
+      <span className="w-9 shrink-0 text-right text-xs text-muted tabular-nums">{percent}%</span>
+    </>
+  );
+  return (
+    <li {...rowProps} className={cn("flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-subtle/60", className)}>
+      <span className="flex w-6 shrink-0 justify-center text-xs text-muted tabular-nums">{lead}</span>
+      <span className="min-w-0 flex-1">
+        {heading ?? (
+          <span className="flex min-w-0 items-center gap-2">
+            <Link href={listHref(list)} className="truncate text-sm font-medium hover:text-accent">
+              {title}
+            </Link>
+            {badges}
+          </span>
+        )}
+        <span className="mt-0.5 block truncate text-xs text-muted tabular-nums">{t.lists.listMeta(total, learned)}</span>
+        {detail && <span className="mt-0.5 block truncate text-xs text-muted">{detail}</span>}
+        {/* Phones: the bar sits under the name, so the name keeps its width. */}
+        <span className="mt-2 flex items-center gap-2 sm:hidden">{bar}</span>
+      </span>
+      <span className="hidden w-32 shrink-0 items-center gap-2 sm:flex">{bar}</span>
+      <span className="flex shrink-0 justify-end sm:w-24">{trailing}</span>
+    </li>
+  );
+}
+
 const groupListeners = new Set<() => void>();
 
-/** The stored open-group ids as raw JSON (a stable snapshot), or "[]". */
 /** Open groups when this browser cannot store them (private mode, blocked storage). */
 let fallbackOpen = "[]";
 
+/** The stored open-group ids as raw JSON (a stable snapshot), or "[]". */
 function openGroupsSnapshot() {
   try {
     return window.localStorage.getItem(OPEN_GROUPS_KEY) ?? fallbackOpen;
@@ -351,46 +419,27 @@ function AuthorGroups({ groups, busy, onFollow }: { groups: StudyListAuthorGroup
               </button>
             </h3>
             <ol id={panelId} hidden={!isOpen} className={cn("divide-y divide-border", isOpen ? "block" : "hidden", last && "overflow-hidden rounded-b-xl")}>
-              {group.lists.map((list, position) => {
-                const title = pick(list.name, language);
-                const { learned, started, total } = list.progress;
-                const percent = total > 0 ? Math.round((learned / total) * 100) : 0;
-                const bar = (
-                  <>
-                    <ProgressBar label={title} valueText={t.lists.progress(learned, started, total)} learned={learned} started={started} total={total} />
-                    <span className="w-8 shrink-0 text-right text-xs text-muted tabular-nums">{percent}%</span>
-                  </>
-                );
-                return (
-                  <li key={list.builtinId} className="group/row flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-subtle/60">
-                    <span className="w-5 shrink-0 text-right text-xs text-muted tabular-nums" aria-hidden>
-                      {position + 1}
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <Link href={listHref(list)} className="block truncate text-sm font-medium hover:text-accent">
-                        {title}
-                      </Link>
-                      <span className="mt-0.5 block truncate text-xs text-muted tabular-nums">{t.lists.listMeta(total, learned)}</span>
-                      {/* Phones: the bar sits under the name, so the name keeps its width. */}
-                      <span className="mt-2 flex items-center gap-2 sm:hidden">{bar}</span>
-                    </span>
-                    <span className="hidden w-32 shrink-0 items-center gap-2 sm:flex">{bar}</span>
-                    <span className="flex shrink-0 justify-end sm:w-24">
-                      {list.followed ? (
-                        <span className="inline-flex items-center gap-1 text-xs font-medium text-success">
-                          <Check className="h-3.5 w-3.5" aria-hidden />
-                          {t.lists.following}
-                        </span>
-                      ) : (
-                        <Button size="xs" variant="secondary" disabled={busy != null} onClick={() => onFollow(list)} aria-label={`${t.lists.follow}: ${title}`}>
-                          {busy === `follow:${list.builtinId}` && <Spinner />}
-                          {t.lists.follow}
-                        </Button>
-                      )}
-                    </span>
-                  </li>
-                );
-              })}
+              {group.lists.map((list, position) => (
+                <ListRow
+                  key={list.builtinId}
+                  list={list}
+                  title={pick(list.name, language)}
+                  lead={<span aria-hidden>{position + 1}</span>}
+                  trailing={
+                    list.followed ? (
+                      <span className="inline-flex items-center gap-1 text-xs font-medium text-success">
+                        <Check className="h-3.5 w-3.5" aria-hidden />
+                        {t.lists.following}
+                      </span>
+                    ) : (
+                      <Button size="xs" variant="secondary" disabled={busy != null} onClick={() => onFollow(list)} aria-label={`${t.lists.follow}: ${pick(list.name, language)}`}>
+                        {busy === `follow:${list.builtinId}` && <Spinner />}
+                        {t.lists.follow}
+                      </Button>
+                    )
+                  }
+                />
+              ))}
             </ol>
           </section>
         );

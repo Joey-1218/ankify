@@ -8,7 +8,6 @@ import { leetcodeSlugSchema } from "./schemas";
  */
 
 export const STUDY_LIST_NAME_MAX = 80;
-export const STUDY_LIST_SHARE_MAX = 10;
 
 const listName = z.string().trim().min(1).max(STUDY_LIST_NAME_MAX);
 const builtinId = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).max(64);
@@ -22,12 +21,11 @@ export const studyListCreateSchema = z.discriminatedUnion("action", [
 ]);
 export type StudyListCreateInput = z.infer<typeof studyListCreateSchema>;
 
-/** PATCH /api/study-lists/:id — rename (custom only), pause, or reweight. */
+/** PATCH /api/study-lists/:id — rename (custom only), or pause and resume (no new problems on Today while paused). */
 export const studyListPatchSchema = z
   .object({
     name: listName.optional(),
     active: z.boolean().optional(),
-    share: z.number().int().min(1).max(STUDY_LIST_SHARE_MAX).optional(),
   })
   .strict()
   .refine((value) => Object.keys(value).length > 0, { message: "Nothing to change." });
@@ -96,8 +94,8 @@ export type StudyListSummaryDto = {
   author: LocalizedTextDto | null;
   sourceUrl: string | null;
   followed: boolean;
+  /** Paused lists give no new problems on Today; their reviews continue. */
   active: boolean;
-  share: number;
   progress: StudyListProgressDto;
   /** The first entry in list order not started yet (attempted-before ones included). */
   nextUp: StudyListEntryDto | null;

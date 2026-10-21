@@ -147,16 +147,16 @@ describe("study lists", () => {
     expect(fromBuiltin).toMatchObject({ ok: true });
   });
 
-  it("renames custom lists only, pauses and reweights any list, and keeps built-in lists read-only", async () => {
+  it("renames custom lists only, pauses any list, and keeps built-in lists read-only", async () => {
     const custom = await create({ action: "create", requestId: uuid(), name: "Before" });
     const followed = await create({ action: "follow", requestId: uuid(), builtinId: "binary-search" });
-    expect(await updateStudyList(USER, custom.listId, { name: "After", share: 3 })).toEqual({ ok: true });
+    expect(await updateStudyList(USER, custom.listId, { name: "After" })).toEqual({ ok: true });
     expect(await updateStudyList(USER, followed.listId, { active: false })).toEqual({ ok: true });
     expect(await updateStudyList(USER, followed.listId, { name: "Mine now" })).toMatchObject({ ok: false, error: "not_editable" });
     expect(await addStudyListItem(USER, followed.listId, { source: "builtin", slug: builtin().items[0]!.slug })).toMatchObject({ ok: false, error: "not_editable" });
 
     const overview = await loadStudyListsOverview(USER);
-    expect(overview.lists.find((list) => list.id === custom.listId)).toMatchObject({ name: { en: "After" }, share: 3, active: true });
+    expect(overview.lists.find((list) => list.id === custom.listId)).toMatchObject({ name: { en: "After" }, active: true });
     expect(overview.lists.find((list) => list.id === followed.listId)).toMatchObject({ active: false, followed: true });
   });
 

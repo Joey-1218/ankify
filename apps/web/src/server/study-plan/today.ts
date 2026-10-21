@@ -113,7 +113,8 @@ export async function loadTodayPlan(
     slots: slots + 1,
     lists: lists.map((list) => ({
       id: list.id,
-      share: list.share,
+      // Every active list gets equal turns (shares were removed from the UI).
+      share: 1,
       candidates: list.candidates.map((entry) => ({ slug: entry.slug, pattern: entryPattern(list, entry) })),
     })),
     served,

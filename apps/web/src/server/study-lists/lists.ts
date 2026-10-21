@@ -170,7 +170,6 @@ function summaryOf(
     id: row?.id ?? null,
     followed: row != null,
     active: row?.active ?? false,
-    share: row?.share ?? 1,
     progress: progressOf(entries),
     nextUp: nextUpOf(entries),
   };
@@ -290,7 +289,6 @@ export type ActiveListCandidates = {
   kind: "custom" | "builtin";
   builtinId: string | null;
   name: { en: string; zh: string };
-  share: number;
   /** Every entry, for attributing recent first practices to the list. */
   slugs: ReadonlySet<string>;
   /** Entries not started yet (attempted-before included), in list order, one per slug. */
@@ -318,7 +316,6 @@ export async function loadActiveListCandidates(userId: string, db: Db = getDb())
           kind: row.kind,
           builtinId: row.builtinId,
           name: resolved.base.name,
-          share: row.share,
           slugs: new Set(resolved.entries.map((entry) => entry.slug)),
           candidates,
           sectionPatterns: new Map(

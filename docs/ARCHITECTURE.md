@@ -60,7 +60,7 @@ Tables (all in `packages/db/src/schema.ts`):
 | `ai_jobs` | Durable async card, quiz, and session-analysis commands (see below) |
 | `session_analyses` | Immutable session-analysis results, cached per evidence version, analyzer version, provider, and model (see Session analysis) |
 | `suggestion_candidates` | Verified LeetCode metadata (title, difficulty, paid flag, topics, source, `verified_at`) of problems that may be suggested |
-| `study_lists`, `study_list_items` | The user's custom lists and followed built-in lists (with `active` and `share` for pacing), and custom-list items by slug (see Study lists) |
+| `study_lists`, `study_list_items` | The user's custom lists and followed built-in lists (with `active`: a paused list gives no new problems), and custom-list items by slug (see Study lists) |
 | `attempt_history`, `attempt_history_coverage` | Attempted problems by slug and source, independent of `problems` rows, and how much of a LeetCode account's history was read (see New-problem suggestions) |
 | `agent_sessions`, `agent_runs`, `agent_messages`, `agent_steps` | Persistent Study Coach conversations |
 | `settings` | Per-user key/value: encrypted AI config, review/generation prefs, onboarding, rate-limit windows, starter-credit counter, Stripe customer ids |
@@ -427,8 +427,10 @@ everywhere. Lists organize problems and pace new ones (Today planner below).
   slug, followed or not (`patternsForSlug()`).
 - **Tables**: `study_lists` has one row per custom list (`kind = custom`,
   `name`) or followed built-in list (`kind = builtin`, `builtin_id`, unique
-  per user), with `active`, `share` (1-10), `position`, and the creating
+  per user), with `active`, `position`, and the creating
   `request_id` (unique per user, so create/follow/copy are idempotent).
+  `share` is unused since shares were removed on 2026-10-21 (every active
+  list gets equal turns); the column stays at its default of 1.
   `study_list_items` holds custom-list items by slug, with the title,
   Chinese title, difficulty, and LeetCode number taken from the server's own
   rows (the deck or a built-in list, never the request), and a composite
@@ -458,7 +460,7 @@ everywhere. Lists organize problems and pace new ones (Today planner below).
     problems already started today. Reviews are never cut. Typical times are
     12 and 35 minutes until five completed sessions of a kind exist, then the
     median of `practice_sessions.active_ms` (last 90 days).
-  - Slots go to active lists by share through a deficit round-robin over the
+  - Slots go to active lists in equal turns through a deficit round-robin over the
     last 14 days of first practices (each counted for the first active list
     holding it), ties broken by a seeded hash. Within a list: the next unseen
     problem of a weak pattern first (`weak_pattern`), then at most one check
@@ -480,7 +482,7 @@ everywhere. Lists organize problems and pace new ones (Today planner below).
   author; create, follow, copy; the order of the user's lists, every list
   id once, My problems staying first),
   `GET/PATCH/DELETE /api/study-lists/:id` (`my-problems` for My problems;
-  rename custom lists, pause, reweight; delete or unfollow),
+  rename custom lists, pause or resume; delete or unfollow),
   `POST/PUT /api/study-lists/:id/items` (add by problem id or built-in slug;
   reorder with every item id once), `DELETE /api/study-lists/:id/items/:itemId`,
   `GET /api/study-lists/builtin/:builtinId`, and
@@ -701,14 +703,19 @@ extension reuses the web session cookie, and production CORS allows only
   practice, focus areas from the profile, and today's suggestions; Today's
   plan (`loadTodayPlan()`) adds the day's new problems from the active lists
   and orders the due reviews (see Study lists, "Today planner").
-- `/lists`: two areas. Your lists: My problems pinned first, then the
-  user's lists with progress, next up, share, Pause/Resume, and Delete or
-  Unfollow (after a confirmation), reordered by dragging a row's handle
-  (pointer events, so touch works too) or with the arrow keys on it; a
-  new-list form. Built-in lists: an always-open accordion, one item per
-  author, collapsed until opened (the browser remembers which, in
-  localStorage), with a header that sticks under the nav while its lists
-  scroll; each list is a numbered row with its size, progress, and Follow.
+- `/lists`: two areas, both made of the same list row (name, size and
+  learned count, a detail line, a progress bar with a percentage, which sits
+  under the name on phones, and an action). Your lists: My problems pinned
+  first (a pin, a faint tint, no actions), then the user's lists, reordered
+  by dragging a row's handle (pointer events, so touch works too) or with
+  the arrow keys on it, each with a "⋯" menu (`components/ui/menu.tsx`):
+  Pause or Resume (paused: no new problems on Today, reviews continue),
+  Rename (custom lists, inline), and Delete or Unfollow (after a
+  confirmation); a new-list form. Built-in lists: an always-open accordion,
+  one item per author, collapsed until opened (the browser remembers which,
+  in localStorage), with a header that sticks under the nav while its lists
+  scroll; each list is a numbered row with Follow. Every list page starts
+  with an "All lists" back button (an arrow icon).
   `/lists/builtin/[builtinId]` shows a built-in list by chapter and section
   (pattern, level, rating, state) with Follow, Unfollow, Pause, and Copy;
   `/lists/[id]` and `/lists/my-problems` show a custom list (drag to

@@ -50,7 +50,7 @@ test.afterEach(async ({ api, context }) => {
   await context.addCookies([{ name: "ankileet-language", value: "en", url: API_ORIGIN }]);
 });
 
-test("lists reorder from the keyboard, delete after a confirmation, and group built-in lists by author", async ({ context, panel }) => {
+test("lists reorder from the keyboard, pause and delete from the row menu, go back, and group built-in lists by author", async ({ context, panel }) => {
   void panel; // signs the context in
   const page = await openWeb(context, "/lists");
   const stamp = Date.now();
@@ -70,8 +70,17 @@ test("lists reorder from the keyboard, delete after a confirmation, and group bu
   await page.reload();
   expect(await order()).toEqual([names[1], names[0]]);
 
+  // Pause from the row menu, then open the list and come back with the back link.
+  await yours.getByRole("button", { name: `Actions: ${names[0]}` }).click();
+  await page.getByRole("menuitem", { name: /^Pause/ }).click();
+  await expect(yours.getByText("Paused")).toBeVisible();
+  await yours.getByRole("link", { name: names[0] }).click();
+  await page.getByRole("link", { name: "All lists" }).click();
+  await expect(page).toHaveURL(/\/lists$/);
+
   for (const name of names) {
-    await yours.getByRole("button", { name: `Delete list: ${name}` }).click();
+    await yours.getByRole("button", { name: `Actions: ${name}` }).click();
+    await page.getByRole("menuitem", { name: "Delete list" }).click();
     await page.getByRole("alertdialog").getByRole("button", { name: "Delete list" }).click();
     await expect(yours.getByRole("link", { name })).toHaveCount(0);
   }

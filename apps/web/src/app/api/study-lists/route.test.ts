@@ -51,6 +51,8 @@ describe("study list routes", () => {
     expect((await postList(request("/api/study-lists", "POST", { action: "create", requestId: crypto.randomUUID(), name: "   " }))).status).toBe(400);
     expect((await postList(request("/api/study-lists", "POST", { action: "follow", requestId: crypto.randomUUID(), builtinId: "nope" }))).status).toBe(404);
     expect((await patchList(request("/api/study-lists/missing", "PATCH", {}), params({ id: "missing" }))).status).toBe(400);
+    // Shares were removed: every active list gets equal turns.
+    expect((await patchList(request("/api/study-lists/missing", "PATCH", { share: 2 }), params({ id: "missing" }))).status).toBe(400);
     expect((await patchList(request("/api/study-lists/missing", "PATCH", { active: false }), params({ id: "missing" }))).status).toBe(404);
     expect((await getList(request("/api/study-lists/missing"), params({ id: "missing" }))).status).toBe(404);
     expect((await getBuiltin(request("/api/study-lists/builtin/nope"), params({ builtinId: "nope" }))).status).toBe(404);
