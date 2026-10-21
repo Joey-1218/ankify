@@ -1,0 +1,99 @@
+{
+  "id": "strings",
+  "name": {
+    "en": "String Algorithms",
+    "zh": "字符串"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/SJFwQI/",
+  "headings": {},
+  "chapters": {
+    "1": {
+      "en": "KMP",
+      "zh": "KMP（前缀的后缀）"
+    },
+    "2": {
+      "en": "Z-function",
+      "zh": "Z 函数（后缀的前缀）"
+    },
+    "3": {
+      "en": "Manacher's algorithm",
+      "zh": "Manacher 算法（回文串）"
+    },
+    "4": {
+      "en": "String hashing",
+      "zh": "字符串哈希"
+    },
+    "5": {
+      "en": "Minimum rotation",
+      "zh": "最小表示法"
+    },
+    "6": {
+      "en": "Tries",
+      "zh": "字典树"
+    },
+    "7": {
+      "en": "Aho-Corasick",
+      "zh": "AC 自动机"
+    },
+    "8": {
+      "en": "Suffix arrays and suffix automata",
+      "zh": "后缀数组/后缀自动机"
+    },
+    "9": {
+      "en": "Subsequence automaton",
+      "zh": "子序列自动机"
+    },
+    "10": {
+      "en": "Other",
+      "zh": "其他"
+    }
+  },
+  "sections": {
+    "1": {
+      "en": "KMP",
+      "zh": "KMP（前缀的后缀）",
+      "pattern": "string.kmp"
+    },
+    "2": {
+      "en": "Z-function",
+      "zh": "Z 函数（后缀的前缀）",
+      "pattern": "string.z_function"
+    },
+    "3": {
+      "en": "Manacher's algorithm",
+      "zh": "Manacher 算法（回文串）",
+      "pattern": "string.manacher"
+    },
+    "4": {
+      "en": "String hashing",
+      "zh": "字符串哈希",
+      "pattern": "string.hashing"
+    },
+    "5": {
+      "en": "Minimum rotation",
+      "zh": "最小表示法",
+      "pattern": "string.min_rotation"
+    },
+    "7": {
+      "en": "Aho-Corasick",
+      "zh": "AC 自动机",
+      "pattern": "string.aho_corasick"
+    },
+    "8": {
+      "en": "Suffix arrays and suffix automata",
+      "zh": "后缀数组/后缀自动机",
+      "pattern": "string.suffix"
+    },
+    "9": {
+      "en": "Subsequence automaton",
+      "zh": "子序列自动机",
+      "pattern": "string.subsequence_automaton"
+    },
+    "10": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "string.other"
+    }
+  }
+}

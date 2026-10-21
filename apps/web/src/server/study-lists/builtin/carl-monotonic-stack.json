@@ -1,0 +1,111 @@
+{
+  "id": "carl-monotonic-stack",
+  "name": {
+    "en": "Monotonic Stack",
+    "zh": "单调栈"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/monotonic-stack/",
+  "sourceUpdatedAt": null,
+  "generatedAt": "2026-10-20T23:12:08.141Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Monotonic stack",
+        "zh": "单调栈"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Next greater element",
+        "zh": "下一个更大元素"
+      },
+      "pattern": "monotonic_stack.basic",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Rain water and histograms",
+        "zh": "接雨水与柱状图"
+      },
+      "pattern": "monotonic_stack.rectangle",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "daily-temperatures",
+      "frontendId": "739",
+      "title": {
+        "en": "Daily Temperatures",
+        "zh": "每日温度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "next-greater-element-i",
+      "frontendId": "496",
+      "title": {
+        "en": "Next Greater Element I",
+        "zh": "下一个更大元素 I"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "next-greater-element-ii",
+      "frontendId": "503",
+      "title": {
+        "en": "Next Greater Element II",
+        "zh": "下一个更大元素 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "trapping-rain-water",
+      "frontendId": "42",
+      "title": {
+        "en": "Trapping Rain Water",
+        "zh": "接雨水"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "largest-rectangle-in-histogram",
+      "frontendId": "84",
+      "title": {
+        "en": "Largest Rectangle in Histogram",
+        "zh": "柱状图中最大的矩形"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    }
+  ],
+  "excluded": []
+}

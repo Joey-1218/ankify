@@ -90,6 +90,71 @@ a signed-in `leetcode.com/problems/<slug>/` page:
   `apps/web/src/server/suggestions/catalog.json`, the cold-start list of
   problems to suggest; commit it after `catalog.test.ts` passes.
 
+## Adding a built-in study list
+
+Built-in lists are generated files in
+`apps/web/src/server/study-lists/builtin/`, one per list, from a public
+source plus LeetCode's own metadata. Only problem identities, LeetCode
+titles, ratings, and the order and section structure are kept; none of the
+source's text. Every English label is our own: in English, only an author's
+name may be Chinese (`builtin.test.ts` fails on Chinese in any English
+label). Each author is registered in `BUILTIN_AUTHORS` in
+`study-lists/builtin.ts`, with the display name in both languages; /lists
+shows one collapsible group per author, in that order.
+
+### From a leetcode.cn post (灵茶山艾府)
+
+1. Run `pnpm study-lists:import --init <post-url> <list-id>`. It writes
+   `scripts/study-lists/<list-id>.json` with every chapter (`一、` headings)
+   and section (`§x.y` headings, or a chapter with problems directly under
+   it) that holds problems, their Chinese titles, and the optional (选做)
+   flags. Fill in the list's names and author, each English title, and each
+   section's pattern (sections that differ only in level, like 基础 and 进阶,
+   share one). An unnumbered `##` heading with problems (专题：…) needs an
+   entry in `headings` mapping it to a section id, plus that chapter and
+   section. A new pattern goes into
+   `apps/web/src/server/study-lists/patterns.ts` with English and Chinese
+   names; never rename an existing pattern id.
+2. Run `pnpm study-lists:import scripts/study-lists/<list-id>.json`. It reads
+   the post, maps every section (an unmapped section or an unexpected link
+   format stops it), reads metadata from leetcode.com, and writes
+   `builtin/<list-id>.json`. leetcode.cn-only problems are replaced only when
+   the post says they are the same as a listed problem (`同 X 题`) or the
+   config's `replacements` names one; the rest are listed under `excluded`.
+   A section that repeats a problem keeps it once; code blocks and links to
+   write-ups are skipped. Chinese titles come from leetcode.cn's API.
+   Where leetcode.com is unreachable, `--metadata-site leetcode.cn` reads the
+   same English titles from leetcode.cn (rerun against leetcode.com before
+   launch), and `--input post.html` reads a saved copy of the post. Behind a
+   proxy, prefix the command with `NODE_USE_ENV_PROXY=1`.
+
+### From programmercarl.com (代码随想录)
+
+1. Run `pnpm study-lists:import-carl --init https://programmercarl.com/algo/<topic>/ carl-<topic> --cache <dir>`.
+   It reads the topic page's articles in order and each article's LeetCode
+   links, and writes `scripts/study-lists/carl-<topic>.json` with one
+   section per article (`source: "programmercarl"`). Group consecutive
+   articles into sections in `articles` (article file name -> section id),
+   map a recap that only repeats problems (周末总结) to `null`, and fill in
+   the English and Chinese labels and patterns. Articles without problems
+   (basics, summaries) need no entry; Kamacoder (卡码网) and 剑指 Offer
+   articles that are mapped are recorded under `excluded`.
+2. Run `pnpm study-lists:import-carl scripts/study-lists/carl-<topic>.json --cache <dir>`.
+   An article's own problem (力扣题目链接, or a heading's problem) is core,
+   problems under 相关题目推荐 are stretch, and a problem is kept once per
+   list (core first). An article that links no problem but is named after
+   one (`0207-course-schedule`) gets that problem, its number checked on
+   leetcode.com. Problems not on leetcode.com go to `excluded`. `--cache`
+   keeps fetched pages, since the site resets connections now and then.
+
+### Then, for either source
+
+3. Register the file in `SOURCES` in `study-lists/builtin.ts` under its
+   author (each array's order is the order users see).
+4. Run `pnpm vitest run apps/web/src/server/study-lists scripts`
+   and commit the config, the generated file, and the registry line. To pick
+   up the author's later edits, rerun step 2 and commit the result.
+
 ## Manual QA checklist
 
 Run through this in `pnpm dev:qa` (or on Production with a test account)

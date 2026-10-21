@@ -939,6 +939,78 @@ export const suggestions = sqliteTable(
 );
 
 /* ────────────────────────────────────────────────────────────────────────────
+ * study_lists / study_list_items
+ * The user's study lists: playlist-style `custom` lists and followed
+ * `builtin` lists (whose content is committed data, never copied here). My
+ * problems is not stored: it is every problem in no other list. `active`
+ * pauses new problems on Today (reviews continue). Items belong to custom lists only and
+ * name problems by slug, so a list can hold problems not yet in the deck.
+ * ──────────────────────────────────────────────────────────────────────────── */
+export const studyLists = sqliteTable(
+  "study_lists",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    kind: text("kind", { enum: ["custom", "builtin"] }).notNull(),
+    /** The followed built-in list (`builtin` only). */
+    builtinId: text("builtin_id"),
+    /** The user's name for a `custom` list; built-in lists use their own. */
+    name: text("name"),
+    /** Idempotency of the creating request. */
+    requestId: text("request_id").notNull(),
+    active: integer("active", { mode: "boolean" }).notNull().default(true),
+    /** Unused since shares were removed (2026-10-21): every active list gets equal turns. */
+    share: integer("share").notNull().default(1),
+    position: integer("position").notNull().default(0),
+    createdAt: ts("created_at"),
+    updatedAt: ts("updated_at"),
+  },
+  (t) => ({
+    ownerIdx: uniqueIndex("study_lists_id_owner_unique").on(t.id, t.userId),
+    userRequestIdx: uniqueIndex("study_lists_user_request_unique").on(t.userId, t.requestId),
+    userBuiltinIdx: uniqueIndex("study_lists_user_builtin_unique").on(t.userId, t.builtinId).where(sql`${t.kind} = 'builtin'`),
+    userPositionIdx: index("study_lists_user_position_idx").on(t.userId, t.position),
+    kindShape: check(
+      "study_lists_kind_shape",
+      sql`(${t.kind} = 'builtin' AND ${t.builtinId} IS NOT NULL AND ${t.name} IS NULL) OR (${t.kind} = 'custom' AND ${t.builtinId} IS NULL AND ${t.name} IS NOT NULL)`,
+    ),
+    shareRange: check("study_lists_share_range", sql`${t.share} BETWEEN 1 AND 10`),
+  }),
+);
+
+export const studyListItems = sqliteTable(
+  "study_list_items",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    listId: text("list_id").notNull(),
+    slug: text("slug").notNull(),
+    leetcodeId: integer("leetcode_id"),
+    title: text("title").notNull(),
+    /** LeetCode's Chinese title, when the item came from a built-in list. */
+    titleZh: text("title_zh"),
+    difficulty: text("difficulty", { enum: ["Easy", "Medium", "Hard"] }).notNull(),
+    position: integer("position").notNull(),
+    createdAt: ts("created_at"),
+    updatedAt: ts("updated_at"),
+  },
+  (t) => ({
+    listOwnerFk: foreignKey({
+      name: "study_list_items_list_owner_fk",
+      columns: [t.listId, t.userId],
+      foreignColumns: [studyLists.id, studyLists.userId],
+    }).onDelete("cascade"),
+    listSlugIdx: uniqueIndex("study_list_items_list_slug_unique").on(t.listId, t.slug),
+    listPositionIdx: index("study_list_items_list_position_idx").on(t.listId, t.position),
+    userSlugIdx: index("study_list_items_user_slug_idx").on(t.userId, t.slug),
+  }),
+);
+
+/* ────────────────────────────────────────────────────────────────────────────
  * agent_sessions / agent_runs / agent_messages / agent_steps
  * Persistent Study Coach conversations. Page and problem context belong to
  * individual runs, so one session can continue across the entire web app.
@@ -1164,6 +1236,8 @@ export type SuggestionCandidate = typeof suggestionCandidates.$inferSelect;
 export type AttemptHistoryEntry = typeof attemptHistory.$inferSelect;
 export type AttemptHistoryCoverage = typeof attemptHistoryCoverage.$inferSelect;
 export type Suggestion = typeof suggestions.$inferSelect;
+export type StudyList = typeof studyLists.$inferSelect;
+export type StudyListItem = typeof studyListItems.$inferSelect;
 export type NewAiJob = typeof aiJobs.$inferInsert;
 export type AgentSession = typeof agentSessions.$inferSelect;
 export type NewAgentSession = typeof agentSessions.$inferInsert;

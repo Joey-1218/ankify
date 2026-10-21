@@ -19,6 +19,7 @@ import { ActiveIndicator, MotionPresence } from "@/components/ui/motion";
 
 const LINKS = [
   { href: "/today", key: "today" },
+  { href: "/lists", key: "lists" },
   { href: "/problems", key: "problems" },
   { href: "/suggestions", key: "suggestions" },
   { href: "/analysis", key: "analysis" },
@@ -123,6 +124,8 @@ export function Nav({
                   prefetch={false}
                   className={cn(
                     "relative isolate min-h-9 rounded-md px-1.5 py-2 text-center transition-colors font-ui sm:min-h-0 sm:px-3 sm:py-1.5",
+                    // Phones show five tabs; Settings stays in the account menu there.
+                    l.href === "/settings" && "hidden sm:block",
                     active
                       ? "text-accent"
                       : "text-muted hover:bg-subtle hover:text-fg",

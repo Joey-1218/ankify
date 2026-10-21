@@ -121,6 +121,43 @@ Later extension updates: bump `version` in
 `apps/extension/manifest.config.ts`, ship the web side first, then build,
 zip, and upload a new package (DEPLOYMENT.md, "Extension release").
 
+### Study lists (merged to main 2026-10-20)
+
+A list-based practice workflow: built-in lists (Carl's 12 and
+灵茶山艾府's 12 topic lists, moved to leetcode.com, grouped by author on
+`/lists`), playlist-style user lists (drag to reorder, a row menu to pause,
+rename, or delete), a daily time budget for new problems, and a pattern
+axis in the mistake profile. The settled design is in ARCHITECTURE.md,
+"Study lists" (the planning doc was retired once every phase shipped).
+Merged from branch `claude/determined-pasteur-cid59n`; migration
+`0027_study_lists` was applied to Production first. All four phases are done:
+
+1. the importers and all 24 lists;
+2. lists in the database, the list API, the `/lists` pages, and the
+   problem page's Lists panel;
+3. Today's plan: a daily time budget, equal turns across active lists,
+   weak-pattern priority and check problems, interleaved reviews,
+   study-plan settings, and the same-day re-solve rule;
+4. the pattern profile: the pattern x cause grid on `/analysis`
+   (`GET /api/mistakes/patterns`), weak patterns with a problem to practice
+   next on Today's focus card.
+
+Later polish on the branch: per-list shares removed (equal turns), My
+problems pinned as the first row of Your lists, an "All lists" back
+button on every list page, and the problems pages reworked: a "⋯" menu on
+each row (Add to list, Archive), Add to list for selected problems, a
+playlist-style add-to-list dialog, and a redesigned problem page (header
+with actions and list links, a stats strip, full-width tabs; the resizable
+side rail is gone).
+
+Still open: the web screenshot baselines (Today, Lists, `/analysis`,
+Problems, problem page) must be regenerated on the owner's machine after
+review, since the nav, the problem page, Today, and `/analysis` changed.
+Ask 灵茶山艾府 and Carl for permission before shipping the lists to users.
+Browser tests run in a cloud container only with
+a scratch `PLAYWRIGHT_BROWSERS_PATH` that maps Playwright's expected
+Chromium build to the installed one (the container's build is older).
+
 ### Planned for 0.3.1
 
 The owner wants both of these in the next release (extension 0.3.1 and the

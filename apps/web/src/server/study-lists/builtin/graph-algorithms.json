@@ -1,0 +1,2526 @@
+{
+  "id": "graph-algorithms",
+  "name": {
+    "en": "Graph Algorithms",
+    "zh": "图论算法"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/01LUak/",
+  "sourceUpdatedAt": "2026-09-10T01:24:06.999995+00:00",
+  "generatedAt": "2026-10-20T19:19:18.961Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Graph traversal",
+        "zh": "图的遍历"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Topological sort",
+        "zh": "拓扑排序"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Shortest paths",
+        "zh": "最短路"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Minimum spanning trees",
+        "zh": "最小生成树"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Euler paths and circuits",
+        "zh": "欧拉路径/欧拉回路"
+      }
+    },
+    {
+      "id": "6",
+      "title": {
+        "en": "Strongly connected and biconnected components",
+        "zh": "强连通分量/双连通分量"
+      }
+    },
+    {
+      "id": "7",
+      "title": {
+        "en": "Bipartite coloring",
+        "zh": "二分图染色"
+      }
+    },
+    {
+      "id": "8",
+      "title": {
+        "en": "Network flow",
+        "zh": "网络流"
+      }
+    },
+    {
+      "id": "9",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Depth-first search",
+        "zh": "深度优先搜索（DFS）"
+      },
+      "pattern": "graph.dfs",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Breadth-first search",
+        "zh": "广度优先搜索（BFS）"
+      },
+      "pattern": "graph.bfs",
+      "optional": false
+    },
+    {
+      "id": "1.3",
+      "chapterId": "1",
+      "title": {
+        "en": "Modeling as a graph, then BFS shortest paths",
+        "zh": "图论建模 + BFS 最短路"
+      },
+      "pattern": "graph.bfs_modeling",
+      "optional": false
+    },
+    {
+      "id": "2.1",
+      "chapterId": "2",
+      "title": {
+        "en": "Topological sort",
+        "zh": "拓扑排序"
+      },
+      "pattern": "graph.topo",
+      "optional": false
+    },
+    {
+      "id": "2.2",
+      "chapterId": "2",
+      "title": {
+        "en": "DP on a topological order",
+        "zh": "在拓扑序上 DP"
+      },
+      "pattern": "graph.topo_dp",
+      "optional": false
+    },
+    {
+      "id": "2.3",
+      "chapterId": "2",
+      "title": {
+        "en": "Functional graphs (one cycle per component)",
+        "zh": "基环树"
+      },
+      "pattern": "graph.functional",
+      "optional": false
+    },
+    {
+      "id": "3.1",
+      "chapterId": "3",
+      "title": {
+        "en": "Single-source shortest paths: Dijkstra",
+        "zh": "单源最短路：Dijkstra 算法"
+      },
+      "pattern": "graph.dijkstra",
+      "optional": false
+    },
+    {
+      "id": "3.2",
+      "chapterId": "3",
+      "title": {
+        "en": "All-pairs shortest paths: Floyd",
+        "zh": "全源最短路：Floyd 算法"
+      },
+      "pattern": "graph.floyd",
+      "optional": false
+    },
+    {
+      "id": "4",
+      "chapterId": "4",
+      "title": {
+        "en": "Minimum spanning trees",
+        "zh": "最小生成树"
+      },
+      "pattern": "graph.mst",
+      "optional": false
+    },
+    {
+      "id": "5",
+      "chapterId": "5",
+      "title": {
+        "en": "Euler paths and circuits",
+        "zh": "欧拉路径/欧拉回路"
+      },
+      "pattern": "graph.euler",
+      "optional": false
+    },
+    {
+      "id": "6",
+      "chapterId": "6",
+      "title": {
+        "en": "Strongly connected and biconnected components",
+        "zh": "强连通分量/双连通分量"
+      },
+      "pattern": "graph.components",
+      "optional": false
+    },
+    {
+      "id": "7",
+      "chapterId": "7",
+      "title": {
+        "en": "Bipartite coloring",
+        "zh": "二分图染色"
+      },
+      "pattern": "graph.bipartite",
+      "optional": false
+    },
+    {
+      "id": "8",
+      "chapterId": "8",
+      "title": {
+        "en": "Network flow",
+        "zh": "网络流"
+      },
+      "pattern": "graph.flow",
+      "optional": false
+    },
+    {
+      "id": "9",
+      "chapterId": "9",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "graph.other",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "number-of-provinces",
+      "frontendId": "547",
+      "title": {
+        "en": "Number of Provinces",
+        "zh": "省份数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-if-path-exists-in-graph",
+      "frontendId": "1971",
+      "title": {
+        "en": "Find if Path Exists in Graph",
+        "zh": "寻找图中是否存在路径"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "all-paths-from-source-to-target",
+      "frontendId": "797",
+      "title": {
+        "en": "All Paths From Source to Target",
+        "zh": "所有可能的路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1383,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "jump-game-iii",
+      "frontendId": "1306",
+      "title": {
+        "en": "Jump Game III",
+        "zh": "跳跃游戏 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1397,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "keys-and-rooms",
+      "frontendId": "841",
+      "title": {
+        "en": "Keys and Rooms",
+        "zh": "钥匙和房间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1412,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-unreachable-pairs-of-nodes-in-an-undirected-graph",
+      "frontendId": "2316",
+      "title": {
+        "en": "Count Unreachable Pairs of Nodes in an Undirected Graph",
+        "zh": "统计无向图中无法互相到达点对数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1604,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-operations-to-make-network-connected",
+      "frontendId": "1319",
+      "title": {
+        "en": "Number of Operations to Make Network Connected",
+        "zh": "连通网络的操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1633,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-score-of-a-path-between-two-cities",
+      "frontendId": "2492",
+      "title": {
+        "en": "Minimum Score of a Path Between Two Cities",
+        "zh": "两个城市间路径的最小分数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1680,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "remove-methods-from-project",
+      "frontendId": "3310",
+      "title": {
+        "en": "Remove Methods From Project",
+        "zh": "移除可疑的方法"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1711,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-complete-components",
+      "frontendId": "2685",
+      "title": {
+        "en": "Count the Number of Complete Components",
+        "zh": "统计完全连通分量的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1769,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "all-ancestors-of-a-node-in-a-directed-acyclic-graph",
+      "frontendId": "2192",
+      "title": {
+        "en": "All Ancestors of a Node in a Directed Acyclic Graph",
+        "zh": "有向无环图中一个节点的所有祖先"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1788,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-amount-after-two-days-of-conversions",
+      "frontendId": "3387",
+      "title": {
+        "en": "Maximize Amount After Two Days of Conversions",
+        "zh": "两天自由外汇交易后的最大货币数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1788,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-malware-spread",
+      "frontendId": "924",
+      "title": {
+        "en": "Minimize Malware Spread",
+        "zh": "尽量减少恶意软件的传播"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1869,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "detonate-the-maximum-bombs",
+      "frontendId": "2101",
+      "title": {
+        "en": "Detonate the Maximum Bombs",
+        "zh": "引爆最多的炸弹"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1880,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "accounts-merge",
+      "frontendId": "721",
+      "title": {
+        "en": "Accounts Merge",
+        "zh": "账户合并"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "course-schedule",
+      "frontendId": "207",
+      "title": {
+        "en": "Course Schedule",
+        "zh": "课程表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-eventual-safe-states",
+      "frontendId": "802",
+      "title": {
+        "en": "Find Eventual Safe States",
+        "zh": "找到最终的安全状态"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1962,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-alternating-sum-using-swaps",
+      "frontendId": "3695",
+      "title": {
+        "en": "Maximize Alternating Sum Using Swaps",
+        "zh": "交换元素后的最大交替和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1984,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-malware-spread-ii",
+      "frontendId": "928",
+      "title": {
+        "en": "Minimize Malware Spread II",
+        "zh": "尽量减少恶意软件的传播 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1985,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-all-people-with-secret",
+      "frontendId": "2092",
+      "title": {
+        "en": "Find All People With Secret",
+        "zh": "找出知晓秘密的所有专家"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2004,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-walk-in-weighted-graph",
+      "frontendId": "3108",
+      "title": {
+        "en": "Minimum Cost Walk in Weighted Graph",
+        "zh": "带权图里旅途的最小代价"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2109,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "graph-valid-tree",
+      "frontendId": "261",
+      "title": {
+        "en": "Graph Valid Tree",
+        "zh": "以图判树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-connected-components-in-an-undirected-graph",
+      "frontendId": "323",
+      "title": {
+        "en": "Number of Connected Components in an Undirected Graph",
+        "zh": "无向图中连通分量的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-candies-you-can-get-from-boxes",
+      "frontendId": "1298",
+      "title": {
+        "en": "Maximum Candies You Can Get from Boxes",
+        "zh": "你能从盒子里获得的最大糖果数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1825,
+      "sectionId": "1.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "shortest-distance-after-road-addition-queries-i",
+      "frontendId": "3243",
+      "title": {
+        "en": "Shortest Distance After Road Addition Queries I",
+        "zh": "新增道路查询后的最短距离 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1568,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "get-watched-videos-by-your-friends",
+      "frontendId": "1311",
+      "title": {
+        "en": "Get Watched Videos by Your Friends",
+        "zh": "获取你好友已观看的视频"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1653,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-houses-at-a-certain-distance-i",
+      "frontendId": "3015",
+      "title": {
+        "en": "Count the Number of Houses at a Certain Distance I",
+        "zh": "按距离统计房屋对数目 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1658,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-path-with-alternating-colors",
+      "frontendId": "1129",
+      "title": {
+        "en": "Shortest Path with Alternating Colors",
+        "zh": "颜色交替的最短路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1780,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "the-time-when-the-network-becomes-idle",
+      "frontendId": "2039",
+      "title": {
+        "en": "The Time When the Network Becomes Idle",
+        "zh": "网络空闲的时刻"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1865,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-cycle-in-a-graph",
+      "frontendId": "2608",
+      "title": {
+        "en": "Shortest Cycle in a Graph",
+        "zh": "图中的最短环"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1904,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "bus-routes",
+      "frontendId": "815",
+      "title": {
+        "en": "Bus Routes",
+        "zh": "公交路线"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1964,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-repair-edges-to-traverse-a-graph",
+      "frontendId": "3807",
+      "title": {
+        "en": "Minimum Cost to Repair Edges to Traverse a Graph",
+        "zh": "修复边以遍历图的最小成本"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "coin-change",
+      "frontendId": "322",
+      "title": {
+        "en": "Coin Change",
+        "zh": "零钱兑换"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "perfect-squares",
+      "frontendId": "279",
+      "title": {
+        "en": "Perfect Squares",
+        "zh": "完全平方数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-removals-to-achieve-target-xor",
+      "frontendId": "3877",
+      "title": {
+        "en": "Minimum Removals to Achieve Target XOR",
+        "zh": "达到目标异或值的最少删除次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1745,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-genetic-mutation",
+      "frontendId": "433",
+      "title": {
+        "en": "Minimum Genetic Mutation",
+        "zh": "最小基因变化"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-flips-to-convert-binary-matrix-to-zero-matrix",
+      "frontendId": "1284",
+      "title": {
+        "en": "Minimum Number of Flips to Convert Binary Matrix to Zero Matrix",
+        "zh": "转化为全零矩阵的最少反转次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1811,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "sliding-puzzle",
+      "frontendId": "773",
+      "title": {
+        "en": "Sliding Puzzle",
+        "zh": "滑动谜题"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1815,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "open-the-lock",
+      "frontendId": "752",
+      "title": {
+        "en": "Open the Lock",
+        "zh": "打开转盘锁"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1878,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "split-and-merge-array-transformation",
+      "frontendId": "3690",
+      "title": {
+        "en": "Split and Merge Array Transformation",
+        "zh": "拆分合并数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1982,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "remove-invalid-parentheses",
+      "frontendId": "301",
+      "title": {
+        "en": "Remove Invalid Parentheses",
+        "zh": "删除无效的括号"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "freedom-trail",
+      "frontendId": "514",
+      "title": {
+        "en": "Freedom Trail",
+        "zh": "自由之路"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-path-visiting-all-nodes",
+      "frontendId": "847",
+      "title": {
+        "en": "Shortest Path Visiting All Nodes",
+        "zh": "访问所有节点的最短路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2201,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "k-similar-strings",
+      "frontendId": "854",
+      "title": {
+        "en": "K-Similar Strings",
+        "zh": "相似度为 K 的字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2377,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "word-ladder",
+      "frontendId": "127",
+      "title": {
+        "en": "Word Ladder",
+        "zh": "单词接龙"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "zuma-game",
+      "frontendId": "488",
+      "title": {
+        "en": "Zuma Game",
+        "zh": "祖玛游戏"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "sort-array-using-prefix-reversals",
+      "frontendId": "3991",
+      "title": {
+        "en": "Sort Array Using Prefix Reversals",
+        "zh": "使用前缀反转对数组进行排序"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-hamming-distances",
+      "frontendId": "3141",
+      "title": {
+        "en": "Maximum Hamming Distances",
+        "zh": "最大汉明距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-make-x-and-y-equal",
+      "frontendId": "2998",
+      "title": {
+        "en": "Minimum Number of Operations to Make X and Y Equal",
+        "zh": "使 X 和 Y 相等的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1795,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "jump-game-iv",
+      "frontendId": "1345",
+      "title": {
+        "en": "Jump Game IV",
+        "zh": "跳跃游戏 IV"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1810,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-convert-number",
+      "frontendId": "2059",
+      "title": {
+        "en": "Minimum Operations to Convert Number",
+        "zh": "转化数字的最小运算数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1850,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-jumps-to-reach-home",
+      "frontendId": "1654",
+      "title": {
+        "en": "Minimum Jumps to Reach Home",
+        "zh": "到家的最少跳跃次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2124,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-jumps-to-reach-end-via-prime-teleportation",
+      "frontendId": "3629",
+      "title": {
+        "en": "Minimum Jumps to Reach End via Prime Teleportation",
+        "zh": "通过质数传送到达终点的最少跳跃次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2139,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "course-schedule-ii",
+      "frontendId": "210",
+      "title": {
+        "en": "Course Schedule II",
+        "zh": "课程表 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-all-possible-recipes-from-given-supplies",
+      "frontendId": "2115",
+      "title": {
+        "en": "Find All Possible Recipes from Given Supplies",
+        "zh": "从给定原材料中找到所有可以做出的菜"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1679,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "build-a-matrix-with-conditions",
+      "frontendId": "2392",
+      "title": {
+        "en": "Build a Matrix With Conditions",
+        "zh": "给定条件下构造矩阵"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1961,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-eventual-safe-states",
+      "frontendId": "802",
+      "title": {
+        "en": "Find Eventual Safe States",
+        "zh": "找到最终的安全状态"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1962,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "strange-printer-ii",
+      "frontendId": "1591",
+      "title": {
+        "en": "Strange Printer II",
+        "zh": "奇怪的打印机 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2291,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "sort-items-by-groups-respecting-dependencies",
+      "frontendId": "1203",
+      "title": {
+        "en": "Sort Items by Groups Respecting Dependencies",
+        "zh": "项目管理"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2419,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "rank-transform-of-a-matrix",
+      "frontendId": "1632",
+      "title": {
+        "en": "Rank Transform of a Matrix",
+        "zh": "矩阵转换后的排名"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2530,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "collect-coins-in-a-tree",
+      "frontendId": "2603",
+      "title": {
+        "en": "Collect Coins in a Tree",
+        "zh": "收集树中金币"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2712,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "sequence-reconstruction",
+      "frontendId": "444",
+      "title": {
+        "en": "Sequence Reconstruction",
+        "zh": "序列重建"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "apply-substitutions",
+      "frontendId": "3481",
+      "title": {
+        "en": "Apply Substitutions",
+        "zh": "应用替换"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "alien-dictionary",
+      "frontendId": "269",
+      "title": {
+        "en": "Alien Dictionary",
+        "zh": "火星词典"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-maximum-value-in-a-grid",
+      "frontendId": "2371",
+      "title": {
+        "en": "Minimize Maximum Value in a Grid",
+        "zh": "最小化网格中的最大值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-height-trees",
+      "frontendId": "310",
+      "title": {
+        "en": "Minimum Height Trees",
+        "zh": "最小高度树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "validate-binary-tree-nodes",
+      "frontendId": "1361",
+      "title": {
+        "en": "Validate Binary Tree Nodes",
+        "zh": "验证二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "loud-and-rich",
+      "frontendId": "851",
+      "title": {
+        "en": "Loud and Rich",
+        "zh": "喧闹和富有"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1783,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "parallel-courses-iii",
+      "frontendId": "2050",
+      "title": {
+        "en": "Parallel Courses III",
+        "zh": "并行课程 III"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2084,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "network-recovery-pathways",
+      "frontendId": "3620",
+      "title": {
+        "en": "Network Recovery Pathways",
+        "zh": "恢复网络路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "largest-color-value-in-a-directed-graph",
+      "frontendId": "1857",
+      "title": {
+        "en": "Largest Color Value in a Directed Graph",
+        "zh": "有向图中最大颜色值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2313,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "parallel-courses",
+      "frontendId": "1136",
+      "title": {
+        "en": "Parallel Courses",
+        "zh": "并行课程"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-closest-node-to-given-two-nodes",
+      "frontendId": "2359",
+      "title": {
+        "en": "Find Closest Node to Given Two Nodes",
+        "zh": "找到离给定两个节点最近的节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1715,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "longest-cycle-in-a-graph",
+      "frontendId": "2360",
+      "title": {
+        "en": "Longest Cycle in a Graph",
+        "zh": "图中的最长环"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1897,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "redundant-connection",
+      "frontendId": "684",
+      "title": {
+        "en": "Redundant Connection",
+        "zh": "冗余连接"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "redundant-connection-ii",
+      "frontendId": "685",
+      "title": {
+        "en": "Redundant Connection II",
+        "zh": "冗余连接 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-visited-nodes-in-a-directed-graph",
+      "frontendId": "2876",
+      "title": {
+        "en": "Count Visited Nodes in a Directed Graph",
+        "zh": "有向图访问计数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2210,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-employees-to-be-invited-to-a-meeting",
+      "frontendId": "2127",
+      "title": {
+        "en": "Maximum Employees to Be Invited to a Meeting",
+        "zh": "参加会议的最多员工数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2449,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-value-of-function-in-a-ball-passing-game",
+      "frontendId": "2836",
+      "title": {
+        "en": "Maximize Value of Function in a Ball Passing Game",
+        "zh": "在传球游戏中最大化函数值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2769,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "distance-to-a-cycle-in-undirected-graph",
+      "frontendId": "2204",
+      "title": {
+        "en": "Distance to a Cycle in Undirected Graph",
+        "zh": "无向图中到环的距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-duplicate-number",
+      "frontendId": "287",
+      "title": {
+        "en": "Find the Duplicate Number",
+        "zh": "寻找重复数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "stretch"
+    },
+    {
+      "slug": "network-delay-time",
+      "frontendId": "743",
+      "title": {
+        "en": "Network Delay Time",
+        "zh": "网络延迟时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-minimum-time-to-reach-last-room-i",
+      "frontendId": "3341",
+      "title": {
+        "en": "Find Minimum Time to Reach Last Room I",
+        "zh": "到达最后一个房间的最少时间 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1721,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-visit-disappearing-nodes",
+      "frontendId": "3112",
+      "title": {
+        "en": "Minimum Time to Visit Disappearing Nodes",
+        "zh": "访问消失节点的最少时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1757,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "design-graph-with-shortest-path-calculator",
+      "frontendId": "2642",
+      "title": {
+        "en": "Design Graph With Shortest Path Calculator",
+        "zh": "设计可以求最短路径的图类"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1811,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-reach-destination-in-directed-graph",
+      "frontendId": "3604",
+      "title": {
+        "en": "Minimum Time to Reach Destination in Directed Graph",
+        "zh": "有向图中到达终点的最少时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1845,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "path-with-maximum-probability",
+      "frontendId": "1514",
+      "title": {
+        "en": "Path with Maximum Probability",
+        "zh": "概率最大的路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1846,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-path-with-edge-reversals",
+      "frontendId": "3650",
+      "title": {
+        "en": "Minimum Cost Path with Edge Reversals",
+        "zh": "边反转的最小路径总成本"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1854,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-minimum-time-to-reach-last-room-ii",
+      "frontendId": "3342",
+      "title": {
+        "en": "Find Minimum Time to Reach Last Room II",
+        "zh": "到达最后一个房间的最少时间 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1862,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "path-with-minimum-effort",
+      "frontendId": "1631",
+      "title": {
+        "en": "Path With Minimum Effort",
+        "zh": "最小体力消耗路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1948,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-restricted-paths-from-first-to-last-node",
+      "frontendId": "1786",
+      "title": {
+        "en": "Number of Restricted Paths From First to Last Node",
+        "zh": "从第一个节点出发到最后一个节点的受限路径数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2079,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-threshold-path-with-limited-heavy-edges",
+      "frontendId": "3924",
+      "title": {
+        "en": "Minimum Threshold Path With Limited Heavy Edges",
+        "zh": "有限重边的最小阈值路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2080,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-edges-in-shortest-paths",
+      "frontendId": "3123",
+      "title": {
+        "en": "Find Edges in Shortest Paths",
+        "zh": "最短路径中的边"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2093,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-arrive-at-destination",
+      "frontendId": "1976",
+      "title": {
+        "en": "Number of Ways to Arrive at Destination",
+        "zh": "到达目的地的方案数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2095,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "swim-in-rising-water",
+      "frontendId": "778",
+      "title": {
+        "en": "Swim in Rising Water",
+        "zh": "水位上升的泳池中游泳"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2097,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-of-a-path-with-special-roads",
+      "frontendId": "2662",
+      "title": {
+        "en": "Minimum Cost of a Path With Special Roads",
+        "zh": "前往目标的最小代价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2154,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "digit-operations-to-make-two-integers-equal",
+      "frontendId": "3377",
+      "title": {
+        "en": "Digit Operations to Make Two Integers Equal",
+        "zh": "使两个整数相等的数位操作"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2186,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-buy-apples-ii",
+      "frontendId": "3928",
+      "title": {
+        "en": "Minimum Cost to Buy Apples II",
+        "zh": "购买苹果的最低成本 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2187,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "second-minimum-time-to-reach-destination",
+      "frontendId": "2045",
+      "title": {
+        "en": "Second Minimum Time to Reach Destination",
+        "zh": "到达目的地的第二短时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2202,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-the-maximum-edge-weight-of-graph",
+      "frontendId": "3419",
+      "title": {
+        "en": "Minimize the Maximum Edge Weight of Graph",
+        "zh": "图的最大边权的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2243,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reachable-nodes-in-subdivided-graph",
+      "frontendId": "882",
+      "title": {
+        "en": "Reachable Nodes In Subdivided Graph",
+        "zh": "细分图中的可到达节点"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2328,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-weighted-subgraph-with-the-required-paths",
+      "frontendId": "2203",
+      "title": {
+        "en": "Minimum Weighted Subgraph With the Required Paths",
+        "zh": "包含要求路径的最小带权子图"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2364,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-visit-a-cell-in-a-grid",
+      "frontendId": "2577",
+      "title": {
+        "en": "Minimum Time to Visit a Cell In a Grid",
+        "zh": "在网格图中访问一个格子的最少时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2382,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "race-car",
+      "frontendId": "818",
+      "title": {
+        "en": "Race Car",
+        "zh": "赛车"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2392,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-reach-destination-in-time",
+      "frontendId": "1928",
+      "title": {
+        "en": "Minimum Cost to Reach Destination in Time",
+        "zh": "规定时间内到达终点的最小花费"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2413,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "cheapest-flights-within-k-stops",
+      "frontendId": "787",
+      "title": {
+        "en": "Cheapest Flights Within K Stops",
+        "zh": "K 站中转内最便宜的航班"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "modify-graph-edge-weights",
+      "frontendId": "2699",
+      "title": {
+        "en": "Modify Graph Edge Weights",
+        "zh": "修改图中的边权"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2874,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-path-cost-in-a-hidden-grid",
+      "frontendId": "1810",
+      "title": {
+        "en": "Minimum Path Cost in a Hidden Grid",
+        "zh": "隐藏网格下的最小消耗路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-reach-city-with-discounts",
+      "frontendId": "2093",
+      "title": {
+        "en": "Minimum Cost to Reach City With Discounts",
+        "zh": "前往目标城市的最小费用"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-buy-apples",
+      "frontendId": "2473",
+      "title": {
+        "en": "Minimum Cost to Buy Apples",
+        "zh": "购买苹果的最低成本"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-closest-marked-node",
+      "frontendId": "2737",
+      "title": {
+        "en": "Find the Closest Marked Node",
+        "zh": "找到最近的标记节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-path-with-at-most-k-consecutive-identical-characters",
+      "frontendId": "3970",
+      "title": {
+        "en": "Shortest Path With At Most K Consecutive Identical Characters",
+        "zh": "最多 K 个连续相同字符的最短路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1840,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-reach-target-with-limited-power",
+      "frontendId": "3977",
+      "title": {
+        "en": "Minimum Time to Reach Target With Limited Power",
+        "zh": "有限电量到达目标节点的最少时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2103,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "partition-array-to-minimize-xor",
+      "frontendId": "3599",
+      "title": {
+        "en": "Partition Array to Minimize XOR",
+        "zh": "划分数组得到最小 XOR"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-transport-all-individuals",
+      "frontendId": "3594",
+      "title": {
+        "en": "Minimum Time to Transport All Individuals",
+        "zh": "所有人渡河所需的最短时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2604,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-distance-excluding-one-maximum-weighted-edge",
+      "frontendId": "3778",
+      "title": {
+        "en": "Minimum Distance Excluding One Maximum Weighted Edge",
+        "zh": "排除一个最大权重边的最小距离"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-shortest-path-with-k-hops",
+      "frontendId": "2714",
+      "title": {
+        "en": "Find Shortest Path with K Hops",
+        "zh": "找到 K 次跨越的最短路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-complete-all-tasks",
+      "frontendId": "2589",
+      "title": {
+        "en": "Minimum Time to Complete All Tasks",
+        "zh": "完成所有任务的最少时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2381,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "design-graph-with-shortest-path-calculator",
+      "frontendId": "2642",
+      "title": {
+        "en": "Design Graph With Shortest Path Calculator",
+        "zh": "设计可以求最短路径的图类"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1811,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+      "frontendId": "1334",
+      "title": {
+        "en": "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+        "zh": "阈值距离内邻居最少的城市"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1855,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-convert-string-i",
+      "frontendId": "2976",
+      "title": {
+        "en": "Minimum Cost to Convert String I",
+        "zh": "转换字符串的最小成本 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1882,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-possible-sets-of-closing-branches",
+      "frontendId": "2959",
+      "title": {
+        "en": "Number of Possible Sets of Closing Branches",
+        "zh": "关闭分部的可行集合数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2077,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-convert-string-ii",
+      "frontendId": "2977",
+      "title": {
+        "en": "Minimum Cost to Convert String II",
+        "zh": "转换字符串的最小成本 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2696,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "course-schedule-iv",
+      "frontendId": "1462",
+      "title": {
+        "en": "Course Schedule IV",
+        "zh": "课程表 IV"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1693,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "detonate-the-maximum-bombs",
+      "frontendId": "2101",
+      "title": {
+        "en": "Detonate the Maximum Bombs",
+        "zh": "引爆最多的炸弹"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "min-cost-to-connect-all-points",
+      "frontendId": "1584",
+      "title": {
+        "en": "Min Cost to Connect All Points",
+        "zh": "连接所有点的最小费用"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1858,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-spanning-tree-stability-with-upgrades",
+      "frontendId": "3600",
+      "title": {
+        "en": "Maximize Spanning Tree Stability with Upgrades",
+        "zh": "升级后最大生成树稳定性"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2301,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree",
+      "frontendId": "1489",
+      "title": {
+        "en": "Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree",
+        "zh": "找到最小生成树里的关键边和伪关键边"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2572,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "connecting-cities-with-minimum-cost",
+      "frontendId": "1135",
+      "title": {
+        "en": "Connecting Cities With Minimum Cost",
+        "zh": "最低成本连通所有城市"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "optimize-water-distribution-in-a-village",
+      "frontendId": "1168",
+      "title": {
+        "en": "Optimize Water Distribution in a Village",
+        "zh": "水资源分配优化"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-for-cutting-cake-ii",
+      "frontendId": "3219",
+      "title": {
+        "en": "Minimum Cost for Cutting Cake II",
+        "zh": "切蛋糕的最小总开销 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "stretch"
+    },
+    {
+      "slug": "reconstruct-itinerary",
+      "frontendId": "332",
+      "title": {
+        "en": "Reconstruct Itinerary",
+        "zh": "重新安排行程"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "cracking-the-safe",
+      "frontendId": "753",
+      "title": {
+        "en": "Cracking the Safe",
+        "zh": "破解保险箱"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2274,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "valid-arrangement-of-pairs",
+      "frontendId": "2097",
+      "title": {
+        "en": "Valid Arrangement of Pairs",
+        "zh": "合法重新排列数对"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2651,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "critical-connections-in-a-network",
+      "frontendId": "1192",
+      "title": {
+        "en": "Critical Connections in a Network",
+        "zh": "查找集群内的关键连接"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2085,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-days-to-disconnect-island",
+      "frontendId": "1568",
+      "title": {
+        "en": "Minimum Number of Days to Disconnect Island",
+        "zh": "使陆地分离的最少天数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2209,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-runes-to-add-to-cast-spell",
+      "frontendId": "3383",
+      "title": {
+        "en": "Minimum Runes to Add to Cast Spell",
+        "zh": "施法所需最低符文数量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "is-graph-bipartite",
+      "frontendId": "785",
+      "title": {
+        "en": "Is Graph Bipartite?",
+        "zh": "判断二分图"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1625,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "possible-bipartition",
+      "frontendId": "886",
+      "title": {
+        "en": "Possible Bipartition",
+        "zh": "可能的二分法"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1795,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-partition-factor",
+      "frontendId": "3710",
+      "title": {
+        "en": "Maximum Partition Factor",
+        "zh": "最大划分因子"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2135,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-compatibility-score-sum",
+      "frontendId": "1947",
+      "title": {
+        "en": "Maximum Compatibility Score Sum",
+        "zh": "最大兼容性评分和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1704,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-break-locks-i",
+      "frontendId": "3376",
+      "title": {
+        "en": "Minimum Time to Break Locks I",
+        "zh": "破解锁的最少时间 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1793,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-spread-stones-over-grid",
+      "frontendId": "2850",
+      "title": {
+        "en": "Minimum Moves to Spread Stones Over Grid",
+        "zh": "将石头分散到网格图的最少移动次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2001,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-xor-sum-of-two-arrays",
+      "frontendId": "1879",
+      "title": {
+        "en": "Minimum XOR Sum of Two Arrays",
+        "zh": "两个数组最小的异或值之和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2145,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-students-taking-exam",
+      "frontendId": "1349",
+      "title": {
+        "en": "Maximum Students Taking Exam",
+        "zh": "参加考试的最大学生数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2386,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-and-sum-of-array",
+      "frontendId": "2172",
+      "title": {
+        "en": "Maximum AND Sum of Array",
+        "zh": "数组的最大与和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2392,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "select-cells-in-grid-with-maximum-score",
+      "frontendId": "3276",
+      "title": {
+        "en": "Select Cells in Grid With Maximum Score",
+        "zh": "选择矩阵中单元格的最大得分"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2403,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-connect-two-groups-of-points",
+      "frontendId": "1595",
+      "title": {
+        "en": "Minimum Cost to Connect Two Groups of Points",
+        "zh": "连通两组点的最小成本"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2538,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-value-sum-by-placing-three-rooks-ii",
+      "frontendId": "3257",
+      "title": {
+        "en": "Maximum Value Sum by Placing Three Rooks II",
+        "zh": "放三个车的价值之和最大 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2553,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-accepted-invitations",
+      "frontendId": "1820",
+      "title": {
+        "en": "Maximum Number of Accepted Invitations",
+        "zh": "最多邀请的个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-kill-all-monsters",
+      "frontendId": "2403",
+      "title": {
+        "en": "Minimum Time to Kill All Monsters",
+        "zh": "杀死所有怪物的最短时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-break-locks-ii",
+      "frontendId": "3385",
+      "title": {
+        "en": "Minimum Time to Break Locks II",
+        "zh": "破解锁的最少时间 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "campus-bikes-ii",
+      "frontendId": "1066",
+      "title": {
+        "en": "Campus Bikes II",
+        "zh": "校园自行车分配 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-balance-circular-array-ii",
+      "frontendId": "4004",
+      "title": {
+        "en": "Minimum Moves to Balance Circular Array II",
+        "zh": "使循环数组余额非负的最少移动次数 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-remove-adjacent-ones-in-matrix",
+      "frontendId": "2123",
+      "title": {
+        "en": "Minimum Operations to Remove Adjacent Ones in Matrix",
+        "zh": "使矩阵中的 1 互不相邻的最小操作数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-total-distance-traveled",
+      "frontendId": "2463",
+      "title": {
+        "en": "Minimum Total Distance Traveled",
+        "zh": "最小移动总距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "flower-planting-with-no-adjacent",
+      "frontendId": "1042",
+      "title": {
+        "en": "Flower Planting With No Adjacent",
+        "zh": "不邻接植花"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1712,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-degree-of-a-connected-trio-in-a-graph",
+      "frontendId": "1761",
+      "title": {
+        "en": "Minimum Degree of a Connected Trio in a Graph",
+        "zh": "一个图中连通三元组的最小度数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2005,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "add-edges-to-make-degrees-of-all-nodes-even",
+      "frontendId": "2508",
+      "title": {
+        "en": "Add Edges to Make Degrees of All Nodes Even",
+        "zh": "添加边使所有节点度数都为偶数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2060,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "remove-max-number-of-edges-to-keep-graph-fully-traversable",
+      "frontendId": "1579",
+      "title": {
+        "en": "Remove Max Number of Edges to Keep Graph Fully Traversable",
+        "zh": "保证图可完全遍历"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2132,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-path-quality-of-a-graph",
+      "frontendId": "2065",
+      "title": {
+        "en": "Maximum Path Quality of a Graph",
+        "zh": "最大化一张图中的路径价值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2178,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "checking-existence-of-edge-length-limited-paths",
+      "frontendId": "1697",
+      "title": {
+        "en": "Checking Existence of Edge Length Limited Paths",
+        "zh": "检查边长度限制的路径是否存在"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2300,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-score-of-a-node-sequence",
+      "frontendId": "2242",
+      "title": {
+        "en": "Maximum Score of a Node Sequence",
+        "zh": "节点序列的最大得分"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2304,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "divide-nodes-into-the-maximum-number-of-groups",
+      "frontendId": "2493",
+      "title": {
+        "en": "Divide Nodes Into the Maximum Number of Groups",
+        "zh": "将节点分成尽可能多的组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2415,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "count-pairs-of-nodes",
+      "frontendId": "1782",
+      "title": {
+        "en": "Count Pairs Of Nodes",
+        "zh": "统计点对的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2457,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-equalize-binary-string",
+      "frontendId": "3666",
+      "title": {
+        "en": "Minimum Operations to Equalize Binary String",
+        "zh": "使二进制字符串全为 1 的最少操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2477,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-reverse-operations",
+      "frontendId": "2612",
+      "title": {
+        "en": "Minimum Reverse Operations",
+        "zh": "最少翻转操作数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2824,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "frequencies-of-shortest-supersequences",
+      "frontendId": "3435",
+      "title": {
+        "en": "Frequencies of Shortest Supersequences",
+        "zh": "最短公共超序列的字母出现频率"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 3028,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-repetitions",
+      "frontendId": "466",
+      "title": {
+        "en": "Count The Repetitions",
+        "zh": "统计重复个数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-celebrity",
+      "frontendId": "277",
+      "title": {
+        "en": "Find the Celebrity",
+        "zh": "搜寻名人"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "checking-existence-of-edge-length-limited-paths-ii",
+      "frontendId": "1724",
+      "title": {
+        "en": "Checking Existence of Edge Length Limited Paths II",
+        "zh": "检查边长度限制的路径是否存在 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "paths-in-maze-that-lead-to-same-room",
+      "frontendId": "2077",
+      "title": {
+        "en": "Paths in Maze That Lead to Same Room",
+        "zh": "殊途同归"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "determine-if-a-simple-graph-exists",
+      "frontendId": "3656",
+      "title": {
+        "en": "Determine if a Simple Graph Exists",
+        "zh": "判断是否存在简单图"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "LCP 07",
+      "title": "传递信息",
+      "sectionId": "1.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 09",
+      "title": "最小跳跃次数",
+      "sectionId": "1.3",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCR 114",
+      "title": "火星词典",
+      "sectionId": "2.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 21",
+      "title": "追逐游戏",
+      "sectionId": "2.3",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 35",
+      "title": "电动车游城市",
+      "sectionId": "3.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 54",
+      "title": "夺回据点",
+      "sectionId": "6",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 04",
+      "title": "覆盖",
+      "sectionId": "8",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 38",
+      "title": "守卫城堡",
+      "sectionId": "8",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 16",
+      "title": "游乐园的游览计划",
+      "sectionId": "9",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}

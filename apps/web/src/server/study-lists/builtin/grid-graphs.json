@@ -1,0 +1,994 @@
+{
+  "id": "grid-graphs",
+  "name": {
+    "en": "Grid Graphs",
+    "zh": "网格图"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/YiXPXW/",
+  "sourceUpdatedAt": "2026-09-12T08:20:52.433505+00:00",
+  "generatedAt": "2026-10-20T19:18:47.093Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Grid DFS",
+        "zh": "网格图 DFS"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Grid BFS",
+        "zh": "网格图 BFS"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Grid 0-1 BFS",
+        "zh": "网格图 0-1 BFS"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Combined applications",
+        "zh": "综合应用"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1",
+      "chapterId": "1",
+      "title": {
+        "en": "Grid DFS",
+        "zh": "网格图 DFS"
+      },
+      "pattern": "grid.dfs",
+      "optional": false
+    },
+    {
+      "id": "2",
+      "chapterId": "2",
+      "title": {
+        "en": "Grid BFS",
+        "zh": "网格图 BFS"
+      },
+      "pattern": "grid.bfs",
+      "optional": false
+    },
+    {
+      "id": "3",
+      "chapterId": "3",
+      "title": {
+        "en": "Grid 0-1 BFS",
+        "zh": "网格图 0-1 BFS"
+      },
+      "pattern": "grid.zero_one_bfs",
+      "optional": false
+    },
+    {
+      "id": "5",
+      "chapterId": "5",
+      "title": {
+        "en": "Combined applications",
+        "zh": "综合应用"
+      },
+      "pattern": "grid.mixed",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "number-of-islands",
+      "frontendId": "200",
+      "title": {
+        "en": "Number of Islands",
+        "zh": "岛屿数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "max-area-of-island",
+      "frontendId": "695",
+      "title": {
+        "en": "Max Area of Island",
+        "zh": "岛屿的最大面积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "count-islands-with-total-value-divisible-by-k",
+      "frontendId": "3619",
+      "title": {
+        "en": "Count Islands With Total Value Divisible by K",
+        "zh": "总价值可以被 K 整除的岛屿数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1461,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-fish-in-a-grid",
+      "frontendId": "2658",
+      "title": {
+        "en": "Maximum Number of Fish in a Grid",
+        "zh": "网格图中鱼的最大数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1490,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "island-perimeter",
+      "frontendId": "463",
+      "title": {
+        "en": "Island Perimeter",
+        "zh": "岛屿的周长"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "flood-fill",
+      "frontendId": "733",
+      "title": {
+        "en": "Flood Fill",
+        "zh": "图像渲染"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "coloring-a-border",
+      "frontendId": "1034",
+      "title": {
+        "en": "Coloring A Border",
+        "zh": "边界着色"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1579,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-enclaves",
+      "frontendId": "1020",
+      "title": {
+        "en": "Number of Enclaves",
+        "zh": "飞地的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1615,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-moves-in-a-grid",
+      "frontendId": "2684",
+      "title": {
+        "en": "Maximum Number of Moves in a Grid",
+        "zh": "矩阵中移动的最大次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1626,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-closed-islands",
+      "frontendId": "1254",
+      "title": {
+        "en": "Number of Closed Islands",
+        "zh": "统计封闭岛屿的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1659,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "surrounded-regions",
+      "frontendId": "130",
+      "title": {
+        "en": "Surrounded Regions",
+        "zh": "被围绕的区域"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "count-sub-islands",
+      "frontendId": "1905",
+      "title": {
+        "en": "Count Sub Islands",
+        "zh": "统计子岛屿"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1679,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-there-is-a-valid-path-in-a-grid",
+      "frontendId": "1391",
+      "title": {
+        "en": "Check if There is a Valid Path in a Grid",
+        "zh": "检查网格中是否存在有效路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1746,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "detect-cycles-in-2d-grid",
+      "frontendId": "1559",
+      "title": {
+        "en": "Detect Cycles in 2D Grid",
+        "zh": "二维网格图中探测环"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1838,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "minesweeper",
+      "frontendId": "529",
+      "title": {
+        "en": "Minesweeper",
+        "zh": "扫雷游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "pacific-atlantic-water-flow",
+      "frontendId": "417",
+      "title": {
+        "en": "Pacific Atlantic Water Flow",
+        "zh": "太平洋大西洋水流问题"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "making-a-large-island",
+      "frontendId": "827",
+      "title": {
+        "en": "Making A Large Island",
+        "zh": "最大人工岛"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1934,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-islands-ii",
+      "frontendId": "305",
+      "title": {
+        "en": "Number of Islands II",
+        "zh": "岛屿数量 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-spaces-cleaning-robot-cleaned",
+      "frontendId": "2061",
+      "title": {
+        "en": "Number of Spaces Cleaning Robot Cleaned",
+        "zh": "扫地机器人清扫过的空间个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-remoteness-of-all-cells",
+      "frontendId": "2852",
+      "title": {
+        "en": "Sum of Remoteness of All Cells",
+        "zh": "所有单元格的远离程度之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "robot-room-cleaner",
+      "frontendId": "489",
+      "title": {
+        "en": "Robot Room Cleaner",
+        "zh": "扫地机器人"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "last-day-where-you-can-still-cross",
+      "frontendId": "1970",
+      "title": {
+        "en": "Last Day Where You Can Still Cross",
+        "zh": "你能穿过矩阵的最后一天"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2124,
+      "sectionId": "1",
+      "level": "stretch"
+    },
+    {
+      "slug": "nearest-exit-from-entrance-in-maze",
+      "frontendId": "1926",
+      "title": {
+        "en": "Nearest Exit from Entrance in Maze",
+        "zh": "迷宫中离入口最近的出口"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1638,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-path-in-binary-matrix",
+      "frontendId": "1091",
+      "title": {
+        "en": "Shortest Path in Binary Matrix",
+        "zh": "二进制矩阵中的最短路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1658,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "as-far-from-land-as-possible",
+      "frontendId": "1162",
+      "title": {
+        "en": "As Far from Land as Possible",
+        "zh": "地图分析"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1666,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "01-matrix",
+      "frontendId": "542",
+      "title": {
+        "en": "01 Matrix",
+        "zh": "01 矩阵"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "rotting-oranges",
+      "frontendId": "994",
+      "title": {
+        "en": "Rotting Oranges",
+        "zh": "腐烂的橘子"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "multi-source-flood-fill",
+      "frontendId": "3905",
+      "title": {
+        "en": "Multi Source Flood Fill",
+        "zh": "多源图像渲染"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1671,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "map-of-highest-peak",
+      "frontendId": "1765",
+      "title": {
+        "en": "Map of Highest Peak",
+        "zh": "地图中的最高点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1783,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-bridge",
+      "frontendId": "934",
+      "title": {
+        "en": "Shortest Bridge",
+        "zh": "最短的桥"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1826,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "k-highest-ranked-items-within-a-price-range",
+      "frontendId": "2146",
+      "title": {
+        "en": "K Highest Ranked Items Within a Price Range",
+        "zh": "价格范围内最高排名的 K 样物品"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1837,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-path-in-a-grid-with-obstacles-elimination",
+      "frontendId": "1293",
+      "title": {
+        "en": "Shortest Path in a Grid with Obstacles Elimination",
+        "zh": "网格中的最短路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1967,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "snakes-and-ladders",
+      "frontendId": "909",
+      "title": {
+        "en": "Snakes and Ladders",
+        "zh": "蛇梯棋"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2020,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-reach-target-with-rotations",
+      "frontendId": "1210",
+      "title": {
+        "en": "Minimum Moves to Reach Target with Rotations",
+        "zh": "穿过迷宫的最少移动次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2022,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "cut-off-trees-for-golf-event",
+      "frontendId": "675",
+      "title": {
+        "en": "Cut Off Trees for Golf Event",
+        "zh": "为高尔夫比赛砍树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-safest-path-in-a-grid",
+      "frontendId": "2812",
+      "title": {
+        "en": "Find the Safest Path in a Grid",
+        "zh": "找出最安全路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2154,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "contain-virus",
+      "frontendId": "749",
+      "title": {
+        "en": "Contain Virus",
+        "zh": "隔离病毒"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2277,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-path-to-get-food",
+      "frontendId": "1730",
+      "title": {
+        "en": "Shortest Path to Get Food",
+        "zh": "获取食物的最短路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "walls-and-gates",
+      "frontendId": "286",
+      "title": {
+        "en": "Walls and Gates",
+        "zh": "墙与门"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "the-maze",
+      "frontendId": "490",
+      "title": {
+        "en": "The Maze",
+        "zh": "迷宫"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "the-maze-ii",
+      "frontendId": "505",
+      "title": {
+        "en": "The Maze II",
+        "zh": "迷宫 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "the-maze-iii",
+      "frontendId": "499",
+      "title": {
+        "en": "The Maze III",
+        "zh": "迷宫 III"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-knight-moves",
+      "frontendId": "1197",
+      "title": {
+        "en": "Minimum Knight Moves",
+        "zh": "进击的骑士"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-distance-from-all-buildings",
+      "frontendId": "317",
+      "title": {
+        "en": "Shortest Distance from All Buildings",
+        "zh": "离建筑物最近的距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-takes-to-reach-destination-without-drowning",
+      "frontendId": "2814",
+      "title": {
+        "en": "Minimum Time Takes to Reach Destination Without Drowning",
+        "zh": "避免淹死并到达目的地的最短时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "find-a-safe-walk-through-a-grid",
+      "frontendId": "3286",
+      "title": {
+        "en": "Find a Safe Walk Through a Grid",
+        "zh": "穿越网格图的安全路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-obstacle-removal-to-reach-corner",
+      "frontendId": "2290",
+      "title": {
+        "en": "Minimum Obstacle Removal to Reach Corner",
+        "zh": "到达角落需要移除障碍物的最小数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2138,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
+      "frontendId": "1368",
+      "title": {
+        "en": "Minimum Cost to Make at Least One Valid Path in a Grid",
+        "zh": "使网格图至少有一条有效路径的最小代价"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2069,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "grid-teleportation-traversal",
+      "frontendId": "3552",
+      "title": {
+        "en": "Grid Teleportation Traversal",
+        "zh": "网格传送门旅游"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2036,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-sideway-jumps",
+      "frontendId": "1824",
+      "title": {
+        "en": "Minimum Sideway Jumps",
+        "zh": "最少侧跳次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-xor-path-in-a-grid",
+      "frontendId": "3882",
+      "title": {
+        "en": "Minimum XOR Path in a Grid",
+        "zh": "网格图中最小异或路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1771,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "path-with-minimum-effort",
+      "frontendId": "1631",
+      "title": {
+        "en": "Path With Minimum Effort",
+        "zh": "最小体力消耗路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1948,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-there-is-a-valid-parentheses-string-path",
+      "frontendId": "2267",
+      "title": {
+        "en": " Check if There Is a Valid Parentheses String Path",
+        "zh": "检查是否有合法括号字符串路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2085,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "swim-in-rising-water",
+      "frontendId": "778",
+      "title": {
+        "en": "Swim in Rising Water",
+        "zh": "水位上升的泳池中游泳"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2097,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-clean-the-classroom",
+      "frontendId": "3568",
+      "title": {
+        "en": "Minimum Moves to Clean the Classroom",
+        "zh": "清理教室的最少移动"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2143,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "escape-a-large-maze",
+      "frontendId": "1036",
+      "title": {
+        "en": "Escape a Large Maze",
+        "zh": "逃离大迷宫"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2165,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-path-to-get-all-keys",
+      "frontendId": "864",
+      "title": {
+        "en": "Shortest Path to Get All Keys",
+        "zh": "获取所有钥匙的最短路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2259,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-move-a-box-to-their-target-location",
+      "frontendId": "1263",
+      "title": {
+        "en": "Minimum Moves to Move a Box to Their Target Location",
+        "zh": "推箱子"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2297,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "escape-the-spreading-fire",
+      "frontendId": "2258",
+      "title": {
+        "en": "Escape the Spreading Fire",
+        "zh": "逃离火灾"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2347,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "disconnect-path-in-a-binary-matrix-by-at-most-one-flip",
+      "frontendId": "2556",
+      "title": {
+        "en": "Disconnect Path in a Binary Matrix by at Most One Flip",
+        "zh": "二进制矩阵中翻转最多一次使路径不连通"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2369,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-visit-a-cell-in-a-grid",
+      "frontendId": "2577",
+      "title": {
+        "en": "Minimum Time to Visit a Cell In a Grid",
+        "zh": "在网格图中访问一个格子的最少时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2382,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-visited-cells-in-a-grid",
+      "frontendId": "2617",
+      "title": {
+        "en": "Minimum Number of Visited Cells in a Grid",
+        "zh": "网格图中最少访问的格子数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2582,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-path-in-a-hidden-grid",
+      "frontendId": "1778",
+      "title": {
+        "en": "Shortest Path in a Hidden Grid",
+        "zh": "未知网格中的最短路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-distinct-islands",
+      "frontendId": "694",
+      "title": {
+        "en": "Number of Distinct Islands",
+        "zh": "不同岛屿的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-distinct-islands-ii",
+      "frontendId": "711",
+      "title": {
+        "en": "Number of Distinct Islands II",
+        "zh": "不同岛屿的数量 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "path-with-maximum-minimum-value",
+      "frontendId": "1102",
+      "title": {
+        "en": "Path With Maximum Minimum Value",
+        "zh": "得分最高的路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "面试题 16.19",
+      "title": "水域大小",
+      "sectionId": "1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCS 03",
+      "title": "主题空间",
+      "sectionId": "1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 63",
+      "title": "弹珠游戏",
+      "sectionId": "1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 56",
+      "title": "信物传送",
+      "sectionId": "3",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 13",
+      "title": "寻宝",
+      "sectionId": "5",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 31",
+      "title": "变换的迷宫",
+      "sectionId": "5",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 45",
+      "title": "自行车炫技赛场",
+      "sectionId": "5",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 75",
+      "title": "传送卷轴",
+      "sectionId": "5",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}

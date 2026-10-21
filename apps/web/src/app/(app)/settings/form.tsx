@@ -259,6 +259,97 @@ export function ReviewSettingsForm({ initial }: { initial: { dailyReviewLimit: n
   );
 }
 
+export function StudyPlanSettingsForm({ initial }: { initial: { dailyMinutes: number; maxNewPerDay: number; hidePatternsOnToday: boolean } }) {
+  const router = useRouter();
+  const { t } = useLanguage();
+  const [dailyMinutes, setDailyMinutes] = useState(initial.dailyMinutes);
+  const [maxNewPerDay, setMaxNewPerDay] = useState(initial.maxNewPerDay);
+  const [hidePatternsOnToday, setHidePatternsOnToday] = useState(initial.hidePatternsOnToday);
+  const [saving, setSaving] = useState(false);
+  const [msg, setMsg] = useState<string | null>(null);
+
+  async function save(e: React.FormEvent) {
+    e.preventDefault();
+    setSaving(true);
+    setMsg(null);
+    try {
+      const res = await fetch("/api/settings", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ studyPlan: { dailyMinutes, maxNewPerDay, hidePatternsOnToday } }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setMsg(t.common.saved);
+      router.refresh();
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : t.settings.failedToSave);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <form onSubmit={save} className="max-w-2xl space-y-5">
+      <div className="max-w-sm space-y-1">
+        <div className="flex items-center gap-1.5 text-sm">
+          <label htmlFor="daily-minutes">{t.settings.dailyMinutes}</label>
+          <InfoTip label={t.settings.dailyMinutesHelp} align="left" />
+        </div>
+        <Input
+          id="daily-minutes"
+          type="number"
+          min={10}
+          max={960}
+          step={5}
+          value={dailyMinutes}
+          onChange={(e) => setDailyMinutes(Number(e.target.value))}
+          className="tabular-nums"
+        />
+      </div>
+
+      <div className="max-w-sm space-y-1">
+        <div className="flex items-center gap-1.5 text-sm">
+          <label htmlFor="max-new-per-day">{t.settings.maxNewPerDay}</label>
+          <InfoTip label={t.settings.maxNewPerDayHelp} align="left" />
+        </div>
+        <Input
+          id="max-new-per-day"
+          type="number"
+          min={0}
+          max={100}
+          value={maxNewPerDay}
+          onChange={(e) => setMaxNewPerDay(Number(e.target.value))}
+          className="tabular-nums"
+        />
+      </div>
+
+      <label className="flex cursor-pointer items-start gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={hidePatternsOnToday}
+          onChange={(event) => setHidePatternsOnToday(event.target.checked)}
+          className="mt-1 h-4 w-4 shrink-0 cursor-pointer rounded border-border accent-accent"
+        />
+        <span>
+          {t.settings.hidePatterns}
+          <span className="mt-1 block text-muted">{t.settings.hidePatternsHelp}</span>
+        </span>
+      </label>
+
+      <div className="flex flex-wrap items-center justify-end gap-2 border-t border-border pt-4">
+        {msg && (
+          <span className="mr-auto text-sm text-muted" role="status" aria-live="polite">
+            {msg}
+          </span>
+        )}
+        <Button type="submit" variant="primary" className={SETTINGS_ACTION_CLASS} disabled={saving}>
+          {saving ? t.common.saving : t.settings.saveStudyPlan}
+        </Button>
+      </div>
+    </form>
+  );
+}
+
 /** Whether session analysis can run, and whether automation can be configured. */
 export type AnalysisAvailability = "disabled" | "needs_key" | "manual_only" | "automatic";
 

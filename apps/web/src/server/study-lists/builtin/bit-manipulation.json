@@ -1,0 +1,1836 @@
+{
+  "id": "bit-manipulation",
+  "name": {
+    "en": "Bit Manipulation",
+    "zh": "位运算"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/dHn9Vk/",
+  "sourceUpdatedAt": "2026-09-12T08:10:47.067998+00:00",
+  "generatedAt": "2026-10-20T19:18:57.637Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Basics",
+        "zh": "基础题"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Properties of XOR",
+        "zh": "异或（XOR）的性质"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Properties of AND and OR",
+        "zh": "与或（AND/OR）的性质"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Splitting bits and contribution",
+        "zh": "拆位 / 贡献法"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Bit-by-bit trial filling",
+        "zh": "试填法"
+      }
+    },
+    {
+      "id": "6",
+      "title": {
+        "en": "Identities",
+        "zh": "恒等式"
+      }
+    },
+    {
+      "id": "7",
+      "title": {
+        "en": "Linear basis",
+        "zh": "线性基"
+      }
+    },
+    {
+      "id": "8",
+      "title": {
+        "en": "Thinking problems",
+        "zh": "思维题"
+      }
+    },
+    {
+      "id": "9",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1",
+      "chapterId": "1",
+      "title": {
+        "en": "Basics",
+        "zh": "基础题"
+      },
+      "pattern": "bits.basic",
+      "optional": false
+    },
+    {
+      "id": "2",
+      "chapterId": "2",
+      "title": {
+        "en": "Properties of XOR",
+        "zh": "异或（XOR）的性质"
+      },
+      "pattern": "bits.xor",
+      "optional": false
+    },
+    {
+      "id": "3",
+      "chapterId": "3",
+      "title": {
+        "en": "Properties of AND and OR",
+        "zh": "与或（AND/OR）的性质"
+      },
+      "pattern": "bits.and_or",
+      "optional": false
+    },
+    {
+      "id": "4",
+      "chapterId": "4",
+      "title": {
+        "en": "Splitting bits and contribution",
+        "zh": "拆位 / 贡献法"
+      },
+      "pattern": "bits.split",
+      "optional": false
+    },
+    {
+      "id": "5",
+      "chapterId": "5",
+      "title": {
+        "en": "Bit-by-bit trial filling",
+        "zh": "试填法"
+      },
+      "pattern": "bits.trial_fill",
+      "optional": false
+    },
+    {
+      "id": "6",
+      "chapterId": "6",
+      "title": {
+        "en": "Identities",
+        "zh": "恒等式"
+      },
+      "pattern": "bits.identity",
+      "optional": false
+    },
+    {
+      "id": "7",
+      "chapterId": "7",
+      "title": {
+        "en": "Linear basis",
+        "zh": "线性基"
+      },
+      "pattern": "bits.linear_basis",
+      "optional": false
+    },
+    {
+      "id": "8",
+      "chapterId": "8",
+      "title": {
+        "en": "Thinking problems",
+        "zh": "思维题"
+      },
+      "pattern": "bits.insight",
+      "optional": false
+    },
+    {
+      "id": "9",
+      "chapterId": "9",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "bits.other",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "smallest-number-with-all-set-bits",
+      "frontendId": "3370",
+      "title": {
+        "en": "Smallest Number With All Set Bits",
+        "zh": "仅含置位位的最小整数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1199,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "count-monobit-integers",
+      "frontendId": "3827",
+      "title": {
+        "en": "Count Monobit Integers",
+        "zh": "统计单比特整数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-bit-changes-to-make-two-integers-equal",
+      "frontendId": "3226",
+      "title": {
+        "en": "Number of Bit Changes to Make Two Integers Equal",
+        "zh": "使两个整数相等的位更改次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1247,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "sort-integers-by-the-number-of-1-bits",
+      "frontendId": "1356",
+      "title": {
+        "en": "Sort Integers by The Number of 1 Bits",
+        "zh": "根据数字二进制下 1 的数目排序"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1258,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "hamming-distance",
+      "frontendId": "461",
+      "title": {
+        "en": "Hamming Distance",
+        "zh": "汉明距离"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1282,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-bit-flips-to-convert-number",
+      "frontendId": "2220",
+      "title": {
+        "en": "Minimum Bit Flips to Convert Number",
+        "zh": "转换数字的最少位翻转次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1282,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-steps-to-reduce-a-number-to-zero",
+      "frontendId": "1342",
+      "title": {
+        "en": "Number of Steps to Reduce a Number to Zero",
+        "zh": "将数字变成 0 的操作次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "number-complement",
+      "frontendId": "476",
+      "title": {
+        "en": "Number Complement",
+        "zh": "数字的补数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "complement-of-base-10-integer",
+      "frontendId": "1009",
+      "title": {
+        "en": "Complement of Base 10 Integer",
+        "zh": "十进制整数的反码"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "binary-gap",
+      "frontendId": "868",
+      "title": {
+        "en": "Binary Gap",
+        "zh": "二进制间距"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1307,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-k-or-of-an-array",
+      "frontendId": "2917",
+      "title": {
+        "en": "Find the K-or of an Array",
+        "zh": "找出数组中的 K-or 值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1389,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-prefix-common-array-of-two-arrays",
+      "frontendId": "2657",
+      "title": {
+        "en": "Find the Prefix Common Array of Two Arrays",
+        "zh": "找到两个数组的前缀公共数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "power-of-two",
+      "frontendId": "231",
+      "title": {
+        "en": "Power of Two",
+        "zh": "2 的幂"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "power-of-four",
+      "frontendId": "342",
+      "title": {
+        "en": "Power of Four",
+        "zh": "4的幂"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "binary-number-with-alternating-bits",
+      "frontendId": "693",
+      "title": {
+        "en": "Binary Number with Alternating Bits",
+        "zh": "交替位二进制数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "exactly-one-consecutive-set-bits-pair",
+      "frontendId": "3950",
+      "title": {
+        "en": "Exactly One Consecutive Set Bits Pair",
+        "zh": "恰好一对连续置位"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-1-bits",
+      "frontendId": "191",
+      "title": {
+        "en": "Number of 1 Bits",
+        "zh": "位1的个数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "counting-bits",
+      "frontendId": "338",
+      "title": {
+        "en": "Counting Bits",
+        "zh": "比特位计数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-even-and-odd-bits",
+      "frontendId": "2595",
+      "title": {
+        "en": "Number of Even and Odd Bits",
+        "zh": "奇偶位数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "keep-multiplying-found-values-by-two",
+      "frontendId": "2154",
+      "title": {
+        "en": "Keep Multiplying Found Values by Two",
+        "zh": "将找到的值乘以 2"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "generate-binary-strings-without-adjacent-zeros",
+      "frontendId": "3211",
+      "title": {
+        "en": "Generate Binary Strings Without Adjacent Zeros",
+        "zh": "生成不含相邻零的二进制字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "split-and-merge-array-transformation",
+      "frontendId": "3690",
+      "title": {
+        "en": "Split and Merge Array Transformation",
+        "zh": "拆分合并数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-bits",
+      "frontendId": "190",
+      "title": {
+        "en": "Reverse Bits",
+        "zh": "颠倒二进制位"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "check-ascii-palindromic",
+      "frontendId": "4030",
+      "title": {
+        "en": "Check ASCII Palindromic",
+        "zh": "判断 ASCII 值回文"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1165,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-flips-to-reverse-binary-string",
+      "frontendId": "3750",
+      "title": {
+        "en": "Minimum Number of Flips to Reverse Binary String",
+        "zh": "最少翻转次数得到反转二进制字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1289,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "sort-integers-by-binary-reflection",
+      "frontendId": "3769",
+      "title": {
+        "en": "Sort Integers by Binary Reflection",
+        "zh": "二进制反射排序"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1364,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "xor-operation-in-an-array",
+      "frontendId": "1486",
+      "title": {
+        "en": "XOR Operation in an Array",
+        "zh": "数组异或操作"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1181,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "decode-xored-array",
+      "frontendId": "1720",
+      "title": {
+        "en": "Decode XORed Array",
+        "zh": "解码异或后的数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1284,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-original-array-of-prefix-xor",
+      "frontendId": "2433",
+      "title": {
+        "en": "Find The Original Array of Prefix Xor",
+        "zh": "找出前缀异或的原始数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1367,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "xor-queries-of-a-subarray",
+      "frontendId": "1310",
+      "title": {
+        "en": "XOR Queries of a Subarray",
+        "zh": "子数组异或查询"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1460,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-subsequence-with-non-zero-bitwise-xor",
+      "frontendId": "3702",
+      "title": {
+        "en": "Longest Subsequence With Non-Zero Bitwise XOR",
+        "zh": "按位异或非零的最长子序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1489,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "neighboring-bitwise-xor",
+      "frontendId": "2683",
+      "title": {
+        "en": "Neighboring Bitwise XOR",
+        "zh": "相邻值的按位异或"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1518,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-xor-for-each-query",
+      "frontendId": "1829",
+      "title": {
+        "en": "Maximum XOR for Each Query",
+        "zh": "每个查询的最大异或值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1523,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-make-array-xor-equal-to-k",
+      "frontendId": "2997",
+      "title": {
+        "en": "Minimum Number of Operations to Make Array XOR Equal to K",
+        "zh": "使数组异或和等于 K 的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1525,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "count-triplets-that-can-form-two-arrays-of-equal-xor",
+      "frontendId": "1442",
+      "title": {
+        "en": "Count Triplets That Can Form Two Arrays of Equal XOR",
+        "zh": "形成两个异或相等数组的三元组数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1525,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-xor",
+      "frontendId": "2429",
+      "title": {
+        "en": "Minimize XOR",
+        "zh": "最小异或"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1532,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "find-xor-beauty-of-array",
+      "frontendId": "2527",
+      "title": {
+        "en": "Find Xor-Beauty of Array",
+        "zh": "查询数组异或美丽值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1550,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-xor-after-operations",
+      "frontendId": "2317",
+      "title": {
+        "en": "Maximum XOR After Operations ",
+        "zh": "操作后的最大异或和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1679,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-beautiful-subarrays",
+      "frontendId": "2588",
+      "title": {
+        "en": "Count the Number of Beautiful Subarrays",
+        "zh": "统计美丽子数组数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1697,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "substring-xor-queries",
+      "frontendId": "2564",
+      "title": {
+        "en": "Substring XOR Queries",
+        "zh": "子字符串异或查询"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1959,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "decode-xored-permutation",
+      "frontendId": "1734",
+      "title": {
+        "en": "Decode XORed Permutation",
+        "zh": "解码异或后的排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2024,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "count-pairs-of-points-with-distance-k",
+      "frontendId": "2857",
+      "title": {
+        "en": "Count Pairs of Points With Distance k",
+        "zh": "统计距离为 k 的点对"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2082,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "count-pairs-with-xor-in-a-range",
+      "frontendId": "1803",
+      "title": {
+        "en": "Count Pairs With XOR in a Range",
+        "zh": "统计异或值在范围内的数对有多少"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2479,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "count-triplets-with-even-xor-set-bits-ii",
+      "frontendId": "3215",
+      "title": {
+        "en": "Count Triplets with Even XOR Set Bits II",
+        "zh": "用偶数异或设置位计数三元组 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-bitwise-or-has-trailing-zeros",
+      "frontendId": "2980",
+      "title": {
+        "en": "Check if Bitwise OR Has Trailing Zeros",
+        "zh": "检查按位或是否存在尾随零"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1234,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-flips-to-make-a-or-b-equal-to-c",
+      "frontendId": "1318",
+      "title": {
+        "en": "Minimum Flips to Make a OR b Equal to c",
+        "zh": "或运算的最小翻转次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1383,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "longest-subarray-with-maximum-bitwise-and",
+      "frontendId": "2419",
+      "title": {
+        "en": "Longest Subarray With Maximum Bitwise AND",
+        "zh": "按位与最大的最长子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1496,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "split-array-into-maximum-number-of-subarrays",
+      "frontendId": "2871",
+      "title": {
+        "en": "Split Array Into Maximum Number of Subarrays",
+        "zh": "将数组分割成最多数目的子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1750,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "longest-nice-subarray",
+      "frontendId": "2401",
+      "title": {
+        "en": "Longest Nice Subarray",
+        "zh": "最长优雅子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1750,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-or",
+      "frontendId": "2680",
+      "title": {
+        "en": "Maximum OR",
+        "zh": "最大或值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1912,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-array-end",
+      "frontendId": "3133",
+      "title": {
+        "en": "Minimum Array End",
+        "zh": "数组最后一个元素的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1935,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-walk-in-weighted-graph",
+      "frontendId": "3108",
+      "title": {
+        "en": "Minimum Cost Walk in Weighted Graph",
+        "zh": "带权图里旅途的最小代价"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2109,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-sum-of-values-by-dividing-array",
+      "frontendId": "3117",
+      "title": {
+        "en": "Minimum Sum of Values by Dividing Array",
+        "zh": "划分数组得到最小的值之和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2735,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-that-makes-result-of-bitwise-and-zero",
+      "frontendId": "3125",
+      "title": {
+        "en": "Maximum Number That Makes Result of Bitwise AND Zero",
+        "zh": "使得按位与结果为 0 的最大数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "find-subarray-with-bitwise-or-closest-to-k",
+      "frontendId": "3171",
+      "title": {
+        "en": "Find Subarray With Bitwise OR Closest to K",
+        "zh": "找到按位或最接近 K 的子数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "find-a-value-of-a-mysterious-function-closest-to-target",
+      "frontendId": "1521",
+      "title": {
+        "en": "Find a Value of a Mysterious Function Closest to Target",
+        "zh": "找到最接近目标值的函数值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-subarray-with-or-at-least-k-ii",
+      "frontendId": "3097",
+      "title": {
+        "en": "Shortest Subarray With OR at Least K II",
+        "zh": "或值至少为 K 的最短子数组 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1891,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-subarrays-with-maximum-bitwise-or",
+      "frontendId": "2411",
+      "title": {
+        "en": "Smallest Subarrays With Maximum Bitwise OR",
+        "zh": "按位或最大的最小子数组长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1938,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-subarrays-with-and-value-of-k",
+      "frontendId": "3209",
+      "title": {
+        "en": "Number of Subarrays With AND Value of K",
+        "zh": "子数组按位与值为 K 的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2050,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "bitwise-ors-of-subarrays",
+      "frontendId": "898",
+      "title": {
+        "en": "Bitwise ORs of Subarrays",
+        "zh": "子数组按位或操作"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2133,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "count-good-subarrays",
+      "frontendId": "3878",
+      "title": {
+        "en": "Count Good Subarrays",
+        "zh": "统计好子数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2230,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-subarrays-with-gcd-equal-to-k",
+      "frontendId": "2447",
+      "title": {
+        "en": "Number of Subarrays With GCD Equal to K",
+        "zh": "最大公因数等于 K 的子数组数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-make-all-array-elements-equal-to-1",
+      "frontendId": "2654",
+      "title": {
+        "en": "Minimum Number of Operations to Make All Array Elements Equal to 1",
+        "zh": "使数组所有元素变成 1 的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-stability-factor-of-array",
+      "frontendId": "3605",
+      "title": {
+        "en": "Minimum Stability Factor of Array",
+        "zh": "数组的最小稳定性因子"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2410,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-subarray-gcd-score",
+      "frontendId": "3574",
+      "title": {
+        "en": "Maximize Subarray GCD Score",
+        "zh": "最大子数组 GCD 分数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-gcd-sum-of-a-subarray",
+      "frontendId": "2941",
+      "title": {
+        "en": "Maximum GCD-Sum of a Subarray",
+        "zh": "子数组的最大 GCD-Sum"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "total-hamming-distance",
+      "frontendId": "477",
+      "title": {
+        "en": "Total Hamming Distance",
+        "zh": "汉明距离总和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-all-subset-xor-totals",
+      "frontendId": "1863",
+      "title": {
+        "en": "Sum of All Subset XOR Totals",
+        "zh": "找出所有子集的异或总和再求和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "bitwise-xor-of-all-pairings",
+      "frontendId": "2425",
+      "title": {
+        "en": "Bitwise XOR of All Pairings",
+        "zh": "所有数对的异或和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1622,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "largest-combination-with-bitwise-and-greater-than-zero",
+      "frontendId": "2275",
+      "title": {
+        "en": "Largest Combination With Bitwise AND Greater Than Zero",
+        "zh": "按位与结果大于零的最长组合"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1642,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "find-xor-sum-of-all-pairs-bitwise-and",
+      "frontendId": "1835",
+      "title": {
+        "en": "Find XOR Sum of All Pairs Bitwise AND",
+        "zh": "所有数对按位与结果的异或和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1825,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "bitwise-or-of-even-numbers-in-an-array",
+      "frontendId": "3688",
+      "title": {
+        "en": "Bitwise OR of Even Numbers in an Array",
+        "zh": "偶数的按位或运算"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "bitwise-or-of-all-subsequence-sums",
+      "frontendId": "2505",
+      "title": {
+        "en": "Bitwise OR of All Subsequence Sums",
+        "zh": "所有子序列和的按位或"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-digit-differences-of-all-pairs",
+      "frontendId": "3153",
+      "title": {
+        "en": "Sum of Digit Differences of All Pairs",
+        "zh": "所有数对中数位差之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1645,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-xor-of-two-numbers-in-an-array",
+      "frontendId": "421",
+      "title": {
+        "en": "Maximum XOR of Two Numbers in an Array",
+        "zh": "数组中两个数的最大异或值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-bitwise-or-from-grid",
+      "frontendId": "3858",
+      "title": {
+        "en": "Minimum Bitwise OR From Grid",
+        "zh": "按位或的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1947,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-bitwise-and-after-increment-operations",
+      "frontendId": "3806",
+      "title": {
+        "en": "Maximum Bitwise AND After Increment Operations",
+        "zh": "增加操作后最大按位与的结果"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2259,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-strong-pair-xor-ii",
+      "frontendId": "2935",
+      "title": {
+        "en": "Maximum Strong Pair XOR II",
+        "zh": "找出强数对的最大异或值 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2349,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-subarray-xor-with-bounded-range",
+      "frontendId": "3845",
+      "title": {
+        "en": "Maximum Subarray XOR with Bounded Range",
+        "zh": "最大子数组异或值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k",
+      "frontendId": "3007",
+      "title": {
+        "en": "Maximum Number That Sum of the Prices Is Less Than or Equal to K",
+        "zh": "价值和小于等于 K 的最大数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "find-products-of-elements-of-big-array",
+      "frontendId": "3145",
+      "title": {
+        "en": "Find Products of Elements of Big Array",
+        "zh": "大数组元素的乘积"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2859,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-or-of-remaining-elements-using-operations",
+      "frontendId": "3022",
+      "title": {
+        "en": "Minimize OR of Remaining Elements Using Operations",
+        "zh": "给定操作次数内使剩余元素的或值最小"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2918,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-maximum-sequence-value-of-array",
+      "frontendId": "3287",
+      "title": {
+        "en": "Find the Maximum Sequence Value of Array",
+        "zh": "求出数组中最大序列值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-sized-array",
+      "frontendId": "3344",
+      "title": {
+        "en": "Maximum Sized Array",
+        "zh": "最大尺寸数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "find-xor-sum-of-all-pairs-bitwise-and",
+      "frontendId": "1835",
+      "title": {
+        "en": "Find XOR Sum of All Pairs Bitwise AND",
+        "zh": "所有数对按位与结果的异或和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1825,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-excellent-pairs",
+      "frontendId": "2354",
+      "title": {
+        "en": "Number of Excellent Pairs",
+        "zh": "优质数对的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2076,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-xor-of-subsequences",
+      "frontendId": "3681",
+      "title": {
+        "en": "Maximum XOR of Subsequences",
+        "zh": "子序列最大 XOR 值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "partition-array-for-maximum-xor-and-and",
+      "frontendId": "3630",
+      "title": {
+        "en": "Partition Array for Maximum XOR and AND",
+        "zh": "划分数组得到最大异或运算和与运算之和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2744,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "apply-bitwise-operations-to-make-strings-equal",
+      "frontendId": "2546",
+      "title": {
+        "en": "Apply Bitwise Operations to Make Strings Equal",
+        "zh": "执行逐位运算使字符串相等"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1605,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-numbers-of-function-calls-to-make-target-array",
+      "frontendId": "1558",
+      "title": {
+        "en": "Minimum Numbers of Function Calls to Make Target Array",
+        "zh": "得到目标数组的最少函数调用次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1637,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-reduce-an-integer-to-0",
+      "frontendId": "2571",
+      "title": {
+        "en": "Minimum Operations to Reduce an Integer to 0",
+        "zh": "将整数减少到零需要的最少操作数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1649,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "construct-the-minimum-bitwise-array-ii",
+      "frontendId": "3315",
+      "title": {
+        "en": "Construct the Minimum Bitwise Array II",
+        "zh": "构造最小位运算数组 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1715,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-impossible-or",
+      "frontendId": "2568",
+      "title": {
+        "en": "Minimum Impossible OR",
+        "zh": "最小无法得到的或值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1754,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-k-to-sort-a-permutation",
+      "frontendId": "3644",
+      "title": {
+        "en": "Maximum K to Sort a Permutation",
+        "zh": "排序排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1775,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "cycle-length-queries-in-a-tree",
+      "frontendId": "2509",
+      "title": {
+        "en": "Cycle Length Queries in a Tree",
+        "zh": "查询树中环的长度"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1948,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-xor-product",
+      "frontendId": "2939",
+      "title": {
+        "en": "Maximum Xor Product",
+        "zh": "最大异或乘积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2128,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-the-integer-zero",
+      "frontendId": "2749",
+      "title": {
+        "en": "Minimum Operations to Make the Integer Zero",
+        "zh": "得到整数零需要执行的最少操作数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2132,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-form-subsequence-with-target-sum",
+      "frontendId": "2835",
+      "title": {
+        "en": "Minimum Operations to Form Subsequence With Target Sum",
+        "zh": "使子序列的和等于目标的最少操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2207,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "apply-operations-on-array-to-maximize-sum-of-squares",
+      "frontendId": "2897",
+      "title": {
+        "en": "Apply Operations on Array to Maximize Sum of Squares",
+        "zh": "对数组执行操作使平方和最大"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2301,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "chalkboard-xor-game",
+      "frontendId": "810",
+      "title": {
+        "en": "Chalkboard XOR Game",
+        "zh": "黑板异或游戏"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2341,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "guess-the-number-using-bitwise-questions-i",
+      "frontendId": "3064",
+      "title": {
+        "en": "Guess the Number Using Bitwise Questions I",
+        "zh": "使用按位查询猜测数字 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "guess-the-number-using-bitwise-questions-ii",
+      "frontendId": "3094",
+      "title": {
+        "en": "Guess the Number Using Bitwise Questions II",
+        "zh": "使用按位查询猜测数字 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "single-number",
+      "frontendId": "136",
+      "title": {
+        "en": "Single Number",
+        "zh": "只出现一次的数字"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "single-number-iii",
+      "frontendId": "260",
+      "title": {
+        "en": "Single Number III",
+        "zh": "只出现一次的数字 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "find-missing-and-repeated-values",
+      "frontendId": "2965",
+      "title": {
+        "en": "Find Missing and Repeated Values",
+        "zh": "找出缺失和重复的数字"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "single-number-ii",
+      "frontendId": "137",
+      "title": {
+        "en": "Single Number II",
+        "zh": "只出现一次的数字 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "set-mismatch",
+      "frontendId": "645",
+      "title": {
+        "en": "Set Mismatch",
+        "zh": "错误的集合"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-two-integers",
+      "frontendId": "371",
+      "title": {
+        "en": "Sum of Two Integers",
+        "zh": "两整数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "bitwise-and-of-numbers-range",
+      "frontendId": "201",
+      "title": {
+        "en": "Bitwise AND of Numbers Range",
+        "zh": "数字范围按位与"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "range-product-queries-of-powers",
+      "frontendId": "2438",
+      "title": {
+        "en": "Range Product Queries of Powers",
+        "zh": "二的幂数组中查询范围内的乘积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1610,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "concatenation-of-consecutive-binary-numbers",
+      "frontendId": "1680",
+      "title": {
+        "en": "Concatenation of Consecutive Binary Numbers",
+        "zh": "连接连续二进制数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1630,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "the-k-th-lexicographical-string-of-all-happy-strings-of-length-n",
+      "frontendId": "1415",
+      "title": {
+        "en": "The k-th Lexicographical String of All Happy Strings of Length n",
+        "zh": "长度为 n 的开心字符串中字典序第 k 小的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "find-elements-in-a-contaminated-binary-tree",
+      "frontendId": "1261",
+      "title": {
+        "en": "Find Elements in a Contaminated Binary Tree",
+        "zh": "在受污染的二叉树中查找元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "find-kth-bit-in-nth-binary-string",
+      "frontendId": "1545",
+      "title": {
+        "en": "Find Kth Bit in Nth Binary String",
+        "zh": "找出第 N 个二进制字符串中的第 K 位"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "gray-code",
+      "frontendId": "89",
+      "title": {
+        "en": "Gray Code",
+        "zh": "格雷编码"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "circular-permutation-in-binary-representation",
+      "frontendId": "1238",
+      "title": {
+        "en": "Circular Permutation in Binary Representation",
+        "zh": "循环码排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1775,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "destroying-asteroids",
+      "frontendId": "2126",
+      "title": {
+        "en": "Destroying Asteroids",
+        "zh": "摧毁小行星"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-binary-palindrome",
+      "frontendId": "3766",
+      "title": {
+        "en": "Minimum Operations to Make Binary Palindrome",
+        "zh": "将数字变成二进制回文数的最少操作"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "last-remaining-integer-after-alternating-deletion-operations",
+      "frontendId": "3782",
+      "title": {
+        "en": "Last Remaining Integer After Alternating Deletion Operations",
+        "zh": "交替删除操作后最后剩下的整数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2074,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "elimination-game",
+      "frontendId": "390",
+      "title": {
+        "en": "Elimination Game",
+        "zh": "消除游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "triples-with-bitwise-and-equal-to-zero",
+      "frontendId": "982",
+      "title": {
+        "en": "Triples with Bitwise AND Equal To Zero",
+        "zh": "按位与为零的三元组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2085,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-k-th-character-in-string-game-ii",
+      "frontendId": "3307",
+      "title": {
+        "en": "Find the K-th Character in String Game II",
+        "zh": "找出第 K 个字符 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2232,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-one-bit-operations-to-make-integers-zero",
+      "frontendId": "1611",
+      "title": {
+        "en": "Minimum One Bit Operations to Make Integers Zero",
+        "zh": "使整数变为 0 的最少操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2345,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-unique-xor-triplets-ii",
+      "frontendId": "3514",
+      "title": {
+        "en": "Number of Unique XOR Triplets II",
+        "zh": "不同 XOR 三元组的数目 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "ip-to-cidr",
+      "frontendId": "751",
+      "title": {
+        "en": "IP to CIDR",
+        "zh": "IP 到 CIDR"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "once-twice",
+      "frontendId": "3595",
+      "title": {
+        "en": "Once Twice",
+        "zh": "一次或两次"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-hamming-distances",
+      "frontendId": "3141",
+      "title": {
+        "en": "Maximum Hamming Distances",
+        "zh": "最大汉明距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "面试题 05.01",
+      "title": "插入",
+      "sectionId": "1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 81",
+      "title": "与非的谜题",
+      "sectionId": "9",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}

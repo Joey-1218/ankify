@@ -4,7 +4,8 @@ import { getDb, schema } from "@ankileet/db";
 import { and, eq } from "drizzle-orm";
 import { iterateAccountExport } from "./account-export";
 import { captureProblem } from "./capture";
-import { loadMistakeProfile } from "./mistake-profile";
+import type { PatternStat } from "@ankileet/core";
+import { loadMistakeProfile, patternProfileDto } from "./mistake-profile";
 import { createMistake, updateMistake } from "./mistakes";
 import { ingestSessionObservations, runSessionCommand, startPracticeSession } from "./practice-sessions/commands";
 import { undoLatestProblemReview } from "./review-commands";
@@ -235,5 +236,38 @@ describe("mistake profile", () => {
     await record({ sourceType: "practice_session", practiceSessionId: theirs.sessionId, requestId: uuid(), problemId: theirs.problemId, primaryCategory: "approach" }, OTHER);
     const profile = await loadMistakeProfile(USER);
     expect(profile).toMatchObject({ categories: [], candidates: [], topics: [], readiness: { completedSessions: 0 } });
+  });
+});
+
+describe("pattern profile", () => {
+  const stat = (pattern: string, sessions: number, weakness: number, weak: boolean): PatternStat => ({
+    pattern,
+    sessions,
+    problems: sessions,
+    newProblems: { total: sessions, firstTry: 0 },
+    weakness,
+    ready: true,
+    weak,
+    strong: false,
+    causes: weak ? { approach: 2 } : {},
+    lastNewAt: null,
+  });
+
+  it("puts weak patterns first, weakest first, then the rest by sessions, with practice only for the weak", async () => {
+    // computePatternProfile sorts by weakness; the DTO keeps that for weak patterns only.
+    const dto = await patternProfileDto(USER, [
+      stat("sliding_window.variable.shortest", 2, 0.71234, true),
+      stat("binary_search.answer_min", 3, 0.6, true),
+      stat("sliding_window.fixed", 2, 0.3, false),
+      stat("two_pointers.opposite", 9, 0.2, false),
+    ]);
+    expect(dto.patterns.map((item) => [item.pattern.id, item.weak, item.next.length])).toEqual([
+      ["sliding_window.variable.shortest", true, 3],
+      ["binary_search.answer_min", true, 3],
+      ["two_pointers.opposite", false, 0],
+      ["sliding_window.fixed", false, 0],
+    ]);
+    expect(dto.patterns[0]).toMatchObject({ weakness: 0.712, causes: { approach: 2 }, pattern: { name: { en: "Variable window: shortest or smallest" } } });
+    expect(dto.required).toEqual({ sessions: 2, problems: 2 });
   });
 });

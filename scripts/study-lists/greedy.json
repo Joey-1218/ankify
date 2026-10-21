@@ -1,0 +1,221 @@
+{
+  "id": "greedy",
+  "name": {
+    "en": "Greedy and Thinking",
+    "zh": "贪心与思维"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/g6KTKL/",
+  "headings": {},
+  "chapters": {
+    "1": {
+      "en": "Greedy strategies",
+      "zh": "贪心策略"
+    },
+    "2": {
+      "en": "Interval greedy",
+      "zh": "区间贪心"
+    },
+    "3": {
+      "en": "String greedy",
+      "zh": "字符串贪心"
+    },
+    "4": {
+      "en": "Math greedy",
+      "zh": "数学贪心"
+    },
+    "5": {
+      "en": "Thinking problems",
+      "zh": "思维题"
+    },
+    "6": {
+      "en": "Constructive problems",
+      "zh": "构造题"
+    },
+    "7": {
+      "en": "Interactive problems",
+      "zh": "交互题"
+    },
+    "8": {
+      "en": "Other",
+      "zh": "其他"
+    }
+  },
+  "sections": {
+    "1.1": {
+      "en": "Start from the smallest or largest",
+      "zh": "从最小/最大开始贪心",
+      "pattern": "greedy.extremes"
+    },
+    "1.2": {
+      "en": "Pairing within one sequence",
+      "zh": "单序列配对",
+      "pattern": "greedy.pair_one"
+    },
+    "1.3": {
+      "en": "Pairing across two sequences",
+      "zh": "双序列配对",
+      "pattern": "greedy.pair_two"
+    },
+    "1.4": {
+      "en": "Start from the leftmost or rightmost",
+      "zh": "从最左/最右开始贪心",
+      "pattern": "greedy.ends"
+    },
+    "1.5": {
+      "en": "Partition greedy",
+      "zh": "划分型贪心",
+      "pattern": "greedy.partition"
+    },
+    "1.6": {
+      "en": "Enumerate, then greedy",
+      "zh": "先枚举，再贪心",
+      "pattern": "greedy.enumerate_then"
+    },
+    "1.7": {
+      "en": "Exchange argument",
+      "zh": "交换论证法",
+      "pattern": "greedy.exchange"
+    },
+    "1.8": {
+      "en": "Adjacent elements differ",
+      "zh": "相邻不同",
+      "pattern": "greedy.adjacent_differ"
+    },
+    "1.9": {
+      "en": "Regret greedy",
+      "zh": "反悔贪心",
+      "pattern": "greedy.regret"
+    },
+    "2.1": {
+      "en": "Non-overlapping intervals",
+      "zh": "不相交区间",
+      "pattern": "greedy.intervals_disjoint"
+    },
+    "2.2": {
+      "en": "Grouping intervals",
+      "zh": "区间分组",
+      "pattern": "greedy.intervals_grouping"
+    },
+    "2.3": {
+      "en": "Choosing points for intervals",
+      "zh": "区间选点",
+      "pattern": "greedy.intervals_points"
+    },
+    "2.4": {
+      "en": "Covering with intervals",
+      "zh": "区间覆盖",
+      "pattern": "greedy.intervals_cover"
+    },
+    "2.5": {
+      "en": "Merging intervals",
+      "zh": "合并区间",
+      "pattern": "greedy.intervals_merge"
+    },
+    "2.6": {
+      "en": "Other",
+      "zh": "其他区间贪心",
+      "pattern": "greedy.intervals_other"
+    },
+    "3.1": {
+      "en": "Smallest or largest lexicographic order",
+      "zh": "字典序最小/最大",
+      "pattern": "greedy.lexicographic"
+    },
+    "3.2": {
+      "en": "Palindrome greedy",
+      "zh": "回文串贪心",
+      "pattern": "greedy.palindrome"
+    },
+    "4.1": {
+      "en": "Basics",
+      "zh": "基础",
+      "pattern": "greedy.math"
+    },
+    "4.2": {
+      "en": "Product greedy",
+      "zh": "乘积贪心",
+      "pattern": "greedy.product"
+    },
+    "4.3": {
+      "en": "Rearrangement inequality",
+      "zh": "排序不等式",
+      "pattern": "greedy.rearrangement"
+    },
+    "4.4": {
+      "en": "AM-GM inequality",
+      "zh": "均值不等式",
+      "pattern": "greedy.am_gm"
+    },
+    "4.5": {
+      "en": "Median greedy",
+      "zh": "中位数贪心",
+      "pattern": "greedy.median"
+    },
+    "4.6": {
+      "en": "Induction",
+      "zh": "归纳法",
+      "pattern": "greedy.induction"
+    },
+    "4.7": {
+      "en": "Other",
+      "zh": "其他数学贪心",
+      "pattern": "greedy.math_other"
+    },
+    "5.1": {
+      "en": "From special cases to the general one",
+      "zh": "从特殊到一般",
+      "pattern": "greedy.thinking_special_to_general"
+    },
+    "5.2": {
+      "en": "Brain teasers",
+      "zh": "脑筋急转弯",
+      "pattern": "greedy.thinking_brain_teaser"
+    },
+    "5.3": {
+      "en": "Equivalent transformation",
+      "zh": "等价转化",
+      "pattern": "greedy.thinking_transformation"
+    },
+    "5.4": {
+      "en": "Thinking in reverse",
+      "zh": "逆向思维",
+      "pattern": "greedy.thinking_reverse"
+    },
+    "5.5": {
+      "en": "Contribution technique",
+      "zh": "贡献法",
+      "pattern": "greedy.thinking_contribution"
+    },
+    "5.6": {
+      "en": "Two passes",
+      "zh": "两次扫描",
+      "pattern": "greedy.thinking_two_passes"
+    },
+    "5.7": {
+      "en": "Swapping elements",
+      "zh": "交换元素",
+      "pattern": "greedy.thinking_swaps"
+    },
+    "5.8": {
+      "en": "Case analysis",
+      "zh": "分类讨论",
+      "pattern": "greedy.thinking_case_analysis"
+    },
+    "6": {
+      "en": "Constructive problems",
+      "zh": "构造题",
+      "pattern": "greedy.constructive"
+    },
+    "7": {
+      "en": "Interactive problems",
+      "zh": "交互题",
+      "pattern": "greedy.interactive"
+    },
+    "8": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "greedy.other"
+    }
+  }
+}

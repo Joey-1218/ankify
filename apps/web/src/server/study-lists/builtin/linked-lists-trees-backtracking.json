@@ -1,0 +1,6152 @@
+{
+  "id": "linked-lists-trees-backtracking",
+  "name": {
+    "en": "Linked Lists, Trees, and Backtracking",
+    "zh": "链表、树与回溯"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/K0n2gO/",
+  "sourceUpdatedAt": "2026-10-03T06:44:29.814958+00:00",
+  "generatedAt": "2026-10-20T19:21:48.881Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Linked lists",
+        "zh": "链表"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Binary trees",
+        "zh": "二叉树"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "General trees",
+        "zh": "一般树"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Backtracking",
+        "zh": "回溯"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Other recursion and divide and conquer",
+        "zh": "其他递归/分治"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Traversing a linked list",
+        "zh": "遍历链表"
+      },
+      "pattern": "linked_list.traverse",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Deleting nodes",
+        "zh": "删除节点"
+      },
+      "pattern": "linked_list.delete",
+      "optional": false
+    },
+    {
+      "id": "1.3",
+      "chapterId": "1",
+      "title": {
+        "en": "Inserting nodes",
+        "zh": "插入节点"
+      },
+      "pattern": "linked_list.insert",
+      "optional": false
+    },
+    {
+      "id": "1.4",
+      "chapterId": "1",
+      "title": {
+        "en": "Reversing a linked list",
+        "zh": "反转链表"
+      },
+      "pattern": "linked_list.reverse",
+      "optional": false
+    },
+    {
+      "id": "1.5",
+      "chapterId": "1",
+      "title": {
+        "en": "Leading and trailing pointers",
+        "zh": "前后指针"
+      },
+      "pattern": "linked_list.gap_pointers",
+      "optional": false
+    },
+    {
+      "id": "1.6",
+      "chapterId": "1",
+      "title": {
+        "en": "Fast and slow pointers",
+        "zh": "快慢指针"
+      },
+      "pattern": "linked_list.fast_slow",
+      "optional": false
+    },
+    {
+      "id": "1.7",
+      "chapterId": "1",
+      "title": {
+        "en": "Two pointers",
+        "zh": "双指针"
+      },
+      "pattern": "linked_list.two_pointers",
+      "optional": false
+    },
+    {
+      "id": "1.8",
+      "chapterId": "1",
+      "title": {
+        "en": "Merging linked lists",
+        "zh": "合并链表"
+      },
+      "pattern": "linked_list.merge",
+      "optional": false
+    },
+    {
+      "id": "1.9",
+      "chapterId": "1",
+      "title": {
+        "en": "Divide and conquer",
+        "zh": "分治"
+      },
+      "pattern": "linked_list.divide",
+      "optional": false
+    },
+    {
+      "id": "1.10",
+      "chapterId": "1",
+      "title": {
+        "en": "Combined applications",
+        "zh": "综合应用"
+      },
+      "pattern": "linked_list.mixed",
+      "optional": false
+    },
+    {
+      "id": "1.11",
+      "chapterId": "1",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "linked_list.other",
+      "optional": false
+    },
+    {
+      "id": "2.1",
+      "chapterId": "2",
+      "title": {
+        "en": "Traversing a binary tree",
+        "zh": "遍历二叉树"
+      },
+      "pattern": "binary_tree.traverse",
+      "optional": false
+    },
+    {
+      "id": "2.2",
+      "chapterId": "2",
+      "title": {
+        "en": "Top-down DFS (preorder)",
+        "zh": "自顶向下 DFS（先序遍历）"
+      },
+      "pattern": "binary_tree.top_down",
+      "optional": false
+    },
+    {
+      "id": "2.3",
+      "chapterId": "2",
+      "title": {
+        "en": "Bottom-up DFS (postorder)",
+        "zh": "自底向上 DFS（后序遍历）"
+      },
+      "pattern": "binary_tree.bottom_up",
+      "optional": false
+    },
+    {
+      "id": "2.4",
+      "chapterId": "2",
+      "title": {
+        "en": "Bottom-up DFS: deleting nodes",
+        "zh": "自底向上 DFS：删点"
+      },
+      "pattern": "binary_tree.bottom_up_delete",
+      "optional": false
+    },
+    {
+      "id": "2.5",
+      "chapterId": "2",
+      "title": {
+        "en": "Passing down and returning up",
+        "zh": "有递有归"
+      },
+      "pattern": "binary_tree.down_and_up",
+      "optional": false
+    },
+    {
+      "id": "2.6",
+      "chapterId": "2",
+      "title": {
+        "en": "Diameter of a binary tree",
+        "zh": "二叉树的直径"
+      },
+      "pattern": "binary_tree.diameter",
+      "optional": false
+    },
+    {
+      "id": "2.7",
+      "chapterId": "2",
+      "title": {
+        "en": "Backtracking",
+        "zh": "回溯"
+      },
+      "pattern": "binary_tree.backtracking",
+      "optional": false
+    },
+    {
+      "id": "2.8",
+      "chapterId": "2",
+      "title": {
+        "en": "Lowest common ancestor",
+        "zh": "最近公共祖先"
+      },
+      "pattern": "binary_tree.lca",
+      "optional": false
+    },
+    {
+      "id": "2.9",
+      "chapterId": "2",
+      "title": {
+        "en": "Binary search trees",
+        "zh": "二叉搜索树"
+      },
+      "pattern": "binary_tree.bst",
+      "optional": false
+    },
+    {
+      "id": "2.10",
+      "chapterId": "2",
+      "title": {
+        "en": "Building a binary tree",
+        "zh": "创建二叉树"
+      },
+      "pattern": "binary_tree.build",
+      "optional": false
+    },
+    {
+      "id": "2.11",
+      "chapterId": "2",
+      "title": {
+        "en": "Inserting or deleting nodes",
+        "zh": "插入/删除节点"
+      },
+      "pattern": "binary_tree.insert_delete",
+      "optional": false
+    },
+    {
+      "id": "2.12",
+      "chapterId": "2",
+      "title": {
+        "en": "Tree DP",
+        "zh": "树形 DP"
+      },
+      "pattern": "binary_tree.dp",
+      "optional": false
+    },
+    {
+      "id": "2.13",
+      "chapterId": "2",
+      "title": {
+        "en": "Binary tree BFS",
+        "zh": "二叉树 BFS"
+      },
+      "pattern": "binary_tree.bfs",
+      "optional": false
+    },
+    {
+      "id": "2.14",
+      "chapterId": "2",
+      "title": {
+        "en": "Linked lists and binary trees",
+        "zh": "链表+二叉树"
+      },
+      "pattern": "binary_tree.linked_list",
+      "optional": false
+    },
+    {
+      "id": "2.15",
+      "chapterId": "2",
+      "title": {
+        "en": "N-ary trees",
+        "zh": "N 叉树"
+      },
+      "pattern": "binary_tree.n_ary",
+      "optional": false
+    },
+    {
+      "id": "2.16",
+      "chapterId": "2",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "binary_tree.other",
+      "optional": false
+    },
+    {
+      "id": "3.1",
+      "chapterId": "3",
+      "title": {
+        "en": "Traversal",
+        "zh": "遍历"
+      },
+      "pattern": "tree.traverse",
+      "optional": false
+    },
+    {
+      "id": "3.2",
+      "chapterId": "3",
+      "title": {
+        "en": "Top-down DFS",
+        "zh": "自顶向下 DFS"
+      },
+      "pattern": "tree.top_down",
+      "optional": false
+    },
+    {
+      "id": "3.3",
+      "chapterId": "3",
+      "title": {
+        "en": "Bottom-up DFS",
+        "zh": "自底向上 DFS"
+      },
+      "pattern": "tree.bottom_up",
+      "optional": false
+    },
+    {
+      "id": "3.4",
+      "chapterId": "3",
+      "title": {
+        "en": "Passing down and returning up",
+        "zh": "有递有归"
+      },
+      "pattern": "tree.down_and_up",
+      "optional": false
+    },
+    {
+      "id": "3.5",
+      "chapterId": "3",
+      "title": {
+        "en": "Tree diameter",
+        "zh": "树的直径"
+      },
+      "pattern": "tree.diameter",
+      "optional": false
+    },
+    {
+      "id": "3.6",
+      "chapterId": "3",
+      "title": {
+        "en": "Topological sort on a tree",
+        "zh": "树的拓扑排序"
+      },
+      "pattern": "tree.topo",
+      "optional": false
+    },
+    {
+      "id": "3.7",
+      "chapterId": "3",
+      "title": {
+        "en": "DFS timestamps",
+        "zh": "DFS 时间戳"
+      },
+      "pattern": "tree.dfs_order",
+      "optional": false
+    },
+    {
+      "id": "3.8",
+      "chapterId": "3",
+      "title": {
+        "en": "Lowest common ancestor and binary lifting",
+        "zh": "最近公共祖先（LCA）、倍增算法"
+      },
+      "pattern": "tree.lca",
+      "optional": false
+    },
+    {
+      "id": "3.9",
+      "chapterId": "3",
+      "title": {
+        "en": "Virtual trees",
+        "zh": "虚树"
+      },
+      "pattern": "tree.virtual",
+      "optional": false
+    },
+    {
+      "id": "3.10",
+      "chapterId": "3",
+      "title": {
+        "en": "Small-to-large merging",
+        "zh": "树上启发式合并"
+      },
+      "pattern": "tree.small_to_large",
+      "optional": false
+    },
+    {
+      "id": "3.11",
+      "chapterId": "3",
+      "title": {
+        "en": "Centroid decomposition",
+        "zh": "点分治"
+      },
+      "pattern": "tree.centroid",
+      "optional": false
+    },
+    {
+      "id": "3.12",
+      "chapterId": "3",
+      "title": {
+        "en": "Sliding window on a tree",
+        "zh": "树上滑动窗口"
+      },
+      "pattern": "tree.sliding_window",
+      "optional": false
+    },
+    {
+      "id": "3.13",
+      "chapterId": "3",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "tree.other",
+      "optional": false
+    },
+    {
+      "id": "4.1",
+      "chapterId": "4",
+      "title": {
+        "en": "Subset backtracking",
+        "zh": "子集型回溯"
+      },
+      "pattern": "backtracking.subset",
+      "optional": false
+    },
+    {
+      "id": "4.2",
+      "chapterId": "4",
+      "title": {
+        "en": "Partition backtracking",
+        "zh": "划分型回溯"
+      },
+      "pattern": "backtracking.partition",
+      "optional": false
+    },
+    {
+      "id": "4.3",
+      "chapterId": "4",
+      "title": {
+        "en": "Combination backtracking",
+        "zh": "组合型回溯"
+      },
+      "pattern": "backtracking.combination",
+      "optional": false
+    },
+    {
+      "id": "4.4",
+      "chapterId": "4",
+      "title": {
+        "en": "Permutation backtracking",
+        "zh": "排列型回溯"
+      },
+      "pattern": "backtracking.permutation",
+      "optional": false
+    },
+    {
+      "id": "4.5",
+      "chapterId": "4",
+      "title": {
+        "en": "Backtracking with duplicates",
+        "zh": "有重复元素的回溯"
+      },
+      "pattern": "backtracking.duplicates",
+      "optional": false
+    },
+    {
+      "id": "4.6",
+      "chapterId": "4",
+      "title": {
+        "en": "Search",
+        "zh": "搜索"
+      },
+      "pattern": "backtracking.search",
+      "optional": false
+    },
+    {
+      "id": "4.7",
+      "chapterId": "4",
+      "title": {
+        "en": "Meet in the middle",
+        "zh": "折半搜索"
+      },
+      "pattern": "backtracking.meet_in_middle",
+      "optional": false
+    },
+    {
+      "id": "5",
+      "chapterId": "5",
+      "title": {
+        "en": "Other recursion and divide and conquer",
+        "zh": "其他递归/分治"
+      },
+      "pattern": "recursion.other",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "convert-binary-number-in-a-linked-list-to-integer",
+      "frontendId": "1290",
+      "title": {
+        "en": "Convert Binary Number in a Linked List to Integer",
+        "zh": "二进制链表转整数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-minimum-and-maximum-number-of-nodes-between-critical-points",
+      "frontendId": "2058",
+      "title": {
+        "en": "Find the Minimum and Maximum Number of Nodes Between Critical Points",
+        "zh": "找出临界点之间的最小和最大距离"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "merge-nodes-in-between-zeros",
+      "frontendId": "2181",
+      "title": {
+        "en": "Merge Nodes in Between Zeros",
+        "zh": "合并零之间的节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "split-linked-list-in-parts",
+      "frontendId": "725",
+      "title": {
+        "en": "Split Linked List in Parts",
+        "zh": "分隔链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-components",
+      "frontendId": "817",
+      "title": {
+        "en": "Linked List Components",
+        "zh": "链表组件"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "convert-doubly-linked-list-to-array-i",
+      "frontendId": "3263",
+      "title": {
+        "en": "Convert Doubly Linked List to Array I",
+        "zh": "将双链表转换为数组 I"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "convert-doubly-linked-list-to-array-ii",
+      "frontendId": "3294",
+      "title": {
+        "en": "Convert Doubly Linked List to Array II",
+        "zh": "将双链表转换为数组 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "winner-of-the-linked-list-game",
+      "frontendId": "3062",
+      "title": {
+        "en": "Winner of the Linked List Game",
+        "zh": "链表游戏的获胜者"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-frequency",
+      "frontendId": "3063",
+      "title": {
+        "en": "Linked List Frequency",
+        "zh": "链表频率"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "remove-linked-list-elements",
+      "frontendId": "203",
+      "title": {
+        "en": "Remove Linked List Elements",
+        "zh": "移除链表元素"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "delete-nodes-from-linked-list-present-in-array",
+      "frontendId": "3217",
+      "title": {
+        "en": "Delete Nodes From Linked List Present in Array",
+        "zh": "从链表中移除在数组中存在的节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "remove-duplicates-from-sorted-list",
+      "frontendId": "83",
+      "title": {
+        "en": "Remove Duplicates from Sorted List",
+        "zh": "删除排序链表中的重复元素"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "remove-duplicates-from-sorted-list-ii",
+      "frontendId": "82",
+      "title": {
+        "en": "Remove Duplicates from Sorted List II",
+        "zh": "删除排序链表中的重复元素 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "merge-in-between-linked-lists",
+      "frontendId": "1669",
+      "title": {
+        "en": "Merge In Between Linked Lists",
+        "zh": "合并两个链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "remove-nodes-from-linked-list",
+      "frontendId": "2487",
+      "title": {
+        "en": "Remove Nodes From Linked List",
+        "zh": "从链表中移除节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "remove-duplicates-from-an-unsorted-linked-list",
+      "frontendId": "1836",
+      "title": {
+        "en": "Remove Duplicates From an Unsorted Linked List",
+        "zh": "从未排序的链表中移除重复元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "delete-node-in-a-linked-list",
+      "frontendId": "237",
+      "title": {
+        "en": "Delete Node in a Linked List",
+        "zh": "删除链表中的节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "insert-greatest-common-divisors-in-linked-list",
+      "frontendId": "2807",
+      "title": {
+        "en": "Insert Greatest Common Divisors in Linked List",
+        "zh": "在链表中插入最大公约数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "insertion-sort-list",
+      "frontendId": "147",
+      "title": {
+        "en": "Insertion Sort List",
+        "zh": "对链表进行插入排序"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "insert-into-a-sorted-circular-linked-list",
+      "frontendId": "708",
+      "title": {
+        "en": "Insert into a Sorted Circular Linked List",
+        "zh": "循环有序列表的插入"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "sort-linked-list-already-sorted-using-absolute-values",
+      "frontendId": "2046",
+      "title": {
+        "en": "Sort Linked List Already Sorted Using Absolute Values",
+        "zh": "给按照绝对值排序的链表排序"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-linked-list",
+      "frontendId": "206",
+      "title": {
+        "en": "Reverse Linked List",
+        "zh": "反转链表"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-linked-list-ii",
+      "frontendId": "92",
+      "title": {
+        "en": "Reverse Linked List II",
+        "zh": "反转链表 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "swap-nodes-in-pairs",
+      "frontendId": "24",
+      "title": {
+        "en": "Swap Nodes in Pairs",
+        "zh": "两两交换链表中的节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-nodes-in-k-group",
+      "frontendId": "25",
+      "title": {
+        "en": "Reverse Nodes in k-Group",
+        "zh": "K 个一组翻转链表"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-nodes-in-even-length-groups",
+      "frontendId": "2074",
+      "title": {
+        "en": "Reverse Nodes in Even Length Groups",
+        "zh": "反转偶数长度组的节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "remove-nth-node-from-end-of-list",
+      "frontendId": "19",
+      "title": {
+        "en": "Remove Nth Node From End of List",
+        "zh": "删除链表的倒数第 N 个结点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "swapping-nodes-in-a-linked-list",
+      "frontendId": "1721",
+      "title": {
+        "en": "Swapping Nodes in a Linked List",
+        "zh": "交换链表中的节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "delete-n-nodes-after-m-nodes-of-a-linked-list",
+      "frontendId": "1474",
+      "title": {
+        "en": "Delete N Nodes After M Nodes of a Linked List",
+        "zh": "删除链表 M 个节点之后的 N 个节点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "middle-of-the-linked-list",
+      "frontendId": "876",
+      "title": {
+        "en": "Middle of the Linked List",
+        "zh": "链表的中间结点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "delete-the-middle-node-of-a-linked-list",
+      "frontendId": "2095",
+      "title": {
+        "en": "Delete the Middle Node of a Linked List",
+        "zh": "删除链表的中间节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "palindrome-linked-list",
+      "frontendId": "234",
+      "title": {
+        "en": "Palindrome Linked List",
+        "zh": "回文链表"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-twin-sum-of-a-linked-list",
+      "frontendId": "2130",
+      "title": {
+        "en": "Maximum Twin Sum of a Linked List",
+        "zh": "链表最大孪生和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "reorder-list",
+      "frontendId": "143",
+      "title": {
+        "en": "Reorder List",
+        "zh": "重排链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-cycle",
+      "frontendId": "141",
+      "title": {
+        "en": "Linked List Cycle",
+        "zh": "环形链表"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-cycle-ii",
+      "frontendId": "142",
+      "title": {
+        "en": "Linked List Cycle II",
+        "zh": "环形链表 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "circular-array-loop",
+      "frontendId": "457",
+      "title": {
+        "en": "Circular Array Loop",
+        "zh": "环形数组是否存在循环"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "split-a-circular-linked-list",
+      "frontendId": "2674",
+      "title": {
+        "en": "Split a Circular Linked List",
+        "zh": "拆分循环链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-duplicate-number",
+      "frontendId": "287",
+      "title": {
+        "en": "Find the Duplicate Number",
+        "zh": "寻找重复数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "stretch"
+    },
+    {
+      "slug": "smallest-integer-divisible-by-k",
+      "frontendId": "1015",
+      "title": {
+        "en": "Smallest Integer Divisible by K",
+        "zh": "可被 K 整除的最小整数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "stretch"
+    },
+    {
+      "slug": "smallest-all-ones-multiple",
+      "frontendId": "3790",
+      "title": {
+        "en": "Smallest All-Ones Multiple",
+        "zh": "最小全 1 倍数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "stretch"
+    },
+    {
+      "slug": "odd-even-linked-list",
+      "frontendId": "328",
+      "title": {
+        "en": "Odd Even Linked List",
+        "zh": "奇偶链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "partition-list",
+      "frontendId": "86",
+      "title": {
+        "en": "Partition List",
+        "zh": "分隔链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "intersection-of-two-linked-lists",
+      "frontendId": "160",
+      "title": {
+        "en": "Intersection of Two Linked Lists",
+        "zh": "相交链表"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "add-two-numbers",
+      "frontendId": "2",
+      "title": {
+        "en": "Add Two Numbers",
+        "zh": "两数相加"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "add-two-numbers-ii",
+      "frontendId": "445",
+      "title": {
+        "en": "Add Two Numbers II",
+        "zh": "两数相加 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "double-a-number-represented-as-a-linked-list",
+      "frontendId": "2816",
+      "title": {
+        "en": "Double a Number Represented as a Linked List",
+        "zh": "翻倍以链表形式表示的数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "merge-two-sorted-lists",
+      "frontendId": "21",
+      "title": {
+        "en": "Merge Two Sorted Lists",
+        "zh": "合并两个有序链表"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "plus-one-linked-list",
+      "frontendId": "369",
+      "title": {
+        "en": "Plus One Linked List",
+        "zh": "给单链表加一"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "add-two-polynomials-represented-as-linked-lists",
+      "frontendId": "1634",
+      "title": {
+        "en": "Add Two Polynomials Represented as Linked Lists",
+        "zh": "求两个多项式链表的和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "merge-k-sorted-lists",
+      "frontendId": "23",
+      "title": {
+        "en": "Merge k Sorted Lists",
+        "zh": "合并 K 个升序链表"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "sort-list",
+      "frontendId": "148",
+      "title": {
+        "en": "Sort List",
+        "zh": "排序链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "next-greater-node-in-linked-list",
+      "frontendId": "1019",
+      "title": {
+        "en": "Next Greater Node In Linked List",
+        "zh": "链表中的下一个更大节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.10",
+      "level": "core"
+    },
+    {
+      "slug": "remove-zero-sum-consecutive-nodes-from-linked-list",
+      "frontendId": "1171",
+      "title": {
+        "en": "Remove Zero Sum Consecutive Nodes from Linked List",
+        "zh": "从链表中删去总和值为零的连续节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.10",
+      "level": "core"
+    },
+    {
+      "slug": "design-linked-list",
+      "frontendId": "707",
+      "title": {
+        "en": "Design Linked List",
+        "zh": "设计链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.10",
+      "level": "core"
+    },
+    {
+      "slug": "lru-cache",
+      "frontendId": "146",
+      "title": {
+        "en": "LRU Cache",
+        "zh": "LRU 缓存"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.10",
+      "level": "core"
+    },
+    {
+      "slug": "lfu-cache",
+      "frontendId": "460",
+      "title": {
+        "en": "LFU Cache",
+        "zh": "LFU 缓存"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.10",
+      "level": "core"
+    },
+    {
+      "slug": "all-oone-data-structure",
+      "frontendId": "432",
+      "title": {
+        "en": "All O`one Data Structure",
+        "zh": "全 O(1) 的数据结构"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.10",
+      "level": "core"
+    },
+    {
+      "slug": "design-skiplist",
+      "frontendId": "1206",
+      "title": {
+        "en": "Design Skiplist",
+        "zh": "设计跳表"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.10",
+      "level": "core"
+    },
+    {
+      "slug": "rotate-list",
+      "frontendId": "61",
+      "title": {
+        "en": "Rotate List",
+        "zh": "旋转链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.11",
+      "level": "core"
+    },
+    {
+      "slug": "copy-list-with-random-pointer",
+      "frontendId": "138",
+      "title": {
+        "en": "Copy List with Random Pointer",
+        "zh": "随机链表的复制"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.11",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-random-node",
+      "frontendId": "382",
+      "title": {
+        "en": "Linked List Random Node",
+        "zh": "链表随机节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.11",
+      "level": "core"
+    },
+    {
+      "slug": "flatten-a-multilevel-doubly-linked-list",
+      "frontendId": "430",
+      "title": {
+        "en": "Flatten a Multilevel Doubly Linked List",
+        "zh": "扁平化多级双向链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.11",
+      "level": "core"
+    },
+    {
+      "slug": "print-immutable-linked-list-in-reverse",
+      "frontendId": "1265",
+      "title": {
+        "en": "Print Immutable Linked List in Reverse",
+        "zh": "逆序打印不可变链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.11",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-preorder-traversal",
+      "frontendId": "144",
+      "title": {
+        "en": "Binary Tree Preorder Traversal",
+        "zh": "二叉树的前序遍历"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-inorder-traversal",
+      "frontendId": "94",
+      "title": {
+        "en": "Binary Tree Inorder Traversal",
+        "zh": "二叉树的中序遍历"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-postorder-traversal",
+      "frontendId": "145",
+      "title": {
+        "en": "Binary Tree Postorder Traversal",
+        "zh": "二叉树的后序遍历"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "leaf-similar-trees",
+      "frontendId": "872",
+      "title": {
+        "en": "Leaf-Similar Trees",
+        "zh": "叶子相似的树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1288,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-left-leaves",
+      "frontendId": "404",
+      "title": {
+        "en": "Sum of Left Leaves",
+        "zh": "左叶子之和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "second-minimum-node-in-a-binary-tree",
+      "frontendId": "671",
+      "title": {
+        "en": "Second Minimum Node In a Binary Tree",
+        "zh": "二叉树中第二小的节点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-all-the-lonely-nodes",
+      "frontendId": "1469",
+      "title": {
+        "en": "Find All The Lonely Nodes",
+        "zh": "寻找所有的独生节点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "two-sum-bsts",
+      "frontendId": "1214",
+      "title": {
+        "en": "Two Sum BSTs",
+        "zh": "查找两棵二叉搜索树之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "is-array-a-preorder-of-some-binary-tree",
+      "frontendId": "2764",
+      "title": {
+        "en": "Is Array a Preorder of Some ‌Binary Tree",
+        "zh": "数组是否表示某二叉树的前序遍历"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-depth-of-binary-tree",
+      "frontendId": "104",
+      "title": {
+        "en": "Maximum Depth of Binary Tree",
+        "zh": "二叉树的最大深度"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-depth-of-binary-tree",
+      "frontendId": "111",
+      "title": {
+        "en": "Minimum Depth of Binary Tree",
+        "zh": "二叉树的最小深度"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "path-sum",
+      "frontendId": "112",
+      "title": {
+        "en": "Path Sum",
+        "zh": "路径总和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "sum-root-to-leaf-numbers",
+      "frontendId": "129",
+      "title": {
+        "en": "Sum Root to Leaf Numbers",
+        "zh": "求根节点到叶节点数字之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-right-side-view",
+      "frontendId": "199",
+      "title": {
+        "en": "Binary Tree Right Side View",
+        "zh": "二叉树的右视图"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-good-nodes-in-binary-tree",
+      "frontendId": "1448",
+      "title": {
+        "en": "Count Good Nodes in Binary Tree",
+        "zh": "统计二叉树中好节点的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1360,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-nodes-with-even-valued-grandparent",
+      "frontendId": "1315",
+      "title": {
+        "en": "Sum of Nodes with Even-Valued Grandparent",
+        "zh": "祖父节点值为偶数的节点和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1427,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-string-starting-from-leaf",
+      "frontendId": "988",
+      "title": {
+        "en": "Smallest String Starting From Leaf",
+        "zh": "从叶结点开始的最小字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1429,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-difference-between-node-and-ancestor",
+      "frontendId": "1026",
+      "title": {
+        "en": "Maximum Difference Between Node and Ancestor",
+        "zh": "节点与其祖先之间的最大差值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1446,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-root-to-leaf-binary-numbers",
+      "frontendId": "1022",
+      "title": {
+        "en": "Sum of Root To Leaf Binary Numbers",
+        "zh": "从根到叶的二进制数之和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1462,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "add-one-row-to-tree",
+      "frontendId": "623",
+      "title": {
+        "en": "Add One Row to Tree",
+        "zh": "在二叉树中增加一行"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-zigzag-path-in-a-binary-tree",
+      "frontendId": "1372",
+      "title": {
+        "en": "Longest ZigZag Path in a Binary Tree",
+        "zh": "二叉树中的最长交错路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1713,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "flip-binary-tree-to-match-preorder-traversal",
+      "frontendId": "971",
+      "title": {
+        "en": "Flip Binary Tree To Match Preorder Traversal",
+        "zh": "翻转二叉树以匹配先序遍历"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1787,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "extract-kth-character-from-the-rope-tree",
+      "frontendId": "2689",
+      "title": {
+        "en": "Extract Kth Character From The Rope Tree",
+        "zh": "从 Rope 树中提取第 K 个字符"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-longest-consecutive-sequence",
+      "frontendId": "298",
+      "title": {
+        "en": "Binary Tree Longest Consecutive Sequence",
+        "zh": "二叉树最长连续序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree",
+      "frontendId": "1430",
+      "title": {
+        "en": "Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree",
+        "zh": "判断给定的序列是否是二叉树从根到叶的路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "boundary-of-binary-tree",
+      "frontendId": "545",
+      "title": {
+        "en": "Boundary of Binary Tree",
+        "zh": "二叉树的边界"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-depth-of-binary-tree",
+      "frontendId": "104",
+      "title": {
+        "en": "Maximum Depth of Binary Tree",
+        "zh": "二叉树的最大深度"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-depth-of-binary-tree",
+      "frontendId": "111",
+      "title": {
+        "en": "Minimum Depth of Binary Tree",
+        "zh": "二叉树的最小深度"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "univalued-binary-tree",
+      "frontendId": "965",
+      "title": {
+        "en": "Univalued Binary Tree",
+        "zh": "单值二叉树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1178,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "same-tree",
+      "frontendId": "100",
+      "title": {
+        "en": "Same Tree",
+        "zh": "相同的树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "symmetric-tree",
+      "frontendId": "101",
+      "title": {
+        "en": "Symmetric Tree",
+        "zh": "对称二叉树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "flip-equivalent-binary-trees",
+      "frontendId": "951",
+      "title": {
+        "en": "Flip Equivalent Binary Trees",
+        "zh": "翻转等价二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree",
+      "frontendId": "1379",
+      "title": {
+        "en": "Find a Corresponding Node of a Binary Tree in a Clone of That Tree",
+        "zh": "找出克隆二叉树中的相同节点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "balanced-binary-tree",
+      "frontendId": "110",
+      "title": {
+        "en": "Balanced Binary Tree",
+        "zh": "平衡二叉树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "invert-binary-tree",
+      "frontendId": "226",
+      "title": {
+        "en": "Invert Binary Tree",
+        "zh": "翻转二叉树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "merge-two-binary-trees",
+      "frontendId": "617",
+      "title": {
+        "en": "Merge Two Binary Trees",
+        "zh": "合并二叉树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "evaluate-boolean-binary-tree",
+      "frontendId": "2331",
+      "title": {
+        "en": "Evaluate Boolean Binary Tree",
+        "zh": "计算布尔二叉树的值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1304,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "most-frequent-subtree-sum",
+      "frontendId": "508",
+      "title": {
+        "en": "Most Frequent Subtree Sum",
+        "zh": "出现次数最多的子树元素和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-tilt",
+      "frontendId": "563",
+      "title": {
+        "en": "Binary Tree Tilt",
+        "zh": "二叉树的坡度"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-dominant-nodes-in-a-binary-tree",
+      "frontendId": "3997",
+      "title": {
+        "en": "Count Dominant Nodes in a Binary Tree",
+        "zh": "统计二叉树中支配节点的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1427,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "construct-string-from-binary-tree",
+      "frontendId": "606",
+      "title": {
+        "en": "Construct String from Binary Tree",
+        "zh": "根据二叉树创建字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-nodes-equal-to-average-of-subtree",
+      "frontendId": "2265",
+      "title": {
+        "en": "Count Nodes Equal to Average of Subtree",
+        "zh": "统计值等于子树平均值的节点数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1473,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-difference-between-node-and-ancestor",
+      "frontendId": "1026",
+      "title": {
+        "en": "Maximum Difference Between Node and Ancestor",
+        "zh": "节点与其祖先之间的最大差值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "k-th-largest-perfect-subtree-size-in-binary-tree",
+      "frontendId": "3319",
+      "title": {
+        "en": "K-th Largest Perfect Subtree Size in Binary Tree",
+        "zh": "第 K 大的完美二叉子树的大小"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1603,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-product-of-splitted-binary-tree",
+      "frontendId": "1339",
+      "title": {
+        "en": "Maximum Product of Splitted Binary Tree",
+        "zh": "分裂二叉树的最大乘积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1675,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "finish-time-of-tasks-i",
+      "frontendId": "3965",
+      "title": {
+        "en": "Finish Time of Tasks I",
+        "zh": "任务完成时间 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1699,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "longest-zigzag-path-in-a-binary-tree",
+      "frontendId": "1372",
+      "title": {
+        "en": "Longest ZigZag Path in a Binary Tree",
+        "zh": "二叉树中的最长交错路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1713,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-coloring-game",
+      "frontendId": "1145",
+      "title": {
+        "en": "Binary Tree Coloring Game",
+        "zh": "二叉树着色游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1741,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "subtree-of-another-tree",
+      "frontendId": "572",
+      "title": {
+        "en": "Subtree of Another Tree",
+        "zh": "另一棵树的子树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-good-leaf-nodes-pairs",
+      "frontendId": "1530",
+      "title": {
+        "en": "Number of Good Leaf Nodes Pairs",
+        "zh": "好叶子节点对的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-longest-consecutive-sequence",
+      "frontendId": "298",
+      "title": {
+        "en": "Binary Tree Longest Consecutive Sequence",
+        "zh": "二叉树最长连续序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-univalue-subtrees",
+      "frontendId": "250",
+      "title": {
+        "en": "Count Univalue Subtrees",
+        "zh": "统计同值子树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-nodes-equal-to-sum-of-descendants",
+      "frontendId": "1973",
+      "title": {
+        "en": "Count Nodes Equal to Sum of Descendants",
+        "zh": "值等于子节点值之和的节点数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "equal-tree-partition",
+      "frontendId": "663",
+      "title": {
+        "en": "Equal Tree Partition",
+        "zh": "均匀树划分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-average-subtree",
+      "frontendId": "1120",
+      "title": {
+        "en": "Maximum Average Subtree",
+        "zh": "子树的最大平均值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-nodes-that-are-great-enough",
+      "frontendId": "2792",
+      "title": {
+        "en": "Count Nodes That Are Great Enough",
+        "zh": "计算足够大的节点数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "largest-bst-subtree",
+      "frontendId": "333",
+      "title": {
+        "en": "Largest BST Subtree",
+        "zh": "最大二叉搜索子树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "find-leaves-of-binary-tree",
+      "frontendId": "366",
+      "title": {
+        "en": "Find Leaves of Binary Tree",
+        "zh": "寻找二叉树的叶子节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-upside-down",
+      "frontendId": "156",
+      "title": {
+        "en": "Binary Tree Upside Down",
+        "zh": "上下翻转二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-two-expression-trees-are-equivalent",
+      "frontendId": "1612",
+      "title": {
+        "en": "Check If Two Expression Trees are Equivalent",
+        "zh": "检查两棵二叉表达式树是否等价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-pruning",
+      "frontendId": "814",
+      "title": {
+        "en": "Binary Tree Pruning",
+        "zh": "二叉树剪枝"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1380,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "delete-leaves-with-a-given-value",
+      "frontendId": "1325",
+      "title": {
+        "en": "Delete Leaves With a Given Value",
+        "zh": "删除给定值的叶子节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1407,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "delete-nodes-and-return-forest",
+      "frontendId": "1110",
+      "title": {
+        "en": "Delete Nodes And Return Forest",
+        "zh": "删点成林"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1511,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "convert-bst-to-greater-tree",
+      "frontendId": "538",
+      "title": {
+        "en": "Convert BST to Greater Tree",
+        "zh": "把二叉搜索树转换为累加树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1375,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "binary-search-tree-to-greater-sum-tree",
+      "frontendId": "1038",
+      "title": {
+        "en": "Binary Search Tree to Greater Sum Tree",
+        "zh": "从二叉搜索树到更大和树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-subtree-with-all-the-deepest-nodes",
+      "frontendId": "865",
+      "title": {
+        "en": "Smallest Subtree with all the Deepest Nodes",
+        "zh": "具有所有最深节点的最小子树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1534,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "insufficient-nodes-in-root-to-leaf-paths",
+      "frontendId": "1080",
+      "title": {
+        "en": "Insufficient Nodes in Root to Leaf Paths",
+        "zh": "根到叶路径上的不足节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1805,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "diameter-of-binary-tree",
+      "frontendId": "543",
+      "title": {
+        "en": "Diameter of Binary Tree",
+        "zh": "二叉树的直径"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-univalue-path",
+      "frontendId": "687",
+      "title": {
+        "en": "Longest Univalue Path",
+        "zh": "最长同值路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-maximum-path-sum",
+      "frontendId": "124",
+      "title": {
+        "en": "Binary Tree Maximum Path Sum",
+        "zh": "二叉树中的最大路径和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "amount-of-time-for-binary-tree-to-be-infected",
+      "frontendId": "2385",
+      "title": {
+        "en": "Amount of Time for Binary Tree to Be Infected",
+        "zh": "感染二叉树需要的总时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1711,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-longest-consecutive-sequence-ii",
+      "frontendId": "549",
+      "title": {
+        "en": "Binary Tree Longest Consecutive Sequence II",
+        "zh": "二叉树最长连续序列 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-paths",
+      "frontendId": "257",
+      "title": {
+        "en": "Binary Tree Paths",
+        "zh": "二叉树的所有路径"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.7",
+      "level": "core"
+    },
+    {
+      "slug": "path-sum-ii",
+      "frontendId": "113",
+      "title": {
+        "en": "Path Sum II",
+        "zh": "路径总和 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.7",
+      "level": "core"
+    },
+    {
+      "slug": "pseudo-palindromic-paths-in-a-binary-tree",
+      "frontendId": "1457",
+      "title": {
+        "en": "Pseudo-Palindromic Paths in a Binary Tree",
+        "zh": "二叉树中的伪回文路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1405,
+      "sectionId": "2.7",
+      "level": "core"
+    },
+    {
+      "slug": "path-sum-iii",
+      "frontendId": "437",
+      "title": {
+        "en": "Path Sum III",
+        "zh": "路径总和 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.7",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-distinct-path-sum-in-a-binary-tree",
+      "frontendId": "3879",
+      "title": {
+        "en": "Maximum Distinct Path Sum in a Binary Tree",
+        "zh": "二叉树中的最大不同路径和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.7",
+      "level": "core"
+    },
+    {
+      "slug": "lowest-common-ancestor-of-a-binary-search-tree",
+      "frontendId": "235",
+      "title": {
+        "en": "Lowest Common Ancestor of a Binary Search Tree",
+        "zh": "二叉搜索树的最近公共祖先"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.8",
+      "level": "core"
+    },
+    {
+      "slug": "lowest-common-ancestor-of-a-binary-tree",
+      "frontendId": "236",
+      "title": {
+        "en": "Lowest Common Ancestor of a Binary Tree",
+        "zh": "二叉树的最近公共祖先"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.8",
+      "level": "core"
+    },
+    {
+      "slug": "lowest-common-ancestor-of-deepest-leaves",
+      "frontendId": "1123",
+      "title": {
+        "en": "Lowest Common Ancestor of Deepest Leaves",
+        "zh": "最深叶节点的最近公共祖先"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1607,
+      "sectionId": "2.8",
+      "level": "core"
+    },
+    {
+      "slug": "step-by-step-directions-from-a-binary-tree-node-to-another",
+      "frontendId": "2096",
+      "title": {
+        "en": "Step-By-Step Directions From a Binary Tree Node to Another",
+        "zh": "从二叉树一个节点到另一个节点每一步的方向"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1805,
+      "sectionId": "2.8",
+      "level": "core"
+    },
+    {
+      "slug": "find-distance-in-a-binary-tree",
+      "frontendId": "1740",
+      "title": {
+        "en": "Find Distance in a Binary Tree",
+        "zh": "找到二叉树中的距离"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.8",
+      "level": "core"
+    },
+    {
+      "slug": "lowest-common-ancestor-of-a-binary-tree-ii",
+      "frontendId": "1644",
+      "title": {
+        "en": "Lowest Common Ancestor of a Binary Tree II",
+        "zh": "二叉树的最近公共祖先 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.8",
+      "level": "core"
+    },
+    {
+      "slug": "lowest-common-ancestor-of-a-binary-tree-iii",
+      "frontendId": "1650",
+      "title": {
+        "en": "Lowest Common Ancestor of a Binary Tree III",
+        "zh": "二叉树的最近公共祖先 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.8",
+      "level": "core"
+    },
+    {
+      "slug": "lowest-common-ancestor-of-a-binary-tree-iv",
+      "frontendId": "1676",
+      "title": {
+        "en": "Lowest Common Ancestor of a Binary Tree IV",
+        "zh": "二叉树的最近公共祖先 IV"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.8",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-common-region",
+      "frontendId": "1257",
+      "title": {
+        "en": "Smallest Common Region",
+        "zh": "最小公共区域"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.8",
+      "level": "core"
+    },
+    {
+      "slug": "search-in-a-binary-search-tree",
+      "frontendId": "700",
+      "title": {
+        "en": "Search in a Binary Search Tree",
+        "zh": "二叉搜索树中的搜索"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-absolute-difference-in-bst",
+      "frontendId": "530",
+      "title": {
+        "en": "Minimum Absolute Difference in BST",
+        "zh": "二叉搜索树的最小绝对差"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1303,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-distance-between-bst-nodes",
+      "frontendId": "783",
+      "title": {
+        "en": "Minimum Distance Between BST Nodes",
+        "zh": "二叉搜索树节点最小距离"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "range-sum-of-bst",
+      "frontendId": "938",
+      "title": {
+        "en": "Range Sum of BST",
+        "zh": "二叉搜索树的范围和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1335,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "find-mode-in-binary-search-tree",
+      "frontendId": "501",
+      "title": {
+        "en": "Find Mode in Binary Search Tree",
+        "zh": "二叉搜索树中的众数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "kth-smallest-element-in-a-bst",
+      "frontendId": "230",
+      "title": {
+        "en": "Kth Smallest Element in a BST",
+        "zh": "二叉搜索树中第 K 小的元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "validate-binary-search-tree",
+      "frontendId": "98",
+      "title": {
+        "en": "Validate Binary Search Tree",
+        "zh": "验证二叉搜索树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "all-elements-in-two-binary-search-trees",
+      "frontendId": "1305",
+      "title": {
+        "en": "All Elements in Two Binary Search Trees",
+        "zh": "两棵二叉搜索树中的所有元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "recover-binary-search-tree",
+      "frontendId": "99",
+      "title": {
+        "en": "Recover Binary Search Tree",
+        "zh": "恢复二叉搜索树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "increasing-order-search-tree",
+      "frontendId": "897",
+      "title": {
+        "en": "Increasing Order Search Tree",
+        "zh": "递增顺序搜索树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1473,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "closest-nodes-queries-in-a-binary-search-tree",
+      "frontendId": "2476",
+      "title": {
+        "en": "Closest Nodes Queries in a Binary Search Tree",
+        "zh": "二叉搜索树最近节点查询"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1597,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "two-sum-iv-input-is-a-bst",
+      "frontendId": "653",
+      "title": {
+        "en": "Two Sum IV - Input is a BST",
+        "zh": "两数之和 IV - 输入二叉搜索树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-sum-bst-in-binary-tree",
+      "frontendId": "1373",
+      "title": {
+        "en": "Maximum Sum BST in Binary Tree",
+        "zh": "二叉搜索子树的最大键值和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1914,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "merge-bsts-to-create-single-bst",
+      "frontendId": "1932",
+      "title": {
+        "en": "Merge BSTs to Create Single BST",
+        "zh": "合并多棵二叉搜索树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2484,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "inorder-successor-in-bst",
+      "frontendId": "285",
+      "title": {
+        "en": "Inorder Successor in BST",
+        "zh": "二叉搜索树中的中序后继"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "inorder-successor-in-bst-ii",
+      "frontendId": "510",
+      "title": {
+        "en": "Inorder Successor in BST II",
+        "zh": "二叉搜索树中的中序后继 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "closest-binary-search-tree-value",
+      "frontendId": "270",
+      "title": {
+        "en": "Closest Binary Search Tree Value",
+        "zh": "最接近的二叉搜索树值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "closest-binary-search-tree-value-ii",
+      "frontendId": "272",
+      "title": {
+        "en": "Closest Binary Search Tree Value II",
+        "zh": "最接近的二叉搜索树值 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "verify-preorder-sequence-in-binary-search-tree",
+      "frontendId": "255",
+      "title": {
+        "en": "Verify Preorder Sequence in Binary Search Tree",
+        "zh": "验证二叉搜索树的前序遍历序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "depth-of-bst-given-insertion-order",
+      "frontendId": "1902",
+      "title": {
+        "en": "Depth of BST Given Insertion Order",
+        "zh": "给定二叉搜索树的插入顺序求深度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.9",
+      "level": "core"
+    },
+    {
+      "slug": "convert-sorted-array-to-binary-search-tree",
+      "frontendId": "108",
+      "title": {
+        "en": "Convert Sorted Array to Binary Search Tree",
+        "zh": "将有序数组转换为二叉搜索树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-binary-tree",
+      "frontendId": "654",
+      "title": {
+        "en": "Maximum Binary Tree",
+        "zh": "最大二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-binary-tree-ii",
+      "frontendId": "998",
+      "title": {
+        "en": "Maximum Binary Tree II",
+        "zh": "最大二叉树 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1498,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "construct-binary-search-tree-from-preorder-traversal",
+      "frontendId": "1008",
+      "title": {
+        "en": "Construct Binary Search Tree from Preorder Traversal",
+        "zh": "前序遍历构造二叉搜索树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1563,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "balance-a-binary-search-tree",
+      "frontendId": "1382",
+      "title": {
+        "en": "Balance a Binary Search Tree",
+        "zh": "将二叉搜索树变平衡"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "create-binary-tree-from-descriptions",
+      "frontendId": "2196",
+      "title": {
+        "en": "Create Binary Tree From Descriptions",
+        "zh": "根据描述创建二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1644,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "construct-binary-tree-from-preorder-and-inorder-traversal",
+      "frontendId": "105",
+      "title": {
+        "en": "Construct Binary Tree from Preorder and Inorder Traversal",
+        "zh": "从前序与中序遍历序列构造二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "construct-binary-tree-from-inorder-and-postorder-traversal",
+      "frontendId": "106",
+      "title": {
+        "en": "Construct Binary Tree from Inorder and Postorder Traversal",
+        "zh": "从中序与后序遍历序列构造二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "construct-binary-tree-from-preorder-and-postorder-traversal",
+      "frontendId": "889",
+      "title": {
+        "en": "Construct Binary Tree from Preorder and Postorder Traversal",
+        "zh": "从前序与后序遍历序列构造二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1732,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "recover-a-tree-from-preorder-traversal",
+      "frontendId": "1028",
+      "title": {
+        "en": "Recover a Tree From Preorder Traversal",
+        "zh": "从先序遍历还原二叉树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1797,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "construct-binary-tree-from-string",
+      "frontendId": "536",
+      "title": {
+        "en": "Construct Binary Tree from String",
+        "zh": "从字符串生成二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "design-an-expression-tree-with-evaluate-function",
+      "frontendId": "1628",
+      "title": {
+        "en": "Design an Expression Tree With Evaluate Function",
+        "zh": "设计带解析函数的表达式树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "build-binary-expression-tree-from-infix-expression",
+      "frontendId": "1597",
+      "title": {
+        "en": "Build Binary Expression Tree From Infix Expression",
+        "zh": "根据中缀表达式构造二叉表达式树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.10",
+      "level": "core"
+    },
+    {
+      "slug": "insert-into-a-binary-search-tree",
+      "frontendId": "701",
+      "title": {
+        "en": "Insert into a Binary Search Tree",
+        "zh": "二叉搜索树中的插入操作"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.11",
+      "level": "core"
+    },
+    {
+      "slug": "delete-node-in-a-bst",
+      "frontendId": "450",
+      "title": {
+        "en": "Delete Node in a BST",
+        "zh": "删除二叉搜索树中的节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.11",
+      "level": "core"
+    },
+    {
+      "slug": "trim-a-binary-search-tree",
+      "frontendId": "669",
+      "title": {
+        "en": "Trim a Binary Search Tree",
+        "zh": "修剪二叉搜索树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.11",
+      "level": "core"
+    },
+    {
+      "slug": "split-bst",
+      "frontendId": "776",
+      "title": {
+        "en": "Split BST",
+        "zh": "拆分二叉搜索树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.11",
+      "level": "core"
+    },
+    {
+      "slug": "change-the-root-of-a-binary-tree",
+      "frontendId": "1666",
+      "title": {
+        "en": "Change the Root of a Binary Tree",
+        "zh": "改变二叉树的根节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.11",
+      "level": "core"
+    },
+    {
+      "slug": "house-robber-iii",
+      "frontendId": "337",
+      "title": {
+        "en": "House Robber III",
+        "zh": "打家劫舍 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.12",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-cameras",
+      "frontendId": "968",
+      "title": {
+        "en": "Binary Tree Cameras",
+        "zh": "监控二叉树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.12",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-flips-in-binary-tree-to-get-result",
+      "frontendId": "2313",
+      "title": {
+        "en": "Minimum Flips in Binary Tree to Get Result",
+        "zh": "二叉树中得到结果所需的最少翻转次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.12",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-level-order-traversal",
+      "frontendId": "102",
+      "title": {
+        "en": "Binary Tree Level Order Traversal",
+        "zh": "二叉树的层序遍历"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-zigzag-level-order-traversal",
+      "frontendId": "103",
+      "title": {
+        "en": "Binary Tree Zigzag Level Order Traversal",
+        "zh": "二叉树的锯齿形层序遍历"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-level-order-traversal-ii",
+      "frontendId": "107",
+      "title": {
+        "en": "Binary Tree Level Order Traversal II",
+        "zh": "二叉树的层序遍历 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-right-side-view",
+      "frontendId": "199",
+      "title": {
+        "en": "Binary Tree Right Side View",
+        "zh": "二叉树的右视图"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "find-bottom-left-tree-value",
+      "frontendId": "513",
+      "title": {
+        "en": "Find Bottom Left Tree Value",
+        "zh": "找树左下角的值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "find-largest-value-in-each-tree-row",
+      "frontendId": "515",
+      "title": {
+        "en": "Find Largest Value in Each Tree Row",
+        "zh": "在每个树行中找最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "average-of-levels-in-binary-tree",
+      "frontendId": "637",
+      "title": {
+        "en": "Average of Levels in Binary Tree",
+        "zh": "二叉树的层平均值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-level-sum-of-a-binary-tree",
+      "frontendId": "1161",
+      "title": {
+        "en": "Maximum Level Sum of a Binary Tree",
+        "zh": "最大层内元素和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1250,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "cousins-in-binary-tree",
+      "frontendId": "993",
+      "title": {
+        "en": "Cousins in Binary Tree",
+        "zh": "二叉树的堂兄弟节点"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1288,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "kth-largest-sum-in-a-binary-tree",
+      "frontendId": "2583",
+      "title": {
+        "en": "Kth Largest Sum in a Binary Tree",
+        "zh": "二叉树中的第 K 大层和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1374,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "deepest-leaves-sum",
+      "frontendId": "1302",
+      "title": {
+        "en": "Deepest Leaves Sum",
+        "zh": "层数最深叶子节点的和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1388,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-odd-levels-of-binary-tree",
+      "frontendId": "2415",
+      "title": {
+        "en": "Reverse Odd Levels of Binary Tree",
+        "zh": "反转二叉树的奇数层"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1431,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "even-odd-tree",
+      "frontendId": "1609",
+      "title": {
+        "en": "Even Odd Tree",
+        "zh": "奇偶树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1438,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "add-one-row-to-tree",
+      "frontendId": "623",
+      "title": {
+        "en": "Add One Row to Tree",
+        "zh": "在二叉树中增加一行"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-sort-a-binary-tree-by-level",
+      "frontendId": "2471",
+      "title": {
+        "en": "Minimum Number of Operations to Sort a Binary Tree by Level",
+        "zh": "逐层排序二叉树所需的最少操作数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1635,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "cousins-in-binary-tree-ii",
+      "frontendId": "2641",
+      "title": {
+        "en": "Cousins in Binary Tree II",
+        "zh": "二叉树的堂兄弟节点 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1677,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "complete-binary-tree-inserter",
+      "frontendId": "919",
+      "title": {
+        "en": "Complete Binary Tree Inserter",
+        "zh": "完全二叉树插入器"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1691,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "check-completeness-of-a-binary-tree",
+      "frontendId": "958",
+      "title": {
+        "en": "Check Completeness of a Binary Tree",
+        "zh": "二叉树的完全性检验"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1703,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "all-nodes-distance-k-in-binary-tree",
+      "frontendId": "863",
+      "title": {
+        "en": "All Nodes Distance K in Binary Tree",
+        "zh": "二叉树中所有距离为 K 的结点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-width-of-binary-tree",
+      "frontendId": "662",
+      "title": {
+        "en": "Maximum Width of Binary Tree",
+        "zh": "二叉树最大宽度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-level-of-tree-with-minimum-sum",
+      "frontendId": "3157",
+      "title": {
+        "en": "Find the Level of Tree with Minimum Sum",
+        "zh": "找到具有最小和的树的层数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "median-of-a-binary-search-tree-level",
+      "frontendId": "3831",
+      "title": {
+        "en": "Median of a Binary Search Tree Level",
+        "zh": "二叉搜索树某一层的中位数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "find-nearest-right-node-in-binary-tree",
+      "frontendId": "1602",
+      "title": {
+        "en": "Find Nearest Right Node in Binary Tree",
+        "zh": "找到二叉树中最近的右侧节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "zigzag-level-sum-of-binary-tree",
+      "frontendId": "3902",
+      "title": {
+        "en": "Zigzag Level Sum of Binary Tree",
+        "zh": "二叉树的 Z 字形层级和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "closest-leaf-in-a-binary-tree",
+      "frontendId": "742",
+      "title": {
+        "en": "Closest Leaf in a Binary Tree",
+        "zh": "二叉树最近的叶节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "correct-a-binary-tree",
+      "frontendId": "1660",
+      "title": {
+        "en": "Correct a Binary Tree",
+        "zh": "纠正二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.13",
+      "level": "core"
+    },
+    {
+      "slug": "flatten-binary-tree-to-linked-list",
+      "frontendId": "114",
+      "title": {
+        "en": "Flatten Binary Tree to Linked List",
+        "zh": "二叉树展开为链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.14",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-in-binary-tree",
+      "frontendId": "1367",
+      "title": {
+        "en": "Linked List in Binary Tree",
+        "zh": "二叉树中的链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1650,
+      "sectionId": "2.14",
+      "level": "core"
+    },
+    {
+      "slug": "convert-sorted-list-to-binary-search-tree",
+      "frontendId": "109",
+      "title": {
+        "en": "Convert Sorted List to Binary Search Tree",
+        "zh": "有序链表转换二叉搜索树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.14",
+      "level": "core"
+    },
+    {
+      "slug": "populating-next-right-pointers-in-each-node",
+      "frontendId": "116",
+      "title": {
+        "en": "Populating Next Right Pointers in Each Node",
+        "zh": "填充每个节点的下一个右侧节点指针"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.14",
+      "level": "core"
+    },
+    {
+      "slug": "populating-next-right-pointers-in-each-node-ii",
+      "frontendId": "117",
+      "title": {
+        "en": "Populating Next Right Pointers in Each Node II",
+        "zh": "填充每个节点的下一个右侧节点指针 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.14",
+      "level": "core"
+    },
+    {
+      "slug": "convert-binary-search-tree-to-sorted-doubly-linked-list",
+      "frontendId": "426",
+      "title": {
+        "en": "Convert Binary Search Tree to Sorted Doubly Linked List",
+        "zh": "将二叉搜索树转化为排序的双向链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.14",
+      "level": "core"
+    },
+    {
+      "slug": "n-ary-tree-preorder-traversal",
+      "frontendId": "589",
+      "title": {
+        "en": "N-ary Tree Preorder Traversal",
+        "zh": "N 叉树的前序遍历"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "n-ary-tree-postorder-traversal",
+      "frontendId": "590",
+      "title": {
+        "en": "N-ary Tree Postorder Traversal",
+        "zh": "N 叉树的后序遍历"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-depth-of-n-ary-tree",
+      "frontendId": "559",
+      "title": {
+        "en": "Maximum Depth of N-ary Tree",
+        "zh": "N 叉树的最大深度"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "n-ary-tree-level-order-traversal",
+      "frontendId": "429",
+      "title": {
+        "en": "N-ary Tree Level Order Traversal",
+        "zh": "N 叉树的层序遍历"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "construct-quad-tree",
+      "frontendId": "427",
+      "title": {
+        "en": "Construct Quad Tree",
+        "zh": "建立四叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "logical-or-of-two-binary-grids-represented-as-quad-trees",
+      "frontendId": "558",
+      "title": {
+        "en": "Logical OR of Two Binary Grids Represented as Quad-Trees",
+        "zh": "四叉树交集"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "serialize-and-deserialize-n-ary-tree",
+      "frontendId": "428",
+      "title": {
+        "en": "Serialize and Deserialize N-ary Tree",
+        "zh": "序列化和反序列化 N 叉树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "clone-n-ary-tree",
+      "frontendId": "1490",
+      "title": {
+        "en": "Clone N-ary Tree",
+        "zh": "克隆 N 叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "find-root-of-n-ary-tree",
+      "frontendId": "1506",
+      "title": {
+        "en": "Find Root of N-Ary Tree",
+        "zh": "找到 N 叉树的根节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "diameter-of-n-ary-tree",
+      "frontendId": "1522",
+      "title": {
+        "en": "Diameter of N-Ary Tree",
+        "zh": "N 叉树的直径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "move-sub-tree-of-n-ary-tree",
+      "frontendId": "1516",
+      "title": {
+        "en": "Move Sub-Tree of N-Ary Tree",
+        "zh": "移动 N 叉树的子树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.15",
+      "level": "core"
+    },
+    {
+      "slug": "find-elements-in-a-contaminated-binary-tree",
+      "frontendId": "1261",
+      "title": {
+        "en": "Find Elements in a Contaminated Binary Tree",
+        "zh": "在受污染的二叉树中查找元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1440,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "path-in-zigzag-labelled-binary-tree",
+      "frontendId": "1104",
+      "title": {
+        "en": "Path In Zigzag Labelled Binary Tree",
+        "zh": "二叉树寻路"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1545,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "vertical-order-traversal-of-a-binary-tree",
+      "frontendId": "987",
+      "title": {
+        "en": "Vertical Order Traversal of a Binary Tree",
+        "zh": "二叉树的垂序遍历"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1676,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "print-binary-tree",
+      "frontendId": "655",
+      "title": {
+        "en": "Print Binary Tree",
+        "zh": "输出二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "distribute-coins-in-binary-tree",
+      "frontendId": "979",
+      "title": {
+        "en": "Distribute Coins in Binary Tree",
+        "zh": "在二叉树中分配硬币"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1709,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "count-complete-tree-nodes",
+      "frontendId": "222",
+      "title": {
+        "en": "Count Complete Tree Nodes",
+        "zh": "完全二叉树的节点个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "serialize-and-deserialize-binary-tree",
+      "frontendId": "297",
+      "title": {
+        "en": "Serialize and Deserialize Binary Tree",
+        "zh": "二叉树的序列化与反序列化"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "serialize-and-deserialize-bst",
+      "frontendId": "449",
+      "title": {
+        "en": "Serialize and Deserialize BST",
+        "zh": "序列化和反序列化二叉搜索树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "verify-preorder-serialization-of-a-binary-tree",
+      "frontendId": "331",
+      "title": {
+        "en": "Verify Preorder Serialization of a Binary Tree",
+        "zh": "验证二叉树的前序序列化"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "find-duplicate-subtrees",
+      "frontendId": "652",
+      "title": {
+        "en": "Find Duplicate Subtrees",
+        "zh": "寻找重复的子树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "binary-search-tree-iterator",
+      "frontendId": "173",
+      "title": {
+        "en": "Binary Search Tree Iterator",
+        "zh": "二叉搜索树迭代器"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "count-nodes-with-the-highest-score",
+      "frontendId": "2049",
+      "title": {
+        "en": "Count Nodes With the Highest Score",
+        "zh": "统计最高分的节点数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1912,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "make-costs-of-paths-equal-in-a-binary-tree",
+      "frontendId": "2673",
+      "title": {
+        "en": "Make Costs of Paths Equal in a Binary Tree",
+        "zh": "使二叉树所有路径值相等的最小代价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1917,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "cycle-length-queries-in-a-tree",
+      "frontendId": "2509",
+      "title": {
+        "en": "Cycle Length Queries in a Tree",
+        "zh": "查询树中环的长度"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1948,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "height-of-binary-tree-after-subtree-removal-queries",
+      "frontendId": "2458",
+      "title": {
+        "en": "Height of Binary Tree After Subtree Removal Queries",
+        "zh": "移除子树后的二叉树高度"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2299,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-vertical-order-traversal",
+      "frontendId": "314",
+      "title": {
+        "en": "Binary Tree Vertical Order Traversal",
+        "zh": "二叉树的垂直遍历"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "path-sum-iv",
+      "frontendId": "666",
+      "title": {
+        "en": "Path Sum IV",
+        "zh": "路径总和 IV"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "binary-search-tree-iterator-ii",
+      "frontendId": "1586",
+      "title": {
+        "en": "Binary Search Tree Iterator II",
+        "zh": "二叉搜索树迭代器 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "height-of-special-binary-tree",
+      "frontendId": "2773",
+      "title": {
+        "en": "Height of Special Binary Tree",
+        "zh": "特殊二叉树的高度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "clone-binary-tree-with-random-pointer",
+      "frontendId": "1485",
+      "title": {
+        "en": "Clone Binary Tree With Random Pointer",
+        "zh": "克隆含随机指针的二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-nodes-with-value-one",
+      "frontendId": "2445",
+      "title": {
+        "en": "Number of Nodes With Value One",
+        "zh": "值为 1 的节点数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "encode-n-ary-tree-to-binary-tree",
+      "frontendId": "431",
+      "title": {
+        "en": "Encode N-ary Tree to Binary Tree",
+        "zh": "将 N 叉树编码为二叉树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "subtree-removal-game-with-fibonacci-tree",
+      "frontendId": "2005",
+      "title": {
+        "en": "Subtree Removal Game with Fibonacci Tree",
+        "zh": "斐波那契树的移除子树游戏"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.16",
+      "level": "core"
+    },
+    {
+      "slug": "reachable-nodes-with-restrictions",
+      "frontendId": "2368",
+      "title": {
+        "en": "Reachable Nodes With Restrictions",
+        "zh": "受限条件下可到达节点的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1477,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reorder-routes-to-make-all-paths-lead-to-the-city-zero",
+      "frontendId": "1466",
+      "title": {
+        "en": "Reorder Routes to Make All Paths Lead to the City Zero",
+        "zh": "重新规划路线"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1634,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "kill-process",
+      "frontendId": "582",
+      "title": {
+        "en": "Kill Process",
+        "zh": "杀掉进程"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "weighted-sum-of-a-tree",
+      "frontendId": "4015",
+      "title": {
+        "en": "Weighted Sum of a Tree",
+        "zh": "树的加权和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1534,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "time-needed-to-inform-all-employees",
+      "frontendId": "1376",
+      "title": {
+        "en": "Time Needed to Inform All Employees",
+        "zh": "通知所有员工所需的时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1561,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "unit-conversion-i",
+      "frontendId": "3528",
+      "title": {
+        "en": "Unit Conversion I",
+        "zh": "单位转换 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1580,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-collect-all-apples-in-a-tree",
+      "frontendId": "1443",
+      "title": {
+        "en": "Minimum Time to Collect All Apples in a Tree",
+        "zh": "收集树上所有苹果的最少时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1683,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "pythagorean-distance-nodes-in-a-tree",
+      "frontendId": "3820",
+      "title": {
+        "en": "Pythagorean Distance Nodes in a Tree",
+        "zh": "树上的勾股距离节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1725,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "frog-position-after-t-seconds",
+      "frontendId": "1377",
+      "title": {
+        "en": "Frog Position After T Seconds",
+        "zh": "T 秒后青蛙的位置"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1824,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-pairs-of-connectable-servers-in-a-weighted-tree-network",
+      "frontendId": "3067",
+      "title": {
+        "en": "Count Pairs of Connectable Servers in a Weighted Tree Network",
+        "zh": "在带权树网络中统计可连接服务器对数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1909,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-number-of-target-nodes-after-connecting-trees-i",
+      "frontendId": "3372",
+      "title": {
+        "en": "Maximize the Number of Target Nodes After Connecting Trees I",
+        "zh": "连接两棵树后最大目标节点数目 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1927,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "most-profitable-path-in-a-tree",
+      "frontendId": "2467",
+      "title": {
+        "en": "Most Profitable Path in a Tree",
+        "zh": "树上最大得分和路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2053,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-number-of-target-nodes-after-connecting-trees-ii",
+      "frontendId": "3373",
+      "title": {
+        "en": "Maximize the Number of Target Nodes After Connecting Trees II",
+        "zh": "连接两棵树后最大目标节点数目 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2162,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "tree-of-coprimes",
+      "frontendId": "1766",
+      "title": {
+        "en": "Tree of Coprimes",
+        "zh": "互质树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2232,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-paths-that-can-form-a-palindrome-in-a-tree",
+      "frontendId": "2791",
+      "title": {
+        "en": "Count Paths That Can Form a Palindrome in a Tree",
+        "zh": "树中可以形成回文的路径数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2677,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "unit-conversion-ii",
+      "frontendId": "3535",
+      "title": {
+        "en": "Unit Conversion II",
+        "zh": "单位转换 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "employee-importance",
+      "frontendId": "690",
+      "title": {
+        "en": "Employee Importance",
+        "zh": "员工的重要性"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-good-nodes",
+      "frontendId": "3249",
+      "title": {
+        "en": "Count the Number of Good Nodes",
+        "zh": "统计好节点的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1566,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-nodes-in-the-sub-tree-with-the-same-label",
+      "frontendId": "1519",
+      "title": {
+        "en": "Number of Nodes in the Sub-Tree With the Same Label",
+        "zh": "子树中标签相同的节点数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1809,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-assign-edge-weights-i",
+      "frontendId": "3558",
+      "title": {
+        "en": "Number of Ways to Assign Edge Weights I",
+        "zh": "给边赋权值的方案数 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1845,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-increments-to-equalize-leaf-paths",
+      "frontendId": "3593",
+      "title": {
+        "en": "Minimum Increments to Equalize Leaf Paths",
+        "zh": "使叶子路径成本相等的最小增量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1959,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-k-divisible-components",
+      "frontendId": "2872",
+      "title": {
+        "en": "Maximum Number of K-Divisible Components",
+        "zh": "可以被 K 整除连通块的最大数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1968,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-fuel-cost-to-report-to-the-capital",
+      "frontendId": "2477",
+      "title": {
+        "en": "Minimum Fuel Cost to Report to the Capital",
+        "zh": "到达首都的最少油耗"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2012,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-edge-toggles-on-a-tree",
+      "frontendId": "3812",
+      "title": {
+        "en": "Minimum Edge Toggles on a Tree",
+        "zh": "翻转树上最少边"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2179,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "find-number-of-coins-to-place-in-tree-nodes",
+      "frontendId": "2973",
+      "title": {
+        "en": "Find Number of Coins to Place in Tree Nodes",
+        "zh": "树中每个节点放置的金币数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2277,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "create-components-with-same-value",
+      "frontendId": "2440",
+      "title": {
+        "en": "Create Components With Same Value",
+        "zh": "创建价值相同的连通块"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2460,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "delete-tree-nodes",
+      "frontendId": "1273",
+      "title": {
+        "en": "Delete Tree Nodes",
+        "zh": "删除树节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-subtree-of-the-same-color",
+      "frontendId": "3004",
+      "title": {
+        "en": "Maximum Subtree of the Same Color",
+        "zh": "相同颜色的最大子树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-increments-to-equalize-leaf-paths",
+      "frontendId": "3593",
+      "title": {
+        "en": "Minimum Increments to Equalize Leaf Paths",
+        "zh": "使叶子路径成本相等的最小增量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1959,
+      "sectionId": "3.4",
+      "level": "core"
+    },
+    {
+      "slug": "find-subtree-sizes-after-changes",
+      "frontendId": "3331",
+      "title": {
+        "en": "Find Subtree Sizes After Changes",
+        "zh": "修改后子树的大小"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2046,
+      "sectionId": "3.4",
+      "level": "core"
+    },
+    {
+      "slug": "longest-path-with-different-adjacent-characters",
+      "frontendId": "2246",
+      "title": {
+        "en": "Longest Path With Different Adjacent Characters",
+        "zh": "相邻字符不同的最长路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2126,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-minimum-diameter-after-merging-two-trees",
+      "frontendId": "3203",
+      "title": {
+        "en": "Find Minimum Diameter After Merging Two Trees",
+        "zh": "合并两棵树后的最小直径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2266,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "count-subtrees-with-max-distance-between-cities",
+      "frontendId": "1617",
+      "title": {
+        "en": "Count Subtrees With Max Distance Between Cities",
+        "zh": "统计子树中城市之间最大距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2309,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "difference-between-maximum-and-minimum-price-sum",
+      "frontendId": "2538",
+      "title": {
+        "en": "Difference Between Maximum and Minimum Price Sum",
+        "zh": "最大价值和与最小价值和的差值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2398,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "tree-diameter",
+      "frontendId": "1245",
+      "title": {
+        "en": "Tree Diameter",
+        "zh": "树的直径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-diameter-endpoints-of-a-tree",
+      "frontendId": "3787",
+      "title": {
+        "en": "Find Diameter Endpoints of a Tree",
+        "zh": "查找树的直径端点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-last-marked-nodes-in-tree",
+      "frontendId": "3313",
+      "title": {
+        "en": "Find the Last Marked Nodes in Tree",
+        "zh": "查找树中最后标记的节点"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-height-trees",
+      "frontendId": "310",
+      "title": {
+        "en": "Minimum Height Trees",
+        "zh": "最小高度树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-edge-toggles-on-a-tree",
+      "frontendId": "3812",
+      "title": {
+        "en": "Minimum Edge Toggles on a Tree",
+        "zh": "翻转树上最少边"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2179,
+      "sectionId": "3.6",
+      "level": "core"
+    },
+    {
+      "slug": "collect-coins-in-a-tree",
+      "frontendId": "2603",
+      "title": {
+        "en": "Collect Coins in a Tree",
+        "zh": "收集树中金币"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2712,
+      "sectionId": "3.6",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-path-in-a-weighted-tree",
+      "frontendId": "3515",
+      "title": {
+        "en": "Shortest Path in a Weighted Tree",
+        "zh": "带权树中的最短路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2312,
+      "sectionId": "3.7",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-score-after-removals-on-a-tree",
+      "frontendId": "2322",
+      "title": {
+        "en": "Minimum Score After Removals on a Tree",
+        "zh": "从树中删除边的最小分数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2392,
+      "sectionId": "3.7",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-dfs-strings-are-palindromes",
+      "frontendId": "3327",
+      "title": {
+        "en": "Check if DFS Strings Are Palindromes",
+        "zh": "判断 DFS 字符串是否是回文串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2454,
+      "sectionId": "3.7",
+      "level": "core"
+    },
+    {
+      "slug": "kth-smallest-path-xor-sum",
+      "frontendId": "3590",
+      "title": {
+        "en": "Kth Smallest Path XOR Sum",
+        "zh": "第 K 小的路径异或和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2646,
+      "sectionId": "3.7",
+      "level": "core"
+    },
+    {
+      "slug": "kth-ancestor-of-a-tree-node",
+      "frontendId": "1483",
+      "title": {
+        "en": "Kth Ancestor of a Tree Node",
+        "zh": "树节点的第 K 个祖先"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2115,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-assign-edge-weights-ii",
+      "frontendId": "3559",
+      "title": {
+        "en": "Number of Ways to Assign Edge Weights II",
+        "zh": "给边赋权值的方案数 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2146,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "palindromic-path-queries-in-a-tree",
+      "frontendId": "3841",
+      "title": {
+        "en": "Palindromic Path Queries in a Tree",
+        "zh": "查询树上回文路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2384,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-weighted-subgraph-with-the-required-paths-ii",
+      "frontendId": "3553",
+      "title": {
+        "en": "Minimum Weighted Subgraph With the Required Paths II",
+        "zh": "包含要求路径的最小带权子图 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2411,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "find-weighted-median-node-in-tree",
+      "frontendId": "3585",
+      "title": {
+        "en": "Find Weighted Median Node in Tree",
+        "zh": "树中找到带权中位节点"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2429,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-edge-weight-equilibrium-queries-in-a-tree",
+      "frontendId": "2846",
+      "title": {
+        "en": "Minimum Edge Weight Equilibrium Queries in a Tree",
+        "zh": "边权重均等查询"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2508,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-the-total-price-of-the-trips",
+      "frontendId": "2646",
+      "title": {
+        "en": "Minimize the Total Price of the Trips",
+        "zh": "最小化旅行的价格总和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "closest-node-to-path-in-tree",
+      "frontendId": "2277",
+      "title": {
+        "en": "Closest Node to Path in Tree",
+        "zh": "树中最接近路径的节点"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "distinct-gate-paths-to-lca",
+      "frontendId": "3973",
+      "title": {
+        "en": "Distinct Gate Paths to LCA",
+        "zh": "通往最近公共祖先的不同门径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "path-existence-queries-in-a-graph-ii",
+      "frontendId": "3534",
+      "title": {
+        "en": "Path Existence Queries in a Graph II",
+        "zh": "针对图的路径存在性查询 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2507,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-value-of-function-in-a-ball-passing-game",
+      "frontendId": "2836",
+      "title": {
+        "en": "Maximize Value of Function in a Ball Passing Game",
+        "zh": "在传球游戏中最大化函数值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2769,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-distance-between-points-on-a-square",
+      "frontendId": "3464",
+      "title": {
+        "en": "Maximize the Distance Between Points on a Square",
+        "zh": "正方形上的点之间的最大距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.8",
+      "level": "core"
+    },
+    {
+      "slug": "total-sum-of-interaction-cost-in-tree-groups",
+      "frontendId": "3786",
+      "title": {
+        "en": "Total Sum of Interaction Cost in Tree Groups",
+        "zh": "树组的交互代价总和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.9",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-missing-genetic-value-in-each-subtree",
+      "frontendId": "2003",
+      "title": {
+        "en": "Smallest Missing Genetic Value in Each Subtree",
+        "zh": "每棵子树内缺失的最小基因值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2415,
+      "sectionId": "3.10",
+      "level": "core"
+    },
+    {
+      "slug": "kth-smallest-path-xor-sum",
+      "frontendId": "3590",
+      "title": {
+        "en": "Kth Smallest Path XOR Sum",
+        "zh": "第 K 小的路径异或和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2646,
+      "sectionId": "3.10",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-good-subtree-score",
+      "frontendId": "3575",
+      "title": {
+        "en": "Maximum Good Subtree Score",
+        "zh": "最大好子树分数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.10",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-number-of-target-nodes-after-connecting-trees-i",
+      "frontendId": "3372",
+      "title": {
+        "en": "Maximize the Number of Target Nodes After Connecting Trees I",
+        "zh": "连接两棵树后最大目标节点数目 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.11",
+      "level": "core"
+    },
+    {
+      "slug": "longest-special-path",
+      "frontendId": "3425",
+      "title": {
+        "en": "Longest Special Path",
+        "zh": "最长特殊路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2435,
+      "sectionId": "3.12",
+      "level": "core"
+    },
+    {
+      "slug": "longest-special-path-ii",
+      "frontendId": "3486",
+      "title": {
+        "en": "Longest Special Path II",
+        "zh": "最长特殊路径 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2925,
+      "sectionId": "3.12",
+      "level": "core"
+    },
+    {
+      "slug": "count-valid-paths-in-a-tree",
+      "frontendId": "2867",
+      "title": {
+        "en": "Count Valid Paths in a Tree",
+        "zh": "统计树中的合法路径数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2428,
+      "sectionId": "3.13",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-good-paths",
+      "frontendId": "2421",
+      "title": {
+        "en": "Number of Good Paths",
+        "zh": "好路径的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2445,
+      "sectionId": "3.13",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-reconstruct-a-tree",
+      "frontendId": "1719",
+      "title": {
+        "en": "Number Of Ways To Reconstruct A Tree",
+        "zh": "重构一棵树的方案数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 3018,
+      "sectionId": "3.13",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-xor-of-two-non-overlapping-subtrees",
+      "frontendId": "2479",
+      "title": {
+        "en": "Maximum XOR of Two Non-Overlapping Subtrees",
+        "zh": "两个不重叠子树的最大异或值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.13",
+      "level": "core"
+    },
+    {
+      "slug": "subsets",
+      "frontendId": "78",
+      "title": {
+        "en": "Subsets",
+        "zh": "子集"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-all-subset-xor-totals",
+      "frontendId": "1863",
+      "title": {
+        "en": "Sum of All Subset XOR Totals",
+        "zh": "找出所有子集的异或总和再求和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1372,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "letter-case-permutation",
+      "frontendId": "784",
+      "title": {
+        "en": "Letter Case Permutation",
+        "zh": "字母大小写全排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "valid-binary-strings-with-cost-limit",
+      "frontendId": "3955",
+      "title": {
+        "en": "Valid Binary Strings With Cost Limit",
+        "zh": "成本限制的有效二进制字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1429,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "partition-array-into-two-equal-product-subsets",
+      "frontendId": "3566",
+      "title": {
+        "en": "Partition Array into Two Equal Product Subsets",
+        "zh": "等积子集的划分方案"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1459,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-number-of-maximum-bitwise-or-subsets",
+      "frontendId": "2044",
+      "title": {
+        "en": "Count Number of Maximum Bitwise-OR Subsets",
+        "zh": "统计按位或能得到最大值的子集数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1568,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "closest-dessert-cost",
+      "frontendId": "1774",
+      "title": {
+        "en": "Closest Dessert Cost",
+        "zh": "最接近目标价格的甜点成本"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1702,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-rows-covered-by-columns",
+      "frontendId": "2397",
+      "title": {
+        "en": "Maximum Rows Covered by Columns",
+        "zh": "被列覆盖的最多行数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1719,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-length-of-a-concatenated-string-with-unique-characters",
+      "frontendId": "1239",
+      "title": {
+        "en": "Maximum Length of a Concatenated String with Unique Characters",
+        "zh": "串联字符串的最大长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1720,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-connected-subgraphs-with-even-node-sum",
+      "frontendId": "3910",
+      "title": {
+        "en": "Count Connected Subgraphs with Even Node Sum",
+        "zh": "统计节点和为偶数的连通子图"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1859,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-points-in-an-archery-competition",
+      "frontendId": "2212",
+      "title": {
+        "en": "Maximum Points in an Archery Competition",
+        "zh": "射箭比赛中的最大得分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1869,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-score-words-formed-by-letters",
+      "frontendId": "1255",
+      "title": {
+        "en": "Maximum Score Words Formed by Letters",
+        "zh": "得分最高的单词集合"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1882,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-good-people-based-on-statements",
+      "frontendId": "2151",
+      "title": {
+        "en": "Maximum Good People Based on Statements",
+        "zh": "基于陈述统计最多好人数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1980,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "the-number-of-beautiful-subsets",
+      "frontendId": "2597",
+      "title": {
+        "en": "The Number of Beautiful Subsets",
+        "zh": "美丽子集的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2023,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-possible-sets-of-closing-branches",
+      "frontendId": "2959",
+      "title": {
+        "en": "Number of Possible Sets of Closing Branches",
+        "zh": "关闭分部的可行集合数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2077,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-achievable-transfer-requests",
+      "frontendId": "1601",
+      "title": {
+        "en": "Maximum Number of Achievable Transfer Requests",
+        "zh": "最多可达成的换楼请求数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2119,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-subtrees-with-max-distance-between-cities",
+      "frontendId": "1617",
+      "title": {
+        "en": "Count Subtrees With Max Distance Between Cities",
+        "zh": "统计子树中城市之间最大距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2309,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "remove-all-ones-with-row-and-column-flips-ii",
+      "frontendId": "2174",
+      "title": {
+        "en": "Remove All Ones With Row and Column Flips II",
+        "zh": "通过翻转行或列来去除所有的 1 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "generalized-abbreviation",
+      "frontendId": "320",
+      "title": {
+        "en": "Generalized Abbreviation",
+        "zh": "列举单词的全部缩写"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "factor-combinations",
+      "frontendId": "254",
+      "title": {
+        "en": "Factor Combinations",
+        "zh": "因子的组合"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "combination-sum",
+      "frontendId": "39",
+      "title": {
+        "en": "Combination Sum",
+        "zh": "组合总和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-product-of-the-length-of-two-palindromic-subsequences",
+      "frontendId": "2002",
+      "title": {
+        "en": "Maximum Product of the Length of Two Palindromic Subsequences",
+        "zh": "两个回文子序列长度的最大乘积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1869,
+      "sectionId": "4.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "palindrome-partitioning",
+      "frontendId": "131",
+      "title": {
+        "en": "Palindrome Partitioning",
+        "zh": "分割回文串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-punishment-number-of-an-integer",
+      "frontendId": "2698",
+      "title": {
+        "en": "Find the Punishment Number of an Integer",
+        "zh": "求一个整数的惩罚数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1679,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "split-a-string-into-the-max-number-of-unique-substrings",
+      "frontendId": "1593",
+      "title": {
+        "en": "Split a String Into the Max Number of Unique Substrings",
+        "zh": "拆分字符串使唯一子字符串的数目最大"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1740,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "splitting-a-string-into-descending-consecutive-values",
+      "frontendId": "1849",
+      "title": {
+        "en": "Splitting a String Into Descending Consecutive Values",
+        "zh": "将字符串拆分为递减的连续值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1747,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "restore-ip-addresses",
+      "frontendId": "93",
+      "title": {
+        "en": "Restore IP Addresses",
+        "zh": "复原 IP 地址"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "word-break-ii",
+      "frontendId": "140",
+      "title": {
+        "en": "Word Break II",
+        "zh": "单词拆分 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "word-pattern-ii",
+      "frontendId": "291",
+      "title": {
+        "en": "Word Pattern II",
+        "zh": "单词规律 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "combinations",
+      "frontendId": "77",
+      "title": {
+        "en": "Combinations",
+        "zh": "组合"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "combination-sum-iii",
+      "frontendId": "216",
+      "title": {
+        "en": "Combination Sum III",
+        "zh": "组合总和 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "iterator-for-combination",
+      "frontendId": "1286",
+      "title": {
+        "en": "Iterator for Combination",
+        "zh": "字母组合迭代器"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1591,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "generate-parentheses",
+      "frontendId": "22",
+      "title": {
+        "en": "Generate Parentheses",
+        "zh": "括号生成"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "permutations",
+      "frontendId": "46",
+      "title": {
+        "en": "Permutations",
+        "zh": "全排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "word-squares-ii",
+      "frontendId": "3799",
+      "title": {
+        "en": "Word Squares II",
+        "zh": "单词方块 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1606,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-break-locks-i",
+      "frontendId": "3376",
+      "title": {
+        "en": "Minimum Time to Break Locks I",
+        "zh": "破解锁的最少时间 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1793,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "n-queens",
+      "frontendId": "51",
+      "title": {
+        "en": "N-Queens",
+        "zh": "N 皇后"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "n-queens-ii",
+      "frontendId": "52",
+      "title": {
+        "en": "N-Queens II",
+        "zh": "N 皇后 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-moves-to-spread-stones-over-grid",
+      "frontendId": "2850",
+      "title": {
+        "en": "Minimum Moves to Spread Stones Over Grid",
+        "zh": "将石头分散到网格图的最少移动次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2001,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "construct-the-lexicographically-largest-valid-sequence",
+      "frontendId": "1718",
+      "title": {
+        "en": "Construct the Lexicographically Largest Valid Sequence",
+        "zh": "构建字典序最大的可行序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2080,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "verbal-arithmetic-puzzle",
+      "frontendId": "1307",
+      "title": {
+        "en": "Verbal Arithmetic Puzzle",
+        "zh": "口算难题"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2250,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "sudoku-solver",
+      "frontendId": "37",
+      "title": {
+        "en": "Sudoku Solver",
+        "zh": "解数独"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "permutations-iii",
+      "frontendId": "3437",
+      "title": {
+        "en": "Permutations III",
+        "zh": "全排列 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "palindrome-permutation-ii",
+      "frontendId": "267",
+      "title": {
+        "en": "Palindrome Permutation II",
+        "zh": "回文排列 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "subsets-ii",
+      "frontendId": "90",
+      "title": {
+        "en": "Subsets II",
+        "zh": "子集 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "combination-sum-ii",
+      "frontendId": "40",
+      "title": {
+        "en": "Combination Sum II",
+        "zh": "组合总和 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "non-decreasing-subsequences",
+      "frontendId": "491",
+      "title": {
+        "en": "Non-decreasing Subsequences",
+        "zh": "非递减子序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "permutations-ii",
+      "frontendId": "47",
+      "title": {
+        "en": "Permutations II",
+        "zh": "全排列 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "letter-tile-possibilities",
+      "frontendId": "1079",
+      "title": {
+        "en": "Letter Tile Possibilities",
+        "zh": "活字印刷"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1741,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "remove-invalid-parentheses",
+      "frontendId": "301",
+      "title": {
+        "en": "Remove Invalid Parentheses",
+        "zh": "删除无效的括号"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "next-special-palindrome-number",
+      "frontendId": "3646",
+      "title": {
+        "en": "Next Special Palindrome Number",
+        "zh": "下一个特殊回文数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2445,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "longest-subsequence-repeated-k-times",
+      "frontendId": "2014",
+      "title": {
+        "en": "Longest Subsequence Repeated k Times",
+        "zh": "重复 K 次的最长子序列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2558,
+      "sectionId": "4.5",
+      "level": "core"
+    },
+    {
+      "slug": "letter-combinations-of-a-phone-number",
+      "frontendId": "17",
+      "title": {
+        "en": "Letter Combinations of a Phone Number",
+        "zh": "电话号码的字母组合"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "generate-binary-strings-without-adjacent-zeros",
+      "frontendId": "3211",
+      "title": {
+        "en": "Generate Binary Strings Without Adjacent Zeros",
+        "zh": "生成不含相邻零的二进制字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1353,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "numbers-with-same-consecutive-differences",
+      "frontendId": "967",
+      "title": {
+        "en": "Numbers With Same Consecutive Differences",
+        "zh": "连续差相同的数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1433,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "finding-3-digit-even-numbers",
+      "frontendId": "2094",
+      "title": {
+        "en": "Finding 3-Digit Even Numbers",
+        "zh": "找出 3 位偶数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "unique-3-digit-even-numbers",
+      "frontendId": "3483",
+      "title": {
+        "en": "Unique 3-Digit Even Numbers",
+        "zh": "不同三位偶数的数目"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "the-k-th-lexicographical-string-of-all-happy-strings-of-length-n",
+      "frontendId": "1415",
+      "title": {
+        "en": "The k-th Lexicographical String of All Happy Strings of Length n",
+        "zh": "长度为 n 的开心字符串中字典序第 k 小的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1576,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "path-with-maximum-gold",
+      "frontendId": "1219",
+      "title": {
+        "en": "Path with Maximum Gold",
+        "zh": "黄金矿工"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1663,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "word-search",
+      "frontendId": "79",
+      "title": {
+        "en": "Word Search",
+        "zh": "单词搜索"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "unique-paths-iii",
+      "frontendId": "980",
+      "title": {
+        "en": "Unique Paths III",
+        "zh": "不同路径 III"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1830,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-product-of-the-length-of-two-palindromic-subsequences",
+      "frontendId": "2002",
+      "title": {
+        "en": "Maximum Product of the Length of Two Palindromic Subsequences",
+        "zh": "两个回文子序列长度的最大乘积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1869,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-score-words-formed-by-letters",
+      "frontendId": "1255",
+      "title": {
+        "en": "Maximum Score Words Formed by Letters",
+        "zh": "得分最高的单词集合"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1882,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "balanced-k-factor-decomposition",
+      "frontendId": "3669",
+      "title": {
+        "en": "Balanced K-Factor Decomposition",
+        "zh": "K 因数分解"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1917,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "pyramid-transition-matrix",
+      "frontendId": "756",
+      "title": {
+        "en": "Pyramid Transition Matrix",
+        "zh": "金字塔转换矩阵"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1990,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "matchsticks-to-square",
+      "frontendId": "473",
+      "title": {
+        "en": "Matchsticks to Square",
+        "zh": "火柴拼正方形"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "word-search-ii",
+      "frontendId": "212",
+      "title": {
+        "en": "Word Search II",
+        "zh": "单词搜索 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "shopping-offers",
+      "frontendId": "638",
+      "title": {
+        "en": "Shopping Offers",
+        "zh": "大礼包"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "tiling-a-rectangle-with-the-fewest-squares",
+      "frontendId": "1240",
+      "title": {
+        "en": "Tiling a Rectangle with the Fewest Squares",
+        "zh": "铺瓷砖"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2242,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "24-game",
+      "frontendId": "679",
+      "title": {
+        "en": "24 Game",
+        "zh": "24 点游戏"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "expression-add-operators",
+      "frontendId": "282",
+      "title": {
+        "en": "Expression Add Operators",
+        "zh": "给表达式添加运算符"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "word-ladder-ii",
+      "frontendId": "126",
+      "title": {
+        "en": "Word Ladder II",
+        "zh": "单词接龙 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "stickers-to-spell-word",
+      "frontendId": "691",
+      "title": {
+        "en": "Stickers to Spell Word",
+        "zh": "贴纸拼词"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-valid-move-combinations-on-chessboard",
+      "frontendId": "2056",
+      "title": {
+        "en": "Number of Valid Move Combinations On Chessboard",
+        "zh": "棋盘上有效移动组合的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2611,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-k-sum-of-an-array",
+      "frontendId": "2386",
+      "title": {
+        "en": "Find the K-Sum of an Array",
+        "zh": "找出数组的第 K 大和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2648,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k",
+      "frontendId": "3509",
+      "title": {
+        "en": "Maximum Product of Subsequences With an Alternating Sum Equal to K",
+        "zh": "最大化交错和为 K 的子序列乘积"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2703,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "zuma-game",
+      "frontendId": "488",
+      "title": {
+        "en": "Zuma Game",
+        "zh": "祖玛游戏"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "the-knights-tour",
+      "frontendId": "2664",
+      "title": {
+        "en": "The Knight’s Tour",
+        "zh": "巡逻的骑士"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "sequential-grid-path-cover",
+      "frontendId": "3565",
+      "title": {
+        "en": "Sequential Grid Path Cover",
+        "zh": "顺序网格路径覆盖"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "strobogrammatic-number-ii",
+      "frontendId": "247",
+      "title": {
+        "en": "Strobogrammatic Number II",
+        "zh": "中心对称数 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "strobogrammatic-number-iii",
+      "frontendId": "248",
+      "title": {
+        "en": "Strobogrammatic Number III",
+        "zh": "中心对称数 III"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-unique-word-abbreviation",
+      "frontendId": "411",
+      "title": {
+        "en": "Minimum Unique Word Abbreviation",
+        "zh": "最短独占单词缩写"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "confusing-number-ii",
+      "frontendId": "1088",
+      "title": {
+        "en": "Confusing Number II",
+        "zh": "易混淆数 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.6",
+      "level": "core"
+    },
+    {
+      "slug": "split-array-with-same-average",
+      "frontendId": "805",
+      "title": {
+        "en": "Split Array With Same Average",
+        "zh": "数组的均值分割"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1983,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "target-sum",
+      "frontendId": "494",
+      "title": {
+        "en": "Target Sum",
+        "zh": "目标和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-removals-to-achieve-target-xor",
+      "frontendId": "3877",
+      "title": {
+        "en": "Minimum Removals to Achieve Target XOR",
+        "zh": "达到目标异或值的最少删除次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "partition-array-into-two-equal-product-subsets",
+      "frontendId": "3566",
+      "title": {
+        "en": "Partition Array into Two Equal Product Subsets",
+        "zh": "等积子集的划分方案"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "count-sequences-to-k",
+      "frontendId": "3850",
+      "title": {
+        "en": "Count Sequences to K",
+        "zh": "统计结果等于 K 的序列数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "closest-subsequence-sum",
+      "frontendId": "1755",
+      "title": {
+        "en": "Closest Subsequence Sum",
+        "zh": "最接近目标值的子序列和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2364,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "tallest-billboard",
+      "frontendId": "956",
+      "title": {
+        "en": "Tallest Billboard",
+        "zh": "最高的广告牌"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2381,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "partition-array-into-two-arrays-to-minimize-sum-difference",
+      "frontendId": "2035",
+      "title": {
+        "en": "Partition Array Into Two Arrays to Minimize Sum Difference",
+        "zh": "将数组分成两个数组并最小化数组和的差"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2490,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-merge-sorted-lists",
+      "frontendId": "3801",
+      "title": {
+        "en": "Minimum Cost to Merge Sorted Lists",
+        "zh": "合并有序列表的最小成本"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "count-almost-equal-pairs-ii",
+      "frontendId": "3267",
+      "title": {
+        "en": "Count Almost Equal Pairs II",
+        "zh": "统计近似相等数对 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.7",
+      "level": "core"
+    },
+    {
+      "slug": "fill-a-special-grid",
+      "frontendId": "3537",
+      "title": {
+        "en": "Fill a Special Grid",
+        "zh": "填充特殊网格"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1542,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-partition-a-binary-string",
+      "frontendId": "3864",
+      "title": {
+        "en": "Minimum Cost to Partition a Binary String",
+        "zh": "划分二进制字符串的最小费用"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2032,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "find-kth-bit-in-nth-binary-string",
+      "frontendId": "1545",
+      "title": {
+        "en": "Find Kth Bit in Nth Binary String",
+        "zh": "找出第 N 个二进制字符串中的第 K 位"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-k-th-character-in-string-game-ii",
+      "frontendId": "3307",
+      "title": {
+        "en": "Find the K-th Character in String Game II",
+        "zh": "找出第 K 个字符 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2232,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "decoded-string-at-index",
+      "frontendId": "880",
+      "title": {
+        "en": "Decoded String at Index",
+        "zh": "索引处的解码字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "process-string-with-special-operations-ii",
+      "frontendId": "3614",
+      "title": {
+        "en": "Process String with Special Operations II",
+        "zh": "用特殊操作处理字符串 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "beautiful-array",
+      "frontendId": "932",
+      "title": {
+        "en": "Beautiful Array",
+        "zh": "漂亮数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "kth-largest-element-in-an-array",
+      "frontendId": "215",
+      "title": {
+        "en": "Kth Largest Element in an Array",
+        "zh": "数组中的第K个最大元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "sort-an-array",
+      "frontendId": "912",
+      "title": {
+        "en": "Sort an Array",
+        "zh": "排序数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "LCR 029",
+      "title": "循环有序列表的插入",
+      "sectionId": "1.3",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 44",
+      "title": "开幕式焰火",
+      "sectionId": "2.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 67",
+      "title": "装饰树",
+      "sectionId": "2.3",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 10",
+      "title": "二叉树任务调度",
+      "sectionId": "2.12",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 34",
+      "title": "二叉树染色",
+      "sectionId": "2.12",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 64",
+      "title": "二叉树灯饰",
+      "sectionId": "2.12",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 26",
+      "title": "导航装置",
+      "sectionId": "2.16",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 60",
+      "title": "力扣泡泡龙",
+      "sectionId": "2.16",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 05",
+      "title": "发 LeetCoin",
+      "sectionId": "3.7",
+      "reason": "same_as",
+      "replacedBy": "shortest-path-in-a-weighted-tree"
+    },
+    {
+      "sourceId": "LCP 51",
+      "title": "烹饪料理",
+      "sectionId": "4.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 58",
+      "title": "积木拼接",
+      "sectionId": "4.6",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "面试题 17.25",
+      "title": "单词矩阵",
+      "sectionId": "4.6",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 82",
+      "title": "万灵之树",
+      "sectionId": "4.7",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}

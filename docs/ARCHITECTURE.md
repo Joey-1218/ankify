@@ -60,6 +60,7 @@ Tables (all in `packages/db/src/schema.ts`):
 | `ai_jobs` | Durable async card, quiz, and session-analysis commands (see below) |
 | `session_analyses` | Immutable session-analysis results, cached per evidence version, analyzer version, provider, and model (see Session analysis) |
 | `suggestion_candidates` | Verified LeetCode metadata (title, difficulty, paid flag, topics, source, `verified_at`) of problems that may be suggested |
+| `study_lists`, `study_list_items` | The user's custom lists and followed built-in lists (with `active`: a paused list gives no new problems), and custom-list items by slug (see Study lists) |
 | `attempt_history`, `attempt_history_coverage` | Attempted problems by slug and source, independent of `problems` rows, and how much of a LeetCode account's history was read (see New-problem suggestions) |
 | `agent_sessions`, `agent_runs`, `agent_messages`, `agent_steps` | Persistent Study Coach conversations |
 | `settings` | Per-user key/value: encrypted AI config, review/generation prefs, onboarding, rate-limit windows, starter-credit counter, Stripe customer ids |
@@ -105,6 +106,11 @@ Tables (all in `packages/db/src/schema.ts`):
   unchanged since the session started. One rating event per session is
   enforced by a unique index; the response is stored for replay. Voluntary
   practice, capture, and dashboard visits never change the schedule.
+- **Same-day re-solve**: an early review requested on the local day the
+  problem was last scheduled (first-review schedule) or rated, neither undone,
+  starts as voluntary practice (`startSessionInTransaction()`). It counts as
+  practice and never moves the schedule: memories consolidate overnight, so a
+  second solve the same day is not a spaced retrieval.
 - A review finished as not solved (`result: "unsuccessful"`, the panel's
   "Finish anyway") is rated Again in the finish transaction: failing to
   produce a correct solution is a lapse, and Hard/Good/Easy all mean
@@ -394,6 +400,140 @@ One model call explains one completed practice session (`server/session-analysis
   (`503 workflow_disabled`) and fails queued ones before any provider call.
   Stored analyses, candidates, and confirmed mistakes stay.
 
+## Study lists
+
+Practice is organized in lists: a user who doesn't know what to practice
+follows a list in order. FSRS stays problem-level: a problem in several lists
+has one schedule, and practicing it anywhere counts everywhere. Lists
+organize problems and pace new ones (Today planner below); the patterns of
+their sections give the mistake profile a technique axis (Pattern profile
+below). The design follows a few learning principles: a review is a full
+re-solve (retrieval), FSRS spaces reviews, Today interleaves patterns and
+hides their names so recognizing one is part of the work, new problems are
+paced by time so reviews never pile up, and a pattern's mastery weighs
+first tries on unseen problems most (transfer).
+
+- **Built-in lists** are committed data in
+  `apps/web/src/server/study-lists/builtin/<id>.json`, generated from a
+  config in `scripts/study-lists/` by `scripts/study-list-import.mjs`
+  (leetcode.cn list posts) or `scripts/study-list-import-carl.mjs`
+  (programmercarl.com topic pages); see DEVELOPMENT.md, "Adding a built-in
+  study list". `builtin.ts` validates every file at load and registers it
+  in `SOURCES` under an author of `BUILTIN_AUTHORS` (display name in both
+  languages; /lists groups by it). They hold problem identities, LeetCode's
+  English and Chinese titles, difficulty, paid flag, contest rating, the
+  level (`core`, `optional`, `stretch`), and chapters and sections with a
+  pattern each; every English label is our own, and only an author's name
+  may be Chinese in English. 24 lists are imported (2026-10-20), all on
+  leetcode.com, 2,750 unique problems:
+  - 灵茶山艾府's 12 topic lists from his index post
+    ([如何科学刷题](https://leetcode.cn/discuss/post/3141566/ru-he-ke-xue-shua-ti-by-endlesscheng-q3yd/)).
+    leetcode.cn-only problems (LCP, LCR, 面试题) are replaced by their
+    leetcode.com twin only when the post says they are the same (`同 X 题`),
+    else left out; a list page notes how many are not included.
+  - Carl's (代码随想录) 11 core topics in the order of
+    [programmercarl.com/algo](https://programmercarl.com/algo/) (graph theory
+    left out: its problems are on Kamacoder) and his extra problems. Each
+    article's own problem is core, the ones it recommends (相关题目推荐) are
+    stretch; 221 items, 200 unique problems.
+  - Optional (选做) and premium problems are ordinary entries; nothing skips
+    them. The files total 1.3 MB of server-only JSON, parsed once per server
+    instance on first use. Only problem identities, LeetCode's titles,
+    ratings, and the section structure are stored (none of the authors'
+    text), and every list page credits and links its source.
+- **Patterns** (`patterns.ts`) name the technique a section practices,
+  finer than LeetCode topics. Ids are stable (history will be keyed by them);
+  a problem's patterns are those of every built-in section containing its
+  slug, followed or not (`patternsForSlug()`).
+- **Tables**: `study_lists` has one row per custom list (`kind = custom`,
+  `name`) or followed built-in list (`kind = builtin`, `builtin_id`, unique
+  per user), with `active`, `position`, and the creating
+  `request_id` (unique per user, so create/follow/copy are idempotent).
+  `share` is unused since shares were removed on 2026-10-21 (every active
+  list gets equal turns); the column stays at its default of 1.
+  `study_list_items` holds custom-list items by slug, with the title,
+  Chinese title, difficulty, and LeetCode number taken from the server's own
+  rows (the deck or a built-in list, never the request), and a composite
+  foreign key pinning each item to its list's owner. Built-in items are never
+  copied into the database; a copy makes a custom list of the distinct slugs.
+- **My problems is not stored**: it is every problem of the deck whose slug is
+  in no custom list item and no followed built-in list. So a problem started
+  on LeetCode outside any list, a problem removed from its last list, and the
+  started problems of an unfollowed list all show there with nothing to keep
+  in sync. It never supplies new problems.
+- **Entry state** is derived on read by slug (`server/study-lists/lists.ts`):
+  `in_progress` (awaiting initial learning), `learned` (enrolled),
+  `archived`, `attempted_before` (only in `attempt_history`), or
+  `not_started`. Progress counts distinct slugs; "next up" is the first entry
+  in list order not started (attempted-before included). Optional and premium
+  entries are ordinary entries.
+- **Starting** a list problem is opening it on LeetCode; the extension starts
+  the session as for any problem, and the new problem joins its lists by
+  slug.
+- **Today planner** (`server/study-plan/today.ts`, pure logic in
+  `packages/core/src/study-plan/`), derived on every read, nothing stored:
+  - Pacing by a daily time budget (`study_plan` settings: `dailyMinutes`
+    default 60, `maxNewPerDay` default 5 up to 100, `hidePatternsOnToday`
+    default on). The day's reviews are due now within the daily limit plus
+    those rated today; `newSlots = round((dailyMinutes − reviews ×
+    reviewMinutes) / newMinutes)` clamped to [0, maxNewPerDay], minus new
+    problems already started today. Reviews are never cut. Typical times are
+    12 and 35 minutes until five completed sessions of a kind exist, then the
+    median of `practice_sessions.active_ms` (last 90 days). Why a budget
+    and not a fixed count: simulated with the app's FSRS settings on the
+    272-problem list, 1 new problem a day climbs from 42 to 133 minutes a
+    day by month 9 and 2 a day peaks near 200 by month 3, while a 60-minute
+    budget stays near 60 (about 1.4 new a day in week 1, 0.6 by month 6). A
+    60-day look-ahead planner did no better.
+  - Slots go to active lists in equal turns through a deficit round-robin over the
+    last 14 days of first practices (each counted for the first active list
+    holding it), ties broken by a seeded hash. Within a list: the next unseen
+    problem of a weak pattern first (`weak_pattern`), then at most one check
+    problem a day for a strong pattern not checked in 14 days (`check`), else
+    the next problem in order (`next`). "One more new problem" (`?more=N`)
+    shows picks past the plan.
+  - Pattern stats (`computePatternProfile()`, `loadPatternProfile()` over the
+    mistake profile's evidence): every completed session counts for its
+    problem's patterns (rating outranks outcome), first practices weigh 1.5x
+    (transfer), a context with confirmed mistakes adds failure weight once
+    and counts its causes. Ready at 2 sessions across 2 problems; weak at
+    weakness 0.25+; strong at 3+ problems and weakness below 0.15.
+  - Due reviews on Today are shown in a seeded interleaved order (stable for
+    the day) that never puts two problems of one pattern next to each other
+    when an order like that exists; their patterns are hidden unless the
+    setting is off. The extension popup keeps most overdue first.
+  - Pause: a paused list gives no new problems; reviews of its started
+    problems stay on schedule (FSRS never looks at lists).
+- **Pattern profile** (`patternProfileDto()` in `server/mistake-profile.ts`,
+  from the same pattern stats as the planner): `/analysis` shows a pattern x
+  cause grid, one row per pattern with evidence (weak ones first, weakest
+  first, then the rest by sessions): status (Weak, Strong, Steady, or too few
+  sessions), sessions and problems, new problems solved on the first try,
+  and one column per confirmed cause, shaded by count. A weak pattern lists
+  up to 3 problems to practice it next (`loadPatternPractice()` in
+  `lists.ts`): never-attempted problems (no problem row, nothing in
+  `attempt_history`) from built-in sections with the pattern, from the lists
+  the user follows and has not paused first, in the user's order, then the
+  other built-in lists in display order, each problem once. Today's focus
+  card names the 3 weakest patterns with one such problem each
+  (`TodayPlanDto.focusPatterns`); it shows whatever `hidePatternsOnToday`
+  says, since it names weak patterns, not which due review needs one.
+  `/analysis` reads the evidence once for both profiles (`loadProfiles()`).
+- **API** (contracts in `packages/contracts/src/study-lists.ts`):
+  `GET/POST/PUT /api/study-lists` (overview with built-in lists grouped by
+  author; create, follow, copy; the order of the user's lists, every list
+  id once, My problems staying first),
+  `GET/PATCH/DELETE /api/study-lists/:id` (`my-problems` for My problems;
+  rename custom lists, pause or resume; delete or unfollow),
+  `POST/PUT /api/study-lists/:id/items` (add by problem id or built-in slug,
+  or several of the deck's problems at once; reorder with every item id
+  once), `DELETE /api/study-lists/:id/items/:itemId`,
+  `GET /api/study-lists/builtin/:builtinId`,
+  `GET /api/problems/:id/study-lists`, and `GET /api/mistakes/patterns`
+  (the pattern profile). Lists and items are in the account export.
+- **Open item**: ask 灵茶山艾府 and Carl for permission before shipping the
+  lists to users: the selection and grouping are their work.
+
 ## New-problem suggestions
 
 Suggestions target problems the user has never attempted; no model invents or
@@ -551,8 +691,9 @@ refund, and update the terms and privacy policy.
 ## Rate limits and caps
 
 `server/rate-limit.ts` is a DB-backed fixed-window limiter per user and scope
-(`agent` 12/min, `ai` 20/min, `capture` 60/min, `sessions` 120/min, `mistakes` 60/min, `suggestions` 60/min, `billing` 10/min). Hard caps
-limit cards and quiz sessions per problem and active AI jobs per user.
+(`agent` 12/min, `ai` 20/min, `capture` 60/min, `sessions` 120/min, `mistakes` 60/min, `suggestions` 60/min, `lists` 60/min, `billing` 10/min). Hard caps
+limit cards and quiz sessions per problem, active AI jobs per user, and study
+lists (50 per user, 2,000 problems per custom list).
 
 ## The extension
 
@@ -604,11 +745,46 @@ extension reuses the web session cookie, and production CORS allows only
 - `/`: the public landing (signed-in users go to `/today`).
 - `/today`: the dashboard and onboarding. `server/dashboard.ts` gathers the
   popup's review overview, the last week's completed sessions, recent
-  practice, focus areas from the profile, and today's suggestions.
+  practice, focus areas from the profile, and today's suggestions; Today's
+  plan (`loadTodayPlan()`) adds the day's new problems from the active lists,
+  orders the due reviews, and adds weak patterns to the focus card (see
+  Study lists, "Today planner" and "Pattern profile").
+- `/lists`: two areas, both made of the same list row (name, size and
+  learned count, a detail line, a progress bar with a percentage, which sits
+  under the name on phones, and an action). Your lists: My problems pinned
+  first (a pin, a faint tint, no actions), then the user's lists, reordered
+  by dragging a row's handle (pointer events, so touch works too) or with
+  the arrow keys on it, each with a "⋯" menu (`components/ui/menu.tsx`):
+  Pause or Resume (paused: no new problems on Today, reviews continue),
+  Rename (custom lists, inline), and Delete or Unfollow (after a
+  confirmation); a new-list form. Built-in lists: an always-open accordion,
+  one item per author, collapsed until opened (the browser remembers which,
+  in localStorage), with a header that sticks under the nav while its lists
+  scroll; each list is a numbered row with Follow. Every list page starts
+  with an "All lists" back button (an arrow icon).
+  `/lists/builtin/[builtinId]` shows a built-in list by chapter and section
+  (pattern, level, rating, state) with Follow, Unfollow, Pause, and Copy;
+  `/lists/[id]` and `/lists/my-problems` show a custom list (drag to
+  reorder, remove, rename, delete) or My problems. Any list can add its problems to one of
+  the user's custom lists.
 - `/problems` and `/problems/[id]`:
-  - archive, unarchive, delete; the list archives or unarchives several
-    selected problems at once (`POST /api/problems/archive`, which refuses
-    to unarchive past the active-problem cap);
+  - each row of the list has a "⋯" menu (Add to list, Archive or Unarchive);
+    selected problems are added to a list or archived together (`POST
+    /api/problems/archive`, which refuses to unarchive past the
+    active-problem cap; `POST /api/study-lists/:id/items` with
+    `source: "problems"`, all or nothing, counting the ones already there);
+  - "Add to list" (`app/(app)/lists/add-to-list-dialog.tsx`) is a dialog of
+    the user's custom lists, like adding a track to playlists: for one
+    problem each list is a checkbox (check adds, uncheck removes; it flips
+    at once and is put back if the request fails), for several each list
+    has an Add button; a new list can be named there and gets the problems
+    at once;
+  - the detail page: an "All problems" back button (back to the list's last
+    sort, kept in sessionStorage) with the "⋯" menu (Archive or Unarchive,
+    Delete after a confirmation) across from it; a header with the title,
+    pills, topic tags, the lists holding the problem as links, and Practice
+    on LeetCode and Add to list; a strip of scheduling stats (next review,
+    reviews, times forgotten, last reviewed); then the tabs at full width;
   - the list loads the whole active deck in one page (the cap counts only
     active problems), so search, filters, and sorting see every problem.
     Sort keys (`problems-sort.ts`, kept in `?sort=&dir=`): next review, date
@@ -621,15 +797,16 @@ extension reuses the web session cookie, and production CORS allows only
   - the Sessions tab (evidence, active time, rating, and Delete for a
     finished or stale session, with a confirmation that says what it undoes);
   - History as the scheduling timeline of ratings and initial-review
-    schedules (undone ones hidden);
-  - the next review date;
-  - "Practice on LeetCode".
+    schedules (undone ones hidden).
 - `/suggestions`: today's new-problem suggestions, the same items as the
   popup.
-- `/analysis`: the mistake profile, then the FSRS dashboard.
-- `/settings`: AI provider, AI credits, language and region, review schedule
-  and first-review delay, session-analysis automation, account export and
-  delete.
+- `/analysis`: the mistake profile, the pattern x cause grid (it scrolls
+  inside its panel on a phone, the pattern column staying put), then the
+  FSRS dashboard.
+- `/settings`: AI provider, AI credits, language and region, study plan
+  (daily time, new problems per day, hiding patterns on Today), review
+  schedule and first-review delay, session-analysis automation, account
+  export and delete.
 - `/privacy` and `/terms`.
 
 The retired web review workspace (`/review`) redirects to

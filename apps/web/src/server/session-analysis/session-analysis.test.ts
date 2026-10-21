@@ -535,6 +535,13 @@ describe("automatic analysis", () => {
   it("runs for a review exactly as for a first practice, before and regardless of its rating", async () => {
     enable();
     const first = await session(["Accepted"]);
+    // A review on the day of the first practice would start as practice
+    // (same-day re-solves never move the schedule), so the first practice's
+    // schedule is moved to two days ago.
+    await getDb()
+      .update(schema.reviewEvents)
+      .set({ occurredAt: new Date(Date.now() - 2 * 86_400_000) })
+      .where(and(eq(schema.reviewEvents.problemId, first.problemId), eq(schema.reviewEvents.eventType, "fsrs_scheduled")));
     const review = await session(["Accepted"], { reviewOf: first.problemId });
     const [row] = await getDb().select().from(schema.practiceSessions).where(eq(schema.practiceSessions.id, review.sessionId));
     expect(row).toMatchObject({ type: "scheduled_review", status: "completed", ratingDisposition: "pending" });

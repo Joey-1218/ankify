@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowDownWideNarrow, ArrowUpNarrowWide, ChevronDown } from "lucide-react";
+import { ArrowDownWideNarrow, ArrowUpNarrowWide, ChevronDown, ListPlus } from "lucide-react";
 import type { LeetCodeDifficulty } from "@ankileet/core";
 import { isMasteryCandidate } from "@ankileet/core/mastery";
 import type {
@@ -16,16 +16,19 @@ import { Surface } from "@/components/ui/surface";
 import { Input, Select } from "@/components/ui/field";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
+import { Menu } from "@/components/ui/menu";
 import { Spinner } from "@/components/ui/spinner";
 import { ActiveIndicator } from "@/components/ui/motion";
 import { PageFrame, PageHeader } from "@/components/ui/page";
 import { useLanguage } from "@/components/LanguageProvider";
 import { notifyReviewQueueUpdated } from "@/lib/review-queue-event";
 import { cn, formatRelative } from "@/lib/utils";
+import { AddToListDialog, type AddToListTarget } from "../lists/add-to-list-dialog";
 import {
   compareProblems,
   PROBLEM_SORT_DEFAULT_DIR,
   PROBLEM_SORT_KEYS,
+  PROBLEMS_SEARCH_KEY,
   problemsSortSearch,
   type ProblemSort,
   type ProblemSortKey,
@@ -48,9 +51,12 @@ function isProblemDue(problem: Pick<ProblemListItemDto, "enrollment" | "fsrsDue"
 export default function ProblemsPage({
   initialData,
   initialSort,
+  customLists,
 }: {
   initialData: ProblemsListPayloadDto;
   initialSort: ProblemSort;
+  /** The user's custom lists, for adding selected problems to one. */
+  customLists: readonly { id: string; name: string }[];
 }) {
   const { language, t } = useLanguage();
   const router = useRouter();
@@ -73,6 +79,7 @@ export default function ProblemsPage({
   const [selected, setSelected] = useState<Set<string>>(() => new Set());
   const [bulkBusy, setBulkBusy] = useState(false);
   const [bulkError, setBulkError] = useState<string | null>(null);
+  const [adding, setAdding] = useState<AddToListTarget | null>(null);
   const [nowMs, setNowMs] = useState(
     () => new Date(initialData.serverNow).getTime(),
   );
@@ -135,7 +142,11 @@ export default function ProblemsPage({
 
   // Keep the sort in the URL, so coming back from a problem restores it.
   useEffect(() => {
-    window.history.replaceState(null, "", `/problems${problemsSortSearch(sort)}`);
+    const search = problemsSortSearch(sort);
+    window.history.replaceState(null, "", `/problems${search}`);
+    try {
+      sessionStorage.setItem(PROBLEMS_SEARCH_KEY, search);
+    } catch {}
   }, [sort]);
 
   async function loadMore() {
@@ -256,8 +267,8 @@ export default function ProblemsPage({
     });
   };
 
-  async function archiveSelected() {
-    const ids = selectedShown.map((p) => p.id);
+  /** Archives (or, in the Archived view, restores) problems; from the bulk bar or one row's menu. */
+  async function archiveProblems(ids: readonly string[]) {
     if (!ids.length || bulkBusy) return;
     setBulkBusy(true);
     setBulkError(null);
@@ -282,7 +293,7 @@ export default function ProblemsPage({
       setProblems((current) => current.filter((p) => !moved.has(p.id)));
       setTotalCount((count) => Math.max(0, count - ids.length));
       setArchivedCount((count) => Math.max(0, count + (showArchived ? -ids.length : ids.length)));
-      setSelected(new Set());
+      setSelected((current) => new Set([...current].filter((id) => !moved.has(id))));
       if (json.dueCount != null) {
         setDueCount(json.dueCount);
         notifyReviewQueueUpdated(json.dueCount);
@@ -489,7 +500,11 @@ export default function ProblemsPage({
           {selectedShown.length > 0 && (
             <>
               <span className="text-sm font-medium tabular-nums">{t.problems.selectedCount(selectedShown.length)}</span>
-              <Button size="sm" variant="primary" onClick={() => void archiveSelected()} disabled={bulkBusy}>
+              <Button size="sm" variant="secondary" onClick={() => setAdding({ kind: "problems", problemIds: selectedShown.map((p) => p.id) })} disabled={bulkBusy}>
+                <ListPlus aria-hidden className="h-4 w-4" />
+                {t.lists.addTo}
+              </Button>
+              <Button size="sm" variant="primary" onClick={() => void archiveProblems(selectedShown.map((p) => p.id))} disabled={bulkBusy}>
                 {bulkBusy && <Spinner />}
                 {showArchived
                   ? t.problems.unarchiveSelected(selectedShown.length)
@@ -506,7 +521,8 @@ export default function ProblemsPage({
 
       {/* Table */}
       <Surface className="overflow-hidden">
-        <div className="overflow-x-auto">
+        {/* relative: the header's sr-only text is clipped here too, so it never widens the page. */}
+        <div className="relative overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border text-left text-xs text-muted">
@@ -549,6 +565,9 @@ export default function ProblemsPage({
                     </th>
                   );
                 })}
+                <th className="w-12 py-2.5 pr-3">
+                  <span className="sr-only">{t.problems.actionsColumn}</span>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -633,6 +652,22 @@ export default function ProblemsPage({
                     <td className="hidden xl:table-cell whitespace-nowrap px-4 py-2.5 text-xs tabular-nums text-muted">
                       {dateFormat.format(new Date(p.createdAt))}
                     </td>
+                    {/* The menu acts on this problem; it never opens it. */}
+                    <td className="py-1 pr-3 text-right" onClick={(e) => e.stopPropagation()}>
+                      <Menu
+                        label={t.problems.rowActions(p.title)}
+                        items={[
+                          { key: "add", label: t.lists.addTo, onSelect: () => setAdding({ kind: "problem", problemId: p.id, title: p.title }) },
+                          {
+                            key: "archive",
+                            label: showArchived ? t.detail.unarchive : t.detail.archive,
+                            description: showArchived ? t.detail.unarchiveHint : t.detail.archiveHint,
+                            disabled: bulkBusy,
+                            onSelect: () => void archiveProblems([p.id]),
+                          },
+                        ]}
+                      />
+                    </td>
                   </tr>
                 );
               })}
@@ -661,6 +696,14 @@ export default function ProblemsPage({
           </div>
         )}
       </Surface>
+      {adding && (
+        <AddToListDialog
+          open
+          onClose={() => setAdding(null)}
+          target={adding}
+          lists={adding.kind === "problems" ? customLists : undefined}
+        />
+      )}
     </PageFrame>
   );
 }

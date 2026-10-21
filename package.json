@@ -30,6 +30,8 @@
     "release:check": "pnpm typecheck && pnpm lint && pnpm test && pnpm test:e2e && pnpm build && pnpm extension:check-manifest && pnpm audit --prod --audit-level=high --ignore-registry-errors",
     "extension:build:unpacked": "pnpm --filter @ankileet/extension build:unpacked",
     "extension:check-manifest": "node scripts/check-extension-manifest.mjs",
+    "study-lists:import": "node scripts/study-list-import.mjs",
+    "study-lists:import-carl": "node scripts/study-list-import-carl.mjs",
     "db:generate": "pnpm --filter @ankileet/db generate",
     "db:migrate": "pnpm --filter @ankileet/db migrate",
     "db:migrate:qa": "pnpm --filter @ankileet/db migrate:qa",
@@ -66,6 +68,7 @@
       "shell-quote": "1.11.0",
       "source-map-js": "1.2.2",
       "undici@7": "7.29.1",
+      "vite@6": "6.4.4",
       "ws": "8.21.1"
     }
   }

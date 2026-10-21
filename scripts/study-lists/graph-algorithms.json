@@ -1,0 +1,124 @@
+{
+  "id": "graph-algorithms",
+  "name": {
+    "en": "Graph Algorithms",
+    "zh": "图论算法"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/01LUak/",
+  "headings": {},
+  "chapters": {
+    "1": {
+      "en": "Graph traversal",
+      "zh": "图的遍历"
+    },
+    "2": {
+      "en": "Topological sort",
+      "zh": "拓扑排序"
+    },
+    "3": {
+      "en": "Shortest paths",
+      "zh": "最短路"
+    },
+    "4": {
+      "en": "Minimum spanning trees",
+      "zh": "最小生成树"
+    },
+    "5": {
+      "en": "Euler paths and circuits",
+      "zh": "欧拉路径/欧拉回路"
+    },
+    "6": {
+      "en": "Strongly connected and biconnected components",
+      "zh": "强连通分量/双连通分量"
+    },
+    "7": {
+      "en": "Bipartite coloring",
+      "zh": "二分图染色"
+    },
+    "8": {
+      "en": "Network flow",
+      "zh": "网络流"
+    },
+    "9": {
+      "en": "Other",
+      "zh": "其他"
+    },
+    "10": {
+      "en": "Tree algorithms",
+      "zh": "树上算法"
+    }
+  },
+  "sections": {
+    "1.1": {
+      "en": "Depth-first search",
+      "zh": "深度优先搜索（DFS）",
+      "pattern": "graph.dfs"
+    },
+    "1.2": {
+      "en": "Breadth-first search",
+      "zh": "广度优先搜索（BFS）",
+      "pattern": "graph.bfs"
+    },
+    "1.3": {
+      "en": "Modeling as a graph, then BFS shortest paths",
+      "zh": "图论建模 + BFS 最短路",
+      "pattern": "graph.bfs_modeling"
+    },
+    "2.1": {
+      "en": "Topological sort",
+      "zh": "拓扑排序",
+      "pattern": "graph.topo"
+    },
+    "2.2": {
+      "en": "DP on a topological order",
+      "zh": "在拓扑序上 DP",
+      "pattern": "graph.topo_dp"
+    },
+    "2.3": {
+      "en": "Functional graphs (one cycle per component)",
+      "zh": "基环树",
+      "pattern": "graph.functional"
+    },
+    "3.1": {
+      "en": "Single-source shortest paths: Dijkstra",
+      "zh": "单源最短路：Dijkstra 算法",
+      "pattern": "graph.dijkstra"
+    },
+    "3.2": {
+      "en": "All-pairs shortest paths: Floyd",
+      "zh": "全源最短路：Floyd 算法",
+      "pattern": "graph.floyd"
+    },
+    "4": {
+      "en": "Minimum spanning trees",
+      "zh": "最小生成树",
+      "pattern": "graph.mst"
+    },
+    "5": {
+      "en": "Euler paths and circuits",
+      "zh": "欧拉路径/欧拉回路",
+      "pattern": "graph.euler"
+    },
+    "6": {
+      "en": "Strongly connected and biconnected components",
+      "zh": "强连通分量/双连通分量",
+      "pattern": "graph.components"
+    },
+    "7": {
+      "en": "Bipartite coloring",
+      "zh": "二分图染色",
+      "pattern": "graph.bipartite"
+    },
+    "8": {
+      "en": "Network flow",
+      "zh": "网络流",
+      "pattern": "graph.flow"
+    },
+    "9": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "graph.other"
+    }
+  }
+}

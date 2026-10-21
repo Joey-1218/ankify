@@ -1,0 +1,3936 @@
+{
+  "id": "sliding-window-two-pointers",
+  "name": {
+    "en": "Sliding Window and Two Pointers",
+    "zh": "滑动窗口与双指针"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/3578981/ti-dan-hua-dong-chuang-kou-ding-chang-bu-rzz7/",
+  "sourceUpdatedAt": "2026-09-12T08:35:25.251470+00:00",
+  "generatedAt": "2026-10-20T19:18:27.587Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Fixed-length sliding window",
+        "zh": "定长滑动窗口"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Variable-length sliding window",
+        "zh": "不定长滑动窗口"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Two pointers on one sequence",
+        "zh": "单序列双指针"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Two pointers on two sequences",
+        "zh": "双序列双指针"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Three pointers",
+        "zh": "三指针"
+      }
+    },
+    {
+      "id": "6",
+      "title": {
+        "en": "Group loop",
+        "zh": "分组循环"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Basics",
+        "zh": "基础"
+      },
+      "pattern": "sliding_window.fixed",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Advanced",
+        "zh": "进阶"
+      },
+      "pattern": "sliding_window.fixed",
+      "optional": true
+    },
+    {
+      "id": "2.1.1",
+      "chapterId": "2",
+      "title": {
+        "en": "Longest or largest: basics",
+        "zh": "求最长/最大：基础"
+      },
+      "pattern": "sliding_window.variable.longest",
+      "optional": false
+    },
+    {
+      "id": "2.1.2",
+      "chapterId": "2",
+      "title": {
+        "en": "Longest or largest: advanced",
+        "zh": "求最长/最大：进阶"
+      },
+      "pattern": "sliding_window.variable.longest",
+      "optional": true
+    },
+    {
+      "id": "2.2",
+      "chapterId": "2",
+      "title": {
+        "en": "Shortest or smallest",
+        "zh": "求最短/最小"
+      },
+      "pattern": "sliding_window.variable.shortest",
+      "optional": false
+    },
+    {
+      "id": "2.3.1",
+      "chapterId": "2",
+      "title": {
+        "en": "Counting subarrays: shorter is valid",
+        "zh": "求子数组个数：越短越合法"
+      },
+      "pattern": "sliding_window.variable.count_at_most",
+      "optional": false
+    },
+    {
+      "id": "2.3.2",
+      "chapterId": "2",
+      "title": {
+        "en": "Counting subarrays: longer is valid",
+        "zh": "求子数组个数：越长越合法"
+      },
+      "pattern": "sliding_window.variable.count_at_least",
+      "optional": false
+    },
+    {
+      "id": "2.3.3",
+      "chapterId": "2",
+      "title": {
+        "en": "Counting subarrays: exactly k",
+        "zh": "求子数组个数：恰好型"
+      },
+      "pattern": "sliding_window.variable.count_exact",
+      "optional": false
+    },
+    {
+      "id": "2.4",
+      "chapterId": "2",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "sliding_window.variable.other",
+      "optional": true
+    },
+    {
+      "id": "3.1",
+      "chapterId": "3",
+      "title": {
+        "en": "Reversing a string",
+        "zh": "反转字符串"
+      },
+      "pattern": "two_pointers.reverse",
+      "optional": false
+    },
+    {
+      "id": "3.2",
+      "chapterId": "3",
+      "title": {
+        "en": "Pointers moving toward each other",
+        "zh": "相向双指针"
+      },
+      "pattern": "two_pointers.opposite",
+      "optional": false
+    },
+    {
+      "id": "3.3",
+      "chapterId": "3",
+      "title": {
+        "en": "Pointers moving the same way",
+        "zh": "同向双指针"
+      },
+      "pattern": "two_pointers.same_direction",
+      "optional": false
+    },
+    {
+      "id": "3.4",
+      "chapterId": "3",
+      "title": {
+        "en": "Pointers moving apart",
+        "zh": "背向双指针"
+      },
+      "pattern": "two_pointers.outward",
+      "optional": false
+    },
+    {
+      "id": "3.5",
+      "chapterId": "3",
+      "title": {
+        "en": "In-place modification",
+        "zh": "原地修改"
+      },
+      "pattern": "two_pointers.in_place",
+      "optional": false
+    },
+    {
+      "id": "3.6",
+      "chapterId": "3",
+      "title": {
+        "en": "Two pointers on a matrix",
+        "zh": "矩阵上的双指针"
+      },
+      "pattern": "two_pointers.matrix",
+      "optional": false
+    },
+    {
+      "id": "4.1",
+      "chapterId": "4",
+      "title": {
+        "en": "Two pointers",
+        "zh": "双指针"
+      },
+      "pattern": "two_sequences.two_pointers",
+      "optional": false
+    },
+    {
+      "id": "4.2",
+      "chapterId": "4",
+      "title": {
+        "en": "Subsequence checks",
+        "zh": "判断子序列"
+      },
+      "pattern": "two_sequences.subsequence",
+      "optional": false
+    },
+    {
+      "id": "5",
+      "chapterId": "5",
+      "title": {
+        "en": "Three pointers",
+        "zh": "三指针"
+      },
+      "pattern": "three_pointers",
+      "optional": false
+    },
+    {
+      "id": "6",
+      "chapterId": "6",
+      "title": {
+        "en": "Group loop",
+        "zh": "分组循环"
+      },
+      "pattern": "group_loop",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "maximum-number-of-vowels-in-a-substring-of-given-length",
+      "frontendId": "1456",
+      "title": {
+        "en": "Maximum Number of Vowels in a Substring of Given Length",
+        "zh": "定长子串中元音的最大数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1263,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-average-subarray-i",
+      "frontendId": "643",
+      "title": {
+        "en": "Maximum Average Subarray I",
+        "zh": "子数组最大平均数 I"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold",
+      "frontendId": "1343",
+      "title": {
+        "en": "Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold",
+        "zh": "大小为 K 且平均值大于等于阈值的子数组数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1317,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "k-radius-subarray-averages",
+      "frontendId": "2090",
+      "title": {
+        "en": "K Radius Subarray Averages",
+        "zh": "半径为 k 的子数组平均值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1358,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-recolors-to-get-k-consecutive-black-blocks",
+      "frontendId": "2379",
+      "title": {
+        "en": "Minimum Recolors to Get K Consecutive Black Blocks",
+        "zh": "得到 K 个黑块的最少涂色次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1360,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-sum-of-almost-unique-subarray",
+      "frontendId": "2841",
+      "title": {
+        "en": "Maximum Sum of Almost Unique Subarray",
+        "zh": "几乎唯一子数组的最大和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1546,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-sum-of-distinct-subarrays-with-length-k",
+      "frontendId": "2461",
+      "title": {
+        "en": "Maximum Sum of Distinct Subarrays With Length K",
+        "zh": "长度为 K 子数组中的最大和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1553,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-points-you-can-obtain-from-cards",
+      "frontendId": "1423",
+      "title": {
+        "en": "Maximum Points You Can Obtain from Cards",
+        "zh": "可获得的最大点数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1574,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "diet-plan-performance",
+      "frontendId": "1176",
+      "title": {
+        "en": "Diet Plan Performance",
+        "zh": "健身计划评估"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-k-length-substrings-with-no-repeated-characters",
+      "frontendId": "1100",
+      "title": {
+        "en": "Find K-Length Substrings With No Repeated Characters",
+        "zh": "长度为 K 的无重复字符子串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "distinct-numbers-in-each-subarray",
+      "frontendId": "1852",
+      "title": {
+        "en": "Distinct Numbers in Each Subarray",
+        "zh": "每个子数组的数字种类数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-swaps-to-group-all-1s-together",
+      "frontendId": "1151",
+      "title": {
+        "en": "Minimum Swaps to Group All 1's Together",
+        "zh": "最少交换次数来组合所有的 1"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-unique-flavors-after-sharing-k-candies",
+      "frontendId": "2107",
+      "title": {
+        "en": "Number of Unique Flavors After Sharing K Candies",
+        "zh": "分享 K 个糖果后独特口味的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "grumpy-bookstore-owner",
+      "frontendId": "1052",
+      "title": {
+        "en": "Grumpy Bookstore Owner",
+        "zh": "爱生气的书店老板"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1418,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "minimum-discards-to-balance-inventory",
+      "frontendId": "3679",
+      "title": {
+        "en": " Minimum Discards to Balance Inventory",
+        "zh": "使库存平衡的最少丢弃次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1639,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "reschedule-meetings-for-maximum-free-time-i",
+      "frontendId": "3439",
+      "title": {
+        "en": "Reschedule Meetings for Maximum Free Time I",
+        "zh": "重新安排会议得到最多空余时间 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1729,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "distinct-points-reachable-after-substring-removal",
+      "frontendId": "3694",
+      "title": {
+        "en": "Distinct Points Reachable After Substring Removal",
+        "zh": "删除子字符串后不同的终点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1739,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "maximum-number-of-occurrences-of-a-substring",
+      "frontendId": "1297",
+      "title": {
+        "en": "Maximum Number of Occurrences of a Substring",
+        "zh": "子串的最大出现次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1748,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "minimum-swaps-to-group-all-1s-together-ii",
+      "frontendId": "2134",
+      "title": {
+        "en": "Minimum Swaps to Group All 1's Together II",
+        "zh": "最少交换次数来组合所有的 1 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1748,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "defuse-the-bomb",
+      "frontendId": "1652",
+      "title": {
+        "en": "Defuse the Bomb",
+        "zh": "拆炸弹"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "count-rotations-with-exactly-k-equal-adjacent-pairs",
+      "frontendId": "4043",
+      "title": {
+        "en": "Count Rotations With Exactly K Equal Adjacent Pairs",
+        "zh": "恰好有 K 对相等相邻字符的循环移位数量"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "count-good-cyclic-rotations",
+      "frontendId": "4044",
+      "title": {
+        "en": "Count Good Cyclic Rotations",
+        "zh": "统计好循环移位的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "best-time-to-buy-and-sell-stock-using-strategy",
+      "frontendId": "3652",
+      "title": {
+        "en": "Best Time to Buy and Sell Stock using Strategy",
+        "zh": "按策略买卖股票的最佳时机"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "permutation-in-string",
+      "frontendId": "567",
+      "title": {
+        "en": "Permutation in String",
+        "zh": "字符串的排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "find-all-anagrams-in-a-string",
+      "frontendId": "438",
+      "title": {
+        "en": "Find All Anagrams in a String",
+        "zh": "找到字符串中所有字母异位词"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "substring-with-concatenation-of-all-words",
+      "frontendId": "30",
+      "title": {
+        "en": "Substring with Concatenation of All Words",
+        "zh": "串联所有单词的子串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "minimum-number-of-flips-to-make-the-binary-string-alternating",
+      "frontendId": "1888",
+      "title": {
+        "en": "Minimum Number of Flips to Make the Binary String Alternating",
+        "zh": "使二进制字符串字符交替的最少反转次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2006,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "find-substring-with-given-hash-value",
+      "frontendId": "2156",
+      "title": {
+        "en": "Find Substring With Given Hash Value",
+        "zh": "查找给定哈希值的子串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2063,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "count-complete-substrings",
+      "frontendId": "2953",
+      "title": {
+        "en": "Count Complete Substrings",
+        "zh": "统计完全子字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2449,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "sum-of-weighted-modes-in-subarrays",
+      "frontendId": "3672",
+      "title": {
+        "en": "Sum of Weighted Modes in Subarrays",
+        "zh": "子数组中加权众数的总和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "number-of-equal-count-substrings",
+      "frontendId": "2067",
+      "title": {
+        "en": "Number of Equal Count Substrings",
+        "zh": "等计数子串的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "maximum-frequency-score-of-a-subarray",
+      "frontendId": "2524",
+      "title": {
+        "en": "Maximum Frequency Score of a Subarray",
+        "zh": "子数组的最大频率分数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "find-all-k-distant-indices-in-an-array",
+      "frontendId": "2200",
+      "title": {
+        "en": "Find All K-Distant Indices in an Array",
+        "zh": "找出数组中的所有 K 近邻下标"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "check-if-a-string-contains-all-binary-codes-of-size-k",
+      "frontendId": "1461",
+      "title": {
+        "en": "Check If a String Contains All Binary Codes of Size K",
+        "zh": "检查一个字符串是否包含所有长度为 K 的二进制子串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1504,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "binary-string-with-substrings-representing-1-to-n",
+      "frontendId": "1016",
+      "title": {
+        "en": "Binary String With Substrings Representing 1 To N",
+        "zh": "子串能表示从 1 到 N 数字的二进制串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "sliding-subarray-beauty",
+      "frontendId": "2653",
+      "title": {
+        "en": "Sliding Subarray Beauty",
+        "zh": "滑动子数组的美丽值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1786,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "longest-substring-without-repeating-characters",
+      "frontendId": "3",
+      "title": {
+        "en": "Longest Substring Without Repeating Characters",
+        "zh": "无重复字符的最长子串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-length-substring-with-two-occurrences",
+      "frontendId": "3090",
+      "title": {
+        "en": "Maximum Length Substring With Two Occurrences",
+        "zh": "每个字符最多出现两次的最长子字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1329,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "longest-subarray-of-1s-after-deleting-one-element",
+      "frontendId": "1493",
+      "title": {
+        "en": "Longest Subarray of 1's After Deleting One Element",
+        "zh": "删掉一个元素以后全为 1 的最长子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1423,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-removals-to-balance-array",
+      "frontendId": "3634",
+      "title": {
+        "en": "Minimum Removals to Balance Array",
+        "zh": "使数组平衡的最少移除数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1453,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "get-equal-substrings-within-budget",
+      "frontendId": "1208",
+      "title": {
+        "en": "Get Equal Substrings Within Budget",
+        "zh": "尽可能使字符串相等"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1497,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "fruit-into-baskets",
+      "frontendId": "904",
+      "title": {
+        "en": "Fruit Into Baskets",
+        "zh": "水果成篮"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1516,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-erasure-value",
+      "frontendId": "1695",
+      "title": {
+        "en": "Maximum Erasure Value",
+        "zh": "删除子数组的最大得分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1529,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "length-of-longest-subarray-with-at-most-k-frequency",
+      "frontendId": "2958",
+      "title": {
+        "en": "Length of Longest Subarray With at Most K Frequency",
+        "zh": "最多 K 个重复元素的最长子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1535,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-confusion-of-an-exam",
+      "frontendId": "2024",
+      "title": {
+        "en": "Maximize the Confusion of an Exam",
+        "zh": "考试的最大困扰度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1643,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "max-consecutive-ones-iii",
+      "frontendId": "1004",
+      "title": {
+        "en": "Max Consecutive Ones III",
+        "zh": "最大连续1的个数 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1656,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "longest-semi-repeating-subarray",
+      "frontendId": "3641",
+      "title": {
+        "en": "Longest Semi-Repeating Subarray",
+        "zh": "最长半重复子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-longest-semi-repetitive-substring",
+      "frontendId": "2730",
+      "title": {
+        "en": "Find the Longest Semi-Repetitive Substring",
+        "zh": "找到最长的半重复子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "maximum-beauty-of-an-array-after-applying-operation",
+      "frontendId": "2779",
+      "title": {
+        "en": "Maximum Beauty of an Array After Applying Operation",
+        "zh": "数组的最大美丽值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1638,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "longest-subarray-with-at-most-k-distinct-prime-factors",
+      "frontendId": "4032",
+      "title": {
+        "en": "Longest Subarray With at Most K Distinct Prime Factors",
+        "zh": "至多 K 个不同质因数集合的最长子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1759,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "minimum-operations-to-reduce-x-to-zero",
+      "frontendId": "1658",
+      "title": {
+        "en": "Minimum Operations to Reduce X to Zero",
+        "zh": "将 x 减到 0 的最小操作数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1817,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "frequency-of-the-most-frequent-element",
+      "frontendId": "1838",
+      "title": {
+        "en": "Frequency of the Most Frequent Element",
+        "zh": "最高频元素的频数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1876,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "take-k-of-each-character-from-left-and-right",
+      "frontendId": "2516",
+      "title": {
+        "en": "Take K of Each Character From Left and Right",
+        "zh": "每种字符至少取 K 个"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1948,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "find-the-longest-equal-subarray",
+      "frontendId": "2831",
+      "title": {
+        "en": "Find the Longest Equal Subarray",
+        "zh": "找出最长等值子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1976,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "maximum-white-tiles-covered-by-a-carpet",
+      "frontendId": "2271",
+      "title": {
+        "en": "Maximum White Tiles Covered by a Carpet",
+        "zh": "毯子覆盖的最多白色砖块数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2022,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "maximum-fruits-harvested-after-at-most-k-steps",
+      "frontendId": "2106",
+      "title": {
+        "en": "Maximum Fruits Harvested After at Most K Steps",
+        "zh": "摘水果"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2062,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "maximize-win-from-two-segments",
+      "frontendId": "2555",
+      "title": {
+        "en": "Maximize Win From Two Segments",
+        "zh": "两个线段获得的最多奖品"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2081,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-make-array-continuous",
+      "frontendId": "2009",
+      "title": {
+        "en": "Minimum Number of Operations to Make Array Continuous",
+        "zh": "使数组连续的最少操作数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2084,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "maximum-number-of-visible-points",
+      "frontendId": "1610",
+      "title": {
+        "en": "Maximum Number of Visible Points",
+        "zh": "可见点的最大数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2147,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "length-of-the-longest-valid-substring",
+      "frontendId": "2781",
+      "title": {
+        "en": "Length of the Longest Valid Substring",
+        "zh": "最长合法子字符串的长度"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2204,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "maximum-subarray-with-equal-products",
+      "frontendId": "3411",
+      "title": {
+        "en": "Maximum Subarray With Equal Products",
+        "zh": "最长乘积等价子数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "maximum-coins-from-k-consecutive-bags",
+      "frontendId": "3413",
+      "title": {
+        "en": "Maximum Coins From K Consecutive Bags",
+        "zh": "收集连续 K 个袋子可以获得的最多硬币数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2374,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "longest-substring-with-at-least-k-repeating-characters",
+      "frontendId": "395",
+      "title": {
+        "en": "Longest Substring with At Least K Repeating Characters",
+        "zh": "至少有 K 个重复字符的最长子串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "longest-nice-substring",
+      "frontendId": "1763",
+      "title": {
+        "en": "Longest Nice Substring",
+        "zh": "最长的美好子字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "apply-operations-to-maximize-frequency-score",
+      "frontendId": "2968",
+      "title": {
+        "en": "Apply Operations to Maximize Frequency Score",
+        "zh": "执行操作使频率分数最大"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2444,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "moving-stones-until-consecutive-ii",
+      "frontendId": "1040",
+      "title": {
+        "en": "Moving Stones Until Consecutive II",
+        "zh": "移动石子直到连续 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2456,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "max-consecutive-ones-ii",
+      "frontendId": "487",
+      "title": {
+        "en": "Max Consecutive Ones II",
+        "zh": "最大连续1的个数 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "longest-substring-with-at-most-two-distinct-characters",
+      "frontendId": "159",
+      "title": {
+        "en": "Longest Substring with At Most Two Distinct Characters",
+        "zh": "至多包含两个不同字符的最长子串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "longest-substring-with-at-most-k-distinct-characters",
+      "frontendId": "340",
+      "title": {
+        "en": "Longest Substring with At Most K Distinct Characters",
+        "zh": "至多包含 K 个不同字符的最长子串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1.2",
+      "level": "optional"
+    },
+    {
+      "slug": "minimum-size-subarray-sum",
+      "frontendId": "209",
+      "title": {
+        "en": "Minimum Size Subarray Sum",
+        "zh": "长度最小的子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-subarray-length-with-distinct-sum-at-least-k",
+      "frontendId": "3795",
+      "title": {
+        "en": "Minimum Subarray Length With Distinct Sum At Least K",
+        "zh": "不同元素和至少为 K 的最短子数组长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1505,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-and-lexicographically-smallest-beautiful-string",
+      "frontendId": "2904",
+      "title": {
+        "en": "Shortest and Lexicographically Smallest Beautiful String",
+        "zh": "最短且字典序最小的美丽子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "replace-the-substring-for-balanced-string",
+      "frontendId": "1234",
+      "title": {
+        "en": "Replace the Substring for Balanced String",
+        "zh": "替换子串得到平衡字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1878,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-size-subarray-in-infinite-array",
+      "frontendId": "2875",
+      "title": {
+        "en": "Minimum Size Subarray in Infinite Array",
+        "zh": "无限数组的最短子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1914,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-window-substring",
+      "frontendId": "76",
+      "title": {
+        "en": "Minimum Window Substring",
+        "zh": "最小覆盖子串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-range-covering-elements-from-k-lists",
+      "frontendId": "632",
+      "title": {
+        "en": "Smallest Range Covering Elements from K Lists",
+        "zh": "最小区间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "subarray-product-less-than-k",
+      "frontendId": "713",
+      "title": {
+        "en": "Subarray Product Less Than K",
+        "zh": "乘积小于 K 的子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-substrings-that-satisfy-k-constraint-i",
+      "frontendId": "3258",
+      "title": {
+        "en": "Count Substrings That Satisfy K-Constraint I",
+        "zh": "统计满足 K 约束的子字符串数量 I"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-subarrays-with-score-less-than-k",
+      "frontendId": "2302",
+      "title": {
+        "en": "Count Subarrays With Score Less Than K",
+        "zh": "统计得分小于 K 的子数组数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1808,
+      "sectionId": "2.3.1",
+      "level": "core"
+    },
+    {
+      "slug": "continuous-subarrays",
+      "frontendId": "2762",
+      "title": {
+        "en": "Continuous Subarrays",
+        "zh": "不间断子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1940,
+      "sectionId": "2.3.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-substrings-without-repeating-character",
+      "frontendId": "2743",
+      "title": {
+        "en": "Count Substrings Without Repeating Character",
+        "zh": "计算没有重复字符的子字符串数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-median-of-the-uniqueness-array",
+      "frontendId": "3134",
+      "title": {
+        "en": "Find the Median of the Uniqueness Array",
+        "zh": "找出唯一性数组的中位数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2451,
+      "sectionId": "2.3.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "count-substrings-that-satisfy-k-constraint-ii",
+      "frontendId": "3261",
+      "title": {
+        "en": "Count Substrings That Satisfy K-Constraint II",
+        "zh": "统计满足 K 约束的子字符串数量 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2659,
+      "sectionId": "2.3.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "number-of-substrings-containing-all-three-characters",
+      "frontendId": "1358",
+      "title": {
+        "en": "Number of Substrings Containing All Three Characters",
+        "zh": "包含所有三种字符的子字符串数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1646,
+      "sectionId": "2.3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-subarrays-where-max-element-appears-at-least-k-times",
+      "frontendId": "2962",
+      "title": {
+        "en": "Count Subarrays Where Max Element Appears at Least K Times",
+        "zh": "统计最大元素出现至少 K 次的子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1701,
+      "sectionId": "2.3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-substrings-with-k-frequency-characters-i",
+      "frontendId": "3325",
+      "title": {
+        "en": "Count Substrings With K-Frequency Characters I",
+        "zh": "字符至少出现 K 次的子字符串 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-vowel-substrings-of-a-string",
+      "frontendId": "2062",
+      "title": {
+        "en": "Count Vowel Substrings of a String",
+        "zh": "统计字符串中的元音子字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-complete-subarrays-in-an-array",
+      "frontendId": "2799",
+      "title": {
+        "en": "Count Complete Subarrays in an Array",
+        "zh": "统计完全子数组的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-good-subarrays",
+      "frontendId": "2537",
+      "title": {
+        "en": "Count the Number of Good Subarrays",
+        "zh": "统计好子数组的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1892,
+      "sectionId": "2.3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-substrings-that-can-be-rearranged-to-contain-a-string-ii",
+      "frontendId": "3298",
+      "title": {
+        "en": "Count Substrings That Can Be Rearranged to Contain a String II",
+        "zh": "统计重新排列后包含另一个字符串的子字符串数目 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1909,
+      "sectionId": "2.3.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-subarrays-having-even-product",
+      "frontendId": "2495",
+      "title": {
+        "en": "Number of Subarrays Having Even Product",
+        "zh": "乘积为偶数的子数组数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3.2",
+      "level": "core"
+    },
+    {
+      "slug": "binary-subarrays-with-sum",
+      "frontendId": "930",
+      "title": {
+        "en": "Binary Subarrays With Sum",
+        "zh": "和相同的二元子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1592,
+      "sectionId": "2.3.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-number-of-nice-subarrays",
+      "frontendId": "1248",
+      "title": {
+        "en": "Count Number of Nice Subarrays",
+        "zh": "统计「优美子数组」"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1624,
+      "sectionId": "2.3.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-of-substrings-containing-every-vowel-and-k-consonants-ii",
+      "frontendId": "3306",
+      "title": {
+        "en": "Count of Substrings Containing Every Vowel and K Consonants II",
+        "zh": "元音辅音字符串计数 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2200,
+      "sectionId": "2.3.3",
+      "level": "core"
+    },
+    {
+      "slug": "subarrays-with-k-different-integers",
+      "frontendId": "992",
+      "title": {
+        "en": "Subarrays with K Different Integers",
+        "zh": "K 个不同整数的子数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2210,
+      "sectionId": "2.3.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-subarrays-with-k-distinct-integers",
+      "frontendId": "3859",
+      "title": {
+        "en": "Count Subarrays With K Distinct Integers",
+        "zh": "统计包含 K 个不同整数的子数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2302,
+      "sectionId": "2.3.3",
+      "level": "core"
+    },
+    {
+      "slug": "friends-of-appropriate-ages",
+      "frontendId": "825",
+      "title": {
+        "en": "Friends Of Appropriate Ages",
+        "zh": "适龄的朋友"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1697,
+      "sectionId": "2.4",
+      "level": "optional"
+    },
+    {
+      "slug": "longest-nice-subarray",
+      "frontendId": "2401",
+      "title": {
+        "en": "Longest Nice Subarray",
+        "zh": "最长优雅子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1750,
+      "sectionId": "2.4",
+      "level": "optional"
+    },
+    {
+      "slug": "swap-for-longest-repeated-character-substring",
+      "frontendId": "1156",
+      "title": {
+        "en": "Swap For Longest Repeated Character Substring",
+        "zh": "单字符重复子串的最大长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1787,
+      "sectionId": "2.4",
+      "level": "optional"
+    },
+    {
+      "slug": "longest-repeating-character-replacement",
+      "frontendId": "424",
+      "title": {
+        "en": "Longest Repeating Character Replacement",
+        "zh": "替换后的最长重复字符"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "optional"
+    },
+    {
+      "slug": "find-all-anagrams-in-a-string",
+      "frontendId": "438",
+      "title": {
+        "en": "Find All Anagrams in a String",
+        "zh": "找到字符串中所有字母异位词"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "optional"
+    },
+    {
+      "slug": "ways-to-split-array-into-three-subarrays",
+      "frontendId": "1712",
+      "title": {
+        "en": "Ways to Split Array Into Three Subarrays",
+        "zh": "将数组分成三个子数组的方案数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2079,
+      "sectionId": "2.4",
+      "level": "optional"
+    },
+    {
+      "slug": "valid-k-unique-subarrays-i",
+      "frontendId": "4033",
+      "title": {
+        "en": "Valid K-Unique Subarrays I",
+        "zh": "有效 K 个不同元素子数组 I"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2314,
+      "sectionId": "2.4",
+      "level": "optional"
+    },
+    {
+      "slug": "kth-smallest-subarray-sum",
+      "frontendId": "1918",
+      "title": {
+        "en": "Kth Smallest Subarray Sum",
+        "zh": "第 K 小的子数组和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "optional"
+    },
+    {
+      "slug": "reverse-string",
+      "frontendId": "344",
+      "title": {
+        "en": "Reverse String",
+        "zh": "反转字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-string-prefix",
+      "frontendId": "3794",
+      "title": {
+        "en": "Reverse String Prefix",
+        "zh": "反转字符串前缀"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-prefix-of-word",
+      "frontendId": "2000",
+      "title": {
+        "en": "Reverse Prefix of Word",
+        "zh": "反转单词前缀"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1199,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "flip-square-submatrix-vertically",
+      "frontendId": "3643",
+      "title": {
+        "en": "Flip Square Submatrix Vertically",
+        "zh": "垂直翻转子矩阵"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1235,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "flipping-an-image",
+      "frontendId": "832",
+      "title": {
+        "en": "Flipping an Image",
+        "zh": "翻转图像"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1243,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-letters-then-special-characters-in-a-string",
+      "frontendId": "3823",
+      "title": {
+        "en": "Reverse Letters Then Special Characters in a String",
+        "zh": "反转一个字符串里的字母后反转特殊字符"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1250,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-string-ii",
+      "frontendId": "541",
+      "title": {
+        "en": "Reverse String II",
+        "zh": "反转字符串 II"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-words-in-a-string-iii",
+      "frontendId": "557",
+      "title": {
+        "en": "Reverse Words in a String III",
+        "zh": "反转字符串中的单词 III"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-words-in-a-string",
+      "frontendId": "151",
+      "title": {
+        "en": "Reverse Words in a String",
+        "zh": "反转字符串中的单词"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-words-with-same-vowel-count",
+      "frontendId": "3775",
+      "title": {
+        "en": "Reverse Words With Same Vowel Count",
+        "zh": "反转元音数相同的单词"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1392,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-only-letters",
+      "frontendId": "917",
+      "title": {
+        "en": "Reverse Only Letters",
+        "zh": "仅仅反转字母"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-vowels-of-a-string",
+      "frontendId": "345",
+      "title": {
+        "en": "Reverse Vowels of a String",
+        "zh": "反转字符串中的元音字母"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-k-subarrays",
+      "frontendId": "3865",
+      "title": {
+        "en": "Reverse K Subarrays",
+        "zh": "反转 K 个子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-words-in-a-string-ii",
+      "frontendId": "186",
+      "title": {
+        "en": "Reverse Words in a String II",
+        "zh": "反转字符串中的单词 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-palindrome",
+      "frontendId": "2697",
+      "title": {
+        "en": "Lexicographically Smallest Palindrome",
+        "zh": "字典序最小回文串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1304,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "valid-palindrome",
+      "frontendId": "125",
+      "title": {
+        "en": "Valid Palindrome",
+        "zh": "验证回文串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-swaps-to-move-zeros-to-end",
+      "frontendId": "3936",
+      "title": {
+        "en": "Minimum Swaps to Move Zeros to End",
+        "zh": "将 0 移到末尾的最少交换次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1346,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-length-of-string-after-deleting-similar-ends",
+      "frontendId": "1750",
+      "title": {
+        "en": "Minimum Length of String After Deleting Similar Ends",
+        "zh": "删除字符串两端相同字符后的最短长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1502,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "watering-plants-ii",
+      "frontendId": "2105",
+      "title": {
+        "en": "Watering Plants II",
+        "zh": "给植物浇水 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1507,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "squares-of-a-sorted-array",
+      "frontendId": "977",
+      "title": {
+        "en": "Squares of a Sorted Array",
+        "zh": "有序数组的平方"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-k-closest-elements",
+      "frontendId": "658",
+      "title": {
+        "en": "Find K Closest Elements",
+        "zh": "找到 K 个最接近的元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "the-k-strongest-values-in-an-array",
+      "frontendId": "1471",
+      "title": {
+        "en": "The k Strongest Values in an Array",
+        "zh": "数组中的 k 个最强值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "two-sum-ii-input-array-is-sorted",
+      "frontendId": "167",
+      "title": {
+        "en": "Two Sum II - Input Array Is Sorted",
+        "zh": "两数之和 II - 输入有序数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-square-numbers",
+      "frontendId": "633",
+      "title": {
+        "en": "Sum of Square Numbers",
+        "zh": "平方数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-pairs-whose-sum-is-less-than-target",
+      "frontendId": "2824",
+      "title": {
+        "en": "Count Pairs Whose Sum is Less than Target",
+        "zh": "统计和小于目标的下标对数目"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "3sum-closest",
+      "frontendId": "16",
+      "title": {
+        "en": "3Sum Closest",
+        "zh": "最接近的三数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "3sum",
+      "frontendId": "15",
+      "title": {
+        "en": "3Sum",
+        "zh": "三数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "4sum",
+      "frontendId": "18",
+      "title": {
+        "en": "4Sum",
+        "zh": "四数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-where-square-of-number-is-equal-to-product-of-two-numbers",
+      "frontendId": "1577",
+      "title": {
+        "en": "Number of Ways Where Square of Number Is Equal to Product of Two Numbers",
+        "zh": "数的平方等于两数乘积的方法数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1594,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-smallest-balanced-index",
+      "frontendId": "3862",
+      "title": {
+        "en": "Find the Smallest Balanced Index",
+        "zh": "找出最小平衡下标"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1697,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "valid-triangle-number",
+      "frontendId": "611",
+      "title": {
+        "en": "Valid Triangle Number",
+        "zh": "有效三角形的个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "3sum-with-multiplicity",
+      "frontendId": "923",
+      "title": {
+        "en": "3Sum With Multiplicity",
+        "zh": "三数之和的多种可能"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1711,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-fair-pairs",
+      "frontendId": "2563",
+      "title": {
+        "en": "Count the Number of Fair Pairs",
+        "zh": "统计公平数对的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1721,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "bag-of-tokens",
+      "frontendId": "948",
+      "title": {
+        "en": "Bag of Tokens",
+        "zh": "令牌放置"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1762,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "container-with-most-water",
+      "frontendId": "11",
+      "title": {
+        "en": "Container With Most Water",
+        "zh": "盛最多水的容器"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "trapping-rain-water",
+      "frontendId": "42",
+      "title": {
+        "en": "Trapping Rain Water",
+        "zh": "接雨水"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "split-two-strings-to-make-palindrome",
+      "frontendId": "1616",
+      "title": {
+        "en": "Split Two Strings to Make Palindrome",
+        "zh": "分割两个字符串得到回文串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1868,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-subsequences-that-satisfy-the-given-sum-condition",
+      "frontendId": "1498",
+      "title": {
+        "en": "Number of Subsequences That Satisfy the Given Sum Condition",
+        "zh": "满足条件的子序列数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2276,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-pairs-of-nodes",
+      "frontendId": "1782",
+      "title": {
+        "en": "Count Pairs Of Nodes",
+        "zh": "统计点对的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2457,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "two-sum-less-than-k",
+      "frontendId": "1099",
+      "title": {
+        "en": "Two Sum Less Than K",
+        "zh": "小于 K 的两数之和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "sort-transformed-array",
+      "frontendId": "360",
+      "title": {
+        "en": "Sort Transformed Array",
+        "zh": "有序转化数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "merge-operations-to-turn-array-into-a-palindrome",
+      "frontendId": "2422",
+      "title": {
+        "en": "Merge Operations to Turn Array Into a Palindrome",
+        "zh": "使用合并操作将数组转换为回文序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "3sum-smaller",
+      "frontendId": "259",
+      "title": {
+        "en": "3Sum Smaller",
+        "zh": "较小的三数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-paint-sheets",
+      "frontendId": "3802",
+      "title": {
+        "en": "Number of Ways to Paint Sheets",
+        "zh": "给纸张涂色的方式数量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.2",
+      "level": "core"
+    },
+    {
+      "slug": "rotating-the-box",
+      "frontendId": "1861",
+      "title": {
+        "en": "Rotating the Box",
+        "zh": "旋转盒子"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1537,
+      "sectionId": "3.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-capacity-within-budget",
+      "frontendId": "3814",
+      "title": {
+        "en": "Maximum Capacity Within Budget",
+        "zh": "预算下的最大总容量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1796,
+      "sectionId": "3.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "find-all-k-distant-indices-in-an-array",
+      "frontendId": "2200",
+      "title": {
+        "en": "Find All K-Distant Indices in an Array",
+        "zh": "找出数组中的所有 K 近邻下标"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "valid-triangle-number",
+      "frontendId": "611",
+      "title": {
+        "en": "Valid Triangle Number",
+        "zh": "有效三角形的个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-perfect-pairs",
+      "frontendId": "3649",
+      "title": {
+        "en": "Number of Perfect Pairs",
+        "zh": "完美对的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1716,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "jump-game-vii",
+      "frontendId": "1871",
+      "title": {
+        "en": "Jump Game VII",
+        "zh": "跳跃游戏 VII"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1896,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-subarray-to-be-removed-to-make-array-sorted",
+      "frontendId": "1574",
+      "title": {
+        "en": "Shortest Subarray to be Removed to Make Array Sorted",
+        "zh": "删除最短的子数组使剩余数组有序"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1932,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-incremovable-subarrays-ii",
+      "frontendId": "2972",
+      "title": {
+        "en": "Count the Number of Incremovable Subarrays II",
+        "zh": "统计移除递增子数组的数目 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2153,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "recover-the-original-array",
+      "frontendId": "2122",
+      "title": {
+        "en": "Recover the Original Array",
+        "zh": "还原原数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2159,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-total-beauty-of-the-gardens",
+      "frontendId": "2234",
+      "title": {
+        "en": "Maximum Total Beauty of the Gardens",
+        "zh": "花园的最大总美丽值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2562,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-people-that-can-be-caught-in-tag",
+      "frontendId": "1989",
+      "title": {
+        "en": "Maximum Number of People That Can Be Caught in Tag",
+        "zh": "捉迷藏中可捕获的最大人数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-connected-groups-by-inserting-interval",
+      "frontendId": "3323",
+      "title": {
+        "en": "Minimize Connected Groups by Inserting Interval",
+        "zh": "通过插入区间最小化连通组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-unsorted-continuous-subarray",
+      "frontendId": "581",
+      "title": {
+        "en": "Shortest Unsorted Continuous Subarray",
+        "zh": "最短无序连续子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-subarray-to-sort-in-every-sliding-window",
+      "frontendId": "3555",
+      "title": {
+        "en": "Smallest Subarray to Sort in Every Sliding Window",
+        "zh": "排序每个滑动窗口中最小的子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-score-of-a-good-subarray",
+      "frontendId": "1793",
+      "title": {
+        "en": "Maximum Score of a Good Subarray",
+        "zh": "好子数组的最大分数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1946,
+      "sectionId": "3.4",
+      "level": "core"
+    },
+    {
+      "slug": "largest-perimeter-triangle",
+      "frontendId": "976",
+      "title": {
+        "en": "Largest Perimeter Triangle",
+        "zh": "三角形的最大周长"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.4",
+      "level": "core"
+    },
+    {
+      "slug": "remove-element",
+      "frontendId": "27",
+      "title": {
+        "en": "Remove Element",
+        "zh": "移除元素"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "remove-duplicates-from-sorted-array",
+      "frontendId": "26",
+      "title": {
+        "en": "Remove Duplicates from Sorted Array",
+        "zh": "删除有序数组中的重复项"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "remove-duplicates-from-sorted-array-ii",
+      "frontendId": "80",
+      "title": {
+        "en": "Remove Duplicates from Sorted Array II",
+        "zh": "删除有序数组中的重复项 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "limit-occurrences-in-sorted-array",
+      "frontendId": "3940",
+      "title": {
+        "en": "Limit Occurrences in Sorted Array",
+        "zh": "限制有序数组中的元素出现次数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-resultant-array-after-removing-anagrams",
+      "frontendId": "2273",
+      "title": {
+        "en": "Find Resultant Array After Removing Anagrams",
+        "zh": "移除字母异位词后的结果数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-sum-of-at-most-k-distinct-elements",
+      "frontendId": "3684",
+      "title": {
+        "en": "Maximize Sum of At Most K Distinct Elements",
+        "zh": "至多 K 个不同元素的最大和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "move-zeroes",
+      "frontendId": "283",
+      "title": {
+        "en": "Move Zeroes",
+        "zh": "移动零"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "sort-array-by-parity",
+      "frontendId": "905",
+      "title": {
+        "en": "Sort Array By Parity",
+        "zh": "按奇偶排序数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "sort-array-by-parity-ii",
+      "frontendId": "922",
+      "title": {
+        "en": "Sort Array By Parity II",
+        "zh": "按奇偶排序数组 II"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "transform-array-by-parity",
+      "frontendId": "3467",
+      "title": {
+        "en": "Transform Array by Parity",
+        "zh": "将数组按照奇偶性转化"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "rearrange-string-to-avoid-character-pair",
+      "frontendId": "3992",
+      "title": {
+        "en": "Rearrange String to Avoid Character Pair",
+        "zh": "重新排列字符串以避免字符对"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "apply-operations-to-an-array",
+      "frontendId": "2460",
+      "title": {
+        "en": "Apply Operations to an Array",
+        "zh": "对数组执行操作"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "duplicate-zeros",
+      "frontendId": "1089",
+      "title": {
+        "en": "Duplicate Zeros",
+        "zh": "复写零"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "sort-colors",
+      "frontendId": "75",
+      "title": {
+        "en": "Sort Colors",
+        "zh": "颜色分类"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-array-is-good",
+      "frontendId": "2784",
+      "title": {
+        "en": "Check if Array is Good",
+        "zh": "检查数组是否是好的"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "stretch"
+    },
+    {
+      "slug": "find-all-duplicates-in-an-array",
+      "frontendId": "442",
+      "title": {
+        "en": "Find All Duplicates in an Array",
+        "zh": "数组中重复的数据"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "stretch"
+    },
+    {
+      "slug": "find-all-numbers-disappeared-in-an-array",
+      "frontendId": "448",
+      "title": {
+        "en": "Find All Numbers Disappeared in an Array",
+        "zh": "找到所有数组中消失的数字"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "stretch"
+    },
+    {
+      "slug": "shuffle-the-array",
+      "frontendId": "1470",
+      "title": {
+        "en": "Shuffle the Array",
+        "zh": "重新排列数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "stretch"
+    },
+    {
+      "slug": "build-array-from-permutation",
+      "frontendId": "1920",
+      "title": {
+        "en": "Build Array from Permutation",
+        "zh": "基于排列构建数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "stretch"
+    },
+    {
+      "slug": "first-missing-positive",
+      "frontendId": "41",
+      "title": {
+        "en": "First Missing Positive",
+        "zh": "缺失的第一个正数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.5",
+      "level": "stretch"
+    },
+    {
+      "slug": "search-a-2d-matrix-ii",
+      "frontendId": "240",
+      "title": {
+        "en": "Search a 2D Matrix II",
+        "zh": "搜索二维矩阵 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.6",
+      "level": "core"
+    },
+    {
+      "slug": "count-negative-numbers-in-a-sorted-matrix",
+      "frontendId": "1351",
+      "title": {
+        "en": "Count Negative Numbers in a Sorted Matrix",
+        "zh": "统计有序矩阵中的负数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.6",
+      "level": "core"
+    },
+    {
+      "slug": "adding-spaces-to-a-string",
+      "frontendId": "2109",
+      "title": {
+        "en": "Adding Spaces to a String",
+        "zh": "向字符串添加空格"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1315,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-common-value",
+      "frontendId": "2540",
+      "title": {
+        "en": "Minimum Common Value",
+        "zh": "最小公共值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "intersection-of-two-arrays-ii",
+      "frontendId": "350",
+      "title": {
+        "en": "Intersection of Two Arrays II",
+        "zh": "两个数组的交集 II"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "merge-sorted-array",
+      "frontendId": "88",
+      "title": {
+        "en": "Merge Sorted Array",
+        "zh": "合并两个有序数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "merge-two-2d-arrays-by-summing-values",
+      "frontendId": "2570",
+      "title": {
+        "en": "Merge Two 2D Arrays by Summing Values",
+        "zh": "合并两个二维数组 - 求和法"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "aggregate-two-time-series",
+      "frontendId": "4001",
+      "title": {
+        "en": "Aggregate Two Time Series",
+        "zh": "聚合两个时间序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1506,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-distance-between-a-pair-of-values",
+      "frontendId": "1855",
+      "title": {
+        "en": "Maximum Distance Between a Pair of Values",
+        "zh": "下标对中的最大距离"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1515,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-distance-value-between-two-arrays",
+      "frontendId": "1385",
+      "title": {
+        "en": "Find the Distance Value Between Two Arrays",
+        "zh": "两个数组间的距离值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "long-pressed-name",
+      "frontendId": "925",
+      "title": {
+        "en": "Long Pressed Name",
+        "zh": "长按键入"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "expressive-words",
+      "frontendId": "809",
+      "title": {
+        "en": "Expressive Words",
+        "zh": "情感丰富的文字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1605,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "move-pieces-to-obtain-a-string",
+      "frontendId": "2337",
+      "title": {
+        "en": "Move Pieces to Obtain a String",
+        "zh": "移动片段得到字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1693,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "swap-adjacent-in-lr-string",
+      "frontendId": "777",
+      "title": {
+        "en": "Swap Adjacent in LR String",
+        "zh": "在 LR 字符串中交换相邻字符"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "backspace-string-compare",
+      "frontendId": "844",
+      "title": {
+        "en": "Backspace String Compare",
+        "zh": "比较含退格的字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "interval-list-intersections",
+      "frontendId": "986",
+      "title": {
+        "en": "Interval List Intersections",
+        "zh": "区间列表的交集"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "heaters",
+      "frontendId": "475",
+      "title": {
+        "en": "Heaters",
+        "zh": "供暖器"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "transform-binary-string-using-subsequence-sort",
+      "frontendId": "3998",
+      "title": {
+        "en": "Transform Binary String Using Subsequence Sort",
+        "zh": "使用子序列排序转换二进制字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1862,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "get-the-maximum-score",
+      "frontendId": "1537",
+      "title": {
+        "en": "Get the Maximum Score",
+        "zh": "最大得分"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1961,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-word-distance-ii",
+      "frontendId": "244",
+      "title": {
+        "en": "Shortest Word Distance II",
+        "zh": "最短单词距离 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-coins-heroes-can-collect",
+      "frontendId": "2838",
+      "title": {
+        "en": "Maximum Coins Heroes Can Collect",
+        "zh": "英雄可以获得的最大金币数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "meeting-scheduler",
+      "frontendId": "1229",
+      "title": {
+        "en": "Meeting Scheduler",
+        "zh": "安排会议日程"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "dot-product-of-two-sparse-vectors",
+      "frontendId": "1570",
+      "title": {
+        "en": "Dot Product of Two Sparse Vectors",
+        "zh": "两个稀疏向量的点积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "product-of-two-run-length-encoded-arrays",
+      "frontendId": "1868",
+      "title": {
+        "en": "Product of Two Run-Length Encoded Arrays",
+        "zh": "两个行程编码数组的积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "is-subsequence",
+      "frontendId": "392",
+      "title": {
+        "en": "Is Subsequence",
+        "zh": "判断子序列"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-word-in-dictionary-through-deleting",
+      "frontendId": "524",
+      "title": {
+        "en": "Longest Word in Dictionary through Deleting",
+        "zh": "通过删除字母匹配到字典里最长单词"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "append-characters-to-string-to-make-subsequence",
+      "frontendId": "2486",
+      "title": {
+        "en": "Append Characters to String to Make Subsequence",
+        "zh": "追加字符以获得子序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1363,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "make-string-a-subsequence-using-cyclic-increments",
+      "frontendId": "2825",
+      "title": {
+        "en": "Make String a Subsequence Using Cyclic Increments",
+        "zh": "循环增长使字符串子序列等于另一个字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1415,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "camelcase-matching",
+      "frontendId": "1023",
+      "title": {
+        "en": "Camelcase Matching",
+        "zh": "驼峰式匹配"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1537,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-integer-added-to-array-ii",
+      "frontendId": "3132",
+      "title": {
+        "en": "Find the Integer Added to Array II",
+        "zh": "找出与数组相加的整数 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1620,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-uncommon-subsequence-ii",
+      "frontendId": "522",
+      "title": {
+        "en": "Longest Uncommon Subsequence II",
+        "zh": "最长特殊序列 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "faulty-sensor",
+      "frontendId": "1826",
+      "title": {
+        "en": "Faulty Sensor",
+        "zh": "有缺陷的传感器"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-gap-between-stations",
+      "frontendId": "4026",
+      "title": {
+        "en": "Maximum Gap Between Stations",
+        "zh": "工位的最大间隔"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1675,
+      "sectionId": "4.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "subsequence-after-one-replacement",
+      "frontendId": "3983",
+      "title": {
+        "en": "Subsequence After One Replacement",
+        "zh": "一次替换后的子序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1755,
+      "sectionId": "4.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-number-of-removable-characters",
+      "frontendId": "1898",
+      "title": {
+        "en": "Maximum Number of Removable Characters",
+        "zh": "可移除字符的最大数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1913,
+      "sectionId": "4.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "subsequence-with-the-minimum-score",
+      "frontendId": "2565",
+      "title": {
+        "en": "Subsequence With the Minimum Score",
+        "zh": "最少得分子序列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2432,
+      "sectionId": "4.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "find-the-lexicographically-smallest-valid-sequence",
+      "frontendId": "3302",
+      "title": {
+        "en": "Find the Lexicographically Smallest Valid Sequence",
+        "zh": "字典序最小的合法序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2474,
+      "sectionId": "4.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "number-of-arithmetic-triplets",
+      "frontendId": "2367",
+      "title": {
+        "en": "Number of Arithmetic Triplets",
+        "zh": "等差三元组的数目"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-fair-pairs",
+      "frontendId": "2563",
+      "title": {
+        "en": "Count the Number of Fair Pairs",
+        "zh": "统计公平数对的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1721,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-subarrays-with-bounded-maximum",
+      "frontendId": "795",
+      "title": {
+        "en": "Number of Subarrays with Bounded Maximum",
+        "zh": "区间子数组个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1817,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "count-subarrays-with-fixed-bounds",
+      "frontendId": "2444",
+      "title": {
+        "en": "Count Subarrays With Fixed Bounds",
+        "zh": "统计定界子数组的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2093,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-frequency-of-an-element-after-performing-operations-ii",
+      "frontendId": "3347",
+      "title": {
+        "en": "Maximum Frequency of an Element After Performing Operations II",
+        "zh": "执行操作后元素的最高频率 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2156,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "intersection-of-three-sorted-arrays",
+      "frontendId": "1213",
+      "title": {
+        "en": "Intersection of Three Sorted Arrays",
+        "zh": "三个有序数组的交集"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-distance-between-points-on-a-square",
+      "frontendId": "3464",
+      "title": {
+        "en": "Maximize the Distance Between Points on a Square",
+        "zh": "正方形上的点之间的最大距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2806,
+      "sectionId": "5",
+      "level": "stretch"
+    },
+    {
+      "slug": "max-consecutive-ones",
+      "frontendId": "485",
+      "title": {
+        "en": "Max Consecutive Ones",
+        "zh": "最大连续 1 的个数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "consecutive-characters",
+      "frontendId": "1446",
+      "title": {
+        "en": "Consecutive Characters",
+        "zh": "连续字符"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1165,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longer-contiguous-segments-of-ones-than-zeros",
+      "frontendId": "1869",
+      "title": {
+        "en": "Longer Contiguous Segments of Ones than Zeros",
+        "zh": "哪种连续子字符串更长"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1205,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "count-integers-appearing-in-a-single-block",
+      "frontendId": "4038",
+      "title": {
+        "en": "Count Integers Appearing in a Single Block",
+        "zh": "计算单个区间中出现的整数数量"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "length-of-the-longest-alphabetical-continuous-substring",
+      "frontendId": "2414",
+      "title": {
+        "en": "Length of the Longest Alphabetical Continuous Substring",
+        "zh": "最长的字母序连续子字符串的长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1222,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "find-special-substring-of-length-k",
+      "frontendId": "3456",
+      "title": {
+        "en": "Find Special Substring of Length K",
+        "zh": "找出长度为 K 的特殊子字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1244,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "positions-of-large-groups",
+      "frontendId": "830",
+      "title": {
+        "en": "Positions of Large Groups",
+        "zh": "较大分组的位置"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1252,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "find-resultant-array-after-removing-anagrams",
+      "frontendId": "2273",
+      "title": {
+        "en": "Find Resultant Array After Removing Anagrams",
+        "zh": "移除字母异位词后的结果数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1295,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "largest-3-same-digit-number-in-string",
+      "frontendId": "2264",
+      "title": {
+        "en": "Largest 3-Same-Digit Number in String",
+        "zh": "字符串中最大的 3 位相同数字"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1309,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-zero-filled-subarrays",
+      "frontendId": "2348",
+      "title": {
+        "en": "Number of Zero-Filled Subarrays",
+        "zh": "全 0 子数组的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1316,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-substrings-with-only-1s",
+      "frontendId": "1513",
+      "title": {
+        "en": "Number of Substrings With Only 1s",
+        "zh": "仅含 1 的子串数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1351,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "delete-characters-to-make-fancy-string",
+      "frontendId": "1957",
+      "title": {
+        "en": "Delete Characters to Make Fancy String",
+        "zh": "删除字符使字符串变好"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1358,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-continuous-increasing-subsequence",
+      "frontendId": "674",
+      "title": {
+        "en": "Longest Continuous Increasing Subsequence",
+        "zh": "最长连续递增序列"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-fibonacci-subarray",
+      "frontendId": "3708",
+      "title": {
+        "en": "Longest Fibonacci Subarray",
+        "zh": "最长斐波那契子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1381,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "count-binary-substrings",
+      "frontendId": "696",
+      "title": {
+        "en": "Count Binary Substrings",
+        "zh": "计数二进制子串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-turbulent-subarray",
+      "frontendId": "978",
+      "title": {
+        "en": "Longest Turbulent Subarray",
+        "zh": "最长湍流子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1393,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-smooth-descent-periods-of-a-stock",
+      "frontendId": "2110",
+      "title": {
+        "en": "Number of Smooth Descent Periods of a Stock",
+        "zh": "股票平滑下跌阶段的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1408,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "summary-ranges",
+      "frontendId": "228",
+      "title": {
+        "en": "Summary Ranges",
+        "zh": "汇总区间"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-even-odd-subarray-with-threshold",
+      "frontendId": "2760",
+      "title": {
+        "en": "Longest Even Odd Subarray With Threshold",
+        "zh": "最长奇偶子数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1420,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "reduction-operations-to-make-the-array-elements-equal",
+      "frontendId": "1887",
+      "title": {
+        "en": "Reduction Operations to Make the Array Elements Equal",
+        "zh": "使数组元素相等的减少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1428,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-mountain-in-array",
+      "frontendId": "845",
+      "title": {
+        "en": "Longest Mountain in Array",
+        "zh": "数组中的最长山脉"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1437,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "remove-colored-pieces-if-both-neighbors-are-the-same-color",
+      "frontendId": "2038",
+      "title": {
+        "en": "Remove Colored Pieces if Both Neighbors are the Same Color",
+        "zh": "如果相邻两个颜色均相同则删除当前颜色"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1468,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-unequal-adjacent-groups-subsequence-i",
+      "frontendId": "2900",
+      "title": {
+        "en": "Longest Unequal Adjacent Groups Subsequence I",
+        "zh": "最长相邻不相等子序列 I"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1469,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "count-number-of-homogenous-substrings",
+      "frontendId": "1759",
+      "title": {
+        "en": "Count Number of Homogenous Substrings",
+        "zh": "统计同质子字符串的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1491,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "find-if-array-can-be-sorted",
+      "frontendId": "3011",
+      "title": {
+        "en": "Find if Array Can Be Sorted",
+        "zh": "判断一个数组是否可以变为有序"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1497,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "rotating-the-box",
+      "frontendId": "1861",
+      "title": {
+        "en": "Rotating the Box",
+        "zh": "旋转盒子"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1537,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-make-rope-colorful",
+      "frontendId": "1578",
+      "title": {
+        "en": "Minimum Time to Make Rope Colorful",
+        "zh": "使绳子变成彩色的最短时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1574,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-substring-of-all-vowels-in-order",
+      "frontendId": "1839",
+      "title": {
+        "en": "Longest Substring Of All Vowels in Order",
+        "zh": "所有元音按顺序排布的最长子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1580,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-alternating-subarray",
+      "frontendId": "2765",
+      "title": {
+        "en": "Longest Alternating Subarray",
+        "zh": "最长交替子数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1581,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-power-of-k-size-subarrays-ii",
+      "frontendId": "3255",
+      "title": {
+        "en": "Find the Power of K-Size Subarrays II",
+        "zh": "长度为 K 的子数组的能量值 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1595,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "adjacent-increasing-subarrays-detection-ii",
+      "frontendId": "3350",
+      "title": {
+        "en": "Adjacent Increasing Subarrays Detection II",
+        "zh": "检测相邻递增子数组 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1600,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-strictly-increasing-or-strictly-decreasing-subarray",
+      "frontendId": "3105",
+      "title": {
+        "en": "Longest Strictly Increasing or Strictly Decreasing Subarray",
+        "zh": "最长的严格递增或递减子数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "count-valid-word-occurrences",
+      "frontendId": "3926",
+      "title": {
+        "en": "Count Valid Word Occurrences",
+        "zh": "有效单词计数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1608,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "push-dominoes",
+      "frontendId": "838",
+      "title": {
+        "en": "Push Dominoes",
+        "zh": "推多米诺"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1638,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "unique-substrings-in-wraparound-string",
+      "frontendId": "467",
+      "title": {
+        "en": "Unique Substrings in Wraparound String",
+        "zh": "环绕字符串中唯一的子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-active-section-with-trade-i",
+      "frontendId": "3499",
+      "title": {
+        "en": "Maximize Active Section with Trade I",
+        "zh": "操作后最大活跃区段数 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1729,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-total-value-of-covered-indices",
+      "frontendId": "3952",
+      "title": {
+        "en": "Maximum Total Value of Covered Indices",
+        "zh": "下标覆盖处的最大总和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1763,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "arithmetic-slices",
+      "frontendId": "413",
+      "title": {
+        "en": "Arithmetic Slices",
+        "zh": "等差数列划分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-non-decreasing-subarray-after-replacing-at-most-one-element",
+      "frontendId": "3738",
+      "title": {
+        "en": "Longest Non-Decreasing Subarray After Replacing at Most One Element",
+        "zh": "替换至多一个元素后最长非递减子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1811,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-divide-a-long-corridor",
+      "frontendId": "2147",
+      "title": {
+        "en": "Number of Ways to Divide a Long Corridor",
+        "zh": "分隔长廊的方案数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1915,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "find-score-of-an-array-after-marking-all-elements",
+      "frontendId": "2593",
+      "title": {
+        "en": "Find Score of an Array After Marking All Elements",
+        "zh": "标记所有元素后数组的分数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "text-justification",
+      "frontendId": "68",
+      "title": {
+        "en": "Text Justification",
+        "zh": "文本左右对齐"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "candy",
+      "frontendId": "135",
+      "title": {
+        "en": "Candy",
+        "zh": "分发糖果"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-arithmetic-sequence-after-changing-at-most-one-element",
+      "frontendId": "3872",
+      "title": {
+        "en": "Longest Arithmetic Sequence After Changing At Most One Element",
+        "zh": "替换最多一个元素后的最长等差子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2042,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "make-lexicographically-smallest-array-by-swapping-elements",
+      "frontendId": "2948",
+      "title": {
+        "en": "Make Lexicographically Smallest Array by Swapping Elements",
+        "zh": "交换得到字典序最小的数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2047,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-maximum-mex-array",
+      "frontendId": "3948",
+      "title": {
+        "en": "Lexicographically Maximum MEX Array",
+        "zh": "字典序最大的 MEX 数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2122,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "longest-alternating-subarray-after-removing-at-most-one-element",
+      "frontendId": "3830",
+      "title": {
+        "en": "Longest Alternating Subarray After Removing At Most One Element",
+        "zh": "移除至多一个元素后的最长交替子数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2162,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "trionic-array-ii",
+      "frontendId": "3640",
+      "title": {
+        "en": "Trionic Array II",
+        "zh": "三段式数组 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2278,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "count-strictly-increasing-subarrays",
+      "frontendId": "2393",
+      "title": {
+        "en": "Count Strictly Increasing Subarrays",
+        "zh": "严格递增的子数组个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-equal-length-runs",
+      "frontendId": "3773",
+      "title": {
+        "en": "Maximum Number of Equal Length Runs",
+        "zh": "最大等长连续字符组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-split-into-subarrays-with-gcd-greater-than-one",
+      "frontendId": "2436",
+      "title": {
+        "en": "Minimum Split Into Subarrays With GCD Greater Than One",
+        "zh": "使子数组最大公约数大于一的最小分割数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-subarrays-having-even-product",
+      "frontendId": "2495",
+      "title": {
+        "en": "Number of Subarrays Having Even Product",
+        "zh": "乘积为偶数的子数组数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-frequency",
+      "frontendId": "3063",
+      "title": {
+        "en": "Linked List Frequency",
+        "zh": "链表频率"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "6",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "LCP 68",
+      "title": "美观的花束",
+      "sectionId": "2.3.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCR 180",
+      "title": "文件组合",
+      "sectionId": "2.4",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 28",
+      "title": "采购方案",
+      "sectionId": "3.2",
+      "reason": "same_as",
+      "replacedBy": "count-pairs-whose-sum-is-less-than-target"
+    },
+    {
+      "sourceId": "LCP 18",
+      "title": "早餐组合",
+      "sectionId": "4.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "面试题 16.06",
+      "title": "最小差",
+      "sectionId": "4.1",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}

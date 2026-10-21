@@ -37,6 +37,8 @@ type AccountExportRecord = {
     | "attempt_history"
     | "attempt_history_coverage"
     | "suggestion"
+    | "study_list"
+    | "study_list_item"
     | "agent_session"
     | "agent_run"
     | "agent_message"
@@ -229,6 +231,32 @@ export async function* iterateAccountExport(
         ),
       )
       .orderBy(asc(schema.suggestions.id))
+      .limit(PAGE_SIZE),
+  );
+  yield* iteratePages("study_list", (afterId) =>
+    db
+      .select()
+      .from(schema.studyLists)
+      .where(
+        and(
+          eq(schema.studyLists.userId, user.id),
+          afterId ? gt(schema.studyLists.id, afterId) : undefined,
+        ),
+      )
+      .orderBy(asc(schema.studyLists.id))
+      .limit(PAGE_SIZE),
+  );
+  yield* iteratePages("study_list_item", (afterId) =>
+    db
+      .select()
+      .from(schema.studyListItems)
+      .where(
+        and(
+          eq(schema.studyListItems.userId, user.id),
+          afterId ? gt(schema.studyListItems.id, afterId) : undefined,
+        ),
+      )
+      .orderBy(asc(schema.studyListItems.id))
       .limit(PAGE_SIZE),
   );
   yield* iteratePages("agent_session", (afterId) =>

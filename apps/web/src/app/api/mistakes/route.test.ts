@@ -4,6 +4,8 @@ import { eq } from "drizzle-orm";
 import { getRequestUser } from "@/server/auth";
 import { ingestSessionObservations, runSessionCommand, startPracticeSession } from "@/server/practice-sessions/commands";
 import { createTestDb } from "@/server/test-db";
+import { getBuiltinList } from "@/server/study-lists/builtin";
+import { GET as getPatterns } from "./patterns/route";
 import { GET as getProfile } from "./profile/route";
 import { POST as postMistake } from "./route";
 
@@ -29,13 +31,13 @@ function request(path: string, body?: unknown, method = body === undefined ? "GE
   });
 }
 
-async function session(userId: string, finish: boolean) {
+async function session(userId: string, finish: boolean, leetcodeSlug?: string) {
   slug += 1;
   const started = await startPracticeSession(userId, {
     requestId: crypto.randomUUID(),
     ownerToken: TAB,
     mode: "practice",
-    target: { kind: "leetcode", problem: { leetcodeSlug: `route-${slug}`, leetcodeId: 3000 + slug, title: "Route", difficulty: "Easy", url: `https://leetcode.com/problems/route-${slug}/`, topicTags: [], similarSlugs: [] } },
+    target: { kind: "leetcode", problem: { leetcodeSlug: leetcodeSlug ?? `route-${slug}`, leetcodeId: 3000 + slug, title: "Route", difficulty: "Easy", url: `https://leetcode.com/problems/${leetcodeSlug ?? `route-${slug}`}/`, topicTags: [], similarSlugs: [] } },
     baseline: { state: "none" },
     supersedePendingRating: false,
   });
@@ -100,5 +102,24 @@ describe("profile", () => {
 
     vi.mocked(getRequestUser).mockResolvedValue(null as never);
     expect((await getProfile(request("/api/mistakes/profile"))).status).toBe(401);
+  });
+});
+
+describe("patterns", () => {
+  it("returns the caller's pattern x cause profile, uncached, and requires a session", async () => {
+    const item = getBuiltinList("sliding-window-two-pointers")!.items[0]!;
+    const done = await session(user.id, true, item.slug);
+    await postMistake(request("/api/mistakes", { sourceType: "practice_session", practiceSessionId: done.sessionId, problemId: done.problemId, primaryCategory: "edge_case", requestId: crypto.randomUUID() }));
+    const response = await getPatterns(request("/api/mistakes/patterns"));
+    expect(response.status).toBe(200);
+    expect(response.headers.get("cache-control")).toBe("private, no-store");
+    const body = await response.json();
+    expect(body).toMatchObject({ windowDays: 90, required: { sessions: 2, problems: 2 } });
+    expect(body.patterns).toContainEqual(
+      expect.objectContaining({ pattern: { id: item.pattern, name: expect.objectContaining({ en: expect.any(String) }) }, sessions: 1, problems: 1, ready: false, causes: { edge_case: 1 }, next: [] }),
+    );
+
+    vi.mocked(getRequestUser).mockResolvedValue(null as never);
+    expect((await getPatterns(request("/api/mistakes/patterns"))).status).toBe(401);
   });
 });

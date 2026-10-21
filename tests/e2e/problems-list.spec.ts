@@ -13,9 +13,13 @@ async function openList(page: Page) {
   return row;
 }
 
-/** The cells a click should open the problem from: not the title link, nor a selection checkbox. */
+/** The cells a click should open the problem from: not the title link, a selection checkbox, or the row's actions menu. */
 function plainCells(page: Page, row: Locator) {
-  return row.getByRole("cell").filter({ hasNot: page.getByRole("link") }).filter({ hasNot: page.getByRole("checkbox") });
+  return row
+    .getByRole("cell")
+    .filter({ hasNot: page.getByRole("link") })
+    .filter({ hasNot: page.getByRole("checkbox") })
+    .filter({ hasNot: page.getByRole("button") });
 }
 
 test("clicking anywhere on a problem row opens its detail page", async ({ context, panel }) => {

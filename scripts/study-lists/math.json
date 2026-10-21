@@ -1,0 +1,217 @@
+{
+  "id": "math",
+  "name": {
+    "en": "Math",
+    "zh": "数学算法"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/IYT3ss/",
+  "headings": {},
+  "chapters": {
+    "1": {
+      "en": "Number theory",
+      "zh": "数论"
+    },
+    "2": {
+      "en": "Combinatorics",
+      "zh": "组合数学"
+    },
+    "3": {
+      "en": "Probability and expectation",
+      "zh": "概率期望"
+    },
+    "4": {
+      "en": "Game theory",
+      "zh": "博弈论"
+    },
+    "5": {
+      "en": "Computational geometry",
+      "zh": "计算几何"
+    },
+    "6": {
+      "en": "Randomized algorithms",
+      "zh": "随机算法"
+    },
+    "7": {
+      "en": "Miscellaneous",
+      "zh": "杂项"
+    }
+  },
+  "sections": {
+    "1.1": {
+      "en": "Primality tests",
+      "zh": "判断质数",
+      "pattern": "math.prime_test"
+    },
+    "1.2": {
+      "en": "Prime sieves",
+      "zh": "预处理质数（筛质数）",
+      "pattern": "math.sieve"
+    },
+    "1.3": {
+      "en": "Prime factorization",
+      "zh": "质因数分解",
+      "pattern": "math.factorization"
+    },
+    "1.4": {
+      "en": "Factoring factorials",
+      "zh": "阶乘分解",
+      "pattern": "math.factorial_factorization"
+    },
+    "1.5": {
+      "en": "Divisors",
+      "zh": "因子",
+      "pattern": "math.divisors"
+    },
+    "1.6": {
+      "en": "Greatest common divisor",
+      "zh": "最大公约数（GCD）",
+      "pattern": "math.gcd"
+    },
+    "1.7": {
+      "en": "Least common multiple",
+      "zh": "最小公倍数（LCM）",
+      "pattern": "math.lcm"
+    },
+    "1.8": {
+      "en": "Coprimality",
+      "zh": "互质",
+      "pattern": "math.coprime"
+    },
+    "1.9": {
+      "en": "Congruences",
+      "zh": "同余",
+      "pattern": "math.congruence"
+    },
+    "1.10": {
+      "en": "Quotient blocks",
+      "zh": "数论分块",
+      "pattern": "math.quotient_blocks"
+    },
+    "1.11": {
+      "en": "Möbius function",
+      "zh": "莫比乌斯函数",
+      "pattern": "math.mobius"
+    },
+    "1.12": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "math.number_theory_other"
+    },
+    "2.1": {
+      "en": "Multiplication principle",
+      "zh": "乘法原理",
+      "pattern": "math.multiplication_principle"
+    },
+    "2.2": {
+      "en": "Combinatorial counting",
+      "zh": "组合计数",
+      "pattern": "math.combinatorics"
+    },
+    "2.3": {
+      "en": "Inclusion-exclusion",
+      "zh": "容斥原理",
+      "pattern": "math.inclusion_exclusion"
+    },
+    "2.4": {
+      "en": "Generating functions",
+      "zh": "生成函数（母函数）",
+      "pattern": "math.generating_functions"
+    },
+    "3": {
+      "en": "Probability and expectation",
+      "zh": "概率期望",
+      "pattern": "math.probability"
+    },
+    "4": {
+      "en": "Game theory",
+      "zh": "博弈论",
+      "pattern": "math.game_theory"
+    },
+    "5.1": {
+      "en": "Points and lines",
+      "zh": "点、线",
+      "pattern": "math.geometry_lines"
+    },
+    "5.2": {
+      "en": "Circles",
+      "zh": "圆",
+      "pattern": "math.geometry_circles"
+    },
+    "5.3": {
+      "en": "Rectangles and polygons",
+      "zh": "矩形、多边形",
+      "pattern": "math.geometry_polygons"
+    },
+    "5.4": {
+      "en": "Convex hulls",
+      "zh": "凸包",
+      "pattern": "math.convex_hull"
+    },
+    "5.5": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "math.geometry_other"
+    },
+    "6.1": {
+      "en": "Random numbers",
+      "zh": "随机数",
+      "pattern": "math.random"
+    },
+    "6.2": {
+      "en": "Randomization tricks",
+      "zh": "随机化技巧",
+      "pattern": "math.randomization"
+    },
+    "6.3": {
+      "en": "XOR hashing",
+      "zh": "异或哈希（XOR hashing）",
+      "pattern": "math.xor_hashing"
+    },
+    "7.1": {
+      "en": "Palindromic numbers",
+      "zh": "回文数",
+      "pattern": "math.palindrome_numbers"
+    },
+    "7.2": {
+      "en": "Integer partitions",
+      "zh": "整数拆分",
+      "pattern": "math.integer_partition"
+    },
+    "7.3": {
+      "en": "Manhattan and Chebyshev distance",
+      "zh": "曼哈顿距离与切比雪夫距离",
+      "pattern": "math.manhattan"
+    },
+    "7.4": {
+      "en": "Convolution",
+      "zh": "卷积",
+      "pattern": "math.convolution"
+    },
+    "7.5": {
+      "en": "Fast Walsh-Hadamard transform",
+      "zh": "快速沃尔什变换（FWT）",
+      "pattern": "math.fwt"
+    },
+    "7.6": {
+      "en": "Lagrange interpolation",
+      "zh": "拉格朗日插值",
+      "pattern": "math.lagrange"
+    },
+    "7.8": {
+      "en": "Boyer-Moore majority vote",
+      "zh": "摩尔投票法",
+      "pattern": "math.majority_vote"
+    },
+    "7.9": {
+      "en": "Determining digits",
+      "zh": "确定数位",
+      "pattern": "math.digits"
+    },
+    "7.10": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "math.other"
+    }
+  }
+}

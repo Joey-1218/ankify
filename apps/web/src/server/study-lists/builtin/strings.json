@@ -1,0 +1,1433 @@
+{
+  "id": "strings",
+  "name": {
+    "en": "String Algorithms",
+    "zh": "字符串"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/SJFwQI/",
+  "sourceUpdatedAt": "2026-09-05T02:43:00.418966+00:00",
+  "generatedAt": "2026-10-20T19:25:02.943Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "KMP",
+        "zh": "KMP（前缀的后缀）"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Z-function",
+        "zh": "Z 函数（后缀的前缀）"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Manacher's algorithm",
+        "zh": "Manacher 算法（回文串）"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "String hashing",
+        "zh": "字符串哈希"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Minimum rotation",
+        "zh": "最小表示法"
+      }
+    },
+    {
+      "id": "7",
+      "title": {
+        "en": "Aho-Corasick",
+        "zh": "AC 自动机"
+      }
+    },
+    {
+      "id": "8",
+      "title": {
+        "en": "Suffix arrays and suffix automata",
+        "zh": "后缀数组/后缀自动机"
+      }
+    },
+    {
+      "id": "9",
+      "title": {
+        "en": "Subsequence automaton",
+        "zh": "子序列自动机"
+      }
+    },
+    {
+      "id": "10",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1",
+      "chapterId": "1",
+      "title": {
+        "en": "KMP",
+        "zh": "KMP（前缀的后缀）"
+      },
+      "pattern": "string.kmp",
+      "optional": false
+    },
+    {
+      "id": "2",
+      "chapterId": "2",
+      "title": {
+        "en": "Z-function",
+        "zh": "Z 函数（后缀的前缀）"
+      },
+      "pattern": "string.z_function",
+      "optional": false
+    },
+    {
+      "id": "3",
+      "chapterId": "3",
+      "title": {
+        "en": "Manacher's algorithm",
+        "zh": "Manacher 算法（回文串）"
+      },
+      "pattern": "string.manacher",
+      "optional": false
+    },
+    {
+      "id": "4",
+      "chapterId": "4",
+      "title": {
+        "en": "String hashing",
+        "zh": "字符串哈希"
+      },
+      "pattern": "string.hashing",
+      "optional": false
+    },
+    {
+      "id": "5",
+      "chapterId": "5",
+      "title": {
+        "en": "Minimum rotation",
+        "zh": "最小表示法"
+      },
+      "pattern": "string.min_rotation",
+      "optional": false
+    },
+    {
+      "id": "7",
+      "chapterId": "7",
+      "title": {
+        "en": "Aho-Corasick",
+        "zh": "AC 自动机"
+      },
+      "pattern": "string.aho_corasick",
+      "optional": false
+    },
+    {
+      "id": "8",
+      "chapterId": "8",
+      "title": {
+        "en": "Suffix arrays and suffix automata",
+        "zh": "后缀数组/后缀自动机"
+      },
+      "pattern": "string.suffix",
+      "optional": false
+    },
+    {
+      "id": "9",
+      "chapterId": "9",
+      "title": {
+        "en": "Subsequence automaton",
+        "zh": "子序列自动机"
+      },
+      "pattern": "string.subsequence_automaton",
+      "optional": false
+    },
+    {
+      "id": "10",
+      "chapterId": "10",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "string.other",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "find-the-index-of-the-first-occurrence-in-a-string",
+      "frontendId": "28",
+      "title": {
+        "en": "Find the Index of the First Occurrence in a String",
+        "zh": "找出字符串中第一个匹配项的下标"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "rotate-string",
+      "frontendId": "796",
+      "title": {
+        "en": "Rotate String",
+        "zh": "旋转字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "longest-happy-prefix",
+      "frontendId": "1392",
+      "title": {
+        "en": "Longest Happy Prefix",
+        "zh": "最长快乐前缀"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1876,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-subarrays-that-match-a-pattern-ii",
+      "frontendId": "3036",
+      "title": {
+        "en": "Number of Subarrays That Match a Pattern II",
+        "zh": "匹配模式数组的子数组数目 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1895,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "form-array-by-concatenating-subarrays-of-another-array",
+      "frontendId": "1764",
+      "title": {
+        "en": "Form Array by Concatenating Subarrays of Another Array",
+        "zh": "通过连接另一个数组的子数组得到一个数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-repeating-substring",
+      "frontendId": "1668",
+      "title": {
+        "en": "Maximum Repeating Substring",
+        "zh": "最大重复子字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "repeated-substring-pattern",
+      "frontendId": "459",
+      "title": {
+        "en": "Repeated Substring Pattern",
+        "zh": "重复的子字符串"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-string-that-contains-three-strings",
+      "frontendId": "2800",
+      "title": {
+        "en": "Shortest String That Contains Three Strings",
+        "zh": "包含三个字符串的最短字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "find-beautiful-indices-in-the-given-array-ii",
+      "frontendId": "3008",
+      "title": {
+        "en": "Find Beautiful Indices in the Given Array II",
+        "zh": "找出数组中的美丽下标 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2016,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-palindrome",
+      "frontendId": "214",
+      "title": {
+        "en": "Shortest Palindrome",
+        "zh": "最短回文串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "count-cells-in-overlapping-horizontal-and-vertical-substrings",
+      "frontendId": "3529",
+      "title": {
+        "en": "Count Cells in Overlapping Horizontal and Vertical Substrings",
+        "zh": "统计水平子串和垂直子串重叠格子的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2105,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "repeated-string-match",
+      "frontendId": "686",
+      "title": {
+        "en": "Repeated String Match",
+        "zh": "重复叠加字符串匹配"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-matching-substring",
+      "frontendId": "3455",
+      "title": {
+        "en": "Shortest Matching Substring",
+        "zh": "最短匹配子字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2303,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "find-all-good-strings",
+      "frontendId": "1397",
+      "title": {
+        "en": "Find All Good Strings",
+        "zh": "找到所有好字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2667,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "find-pattern-in-infinite-stream-ii",
+      "frontendId": "3037",
+      "title": {
+        "en": "Find Pattern in Infinite Stream II",
+        "zh": "在无限流中寻找模式 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-shortest-superstring-ii",
+      "frontendId": "3571",
+      "title": {
+        "en": "Find the Shortest Superstring II",
+        "zh": "最短超级串 II"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-scores-of-built-strings",
+      "frontendId": "2223",
+      "title": {
+        "en": "Sum of Scores of Built Strings",
+        "zh": "构造字符串的总得分和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2220,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-revert-word-to-initial-state-ii",
+      "frontendId": "3031",
+      "title": {
+        "en": "Minimum Time to Revert Word to Initial State II",
+        "zh": "将单词恢复初始状态所需的最短时间 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2278,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "count-prefix-and-suffix-pairs-ii",
+      "frontendId": "3045",
+      "title": {
+        "en": "Count Prefix and Suffix Pairs II",
+        "zh": "统计前后缀下标对 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2328,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-occurrence-of-first-almost-equal-substring",
+      "frontendId": "3303",
+      "title": {
+        "en": "Find the Occurrence of First Almost Equal Substring",
+        "zh": "第一个几乎相等子字符串的下标"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2509,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-valid-strings-to-form-target-ii",
+      "frontendId": "3292",
+      "title": {
+        "en": "Minimum Number of Valid Strings to Form Target II",
+        "zh": "形成目标字符串需要的最少字符串数 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2662,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-generated-string",
+      "frontendId": "3474",
+      "title": {
+        "en": "Lexicographically Smallest Generated String",
+        "zh": "字典序最小的生成字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-deletions-on-a-string",
+      "frontendId": "2430",
+      "title": {
+        "en": "Maximum Deletions on a String",
+        "zh": "对字母串可执行的最大删除数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2102,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "count-beautiful-splits-in-an-array",
+      "frontendId": "3388",
+      "title": {
+        "en": "Count Beautiful Splits in an Array",
+        "zh": "统计数组中的美丽分割"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2365,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-string-with-lcp",
+      "frontendId": "2573",
+      "title": {
+        "en": "Find the String with LCP",
+        "zh": "找出对应 LCP 矩阵的字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2682,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-separate-numbers",
+      "frontendId": "1977",
+      "title": {
+        "en": "Number of Ways to Separate Numbers",
+        "zh": "划分数字的方案数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2817,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "longest-palindromic-substring",
+      "frontendId": "5",
+      "title": {
+        "en": "Longest Palindromic Substring",
+        "zh": "最长回文子串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "palindromic-substrings",
+      "frontendId": "647",
+      "title": {
+        "en": "Palindromic Substrings",
+        "zh": "回文子串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-palindrome",
+      "frontendId": "214",
+      "title": {
+        "en": "Shortest Palindrome",
+        "zh": "最短回文串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "palindromic-subarray-sum",
+      "frontendId": "3985",
+      "title": {
+        "en": "Palindromic Subarray Sum",
+        "zh": "回文子数组求和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2202,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-dfs-strings-are-palindromes",
+      "frontendId": "3327",
+      "title": {
+        "en": "Check if DFS Strings Are Palindromes",
+        "zh": "判断 DFS 字符串是否是回文串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2454,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "palindrome-partitioning-iv",
+      "frontendId": "1745",
+      "title": {
+        "en": "Palindrome Partitioning IV",
+        "zh": "分割回文串 IV"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-product-of-the-length-of-two-palindromic-substrings",
+      "frontendId": "1960",
+      "title": {
+        "en": "Maximum Product of the Length of Two Palindromic Substrings",
+        "zh": "两个回文子字符串长度的最大乘积"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2691,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "longest-almost-palindromic-substring",
+      "frontendId": "3844",
+      "title": {
+        "en": "Longest Almost-Palindromic Substring",
+        "zh": "最长的准回文子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "longest-palindrome-after-substring-concatenation-ii",
+      "frontendId": "3504",
+      "title": {
+        "en": "Longest Palindrome After Substring Concatenation II",
+        "zh": "子字符串连接后的最长回文串 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-non-overlapping-palindrome-substrings",
+      "frontendId": "2472",
+      "title": {
+        "en": "Maximum Number of Non-overlapping Palindrome Substrings",
+        "zh": "不重叠回文子字符串的最大数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2013,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "longest-palindromic-path-in-graph",
+      "frontendId": "3615",
+      "title": {
+        "en": "Longest Palindromic Path in Graph",
+        "zh": "图中的最长回文路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2463,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-steps-to-convert-string-with-operations",
+      "frontendId": "3579",
+      "title": {
+        "en": "Minimum Steps to Convert String with Operations",
+        "zh": "字符串转换需要的最小操作数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-index-of-the-first-occurrence-in-a-string",
+      "frontendId": "28",
+      "title": {
+        "en": "Find the Index of the First Occurrence in a String",
+        "zh": "找出字符串中第一个匹配项的下标"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "repeated-dna-sequences",
+      "frontendId": "187",
+      "title": {
+        "en": "Repeated DNA Sequences",
+        "zh": "重复的DNA序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "distinct-echo-substrings",
+      "frontendId": "1316",
+      "title": {
+        "en": "Distinct Echo Substrings",
+        "zh": "不同的循环子字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1837,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-occurrences-of-a-substring",
+      "frontendId": "1297",
+      "title": {
+        "en": "Maximum Number of Occurrences of a Substring",
+        "zh": "子串的最大出现次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "k-divisible-elements-subarrays",
+      "frontendId": "2261",
+      "title": {
+        "en": "K Divisible Elements Subarrays",
+        "zh": "含最多 K 个可整除元素的子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-string-after-reverse",
+      "frontendId": "3722",
+      "title": {
+        "en": "Lexicographically Smallest String After Reverse",
+        "zh": "反转后字典序最小的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-unique-subarray",
+      "frontendId": "3934",
+      "title": {
+        "en": "Smallest Unique Subarray",
+        "zh": "最短唯一子数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2163,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "construct-string-with-minimum-cost",
+      "frontendId": "3213",
+      "title": {
+        "en": "Construct String with Minimum Cost",
+        "zh": "最小代价构造字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2171,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-in-binary-tree",
+      "frontendId": "1367",
+      "title": {
+        "en": "Linked List in Binary Tree",
+        "zh": "二叉树中的链表"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "longest-duplicate-substring",
+      "frontendId": "1044",
+      "title": {
+        "en": "Longest Duplicate Substring",
+        "zh": "最长重复子串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2429,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-length-of-repeated-subarray",
+      "frontendId": "718",
+      "title": {
+        "en": "Maximum Length of Repeated Subarray",
+        "zh": "最长重复子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "longest-common-subpath",
+      "frontendId": "1923",
+      "title": {
+        "en": "Longest Common Subpath",
+        "zh": "最长公共子路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2661,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-valid-strings-to-form-target-ii",
+      "frontendId": "3292",
+      "title": {
+        "en": "Minimum Number of Valid Strings to Form Target II",
+        "zh": "形成目标字符串需要的最少字符串数 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2662,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "longest-almost-palindromic-substring",
+      "frontendId": "3844",
+      "title": {
+        "en": "Longest Almost-Palindromic Substring",
+        "zh": "最长的准回文子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "unique-substrings-with-equal-digit-frequency",
+      "frontendId": "2168",
+      "title": {
+        "en": "Unique Substrings With Equal Digit Frequency",
+        "zh": "每个数字的频率都相同的不同子字符串的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "strings-differ-by-one-character",
+      "frontendId": "1554",
+      "title": {
+        "en": "Strings Differ by One Character",
+        "zh": "只有一个不同字符的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "longest-repeating-substring",
+      "frontendId": "1062",
+      "title": {
+        "en": "Longest Repeating Substring",
+        "zh": "最长重复子串的长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "orderly-queue",
+      "frontendId": "899",
+      "title": {
+        "en": "Orderly Queue",
+        "zh": "有序队列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-string-groups-through-transformations",
+      "frontendId": "3999",
+      "title": {
+        "en": "Minimum Number of String Groups Through Transformations",
+        "zh": "字符串变换后的最少分组数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2162,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-lexicographically-largest-string-from-the-box-i",
+      "frontendId": "3403",
+      "title": {
+        "en": "Find the Lexicographically Largest String From the Box I",
+        "zh": "从盒子中找出字典序最大的字符串 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-string-after-applying-operations",
+      "frontendId": "1625",
+      "title": {
+        "en": "Lexicographically Smallest String After Applying Operations",
+        "zh": "执行操作后字典序最小的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-lexicographically-largest-string-from-the-box-ii",
+      "frontendId": "3406",
+      "title": {
+        "en": "Find the Lexicographically Largest String From the Box II",
+        "zh": "从盒子中找出字典序最大的字符串 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "largest-subarray-length-k",
+      "frontendId": "1708",
+      "title": {
+        "en": "Largest Subarray Length K",
+        "zh": "长度为 K 的最大子数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5",
+      "level": "core"
+    },
+    {
+      "slug": "stream-of-characters",
+      "frontendId": "1032",
+      "title": {
+        "en": "Stream of Characters",
+        "zh": "字符流"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1970,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-strings-that-appear-as-substrings-in-word",
+      "frontendId": "1967",
+      "title": {
+        "en": "Number of Strings That Appear as Substrings in Word",
+        "zh": "作为子字符串出现在单词中的字符串数目"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "string-matching-in-an-array",
+      "frontendId": "1408",
+      "title": {
+        "en": "String Matching in an Array",
+        "zh": "数组中的字符串匹配"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "construct-string-with-minimum-cost",
+      "frontendId": "3213",
+      "title": {
+        "en": "Construct String with Minimum Cost",
+        "zh": "最小代价构造字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2171,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "length-of-the-longest-valid-substring",
+      "frontendId": "2781",
+      "title": {
+        "en": "Length of the Longest Valid Substring",
+        "zh": "最长合法子字符串的长度"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2204,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-valid-strings-to-form-target-ii",
+      "frontendId": "3292",
+      "title": {
+        "en": "Minimum Number of Valid Strings to Form Target II",
+        "zh": "形成目标字符串需要的最少字符串数 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2662,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "convert-number-words-to-digits",
+      "frontendId": "3758",
+      "title": {
+        "en": "Convert Number Words to Digits",
+        "zh": "将数字词转换为数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7",
+      "level": "core"
+    },
+    {
+      "slug": "last-substring-in-lexicographical-order",
+      "frontendId": "1163",
+      "title": {
+        "en": "Last Substring in Lexicographical Order",
+        "zh": "按字典序排在最后的子串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1864,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "largest-merge-of-two-strings",
+      "frontendId": "1754",
+      "title": {
+        "en": "Largest Merge Of Two Strings",
+        "zh": "构造字典序最大的合并字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-and-lexicographically-smallest-beautiful-string",
+      "frontendId": "2904",
+      "title": {
+        "en": "Shortest and Lexicographically Smallest Beautiful String",
+        "zh": "最短且字典序最小的美丽子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-string-after-reverse",
+      "frontendId": "3722",
+      "title": {
+        "en": "Lexicographically Smallest String After Reverse",
+        "zh": "反转后字典序最小的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-unique-subarray",
+      "frontendId": "3934",
+      "title": {
+        "en": "Smallest Unique Subarray",
+        "zh": "最短唯一子数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2163,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "construct-string-with-minimum-cost",
+      "frontendId": "3213",
+      "title": {
+        "en": "Construct String with Minimum Cost",
+        "zh": "最小代价构造字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2171,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "longest-duplicate-substring",
+      "frontendId": "1044",
+      "title": {
+        "en": "Longest Duplicate Substring",
+        "zh": "最长重复子串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2429,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-length-of-repeated-subarray",
+      "frontendId": "718",
+      "title": {
+        "en": "Maximum Length of Repeated Subarray",
+        "zh": "最长重复子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "longest-common-subpath",
+      "frontendId": "1923",
+      "title": {
+        "en": "Longest Common Subpath",
+        "zh": "最长公共子路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2661,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "string-matching-in-an-array",
+      "frontendId": "1408",
+      "title": {
+        "en": "String Matching in an Array",
+        "zh": "数组中的字符串匹配"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "count-distinct-subarrays-divisible-by-k-in-sorted-array",
+      "frontendId": "3729",
+      "title": {
+        "en": "Count Distinct Subarrays Divisible by K in Sorted Array",
+        "zh": "统计有序数组中可被 K 整除的子数组数量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-uncommon-substring-in-an-array",
+      "frontendId": "3076",
+      "title": {
+        "en": "Shortest Uncommon Substring in an Array",
+        "zh": "数组中的最短非公共子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "longest-almost-palindromic-substring",
+      "frontendId": "3844",
+      "title": {
+        "en": "Longest Almost-Palindromic Substring",
+        "zh": "最长的准回文子字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "longest-palindrome-after-substring-concatenation-ii",
+      "frontendId": "3504",
+      "title": {
+        "en": "Longest Palindrome After Substring Concatenation II",
+        "zh": "子字符串连接后的最长回文串 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "distinct-echo-substrings",
+      "frontendId": "1316",
+      "title": {
+        "en": "Distinct Echo Substrings",
+        "zh": "不同的循环子字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "count-beautiful-splits-in-an-array",
+      "frontendId": "3388",
+      "title": {
+        "en": "Count Beautiful Splits in an Array",
+        "zh": "统计数组中的美丽分割"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "substring-xor-queries",
+      "frontendId": "2564",
+      "title": {
+        "en": "Substring XOR Queries",
+        "zh": "子字符串异或查询"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-distinct-substrings-in-a-string",
+      "frontendId": "1698",
+      "title": {
+        "en": "Number of Distinct Substrings in a String",
+        "zh": "字符串的不同子字符串个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "longest-repeating-substring",
+      "frontendId": "1062",
+      "title": {
+        "en": "Longest Repeating Substring",
+        "zh": "最长重复子串的长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "equalize-strings-by-adding-or-removing-characters-at-ends",
+      "frontendId": "3135",
+      "title": {
+        "en": "Equalize Strings by Adding or Removing Characters at Ends",
+        "zh": "通过添加或删除结尾字符来同化字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "8",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-matching-subsequences",
+      "frontendId": "792",
+      "title": {
+        "en": "Number of Matching Subsequences",
+        "zh": "匹配子序列的单词数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1695,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "freedom-trail",
+      "frontendId": "514",
+      "title": {
+        "en": "Freedom Trail",
+        "zh": "自由之路"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "longest-subsequence-repeated-k-times",
+      "frontendId": "2014",
+      "title": {
+        "en": "Longest Subsequence Repeated k Times",
+        "zh": "重复 K 次的最长子序列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2558,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "shortest-way-to-form-string",
+      "frontendId": "1055",
+      "title": {
+        "en": "Shortest Way to Form String",
+        "zh": "形成字符串的最短路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-window-subsequence",
+      "frontendId": "727",
+      "title": {
+        "en": "Minimum Window Subsequence",
+        "zh": "最小窗口子序列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "9",
+      "level": "core"
+    },
+    {
+      "slug": "longest-common-prefix-of-k-strings-after-removal",
+      "frontendId": "3485",
+      "title": {
+        "en": "Longest Common Prefix of K Strings After Removal",
+        "zh": "删除元素后 K 个字符串的最长公共前缀"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2290,
+      "sectionId": "10",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-repetitions",
+      "frontendId": "466",
+      "title": {
+        "en": "Count The Repetitions",
+        "zh": "统计重复个数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "10",
+      "level": "core"
+    },
+    {
+      "slug": "phone-number-prefix",
+      "frontendId": "3491",
+      "title": {
+        "en": "Phone Number Prefix",
+        "zh": "电话号码前缀"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "10",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "面试题 17.17",
+      "title": "多次搜索",
+      "sectionId": "7",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "面试题 16.18",
+      "title": "模式匹配",
+      "sectionId": "8",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}

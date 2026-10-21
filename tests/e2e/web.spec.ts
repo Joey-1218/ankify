@@ -8,9 +8,24 @@ import type { LeetcodeFixtureState } from "./leetcode-fixture";
 // (the `panel` fixture signs in through /api/qa/login).
 type Settings = { review: { dailyReviewLimit: number; initialReviewDelayHours: number }; analysis: { automatic: boolean } };
 
-async function openWeb(context: BrowserContext, path: string, language: "en" | "zh" = "en"): Promise<Page> {
+/**
+ * The language a page renders in: the cookie the server reads, and the choice
+ * the browser stored, which the client keeps over the cookie (so a page left
+ * in English by an earlier test would switch a Chinese one back).
+ */
+async function setLanguage(context: BrowserContext, page: Page, language: "en" | "zh") {
   await context.addCookies([{ name: "ankileet-language", value: language, url: API_ORIGIN }]);
+  // Runs before the app on every load of this page; a later call runs last and wins.
+  await page.addInitScript((value) => {
+    try {
+      localStorage.setItem("ankileet-language", value);
+    } catch {}
+  }, language);
+}
+
+async function openWeb(context: BrowserContext, path: string, language: "en" | "zh" = "en"): Promise<Page> {
   const page = await context.newPage();
+  await setLanguage(context, page, language);
   await page.goto(`${API_ORIGIN}${path}`);
   return page;
 }
@@ -48,6 +63,53 @@ test.afterEach(async ({ api, context }) => {
   await api("/api/settings", { body: { analysisAutomatic: false, initialReviewDelayHours: 24 } });
   await removeOwnKey(api);
   await context.addCookies([{ name: "ankileet-language", value: "en", url: API_ORIGIN }]);
+});
+
+test("lists reorder from the keyboard, pause and delete from the row menu, go back, and group built-in lists by author", async ({ context, panel }) => {
+  void panel; // signs the context in
+  const page = await openWeb(context, "/lists");
+  const stamp = Date.now();
+  const names = [`E2E first ${stamp}`, `E2E second ${stamp}`];
+  for (const name of names) {
+    const created = await page.request.post(`${API_ORIGIN}/api/study-lists`, { data: { action: "create", requestId: crypto.randomUUID(), name } });
+    expect(created.status()).toBe(201);
+  }
+  await page.reload();
+  const yours = page.getByRole("region", { name: "Your lists" });
+  const order = async () => (await yours.getByRole("link").allTextContents()).filter((text) => text.startsWith("E2E"));
+  expect(await order()).toEqual(names);
+
+  const saved = page.waitForResponse((response) => response.url().endsWith("/api/study-lists") && response.request().method() === "PUT");
+  await yours.getByRole("button", { name: `Reorder ${names[0]}` }).press("ArrowDown");
+  expect((await saved).status()).toBe(200);
+  await page.reload();
+  expect(await order()).toEqual([names[1], names[0]]);
+
+  // Pause from the row menu, then open the list and come back with the back link.
+  await yours.getByRole("button", { name: `Actions: ${names[0]}` }).click();
+  await page.getByRole("menuitem", { name: /^Pause/ }).click();
+  await expect(yours.getByText("Paused")).toBeVisible();
+  await yours.getByRole("link", { name: names[0] }).click();
+  await page.getByRole("link", { name: "All lists" }).click();
+  await expect(page).toHaveURL(/\/lists$/);
+
+  for (const name of names) {
+    await yours.getByRole("button", { name: `Actions: ${name}` }).click();
+    await page.getByRole("menuitem", { name: "Delete list" }).click();
+    await page.getByRole("alertdialog").getByRole("button", { name: "Delete list" }).click();
+    await expect(yours.getByRole("link", { name })).toHaveCount(0);
+  }
+
+  // Built-in lists: one collapsed group per author, remembered once opened.
+  const carl = page.getByRole("button", { name: /^代码随想录/ });
+  await expect(carl).toHaveAttribute("aria-expanded", "false");
+  await expect(page.getByRole("link", { name: "Extra Problems" })).toBeHidden();
+  await carl.click();
+  await expect(page.getByRole("link", { name: "Extra Problems" })).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole("button", { name: /^代码随想录/ })).toHaveAttribute("aria-expanded", "true");
+  await page.getByRole("button", { name: /^代码随想录/ }).click();
+  await page.close();
 });
 
 test("settings add a key in two steps and never store one the provider rejects", async ({ context, api }) => {
@@ -195,7 +257,7 @@ test("the dashboard shows today's counts, recent practice, and focus areas", asy
   await expect(recent.getByText(/^Last 7 days: \d+ sessions? completed/)).toBeVisible();
   await expect(page.getByRole("region", { name: "Focus areas" }).getByRole("link", { name: "View mistake profile" })).toHaveAttribute("href", "/analysis");
 
-  await context.addCookies([{ name: "ankileet-language", value: "zh", url: API_ORIGIN }]);
+  await setLanguage(context, page, "zh");
   await page.reload();
   await expect(page.getByRole("region", { name: "最近练习" })).toBeVisible({ timeout: 30_000 });
   await page.close();
@@ -291,8 +353,8 @@ test("a long problem statement uses the page's own scrolling, at desktop and pho
 
 /** The problems list at a width that shows every column, once its first load settled. */
 async function openProblems(context: BrowserContext, path = "/problems"): Promise<Page> {
-  await context.addCookies([{ name: "ankileet-language", value: "en", url: API_ORIGIN }]);
   const page = await context.newPage();
+  await setLanguage(context, page, "en");
   await page.setViewportSize({ width: 1440, height: 900 });
   // In development the list refetches once after hydration.
   await page.goto(`${API_ORIGIN}${path}`, { waitUntil: "networkidle" });
@@ -311,7 +373,7 @@ test("the problems table names its columns in full", async ({ context, panel }) 
   void panel; // signs the context in
   const page = await openProblems(context);
   const headers = page.getByRole("columnheader");
-  await expect(headers).toHaveText(["", "Problem", "Difficulty", "Next review", "Last practiced", "Practiced", "Reviews", "Times forgotten", "Memory state", "Added"]);
+  await expect(headers).toHaveText(["", "Problem", "Difficulty", "Next review", "Last practiced", "Practiced", "Reviews", "Times forgotten", "Memory state", "Added", "Actions"]);
   // Counts start with the largest.
   await page.getByRole("button", { name: "Times forgotten" }).click();
   await expect(page.getByRole("columnheader", { name: "Times forgotten" })).toHaveAttribute("aria-sort", "descending");
@@ -342,6 +404,56 @@ test("problems are archived and restored together from the list", async ({ conte
   await expect(rows).toHaveCount(0);
   const restored = await api<ProblemsListPayloadDto>(`/api/problems?search=${stamp}`);
   expect(restored.problems.map((problem) => problem.title).sort()).toEqual(titles);
+  await page.close();
+});
+
+test("problems join lists from a row's menu, several at once, and leave from the problem's page", async ({ context, api, leetcode }) => {
+  const stamp = Date.now();
+  const first = `E2E listed ${stamp} a`;
+  const second = `E2E listed ${stamp} b`;
+  await captureProblem(api, leetcode, `web-listed-a-${stamp}`, first);
+  await captureProblem(api, leetcode, `web-listed-b-${stamp}`, second);
+  const listName = `E2E picks ${stamp}`;
+  await api("/api/study-lists", { body: { action: "create", requestId: crypto.randomUUID(), name: listName } });
+  const page = await openProblems(context);
+  await page.getByPlaceholder(/Search/).fill(String(stamp));
+  await expect(page.getByRole("row")).toHaveCount(3);
+
+  // One problem, from its row's menu: a checkbox per list.
+  await page.getByRole("button", { name: `Actions: ${first}` }).click();
+  await page.getByRole("menuitem", { name: "Add to list" }).click();
+  const picker = page.getByRole("dialog", { name: "Add to list" });
+  await picker.getByRole("checkbox", { name: listName }).check();
+  await expect(picker.getByRole("checkbox", { name: listName })).toBeChecked();
+  await picker.getByRole("button", { name: "Done" }).click();
+  await expect(picker).toHaveCount(0);
+
+  // Both selected: the one already there is counted, not added twice.
+  await page.getByRole("checkbox", { name: `Select ${first}` }).check();
+  await page.getByRole("checkbox", { name: `Select ${second}` }).check();
+  await page.getByRole("button", { name: "Add to list" }).click();
+  await picker.getByRole("button", { name: `Add to ${listName}` }).click();
+  await expect(picker.getByRole("status")).toHaveText("Added 1, 1 already there");
+  await picker.getByRole("button", { name: "Done" }).click();
+
+  // The problem's page names the list; unchecking it there takes the problem out.
+  await page.getByRole("link", { name: first }).click();
+  await expect(page.getByRole("heading", { level: 1, name: first })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole("link", { name: listName })).toBeVisible();
+  await page.getByRole("button", { name: "Add to list" }).click();
+  await picker.getByRole("checkbox", { name: listName }).uncheck();
+  await expect(picker.getByRole("checkbox", { name: listName })).not.toBeChecked();
+  await picker.getByRole("button", { name: "Done" }).click();
+  await expect(page.getByRole("link", { name: listName })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "My problems" })).toBeVisible();
+
+  // Back to the list, where a row's menu archives just that problem.
+  await page.getByRole("link", { name: "All problems" }).click();
+  await page.getByPlaceholder(/Search/).fill(String(stamp));
+  await page.getByRole("button", { name: `Actions: ${second}` }).click();
+  await page.getByRole("menuitem", { name: /^Archive/ }).click();
+  await expect(page.getByRole("link", { name: second })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: first })).toBeVisible();
   await page.close();
 });
 

@@ -1,0 +1,697 @@
+{
+  "id": "carl-binary-tree",
+  "name": {
+    "en": "Binary Trees",
+    "zh": "二叉树"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/binary-tree/",
+  "sourceUpdatedAt": null,
+  "generatedAt": "2026-10-20T23:11:49.270Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Traversal",
+        "zh": "遍历"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Properties",
+        "zh": "属性"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Building and merging",
+        "zh": "构造与合并"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Binary search trees",
+        "zh": "二叉搜索树"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Depth-first traversal",
+        "zh": "深度优先遍历"
+      },
+      "pattern": "binary_tree.traverse",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Level-order traversal",
+        "zh": "层序遍历"
+      },
+      "pattern": "binary_tree.bfs",
+      "optional": false
+    },
+    {
+      "id": "2.1",
+      "chapterId": "2",
+      "title": {
+        "en": "Inverting and symmetry",
+        "zh": "翻转与对称"
+      },
+      "pattern": "binary_tree.bottom_up",
+      "optional": false
+    },
+    {
+      "id": "2.2",
+      "chapterId": "2",
+      "title": {
+        "en": "Depth",
+        "zh": "深度"
+      },
+      "pattern": "binary_tree.bottom_up",
+      "optional": false
+    },
+    {
+      "id": "2.3",
+      "chapterId": "2",
+      "title": {
+        "en": "Node counts and balance",
+        "zh": "节点个数与平衡"
+      },
+      "pattern": "binary_tree.bottom_up",
+      "optional": false
+    },
+    {
+      "id": "2.4",
+      "chapterId": "2",
+      "title": {
+        "en": "Paths",
+        "zh": "路径"
+      },
+      "pattern": "binary_tree.backtracking",
+      "optional": false
+    },
+    {
+      "id": "2.5",
+      "chapterId": "2",
+      "title": {
+        "en": "Left leaves and the bottom row",
+        "zh": "左叶子与最底层"
+      },
+      "pattern": "binary_tree.top_down",
+      "optional": false
+    },
+    {
+      "id": "2.6",
+      "chapterId": "2",
+      "title": {
+        "en": "Path sums",
+        "zh": "路径总和"
+      },
+      "pattern": "binary_tree.backtracking",
+      "optional": false
+    },
+    {
+      "id": "3.1",
+      "chapterId": "3",
+      "title": {
+        "en": "Building and merging trees",
+        "zh": "构造与合并二叉树"
+      },
+      "pattern": "binary_tree.build",
+      "optional": false
+    },
+    {
+      "id": "4.1",
+      "chapterId": "4",
+      "title": {
+        "en": "Searching and validating",
+        "zh": "搜索与验证"
+      },
+      "pattern": "binary_tree.bst",
+      "optional": false
+    },
+    {
+      "id": "4.2",
+      "chapterId": "4",
+      "title": {
+        "en": "Lowest common ancestors",
+        "zh": "最近公共祖先"
+      },
+      "pattern": "binary_tree.lca",
+      "optional": false
+    },
+    {
+      "id": "4.3",
+      "chapterId": "4",
+      "title": {
+        "en": "Inserting, deleting, and trimming",
+        "zh": "插入、删除与修剪"
+      },
+      "pattern": "binary_tree.insert_delete",
+      "optional": false
+    },
+    {
+      "id": "4.4",
+      "chapterId": "4",
+      "title": {
+        "en": "Building and converting",
+        "zh": "构造与转换"
+      },
+      "pattern": "binary_tree.bst",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "binary-tree-preorder-traversal",
+      "frontendId": "144",
+      "title": {
+        "en": "Binary Tree Preorder Traversal",
+        "zh": "二叉树的前序遍历"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-postorder-traversal",
+      "frontendId": "145",
+      "title": {
+        "en": "Binary Tree Postorder Traversal",
+        "zh": "二叉树的后序遍历"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-inorder-traversal",
+      "frontendId": "94",
+      "title": {
+        "en": "Binary Tree Inorder Traversal",
+        "zh": "二叉树的中序遍历"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-level-order-traversal",
+      "frontendId": "102",
+      "title": {
+        "en": "Binary Tree Level Order Traversal",
+        "zh": "二叉树的层序遍历"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-level-order-traversal-ii",
+      "frontendId": "107",
+      "title": {
+        "en": "Binary Tree Level Order Traversal II",
+        "zh": "二叉树的层序遍历 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-right-side-view",
+      "frontendId": "199",
+      "title": {
+        "en": "Binary Tree Right Side View",
+        "zh": "二叉树的右视图"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "average-of-levels-in-binary-tree",
+      "frontendId": "637",
+      "title": {
+        "en": "Average of Levels in Binary Tree",
+        "zh": "二叉树的层平均值"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "n-ary-tree-level-order-traversal",
+      "frontendId": "429",
+      "title": {
+        "en": "N-ary Tree Level Order Traversal",
+        "zh": "N 叉树的层序遍历"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-largest-value-in-each-tree-row",
+      "frontendId": "515",
+      "title": {
+        "en": "Find Largest Value in Each Tree Row",
+        "zh": "在每个树行中找最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "populating-next-right-pointers-in-each-node",
+      "frontendId": "116",
+      "title": {
+        "en": "Populating Next Right Pointers in Each Node",
+        "zh": "填充每个节点的下一个右侧节点指针"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "populating-next-right-pointers-in-each-node-ii",
+      "frontendId": "117",
+      "title": {
+        "en": "Populating Next Right Pointers in Each Node II",
+        "zh": "填充每个节点的下一个右侧节点指针 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-depth-of-binary-tree",
+      "frontendId": "104",
+      "title": {
+        "en": "Maximum Depth of Binary Tree",
+        "zh": "二叉树的最大深度"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-depth-of-binary-tree",
+      "frontendId": "111",
+      "title": {
+        "en": "Minimum Depth of Binary Tree",
+        "zh": "二叉树的最小深度"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "invert-binary-tree",
+      "frontendId": "226",
+      "title": {
+        "en": "Invert Binary Tree",
+        "zh": "翻转二叉树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "symmetric-tree",
+      "frontendId": "101",
+      "title": {
+        "en": "Symmetric Tree",
+        "zh": "对称二叉树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "same-tree",
+      "frontendId": "100",
+      "title": {
+        "en": "Same Tree",
+        "zh": "相同的树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "subtree-of-another-tree",
+      "frontendId": "572",
+      "title": {
+        "en": "Subtree of Another Tree",
+        "zh": "另一棵树的子树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-depth-of-n-ary-tree",
+      "frontendId": "559",
+      "title": {
+        "en": "Maximum Depth of N-ary Tree",
+        "zh": "N 叉树的最大深度"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-complete-tree-nodes",
+      "frontendId": "222",
+      "title": {
+        "en": "Count Complete Tree Nodes",
+        "zh": "完全二叉树的节点个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "balanced-binary-tree",
+      "frontendId": "110",
+      "title": {
+        "en": "Balanced Binary Tree",
+        "zh": "平衡二叉树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "binary-tree-paths",
+      "frontendId": "257",
+      "title": {
+        "en": "Binary Tree Paths",
+        "zh": "二叉树的所有路径"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-left-leaves",
+      "frontendId": "404",
+      "title": {
+        "en": "Sum of Left Leaves",
+        "zh": "左叶子之和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-bottom-left-tree-value",
+      "frontendId": "513",
+      "title": {
+        "en": "Find Bottom Left Tree Value",
+        "zh": "找树左下角的值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.5",
+      "level": "core"
+    },
+    {
+      "slug": "path-sum",
+      "frontendId": "112",
+      "title": {
+        "en": "Path Sum",
+        "zh": "路径总和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "path-sum-ii",
+      "frontendId": "113",
+      "title": {
+        "en": "Path Sum II",
+        "zh": "路径总和 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.6",
+      "level": "core"
+    },
+    {
+      "slug": "construct-binary-tree-from-inorder-and-postorder-traversal",
+      "frontendId": "106",
+      "title": {
+        "en": "Construct Binary Tree from Inorder and Postorder Traversal",
+        "zh": "从中序与后序遍历序列构造二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "construct-binary-tree-from-preorder-and-inorder-traversal",
+      "frontendId": "105",
+      "title": {
+        "en": "Construct Binary Tree from Preorder and Inorder Traversal",
+        "zh": "从前序与中序遍历序列构造二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-binary-tree",
+      "frontendId": "654",
+      "title": {
+        "en": "Maximum Binary Tree",
+        "zh": "最大二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "merge-two-binary-trees",
+      "frontendId": "617",
+      "title": {
+        "en": "Merge Two Binary Trees",
+        "zh": "合并二叉树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3.1",
+      "level": "core"
+    },
+    {
+      "slug": "search-in-a-binary-search-tree",
+      "frontendId": "700",
+      "title": {
+        "en": "Search in a Binary Search Tree",
+        "zh": "二叉搜索树中的搜索"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "validate-binary-search-tree",
+      "frontendId": "98",
+      "title": {
+        "en": "Validate Binary Search Tree",
+        "zh": "验证二叉搜索树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-absolute-difference-in-bst",
+      "frontendId": "530",
+      "title": {
+        "en": "Minimum Absolute Difference in BST",
+        "zh": "二叉搜索树的最小绝对差"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-mode-in-binary-search-tree",
+      "frontendId": "501",
+      "title": {
+        "en": "Find Mode in Binary Search Tree",
+        "zh": "二叉搜索树中的众数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.1",
+      "level": "core"
+    },
+    {
+      "slug": "lowest-common-ancestor-of-a-binary-tree",
+      "frontendId": "236",
+      "title": {
+        "en": "Lowest Common Ancestor of a Binary Tree",
+        "zh": "二叉树的最近公共祖先"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "lowest-common-ancestor-of-a-binary-search-tree",
+      "frontendId": "235",
+      "title": {
+        "en": "Lowest Common Ancestor of a Binary Search Tree",
+        "zh": "二叉搜索树的最近公共祖先"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.2",
+      "level": "core"
+    },
+    {
+      "slug": "insert-into-a-binary-search-tree",
+      "frontendId": "701",
+      "title": {
+        "en": "Insert into a Binary Search Tree",
+        "zh": "二叉搜索树中的插入操作"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "delete-node-in-a-bst",
+      "frontendId": "450",
+      "title": {
+        "en": "Delete Node in a BST",
+        "zh": "删除二叉搜索树中的节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "trim-a-binary-search-tree",
+      "frontendId": "669",
+      "title": {
+        "en": "Trim a Binary Search Tree",
+        "zh": "修剪二叉搜索树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.3",
+      "level": "core"
+    },
+    {
+      "slug": "convert-sorted-array-to-binary-search-tree",
+      "frontendId": "108",
+      "title": {
+        "en": "Convert Sorted Array to Binary Search Tree",
+        "zh": "将有序数组转换为二叉搜索树"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.4",
+      "level": "core"
+    },
+    {
+      "slug": "convert-bst-to-greater-tree",
+      "frontendId": "538",
+      "title": {
+        "en": "Convert BST to Greater Tree",
+        "zh": "把二叉搜索树转换为累加树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4.4",
+      "level": "core"
+    }
+  ],
+  "excluded": []
+}

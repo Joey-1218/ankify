@@ -1,0 +1,56 @@
+{
+  "id": "carl-linked-list",
+  "source": "programmercarl",
+  "name": {
+    "en": "Linked Lists",
+    "zh": "链表"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/linked-list/",
+  "chapters": {
+    "1": {
+      "en": "Linked lists",
+      "zh": "链表"
+    }
+  },
+  "articles": {
+    "0203-remove-linked-list-elements": "1.1",
+    "0707-design-linked-list": "1.2",
+    "0206-reverse-linked-list": "1.3",
+    "0019-remove-nth-node-from-end-of-list": "1.4",
+    "interview-02-07-linked-list-intersection": "1.5",
+    "0142-linked-list-cycle-ii": "1.6"
+  },
+  "sections": {
+    "1.1": {
+      "en": "Removing nodes",
+      "zh": "删除节点",
+      "pattern": "linked_list.delete"
+    },
+    "1.2": {
+      "en": "Designing a linked list",
+      "zh": "设计链表",
+      "pattern": "linked_list.design"
+    },
+    "1.3": {
+      "en": "Reversing a linked list",
+      "zh": "反转链表",
+      "pattern": "linked_list.reverse"
+    },
+    "1.4": {
+      "en": "Removing the n-th node from the end",
+      "zh": "删除倒数第 N 个节点",
+      "pattern": "linked_list.gap_pointers"
+    },
+    "1.5": {
+      "en": "Intersections",
+      "zh": "链表相交",
+      "pattern": "linked_list.two_pointers"
+    },
+    "1.6": {
+      "en": "Cycle detection",
+      "zh": "环形链表",
+      "pattern": "linked_list.fast_slow"
+    }
+  }
+}

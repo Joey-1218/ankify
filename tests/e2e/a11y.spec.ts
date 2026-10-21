@@ -22,7 +22,7 @@ async function audit(page: Page, label: string, include?: string) {
   expect(describe(blocking), `${label}: serious or critical axe violations`).toEqual([]);
 }
 
-const PAGES = ["/today", "/problems", "/problems/qa-problem-two-sum", "/analysis", "/suggestions", "/settings"];
+const PAGES = ["/today", "/lists", "/lists/builtin/sliding-window-two-pointers", "/lists/builtin/carl-binary-tree", "/problems", "/problems/qa-problem-two-sum", "/analysis", "/suggestions", "/settings"];
 
 for (const theme of ["light", "dark"] as const) {
   test(`web pages pass axe in ${theme}`, async ({ context, panel }) => {
@@ -34,6 +34,34 @@ for (const theme of ["light", "dark"] as const) {
       await expect(page.getByRole("heading", { level: 1 }).first()).toBeVisible({ timeout: 30_000 });
       await audit(page, `${path} (${theme})`);
     }
+    // The built-in lists' author groups, open.
+    await page.goto(`${API_ORIGIN}/lists`);
+    const groups = [page.getByRole("button", { name: /^代码随想录/ }), page.getByRole("button", { name: /^灵茶山艾府/ })];
+    for (const group of groups) await group.click();
+    await expect(page.getByRole("link", { name: "Extra Problems" })).toBeVisible();
+    await audit(page, `/lists, groups open (${theme})`);
+    for (const group of groups) await group.click();
+    // A list row's actions menu, open.
+    const created = await page.request.post(`${API_ORIGIN}/api/study-lists`, { data: { action: "create", requestId: crypto.randomUUID(), name: `A11y ${theme}` } });
+    const { list } = (await created.json()) as { list: { id: string } };
+    await page.reload();
+    await page.getByRole("button", { name: `Actions: A11y ${theme}` }).click();
+    await expect(page.getByRole("menu")).toBeVisible();
+    await audit(page, `/lists, row menu open (${theme})`);
+    await page.keyboard.press("Escape");
+    // A problem's row menu, and the add-to-list picker on its page.
+    // Clicks before hydration do nothing; in development the list also refetches once after it.
+    await page.goto(`${API_ORIGIN}/problems`, { waitUntil: "networkidle" });
+    await page.getByRole("button", { name: /^Actions: / }).first().click();
+    await expect(page.getByRole("menu")).toBeVisible();
+    await audit(page, `/problems, row menu open (${theme})`);
+    await page.keyboard.press("Escape");
+    await page.goto(`${API_ORIGIN}/problems/qa-problem-two-sum`, { waitUntil: "networkidle" });
+    await page.getByRole("button", { name: "Add to list" }).click();
+    await expect(page.getByRole("dialog").getByRole("checkbox", { name: `A11y ${theme}` })).toBeVisible();
+    await audit(page, `/problems/[id], add to list (${theme})`);
+    await page.keyboard.press("Escape");
+    await page.request.delete(`${API_ORIGIN}/api/study-lists/${list.id}`);
     await page.close();
   });
 

@@ -1,0 +1,274 @@
+{
+  "id": "linked-lists-trees-backtracking",
+  "name": {
+    "en": "Linked Lists, Trees, and Backtracking",
+    "zh": "链表、树与回溯"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/K0n2gO/",
+  "headings": {},
+  "chapters": {
+    "1": {
+      "en": "Linked lists",
+      "zh": "链表"
+    },
+    "2": {
+      "en": "Binary trees",
+      "zh": "二叉树"
+    },
+    "3": {
+      "en": "General trees",
+      "zh": "一般树"
+    },
+    "4": {
+      "en": "Backtracking",
+      "zh": "回溯"
+    },
+    "5": {
+      "en": "Other recursion and divide and conquer",
+      "zh": "其他递归/分治"
+    }
+  },
+  "sections": {
+    "1.1": {
+      "en": "Traversing a linked list",
+      "zh": "遍历链表",
+      "pattern": "linked_list.traverse"
+    },
+    "1.2": {
+      "en": "Deleting nodes",
+      "zh": "删除节点",
+      "pattern": "linked_list.delete"
+    },
+    "1.3": {
+      "en": "Inserting nodes",
+      "zh": "插入节点",
+      "pattern": "linked_list.insert"
+    },
+    "1.4": {
+      "en": "Reversing a linked list",
+      "zh": "反转链表",
+      "pattern": "linked_list.reverse"
+    },
+    "1.5": {
+      "en": "Leading and trailing pointers",
+      "zh": "前后指针",
+      "pattern": "linked_list.gap_pointers"
+    },
+    "1.6": {
+      "en": "Fast and slow pointers",
+      "zh": "快慢指针",
+      "pattern": "linked_list.fast_slow"
+    },
+    "1.7": {
+      "en": "Two pointers",
+      "zh": "双指针",
+      "pattern": "linked_list.two_pointers"
+    },
+    "1.8": {
+      "en": "Merging linked lists",
+      "zh": "合并链表",
+      "pattern": "linked_list.merge"
+    },
+    "1.9": {
+      "en": "Divide and conquer",
+      "zh": "分治",
+      "pattern": "linked_list.divide"
+    },
+    "1.10": {
+      "en": "Combined applications",
+      "zh": "综合应用",
+      "pattern": "linked_list.mixed"
+    },
+    "1.11": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "linked_list.other"
+    },
+    "2.1": {
+      "en": "Traversing a binary tree",
+      "zh": "遍历二叉树",
+      "pattern": "binary_tree.traverse"
+    },
+    "2.2": {
+      "en": "Top-down DFS (preorder)",
+      "zh": "自顶向下 DFS（先序遍历）",
+      "pattern": "binary_tree.top_down"
+    },
+    "2.3": {
+      "en": "Bottom-up DFS (postorder)",
+      "zh": "自底向上 DFS（后序遍历）",
+      "pattern": "binary_tree.bottom_up"
+    },
+    "2.4": {
+      "en": "Bottom-up DFS: deleting nodes",
+      "zh": "自底向上 DFS：删点",
+      "pattern": "binary_tree.bottom_up_delete"
+    },
+    "2.5": {
+      "en": "Passing down and returning up",
+      "zh": "有递有归",
+      "pattern": "binary_tree.down_and_up"
+    },
+    "2.6": {
+      "en": "Diameter of a binary tree",
+      "zh": "二叉树的直径",
+      "pattern": "binary_tree.diameter"
+    },
+    "2.7": {
+      "en": "Backtracking",
+      "zh": "回溯",
+      "pattern": "binary_tree.backtracking"
+    },
+    "2.8": {
+      "en": "Lowest common ancestor",
+      "zh": "最近公共祖先",
+      "pattern": "binary_tree.lca"
+    },
+    "2.9": {
+      "en": "Binary search trees",
+      "zh": "二叉搜索树",
+      "pattern": "binary_tree.bst"
+    },
+    "2.10": {
+      "en": "Building a binary tree",
+      "zh": "创建二叉树",
+      "pattern": "binary_tree.build"
+    },
+    "2.11": {
+      "en": "Inserting or deleting nodes",
+      "zh": "插入/删除节点",
+      "pattern": "binary_tree.insert_delete"
+    },
+    "2.12": {
+      "en": "Tree DP",
+      "zh": "树形 DP",
+      "pattern": "binary_tree.dp"
+    },
+    "2.13": {
+      "en": "Binary tree BFS",
+      "zh": "二叉树 BFS",
+      "pattern": "binary_tree.bfs"
+    },
+    "2.14": {
+      "en": "Linked lists and binary trees",
+      "zh": "链表+二叉树",
+      "pattern": "binary_tree.linked_list"
+    },
+    "2.15": {
+      "en": "N-ary trees",
+      "zh": "N 叉树",
+      "pattern": "binary_tree.n_ary"
+    },
+    "2.16": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "binary_tree.other"
+    },
+    "3.1": {
+      "en": "Traversal",
+      "zh": "遍历",
+      "pattern": "tree.traverse"
+    },
+    "3.2": {
+      "en": "Top-down DFS",
+      "zh": "自顶向下 DFS",
+      "pattern": "tree.top_down"
+    },
+    "3.3": {
+      "en": "Bottom-up DFS",
+      "zh": "自底向上 DFS",
+      "pattern": "tree.bottom_up"
+    },
+    "3.4": {
+      "en": "Passing down and returning up",
+      "zh": "有递有归",
+      "pattern": "tree.down_and_up"
+    },
+    "3.5": {
+      "en": "Tree diameter",
+      "zh": "树的直径",
+      "pattern": "tree.diameter"
+    },
+    "3.6": {
+      "en": "Topological sort on a tree",
+      "zh": "树的拓扑排序",
+      "pattern": "tree.topo"
+    },
+    "3.7": {
+      "en": "DFS timestamps",
+      "zh": "DFS 时间戳",
+      "pattern": "tree.dfs_order"
+    },
+    "3.8": {
+      "en": "Lowest common ancestor and binary lifting",
+      "zh": "最近公共祖先（LCA）、倍增算法",
+      "pattern": "tree.lca"
+    },
+    "3.9": {
+      "en": "Virtual trees",
+      "zh": "虚树",
+      "pattern": "tree.virtual"
+    },
+    "3.10": {
+      "en": "Small-to-large merging",
+      "zh": "树上启发式合并",
+      "pattern": "tree.small_to_large"
+    },
+    "3.11": {
+      "en": "Centroid decomposition",
+      "zh": "点分治",
+      "pattern": "tree.centroid"
+    },
+    "3.12": {
+      "en": "Sliding window on a tree",
+      "zh": "树上滑动窗口",
+      "pattern": "tree.sliding_window"
+    },
+    "3.13": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "tree.other"
+    },
+    "4.1": {
+      "en": "Subset backtracking",
+      "zh": "子集型回溯",
+      "pattern": "backtracking.subset"
+    },
+    "4.2": {
+      "en": "Partition backtracking",
+      "zh": "划分型回溯",
+      "pattern": "backtracking.partition"
+    },
+    "4.3": {
+      "en": "Combination backtracking",
+      "zh": "组合型回溯",
+      "pattern": "backtracking.combination"
+    },
+    "4.4": {
+      "en": "Permutation backtracking",
+      "zh": "排列型回溯",
+      "pattern": "backtracking.permutation"
+    },
+    "4.5": {
+      "en": "Backtracking with duplicates",
+      "zh": "有重复元素的回溯",
+      "pattern": "backtracking.duplicates"
+    },
+    "4.6": {
+      "en": "Search",
+      "zh": "搜索",
+      "pattern": "backtracking.search"
+    },
+    "4.7": {
+      "en": "Meet in the middle",
+      "zh": "折半搜索",
+      "pattern": "backtracking.meet_in_middle"
+    },
+    "5": {
+      "en": "Other recursion and divide and conquer",
+      "zh": "其他递归/分治",
+      "pattern": "recursion.other"
+    }
+  }
+}

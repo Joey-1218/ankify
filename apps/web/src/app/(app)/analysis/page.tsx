@@ -8,8 +8,9 @@ import { Stat, Surface } from "@/components/ui/surface";
 import { formatRelative } from "@/lib/utils";
 import { PageFrame, PageHeader } from "@/components/ui/page";
 import { loadAnalysis, type AnalysisData } from "@/server/analysis";
-import { loadMistakeProfile } from "@/server/mistake-profile";
+import { loadProfiles, patternProfileDto } from "@/server/mistake-profile";
 import { MistakeProfileSection } from "./mistake-profile";
+import { PatternGrid } from "./pattern-grid";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -61,9 +62,14 @@ export default async function AnalysisPage() {
   const user = await requirePageUser();
   const [t, language] = await Promise.all([getRequestTranslations(), getRequestLanguage()]);
   let data: AnalysisData;
-  let profile: Awaited<ReturnType<typeof loadMistakeProfile>>;
+  let profile: Awaited<ReturnType<typeof loadProfiles>>["profile"];
+  let patterns: Awaited<ReturnType<typeof patternProfileDto>>;
   try {
-    [data, profile] = await Promise.all([loadAnalysis(user.id), loadMistakeProfile(user.id)]);
+    const now = new Date();
+    const [analysis, profiles] = await Promise.all([loadAnalysis(user.id), loadProfiles(user.id, now)]);
+    data = analysis;
+    profile = profiles.profile;
+    patterns = await patternProfileDto(user.id, profiles.patterns, now);
   } catch {
     return (
       <PageFrame width="wide">
@@ -96,6 +102,8 @@ export default async function AnalysisPage() {
       />
 
       <MistakeProfileSection profile={profile} t={t} />
+
+      <PatternGrid profile={patterns} t={t} language={language} />
 
       {/* Plain-language summary */}
       <div className={`rounded-xl border px-4 py-3 text-sm font-medium ${HEADLINE_TONE[headline.tone]}`}>

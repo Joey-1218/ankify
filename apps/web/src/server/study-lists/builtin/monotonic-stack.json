@@ -1,0 +1,916 @@
+{
+  "id": "monotonic-stack",
+  "name": {
+    "en": "Monotonic Stack",
+    "zh": "单调栈"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/9oZFK9/",
+  "sourceUpdatedAt": "2026-09-06T23:34:43.533083+00:00",
+  "generatedAt": "2026-10-20T19:18:41.033Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Monotonic stack",
+        "zh": "单调栈"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Rectangles",
+        "zh": "矩形"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Contribution technique",
+        "zh": "贡献法"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Smallest lexicographic order",
+        "zh": "最小字典序"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Basics",
+        "zh": "基础"
+      },
+      "pattern": "monotonic_stack.basic",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Advanced",
+        "zh": "进阶"
+      },
+      "pattern": "monotonic_stack.basic",
+      "optional": false
+    },
+    {
+      "id": "2",
+      "chapterId": "2",
+      "title": {
+        "en": "Rectangle areas",
+        "zh": "矩形"
+      },
+      "pattern": "monotonic_stack.rectangle",
+      "optional": false
+    },
+    {
+      "id": "3",
+      "chapterId": "3",
+      "title": {
+        "en": "Contribution technique",
+        "zh": "贡献法"
+      },
+      "pattern": "monotonic_stack.contribution",
+      "optional": false
+    },
+    {
+      "id": "4",
+      "chapterId": "4",
+      "title": {
+        "en": "Smallest lexicographic order",
+        "zh": "最小字典序"
+      },
+      "pattern": "monotonic_stack.lexicographic",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "daily-temperatures",
+      "frontendId": "739",
+      "title": {
+        "en": "Daily Temperatures",
+        "zh": "每日温度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "final-prices-with-a-special-discount-in-a-shop",
+      "frontendId": "1475",
+      "title": {
+        "en": "Final Prices With a Special Discount in a Shop",
+        "zh": "商品折扣后的最终价格"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "next-greater-element-i",
+      "frontendId": "496",
+      "title": {
+        "en": "Next Greater Element I",
+        "zh": "下一个更大元素 I"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "next-greater-element-ii",
+      "frontendId": "503",
+      "title": {
+        "en": "Next Greater Element II",
+        "zh": "下一个更大元素 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "online-stock-span",
+      "frontendId": "901",
+      "title": {
+        "en": "Online Stock Span",
+        "zh": "股票价格跨度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1709,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-bowl-subarrays",
+      "frontendId": "3676",
+      "title": {
+        "en": "Count Bowl Subarrays",
+        "zh": "碗子数组的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1848,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "132-pattern",
+      "frontendId": "456",
+      "title": {
+        "en": "132 Pattern",
+        "zh": "132 模式"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-number-of-subarrays-where-boundary-elements-are-maximum",
+      "frontendId": "3113",
+      "title": {
+        "en": "Find the Number of Subarrays Where Boundary Elements Are Maximum",
+        "zh": "边界元素是最大值的子数组数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2046,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "beautiful-towers-ii",
+      "frontendId": "2866",
+      "title": {
+        "en": "Beautiful Towers II",
+        "zh": "美丽塔 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2072,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "odd-even-jump",
+      "frontendId": "975",
+      "title": {
+        "en": "Odd Even Jump",
+        "zh": "奇偶跳"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2079,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-visible-people-in-a-queue",
+      "frontendId": "1944",
+      "title": {
+        "en": "Number of Visible People in a Queue",
+        "zh": "队列中可以看到的人数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2105,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "next-greater-element-iv",
+      "frontendId": "2454",
+      "title": {
+        "en": "Next Greater Element IV",
+        "zh": "下一个更大元素 IV"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2175,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-binary-tree",
+      "frontendId": "654",
+      "title": {
+        "en": "Maximum Binary Tree",
+        "zh": "最大二叉树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-tree-from-leaf-values",
+      "frontendId": "1130",
+      "title": {
+        "en": "Minimum Cost Tree From Leaf Values",
+        "zh": "叶值的最小代价生成树"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "steps-to-make-array-non-decreasing",
+      "frontendId": "2289",
+      "title": {
+        "en": "Steps to Make Array Non-decreasing",
+        "zh": "使数组按非递减顺序排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2482,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-sum-queries",
+      "frontendId": "2736",
+      "title": {
+        "en": "Maximum Sum Queries",
+        "zh": "最大和查询"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2533,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-non-decreasing-subarrays-after-k-operations",
+      "frontendId": "3420",
+      "title": {
+        "en": "Count Non-Decreasing Subarrays After K Operations",
+        "zh": "统计 K 次操作以内得到非递减子数组的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2855,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-array-hopping-score-ii",
+      "frontendId": "3221",
+      "title": {
+        "en": "Maximum Array Hopping Score II",
+        "zh": "最大数组跳跃得分 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "binary-searchable-numbers-in-an-unsorted-array",
+      "frontendId": "1966",
+      "title": {
+        "en": "Binary Searchable Numbers in an Unsorted Array",
+        "zh": "未排序数组中的可被二分查找的数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximal-range-that-each-element-is-maximum-in-it",
+      "frontendId": "2832",
+      "title": {
+        "en": "Maximal Range That Each Element Is Maximum in It",
+        "zh": "每个元素为最大值的最大范围"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-valid-subarrays",
+      "frontendId": "1063",
+      "title": {
+        "en": "Number of Valid Subarrays",
+        "zh": "有效子数组的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-of-minimum-values-in-all-subarrays",
+      "frontendId": "1950",
+      "title": {
+        "en": "Maximum of Minimum Values in All Subarrays",
+        "zh": "所有子数组最小值中的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-people-that-can-be-seen-in-a-grid",
+      "frontendId": "2282",
+      "title": {
+        "en": "Number of People That Can Be Seen in a Grid",
+        "zh": "在一个网格中可以看到的人数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-subarray-to-sort-in-every-sliding-window",
+      "frontendId": "3555",
+      "title": {
+        "en": "Smallest Subarray to Sort in Every Sliding Window",
+        "zh": "排序每个滑动窗口中最小的子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "next-greater-node-in-linked-list",
+      "frontendId": "1019",
+      "title": {
+        "en": "Next Greater Node In Linked List",
+        "zh": "链表中的下一个更大节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1571,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-width-ramp",
+      "frontendId": "962",
+      "title": {
+        "en": "Maximum Width Ramp",
+        "zh": "最大宽度坡"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1608,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "car-fleet",
+      "frontendId": "853",
+      "title": {
+        "en": "Car Fleet",
+        "zh": "车队"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1678,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "max-chunks-to-make-sorted-ii",
+      "frontendId": "768",
+      "title": {
+        "en": "Max Chunks To Make Sorted II",
+        "zh": "最多能完成排序的块 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1788,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-capacity-within-budget",
+      "frontendId": "3814",
+      "title": {
+        "en": "Maximum Capacity Within Budget",
+        "zh": "预算下的最大总容量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1796,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "two-best-non-overlapping-events",
+      "frontendId": "2054",
+      "title": {
+        "en": "Two Best Non-Overlapping Events",
+        "zh": "两个最好的不重叠活动"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1883,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "minimum-operations-to-convert-all-elements-to-zero",
+      "frontendId": "3542",
+      "title": {
+        "en": "Minimum Operations to Convert All Elements to Zero",
+        "zh": "将所有元素变为 0 的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1890,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "longest-well-performing-interval",
+      "frontendId": "1124",
+      "title": {
+        "en": "Longest Well-Performing Interval",
+        "zh": "表现良好的最长时间段"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1908,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "jump-game-v",
+      "frontendId": "1340",
+      "title": {
+        "en": "Jump Game V",
+        "zh": "跳跃游戏 V"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "car-fleet-ii",
+      "frontendId": "1776",
+      "title": {
+        "en": "Car Fleet II",
+        "zh": "车队 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2531,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-length-of-semi-decreasing-subarrays",
+      "frontendId": "2863",
+      "title": {
+        "en": "Maximum Length of Semi-Decreasing Subarrays",
+        "zh": "最长半递减子数组的长度"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "maximum-number-of-books-you-can-take",
+      "frontendId": "2355",
+      "title": {
+        "en": "Maximum Number of Books You Can Take",
+        "zh": "你能拿走的最大图书数量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "largest-rectangle-in-histogram",
+      "frontendId": "84",
+      "title": {
+        "en": "Largest Rectangle in Histogram",
+        "zh": "柱状图中最大的矩形"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-score-of-a-good-subarray",
+      "frontendId": "1793",
+      "title": {
+        "en": "Maximum Score of a Good Subarray",
+        "zh": "好子数组的最大分数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1946,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "maximal-rectangle",
+      "frontendId": "85",
+      "title": {
+        "en": "Maximal Rectangle",
+        "zh": "最大矩形"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "maximal-square",
+      "frontendId": "221",
+      "title": {
+        "en": "Maximal Square",
+        "zh": "最大正方形"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-area-of-two-non-overlapping-square-submatrices",
+      "frontendId": "4016",
+      "title": {
+        "en": "Maximum Area of Two Non-Overlapping Square Submatrices",
+        "zh": "两个不重叠子正方形的最大面积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1959,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "trapping-rain-water",
+      "frontendId": "42",
+      "title": {
+        "en": "Trapping Rain Water",
+        "zh": "接雨水"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "count-submatrices-with-all-ones",
+      "frontendId": "1504",
+      "title": {
+        "en": "Count Submatrices With All Ones",
+        "zh": "统计全 1 子矩形"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "count-square-submatrices-with-all-ones",
+      "frontendId": "1277",
+      "title": {
+        "en": "Count Square Submatrices with All Ones",
+        "zh": "统计全为 1 的正方形子矩阵"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "pour-water",
+      "frontendId": "755",
+      "title": {
+        "en": "Pour Water",
+        "zh": "倒水"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2",
+      "level": "core"
+    },
+    {
+      "slug": "largest-submatrix-with-rearrangements",
+      "frontendId": "1727",
+      "title": {
+        "en": "Largest Submatrix With Rearrangements",
+        "zh": "重新排列后的最大子矩阵"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1927,
+      "sectionId": "2",
+      "level": "stretch"
+    },
+    {
+      "slug": "sum-of-subarray-minimums",
+      "frontendId": "907",
+      "title": {
+        "en": "Sum of Subarray Minimums",
+        "zh": "子数组的最小值之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1976,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-subarray-ranges",
+      "frontendId": "2104",
+      "title": {
+        "en": "Sum of Subarray Ranges",
+        "zh": "子数组范围和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-subarray-min-product",
+      "frontendId": "1856",
+      "title": {
+        "en": "Maximum Subarray Min-Product",
+        "zh": "子数组最小乘积的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2051,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "count-good-subarrays",
+      "frontendId": "3878",
+      "title": {
+        "en": "Count Good Subarrays",
+        "zh": "统计好子数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2230,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "apply-operations-to-maximize-score",
+      "frontendId": "2818",
+      "title": {
+        "en": "Apply Operations to Maximize Score",
+        "zh": "操作使得分最大"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2397,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-total-strength-of-wizards",
+      "frontendId": "2281",
+      "title": {
+        "en": "Sum of Total Strength of Wizards",
+        "zh": "巫师的总力量和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2621,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-and-minimum-sums-of-at-most-size-k-subarrays",
+      "frontendId": "3430",
+      "title": {
+        "en": "Maximum and Minimum Sums of at Most Size K Subarrays",
+        "zh": "最多 K 个元素的子数组的最值之和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2645,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "find-sorted-submatrices-with-maximum-element-at-most-k",
+      "frontendId": "3359",
+      "title": {
+        "en": "Find Sorted Submatrices With Maximum Element at Most K",
+        "zh": "查找最大元素不超过 K 的有序子矩阵"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "subarray-with-elements-greater-than-varying-threshold",
+      "frontendId": "2334",
+      "title": {
+        "en": "Subarray With Elements Greater Than Varying Threshold",
+        "zh": "元素值大于变化阈值的子数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2381,
+      "sectionId": "3",
+      "level": "stretch"
+    },
+    {
+      "slug": "count-subarrays-where-max-element-appears-at-least-k-times",
+      "frontendId": "2962",
+      "title": {
+        "en": "Count Subarrays Where Max Element Appears at Least K Times",
+        "zh": "统计最大元素出现至少 K 次的子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "stretch"
+    },
+    {
+      "slug": "remove-k-digits",
+      "frontendId": "402",
+      "title": {
+        "en": "Remove K Digits",
+        "zh": "移掉 K 位数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-most-competitive-subsequence",
+      "frontendId": "1673",
+      "title": {
+        "en": "Find the Most Competitive Subsequence",
+        "zh": "找出最具竞争力的子序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1802,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "remove-duplicate-letters",
+      "frontendId": "316",
+      "title": {
+        "en": "Remove Duplicate Letters",
+        "zh": "去除重复字母"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2185,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-subsequence-of-distinct-characters",
+      "frontendId": "1081",
+      "title": {
+        "en": "Smallest Subsequence of Distinct Characters",
+        "zh": "不同字符的最小子序列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-string-after-deleting-duplicate-characters",
+      "frontendId": "3816",
+      "title": {
+        "en": "Lexicographically Smallest String After Deleting Duplicate Characters",
+        "zh": "删除重复字符后的字典序最小字符串"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2377,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "create-maximum-number",
+      "frontendId": "321",
+      "title": {
+        "en": "Create Maximum Number",
+        "zh": "拼接最大数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-k-length-subsequence-with-occurrences-of-a-letter",
+      "frontendId": "2030",
+      "title": {
+        "en": "Smallest K-Length Subsequence With Occurrences of a Letter",
+        "zh": "含特定字母的最小子序列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2562,
+      "sectionId": "4",
+      "level": "core"
+    }
+  ],
+  "excluded": []
+}

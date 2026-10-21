@@ -1,0 +1,95 @@
+{
+  "id": "bit-manipulation",
+  "name": {
+    "en": "Bit Manipulation",
+    "zh": "位运算"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/dHn9Vk/",
+  "headings": {},
+  "chapters": {
+    "1": {
+      "en": "Basics",
+      "zh": "基础题"
+    },
+    "2": {
+      "en": "Properties of XOR",
+      "zh": "异或（XOR）的性质"
+    },
+    "3": {
+      "en": "Properties of AND and OR",
+      "zh": "与或（AND/OR）的性质"
+    },
+    "4": {
+      "en": "Splitting bits and contribution",
+      "zh": "拆位 / 贡献法"
+    },
+    "5": {
+      "en": "Bit-by-bit trial filling",
+      "zh": "试填法"
+    },
+    "6": {
+      "en": "Identities",
+      "zh": "恒等式"
+    },
+    "7": {
+      "en": "Linear basis",
+      "zh": "线性基"
+    },
+    "8": {
+      "en": "Thinking problems",
+      "zh": "思维题"
+    },
+    "9": {
+      "en": "Other",
+      "zh": "其他"
+    }
+  },
+  "sections": {
+    "1": {
+      "en": "Basics",
+      "zh": "基础题",
+      "pattern": "bits.basic"
+    },
+    "2": {
+      "en": "Properties of XOR",
+      "zh": "异或（XOR）的性质",
+      "pattern": "bits.xor"
+    },
+    "3": {
+      "en": "Properties of AND and OR",
+      "zh": "与或（AND/OR）的性质",
+      "pattern": "bits.and_or"
+    },
+    "4": {
+      "en": "Splitting bits and contribution",
+      "zh": "拆位 / 贡献法",
+      "pattern": "bits.split"
+    },
+    "5": {
+      "en": "Bit-by-bit trial filling",
+      "zh": "试填法",
+      "pattern": "bits.trial_fill"
+    },
+    "6": {
+      "en": "Identities",
+      "zh": "恒等式",
+      "pattern": "bits.identity"
+    },
+    "7": {
+      "en": "Linear basis",
+      "zh": "线性基",
+      "pattern": "bits.linear_basis"
+    },
+    "8": {
+      "en": "Thinking problems",
+      "zh": "思维题",
+      "pattern": "bits.insight"
+    },
+    "9": {
+      "en": "Other",
+      "zh": "其他",
+      "pattern": "bits.other"
+    }
+  }
+}

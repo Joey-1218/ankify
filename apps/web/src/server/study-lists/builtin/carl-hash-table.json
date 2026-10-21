@@ -1,0 +1,209 @@
+{
+  "id": "carl-hash-table",
+  "name": {
+    "en": "Hash Tables",
+    "zh": "哈希表"
+  },
+  "author": "代码随想录",
+  "sourceUrl": "https://programmercarl.com/algo/hash-table/",
+  "sourceUpdatedAt": null,
+  "generatedAt": "2026-10-20T23:12:03.038Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Hash tables",
+        "zh": "哈希表"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Counting with arrays",
+        "zh": "数组计数"
+      },
+      "pattern": "hash.basic",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Sets",
+        "zh": "集合"
+      },
+      "pattern": "hash.basic",
+      "optional": false
+    },
+    {
+      "id": "1.3",
+      "chapterId": "1",
+      "title": {
+        "en": "Maps",
+        "zh": "映射"
+      },
+      "pattern": "hash.basic",
+      "optional": false
+    },
+    {
+      "id": "1.4",
+      "chapterId": "1",
+      "title": {
+        "en": "Three and four sums",
+        "zh": "三数之和与四数之和"
+      },
+      "pattern": "two_pointers.opposite",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "valid-anagram",
+      "frontendId": "242",
+      "title": {
+        "en": "Valid Anagram",
+        "zh": "有效的字母异位词"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "group-anagrams",
+      "frontendId": "49",
+      "title": {
+        "en": "Group Anagrams",
+        "zh": "字母异位词分组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "find-all-anagrams-in-a-string",
+      "frontendId": "438",
+      "title": {
+        "en": "Find All Anagrams in a String",
+        "zh": "找到字符串中所有字母异位词"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.1",
+      "level": "stretch"
+    },
+    {
+      "slug": "intersection-of-two-arrays",
+      "frontendId": "349",
+      "title": {
+        "en": "Intersection of Two Arrays",
+        "zh": "两个数组的交集"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "intersection-of-two-arrays-ii",
+      "frontendId": "350",
+      "title": {
+        "en": "Intersection of Two Arrays II",
+        "zh": "两个数组的交集 II"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "happy-number",
+      "frontendId": "202",
+      "title": {
+        "en": "Happy Number",
+        "zh": "快乐数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "two-sum",
+      "frontendId": "1",
+      "title": {
+        "en": "Two Sum",
+        "zh": "两数之和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "4sum-ii",
+      "frontendId": "454",
+      "title": {
+        "en": "4Sum II",
+        "zh": "四数相加 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "ransom-note",
+      "frontendId": "383",
+      "title": {
+        "en": "Ransom Note",
+        "zh": "赎金信"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "3sum",
+      "frontendId": "15",
+      "title": {
+        "en": "3Sum",
+        "zh": "三数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "4sum",
+      "frontendId": "18",
+      "title": {
+        "en": "4Sum",
+        "zh": "四数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    }
+  ],
+  "excluded": []
+}

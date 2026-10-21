@@ -1,0 +1,4786 @@
+{
+  "id": "math",
+  "name": {
+    "en": "Math",
+    "zh": "数学算法"
+  },
+  "author": "灵茶山艾府",
+  "sourceUrl": "https://leetcode.cn/discuss/post/IYT3ss/",
+  "sourceUpdatedAt": "2026-09-13T04:24:51.707141+00:00",
+  "generatedAt": "2026-10-20T19:20:55.945Z",
+  "metadataSite": "leetcode.com",
+  "chapters": [
+    {
+      "id": "1",
+      "title": {
+        "en": "Number theory",
+        "zh": "数论"
+      }
+    },
+    {
+      "id": "2",
+      "title": {
+        "en": "Combinatorics",
+        "zh": "组合数学"
+      }
+    },
+    {
+      "id": "3",
+      "title": {
+        "en": "Probability and expectation",
+        "zh": "概率期望"
+      }
+    },
+    {
+      "id": "4",
+      "title": {
+        "en": "Game theory",
+        "zh": "博弈论"
+      }
+    },
+    {
+      "id": "5",
+      "title": {
+        "en": "Computational geometry",
+        "zh": "计算几何"
+      }
+    },
+    {
+      "id": "6",
+      "title": {
+        "en": "Randomized algorithms",
+        "zh": "随机算法"
+      }
+    },
+    {
+      "id": "7",
+      "title": {
+        "en": "Miscellaneous",
+        "zh": "杂项"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "1.1",
+      "chapterId": "1",
+      "title": {
+        "en": "Primality tests",
+        "zh": "判断质数"
+      },
+      "pattern": "math.prime_test",
+      "optional": false
+    },
+    {
+      "id": "1.2",
+      "chapterId": "1",
+      "title": {
+        "en": "Prime sieves",
+        "zh": "预处理质数（筛质数）"
+      },
+      "pattern": "math.sieve",
+      "optional": false
+    },
+    {
+      "id": "1.3",
+      "chapterId": "1",
+      "title": {
+        "en": "Prime factorization",
+        "zh": "质因数分解"
+      },
+      "pattern": "math.factorization",
+      "optional": false
+    },
+    {
+      "id": "1.4",
+      "chapterId": "1",
+      "title": {
+        "en": "Factoring factorials",
+        "zh": "阶乘分解"
+      },
+      "pattern": "math.factorial_factorization",
+      "optional": false
+    },
+    {
+      "id": "1.5",
+      "chapterId": "1",
+      "title": {
+        "en": "Divisors",
+        "zh": "因子"
+      },
+      "pattern": "math.divisors",
+      "optional": false
+    },
+    {
+      "id": "1.6",
+      "chapterId": "1",
+      "title": {
+        "en": "Greatest common divisor",
+        "zh": "最大公约数（GCD）"
+      },
+      "pattern": "math.gcd",
+      "optional": false
+    },
+    {
+      "id": "1.7",
+      "chapterId": "1",
+      "title": {
+        "en": "Least common multiple",
+        "zh": "最小公倍数（LCM）"
+      },
+      "pattern": "math.lcm",
+      "optional": false
+    },
+    {
+      "id": "1.8",
+      "chapterId": "1",
+      "title": {
+        "en": "Coprimality",
+        "zh": "互质"
+      },
+      "pattern": "math.coprime",
+      "optional": false
+    },
+    {
+      "id": "1.9",
+      "chapterId": "1",
+      "title": {
+        "en": "Congruences",
+        "zh": "同余"
+      },
+      "pattern": "math.congruence",
+      "optional": false
+    },
+    {
+      "id": "1.10",
+      "chapterId": "1",
+      "title": {
+        "en": "Quotient blocks",
+        "zh": "数论分块"
+      },
+      "pattern": "math.quotient_blocks",
+      "optional": false
+    },
+    {
+      "id": "1.11",
+      "chapterId": "1",
+      "title": {
+        "en": "Möbius function",
+        "zh": "莫比乌斯函数"
+      },
+      "pattern": "math.mobius",
+      "optional": false
+    },
+    {
+      "id": "1.12",
+      "chapterId": "1",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "math.number_theory_other",
+      "optional": false
+    },
+    {
+      "id": "2.1",
+      "chapterId": "2",
+      "title": {
+        "en": "Multiplication principle",
+        "zh": "乘法原理"
+      },
+      "pattern": "math.multiplication_principle",
+      "optional": false
+    },
+    {
+      "id": "2.2",
+      "chapterId": "2",
+      "title": {
+        "en": "Combinatorial counting",
+        "zh": "组合计数"
+      },
+      "pattern": "math.combinatorics",
+      "optional": false
+    },
+    {
+      "id": "2.3",
+      "chapterId": "2",
+      "title": {
+        "en": "Inclusion-exclusion",
+        "zh": "容斥原理"
+      },
+      "pattern": "math.inclusion_exclusion",
+      "optional": false
+    },
+    {
+      "id": "2.4",
+      "chapterId": "2",
+      "title": {
+        "en": "Generating functions",
+        "zh": "生成函数（母函数）"
+      },
+      "pattern": "math.generating_functions",
+      "optional": false
+    },
+    {
+      "id": "3",
+      "chapterId": "3",
+      "title": {
+        "en": "Probability and expectation",
+        "zh": "概率期望"
+      },
+      "pattern": "math.probability",
+      "optional": false
+    },
+    {
+      "id": "4",
+      "chapterId": "4",
+      "title": {
+        "en": "Game theory",
+        "zh": "博弈论"
+      },
+      "pattern": "math.game_theory",
+      "optional": false
+    },
+    {
+      "id": "5.1",
+      "chapterId": "5",
+      "title": {
+        "en": "Points and lines",
+        "zh": "点、线"
+      },
+      "pattern": "math.geometry_lines",
+      "optional": false
+    },
+    {
+      "id": "5.2",
+      "chapterId": "5",
+      "title": {
+        "en": "Circles",
+        "zh": "圆"
+      },
+      "pattern": "math.geometry_circles",
+      "optional": false
+    },
+    {
+      "id": "5.3",
+      "chapterId": "5",
+      "title": {
+        "en": "Rectangles and polygons",
+        "zh": "矩形、多边形"
+      },
+      "pattern": "math.geometry_polygons",
+      "optional": false
+    },
+    {
+      "id": "5.4",
+      "chapterId": "5",
+      "title": {
+        "en": "Convex hulls",
+        "zh": "凸包"
+      },
+      "pattern": "math.convex_hull",
+      "optional": false
+    },
+    {
+      "id": "5.5",
+      "chapterId": "5",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "math.geometry_other",
+      "optional": false
+    },
+    {
+      "id": "6.1",
+      "chapterId": "6",
+      "title": {
+        "en": "Random numbers",
+        "zh": "随机数"
+      },
+      "pattern": "math.random",
+      "optional": false
+    },
+    {
+      "id": "6.2",
+      "chapterId": "6",
+      "title": {
+        "en": "Randomization tricks",
+        "zh": "随机化技巧"
+      },
+      "pattern": "math.randomization",
+      "optional": false
+    },
+    {
+      "id": "6.3",
+      "chapterId": "6",
+      "title": {
+        "en": "XOR hashing",
+        "zh": "异或哈希（XOR hashing）"
+      },
+      "pattern": "math.xor_hashing",
+      "optional": false
+    },
+    {
+      "id": "7.1",
+      "chapterId": "7",
+      "title": {
+        "en": "Palindromic numbers",
+        "zh": "回文数"
+      },
+      "pattern": "math.palindrome_numbers",
+      "optional": false
+    },
+    {
+      "id": "7.2",
+      "chapterId": "7",
+      "title": {
+        "en": "Integer partitions",
+        "zh": "整数拆分"
+      },
+      "pattern": "math.integer_partition",
+      "optional": false
+    },
+    {
+      "id": "7.3",
+      "chapterId": "7",
+      "title": {
+        "en": "Manhattan and Chebyshev distance",
+        "zh": "曼哈顿距离与切比雪夫距离"
+      },
+      "pattern": "math.manhattan",
+      "optional": false
+    },
+    {
+      "id": "7.4",
+      "chapterId": "7",
+      "title": {
+        "en": "Convolution",
+        "zh": "卷积"
+      },
+      "pattern": "math.convolution",
+      "optional": false
+    },
+    {
+      "id": "7.5",
+      "chapterId": "7",
+      "title": {
+        "en": "Fast Walsh-Hadamard transform",
+        "zh": "快速沃尔什变换（FWT）"
+      },
+      "pattern": "math.fwt",
+      "optional": false
+    },
+    {
+      "id": "7.6",
+      "chapterId": "7",
+      "title": {
+        "en": "Lagrange interpolation",
+        "zh": "拉格朗日插值"
+      },
+      "pattern": "math.lagrange",
+      "optional": false
+    },
+    {
+      "id": "7.8",
+      "chapterId": "7",
+      "title": {
+        "en": "Boyer-Moore majority vote",
+        "zh": "摩尔投票法"
+      },
+      "pattern": "math.majority_vote",
+      "optional": false
+    },
+    {
+      "id": "7.9",
+      "chapterId": "7",
+      "title": {
+        "en": "Determining digits",
+        "zh": "确定数位"
+      },
+      "pattern": "math.digits",
+      "optional": false
+    },
+    {
+      "id": "7.10",
+      "chapterId": "7",
+      "title": {
+        "en": "Other",
+        "zh": "其他"
+      },
+      "pattern": "math.other",
+      "optional": false
+    }
+  ],
+  "items": [
+    {
+      "slug": "maximum-prime-difference",
+      "frontendId": "3115",
+      "title": {
+        "en": "Maximum Prime Difference",
+        "zh": "质数的最大距离"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1294,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "prime-in-diagonal",
+      "frontendId": "2614",
+      "title": {
+        "en": "Prime In Diagonal",
+        "zh": "对角线上的质数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1375,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "complete-prime-number",
+      "frontendId": "3765",
+      "title": {
+        "en": "Complete Prime Number",
+        "zh": "完全质数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1378,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-largest-prime-substrings",
+      "frontendId": "3556",
+      "title": {
+        "en": "Sum of Largest Prime Substrings",
+        "zh": "最大质数子字符串之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1440,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "most-frequent-prime",
+      "frontendId": "3044",
+      "title": {
+        "en": "Most Frequent Prime",
+        "zh": "出现频率最高的质数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1737,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "prime-palindrome",
+      "frontendId": "866",
+      "title": {
+        "en": "Prime Palindrome",
+        "zh": "回文质数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1938,
+      "sectionId": "1.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-primes",
+      "frontendId": "204",
+      "title": {
+        "en": "Count Primes",
+        "zh": "计数质数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "split-array-by-prime-indices",
+      "frontendId": "3618",
+      "title": {
+        "en": "Split Array by Prime Indices",
+        "zh": "根据质数下标分割数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1227,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-any-element-has-prime-frequency",
+      "frontendId": "3591",
+      "title": {
+        "en": "Check if Any Element Has Prime Frequency",
+        "zh": "检查元素频次是否为质数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1235,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-primes-between-number-and-its-reverse",
+      "frontendId": "3918",
+      "title": {
+        "en": "Sum of Primes Between Number and Its Reverse",
+        "zh": "数与其逆序数之间的质数和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1301,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "prime-number-of-set-bits-in-binary-representation",
+      "frontendId": "762",
+      "title": {
+        "en": "Prime Number of Set Bits in Binary Representation",
+        "zh": "二进制表示中质数个计算置位"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1383,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-transform-array-into-alternating-prime",
+      "frontendId": "3896",
+      "title": {
+        "en": "Minimum Operations to Transform Array into Alternating Prime",
+        "zh": "将数组转换为交替质数数组的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1435,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "prime-pairs-with-target-sum",
+      "frontendId": "2761",
+      "title": {
+        "en": "Prime Pairs With Target Sum",
+        "zh": "和等于目标值的质数对"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1505,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-count-of-numbers-which-are-not-special",
+      "frontendId": "3233",
+      "title": {
+        "en": "Find the Count of Numbers Which Are Not Special",
+        "zh": "统计不是特殊数字的数字数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1509,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "largest-prime-from-consecutive-prime-sum",
+      "frontendId": "3770",
+      "title": {
+        "en": "Largest Prime from Consecutive Prime Sum",
+        "zh": "可表示为连续质数和的最大质数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1547,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "closest-prime-numbers-in-range",
+      "frontendId": "2523",
+      "title": {
+        "en": "Closest Prime Numbers in Range",
+        "zh": "范围内最接近的两个质数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1650,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "prime-subtraction-operation",
+      "frontendId": "2601",
+      "title": {
+        "en": "Prime Subtraction Operation",
+        "zh": "质数减法运算"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1779,
+      "sectionId": "1.2",
+      "level": "core"
+    },
+    {
+      "slug": "distinct-prime-factors-of-product-of-array",
+      "frontendId": "2521",
+      "title": {
+        "en": "Distinct Prime Factors of Product of Array",
+        "zh": "数组乘积中的不同质因数数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1413,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-value-after-replacing-with-sum-of-prime-factors",
+      "frontendId": "2507",
+      "title": {
+        "en": "Smallest Value After Replacing With Sum of Prime Factors",
+        "zh": "使用质因数之和替换后可以取到的最小值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1500,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "longest-subarray-with-at-most-k-distinct-prime-factors",
+      "frontendId": "4032",
+      "title": {
+        "en": "Longest Subarray With at Most K Distinct Prime Factors",
+        "zh": "至多 K 个不同质因数集合的最长子数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1759,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-division-operations-to-make-array-non-decreasing",
+      "frontendId": "3326",
+      "title": {
+        "en": "Minimum Division Operations to Make Array Non Decreasing",
+        "zh": "使数组非递减的最少除法操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1864,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "divisible-game",
+      "frontendId": "3984",
+      "title": {
+        "en": "Divisible Game",
+        "zh": "可整除游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1944,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-jumps-to-reach-end-via-prime-teleportation",
+      "frontendId": "3629",
+      "title": {
+        "en": "Minimum Jumps to Reach End via Prime Teleportation",
+        "zh": "通过质数传送到达终点的最少跳跃次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2139,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "split-the-array-to-make-coprime-products",
+      "frontendId": "2584",
+      "title": {
+        "en": "Split the Array to Make Coprime Products",
+        "zh": "分割数组使乘积互质"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2159,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "greatest-common-divisor-traversal",
+      "frontendId": "2709",
+      "title": {
+        "en": "Greatest Common Divisor Traversal",
+        "zh": "最大公约数遍历"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2172,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-perfect-square-ancestors",
+      "frontendId": "3715",
+      "title": {
+        "en": "Sum of Perfect Square Ancestors",
+        "zh": "完全平方数的祖先个数总和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2235,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-element-sum-of-a-complete-subset-of-indices",
+      "frontendId": "2862",
+      "title": {
+        "en": "Maximum Element-Sum of a Complete Subset of Indices",
+        "zh": "完全子集的最大元素和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2292,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "apply-operations-to-maximize-score",
+      "frontendId": "2818",
+      "title": {
+        "en": "Apply Operations to Maximize Score",
+        "zh": "操作使得分最大"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2397,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "gcd-sort-of-an-array",
+      "frontendId": "1998",
+      "title": {
+        "en": "GCD Sort of an Array",
+        "zh": "数组的最大公因数排序"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2429,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-ways-to-make-array-with-product",
+      "frontendId": "1735",
+      "title": {
+        "en": "Count Ways to Make Array With Product",
+        "zh": "生成乘积数组的方案数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2500,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-ideal-arrays",
+      "frontendId": "2338",
+      "title": {
+        "en": "Count the Number of Ideal Arrays",
+        "zh": "统计理想数组的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2615,
+      "sectionId": "1.3",
+      "level": "core"
+    },
+    {
+      "slug": "factorial-trailing-zeroes",
+      "frontendId": "172",
+      "title": {
+        "en": "Factorial Trailing Zeroes",
+        "zh": "阶乘后的零"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "preimage-size-of-factorial-zeroes-function",
+      "frontendId": "793",
+      "title": {
+        "en": "Preimage Size of Factorial Zeroes Function",
+        "zh": "阶乘函数后 K 个零"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2100,
+      "sectionId": "1.4",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-common-factors",
+      "frontendId": "2427",
+      "title": {
+        "en": "Number of Common Factors",
+        "zh": "公因子的数目"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1172,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "three-divisors",
+      "frontendId": "1952",
+      "title": {
+        "en": "Three Divisors",
+        "zh": "三除数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1204,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "the-kth-factor-of-n",
+      "frontendId": "1492",
+      "title": {
+        "en": "The kth Factor of n",
+        "zh": "n 的第 k 个因子"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1232,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "perfect-number",
+      "frontendId": "507",
+      "title": {
+        "en": "Perfect Number",
+        "zh": "完美数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "four-divisors",
+      "frontendId": "1390",
+      "title": {
+        "en": "Four Divisors",
+        "zh": "四因数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1478,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "closest-divisors",
+      "frontendId": "1362",
+      "title": {
+        "en": "Closest Divisors",
+        "zh": "最接近的因数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1534,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-array-sum-using-divisible-replacements",
+      "frontendId": "3927",
+      "title": {
+        "en": "Minimize Array Sum Using Divisible Replacements",
+        "zh": "可整除替换后的数组最小元素和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1652,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "consecutive-numbers-sum",
+      "frontendId": "829",
+      "title": {
+        "en": "Consecutive Numbers Sum",
+        "zh": "连续整数求和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1694,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "assign-elements-to-groups-with-constraints",
+      "frontendId": "3447",
+      "title": {
+        "en": "Assign Elements to Groups with Constraints",
+        "zh": "将元素分配给有约束条件的组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1731,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-number-of-good-pairs-ii",
+      "frontendId": "3164",
+      "title": {
+        "en": "Find the Number of Good Pairs II",
+        "zh": "优质数对的总数 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1777,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "count-equal-and-divisible-pairs-in-an-array",
+      "frontendId": "2176",
+      "title": {
+        "en": "Count Equal and Divisible Pairs in an Array",
+        "zh": "统计数组中相等且可以被整除的数对"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "count-array-pairs-divisible-by-k",
+      "frontendId": "2183",
+      "title": {
+        "en": "Count Array Pairs Divisible by K",
+        "zh": "统计可以被 K 整除的下标对数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2246,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "largest-component-size-by-common-factor",
+      "frontendId": "952",
+      "title": {
+        "en": "Largest Component Size by Common Factor",
+        "zh": "按公因数计算最大组件大小"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2272,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "graph-connectivity-with-threshold",
+      "frontendId": "1627",
+      "title": {
+        "en": "Graph Connectivity With Threshold",
+        "zh": "带阈值的图连通性"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2221,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-single-divisor-triplets",
+      "frontendId": "2198",
+      "title": {
+        "en": "Number of Single Divisor Triplets",
+        "zh": "单因数三元组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-factorization",
+      "frontendId": "625",
+      "title": {
+        "en": "Minimum Factorization",
+        "zh": "最小因式分解"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-number-with-given-digit-product",
+      "frontendId": "2847",
+      "title": {
+        "en": "Smallest Number With Given Digit Product",
+        "zh": "给定数字乘积的最小数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-array-equal-iii",
+      "frontendId": "4005",
+      "title": {
+        "en": "Minimum Operations to Make Array Equal III",
+        "zh": "使数组中所有元素相等的最小操作数 III"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-greatest-common-divisor-of-array",
+      "frontendId": "1979",
+      "title": {
+        "en": "Find Greatest Common Divisor of Array",
+        "zh": "找出数组的最大公约数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1184,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-pair-strength-using-gcd",
+      "frontendId": "4010",
+      "title": {
+        "en": "Maximize Pair Strength Using GCD",
+        "zh": "数对的最大强度"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1216,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "gcd-of-odd-and-even-sums",
+      "frontendId": "3658",
+      "title": {
+        "en": "GCD of Odd and Even Sums",
+        "zh": "奇数和与偶数和的最大公约数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1220,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "count-operations-to-obtain-zero",
+      "frontendId": "2169",
+      "title": {
+        "en": "Count Operations to Obtain Zero",
+        "zh": "得到 0 的操作数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "x-of-a-kind-in-a-deck-of-cards",
+      "frontendId": "914",
+      "title": {
+        "en": "X of a Kind in a Deck of Cards",
+        "zh": "卡牌分组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1371,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "greatest-common-divisor-of-strings",
+      "frontendId": "1071",
+      "title": {
+        "en": "Greatest Common Divisor of Strings",
+        "zh": "字符串的最大公因子"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1398,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-deletions-to-make-array-divisible",
+      "frontendId": "2344",
+      "title": {
+        "en": "Minimum Deletions to Make Array Divisible",
+        "zh": "使数组可以被整除的最少删除次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1641,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "water-and-jug-problem",
+      "frontendId": "365",
+      "title": {
+        "en": "Water and Jug Problem",
+        "zh": "水壶问题"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-make-all-array-elements-equal-to-1",
+      "frontendId": "2654",
+      "title": {
+        "en": "Minimum Number of Operations to Make All Array Elements Equal to 1",
+        "zh": "使数组所有元素变成 1 的最少操作次数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1929,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-it-is-a-good-array",
+      "frontendId": "1250",
+      "title": {
+        "en": "Check If It Is a Good Array",
+        "zh": "检查「好数组」"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1983,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "lexicographically-smallest-string-after-applying-operations",
+      "frontendId": "1625",
+      "title": {
+        "en": "Lexicographically Smallest String After Applying Operations",
+        "zh": "执行操作后字典序最小的字符串"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1992,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "make-k-subarray-sums-equal",
+      "frontendId": "2607",
+      "title": {
+        "en": "Make K-Subarray Sums Equal",
+        "zh": "使子数组元素和相等"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2071,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-subarrays-with-gcd-equal-to-k",
+      "frontendId": "2447",
+      "title": {
+        "en": "Number of Subarrays With GCD Equal to K",
+        "zh": "最大公因数等于 K 的子数组数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-point-is-reachable",
+      "frontendId": "2543",
+      "title": {
+        "en": "Check if Point Is Reachable",
+        "zh": "判断一个点是否可以到达"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2221,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-subarray-gcd-score",
+      "frontendId": "3574",
+      "title": {
+        "en": "Maximize Subarray GCD Score",
+        "zh": "最大子数组 GCD 分数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2300,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-valid-split-positions-ii",
+      "frontendId": "4037",
+      "title": {
+        "en": "Maximum Valid Split Positions II",
+        "zh": "最多有效分割位置 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2372,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "sorted-gcd-pair-queries",
+      "frontendId": "3312",
+      "title": {
+        "en": "Sorted GCD Pair Queries",
+        "zh": "查询排序后的最大公约数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2533,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "count-ways-to-choose-coprime-integers-from-rows",
+      "frontendId": "3725",
+      "title": {
+        "en": "Count Ways to Choose Coprime Integers from Rows",
+        "zh": "统计每一行选择互质整数的方案数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-different-subsequences-gcds",
+      "frontendId": "1819",
+      "title": {
+        "en": "Number of Different Subsequences GCDs",
+        "zh": "序列中不同最大公约数的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2540,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "good-subsequence-queries",
+      "frontendId": "3901",
+      "title": {
+        "en": "Good Subsequence Queries",
+        "zh": "好子序列查询"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2545,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-beautiful-subsequences",
+      "frontendId": "3671",
+      "title": {
+        "en": "Sum of Beautiful Subsequences",
+        "zh": "子序列美丽值求和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2647,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-split-into-subarrays-with-gcd-greater-than-one",
+      "frontendId": "2436",
+      "title": {
+        "en": "Minimum Split Into Subarrays With GCD Greater Than One",
+        "zh": "使子数组最大公约数大于一的最小分割数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-subarrays-in-a-valid-split",
+      "frontendId": "2464",
+      "title": {
+        "en": "Minimum Subarrays in a Valid Split",
+        "zh": "有效分割中的最少子数组数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-gcd-sum-of-a-subarray",
+      "frontendId": "2941",
+      "title": {
+        "en": "Maximum GCD-Sum of a Subarray",
+        "zh": "子数组的最大 GCD-Sum"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "insert-greatest-common-divisors-in-linked-list",
+      "frontendId": "2807",
+      "title": {
+        "en": "Insert Greatest Common Divisors in Linked List",
+        "zh": "在链表中插入最大公约数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1279,
+      "sectionId": "1.6",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-even-multiple",
+      "frontendId": "2413",
+      "title": {
+        "en": "Smallest Even Multiple",
+        "zh": "最小偶倍数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1145,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-maximum-factor-score-of-array",
+      "frontendId": "3334",
+      "title": {
+        "en": "Find the Maximum Factor Score of Array",
+        "zh": "数组的最大因子得分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1519,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "mirror-reflection",
+      "frontendId": "858",
+      "title": {
+        "en": "Mirror Reflection",
+        "zh": "镜面反射"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1881,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "replace-non-coprime-numbers-in-array",
+      "frontendId": "2197",
+      "title": {
+        "en": "Replace Non-Coprime Numbers in Array",
+        "zh": "替换数组中的非互质数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2057,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-subarrays-with-lcm-equal-to-k",
+      "frontendId": "2470",
+      "title": {
+        "en": "Number of Subarrays With LCM Equal to K",
+        "zh": "最小公倍数等于 K 的子数组数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.7",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-beautiful-pairs",
+      "frontendId": "2748",
+      "title": {
+        "en": "Number of Beautiful Pairs",
+        "zh": "美丽下标对的数目"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1301,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "simplified-fractions",
+      "frontendId": "1447",
+      "title": {
+        "en": "Simplified Fractions",
+        "zh": "最简分数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "tree-of-coprimes",
+      "frontendId": "1766",
+      "title": {
+        "en": "Tree of Coprimes",
+        "zh": "互质树"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2232,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-subarray-with-equal-products",
+      "frontendId": "3411",
+      "title": {
+        "en": "Maximum Subarray With Equal Products",
+        "zh": "最长乘积等价子数组"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.8",
+      "level": "core"
+    },
+    {
+      "slug": "destroy-sequential-targets",
+      "frontendId": "2453",
+      "title": {
+        "en": "Destroy Sequential Targets",
+        "zh": "摧毁一系列目标"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1762,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-missing-non-negative-integer-after-operations",
+      "frontendId": "2598",
+      "title": {
+        "en": "Smallest Missing Non-negative Integer After Operations",
+        "zh": "执行操作后的最大 MEX"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1846,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "make-sum-divisible-by-p",
+      "frontendId": "1590",
+      "title": {
+        "en": "Make Sum Divisible by P",
+        "zh": "使数组和能被 P 整除"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2039,
+      "sectionId": "1.9",
+      "level": "core"
+    },
+    {
+      "slug": "count-square-sum-triples",
+      "frontendId": "1925",
+      "title": {
+        "en": "Count Square Sum Triples",
+        "zh": "统计平方和三元组的数目"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.10",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-score-with-co-prime-element",
+      "frontendId": "3953",
+      "title": {
+        "en": "Maximum Score with Co-Prime Element",
+        "zh": "互质元素的最大得分"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2390,
+      "sectionId": "1.11",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-number-of-subsequences-with-equal-gcd",
+      "frontendId": "3336",
+      "title": {
+        "en": "Find the Number of Subsequences With Equal GCD",
+        "zh": "最大公约数相等的子序列数量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.11",
+      "level": "core"
+    },
+    {
+      "slug": "binary-prefix-divisible-by-5",
+      "frontendId": "1018",
+      "title": {
+        "en": "Binary Prefix Divisible By 5",
+        "zh": "可被 5 整除的二进制前缀"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1376,
+      "sectionId": "1.12",
+      "level": "core"
+    },
+    {
+      "slug": "power-of-three",
+      "frontendId": "326",
+      "title": {
+        "en": "Power of Three",
+        "zh": "3 的幂"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.12",
+      "level": "core"
+    },
+    {
+      "slug": "sort-integers-by-the-power-value",
+      "frontendId": "1387",
+      "title": {
+        "en": "Sort Integers by The Power Value",
+        "zh": "将整数按权重排序"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1507,
+      "sectionId": "1.12",
+      "level": "core"
+    },
+    {
+      "slug": "super-pow",
+      "frontendId": "372",
+      "title": {
+        "en": "Super Pow",
+        "zh": "超级次方"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.12",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-integer-divisible-by-k",
+      "frontendId": "1015",
+      "title": {
+        "en": "Smallest Integer Divisible by K",
+        "zh": "可被 K 整除的最小整数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.12",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-all-ones-multiple",
+      "frontendId": "3790",
+      "title": {
+        "en": "Smallest All-Ones Multiple",
+        "zh": "最小全 1 倍数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.12",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-square-numbers",
+      "frontendId": "633",
+      "title": {
+        "en": "Sum of Square Numbers",
+        "zh": "平方数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.12",
+      "level": "core"
+    },
+    {
+      "slug": "perfect-squares",
+      "frontendId": "279",
+      "title": {
+        "en": "Perfect Squares",
+        "zh": "完全平方数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.12",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-buy-pens-and-pencils",
+      "frontendId": "2240",
+      "title": {
+        "en": "Number of Ways to Buy Pens and Pencils",
+        "zh": "买钢笔和铅笔的方案数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "1.12",
+      "level": "core"
+    },
+    {
+      "slug": "right-triangles",
+      "frontendId": "3128",
+      "title": {
+        "en": "Right Triangles",
+        "zh": "直角三角形"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1541,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-split-a-string",
+      "frontendId": "1573",
+      "title": {
+        "en": "Number of Ways to Split a String",
+        "zh": "分割字符串的方案数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1591,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "ways-to-split-array-into-good-subarrays",
+      "frontendId": "2750",
+      "title": {
+        "en": "Ways to Split Array Into Good Subarrays",
+        "zh": "将数组划分成若干好子数组的方式"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1598,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-unreachable-pairs-of-nodes-in-an-undirected-graph",
+      "frontendId": "2316",
+      "title": {
+        "en": "Count Unreachable Pairs of Nodes in an Undirected Graph",
+        "zh": "统计无向图中无法互相到达点对数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1604,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-collisions-of-monkeys-on-a-polygon",
+      "frontendId": "2550",
+      "title": {
+        "en": "Count Collisions of Monkeys on a Polygon",
+        "zh": "猴子碰撞的方法数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1663,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-good-numbers",
+      "frontendId": "1922",
+      "title": {
+        "en": "Count Good Numbers",
+        "zh": "统计好数字的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1675,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "unique-3-digit-even-numbers",
+      "frontendId": "3483",
+      "title": {
+        "en": "Unique 3-Digit Even Numbers",
+        "zh": "不同三位偶数的数目"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-pairs-of-connectable-servers-in-a-weighted-tree-network",
+      "frontendId": "3067",
+      "title": {
+        "en": "Count Pairs of Connectable Servers in a Weighted Tree Network",
+        "zh": "在带权树网络中统计可连接服务器对数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1909,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-divide-a-long-corridor",
+      "frontendId": "2147",
+      "title": {
+        "en": "Number of Ways to Divide a Long Corridor",
+        "zh": "分隔长廊的方案数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1915,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-good-partitions",
+      "frontendId": "2963",
+      "title": {
+        "en": "Count the Number of Good Partitions",
+        "zh": "统计好分割方案的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1985,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "naming-a-company",
+      "frontendId": "2306",
+      "title": {
+        "en": "Naming a Company",
+        "zh": "公司命名"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2305,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-valid-paths-in-a-tree",
+      "frontendId": "2867",
+      "title": {
+        "en": "Count Valid Paths in a Tree",
+        "zh": "统计树中的合法路径数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2428,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-subtrees-with-max-distance-between-cities",
+      "frontendId": "1617",
+      "title": {
+        "en": "Count Subtrees With Max Distance Between Cities",
+        "zh": "统计子树中城市之间最大距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-distinct-binary-strings-after-applying-operations",
+      "frontendId": "2450",
+      "title": {
+        "en": "Number of Distinct Binary Strings After Applying Operations",
+        "zh": "应用操作后不同二进制字符串的数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.1",
+      "level": "core"
+    },
+    {
+      "slug": "unique-paths",
+      "frontendId": "62",
+      "title": {
+        "en": "Unique Paths",
+        "zh": "不同路径"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-numbers-with-unique-digits",
+      "frontendId": "357",
+      "title": {
+        "en": "Count Numbers with Unique Digits",
+        "zh": "统计各位数字都不同的数字个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "prime-arrangements",
+      "frontendId": "1175",
+      "title": {
+        "en": "Prime Arrangements",
+        "zh": "质数排列"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1489,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-sorted-vowel-strings",
+      "frontendId": "1641",
+      "title": {
+        "en": "Count Sorted Vowel Strings",
+        "zh": "统计字典序元音字符串的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1519,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-n-th-value-after-k-seconds",
+      "frontendId": "3179",
+      "title": {
+        "en": "Find the N-th Value After K Seconds",
+        "zh": "K 秒后第 N 个元素的值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-all-valid-pickup-and-delivery-options",
+      "frontendId": "1359",
+      "title": {
+        "en": "Count All Valid Pickup and Delivery Options",
+        "zh": "有效的快递序列数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1723,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-reach-a-position-after-exactly-k-steps",
+      "frontendId": "2400",
+      "title": {
+        "en": "Number of Ways to Reach a Position After Exactly k Steps",
+        "zh": "恰好移动 k 步到达某一位置的方法数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1751,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "direction-assignments-with-exactly-k-visible-people",
+      "frontendId": "3881",
+      "title": {
+        "en": "Direction Assignments with Exactly K Visible People",
+        "zh": "恰好看到 K 个人的方向选择"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1761,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-assign-edge-weights-i",
+      "frontendId": "3558",
+      "title": {
+        "en": "Number of Ways to Assign Edge Weights I",
+        "zh": "给边赋权值的方案数 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1845,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-valid-sequences",
+      "frontendId": "4002",
+      "title": {
+        "en": "Count Valid Sequences",
+        "zh": "统计有效序列数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1912,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-nth-smallest-integer-with-k-one-bits",
+      "frontendId": "3821",
+      "title": {
+        "en": "Find Nth Smallest Integer With K One Bits",
+        "zh": "二进制中恰好K个1的第N小整数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2069,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "prime-number-of-set-bits-in-binary-representation",
+      "frontendId": "762",
+      "title": {
+        "en": "Prime Number of Set Bits in Binary Representation",
+        "zh": "二进制表示中质数个计算置位"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-anagrams",
+      "frontendId": "2514",
+      "title": {
+        "en": "Count Anagrams",
+        "zh": "统计同位异构字符串数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2070,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-number-of-ways-to-reach-the-k-th-stair",
+      "frontendId": "3154",
+      "title": {
+        "en": "Find Number of Ways to Reach the K-th Stair",
+        "zh": "到达第 K 级台阶的方案数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2071,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "kth-smallest-instructions",
+      "frontendId": "1643",
+      "title": {
+        "en": "Kth Smallest Instructions",
+        "zh": "第 K 条最小指令"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2080,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-k-subsequences-of-a-string-with-maximum-beauty",
+      "frontendId": "2842",
+      "title": {
+        "en": "Count K-Subsequences of a String With Maximum Beauty",
+        "zh": "统计一个字符串的 k 子序列美丽值最大的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2092,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-sets-of-k-non-overlapping-line-segments",
+      "frontendId": "1621",
+      "title": {
+        "en": "Number of Sets of K Non-Overlapping Line Segments",
+        "zh": "大小为 K 的不重叠线段的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2198,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-triangular-sum-of-an-array",
+      "frontendId": "2221",
+      "title": {
+        "en": "Find Triangular Sum of an Array",
+        "zh": "数组的三角和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-digits-are-equal-in-string-after-operations-ii",
+      "frontendId": "3463",
+      "title": {
+        "en": "Check If Digits Are Equal in String After Operations II",
+        "zh": "判断操作后字符串中的数字是否相等 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2286,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-numbers-with-non-decreasing-digits",
+      "frontendId": "3519",
+      "title": {
+        "en": "Count Numbers with Non-Decreasing Digits ",
+        "zh": "统计逐位非递减的整数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2246,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-good-integers-on-a-grid-path",
+      "frontendId": "3906",
+      "title": {
+        "en": "Count Good Integers on a Grid Path",
+        "zh": "统计网格路径中好整数的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-reorder-array-to-get-same-bst",
+      "frontendId": "1569",
+      "title": {
+        "en": "Number of Ways to Reorder Array to Get Same BST",
+        "zh": "将子数组重新排序得到同一个二叉搜索树的方案数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2288,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-arrays-with-k-matching-adjacent-elements",
+      "frontendId": "3405",
+      "title": {
+        "en": "Count the Number of Arrays with K Matching Adjacent Elements",
+        "zh": "统计恰好有 K 个相等相邻元素的数组数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2310,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-ways-to-rearrange-sticks-with-k-sticks-visible",
+      "frontendId": "1866",
+      "title": {
+        "en": "Number of Ways to Rearrange Sticks With K Sticks Visible",
+        "zh": "恰有 K 根木棍可以看到的排列数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2333,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "probability-of-a-two-boxes-having-the-same-number-of-distinct-balls",
+      "frontendId": "1467",
+      "title": {
+        "en": "Probability of a Two Boxes Having The Same Number of Distinct Balls",
+        "zh": "两个盒子中球的颜色数相同的概率"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2357,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-palindromic-rearrangement-ii",
+      "frontendId": "3518",
+      "title": {
+        "en": "Smallest Palindromic Rearrangement II",
+        "zh": "最小回文排列 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2375,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-count-of-good-integers",
+      "frontendId": "3272",
+      "title": {
+        "en": "Find the Count of Good Integers",
+        "zh": "统计好整数的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2382,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-number-of-possible-ways-for-an-event",
+      "frontendId": "3317",
+      "title": {
+        "en": "Find the Number of Possible Ways for an Event",
+        "zh": "安排活动的方案数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2414,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "permutations-iv",
+      "frontendId": "3470",
+      "title": {
+        "en": "Permutations IV",
+        "zh": "全排列 IV"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2474,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-ways-to-build-rooms-in-an-ant-colony",
+      "frontendId": "1916",
+      "title": {
+        "en": "Count Ways to Build Rooms in an Ant Colony",
+        "zh": "统计为蚁群构筑房间的不同顺序"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2486,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-ways-to-make-array-with-product",
+      "frontendId": "1735",
+      "title": {
+        "en": "Count Ways to Make Array With Product",
+        "zh": "生成乘积数组的方案数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2500,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-ideal-arrays",
+      "frontendId": "2338",
+      "title": {
+        "en": "Count the Number of Ideal Arrays",
+        "zh": "统计理想数组的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2615,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-number-of-balanced-permutations",
+      "frontendId": "3343",
+      "title": {
+        "en": "Count Number of Balanced Permutations",
+        "zh": "统计平衡排列的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2615,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-make-string-sorted",
+      "frontendId": "1830",
+      "title": {
+        "en": "Minimum Number of Operations to Make String Sorted",
+        "zh": "使字符串有序的最少操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2620,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-infection-sequences",
+      "frontendId": "2954",
+      "title": {
+        "en": "Count the Number of Infection Sequences",
+        "zh": "统计感冒序列的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2645,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-sum-of-array-product-of-magical-sequences",
+      "frontendId": "3539",
+      "title": {
+        "en": "Find Sum of Array Product of Magical Sequences",
+        "zh": "魔法序列的数组乘积之和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2694,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "subsequences-with-a-unique-middle-mode-i",
+      "frontendId": "3395",
+      "title": {
+        "en": "Subsequences with a Unique Middle Mode I",
+        "zh": "唯一中间众数子序列 I"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2800,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-all-possible-routes",
+      "frontendId": "1575",
+      "title": {
+        "en": "Count All Possible Routes",
+        "zh": "统计所有可行路径"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-count-of-monotonic-pairs-ii",
+      "frontendId": "3251",
+      "title": {
+        "en": "Find the Count of Monotonic Pairs II",
+        "zh": "单调数组对的数目 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-good-subsequences",
+      "frontendId": "2539",
+      "title": {
+        "en": "Count the Number of Good Subsequences",
+        "zh": "好子序列的个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-derangement-of-an-array",
+      "frontendId": "634",
+      "title": {
+        "en": "Find the Derangement of An Array",
+        "zh": "寻找数组的错位排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "count-ways-to-distribute-candies",
+      "frontendId": "1692",
+      "title": {
+        "en": "Count Ways to Distribute Candies",
+        "zh": "计算分配糖果的不同方式"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "core"
+    },
+    {
+      "slug": "balanced-k-factor-decomposition",
+      "frontendId": "3669",
+      "title": {
+        "en": "Balanced K-Factor Decomposition",
+        "zh": "K 因数分解"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.2",
+      "level": "stretch"
+    },
+    {
+      "slug": "sum-multiples",
+      "frontendId": "2652",
+      "title": {
+        "en": "Sum Multiples",
+        "zh": "倍数求和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "nth-magical-number",
+      "frontendId": "878",
+      "title": {
+        "en": "Nth Magical Number",
+        "zh": "第 N 个神奇数字"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1897,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "ugly-number-iii",
+      "frontendId": "1201",
+      "title": {
+        "en": "Ugly Number III",
+        "zh": "丑数 III"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2039,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "distribute-candies-among-children-ii",
+      "frontendId": "2929",
+      "title": {
+        "en": "Distribute Candies Among Children II",
+        "zh": "给小朋友们分糖果 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-strings-which-can-be-rearranged-to-contain-substring",
+      "frontendId": "2930",
+      "title": {
+        "en": "Number of Strings Which Can Be Rearranged to Contain Substring",
+        "zh": "重新排列后包含指定子字符串的字符串数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-the-maximum-of-two-arrays",
+      "frontendId": "2513",
+      "title": {
+        "en": "Minimize the Maximum of Two Arrays",
+        "zh": "最小化两个数组中的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2302,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-to-complete-all-deliveries",
+      "frontendId": "3733",
+      "title": {
+        "en": "Minimum Time to Complete All Deliveries",
+        "zh": "完成所有送货任务的最少时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "kth-smallest-amount-with-single-denomination-combination",
+      "frontendId": "3116",
+      "title": {
+        "en": "Kth Smallest Amount With Single Denomination Combination",
+        "zh": "单面值组合的第 K 小金额"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2387,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-score-with-co-prime-element",
+      "frontendId": "3953",
+      "title": {
+        "en": "Maximum Score with Co-Prime Element",
+        "zh": "互质元素的最大得分"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2390,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-effective-subsequences",
+      "frontendId": "3757",
+      "title": {
+        "en": "Number of Effective Subsequences",
+        "zh": "有效子序列的数量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2519,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "find-all-possible-stable-binary-arrays-ii",
+      "frontendId": "3130",
+      "title": {
+        "en": "Find All Possible Stable Binary Arrays II",
+        "zh": "找出所有稳定的二进制数组 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2825,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-music-playlists",
+      "frontendId": "920",
+      "title": {
+        "en": "Number of Music Playlists",
+        "zh": "播放列表的数量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-number-of-subsequences-with-equal-gcd",
+      "frontendId": "3336",
+      "title": {
+        "en": "Find the Number of Subsequences With Equal GCD",
+        "zh": "最大公约数相等的子序列数量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "distribute-candies-among-children-iii",
+      "frontendId": "2927",
+      "title": {
+        "en": "Distribute Candies Among Children III",
+        "zh": "给小朋友们分糖果 III"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "2.3",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-dice-rolls-with-target-sum",
+      "frontendId": "1155",
+      "title": {
+        "en": "Number of Dice Rolls With Target Sum",
+        "zh": "掷骰子等于目标和的方法数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "k-inverse-pairs-array",
+      "frontendId": "629",
+      "title": {
+        "en": "K Inverse Pairs Array",
+        "zh": "K 个逆序对数组"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-number-of-inversions",
+      "frontendId": "3193",
+      "title": {
+        "en": "Count the Number of Inversions",
+        "zh": "统计逆序对的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-sum-of-the-power-of-all-subsequences",
+      "frontendId": "3082",
+      "title": {
+        "en": "Find the Sum of the Power of All Subsequences",
+        "zh": "求出所有子序列的能量和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-great-partitions",
+      "frontendId": "2518",
+      "title": {
+        "en": "Number of Great Partitions",
+        "zh": "好分区的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-original-typed-string-ii",
+      "frontendId": "3333",
+      "title": {
+        "en": "Find the Original Typed String II",
+        "zh": "找到初始输入字符串 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "count-sequences-to-k",
+      "frontendId": "3850",
+      "title": {
+        "en": "Count Sequences to K",
+        "zh": "统计结果等于 K 的序列数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "2.4",
+      "level": "core"
+    },
+    {
+      "slug": "airplane-seat-assignment-probability",
+      "frontendId": "1227",
+      "title": {
+        "en": "Airplane Seat Assignment Probability",
+        "zh": "飞机座位分配概率"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "knight-probability-in-chessboard",
+      "frontendId": "688",
+      "title": {
+        "en": "Knight Probability in Chessboard",
+        "zh": "骑士在棋盘上的概率"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "new-21-game",
+      "frontendId": "837",
+      "title": {
+        "en": "New 21 Game",
+        "zh": "新 21 点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2350,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "probability-of-a-two-boxes-having-the-same-number-of-distinct-balls",
+      "frontendId": "1467",
+      "title": {
+        "en": "Probability of a Two Boxes Having The Same Number of Distinct Balls",
+        "zh": "两个盒子中球的颜色数相同的概率"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2357,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "soup-servings",
+      "frontendId": "808",
+      "title": {
+        "en": "Soup Servings",
+        "zh": "分汤"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2397,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "toss-strange-coins",
+      "frontendId": "1230",
+      "title": {
+        "en": "Toss Strange Coins",
+        "zh": "抛掷硬币"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-minimum-amount-of-time-to-brew-potions",
+      "frontendId": "3494",
+      "title": {
+        "en": "Find the Minimum Amount of Time to Brew Potions",
+        "zh": "酿造药水需要的最少总时间"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "3",
+      "level": "core"
+    },
+    {
+      "slug": "nim-game",
+      "frontendId": "292",
+      "title": {
+        "en": "Nim Game",
+        "zh": "Nim 游戏"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "divisor-game",
+      "frontendId": "1025",
+      "title": {
+        "en": "Divisor Game",
+        "zh": "除数博弈"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1435,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "vowels-game-in-a-string",
+      "frontendId": "3227",
+      "title": {
+        "en": "Vowels Game in a String",
+        "zh": "字符串元音游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1452,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "remove-colored-pieces-if-both-neighbors-are-the-same-color",
+      "frontendId": "2038",
+      "title": {
+        "en": "Remove Colored Pieces if Both Neighbors are the Same Color",
+        "zh": "如果相邻两个颜色均相同则删除当前颜色"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1468,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game",
+      "frontendId": "877",
+      "title": {
+        "en": "Stone Game",
+        "zh": "石子游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1590,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "final-element-after-subarray-deletions",
+      "frontendId": "3828",
+      "title": {
+        "en": "Final Element After Subarray Deletions",
+        "zh": "删除子数组后的最终元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1591,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "predict-the-winner",
+      "frontendId": "486",
+      "title": {
+        "en": "Predict the Winner",
+        "zh": "预测赢家"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game-iv",
+      "frontendId": "1510",
+      "title": {
+        "en": "Stone Game IV",
+        "zh": "石子游戏 IV"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 1787,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game-vii",
+      "frontendId": "1690",
+      "title": {
+        "en": "Stone Game VII",
+        "zh": "石子游戏 VII"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1951,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game-vi",
+      "frontendId": "1686",
+      "title": {
+        "en": "Stone Game VI",
+        "zh": "石子游戏 VI"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2001,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "sum-game",
+      "frontendId": "1927",
+      "title": {
+        "en": "Sum Game",
+        "zh": "求和游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2005,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game-iii",
+      "frontendId": "1406",
+      "title": {
+        "en": "Stone Game III",
+        "zh": "石子游戏 III"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2027,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game-ii",
+      "frontendId": "1140",
+      "title": {
+        "en": "Stone Game II",
+        "zh": "石子游戏 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2035,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game-v",
+      "frontendId": "1563",
+      "title": {
+        "en": "Stone Game V",
+        "zh": "石子游戏 V"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2087,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "can-i-win",
+      "frontendId": "464",
+      "title": {
+        "en": "Can I Win",
+        "zh": "我能赢吗"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game-ix",
+      "frontendId": "2029",
+      "title": {
+        "en": "Stone Game IX",
+        "zh": "石子游戏 IX"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2277,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "chalkboard-xor-game",
+      "frontendId": "810",
+      "title": {
+        "en": "Chalkboard XOR Game",
+        "zh": "黑板异或游戏"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2341,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "stone-game-viii",
+      "frontendId": "1872",
+      "title": {
+        "en": "Stone Game VIII",
+        "zh": "石子游戏 VIII"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2440,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "cat-and-mouse",
+      "frontendId": "913",
+      "title": {
+        "en": "Cat and Mouse",
+        "zh": "猫和老鼠"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "cat-and-mouse-ii",
+      "frontendId": "1728",
+      "title": {
+        "en": "Cat and Mouse II",
+        "zh": "猫和老鼠 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2849,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "flip-game-ii",
+      "frontendId": "294",
+      "title": {
+        "en": "Flip Game II",
+        "zh": "翻转游戏 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "game-of-nim",
+      "frontendId": "1908",
+      "title": {
+        "en": "Game of Nim",
+        "zh": "Nim 游戏 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "subtree-removal-game-with-fibonacci-tree",
+      "frontendId": "2005",
+      "title": {
+        "en": "Subtree Removal Game with Fibonacci Tree",
+        "zh": "斐波那契树的移除子树游戏"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "the-wording-game",
+      "frontendId": "2868",
+      "title": {
+        "en": "The Wording Game",
+        "zh": "单词游戏"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "4",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-it-is-a-straight-line",
+      "frontendId": "1232",
+      "title": {
+        "en": "Check If It Is a Straight Line",
+        "zh": "缀点成线"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1247,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-lines-to-represent-a-line-chart",
+      "frontendId": "2280",
+      "title": {
+        "en": "Minimum Lines to Represent a Line Chart",
+        "zh": "表示一个折线图的最少线段数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1681,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-visible-points",
+      "frontendId": "1610",
+      "title": {
+        "en": "Maximum Number of Visible Points",
+        "zh": "可见点的最大数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2147,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-lines-to-cover-points",
+      "frontendId": "2152",
+      "title": {
+        "en": "Minimum Number of Lines to Cover Points",
+        "zh": "穿过所有点的所需最少直线数量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.1",
+      "level": "core"
+    },
+    {
+      "slug": "circle-and-rectangle-overlapping",
+      "frontendId": "1401",
+      "title": {
+        "en": "Circle and Rectangle Overlapping",
+        "zh": "圆和矩形是否有重叠"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1709,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-darts-inside-of-a-circular-dartboard",
+      "frontendId": "1453",
+      "title": {
+        "en": "Maximum Number of Darts Inside of a Circular Dartboard",
+        "zh": "圆形靶内的最大飞镖数量"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2202,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-the-rectangle-corner-is-reachable",
+      "frontendId": "3235",
+      "title": {
+        "en": "Check if the Rectangle Corner Is Reachable",
+        "zh": "判断矩形的两个角落是否可达"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "erect-the-fence-ii",
+      "frontendId": "1924",
+      "title": {
+        "en": "Erect the Fence II",
+        "zh": "安装栅栏 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.2",
+      "level": "core"
+    },
+    {
+      "slug": "rectangle-overlap",
+      "frontendId": "836",
+      "title": {
+        "en": "Rectangle Overlap",
+        "zh": "矩形重叠"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1443,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "rectangle-area",
+      "frontendId": "223",
+      "title": {
+        "en": "Rectangle Area",
+        "zh": "矩形面积"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "valid-square",
+      "frontendId": "593",
+      "title": {
+        "en": "Valid Square",
+        "zh": "有效的正方形"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-area-rectangle",
+      "frontendId": "939",
+      "title": {
+        "en": "Minimum Area Rectangle",
+        "zh": "最小面积矩形"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1752,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-area-rectangle-ii",
+      "frontendId": "963",
+      "title": {
+        "en": "Minimum Area Rectangle II",
+        "zh": "最小面积矩形 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1991,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "count-number-of-trapezoids-ii",
+      "frontendId": "3625",
+      "title": {
+        "en": "Count Number of Trapezoids II",
+        "zh": "统计梯形的数目 II"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2643,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "convex-polygon",
+      "frontendId": "469",
+      "title": {
+        "en": "Convex Polygon",
+        "zh": "凸多边形"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "5.3",
+      "level": "core"
+    },
+    {
+      "slug": "erect-the-fence",
+      "frontendId": "587",
+      "title": {
+        "en": "Erect the Fence",
+        "zh": "安装栅栏"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "largest-triangle-area",
+      "frontendId": "812",
+      "title": {
+        "en": "Largest Triangle Area",
+        "zh": "最大三角形面积"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "5.4",
+      "level": "core"
+    },
+    {
+      "slug": "angles-of-a-triangle",
+      "frontendId": "3899",
+      "title": {
+        "en": "Angles of a Triangle",
+        "zh": "三角形的内角度数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1407,
+      "sectionId": "5.5",
+      "level": "core"
+    },
+    {
+      "slug": "random-pick-index",
+      "frontendId": "398",
+      "title": {
+        "en": "Random Pick Index",
+        "zh": "随机数索引"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "linked-list-random-node",
+      "frontendId": "382",
+      "title": {
+        "en": "Linked List Random Node",
+        "zh": "链表随机节点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "shuffle-an-array",
+      "frontendId": "384",
+      "title": {
+        "en": "Shuffle an Array",
+        "zh": "打乱数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "insert-delete-getrandom-o1",
+      "frontendId": "380",
+      "title": {
+        "en": "Insert Delete GetRandom O(1)",
+        "zh": "O(1) 时间插入、删除和获取随机元素"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "insert-delete-getrandom-o1-duplicates-allowed",
+      "frontendId": "381",
+      "title": {
+        "en": "Insert Delete GetRandom O(1) - Duplicates allowed",
+        "zh": "O(1) 时间插入、删除和获取随机元素 - 允许重复"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "random-pick-with-weight",
+      "frontendId": "528",
+      "title": {
+        "en": "Random Pick with Weight",
+        "zh": "按权重随机选择"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "implement-rand10-using-rand7",
+      "frontendId": "470",
+      "title": {
+        "en": "Implement Rand10() Using Rand7()",
+        "zh": "用 Rand7() 实现 Rand10()"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "random-pick-with-blacklist",
+      "frontendId": "710",
+      "title": {
+        "en": "Random Pick with Blacklist",
+        "zh": "黑名单中的随机数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "generate-random-point-in-a-circle",
+      "frontendId": "478",
+      "title": {
+        "en": "Generate Random Point in a Circle",
+        "zh": "在圆内随机生成点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "random-point-in-non-overlapping-rectangles",
+      "frontendId": "497",
+      "title": {
+        "en": "Random Point in Non-overlapping Rectangles",
+        "zh": "非重叠矩形中的随机点"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "random-flip-matrix",
+      "frontendId": "519",
+      "title": {
+        "en": "Random Flip Matrix",
+        "zh": "随机翻转矩阵"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "6.1",
+      "level": "core"
+    },
+    {
+      "slug": "n-repeated-element-in-size-2n-array",
+      "frontendId": "961",
+      "title": {
+        "en": "N-Repeated Element in Size 2N Array",
+        "zh": "在长度 2N 的数组中找出重复 N 次的元素"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1162,
+      "sectionId": "6.2",
+      "level": "core"
+    },
+    {
+      "slug": "convert-integer-to-the-sum-of-two-no-zero-integers",
+      "frontendId": "1317",
+      "title": {
+        "en": "Convert Integer to the Sum of Two No-Zero Integers",
+        "zh": "将整数转换为两个无零整数的和"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1278,
+      "sectionId": "6.2",
+      "level": "core"
+    },
+    {
+      "slug": "array-with-elements-not-equal-to-average-of-neighbors",
+      "frontendId": "1968",
+      "title": {
+        "en": "Array With Elements Not Equal to Average of Neighbors",
+        "zh": "构造元素不等于两相邻元素平均值的数组"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1499,
+      "sectionId": "6.2",
+      "level": "core"
+    },
+    {
+      "slug": "online-majority-element-in-subarray",
+      "frontendId": "1157",
+      "title": {
+        "en": "Online Majority Element In Subarray",
+        "zh": "子数组中占绝大多数的元素"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2205,
+      "sectionId": "6.2",
+      "level": "core"
+    },
+    {
+      "slug": "generate-schedule",
+      "frontendId": "3680",
+      "title": {
+        "en": "Generate Schedule",
+        "zh": "生成赛程"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2378,
+      "sectionId": "6.2",
+      "level": "core"
+    },
+    {
+      "slug": "valid-k-unique-subarrays-i",
+      "frontendId": "4033",
+      "title": {
+        "en": "Valid K-Unique Subarrays I",
+        "zh": "有效 K 个不同元素子数组 I"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2314,
+      "sectionId": "6.3",
+      "level": "core"
+    },
+    {
+      "slug": "palindrome-number",
+      "frontendId": "9",
+      "title": {
+        "en": "Palindrome Number",
+        "zh": "回文数"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "strictly-palindromic-number",
+      "frontendId": "2396",
+      "title": {
+        "en": "Strictly Palindromic Number",
+        "zh": "严格回文的数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1329,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-palindrome-with-fixed-length",
+      "frontendId": "2217",
+      "title": {
+        "en": "Find Palindrome With Fixed Length",
+        "zh": "找到指定长度的回文数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1822,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "prime-palindrome",
+      "frontendId": "866",
+      "title": {
+        "en": "Prime Palindrome",
+        "zh": "回文质数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1938,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-binary-palindrome",
+      "frontendId": "3766",
+      "title": {
+        "en": "Minimum Operations to Make Binary Palindrome",
+        "zh": "将数字变成二进制回文数的最少操作"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-closest-palindrome",
+      "frontendId": "564",
+      "title": {
+        "en": "Find the Closest Palindrome",
+        "zh": "寻找最近的回文数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-cost-to-make-array-equalindromic",
+      "frontendId": "2967",
+      "title": {
+        "en": "Minimum Cost to Make Array Equalindromic",
+        "zh": "使数组成为等数数组的最小代价"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2116,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "super-palindromes",
+      "frontendId": "906",
+      "title": {
+        "en": "Super Palindromes",
+        "zh": "超级回文数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2140,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-k-mirror-numbers",
+      "frontendId": "2081",
+      "title": {
+        "en": "Sum of k-Mirror Numbers",
+        "zh": "k 镜像数字的和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2210,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "count-binary-palindromic-numbers",
+      "frontendId": "3677",
+      "title": {
+        "en": "Count Binary Palindromic Numbers",
+        "zh": "统计二进制回文数字的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2223,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-largest-palindrome-divisible-by-k",
+      "frontendId": "3260",
+      "title": {
+        "en": "Find the Largest Palindrome Divisible by K",
+        "zh": "找出最大的 N 位 K 回文数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2370,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-count-of-good-integers",
+      "frontendId": "3272",
+      "title": {
+        "en": "Find the Count of Good Integers",
+        "zh": "统计好整数的数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2382,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "next-special-palindrome-number",
+      "frontendId": "3646",
+      "title": {
+        "en": "Next Special Palindrome Number",
+        "zh": "下一个特殊回文数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2445,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "largest-palindrome-product",
+      "frontendId": "479",
+      "title": {
+        "en": "Largest Palindrome Product",
+        "zh": "最大回文数乘积"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.1",
+      "level": "core"
+    },
+    {
+      "slug": "integer-break",
+      "frontendId": "343",
+      "title": {
+        "en": "Integer Break",
+        "zh": "整数拆分"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.2",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-number-of-nice-divisors",
+      "frontendId": "1808",
+      "title": {
+        "en": "Maximize Number of Nice Divisors",
+        "zh": "好因子的最大数目"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2070,
+      "sectionId": "7.2",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-visiting-all-points",
+      "frontendId": "1266",
+      "title": {
+        "en": "Minimum Time Visiting All Points",
+        "zh": "访问所有点的最小时间"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1303,
+      "sectionId": "7.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-manhattan-distance-after-k-changes",
+      "frontendId": "3443",
+      "title": {
+        "en": "Maximum Manhattan Distance After K Changes",
+        "zh": "K 次修改后的最大曼哈顿距离"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1856,
+      "sectionId": "7.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-of-absolute-value-expression",
+      "frontendId": "1131",
+      "title": {
+        "en": "Maximum of Absolute Value Expression",
+        "zh": "绝对值表达式的最大值"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 2059,
+      "sectionId": "7.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-manhattan-distances",
+      "frontendId": "3102",
+      "title": {
+        "en": "Minimize Manhattan Distances",
+        "zh": "最小化曼哈顿距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2216,
+      "sectionId": "7.3",
+      "level": "core"
+    },
+    {
+      "slug": "reverse-subarray-to-maximize-array-value",
+      "frontendId": "1330",
+      "title": {
+        "en": "Reverse Subarray To Maximize Array Value",
+        "zh": "翻转子数组得到最大的数组值"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2482,
+      "sectionId": "7.3",
+      "level": "core"
+    },
+    {
+      "slug": "maximize-the-distance-between-points-on-a-square",
+      "frontendId": "3464",
+      "title": {
+        "en": "Maximize the Distance Between Points on a Square",
+        "zh": "正方形上的点之间的最大距离"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2806,
+      "sectionId": "7.3",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-time-for-k-virus-variants-to-spread",
+      "frontendId": "1956",
+      "title": {
+        "en": "Minimum Time For K Virus Variants to Spread",
+        "zh": "感染 K 种病毒所需的最短时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.3",
+      "level": "core"
+    },
+    {
+      "slug": "beautiful-pairs",
+      "frontendId": "2613",
+      "title": {
+        "en": "Beautiful Pairs",
+        "zh": "美数对"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.3",
+      "level": "core"
+    },
+    {
+      "slug": "valid-triangle-number",
+      "frontendId": "611",
+      "title": {
+        "en": "Valid Triangle Number",
+        "zh": "有效三角形的个数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.4",
+      "level": "core"
+    },
+    {
+      "slug": "3sum-with-multiplicity",
+      "frontendId": "923",
+      "title": {
+        "en": "3Sum With Multiplicity",
+        "zh": "三数之和的多种可能"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.4",
+      "level": "core"
+    },
+    {
+      "slug": "image-overlap",
+      "frontendId": "835",
+      "title": {
+        "en": "Image Overlap",
+        "zh": "图像重叠"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.4",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-a-rotated-palindrome-i",
+      "frontendId": "4021",
+      "title": {
+        "en": "Minimum Operations to Make a Rotated Palindrome I",
+        "zh": "得到旋转回文字符串的最少操作次数 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.4",
+      "level": "core"
+    },
+    {
+      "slug": "multiply-two-polynomials",
+      "frontendId": "3549",
+      "title": {
+        "en": "Multiply Two Polynomials",
+        "zh": "两个多项式相乘"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.4",
+      "level": "core"
+    },
+    {
+      "slug": "3sum-smaller",
+      "frontendId": "259",
+      "title": {
+        "en": "3Sum Smaller",
+        "zh": "较小的三数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.4",
+      "level": "core"
+    },
+    {
+      "slug": "match-alphanumerical-pattern-in-matrix-i",
+      "frontendId": "3078",
+      "title": {
+        "en": "Match Alphanumerical Pattern in Matrix I",
+        "zh": "矩阵中的字母数字模式匹配 I"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.4",
+      "level": "core"
+    },
+    {
+      "slug": "maximum-number-of-matching-indices-after-right-shifts",
+      "frontendId": "3400",
+      "title": {
+        "en": "Maximum Number of Matching Indices After Right Shifts",
+        "zh": "右移后的最大匹配索引数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.4",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-unique-xor-triplets-ii",
+      "frontendId": "3514",
+      "title": {
+        "en": "Number of Unique XOR Triplets II",
+        "zh": "不同 XOR 三元组的数目 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.5",
+      "level": "core"
+    },
+    {
+      "slug": "find-minimum-time-to-finish-all-jobs",
+      "frontendId": "1723",
+      "title": {
+        "en": "Find Minimum Time to Finish All Jobs",
+        "zh": "完成所有工作的最短时间"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.5",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-zigzag-arrays-iii",
+      "frontendId": "3916",
+      "title": {
+        "en": "Number of ZigZag Arrays III",
+        "zh": "锯齿形数组的总数 III"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.6",
+      "level": "core"
+    },
+    {
+      "slug": "majority-element",
+      "frontendId": "169",
+      "title": {
+        "en": "Majority Element",
+        "zh": "多数元素"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.8",
+      "level": "core"
+    },
+    {
+      "slug": "n-repeated-element-in-size-2n-array",
+      "frontendId": "961",
+      "title": {
+        "en": "N-Repeated Element in Size 2N Array",
+        "zh": "在长度 2N 的数组中找出重复 N 次的元素"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.8",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-index-of-a-valid-split",
+      "frontendId": "2780",
+      "title": {
+        "en": "Minimum Index of a Valid Split",
+        "zh": "合法分割的最小下标"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1550,
+      "sectionId": "7.8",
+      "level": "core"
+    },
+    {
+      "slug": "majority-element-ii",
+      "frontendId": "229",
+      "title": {
+        "en": "Majority Element II",
+        "zh": "多数元素 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.8",
+      "level": "core"
+    },
+    {
+      "slug": "online-majority-element-in-subarray",
+      "frontendId": "1157",
+      "title": {
+        "en": "Online Majority Element In Subarray",
+        "zh": "子数组中占绝大多数的元素"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2205,
+      "sectionId": "7.8",
+      "level": "core"
+    },
+    {
+      "slug": "nth-digit",
+      "frontendId": "400",
+      "title": {
+        "en": "Nth Digit",
+        "zh": "第 N 位数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.9",
+      "level": "core"
+    },
+    {
+      "slug": "k-th-digit-in-infinite-string",
+      "frontendId": "4022",
+      "title": {
+        "en": "K-th Digit in Infinite String",
+        "zh": "无限字符串里第 K 个数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1915,
+      "sectionId": "7.9",
+      "level": "core"
+    },
+    {
+      "slug": "count-odd-numbers-in-an-interval-range",
+      "frontendId": "1523",
+      "title": {
+        "en": "Count Odd Numbers in an Interval Range",
+        "zh": "在区间范围内统计奇数数目"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1209,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "calculate-money-in-leetcode-bank",
+      "frontendId": "1716",
+      "title": {
+        "en": "Calculate Money in Leetcode Bank",
+        "zh": "计算力扣银行的钱"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": 1295,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "determine-the-minimum-sum-of-a-k-avoiding-array",
+      "frontendId": "2829",
+      "title": {
+        "en": "Determine the Minimum Sum of a k-avoiding Array",
+        "zh": "k-avoiding 数组的最小总和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1347,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "count-total-number-of-colored-cells",
+      "frontendId": "2579",
+      "title": {
+        "en": "Count Total Number of Colored Cells",
+        "zh": "统计染色格子数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1356,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-sensors-to-cover-grid",
+      "frontendId": "3648",
+      "title": {
+        "en": "Minimum Sensors to Cover Grid",
+        "zh": "覆盖网格的最少传感器数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1396,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-minimum-possible-sum-of-a-beautiful-array",
+      "frontendId": "2834",
+      "title": {
+        "en": "Find the Minimum Possible Sum of a Beautiful Array",
+        "zh": "找出美丽数组的最小和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1409,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k",
+      "frontendId": "1414",
+      "title": {
+        "en": "Find the Minimum Number of Fibonacci Numbers Whose Sum Is K",
+        "zh": "和为 K 的最少斐波那契数字数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1466,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "bulb-switcher",
+      "frontendId": "319",
+      "title": {
+        "en": "Bulb Switcher",
+        "zh": "灯泡开关"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "check-if-number-is-a-sum-of-powers-of-three",
+      "frontendId": "1780",
+      "title": {
+        "en": "Check if Number is a Sum of Powers of Three",
+        "zh": "判断一个数字是否可以表示成三的幂的和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1506,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "apply-operations-to-make-sum-of-array-greater-than-or-equal-to-k",
+      "frontendId": "3091",
+      "title": {
+        "en": "Apply Operations to Make Sum of Array Greater Than or Equal to k",
+        "zh": "执行操作使数据元素之和大于等于 K"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1522,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-number-of-copy-arrays",
+      "frontendId": "3468",
+      "title": {
+        "en": "Find the Number of Copy Arrays",
+        "zh": "可行数组的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1545,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-numbers-with-units-digit-k",
+      "frontendId": "2310",
+      "title": {
+        "en": "Sum of Numbers With Units Digit K",
+        "zh": "个位数字为 K 的整数之和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1559,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "count-the-hidden-sequences",
+      "frontendId": "2145",
+      "title": {
+        "en": "Count the Hidden Sequences",
+        "zh": "统计隐藏数组数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1614,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-make-array-equal-ii",
+      "frontendId": "2541",
+      "title": {
+        "en": "Minimum Operations to Make Array Equal II",
+        "zh": "使数组中所有元素相等的最小操作数 II"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1620,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "can-make-arithmetic-progression-from-sequence",
+      "frontendId": "1502",
+      "title": {
+        "en": "Can Make Arithmetic Progression From Sequence",
+        "zh": "判断能否形成等差数列"
+      },
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "append-k-integers-with-minimal-sum",
+      "frontendId": "2195",
+      "title": {
+        "en": "Append K Integers With Minimal Sum",
+        "zh": "向数组中追加 K 个整数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1659,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-addition-to-make-integer-beautiful",
+      "frontendId": "2457",
+      "title": {
+        "en": "Minimum Addition to Make Integer Beautiful",
+        "zh": "美丽整数的最小增量"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1680,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "convert-to-base-2",
+      "frontendId": "1017",
+      "title": {
+        "en": "Convert to Base -2",
+        "zh": "负二进制转换"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1698,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "number-of-perfect-pairs",
+      "frontendId": "3649",
+      "title": {
+        "en": "Number of Perfect Pairs",
+        "zh": "完美对的数目"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1716,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-garden-perimeter-to-collect-enough-apples",
+      "frontendId": "1954",
+      "title": {
+        "en": "Minimum Garden Perimeter to Collect Enough Apples",
+        "zh": "收集足够苹果的最小花园周长"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1759,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "adding-two-negabinary-numbers",
+      "frontendId": "1073",
+      "title": {
+        "en": "Adding Two Negabinary Numbers",
+        "zh": "负二进制数相加"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1807,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "find-the-winner-of-the-circular-game",
+      "frontendId": "1823",
+      "title": {
+        "en": "Find the Winner of the Circular Game",
+        "zh": "找出游戏的获胜者"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "fraction-to-recurring-decimal",
+      "frontendId": "166",
+      "title": {
+        "en": "Fraction to Recurring Decimal",
+        "zh": "分数到小数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "minimize-length-of-array-using-operations",
+      "frontendId": "3012",
+      "title": {
+        "en": "Minimize Length of Array Using Operations",
+        "zh": "通过操作使数组长度最小"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": 1833,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "smallest-good-base",
+      "frontendId": "483",
+      "title": {
+        "en": "Smallest Good Base",
+        "zh": "最小好进制"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "last-remaining-integer-after-alternating-deletion-operations",
+      "frontendId": "3782",
+      "title": {
+        "en": "Last Remaining Integer After Alternating Deletion Operations",
+        "zh": "交替删除操作后最后剩下的整数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2074,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "elimination-game",
+      "frontendId": "390",
+      "title": {
+        "en": "Elimination Game",
+        "zh": "消除游戏"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "concatenation-of-consecutive-binary-numbers",
+      "frontendId": "1680",
+      "title": {
+        "en": "Concatenation of Consecutive Binary Numbers",
+        "zh": "连接连续二进制数字"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "equal-rational-numbers",
+      "frontendId": "972",
+      "title": {
+        "en": "Equal Rational Numbers",
+        "zh": "相等的有理数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2121,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "best-position-for-a-service-centre",
+      "frontendId": "1515",
+      "title": {
+        "en": "Best Position for a Service Centre",
+        "zh": "服务中心的最佳位置"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2157,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-floored-pairs",
+      "frontendId": "1862",
+      "title": {
+        "en": "Sum of Floored Pairs",
+        "zh": "向下取整数对和"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2170,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "building-boxes",
+      "frontendId": "1739",
+      "title": {
+        "en": "Building Boxes",
+        "zh": "放置盒子"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2198,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "sum-of-number-and-its-reverse",
+      "frontendId": "2443",
+      "title": {
+        "en": "Sum of Number and Its Reverse",
+        "zh": "反转之后的数字和"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-number-of-operations-to-reinitialize-a-permutation",
+      "frontendId": "1806",
+      "title": {
+        "en": "Minimum Number of Operations to Reinitialize a Permutation",
+        "zh": "还原排列的最少操作步数"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "poor-pigs",
+      "frontendId": "458",
+      "title": {
+        "en": "Poor Pigs",
+        "zh": "可怜的小猪"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "next-permutation",
+      "frontendId": "31",
+      "title": {
+        "en": "Next Permutation",
+        "zh": "下一个排列"
+      },
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "permutation-sequence",
+      "frontendId": "60",
+      "title": {
+        "en": "Permutation Sequence",
+        "zh": "排列序列"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "abbreviating-the-product-of-a-range",
+      "frontendId": "2117",
+      "title": {
+        "en": "Abbreviating the Product of a Range",
+        "zh": "一个区间内所有数乘积的缩写"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2477,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "minimum-operations-to-equalize-binary-string",
+      "frontendId": "3666",
+      "title": {
+        "en": "Minimum Operations to Equalize Binary String",
+        "zh": "使二进制字符串全为 1 的最少操作次数"
+      },
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "rating": 2477,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "similar-rgb-color",
+      "frontendId": "800",
+      "title": {
+        "en": "Similar RGB Color",
+        "zh": "相似 RGB 颜色"
+      },
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "remove-9",
+      "frontendId": "660",
+      "title": {
+        "en": "Remove 9",
+        "zh": "移除 9"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "most-expensive-item-that-can-not-be-bought",
+      "frontendId": "2979",
+      "title": {
+        "en": "Most Expensive Item That Can Not Be Bought",
+        "zh": "最贵的无法购买的商品"
+      },
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    },
+    {
+      "slug": "color-the-triangle-red",
+      "frontendId": "2647",
+      "title": {
+        "en": "Color the Triangle Red",
+        "zh": "把三角形染成红色"
+      },
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "rating": null,
+      "sectionId": "7.10",
+      "level": "core"
+    }
+  ],
+  "excluded": [
+    {
+      "sourceId": "LCP 14",
+      "title": "切分数组",
+      "sectionId": "1.3",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 25",
+      "title": "古董键盘",
+      "sectionId": "2.2",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCR 185",
+      "title": "统计结果概率",
+      "sectionId": "3",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 11",
+      "title": "期望个数统计",
+      "sectionId": "3",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 48",
+      "title": "无限棋局",
+      "sectionId": "4",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "面试题 16.03",
+      "title": "交点",
+      "sectionId": "5.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "面试题 16.13",
+      "title": "平分正方形",
+      "sectionId": "5.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "面试题 16.14",
+      "title": "最佳直线",
+      "sectionId": "5.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 37",
+      "title": "最小矩形面积",
+      "sectionId": "5.1",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 42",
+      "title": "玩具套圈",
+      "sectionId": "5.2",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 15",
+      "title": "游乐园的迷宫",
+      "sectionId": "5.4",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "xh-10.2",
+      "title": "约瑟夫环问题",
+      "sectionId": "7.10",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 02",
+      "title": "分式化简",
+      "sectionId": "7.10",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 29",
+      "title": "乐团站位",
+      "sectionId": "7.10",
+      "reason": "leetcode_cn_only"
+    },
+    {
+      "sourceId": "LCP 46",
+      "title": "志愿者调配",
+      "sectionId": "7.10",
+      "reason": "leetcode_cn_only"
+    }
+  ]
+}
