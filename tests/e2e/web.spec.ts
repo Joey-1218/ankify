@@ -373,7 +373,7 @@ test("the problems table names its columns in full", async ({ context, panel }) 
   void panel; // signs the context in
   const page = await openProblems(context);
   const headers = page.getByRole("columnheader");
-  await expect(headers).toHaveText(["", "Problem", "Difficulty", "Next review", "Last practiced", "Practiced", "Reviews", "Times forgotten", "Memory state", "Added"]);
+  await expect(headers).toHaveText(["", "Problem", "Difficulty", "Next review", "Last practiced", "Practiced", "Reviews", "Times forgotten", "Memory state", "Added", "Actions"]);
   // Counts start with the largest.
   await page.getByRole("button", { name: "Times forgotten" }).click();
   await expect(page.getByRole("columnheader", { name: "Times forgotten" })).toHaveAttribute("aria-sort", "descending");
@@ -404,6 +404,56 @@ test("problems are archived and restored together from the list", async ({ conte
   await expect(rows).toHaveCount(0);
   const restored = await api<ProblemsListPayloadDto>(`/api/problems?search=${stamp}`);
   expect(restored.problems.map((problem) => problem.title).sort()).toEqual(titles);
+  await page.close();
+});
+
+test("problems join lists from a row's menu, several at once, and leave from the problem's page", async ({ context, api, leetcode }) => {
+  const stamp = Date.now();
+  const first = `E2E listed ${stamp} a`;
+  const second = `E2E listed ${stamp} b`;
+  await captureProblem(api, leetcode, `web-listed-a-${stamp}`, first);
+  await captureProblem(api, leetcode, `web-listed-b-${stamp}`, second);
+  const listName = `E2E picks ${stamp}`;
+  await api("/api/study-lists", { body: { action: "create", requestId: crypto.randomUUID(), name: listName } });
+  const page = await openProblems(context);
+  await page.getByPlaceholder(/Search/).fill(String(stamp));
+  await expect(page.getByRole("row")).toHaveCount(3);
+
+  // One problem, from its row's menu: a checkbox per list.
+  await page.getByRole("button", { name: `Actions: ${first}` }).click();
+  await page.getByRole("menuitem", { name: "Add to list" }).click();
+  const picker = page.getByRole("dialog", { name: "Add to list" });
+  await picker.getByRole("checkbox", { name: listName }).check();
+  await expect(picker.getByRole("checkbox", { name: listName })).toBeChecked();
+  await picker.getByRole("button", { name: "Done" }).click();
+  await expect(picker).toHaveCount(0);
+
+  // Both selected: the one already there is counted, not added twice.
+  await page.getByRole("checkbox", { name: `Select ${first}` }).check();
+  await page.getByRole("checkbox", { name: `Select ${second}` }).check();
+  await page.getByRole("button", { name: "Add to list" }).click();
+  await picker.getByRole("button", { name: `Add to ${listName}` }).click();
+  await expect(picker.getByRole("status")).toHaveText("Added 1, 1 already there");
+  await picker.getByRole("button", { name: "Done" }).click();
+
+  // The problem's page names the list; unchecking it there takes the problem out.
+  await page.getByRole("link", { name: first }).click();
+  await expect(page.getByRole("heading", { level: 1, name: first })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole("link", { name: listName })).toBeVisible();
+  await page.getByRole("button", { name: "Add to list" }).click();
+  await picker.getByRole("checkbox", { name: listName }).uncheck();
+  await expect(picker.getByRole("checkbox", { name: listName })).not.toBeChecked();
+  await picker.getByRole("button", { name: "Done" }).click();
+  await expect(page.getByRole("link", { name: listName })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "My problems" })).toBeVisible();
+
+  // Back to the list, where a row's menu archives just that problem.
+  await page.getByRole("link", { name: "All problems" }).click();
+  await page.getByPlaceholder(/Search/).fill(String(stamp));
+  await page.getByRole("button", { name: `Actions: ${second}` }).click();
+  await page.getByRole("menuitem", { name: /^Archive/ }).click();
+  await expect(page.getByRole("link", { name: second })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: first })).toBeVisible();
   await page.close();
 });
 

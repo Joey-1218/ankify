@@ -218,6 +218,67 @@ export async function addStudyListItem(
 }
 
 /**
+ * Adds several problems of the user's deck to the end of a custom list, in
+ * the order given; problems the list already holds are counted, not moved.
+ * All or nothing: an unknown problem or the item cap refuses the whole batch.
+ */
+export async function addProblemsToStudyList(
+  userId: string,
+  listId: string,
+  problemIds: readonly string[],
+  now = new Date(),
+): Promise<{ ok: true; added: number; existing: number } | StudyListFailure> {
+  return getDb().transaction(async (tx) => {
+    const row = await loadRow(tx, userId, listId);
+    if (!row) return fail("list_not_found");
+    if (row.kind !== "custom") return fail("not_editable", "Built-in lists are read-only; copy one to edit it.");
+
+    const ids = [...new Set(problemIds)];
+    const p = schema.problems;
+    const found = await tx
+      .select({ id: p.id, slug: p.leetcodeSlug, leetcodeId: p.leetcodeId, title: p.title, difficulty: p.difficulty })
+      .from(p)
+      .where(and(eq(p.userId, userId), inArray(p.id, ids)));
+    if (found.length !== ids.length) return fail("problem_not_found");
+    const byId = new Map(found.map((problem) => [problem.id, problem]));
+
+    const items = await tx
+      .select({ slug: i.slug, position: i.position })
+      .from(i)
+      .where(and(eq(i.listId, row.id), eq(i.userId, userId)));
+    const held = new Set(items.map((item) => item.slug));
+    const fresh = ids.map((id) => byId.get(id)!).filter((problem) => !held.has(problem.slug));
+    if (items.length + fresh.length > MAX_ITEMS_PER_STUDY_LIST) {
+      return fail("item_limit_reached", `A list holds up to ${MAX_ITEMS_PER_STUDY_LIST} problems.`);
+    }
+    if (fresh.length === 0) return { ok: true, added: 0, existing: ids.length };
+
+    const start = items.reduce((max, item) => Math.max(max, item.position), -1) + 1;
+    const inserted = await tx
+      .insert(i)
+      .values(
+        fresh.map((problem, index) => ({
+          id: nanoid(12),
+          userId,
+          listId: row.id,
+          slug: problem.slug,
+          leetcodeId: problem.leetcodeId,
+          title: problem.title,
+          titleZh: builtinProblem(problem.slug)?.title.zh ?? null,
+          difficulty: problem.difficulty,
+          position: start + index,
+          createdAt: now,
+          updatedAt: now,
+        })),
+      )
+      .onConflictDoNothing()
+      .returning({ id: i.id });
+    await tx.update(l).set({ updatedAt: now }).where(and(eq(l.id, row.id), eq(l.userId, userId)));
+    return { ok: true, added: inserted.length, existing: ids.length - inserted.length };
+  });
+}
+
+/**
  * Removes a problem from a custom list. The problem stays in the deck; in no
  * other list, it shows in My problems again.
  */

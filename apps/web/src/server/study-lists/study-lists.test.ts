@@ -6,8 +6,8 @@ import { upsertLeetcodeProblem } from "../problem-upsert";
 import { mergeAttemptHistory } from "../suggestions/history";
 import { createTestDb } from "../test-db";
 import { builtinLists, getBuiltinList } from "./builtin";
-import { addStudyListItem, createStudyList, deleteStudyList, removeStudyListItem, reorderStudyListItems, reorderStudyLists, updateStudyList } from "./commands";
-import { loadPatternPractice, loadProblemStudyLists, loadStudyListDetail, loadStudyListsOverview } from "./lists";
+import { addProblemsToStudyList, addStudyListItem, createStudyList, deleteStudyList, removeStudyListItem, reorderStudyListItems, reorderStudyLists, updateStudyList } from "./commands";
+import { loadCustomLists, loadPatternPractice, loadProblemStudyLists, loadStudyListDetail, loadStudyListsOverview } from "./lists";
 
 const testDb = createTestDb();
 const USER = "lists-user";
@@ -186,8 +186,40 @@ describe("study lists", () => {
     const follow = await create({ action: "follow", requestId: uuid(), builtinId: BUILTIN });
     const lists = (await loadProblemStudyLists(USER, problem!.id))!;
     expect(lists.memberOf).toEqual([{ id: follow.listId, kind: "builtin", name: builtin().name, builtinId: BUILTIN }]);
-    expect(lists.customLists.every((list) => list.contains === false)).toBe(true);
+    expect(lists.customLists.every((list) => list.contains === false && list.itemId === null)).toBe(true);
     expect(await loadProblemStudyLists(OTHER, problem!.id)).toBeNull();
+
+    // A custom list that holds it names the item, which is what removing it takes.
+    const custom = await create({ action: "create", requestId: uuid(), name: "Holds it" });
+    const added = await addStudyListItem(USER, custom.listId, { source: "problem", problemId: problem!.id });
+    expect((await loadProblemStudyLists(USER, problem!.id))!.customLists.find((list) => list.id === custom.listId)).toEqual({
+      id: custom.listId,
+      name: "Holds it",
+      contains: true,
+      itemId: added.ok ? added.itemId : null,
+    });
+    expect((await loadCustomLists(USER)).map((list) => list.name)).toContain("Holds it");
+    expect((await loadCustomLists(OTHER)).map((list) => list.name)).not.toContain("Holds it");
+  });
+
+  it("adds several of the deck's problems at once, in order, counting the ones a list holds", async () => {
+    const a = await addProblem("batch-a");
+    const b = await addProblem("batch-b");
+    const c = await addProblem("batch-c");
+    const list = await create({ action: "create", requestId: uuid(), name: "Batch" });
+    await addStudyListItem(USER, list.listId, { source: "problem", problemId: b!.id });
+    expect(await addProblemsToStudyList(USER, list.listId, [c!.id, b!.id, a!.id, c!.id])).toEqual({ ok: true, added: 2, existing: 1 });
+    const detail = (await loadStudyListDetail(USER, { kind: "list", id: list.listId }))!;
+    expect(detail.entries.map((entry) => entry.slug)).toEqual(["batch-b", "batch-c", "batch-a"]);
+    expect(await addProblemsToStudyList(USER, list.listId, [a!.id])).toEqual({ ok: true, added: 0, existing: 1 });
+
+    // All or nothing, and only the user's own problems and custom lists.
+    const theirs = await addProblem("batch-theirs", "enrolled", OTHER);
+    expect(await addProblemsToStudyList(USER, list.listId, [a!.id, theirs.id])).toMatchObject({ ok: false, error: "problem_not_found" });
+    expect(await addProblemsToStudyList(OTHER, list.listId, [theirs.id])).toMatchObject({ ok: false, error: "list_not_found" });
+    const followed = await create({ action: "follow", requestId: uuid(), builtinId: "math" });
+    expect(await addProblemsToStudyList(USER, followed.listId, [a!.id])).toMatchObject({ ok: false, error: "not_editable" });
+    expect((await loadStudyListDetail(USER, { kind: "list", id: list.listId }))!.entries).toHaveLength(3);
   });
 
   it("scopes every read and write to the user, and exports the user's lists", async () => {

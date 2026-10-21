@@ -83,6 +83,15 @@ describe("study list routes", () => {
     detail = (await (await getList(request(`/api/study-lists/${list.id}`), params({ id: list.id! }))).json()) as StudyListDetailDto;
     expect(detail.entries.map((entry) => entry.slug)).toEqual([second!.slug]);
 
+    // Several problems of the deck at once.
+    const problem = { id: "lists-route-problem", userId: user.id, leetcodeSlug: "route-batch", title: "Route batch", difficulty: "Easy" as const, url: "https://leetcode.com/problems/route-batch/" };
+    await getDb().insert(schema.problems).values(problem);
+    const batch = await postItem(request(`/api/study-lists/${list.id}/items`, "POST", { source: "problems", problemIds: [problem.id] }), params({ id: list.id! }));
+    expect(batch.status).toBe(200);
+    expect(await batch.json()).toEqual({ added: 1, existing: 0 });
+    expect((await postItem(request(`/api/study-lists/${list.id}/items`, "POST", { source: "problems", problemIds: [] }), params({ id: list.id! }))).status).toBe(400);
+    expect((await postItem(request(`/api/study-lists/${list.id}/items`, "POST", { source: "problems", problemIds: ["missing"] }), params({ id: list.id! }))).status).toBe(404);
+
     const overview = (await (await getOverview(request("/api/study-lists"))).json()) as StudyListsOverviewDto;
     expect(overview.lists.map((entry) => entry.kind)).toEqual(["my_problems", "custom"]);
     expect((await putListOrder(request("/api/study-lists", "PUT", { listIds: "x" }))).status).toBe(400);

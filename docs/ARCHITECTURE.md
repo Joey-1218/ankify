@@ -525,8 +525,9 @@ first tries on unseen problems most (transfer).
   id once, My problems staying first),
   `GET/PATCH/DELETE /api/study-lists/:id` (`my-problems` for My problems;
   rename custom lists, pause or resume; delete or unfollow),
-  `POST/PUT /api/study-lists/:id/items` (add by problem id or built-in slug;
-  reorder with every item id once), `DELETE /api/study-lists/:id/items/:itemId`,
+  `POST/PUT /api/study-lists/:id/items` (add by problem id or built-in slug,
+  or several of the deck's problems at once; reorder with every item id
+  once), `DELETE /api/study-lists/:id/items/:itemId`,
   `GET /api/study-lists/builtin/:builtinId`,
   `GET /api/problems/:id/study-lists`, and `GET /api/mistakes/patterns`
   (the pattern profile). Lists and items are in the account export.
@@ -766,11 +767,24 @@ extension reuses the web session cookie, and production CORS allows only
   `/lists/[id]` and `/lists/my-problems` show a custom list (drag to
   reorder, remove, rename, delete) or My problems. Any list can add its problems to one of
   the user's custom lists.
-- `/problems` and `/problems/[id]` (the detail page also shows the problem's
-  lists and adds it to a custom list):
-  - archive, unarchive, delete; the list archives or unarchives several
-    selected problems at once (`POST /api/problems/archive`, which refuses
-    to unarchive past the active-problem cap);
+- `/problems` and `/problems/[id]`:
+  - each row of the list has a "⋯" menu (Add to list, Archive or Unarchive);
+    selected problems are added to a list or archived together (`POST
+    /api/problems/archive`, which refuses to unarchive past the
+    active-problem cap; `POST /api/study-lists/:id/items` with
+    `source: "problems"`, all or nothing, counting the ones already there);
+  - "Add to list" (`app/(app)/lists/add-to-list-dialog.tsx`) is a dialog of
+    the user's custom lists, like adding a track to playlists: for one
+    problem each list is a checkbox (check adds, uncheck removes; it flips
+    at once and is put back if the request fails), for several each list
+    has an Add button; a new list can be named there and gets the problems
+    at once;
+  - the detail page: an "All problems" back button (back to the list's last
+    sort, kept in sessionStorage) with the "⋯" menu (Archive or Unarchive,
+    Delete after a confirmation) across from it; a header with the title,
+    pills, topic tags, the lists holding the problem as links, and Practice
+    on LeetCode and Add to list; a strip of scheduling stats (next review,
+    reviews, times forgotten, last reviewed); then the tabs at full width;
   - the list loads the whole active deck in one page (the cap counts only
     active problems), so search, filters, and sorting see every problem.
     Sort keys (`problems-sort.ts`, kept in `?sort=&dir=`): next review, date
@@ -783,9 +797,7 @@ extension reuses the web session cookie, and production CORS allows only
   - the Sessions tab (evidence, active time, rating, and Delete for a
     finished or stale session, with a confirmation that says what it undoes);
   - History as the scheduling timeline of ratings and initial-review
-    schedules (undone ones hidden);
-  - the next review date;
-  - "Practice on LeetCode".
+    schedules (undone ones hidden).
 - `/suggestions`: today's new-problem suggestions, the same items as the
   popup.
 - `/analysis`: the mistake profile, the pattern x cause grid (it scrolls

@@ -42,6 +42,12 @@ export const studyListItemAddSchema = z.discriminatedUnion("source", [
 ]);
 export type StudyListItemAddInput = z.infer<typeof studyListItemAddSchema>;
 
+/** POST /api/study-lists/:id/items with several problems of the deck at once (the problems page's bulk add). */
+export const studyListBatchAddSchema = z
+  .object({ source: z.literal("problems"), problemIds: z.array(rowId).min(1).max(2_000) })
+  .strict();
+export type StudyListBatchAddInput = z.infer<typeof studyListBatchAddSchema>;
+
 /** PUT /api/study-lists/:id/items — the list's new order: every item id, once. */
 export const studyListOrderSchema = z.object({ itemIds: z.array(rowId).max(2_000) }).strict();
 export type StudyListOrderInput = z.infer<typeof studyListOrderSchema>;
@@ -138,7 +144,8 @@ export type StudyListAuthorGroupDto = { authorId: string; name: LocalizedTextDto
 export type ProblemStudyListsDto = {
   slug: string;
   memberOf: { id: string | null; kind: StudyListKind; name: LocalizedTextDto; builtinId: string | null }[];
-  customLists: { id: string; name: string; contains: boolean }[];
+  /** The user's custom lists in their order; `itemId` is the problem's item when the list holds it. */
+  customLists: { id: string; name: string; contains: boolean; itemId: string | null }[];
 };
 
 /** Why a new problem is on today's plan. */

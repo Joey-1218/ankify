@@ -143,8 +143,12 @@ deployed). All four phases are done:
    next on Today's focus card.
 
 Later polish on the branch: per-list shares removed (equal turns), My
-problems pinned as the first row of Your lists, and an "All lists" back
-button on every list page.
+problems pinned as the first row of Your lists, an "All lists" back
+button on every list page, and the problems pages reworked: a "⋯" menu on
+each row (Add to list, Archive), Add to list for selected problems, a
+playlist-style add-to-list dialog, and a redesigned problem page (header
+with actions and list links, a stats strip, full-width tabs; the resizable
+side rail is gone).
 
 Before deploying: apply migration `0027_study_lists` to Production first
 (`pnpm db:release`, DEPLOYMENT.md), since the list pages and the problem

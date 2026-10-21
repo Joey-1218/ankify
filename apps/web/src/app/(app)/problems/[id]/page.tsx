@@ -1,26 +1,26 @@
+import Link from "next/link";
+import type { Route } from "next";
 import { notFound } from "next/navigation";
+import { Pin } from "lucide-react";
 import type { PracticeSessionDto } from "@ankileet/contracts";
 import { SESSION_STALE_AFTER_MS } from "@ankileet/core";
 import { DifficultyPill, FsrsStatePill, Pill } from "@/components/ui/pill";
 import { Surface } from "@/components/ui/surface";
 import { Markdown } from "@/components/ui/markdown";
 import { SubmissionList } from "@/components/submission-list";
-import { buttonClasses } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ProblemWorkspace, type WorkspacePanel } from "./problem-workspace";
-import { ProblemDetailLayout } from "./problem-detail-layout";
 import { requirePageUser } from "@/server/auth";
 import { getRequestLanguage, getRequestTranslations } from "@/server/i18n";
 import { cn, formatRelative } from "@/lib/utils";
-import { ArchiveProblemButton } from "./archive-problem-button";
-import { DeleteProblemButton } from "./delete-problem-button";
 import { NotesEditor } from "./notes-editor";
 import { MistakeList } from "./mistake-list";
 import { DeleteSessionButton } from "./delete-session-button";
 import { SessionAnalysis } from "./session-analysis";
 import { loadProblemDetail } from "@/server/problem-detail";
 import { loadProblemStudyLists } from "@/server/study-lists/lists";
-import { ProblemLists } from "./problem-lists";
+import { ProblemMenu, ProblemPrimaryActions, ProblemsBackLink } from "./problem-actions";
+import type { ProblemStudyListsDto } from "@ankileet/contracts";
 
 const RATING_TONES: Record<number, "danger" | "warning" | "success" | "accent" | "neutral"> = { 1: "danger", 2: "warning", 3: "success", 4: "accent" };
 
@@ -139,117 +139,111 @@ export default async function ProblemDetail({ params }: { params: Promise<{ id: 
     { id: "notes", label: t.review.notes, node: notesPanel },
   ];
 
+  const lapses = problem.fsrsLapses;
+  const nextReview = awaitingInitial ? t.common.notScheduled : isDue ? t.common.now : formatRelative(problem.fsrsDue);
+
   return (
-    <div className="mx-auto max-w-6xl">
-      <ProblemDetailLayout
-        rail={
-          <aside className="space-y-4 lg:sticky lg:top-6 lg:self-start">
-          <Surface className="p-5">
-            <div className="flex flex-wrap items-center gap-2">
-              <DifficultyPill difficulty={problem.difficulty} language={language} />
-              <FsrsStatePill state={problem.fsrsState} language={language} />
-              {problem.archivedAt != null && <Pill tone="neutral">{t.detail.archived}</Pill>}
-              {problem.archivedAt == null && isDue && problem.fsrsReps > 0 && <Pill tone="accent">{t.common.due}</Pill>}
-            </div>
-            <h1 className="mt-3 text-xl font-semibold leading-snug tracking-tight">
-              {problem.leetcodeId != null && (
-                <span className="text-muted tabular-nums">{problem.leetcodeId}. </span>
-              )}
-              {problem.title}
-            </h1>
+    <div className="mx-auto max-w-6xl space-y-6">
+      <div className="flex items-center justify-between gap-3">
+        <ProblemsBackLink />
+        <ProblemMenu problemId={problem.id} title={problem.title} archived={problem.archivedAt != null} />
+      </div>
+
+      <header className="-mt-2 flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0 space-y-3">
+          <h1 className="text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+            {problem.leetcodeId != null && <span className="text-muted tabular-nums">{problem.leetcodeId}. </span>}
+            {problem.title}
+          </h1>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
+            <DifficultyPill difficulty={problem.difficulty} language={language} />
+            <FsrsStatePill state={problem.fsrsState} language={language} />
+            {problem.archivedAt != null && <Pill tone="neutral">{t.detail.archived}</Pill>}
+            {problem.archivedAt == null && isDue && problem.fsrsReps > 0 && <Pill tone="accent">{t.common.due}</Pill>}
             {problem.topicTags.length > 0 && (
-              <div className="mt-2 flex flex-wrap gap-x-2 gap-y-1 text-xs text-muted">
-                {problem.topicTags.slice(0, 6).map((t) => (
-                  <span key={t}>#{t}</span>
-                ))}
-              </div>
+              <span className="ml-1 text-xs text-muted">{problem.topicTags.slice(0, 6).map((tag) => `#${tag}`).join("  ")}</span>
             )}
-            <a
-              href={problem.url}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-flex items-center gap-1 text-sm text-muted hover:text-accent"
-            >
-              {t.detail.openLeetcode} <span aria-hidden>↗</span>
-            </a>
-          </Surface>
-
-          <Surface className="overflow-hidden">
-            <div className="border-b border-border px-4 py-2.5 text-[11px] font-medium uppercase tracking-wide text-muted">
-              {t.detail.scheduling}
-            </div>
-            <dl className="divide-y divide-border">
-              <MetaRow
-                label={t.detail.due}
-                value={awaitingInitial ? t.common.notScheduled : isDue ? t.common.now : formatRelative(problem.fsrsDue)}
-                accent={isDue}
-              />
-              <MetaRow
-                label={t.detail.reviews}
-                value={
-                  <>
-                    {problem.fsrsReps}
-                    {problem.fsrsLapses > 0 && (
-                      <span className="ml-1.5 text-xs font-normal text-danger">
-                        {t.common.lapses(problem.fsrsLapses)}
-                      </span>
-                    )}
-                  </>
-                }
-              />
-              <MetaRow
-                label={t.sessions.nextReview}
-                value={!awaitingInitial && problem.fsrsDue ? dateFormat.format(new Date(problem.fsrsDue)) : "—"}
-              />
-              <MetaRow label={t.detail.lastReviewed} value={formatRelative(problem.fsrsLastReview)} />
-            </dl>
-          </Surface>
-
-          <ProblemLists problemId={problem.id} lists={studyLists} />
-
-          {problem.archivedAt != null && (
-            <p className="rounded-lg border border-border bg-subtle px-3 py-2 text-xs text-muted">
-              {t.detail.archivedNotice}
-            </p>
-          )}
-
-          <div className="space-y-2">
-            {problem.archivedAt == null && (
-              <a href={problem.url} target="_blank" rel="noreferrer" className={buttonClasses({ variant: "primary", className: "w-full" })}>
-                {t.detail.practiceOnLeetcode}
-              </a>
-            )}
-            <div className="flex flex-wrap gap-2">
-              <ArchiveProblemButton problemId={problem.id} archived={problem.archivedAt != null} />
-              <DeleteProblemButton problemId={problem.id} problemTitle={problem.title} />
-            </div>
           </div>
-          </aside>
-        }
-        workspace={
-          <ProblemWorkspace
-            defaultTab="statement"
-            panels={panels}
-          />
-        }
-      />
+          <ListChips lists={studyLists.memberOf} label={t.lists.memberOf} myProblems={t.lists.myProblems} language={language} />
+        </div>
+        <ProblemPrimaryActions
+          problemId={problem.id}
+          title={problem.title}
+          url={problem.url}
+          archived={problem.archivedAt != null}
+          customLists={studyLists.customLists}
+        />
+      </header>
+
+      {problem.archivedAt != null && (
+        <p role="status" className="rounded-lg border border-border bg-subtle px-4 py-2.5 text-sm text-muted">
+          {t.detail.archivedNotice}
+        </p>
+      )}
+
+      <Surface as="section" aria-label={t.detail.scheduling} className="overflow-hidden">
+        <dl className="grid grid-cols-2 gap-px bg-border sm:grid-cols-4">
+          <StatCell label={t.sessions.nextReview} value={nextReview} accent={isDue} hint={!awaitingInitial && problem.fsrsDue ? dateFormat.format(new Date(problem.fsrsDue)) : null} />
+          <StatCell label={t.detail.reviews} value={problem.fsrsReps} />
+          <StatCell label={t.detail.timesForgotten} value={lapses} danger={lapses > 0} />
+          <StatCell label={t.detail.lastReviewed} value={formatRelative(problem.fsrsLastReview)} />
+        </dl>
+      </Surface>
+
+      <ProblemWorkspace defaultTab="statement" panels={panels} />
     </div>
   );
 }
 
-function MetaRow({
+/** "In" and the lists that hold the problem, each a link to its list. */
+function ListChips({
+  lists,
+  label,
+  myProblems,
+  language,
+}: {
+  lists: ProblemStudyListsDto["memberOf"];
+  label: string;
+  myProblems: string;
+  language: "en" | "zh";
+}) {
+  const href = (entry: ProblemStudyListsDto["memberOf"][number]) =>
+    (entry.kind === "my_problems" ? "/lists/my-problems" : entry.kind === "builtin" ? `/lists/builtin/${entry.builtinId}` : `/lists/${entry.id}`) as Route;
+  return (
+    <div className="flex flex-wrap items-center gap-1.5 text-sm">
+      <span className="mr-0.5 text-muted">{label}</span>
+      {lists.map((entry) => (
+        <Link
+          key={entry.id ?? entry.kind}
+          href={href(entry)}
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface px-2.5 py-0.5 text-xs font-medium transition hover:border-accent-solid/40 hover:text-accent"
+        >
+          {entry.kind === "my_problems" && <Pin aria-hidden className="h-3 w-3 text-muted" />}
+          {entry.kind === "my_problems" ? myProblems : language === "zh" ? entry.name.zh : entry.name.en}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+function StatCell({
   label,
   value,
+  hint,
   accent,
+  danger,
 }: {
   label: string;
   value: React.ReactNode;
+  hint?: string | null;
   accent?: boolean;
+  danger?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-3 px-4 py-2.5 text-sm">
-      <dt className="text-muted">{label}</dt>
-      <dd className={cn("font-medium tabular-nums", accent && "text-accent")}>{value}</dd>
+    <div className="bg-surface px-4 py-3.5">
+      <dt className="text-xs text-muted">{label}</dt>
+      <dd className={cn("mt-1 text-lg font-semibold tabular-nums", accent && "text-accent", danger && "text-danger")}>{value}</dd>
+      {hint && <dd className="text-xs text-muted tabular-nums">{hint}</dd>}
     </div>
   );
 }

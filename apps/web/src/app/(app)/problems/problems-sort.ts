@@ -93,6 +93,9 @@ export function parseProblemsSort(params: { sort?: string | string[]; dir?: stri
 }
 
 /** The query string for a sort: empty for the default sort. */
+/** sessionStorage: the list's last query, so a problem page's back link restores the sort. */
+export const PROBLEMS_SEARCH_KEY = "ankileet.problems.search";
+
 export function problemsSortSearch(sort: ProblemSort) {
   if (sort.key === DEFAULT_PROBLEM_SORT.key && sort.dir === DEFAULT_PROBLEM_SORT.dir) return "";
   return `?${new URLSearchParams({ sort: sort.key, dir: sort.dir })}`;

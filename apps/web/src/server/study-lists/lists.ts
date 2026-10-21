@@ -264,10 +264,9 @@ export async function loadProblemStudyLists(userId: string, problemId: string): 
   const [problem] = await db.select({ slug: p.leetcodeSlug }).from(p).where(and(eq(p.id, problemId), eq(p.userId, userId))).limit(1);
   if (!problem) return null;
   const lists = await loadUserLists(db, userId);
+  const itemOf = (row: StudyList) => (lists.itemsByList.get(row.id) ?? []).find((item) => item.slug === problem.slug) ?? null;
   const contains = (row: StudyList) =>
-    row.kind === "custom"
-      ? (lists.itemsByList.get(row.id) ?? []).some((item) => item.slug === problem.slug)
-      : (getBuiltinList(row.builtinId!)?.items ?? []).some((item) => item.slug === problem.slug);
+    row.kind === "custom" ? itemOf(row) != null : (getBuiltinList(row.builtinId!)?.items ?? []).some((item) => item.slug === problem.slug);
   const memberRows = lists.rows.filter(contains);
   return {
     slug: problem.slug,
@@ -281,8 +280,20 @@ export async function loadProblemStudyLists(userId: string, problemId: string): 
           }),
     customLists: lists.rows
       .filter((row) => row.kind === "custom")
-      .map((row) => ({ id: row.id, name: row.name!, contains: contains(row) })),
+      .map((row) => ({ id: row.id, name: row.name!, contains: contains(row), itemId: itemOf(row)?.id ?? null })),
   };
+}
+
+/** The user's custom lists in their order: what problems can be added to. */
+export async function loadCustomLists(userId: string, db: Db = getDb()): Promise<{ id: string; name: string }[]> {
+  const l = schema.studyLists;
+  return (
+    await db
+      .select({ id: l.id, name: l.name })
+      .from(l)
+      .where(and(eq(l.userId, userId), eq(l.kind, "custom")))
+      .orderBy(asc(l.position), asc(l.createdAt), asc(l.id))
+  ).map((row) => ({ id: row.id, name: row.name! }));
 }
 
 export type ActiveListCandidates = {

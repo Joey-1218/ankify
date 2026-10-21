@@ -49,6 +49,18 @@ for (const theme of ["light", "dark"] as const) {
     await expect(page.getByRole("menu")).toBeVisible();
     await audit(page, `/lists, row menu open (${theme})`);
     await page.keyboard.press("Escape");
+    // A problem's row menu, and the add-to-list picker on its page.
+    // Clicks before hydration do nothing; in development the list also refetches once after it.
+    await page.goto(`${API_ORIGIN}/problems`, { waitUntil: "networkidle" });
+    await page.getByRole("button", { name: /^Actions: / }).first().click();
+    await expect(page.getByRole("menu")).toBeVisible();
+    await audit(page, `/problems, row menu open (${theme})`);
+    await page.keyboard.press("Escape");
+    await page.goto(`${API_ORIGIN}/problems/qa-problem-two-sum`, { waitUntil: "networkidle" });
+    await page.getByRole("button", { name: "Add to list" }).click();
+    await expect(page.getByRole("dialog").getByRole("checkbox", { name: `A11y ${theme}` })).toBeVisible();
+    await audit(page, `/problems/[id], add to list (${theme})`);
+    await page.keyboard.press("Escape");
     await page.request.delete(`${API_ORIGIN}/api/study-lists/${list.id}`);
     await page.close();
   });
